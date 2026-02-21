@@ -3,729 +3,413 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zeke Ops — Pipeline Control</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Zeke Ops Dashboard</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=DM+Sans:wght@400;500;700&display=swap');
   :root {
-    --bg: #0a0a0c;
-    --surface: #111114;
-    --surface-2: #18181c;
-    --border: #2a2a30;
-    --border-bright: #3a3a44;
-    --text: #e4e4e8;
-    --text-dim: #8888a0;
-    --text-faint: #555566;
-    --green: #34d399;
-    --green-dim: #065f46;
-    --red: #f87171;
-    --red-dim: #7f1d1d;
-    --amber: #fbbf24;
-    --amber-dim: #78350f;
-    --blue: #60a5fa;
-    --blue-dim: #1e3a5f;
-    --purple: #a78bfa;
-    --mono: 'JetBrains Mono', monospace;
-    --sans: 'DM Sans', system-ui, sans-serif;
+    --bg: #0a0a0f; --surface: #12121a; --border: #1e1e2e;
+    --text: #e0e0e8; --text-dim: #8888a0; --text-faint: #555568;
+    --green: #22c55e; --amber: #f59e0b; --red: #ef4444;
+    --blue: #3b82f6; --purple: #a855f7; --cyan: #06b6d4;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.5;
-    min-height: 100vh;
-  }
-
-  .header {
-    padding: 20px 24px 16px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--surface);
-  }
-
-  .header-left { display: flex; align-items: center; gap: 16px; }
-
-  .header h1 {
-    font-family: var(--mono);
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: -0.5px;
-  }
-
-  .status-badge {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .status-healthy { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
-  .status-degraded { background: var(--amber-dim); color: var(--amber); border: 1px solid var(--amber); }
-  .status-critical { background: var(--red-dim); color: var(--red); border: 1px solid var(--red); }
-
-  .header-right {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-dim);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .refresh-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--green);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    margin: 1px;
-  }
-
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); padding: 16px; min-height: 100vh; }
+  .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .header h1 { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: var(--text); }
+  .header h1 span { color: var(--text-faint); font-weight: 300; }
+  .badge { padding: 4px 12px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+  .badge-ok { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge-warn { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .badge-crit { background: rgba(239,68,68,0.15); color: var(--red); }
+  .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-faint); text-align: right; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 16px; }
   .grid-full { grid-column: 1 / -1; }
-  .grid-2col { grid-column: span 2; }
-
-  .card {
-    background: var(--surface);
-    padding: 16px 20px;
-  }
-
-  .card-title {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .card-title .icon { font-size: 14px; }
-
-  .metric {
-    font-family: var(--mono);
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -1px;
-    line-height: 1;
-  }
-
-  .metric-label {
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-top: 4px;
-  }
-
-  .metric-row {
-    display: flex;
-    gap: 32px;
-    flex-wrap: wrap;
-  }
-
-  .metric-item { min-width: 80px; }
-
-  .metric-sm {
-    font-family: var(--mono);
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.5px;
-    line-height: 1;
-  }
-
-  .bar-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 4px 0;
-  }
-
-  .bar-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-dim);
-    width: 110px;
-    flex-shrink: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .bar-track {
-    flex: 1;
-    height: 6px;
-    background: var(--surface-2);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.5s ease;
-  }
-
-  .bar-value {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-faint);
-    width: 28px;
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  .log-area {
-    font-family: var(--mono);
-    font-size: 11px;
-    line-height: 1.6;
-    color: var(--text-dim);
-    max-height: 200px;
-    overflow-y: auto;
-    background: var(--bg);
-    border-radius: 4px;
-    padding: 10px 12px;
-  }
-
-  .log-area .log-err { color: var(--red); }
-  .log-area .log-warn { color: var(--amber); }
-  .log-area .log-ok { color: var(--green); }
-  .log-area .log-info { color: var(--blue); }
-
-  .eval-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 0;
-    border-bottom: 1px solid var(--border);
-    font-family: var(--mono);
-    font-size: 11px;
-  }
-
-  .eval-row:last-child { border-bottom: none; }
-
-  .eval-score {
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 12px;
-    flex-shrink: 0;
-  }
-
-  .score-5 { background: var(--green-dim); color: var(--green); }
-  .score-4 { background: var(--green-dim); color: var(--green); opacity: 0.8; }
-  .score-3 { background: var(--blue-dim); color: var(--blue); }
-  .score-2 { background: var(--amber-dim); color: var(--amber); }
-  .score-1 { background: var(--red-dim); color: var(--red); }
-
-  .eval-topic { color: var(--text-dim); width: 120px; flex-shrink: 0; }
-  .eval-detail { color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-  .closed-loop-section {
-    padding: 20px 24px;
-    border-top: 1px solid var(--border);
-    background: var(--surface);
-  }
-
-  .loop-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 2px;
-    margin-top: 12px;
-  }
-
-  .loop-node {
-    background: var(--surface-2);
-    padding: 10px;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 10px;
-    position: relative;
-    border: 1px solid var(--border);
-  }
-
-  .loop-node.active { border-color: var(--green); }
-  .loop-node.partial { border-color: var(--amber); }
-  .loop-node.missing { border-color: var(--red); opacity: 0.5; }
-
-  .loop-node-label {
-    font-weight: 600;
-    font-size: 11px;
-    margin-bottom: 4px;
-  }
-
-  .loop-node-status {
-    font-size: 9px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .loop-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    color: var(--text-faint);
-  }
-
-  .quality-issues {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-  }
-
-  .quality-chip {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 3px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-  }
-
-  .quality-chip.bad { border-color: var(--red); color: var(--red); }
-  .quality-chip.warn { border-color: var(--amber); color: var(--amber); }
-  .quality-chip.ok { border-color: var(--green); color: var(--green); }
-
-  .loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    font-family: var(--mono);
-    color: var(--text-dim);
-    font-size: 14px;
-  }
-
-  .error-banner {
-    background: var(--red-dim);
-    color: var(--red);
-    padding: 10px 20px;
-    font-family: var(--mono);
-    font-size: 12px;
-    border-bottom: 1px solid var(--red);
-  }
-
-  .priority-list {
-    font-family: var(--mono);
-    font-size: 11px;
-    line-height: 1.8;
-  }
-
-  .priority-list .p1 { color: var(--red); }
-  .priority-list .p2 { color: var(--amber); }
-  .priority-list .p3 { color: var(--text-dim); }
-
-  .sparkline {
-    display: inline-flex;
-    align-items: flex-end;
-    gap: 1px;
-    height: 20px;
-    margin-left: 8px;
-    vertical-align: middle;
-  }
-
-  .sparkline-bar {
-    width: 4px;
-    background: var(--blue);
-    border-radius: 1px;
-    min-height: 2px;
-    transition: height 0.3s ease;
-  }
-
-  @media (max-width: 900px) {
-    .grid { grid-template-columns: 1fr 1fr; }
-    .grid-full { grid-column: 1 / -1; }
-    .grid-2col { grid-column: 1 / -1; }
-  }
-
-  @media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; }
-    .grid-2col { grid-column: 1; }
-  }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .card-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 12px; }
+  .card-title .icon { margin-right: 6px; }
+  .metric-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .metric-item { flex: 1; min-width: 60px; }
+  .metric-lg { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600; }
+  .metric-sm { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; }
+  .metric-label { font-size: 11px; color: var(--text-faint); margin-top: 2px; }
+  .log-box { font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6; color: var(--text-dim); max-height: 200px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
+  .log-box .fail { color: var(--red); }
+  .log-box .pass { color: var(--green); }
+  .domain-bar { display: flex; align-items: center; margin: 4px 0; }
+  .domain-name { font-family: 'JetBrains Mono', monospace; font-size: 11px; width: 120px; color: var(--text-dim); }
+  .domain-fill { height: 14px; border-radius: 2px; min-width: 4px; }
+  .domain-count { font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-left: 8px; color: var(--text-faint); }
+  .loop-viz { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; padding: 12px 0; }
+  .loop-node { padding: 8px 16px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; border: 2px solid; }
+  .loop-arrow { color: var(--text-faint); font-size: 18px; }
+  .loop-ok { border-color: var(--green); color: var(--green); background: rgba(34,197,94,0.08); }
+  .loop-warn { border-color: var(--amber); color: var(--amber); background: rgba(245,158,11,0.08); }
+  .loop-fail { border-color: var(--red); color: var(--red); background: rgba(239,68,68,0.08); }
+  canvas { width: 100%; height: 120px; }
+  .chart-container { position: relative; height: 140px; margin-top: 8px; }
 </style>
 </head>
 <body>
-
-<div id="app">
-  <div class="loading" id="loader">fetching status from github bridge...</div>
+<div class="header">
+  <h1>ZEKE <span>ops</span></h1>
+  <div>
+    <span id="health-badge" class="badge">...</span>
+    <div class="meta" id="meta-time">loading...</div>
+  </div>
 </div>
+<div class="grid" id="dashboard"></div>
 
 <script>
-const REPO_URL = 'https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/status.json';
+const STATUS_URL = 'https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/status.json';
 const HISTORY_URL = 'https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/history.jsonl';
-const REFRESH_MS = 60000;
 
-let state = null;
+let state = {};
 let history = [];
-let lastFetch = null;
-let fetchError = null;
 
-async function fetchStatus() {
+async function fetchData() {
   try {
-    const r = await fetch(REPO_URL + '?t=' + Date.now());
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    state = await r.json();
-    lastFetch = new Date();
-    fetchError = null;
-  } catch (e) {
-    fetchError = e.message;
-    // Try GitHub HTML fallback
-    try {
-      const r2 = await fetch('https://api.github.com/repos/mattzirkelbach-pixel/zeke-status/contents/status.json');
-      if (r2.ok) {
-        const data = await r2.json();
-        state = JSON.parse(atob(data.content));
-        lastFetch = new Date();
-        fetchError = null;
-      }
-    } catch (e2) { /* fallback also failed */ }
-  }
-}
-
-async function fetchHistory() {
-  try {
-    const r = await fetch(HISTORY_URL + '?t=' + Date.now());
-    if (!r.ok) return;
-    const text = await r.text();
-    history = text.trim().split('\n').filter(Boolean).map(l => {
+    const [statusRes, historyRes] = await Promise.all([
+      fetch(STATUS_URL + '?t=' + Date.now()),
+      fetch(HISTORY_URL + '?t=' + Date.now())
+    ]);
+    state = await statusRes.json();
+    const histText = await historyRes.text();
+    history = histText.trim().split('\n').filter(Boolean).map(l => {
       try { return JSON.parse(l); } catch { return null; }
-    }).filter(Boolean).slice(-48);
-  } catch (e) { /* non-critical */ }
-}
-
-function parseKgStats(kgStr) {
-  if (!kgStr) return {};
-  const nums = {};
-  const lines = kgStr.split('\n');
-  for (const line of lines) {
-    const m = line.match(/^(\w+):\s*(\d+)/);
-    if (m) nums[m[1].toLowerCase()] = parseInt(m[2]);
+    }).filter(Boolean);
+  } catch (e) {
+    console.error('Fetch error:', e);
   }
-  // Parse domains
-  const domainMatch = kgStr.match(/Domains:\s*\{([^}]+)\}/s);
-  if (domainMatch) {
-    nums.domains = {};
-    const pairs = domainMatch[1].matchAll(/"([^"]+)":\s*(\d+)/g);
-    for (const p of pairs) nums.domains[p[1]] = parseInt(p[2]);
-  }
-  return nums;
+  render();
 }
 
-function parseOpsStatus(opsStr) {
-  if (!opsStr) return { health: 'UNKNOWN', jobsAttempted: 0, jobsSucceeded: 0, jobsFailed: 0 };
-  const health = (opsStr.match(/System Health:\s*(\w+)/) || [])[1] || 'UNKNOWN';
-  const attempted = parseInt((opsStr.match(/Jobs attempted:\s*(\d+)/) || [])[1]) || 0;
-  const succeeded = parseInt((opsStr.match(/Jobs succeeded:\s*(\d+)/) || [])[1]) || 0;
-  const failed = parseInt((opsStr.match(/Jobs failed:\s*(\d+)/) || [])[1]) || 0;
-  return { health, jobsAttempted: attempted, jobsSucceeded: succeeded, jobsFailed: failed };
+function ago(ts) {
+  if (!ts) return '?';
+  const d = (Date.now() - new Date(ts).getTime()) / 1000;
+  if (d < 60) return Math.round(d) + 's ago';
+  if (d < 3600) return Math.round(d/60) + 'm ago';
+  if (d < 86400) return Math.round(d/3600) + 'h ago';
+  return Math.round(d/86400) + 'd ago';
 }
 
-function parseSelfHeal(shStr) {
-  if (!shStr) return [];
-  const issues = [];
-  const sections = shStr.split('### ').slice(1);
-  for (const s of sections) {
-    const title = s.split('\n')[0].trim();
-    const severity = s.includes('CRITICAL') ? 'err' : s.includes('BROKEN') ? 'warn' : 'info';
-    issues.push({ title, severity });
-  }
-  return issues;
+function sparkline(canvas, data, color) {
+  if (!data.length) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width = canvas.offsetWidth * 2;
+  const h = canvas.height = canvas.offsetHeight * 2;
+  ctx.scale(2, 2);
+  const rw = canvas.offsetWidth;
+  const rh = canvas.offsetHeight;
+  const max = Math.max(...data) || 1;
+  const min = Math.min(...data);
+  const range = max - min || 1;
+  const step = rw / Math.max(data.length - 1, 1);
+
+  ctx.beginPath();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  data.forEach((v, i) => {
+    const x = i * step;
+    const y = rh - 8 - ((v - min) / range) * (rh - 16);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // Fill under
+  ctx.lineTo((data.length - 1) * step, rh);
+  ctx.lineTo(0, rh);
+  ctx.closePath();
+  ctx.fillStyle = color.replace(')', ',0.08)').replace('rgb', 'rgba');
+  ctx.fill();
 }
 
-function parseEvaluations(evals) {
-  if (!evals || !Array.isArray(evals)) return [];
-  return evals.map(e => {
-    try {
-      const obj = typeof e === 'string' ? JSON.parse(e) : e;
-      return obj;
-    } catch { return null; }
-  }).filter(Boolean);
+function parseKG(kgStr) {
+  const r = {};
+  if (!kgStr) return r;
+  const m = kgStr.match(/Entities: (\d+)/); if (m) r.entities = +m[1];
+  const m2 = kgStr.match(/Relationships: (\d+)/); if (m2) r.relationships = +m2[1];
+  const m3 = kgStr.match(/Associations: (\d+)/); if (m3) r.associations = +m3[1];
+  const m4 = kgStr.match(/Insights: (\d+)/); if (m4) r.insights = +m4[1];
+  const dm = kgStr.match(/Domains: ({[\s\S]*})/);
+  if (dm) try { r.domains = JSON.parse(dm[1]); } catch {}
+  return r;
 }
 
-function getHealthClass(health) {
-  if (health === 'HEALTHY' || health === 'OK') return 'status-healthy';
-  if (health === 'DEGRADED') return 'status-degraded';
-  return 'status-critical';
-}
-
-function timeAgo(ts) {
-  if (!ts) return '—';
-  const diff = (Date.now() - new Date(ts).getTime()) / 1000;
-  if (diff < 60) return `${Math.floor(diff)}s ago`;
-  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-  return `${Math.floor(diff / 86400)}d ago`;
+function getHealth() {
+  const gw = state.gateway_process || {};
+  const sp = state.spark_status || {};
+  const fq = state.feed_quality || {};
+  if (gw.status !== 'RUNNING' || sp.status !== 'ONLINE') return 'CRITICAL';
+  if ((fq.error_rate || 0) > 15) return 'DEGRADED';
+  const jobs = state.last_jobs || [];
+  const fails = jobs.filter(j => j.result === 'FAILED').length;
+  if (fails > jobs.length / 2) return 'DEGRADED';
+  return 'HEALTHY';
 }
 
 function render() {
-  if (!state) {
-    document.getElementById('app').innerHTML = fetchError
-      ? `<div class="error-banner">⚠ Failed to fetch: ${fetchError}</div><div class="loading">retrying in ${REFRESH_MS/1000}s...</div>`
-      : '<div class="loading">fetching status from github bridge...</div>';
-    return;
-  }
+  const kg = parseKG(state.kg_stats);
+  const gpu = state.gpu_stats || {};
+  const gw = state.gateway_process || {};
+  const sp = state.spark_status || {};
+  const fq = state.feed_quality || {};
+  const cs = state.crontab_status || {};
+  const gc = state.gateway_config || {};
+  const jobs = state.last_jobs || [];
+  const health = getHealth();
 
-  const kg = parseKgStats(state.kg_stats);
-  const ops = parseOpsStatus(state.ops_status);
-  const selfHeal = parseSelfHeal(state.self_heal_log);
-  const evals = parseEvaluations(state.recent_evaluations);
-  const queueTail = state['zeke-queue_tail'] || [];
+  // Health badge
+  const hb = document.getElementById('health-badge');
+  hb.textContent = health;
+  hb.className = 'badge ' + (health === 'HEALTHY' ? 'badge-ok' : health === 'DEGRADED' ? 'badge-warn' : 'badge-crit');
+  document.getElementById('meta-time').textContent = ago(state.timestamp) + ' | auto-refresh 60s';
 
-  // Feed sparkline from history
-  const feedHistory = history.map(h => h.feed_lines || 0);
-  const maxFeed = Math.max(...feedHistory, 1);
+  const feedHistory = history.map(h => h.feed_lines).filter(v => v != null);
+  const entityHistory = history.map(h => h.kg_entities).filter(v => v != null);
+  const gpuHistory = history.map(h => h.gpu_util_pct).filter(v => v != null);
+  const tempHistory = history.map(h => h.gpu_temp_c).filter(v => v != null);
+  const errorHistory = history.map(h => h.feed_error_rate).filter(v => v != null);
 
-  const healthClass = getHealthClass(ops.health);
-  const successRate = ops.jobsAttempted > 0 ? Math.round((ops.jobsSucceeded / ops.jobsAttempted) * 100) : 0;
+  const passedJobs = jobs.filter(j => j.result === 'SUCCESS').length;
+  const failedJobs = jobs.filter(j => j.result === 'FAILED').length;
+  const totalJobs = jobs.length;
 
-  // Quality analysis from evaluations
-  const noveltyScores = evals.map(e => e.novelty_score || 0);
-  const avgNovelty = noveltyScores.length > 0 ? (noveltyScores.reduce((a,b) => a+b, 0) / noveltyScores.length).toFixed(1) : '—';
-  const highNovelty = noveltyScores.filter(s => s >= 4).length;
-  const lowNovelty = noveltyScores.filter(s => s <= 1).length;
-
-  // Domain bars
   const domains = kg.domains || {};
-  const domainEntries = Object.entries(domains).sort((a,b) => b[1] - a[1]);
+  const domainColors = ['#3b82f6','#22c55e','#f59e0b','#a855f7','#ef4444','#06b6d4','#f97316','#ec4899'];
   const maxDomain = Math.max(...Object.values(domains), 1);
-  const domainColors = {
-    'treasury-bonds': 'var(--blue)',
-    'tool-calling': 'var(--purple)',
-    'ai-agents': 'var(--green)',
-    'longevity': 'var(--red)',
-    'cross-domain': 'var(--amber)',
-    'self-improvement': 'var(--text-faint)',
-    'cognitive-science': 'var(--amber)',
-  };
 
-  document.getElementById('app').innerHTML = `
-    ${fetchError ? `<div class="error-banner">⚠ Last fetch failed: ${fetchError}. Showing cached data.</div>` : ''}
+  const domainBars = Object.entries(domains).map(([name, count], i) =>
+    '<div class="domain-bar">' +
+      '<span class="domain-name">' + name + '</span>' +
+      '<div class="domain-fill" style="width:' + Math.round(count/maxDomain*200) + 'px;background:' + domainColors[i % domainColors.length] + '"></div>' +
+      '<span class="domain-count">' + count + '</span>' +
+    '</div>'
+  ).join('');
 
-    <div class="header">
-      <div class="header-left">
-        <h1>ZEKE OPS</h1>
-        <span class="status-badge ${healthClass}">${ops.health}</span>
-      </div>
-      <div class="header-right">
-        <span>updated ${timeAgo(state.timestamp)}</span>
-        <span>refreshing ${REFRESH_MS/1000}s</span>
-        <div class="refresh-dot"></div>
-      </div>
-    </div>
+  // Queue log
+  const queueLog = (state['zeke-queue_tail'] || []).map(l => {
+    if (l.includes('FAILED')) return '<span class="fail">' + escHtml(l) + '</span>';
+    if (l.includes('SUCCESS') || l.includes('DONE') || l.includes('feed=')) return '<span class="pass">' + escHtml(l) + '</span>';
+    return escHtml(l);
+  }).join('\n');
 
-    <div class="grid">
-      <!-- Row 1: Key Metrics -->
-      <div class="card">
-        <div class="card-title"><span class="icon">📊</span> Feed</div>
-        <div class="metric">${state.feed_lines || 0}</div>
-        <div class="metric-label">
-          entries
-          ${feedHistory.length > 0 ? `<span class="sparkline">${feedHistory.slice(-12).map(v => `<span class="sparkline-bar" style="height:${Math.max(2, (v/maxFeed)*20)}px"></span>`).join('')}</span>` : ''}
+  // Self-heal
+  const healLog = escHtml((state.self_heal_log || '').slice(0, 1500)) || 'No issues logged';
+
+  // Evals
+  const evals = (state.recent_evaluations || []).slice(-5).map(e => {
+    try {
+      const ev = JSON.parse(e);
+      const score = ev.novelty_score || ev.score || '?';
+      const color = score >= 4 ? 'var(--green)' : score >= 3 ? 'var(--amber)' : 'var(--text-faint)';
+      return '<span style="color:' + color + '">[' + score + '/5]</span> ' + escHtml(ev.topic || '?');
+    } catch { return escHtml(e); }
+  }).join('\n');
+
+  // Closed loop assessment
+  const gatherOk = gw.status === 'RUNNING' && sp.status === 'ONLINE';
+  const extractOk = (kg.entities || 0) > 50;
+  const assocRate = (kg.entities||1) > 0 ? (kg.associations||0)/(kg.entities||1) : 0;
+  const assocOk = assocRate > 0.3;
+  const reasonOk = cs.has_reason === true;
+
+  const dash = document.getElementById('dashboard');
+  dash.innerHTML = `
+    <!-- Row 1: Infrastructure -->
+    <div class="card">
+      <div class="card-title"><span class="icon">🖥</span> Gateway</div>
+      <div class="metric-row">
+        <div class="metric-item">
+          <div class="metric-sm" style="color:${gw.status==='RUNNING' ? 'var(--green)' : 'var(--red)'}">${gw.status || '?'}</div>
+          <div class="metric-label">PID ${gw.pid || '?'}</div>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title"><span class="icon">🧠</span> Knowledge Graph</div>
-        <div class="metric-row">
-          <div class="metric-item">
-            <div class="metric-sm">${kg.entities || 0}</div>
-            <div class="metric-label">entities</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-sm">${kg.relationships || 0}</div>
-            <div class="metric-label">rels</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-sm">${kg.associations || 0}</div>
-            <div class="metric-label">assoc</div>
-          </div>
+        <div class="metric-item">
+          <div class="metric-sm">${gw.memory_pct || '?'}%</div>
+          <div class="metric-label">memory</div>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title"><span class="icon">⚡</span> Queue Health</div>
-        <div class="metric" style="color: ${successRate > 50 ? 'var(--green)' : successRate > 0 ? 'var(--amber)' : 'var(--red)'}">${successRate}%</div>
-        <div class="metric-label">${ops.jobsSucceeded}/${ops.jobsAttempted} jobs passed</div>
-      </div>
-
-        <div class="card">
-        <div class="card-title"><span class="icon">🔥</span> Spark GPU</div>
-        ${(() => {
-          const gpu = state.gpu_stats || {};
-          if (gpu.status !== 'OK') return `<div class="metric-label">GPU: ${gpu.status || 'NO DATA'}</div>`;
-          return `
-            <div class="metric-row">
-              <div class="metric-item">
-                <div class="metric-sm" style="color:${gpu.gpu_util_pct > 80 ? 'var(--green)' : gpu.gpu_util_pct > 10 ? 'var(--amber)' : 'var(--text-faint)'}">${gpu.gpu_util_pct}%</div>
-                <div class="metric-label">GPU util</div>
-              </div>
-              <div class="metric-item">
-                <div class="metric-sm">${gpu.temp_c}°C</div>
-                <div class="metric-label">temp</div>
-              </div>
-              <div class="metric-item">
-                <div class="metric-sm">${Math.round(gpu.power_w)}W</div>
-                <div class="metric-label">power</div>
-              </div>
-            </div>
-            <div class="metric-label" style="margin-top:6px">${gpu.gpu_name || ''}</div>
-          `;
-        })()}
-      </div>
-      <!-- Row 2: Quality + Domains -->
-      <div class="card">
-        <div class="card-title"><span class="icon">💎</span> Research Quality</div>
-        <div class="metric-row">
-          <div class="metric-item">
-            <div class="metric-sm">${avgNovelty}</div>
-            <div class="metric-label">avg novelty</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-sm" style="color:var(--green)">${highNovelty}</div>
-            <div class="metric-label">high (4-5)</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-sm" style="color:var(--red)">${lowNovelty}</div>
-            <div class="metric-label">low (0-1)</div>
-          </div>
-        </div>
-        <div class="quality-issues">
-          ${evals.length > 0 ? `<span class="quality-chip ok">${evals.length} scored</span>` : ''}
-        </div>
-      </div>
-
-      <div class="card grid-2col">
-        <div class="card-title"><span class="icon">🗂</span> Knowledge Domains</div>
-        ${domainEntries.map(([name, count]) => `
-          <div class="bar-row">
-            <span class="bar-label">${name}</span>
-            <div class="bar-track">
-              <div class="bar-fill" style="width:${(count/maxDomain)*100}%;background:${domainColors[name] || 'var(--text-faint)'}"></div>
-            </div>
-            <span class="bar-value">${count}</span>
-          </div>
-        `).join('')}
-      </div>
-
-      <!-- Row 3: Queue Log + Self-Heal -->
-      <div class="card grid-2col">
-        <div class="card-title"><span class="icon">📋</span> Queue Tail</div>
-        <div class="log-area">
-          ${queueTail.map(line => {
-            const cls = line.includes('FAILED') ? 'log-err' : line.includes('Error') ? 'log-err' : line.includes('duration') ? 'log-warn' : 'log-info';
-            return `<div class="${cls}">${line.replace(/</g,'&lt;')}</div>`;
-          }).join('')}
-          ${queueTail.length === 0 ? '<div class="log-info">No queue log available</div>' : ''}
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title"><span class="icon">🔧</span> Self-Heal Issues</div>
-        <div class="log-area">
-          ${selfHeal.map(issue => `<div class="log-${issue.severity}">${issue.title}</div>`).join('')}
-          ${selfHeal.length === 0 ? '<div class="log-ok">No issues detected</div>' : ''}
-        </div>
-      </div>
-
-      <!-- Row 4: Evaluations -->
-      <div class="card grid-full">
-        <div class="card-title"><span class="icon">🔬</span> Recent Evaluations (${evals.length} scored)</div>
-        <div style="max-height:240px;overflow-y:auto">
-          ${evals.sort((a,b) => (b.novelty_score||0) - (a.novelty_score||0)).map(ev => `
-            <div class="eval-row">
-              <div class="eval-score score-${ev.novelty_score || 1}">${ev.novelty_score || '?'}</div>
-              <span class="eval-topic">${ev.topic || '—'}</span>
-              <span class="eval-detail">${ev.subtopic || ev.reasoning || '—'}</span>
-            </div>
-          `).join('')}
-          ${evals.length === 0 ? '<div style="font-family:var(--mono);font-size:11px;color:var(--text-dim)">No evaluations available</div>' : ''}
-        </div>
-      </div>
-
-      <!-- Row 5: Closed Loop Status -->
-      <div class="card grid-full">
-        <div class="card-title"><span class="icon">🔄</span> Closed Loop Status</div>
-        <div class="loop-grid">
-          <div class="loop-node active">
-            <div class="loop-node-label">GATHER</div>
-            <div class="loop-node-status">spark/qwen3-32b</div>
-            <div class="loop-node-status" style="color:var(--red)">FAILING</div>
-          </div>
-          <div class="loop-node ${evals.some(e => e.novelty_score >= 4) ? 'active' : 'partial'}">
-            <div class="loop-node-label">EXTRACT</div>
-            <div class="loop-node-status">claude code</div>
-            <div class="loop-node-status" style="color:var(--green)">WORKING</div>
-          </div>
-          <div class="loop-node ${kg.associations > 0 ? 'active' : 'partial'}">
-            <div class="loop-node-label">ASSOCIATE</div>
-            <div class="loop-node-status">${kg.associations || 0} links</div>
-            <div class="loop-node-status" style="color:var(--amber)">PARTIAL</div>
-          </div>
-          <div class="loop-node partial">
-            <div class="loop-node-label">REASON</div>
-            <div class="loop-node-status">opus / 7am cron</div>
-            <div class="loop-node-status" style="color:var(--green)">WORKING</div>
-          </div>
-          <div class="loop-node missing">
-            <div class="loop-node-label">ACT</div>
-            <div class="loop-node-status">self-correct</div>
-            <div class="loop-node-status" style="color:var(--red)">MANUAL</div>
-          </div>
-        </div>
-        <div style="margin-top:12px;font-family:var(--mono);font-size:10px;color:var(--text-faint)">
-          GATHER → EXTRACT → ASSOCIATE → REASON → ACT (self-correct) → GATHER ...
-          <br>Loop breaks at: GATHER (timeouts), ACT (requires Matt paste blocks)
+        <div class="metric-item">
+          <div class="metric-sm">${gw.uptime || '?'}</div>
+          <div class="metric-label">uptime</div>
         </div>
       </div>
     </div>
 
-    <!-- System Info Footer -->
-    <div class="closed-loop-section">
-      <div style="font-family:var(--mono);font-size:10px;color:var(--text-faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
-        <span>cron jobs: ${state.cron_job_count || '?'}</span>
-        <span>status bridge: github.com/mattzirkelbach-pixel/zeke-status</span>
-        <span>dashboard: 10.0.0.233:3333</span>
-        <span>spark: 10.0.0.143:11434</span>
+    <div class="card">
+      <div class="card-title"><span class="icon">🔥</span> Spark GPU</div>
+      ${gpu.status === 'OK' ? `
+        <div class="metric-row">
+          <div class="metric-item">
+            <div class="metric-sm" style="color:${(gpu.gpu_util_pct||0) > 80 ? 'var(--green)' : (gpu.gpu_util_pct||0) > 10 ? 'var(--amber)' : 'var(--text-faint)'}">${gpu.gpu_util_pct != null ? gpu.gpu_util_pct + '%' : 'N/A'}</div>
+            <div class="metric-label">GPU util</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-sm">${gpu.temp_c != null ? gpu.temp_c + '\u00b0C' : 'N/A'}</div>
+            <div class="metric-label">temp</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-sm">${gpu.power_w != null ? Math.round(gpu.power_w) + 'W' : 'N/A'}</div>
+            <div class="metric-label">power</div>
+          </div>
+        </div>
+        <div class="metric-label" style="margin-top:6px">${gpu.gpu_name || ''} &bull; ${(sp.loaded_models||[]).map(m=>m.name).join(', ')}</div>
+      ` : `<div class="metric-label">GPU: ${gpu.status || 'NO DATA'}</div>`}
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span> Knowledge Graph</div>
+      <div class="metric-row">
+        <div class="metric-item">
+          <div class="metric-lg" style="color:var(--blue)">${kg.entities || 0}</div>
+          <div class="metric-label">entities</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-sm">${kg.relationships || 0}</div>
+          <div class="metric-label">relationships</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-sm">${kg.associations || 0}</div>
+          <div class="metric-label">associations</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-sm">${kg.insights || 0}</div>
+          <div class="metric-label">insights</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Feed + Queue -->
+    <div class="card">
+      <div class="card-title"><span class="icon">📡</span> Research Feed</div>
+      <div class="metric-row">
+        <div class="metric-item">
+          <div class="metric-lg" style="color:var(--cyan)">${state.feed_lines || 0}</div>
+          <div class="metric-label">entries</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-sm" style="color:${(fq.error_rate||0) > 10 ? 'var(--red)' : 'var(--green)'}">${fq.error_rate || 0}%</div>
+          <div class="metric-label">error rate</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-sm">${state.evaluation_count || 0}</div>
+          <div class="metric-label">evaluated</div>
+        </div>
+      </div>
+      <div class="metric-label" style="margin-top:8px">bad JSON: ${fq.malformed_json||0} | bad timestamps: ${fq.literal_timestamps||0} | dupes: ${fq.duplicates||0} | empty: ${fq.no_new_dev||0}</div>
+      <div class="chart-container"><canvas id="chart-feed"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">⚡</span> Queue Health</div>
+      <div class="metric-row">
+        <div class="metric-item">
+          <div class="metric-sm" style="color:${passedJobs > 0 ? 'var(--green)' : 'var(--red)'}">${passedJobs}/${totalJobs}</div>
+          <div class="metric-label">passed / total</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-sm" style="color:var(--red)">${failedJobs}</div>
+          <div class="metric-label">failed</div>
+        </div>
+      </div>
+      <div class="log-box" style="margin-top:8px">${jobs.map(j => {
+        const c = j.result === 'FAILED' ? 'fail' : j.result === 'SUCCESS' ? 'pass' : '';
+        return '<span class="' + c + '">' + (j.topic||'?') + ' ' + (j.result||'?') + ' ' + (j.duration_s ? j.duration_s+'s' : '') + '</span>';
+      }).join('\n')}</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🗂</span> Domains</div>
+      ${domainBars || '<div class="metric-label">No domain data</div>'}
+    </div>
+
+    <!-- Row 3: Charts -->
+    <div class="card grid-full">
+      <div class="card-title"><span class="icon">📈</span> Trends (${history.length} data points)</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+        <div>
+          <div class="metric-label">Feed Growth</div>
+          <div class="chart-container"><canvas id="chart-feed-trend"></canvas></div>
+        </div>
+        <div>
+          <div class="metric-label">KG Entities</div>
+          <div class="chart-container"><canvas id="chart-kg-trend"></canvas></div>
+        </div>
+        <div>
+          <div class="metric-label">Feed Error Rate %</div>
+          <div class="chart-container"><canvas id="chart-error-trend"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 4: Closed Loop -->
+    <div class="card grid-full">
+      <div class="card-title"><span class="icon">🔄</span> Closed Loop Status</div>
+      <div class="loop-viz">
+        <div class="loop-node ${gatherOk ? 'loop-ok' : 'loop-fail'}">GATHER</div>
+        <div class="loop-arrow">→</div>
+        <div class="loop-node ${extractOk ? 'loop-ok' : 'loop-warn'}">EXTRACT</div>
+        <div class="loop-arrow">→</div>
+        <div class="loop-node ${assocOk ? 'loop-ok' : 'loop-warn'}">ASSOCIATE</div>
+        <div class="loop-arrow">→</div>
+        <div class="loop-node ${reasonOk ? 'loop-ok' : 'loop-fail'}">REASON</div>
+        <div class="loop-arrow">→</div>
+        <div class="loop-node loop-fail">ACT</div>
+        <div class="loop-arrow">→</div>
+      </div>
+      <div class="metric-label" style="text-align:center">
+        GATHER: ${gatherOk ? 'infra online' : 'infra down'} |
+        EXTRACT: ${(kg.entities||0)} entities |
+        ASSOCIATE: ${Math.round(assocRate*100)}% rate |
+        REASON: ${reasonOk ? '7am cron active' : 'not scheduled'} |
+        ACT: requires human
+      </div>
+    </div>
+
+    <!-- Row 5: Logs -->
+    <div class="card">
+      <div class="card-title"><span class="icon">🔧</span> Self-Heal Log</div>
+      <div class="log-box">${healLog}</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">📋</span> Queue Log</div>
+      <div class="log-box">${queueLog}</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">💎</span> Recent Evaluations</div>
+      <div class="log-box">${evals || 'None yet'}</div>
+    </div>
+
+    <!-- Row 6: System -->
+    <div class="card grid-full">
+      <div class="card-title"><span class="icon">⚙</span> System</div>
+      <div class="metric-label">
+        Cron: ${cs.active||0} active | Queue: ${cs.has_queue ? 'ON' : 'OFF'} | Reason: ${cs.has_reason ? 'ON' : 'OFF'} | Overnight: ${cs.has_overnight ? 'ON' : 'OFF'} |
+        Models: ${Object.keys(gc.byProvider||{}).length} configured |
+        Spark: ${sp.status || '?'} |
+        Dashboard: auto-refresh 60s
       </div>
     </div>
   `;
+
+  // Draw charts after DOM update
+  setTimeout(() => {
+    const cf = document.getElementById('chart-feed-trend');
+    if (cf && feedHistory.length > 1) sparkline(cf, feedHistory, 'rgb(6,182,212)');
+    const ck = document.getElementById('chart-kg-trend');
+    if (ck && entityHistory.length > 1) sparkline(ck, entityHistory, 'rgb(59,130,246)');
+    const ce = document.getElementById('chart-error-trend');
+    if (ce && errorHistory.length > 1) sparkline(ce, errorHistory, 'rgb(239,68,68)');
+  }, 50);
 }
 
-async function init() {
-  await Promise.all([fetchStatus(), fetchHistory()]);
-  render();
-  setInterval(async () => {
-    await Promise.all([fetchStatus(), fetchHistory()]);
-    render();
-  }, REFRESH_MS);
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-init();
+fetchData();
+setInterval(fetchData, 60000);
 </script>
 </body>
 </html>
