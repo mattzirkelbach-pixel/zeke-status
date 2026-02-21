@@ -587,14 +587,10 @@ function render() {
               <div class="metric-item">
                 <div class="metric-sm">${gpu.temp_c}°C</div>
                 <div class="metric-label">temp</div>
-              </div>
-              <div class="metric-item">
-                <div class="metric-sm">${Math.round(gpu.mem_used_mb/1024)}G/${Math.round(gpu.mem_total_mb/1024)}G</div>
-                <div class="metric-label">VRAM</div>
-              </div>
               <div class="metric-item">
                 <div class="metric-sm">${Math.round(gpu.power_w)}W</div>
-                <div class="metric-label">/ ${Math.round(gpu.power_limit_w)}W</div>
+                <div class="metric-label">power</div>
+              </div>
               </div>
             </div>
             <div class="metric-label" style="margin-top:6px">${gpu.gpu_name || ''}</div>
