@@ -104,6 +104,10 @@ def build_status():
     except (FileNotFoundError, json.JSONDecodeError, PermissionError):
         status["cron_job_count"] = 0
 
+    # Strategic context (full file, no truncation)
+    ctx_path = os.path.join(MEMORY, "claude-strategic-context.md")
+    status["strategic_context"] = safe_read_text(ctx_path)
+
     # Write output
     out_path = os.path.join(STATUS_DIR, "status.json")
     with open(out_path, "w") as f:
