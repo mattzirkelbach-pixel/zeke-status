@@ -573,7 +573,7 @@ function render() {
         <div class="metric-label">${ops.jobsSucceeded}/${ops.jobsAttempted} jobs passed</div>
       </div>
 
-            <div class="card">
+        <div class="card">
         <div class="card-title"><span class="icon">🔥</span> Spark GPU</div>
         ${(() => {
           const gpu = state.gpu_stats || {};
@@ -587,13 +587,16 @@ function render() {
               <div class="metric-item">
                 <div class="metric-sm">${gpu.temp_c}°C</div>
                 <div class="metric-label">temp</div>
+              </div>
               <div class="metric-item">
                 <div class="metric-sm">${Math.round(gpu.power_w)}W</div>
                 <div class="metric-label">power</div>
               </div>
+            </div>
+            <div class="metric-label" style="margin-top:6px">${gpu.gpu_name || ''}</div>
+          `;
         })()}
       </div>
-
       <!-- Row 2: Quality + Domains -->
       <div class="card">
         <div class="card-title"><span class="icon">💎</span> Research Quality</div>
