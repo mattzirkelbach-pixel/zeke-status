@@ -130,33 +130,28 @@ def get_kg_stats():
         return f"Error: {e}"
 
 
-def safe_float(val):
-    try: return float(val)
-    except: return None
 
 def get_gpu_stats():
-    """Get GPU stats from Spark via SSH."""
+    """Get GPU stats from DGX Spark via SSH. Handles unified memory [N/A] fields."""
     try:
         r = subprocess.run(
             ['ssh', '-o', 'ConnectTimeout=5', '-o', 'BatchMode=yes', 'zirkai@10.0.0.143',
-             'nvidia-smi --query-gpu=utilization.gpu,temperature.gpu,memory.used,memory.total,power.draw,power.limit,name --format=csv,noheader,nounits'],
+             'nvidia-smi --query-gpu=utilization.gpu,temperature.gpu,power.draw,name --format=csv,noheader,nounits'],
             capture_output=True, text=True, timeout=15
         )
         if r.returncode == 0 and r.stdout.strip():
             parts = [x.strip() for x in r.stdout.strip().split(',')]
-            if len(parts) >= 7:
-                return {
-                    'status': 'OK',
-                    'gpu_util_pct': safe_float(parts[0]),
-                    'mem_util_pct': safe_float(parts[1]),
-                    'temp_c': safe_float(parts[2]),
-                    'mem_used_mb': safe_float(parts[3]),
-                    'mem_total_mb': safe_float(parts[4]),
-                    'power_w': safe_float(parts[5]),
-                    'power_limit_w': safe_float(parts[6]),
-                    'gpu_name': parts[7],
-                }
-        return {'status': 'SSH_OK_NO_DATA', 'raw': r.stdout.strip(), 'err': r.stderr.strip()[:200]}
+            def sf(v):
+                try: return float(v)
+                except: return None
+            return {
+                'status': 'OK',
+                'gpu_util_pct': sf(parts[0]) if len(parts) > 0 else None,
+                'temp_c': sf(parts[1]) if len(parts) > 1 else None,
+                'power_w': sf(parts[2]) if len(parts) > 2 else None,
+                'gpu_name': parts[3].strip() if len(parts) > 3 else 'unknown',
+            }
+        return {'status': 'SSH_OK_NO_DATA', 'raw': r.stdout.strip()}
     except subprocess.TimeoutExpired:
         return {'status': 'SSH_TIMEOUT'}
     except Exception as e:
