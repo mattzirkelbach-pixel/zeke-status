@@ -80,6 +80,14 @@ def build_status():
     status["evaluation_count"] = len(eval_lines)
     status["recent_evaluations"] = [l.strip() for l in eval_lines[-10:]]
 
+    # Self-heal log: last 2000 chars
+    heal_path = os.path.join(MEMORY, "self-heal-log.md")
+    status["self_heal_log"] = safe_read_text(heal_path, 2000)
+
+    # Ops status
+    ops_path = os.path.join(MEMORY, "ops-status.md")
+    status["ops_status"] = safe_read_text(ops_path)
+
     # Log tails: last 15 lines each
     for log_path in ["/tmp/zeke-queue.log", "/tmp/zeke-reason-error.log"]:
         key = os.path.basename(log_path).replace(".log", "_tail")
