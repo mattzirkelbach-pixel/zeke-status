@@ -1,202 +1,174 @@
 #!/usr/bin/env python3
-"""Build status.json from Zeke's workspace data sources."""
+"""Zeke Status Bridge v3 — gateway diagnostics + feed quality + closed-loop checks."""
+import json, subprocess, os, glob, sqlite3
+from datetime import datetime, timezone
+from pathlib import Path
 
-import json
-import os
-import glob
-import subprocess
-import datetime
+HOME = Path.home()
+WORKSPACE = HOME / ".openclaw" / "workspace"
+MEMORY = WORKSPACE / "memory"
+STATUS_DIR = HOME / "zeke-status"
+FEED = MEMORY / "learning-feed.jsonl"
 
-STATUS_DIR = os.path.expanduser("~/zeke-status")
-WORKSPACE = os.path.expanduser("~/.openclaw/workspace")
-MEMORY = os.path.join(WORKSPACE, "memory")
-
-
-def safe_read_lines(path):
+def run(cmd, default=""):
     try:
-        with open(path) as f:
-            return f.readlines()
-    except (FileNotFoundError, PermissionError):
-        return []
+        r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=10)
+        return r.stdout.strip() if r.returncode == 0 else default
+    except: return default
 
+def read_file(path, default=""):
+    try: return Path(path).read_text()
+    except: return default
 
-def safe_read_text(path, limit=None):
+def tail_lines(path, n=15):
     try:
-        with open(path) as f:
-            text = f.read(limit) if limit else f.read()
-            return text
-    except (FileNotFoundError, PermissionError):
-        return ""
+        lines = Path(path).read_text().strip().split('\n')
+        return lines[-n:]
+    except: return []
 
-
-def safe_mtime_iso(path):
+def get_gateway_config():
     try:
-        ts = os.path.getmtime(path)
-        return datetime.datetime.fromtimestamp(ts, tz=datetime.timezone.utc).isoformat()
-    except (FileNotFoundError, OSError):
-        return ""
+        with open(HOME / ".openclaw" / "openclaw.json") as f:
+            cfg = json.load(f)
+        gw = cfg.get('gateway', {})
+        tools = cfg.get('tools', {})
+        bp = tools.get('byProvider', {})
+        return {
+            'sessionTimeoutMs': gw.get('sessionTimeoutMs', 'NOT SET'),
+            'timeoutMs': gw.get('timeoutMs', 'NOT SET'),
+            'elevated': tools.get('elevated', {}),
+            'byProvider': {k: {'allow': v.get('allow', []), 'count': len(v.get('allow', []))} for k, v in bp.items()},
+        }
+    except: return {'error': 'could not read config'}
 
+def get_gateway_process():
+    pid = run("pgrep -f 'openclaw gateway'")
+    if pid:
+        return {'pid': pid, 'memory_pct': run(f"ps -p {pid} -o %mem=").strip(),
+                'uptime': run(f"ps -p {pid} -o etime=").strip(), 'status': 'RUNNING'}
+    return {'pid': None, 'status': 'NOT RUNNING'}
 
-def build_status():
-    status = {
-        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-    }
-
-    # Learning feed: line count + last 15 lines
-    feed_path = os.path.join(MEMORY, "learning-feed.jsonl")
-    feed_lines = safe_read_lines(feed_path)
-    status["feed_lines"] = len(feed_lines)
-    status["recent_feed"] = [l.strip() for l in feed_lines[-15:]]
-
-    # KG stats via subprocess
-    kg_script = os.path.join(WORKSPACE, "tools/kg/kg-query.py")
+def get_spark_status():
     try:
-        result = subprocess.run(
-            ["python3", kg_script, "--stats"],
-            capture_output=True, text=True, timeout=15
-        )
-        status["kg_stats"] = result.stdout.strip()
-    except Exception:
-        status["kg_stats"] = ""
+        r = subprocess.run(['curl', '-sf', '--connect-timeout', '5', 'http://10.0.0.143:11434/api/ps'],
+                          capture_output=True, text=True, timeout=10)
+        if r.returncode == 0:
+            data = json.loads(r.stdout)
+            return {'status': 'ONLINE',
+                    'loaded_models': [{'name': m.get('name'), 'size_gb': round(m.get('size',0)/1e9,1)}
+                                     for m in data.get('models', [])]}
+    except: pass
+    return {'status': 'UNREACHABLE', 'loaded_models': []}
 
-    # Latest daily synthesis
-    synths = sorted(glob.glob(os.path.join(MEMORY, "daily-synthesis-*.md")))
-    if synths:
-        latest = synths[-1]
-        status["last_synthesis"] = os.path.basename(latest)
-        status["synthesis_content"] = safe_read_text(latest, 3000)
-    else:
-        status["last_synthesis"] = ""
-        status["synthesis_content"] = ""
-
-    # Research priorities
-    pri_path = os.path.join(MEMORY, "research-priorities.md")
-    status["priorities_updated"] = safe_mtime_iso(pri_path)
-    status["priorities_content"] = safe_read_text(pri_path, 2000)
-
-    # Research evaluations: count + last 10 lines
-    eval_path = os.path.join(MEMORY, "research-evaluations.jsonl")
-    eval_lines = safe_read_lines(eval_path)
-    status["evaluation_count"] = len(eval_lines)
-    status["recent_evaluations"] = [l.strip() for l in eval_lines[-10:]]
-
-    # Self-heal log: last 2000 chars
-    heal_path = os.path.join(MEMORY, "self-heal-log.md")
-    status["self_heal_log"] = safe_read_text(heal_path, 2000)
-
-    # Ops status
-    ops_path = os.path.join(MEMORY, "ops-status.md")
-    status["ops_status"] = safe_read_text(ops_path)
-
-    # Log tails: last 15 lines each
-    for log_path in ["/tmp/zeke-queue.log", "/tmp/zeke-reason-error.log"]:
-        key = os.path.basename(log_path).replace(".log", "_tail")
-        lines = safe_read_lines(log_path)
-        status[key] = [l.strip() for l in lines[-15:]]
-
-    # Cron job count
-    cron_path = os.path.expanduser("~/.openclaw/cron/jobs.json")
+def get_feed_quality():
+    issues = {'malformed_json': 0, 'literal_timestamps': 0, 'duplicates': 0, 'no_new_dev': 0, 'total': 0}
+    seen = set()
     try:
-        with open(cron_path) as f:
-            data = json.load(f)
-            jobs = data if isinstance(data, list) else data.get("jobs", data.get("cron", []))
-            status["cron_job_count"] = len(jobs) if isinstance(jobs, list) else 0
-    except (FileNotFoundError, json.JSONDecodeError, PermissionError):
-        status["cron_job_count"] = 0
-
-    # Strategic context (full file, no truncation)
-    ctx_path = os.path.join(MEMORY, "claude-strategic-context.md")
-    status["strategic_context"] = safe_read_text(ctx_path)
-
-    # Write output
-    out_path = os.path.join(STATUS_DIR, "status.json")
-    with open(out_path, "w") as f:
-        json.dump(status, f, indent=2)
-    print(f"Wrote {out_path}")
-
-    # ── Append history snapshot to history.jsonl ──────────────────
-    append_history(status)
-
-
-def parse_kg_stats_text(kg_text):
-    """Parse kg_stats text output into structured numbers."""
-    import re
-    result = {"entities": 0, "relationships": 0, "associations": 0, "domains": {}}
-    if not kg_text:
-        return result
-    for key in ("entities", "relationships", "associations"):
-        m = re.search(rf"(?i){key}:\s*(\d+)", kg_text)
-        if m:
-            result[key] = int(m.group(1))
-    m = re.search(r"Domains:\s*\{([^}]*)\}", kg_text, re.DOTALL)
-    if m:
-        try:
-            result["domains"] = json.loads("{" + m.group(1) + "}")
-        except (json.JSONDecodeError, ValueError):
-            pass
-    return result
-
-
-def compute_avg_novelty():
-    """Compute average novelty score from research-evaluations.jsonl."""
-    eval_path = os.path.join(MEMORY, "research-evaluations.jsonl")
-    lines = safe_read_lines(eval_path)
-    scores = []
-    for line in lines:
-        line = line.strip()
-        if not line:
-            continue
-        try:
-            obj = json.loads(line)
-            if "novelty_score" in obj:
-                scores.append(obj["novelty_score"])
-        except (json.JSONDecodeError, ValueError):
-            continue
-    if not scores:
-        return 0.0
-    return round(sum(scores) / len(scores), 2)
-
-
-def count_queue_outcomes():
-    """Count succeeded and failed jobs from queue log."""
-    succeeded = 0
-    failed = 0
-    try:
-        with open("/tmp/zeke-queue.log") as f:
+        with open(FEED) as f:
             for line in f:
-                upper = line.upper()
-                if "SUCCEEDED" in upper or "  OK:" in upper or "OK:" in upper:
-                    succeeded += 1
-                if "FAILED" in upper:
-                    failed += 1
-    except (FileNotFoundError, PermissionError):
-        pass
-    return succeeded, failed
+                line = line.strip()
+                if not line: continue
+                issues['total'] += 1
+                if '$(date' in line: issues['literal_timestamps'] += 1
+                if '"No new developments"' in line: issues['no_new_dev'] += 1
+                try:
+                    d = json.loads(line)
+                    ins = d.get('insights', [])
+                    key = f"{d.get('topic','')}|{ins[0] if isinstance(ins, list) and ins else ''}"
+                    if key in seen: issues['duplicates'] += 1
+                    seen.add(key)
+                except json.JSONDecodeError: issues['malformed_json'] += 1
+    except: pass
+    issues['error_rate'] = round((issues['malformed_json'] + issues['literal_timestamps'] + issues['duplicates']) / max(issues['total'], 1) * 100, 1)
+    return issues
 
-
-def append_history(status):
-    """Append a timestamped snapshot to history.jsonl."""
-    history_path = os.path.join(STATUS_DIR, "history.jsonl")
-    kg = parse_kg_stats_text(status.get("kg_stats", ""))
-    avg_novelty = compute_avg_novelty()
-    jobs_ok, jobs_fail = count_queue_outcomes()
-
-    snapshot = {
-        "timestamp": status["timestamp"],
-        "feed_lines": status.get("feed_lines", 0),
-        "entity_count": kg["entities"],
-        "relationship_count": kg["relationships"],
-        "association_count": kg["associations"],
-        "domain_counts": kg["domains"],
-        "avg_novelty_score": avg_novelty,
-        "jobs_succeeded": jobs_ok,
-        "jobs_failed": jobs_fail,
+def get_crontab_status():
+    crontab = run("crontab -l")
+    lines = crontab.split('\n')
+    active = [l for l in lines if l.strip() and not l.strip().startswith('#')]
+    disabled = [l for l in lines if 'MAINT_DISABLED' in l]
+    return {
+        'total_entries': len([l for l in lines if l.strip()]),
+        'active': len(active),
+        'disabled_for_maint': len(disabled),
+        'has_queue': any('zeke-queue' in l for l in active),
+        'has_overnight': any('overnight' in l for l in active),
+        'has_reason': any('zeke-reason' in l for l in active),
+        'has_status_push': any('build-status' in l for l in active),
     }
 
-    with open(history_path, "a") as f:
-        f.write(json.dumps(snapshot) + "\n")
-    print(f"Appended history snapshot to {history_path}")
+def get_last_jobs():
+    log_lines = tail_lines('/tmp/zeke-queue.log', 40)
+    jobs = []
+    current = {}
+    for line in log_lines:
+        if any(k in line for k in ['GATHER', 'EXTRACT', 'ASSOCIATE']):
+            if current: jobs.append(current)
+            parts = line.split()
+            current = {'topic': parts[2] if len(parts) > 2 else '?', 'time': parts[0].strip('[]') if parts else '?'}
+        elif 'FAILED' in line: current['result'] = 'FAILED'
+        elif 'SUCCESS' in line or 'DONE' in line: current['result'] = 'SUCCESS'
+        elif 'duration' in line: current['duration_s'] = line.split(':')[-1].strip().rstrip('s')
+        elif 'Error' in line: current['error'] = line.strip()[:100]
+    if current: jobs.append(current)
+    return jobs[-8:]
 
+def get_kg_stats():
+    try:
+        db = sqlite3.connect(str(WORKSPACE / "memory" / "knowledge.db"))
+        ent = db.execute("SELECT COUNT(*) FROM entities").fetchone()[0]
+        rel = db.execute("SELECT COUNT(*) FROM relationships").fetchone()[0]
+        assoc = db.execute("SELECT COUNT(*) FROM associations").fetchone()[0]
+        tables = [t[0] for t in db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
+        ins = db.execute("SELECT COUNT(*) FROM insights").fetchone()[0] if 'insights' in tables else 0
+        domains = {}
+        for row in db.execute("SELECT domain, COUNT(*) FROM entities GROUP BY domain ORDER BY COUNT(*) DESC"):
+            domains[row[0]] = row[1]
+        db.close()
+        return f"Entities: {ent}\nRelationships: {rel}\nAssociations: {assoc}\nInsights: {ins}\nDomains: {json.dumps(domains, indent=2)}"
+    except Exception as e:
+        return f"Error: {e}"
 
-if __name__ == "__main__":
-    build_status()
+now = datetime.now(timezone.utc)
+
+status = {
+    'timestamp': now.isoformat(),
+    'feed_lines': int(run(f"wc -l < '{FEED}'", "0")),
+    'recent_feed': tail_lines(FEED, 15),
+    'kg_stats': get_kg_stats(),
+    'last_synthesis': sorted(glob.glob(str(MEMORY / "daily-synthesis-*.md")))[-1].split('/')[-1] if glob.glob(str(MEMORY / "daily-synthesis-*.md")) else None,
+    'synthesis_content': read_file(sorted(glob.glob(str(MEMORY / "daily-synthesis-*.md")))[-1])[:3000] if glob.glob(str(MEMORY / "daily-synthesis-*.md")) else "",
+    'priorities_updated': datetime.fromtimestamp(os.path.getmtime(MEMORY / "research-priorities.md"), tz=timezone.utc).isoformat() if (MEMORY / "research-priorities.md").exists() else None,
+    'priorities_content': read_file(MEMORY / "research-priorities.md")[:2000],
+    'gateway_config': get_gateway_config(),
+    'gateway_process': get_gateway_process(),
+    'spark_status': get_spark_status(),
+    'feed_quality': get_feed_quality(),
+    'crontab_status': get_crontab_status(),
+    'last_jobs': get_last_jobs(),
+    'evaluation_count': int(run(f"wc -l < '{MEMORY}/research-evaluations.jsonl'", "0")),
+    'recent_evaluations': tail_lines(MEMORY / "research-evaluations.jsonl", 10),
+    'self_heal_log': read_file(MEMORY / "self-heal-log.md")[:2000],
+    'ops_status': read_file(MEMORY / "ops-status.md")[:2000],
+    'zeke-queue_tail': tail_lines('/tmp/zeke-queue.log', 15),
+    'zeke-reason-error_tail': tail_lines('/tmp/zeke-reason-error.log', 10),
+    'cron_job_count': int(run("crontab -l 2>/dev/null | grep -v '^#' | grep -v '^$' | wc -l", "0")),
+    'strategic_context': read_file(MEMORY / "claude-strategic-context.md")[:3000],
+}
+
+with open(STATUS_DIR / "status.json", 'w') as f:
+    json.dump(status, f, indent=2)
+
+history_entry = {
+    'timestamp': now.isoformat(),
+    'feed_lines': status['feed_lines'],
+    'gateway_status': status['gateway_process']['status'],
+    'gateway_timeout_ms': status['gateway_config'].get('sessionTimeoutMs', 'unknown'),
+    'spark_status': status['spark_status']['status'],
+    'feed_error_rate': status['feed_quality']['error_rate'],
+    'kg_entities': int(status['kg_stats'].split('Entities: ')[1].split('\n')[0]) if 'Entities: ' in str(status['kg_stats']) else 0,
+}
+with open(STATUS_DIR / "history.jsonl", 'a') as f:
+    f.write(json.dumps(history_entry) + '\n')
+
+print(f"Status built. Feed: {status['feed_lines']} | Gateway: {status['gateway_process']['status']} (timeout: {status['gateway_config'].get('sessionTimeoutMs','?')}ms) | Spark: {status['spark_status']['status']} | Feed errors: {status['feed_quality']['error_rate']}%")
