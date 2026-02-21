@@ -262,7 +262,14 @@ function parseFeed(entries){
     if(!raw||!raw.trim())return null;
     try{
       const d=JSON.parse(raw);
-      return{topic:d.topic||'?',finding:d.finding||d.insights?.[0]||'',source:d.source||'',ts:d.timestamp||''};
+      const ts=d.timestamp||'';
+      // Skip broken timestamps and empty findings
+      if(ts.includes('$(date'))return null;
+      if(ts.includes('YYYY'))return null;
+      const finding=d.finding||((Array.isArray(d.insights)&&d.insights[0])?
+        (typeof d.insights[0]==='string'?d.insights[0]:JSON.stringify(d.insights[0]).slice(0,120)):'');
+      if(!finding||finding==='No new developments'||finding.startsWith('No additional'))return null;
+      return{topic:d.topic||'?',finding,source:d.source||'',ts};
     }catch{return null}
   }).filter(Boolean).reverse();
 }
