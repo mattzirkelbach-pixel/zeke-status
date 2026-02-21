@@ -3,413 +3,220 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zeke Ops Dashboard</title>
+<title>Zeke</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=DM+Sans:wght@400;500;700&display=swap');
   :root {
-    --bg: #0a0a0f; --surface: #12121a; --border: #1e1e2e;
-    --text: #e0e0e8; --text-dim: #8888a0; --text-faint: #555568;
-    --green: #22c55e; --amber: #f59e0b; --red: #ef4444;
-    --blue: #3b82f6; --purple: #a855f7; --cyan: #06b6d4;
+    --bg: #000000;
+    --surface: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.06);
+    --border-s: rgba(255,255,255,0.1);
+    --text: rgba(255,255,255,0.92);
+    --t2: rgba(255,255,255,0.55);
+    --t3: rgba(255,255,255,0.3);
+    --green: #30d158;
+    --amber: #ffd60a;
+    --red: #ff453a;
+    --blue: #0a84ff;
+    --cyan: #64d2ff;
+    --purple: #bf5af2;
+    --r: 14px;
+    --font: "Geist", -apple-system, sans-serif;
+    --mono: "Geist Mono", ui-monospace, monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); padding: 16px; min-height: 100vh; }
-  .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-  .header h1 { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: var(--text); }
-  .header h1 span { color: var(--text-faint); font-weight: 300; }
-  .badge { padding: 4px 12px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-  .badge-ok { background: rgba(34,197,94,0.15); color: var(--green); }
-  .badge-warn { background: rgba(245,158,11,0.15); color: var(--amber); }
-  .badge-crit { background: rgba(239,68,68,0.15); color: var(--red); }
-  .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-faint); text-align: right; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 16px; }
-  .grid-full { grid-column: 1 / -1; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
-  .card-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 12px; }
-  .card-title .icon { margin-right: 6px; }
-  .metric-row { display: flex; gap: 16px; flex-wrap: wrap; }
-  .metric-item { flex: 1; min-width: 60px; }
-  .metric-lg { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600; }
-  .metric-sm { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; }
-  .metric-label { font-size: 11px; color: var(--text-faint); margin-top: 2px; }
-  .log-box { font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6; color: var(--text-dim); max-height: 200px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
-  .log-box .fail { color: var(--red); }
-  .log-box .pass { color: var(--green); }
-  .domain-bar { display: flex; align-items: center; margin: 4px 0; }
-  .domain-name { font-family: 'JetBrains Mono', monospace; font-size: 11px; width: 120px; color: var(--text-dim); }
-  .domain-fill { height: 14px; border-radius: 2px; min-width: 4px; }
-  .domain-count { font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-left: 8px; color: var(--text-faint); }
-  .loop-viz { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; padding: 12px 0; }
-  .loop-node { padding: 8px 16px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; border: 2px solid; }
-  .loop-arrow { color: var(--text-faint); font-size: 18px; }
-  .loop-ok { border-color: var(--green); color: var(--green); background: rgba(34,197,94,0.08); }
-  .loop-warn { border-color: var(--amber); color: var(--amber); background: rgba(245,158,11,0.08); }
-  .loop-fail { border-color: var(--red); color: var(--red); background: rgba(239,68,68,0.08); }
-  canvas { width: 100%; height: 120px; }
-  .chart-container { position: relative; height: 140px; margin-top: 8px; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); padding: 20px; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+  .hdr { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0 28px; }
+  .wm { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--t2); }
+  .hp { display: flex; align-items: center; gap: 8px; }
+  .hd { width: 7px; height: 7px; border-radius: 50%; animation: p 2s ease-in-out infinite; }
+  @keyframes p { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .hl { font-family: var(--mono); font-size: 11px; color: var(--t3); }
+  .g { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  @media(max-width:900px){.g{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.g{grid-template-columns:1fr}}
+  .s2 { grid-column: span 2; }
+  .s3 { grid-column: span 3; }
+  @media(max-width:900px){.s2,.s3{grid-column:span 2}}
+  @media(max-width:600px){.s2,.s3{grid-column:span 1}}
+  .c { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 18px 20px; transition: border-color .2s; }
+  .c:hover { border-color: var(--border-s); }
+  .cl { font-family: var(--mono); font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--t3); margin-bottom: 14px; }
+  .v { font-family: var(--mono); font-weight: 500; font-size: 32px; letter-spacing: -.02em; line-height: 1; }
+  .vs { font-family: var(--mono); font-weight: 500; font-size: 20px; line-height: 1; }
+  .lb { font-size: 11px; color: var(--t3); margin-top: 4px; }
+  .mr { display: flex; gap: 24px; flex-wrap: wrap; }
+  .mi { min-width: 60px; }
+  .st { font-family: var(--mono); font-size: 10px; color: var(--t3); margin-top: 10px; line-height: 1.5; }
+  .ca { height: 60px; margin-top: 12px; }
+  canvas { width: 100%; height: 100%; }
+  .lc { display: flex; align-items: center; gap: 4px; justify-content: center; padding: 8px 0; flex-wrap: wrap; }
+  .ls { font-family: var(--mono); font-size: 11px; font-weight: 500; padding: 6px 14px; border-radius: 8px; border: 1px solid; }
+  .lok { border-color: rgba(48,209,88,.3); color: var(--green); background: rgba(48,209,88,.06); }
+  .lw { border-color: rgba(255,214,10,.3); color: var(--amber); background: rgba(255,214,10,.06); }
+  .lo { border-color: var(--border); color: var(--t3); }
+  .la { color: var(--t3); font-size: 12px; padding: 0 2px; }
+  .dr { display: flex; align-items: center; margin: 3px 0; gap: 8px; }
+  .dn { font-family: var(--mono); font-size: 10px; color: var(--t3); width: 100px; text-align: right; flex-shrink: 0; }
+  .db { flex: 1; height: 6px; background: rgba(255,255,255,.03); border-radius: 3px; overflow: hidden; }
+  .df { height: 100%; border-radius: 3px; transition: width .6s ease; }
+  .dv { font-family: var(--mono); font-size: 10px; color: var(--t3); width: 30px; }
+  .la2 { font-family: var(--mono); font-size: 10px; line-height: 1.7; color: var(--t3); max-height: 160px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
+  .la2 .f { color: var(--red); } .la2 .o { color: var(--green); }
+  .jr { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-family: var(--mono); font-size: 10px; border-bottom: 1px solid var(--border); }
+  .jr:last-child { border-bottom: none; }
+  .jt { color: var(--t2); flex: 1; }
+  .js { width: 50px; text-align: right; }
+  .jd { color: var(--t3); width: 50px; text-align: right; }
 </style>
 </head>
 <body>
-<div class="header">
-  <h1>ZEKE <span>ops</span></h1>
-  <div>
-    <span id="health-badge" class="badge">...</span>
-    <div class="meta" id="meta-time">loading...</div>
-  </div>
+<div class="hdr">
+  <div class="wm">Zeke</div>
+  <div class="hp"><div class="hd" id="hd"></div><div class="hl" id="hl">loading</div></div>
 </div>
-<div class="grid" id="dashboard"></div>
-
+<div class="g" id="g"></div>
 <script>
-const STATUS_URL = 'https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/status.json';
-const HISTORY_URL = 'https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/history.jsonl';
+const SRC="https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/status.json";
+const HST="https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/history.jsonl";
+let S={},H=[];
 
-let state = {};
-let history = [];
-
-async function fetchData() {
-  try {
-    const [statusRes, historyRes] = await Promise.all([
-      fetch(STATUS_URL + '?t=' + Date.now()),
-      fetch(HISTORY_URL + '?t=' + Date.now())
-    ]);
-    state = await statusRes.json();
-    const histText = await historyRes.text();
-    history = histText.trim().split('\n').filter(Boolean).map(l => {
-      try { return JSON.parse(l); } catch { return null; }
-    }).filter(Boolean);
-  } catch (e) {
-    console.error('Fetch error:', e);
-  }
-  render();
+async function ld(){
+  try{
+    const[a,b]=await Promise.all([fetch(SRC+"?_="+Date.now()),fetch(HST+"?_="+Date.now())]);
+    S=await a.json();
+    H=(await b.text()).trim().split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
+  }catch(e){console.error(e)}
+  rn();
 }
 
-function ago(ts) {
-  if (!ts) return '?';
-  const d = (Date.now() - new Date(ts).getTime()) / 1000;
-  if (d < 60) return Math.round(d) + 's ago';
-  if (d < 3600) return Math.round(d/60) + 'm ago';
-  if (d < 86400) return Math.round(d/3600) + 'h ago';
-  return Math.round(d/86400) + 'd ago';
+function ago(ts){
+  if(!ts)return"\u2014";
+  const s=(Date.now()-new Date(ts).getTime())/1000;
+  if(s<60)return Math.round(s)+"s";if(s<3600)return Math.round(s/60)+"m";
+  if(s<86400)return Math.round(s/3600)+"h";return Math.round(s/86400)+"d";
 }
 
-function sparkline(canvas, data, color) {
-  if (!data.length) return;
-  const ctx = canvas.getContext('2d');
-  const w = canvas.width = canvas.offsetWidth * 2;
-  const h = canvas.height = canvas.offsetHeight * 2;
-  ctx.scale(2, 2);
-  const rw = canvas.offsetWidth;
-  const rh = canvas.offsetHeight;
-  const max = Math.max(...data) || 1;
-  const min = Math.min(...data);
-  const range = max - min || 1;
-  const step = rw / Math.max(data.length - 1, 1);
-
-  ctx.beginPath();
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 1.5;
-  data.forEach((v, i) => {
-    const x = i * step;
-    const y = rh - 8 - ((v - min) / range) * (rh - 16);
-    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-  });
-  ctx.stroke();
-
-  // Fill under
-  ctx.lineTo((data.length - 1) * step, rh);
-  ctx.lineTo(0, rh);
-  ctx.closePath();
-  ctx.fillStyle = color.replace(')', ',0.08)').replace('rgb', 'rgba');
-  ctx.fill();
+function sp(cv,d,col){
+  if(!d||d.length<2)return;
+  const c=cv.getContext("2d"),dpr=devicePixelRatio||1,w=cv.offsetWidth,h=cv.offsetHeight;
+  cv.width=w*dpr;cv.height=h*dpr;c.scale(dpr,dpr);
+  const mx=Math.max(...d),mn=Math.min(...d),rng=mx-mn||1,step=w/(d.length-1);
+  c.beginPath();d.forEach((v,i)=>{const x=i*step,y=h-4-((v-mn)/rng)*(h-8);i===0?c.moveTo(x,y):c.lineTo(x,y)});
+  c.strokeStyle=col;c.lineWidth=1.5;c.stroke();
+  c.lineTo((d.length-1)*step,h);c.lineTo(0,h);c.closePath();
+  c.fillStyle=col.replace("rgb","rgba").replace(")",",0.07)");c.fill();
 }
 
-function parseKG(kgStr) {
-  const r = {};
-  if (!kgStr) return r;
-  const m = kgStr.match(/Entities: (\d+)/); if (m) r.entities = +m[1];
-  const m2 = kgStr.match(/Relationships: (\d+)/); if (m2) r.relationships = +m2[1];
-  const m3 = kgStr.match(/Associations: (\d+)/); if (m3) r.associations = +m3[1];
-  const m4 = kgStr.match(/Insights: (\d+)/); if (m4) r.insights = +m4[1];
-  const dm = kgStr.match(/Domains: ({[\s\S]*})/);
-  if (dm) try { r.domains = JSON.parse(dm[1]); } catch {}
+function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+
+function pk(s){
+  const r={};if(!s)return r;
+  let m=s.match(/Entities: (\d+)/);if(m)r.ent=+m[1];
+  m=s.match(/Relationships: (\d+)/);if(m)r.rel=+m[1];
+  m=s.match(/Associations: (\d+)/);if(m)r.assoc=+m[1];
+  m=s.match(/Insights: (\d+)/);if(m)r.ins=+m[1];
+  const dm=s.match(/Domains: ({[\s\S]*})/);if(dm)try{r.dom=JSON.parse(dm[1])}catch{}
   return r;
 }
 
-function getHealth() {
-  const gw = state.gateway_process || {};
-  const sp = state.spark_status || {};
-  const fq = state.feed_quality || {};
-  if (gw.status !== 'RUNNING' || sp.status !== 'ONLINE') return 'CRITICAL';
-  if ((fq.error_rate || 0) > 15) return 'DEGRADED';
-  const jobs = state.last_jobs || [];
-  const fails = jobs.filter(j => j.result === 'FAILED').length;
-  if (fails > jobs.length / 2) return 'DEGRADED';
-  return 'HEALTHY';
-}
+function rn(){
+  const gw=S.gateway_process||{},gpu=S.gpu_stats||{},sp2=S.spark_status||{},fq=S.feed_quality||{},cs=S.crontab_status||{},kg=pk(S.kg_stats),jobs=S.last_jobs||[];
+  const on=gw.status==="RUNNING"&&sp2.status==="ONLINE";
+  const fails=jobs.filter(j=>j.result==="FAILED").length;
+  const health=!on?"offline":fails>jobs.length/2?"degraded":"nominal";
+  document.getElementById("hd").style.background=health==="nominal"?"var(--green)":health==="degraded"?"var(--amber)":"var(--red)";
+  document.getElementById("hl").textContent=health+" \u00b7 "+ago(S.timestamp)+" ago";
 
-function render() {
-  const kg = parseKG(state.kg_stats);
-  const gpu = state.gpu_stats || {};
-  const gw = state.gateway_process || {};
-  const sp = state.spark_status || {};
-  const fq = state.feed_quality || {};
-  const cs = state.crontab_status || {};
-  const gc = state.gateway_config || {};
-  const jobs = state.last_jobs || [];
-  const health = getHealth();
+  const fH=H.map(h=>h.feed_lines).filter(v=>v!=null);
+  const kH=H.map(h=>h.kg_entities).filter(v=>v!=null);
+  const eH=H.map(h=>h.feed_error_rate).filter(v=>v!=null);
+  const ar=(kg.ent||0)>0?Math.round((kg.assoc||0)/kg.ent*100):0;
+  const gOk=on,eOk=(kg.ent||0)>50,aOk=ar>25,rOk=cs.has_reason===true;
+  const dc=["#0a84ff","#30d158","#ffd60a","#bf5af2","#ff453a","#64d2ff","#ff9f0a","#ff375f"];
+  const doms=kg.dom||{};const mxD=Math.max(...Object.values(doms),1);
+  const pJ=jobs.filter(j=>j.result==="SUCCESS").length;
+  const fJ=jobs.filter(j=>j.result==="FAILED").length;
 
-  // Health badge
-  const hb = document.getElementById('health-badge');
-  hb.textContent = health;
-  hb.className = 'badge ' + (health === 'HEALTHY' ? 'badge-ok' : health === 'DEGRADED' ? 'badge-warn' : 'badge-crit');
-  document.getElementById('meta-time').textContent = ago(state.timestamp) + ' | auto-refresh 60s';
-
-  const feedHistory = history.map(h => h.feed_lines).filter(v => v != null);
-  const entityHistory = history.map(h => h.kg_entities).filter(v => v != null);
-  const gpuHistory = history.map(h => h.gpu_util_pct).filter(v => v != null);
-  const tempHistory = history.map(h => h.gpu_temp_c).filter(v => v != null);
-  const errorHistory = history.map(h => h.feed_error_rate).filter(v => v != null);
-
-  const passedJobs = jobs.filter(j => j.result === 'SUCCESS').length;
-  const failedJobs = jobs.filter(j => j.result === 'FAILED').length;
-  const totalJobs = jobs.length;
-
-  const domains = kg.domains || {};
-  const domainColors = ['#3b82f6','#22c55e','#f59e0b','#a855f7','#ef4444','#06b6d4','#f97316','#ec4899'];
-  const maxDomain = Math.max(...Object.values(domains), 1);
-
-  const domainBars = Object.entries(domains).map(([name, count], i) =>
-    '<div class="domain-bar">' +
-      '<span class="domain-name">' + name + '</span>' +
-      '<div class="domain-fill" style="width:' + Math.round(count/maxDomain*200) + 'px;background:' + domainColors[i % domainColors.length] + '"></div>' +
-      '<span class="domain-count">' + count + '</span>' +
-    '</div>'
-  ).join('');
-
-  // Queue log
-  const queueLog = (state['zeke-queue_tail'] || []).map(l => {
-    if (l.includes('FAILED')) return '<span class="fail">' + escHtml(l) + '</span>';
-    if (l.includes('SUCCESS') || l.includes('DONE') || l.includes('feed=')) return '<span class="pass">' + escHtml(l) + '</span>';
-    return escHtml(l);
-  }).join('\n');
-
-  // Self-heal
-  const healLog = escHtml((state.self_heal_log || '').slice(0, 1500)) || 'No issues logged';
-
-  // Evals
-  const evals = (state.recent_evaluations || []).slice(-5).map(e => {
-    try {
-      const ev = JSON.parse(e);
-      const score = ev.novelty_score || ev.score || '?';
-      const color = score >= 4 ? 'var(--green)' : score >= 3 ? 'var(--amber)' : 'var(--text-faint)';
-      return '<span style="color:' + color + '">[' + score + '/5]</span> ' + escHtml(ev.topic || '?');
-    } catch { return escHtml(e); }
-  }).join('\n');
-
-  // Closed loop assessment
-  const gatherOk = gw.status === 'RUNNING' && sp.status === 'ONLINE';
-  const extractOk = (kg.entities || 0) > 50;
-  const assocRate = (kg.entities||1) > 0 ? (kg.associations||0)/(kg.entities||1) : 0;
-  const assocOk = assocRate > 0.3;
-  const reasonOk = cs.has_reason === true;
-
-  const dash = document.getElementById('dashboard');
-  dash.innerHTML = `
-    <!-- Row 1: Infrastructure -->
-    <div class="card">
-      <div class="card-title"><span class="icon">🖥</span> Gateway</div>
-      <div class="metric-row">
-        <div class="metric-item">
-          <div class="metric-sm" style="color:${gw.status==='RUNNING' ? 'var(--green)' : 'var(--red)'}">${gw.status || '?'}</div>
-          <div class="metric-label">PID ${gw.pid || '?'}</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-sm">${gw.memory_pct || '?'}%</div>
-          <div class="metric-label">memory</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-sm">${gw.uptime || '?'}</div>
-          <div class="metric-label">uptime</div>
-        </div>
+  document.getElementById("g").innerHTML=`
+    <div class="c">
+      <div class="cl">Research Feed</div>
+      <div class="v" style="color:var(--cyan)">${S.feed_lines||0}</div>
+      <div class="lb">entries</div>
+      <div class="ca"><canvas id="cf"></canvas></div>
+    </div>
+    <div class="c">
+      <div class="cl">Knowledge Graph</div>
+      <div class="mr">
+        <div class="mi"><div class="v" style="color:var(--blue)">${kg.ent||0}</div><div class="lb">entities</div></div>
+        <div class="mi"><div class="vs">${kg.rel||0}</div><div class="lb">relationships</div></div>
+        <div class="mi"><div class="vs">${kg.assoc||0}</div><div class="lb">associations</div></div>
       </div>
+      <div class="ca"><canvas id="ck"></canvas></div>
     </div>
-
-    <div class="card">
-      <div class="card-title"><span class="icon">🔥</span> Spark GPU</div>
-      ${gpu.status === 'OK' ? `
-        <div class="metric-row">
-          <div class="metric-item">
-            <div class="metric-sm" style="color:${(gpu.gpu_util_pct||0) > 80 ? 'var(--green)' : (gpu.gpu_util_pct||0) > 10 ? 'var(--amber)' : 'var(--text-faint)'}">${gpu.gpu_util_pct != null ? gpu.gpu_util_pct + '%' : 'N/A'}</div>
-            <div class="metric-label">GPU util</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-sm">${gpu.temp_c != null ? gpu.temp_c + '\u00b0C' : 'N/A'}</div>
-            <div class="metric-label">temp</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-sm">${gpu.power_w != null ? Math.round(gpu.power_w) + 'W' : 'N/A'}</div>
-            <div class="metric-label">power</div>
-          </div>
+    <div class="c">
+      <div class="cl">Spark GPU</div>
+      ${gpu.status==="OK"?`
+        <div class="mr">
+          <div class="mi"><div class="vs" style="color:${(gpu.gpu_util_pct||0)>50?"var(--green)":(gpu.gpu_util_pct||0)>5?"var(--amber)":"var(--t3)"}">${gpu.gpu_util_pct!=null?gpu.gpu_util_pct+"%":"\u2014"}</div><div class="lb">utilization</div></div>
+          <div class="mi"><div class="vs">${gpu.temp_c!=null?gpu.temp_c+"\u00b0":"\u2014"}</div><div class="lb">temp</div></div>
+          <div class="mi"><div class="vs">${gpu.power_w!=null?Math.round(gpu.power_w)+"W":"\u2014"}</div><div class="lb">power</div></div>
         </div>
-        <div class="metric-label" style="margin-top:6px">${gpu.gpu_name || ''} &bull; ${(sp.loaded_models||[]).map(m=>m.name).join(', ')}</div>
-      ` : `<div class="metric-label">GPU: ${gpu.status || 'NO DATA'}</div>`}
+        <div class="st">${gpu.gpu_name||""}<br>${(sp2.loaded_models||[]).map(m=>m.name+" "+m.size_gb+"GB").join(", ")}</div>
+      `:'<div class="st">no gpu data</div>'}
     </div>
-
-    <div class="card">
-      <div class="card-title"><span class="icon">📊</span> Knowledge Graph</div>
-      <div class="metric-row">
-        <div class="metric-item">
-          <div class="metric-lg" style="color:var(--blue)">${kg.entities || 0}</div>
-          <div class="metric-label">entities</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-sm">${kg.relationships || 0}</div>
-          <div class="metric-label">relationships</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-sm">${kg.associations || 0}</div>
-          <div class="metric-label">associations</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-sm">${kg.insights || 0}</div>
-          <div class="metric-label">insights</div>
-        </div>
+    <div class="c s3">
+      <div class="cl">Pipeline</div>
+      <div class="lc">
+        <div class="ls ${gOk?"lok":"lo"}">Gather</div><div class="la">\u2192</div>
+        <div class="ls ${eOk?"lok":"lw"}">Extract</div><div class="la">\u2192</div>
+        <div class="ls ${aOk?"lok":"lw"}">Associate</div><div class="la">\u2192</div>
+        <div class="ls ${rOk?"lok":"lo"}">Reason</div><div class="la">\u2192</div>
+        <div class="ls lo">Act</div>
       </div>
+      <div class="st" style="text-align:center">gather: ${gOk?"online":"down"} \u00b7 extract: ${kg.ent||0} entities \u00b7 associate: ${ar}% \u00b7 reason: ${rOk?"7am cron":"off"} \u00b7 act: manual</div>
     </div>
-
-    <!-- Row 2: Feed + Queue -->
-    <div class="card">
-      <div class="card-title"><span class="icon">📡</span> Research Feed</div>
-      <div class="metric-row">
-        <div class="metric-item">
-          <div class="metric-lg" style="color:var(--cyan)">${state.feed_lines || 0}</div>
-          <div class="metric-label">entries</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-sm" style="color:${(fq.error_rate||0) > 10 ? 'var(--red)' : 'var(--green)'}">${fq.error_rate || 0}%</div>
-          <div class="metric-label">error rate</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-sm">${state.evaluation_count || 0}</div>
-          <div class="metric-label">evaluated</div>
-        </div>
+    <div class="c">
+      <div class="cl">Feed Quality</div>
+      <div class="vs" style="color:${(fq.error_rate||0)>15?"var(--red)":(fq.error_rate||0)>5?"var(--amber)":"var(--green)"}">${fq.error_rate||0}%</div>
+      <div class="lb">error rate</div>
+      <div class="st">json ${fq.malformed_json||0} \u00b7 timestamps ${fq.literal_timestamps||0} \u00b7 dupes ${fq.duplicates||0} \u00b7 empty ${fq.no_new_dev||0}</div>
+      <div class="ca"><canvas id="ce"></canvas></div>
+    </div>
+    <div class="c">
+      <div class="cl">Queue Jobs</div>
+      <div class="mr" style="margin-bottom:10px">
+        <div class="mi"><div class="vs" style="color:var(--green)">${pJ}</div><div class="lb">passed</div></div>
+        <div class="mi"><div class="vs" style="color:var(--red)">${fJ}</div><div class="lb">failed</div></div>
       </div>
-      <div class="metric-label" style="margin-top:8px">bad JSON: ${fq.malformed_json||0} | bad timestamps: ${fq.literal_timestamps||0} | dupes: ${fq.duplicates||0} | empty: ${fq.no_new_dev||0}</div>
-      <div class="chart-container"><canvas id="chart-feed"></canvas></div>
+      ${jobs.slice(-6).map(j=>'<div class="jr"><span class="jt">'+esc(j.topic||"?")+'</span><span class="js" style="color:'+(j.result==="FAILED"?"var(--red)":j.result==="SUCCESS"?"var(--green)":"var(--t3)")+'">'+esc(j.result||"\u2014")+'</span><span class="jd">'+(j.duration_s?j.duration_s+"s":"\u2014")+'</span></div>').join("")}
     </div>
-
-    <div class="card">
-      <div class="card-title"><span class="icon">⚡</span> Queue Health</div>
-      <div class="metric-row">
-        <div class="metric-item">
-          <div class="metric-sm" style="color:${passedJobs > 0 ? 'var(--green)' : 'var(--red)'}">${passedJobs}/${totalJobs}</div>
-          <div class="metric-label">passed / total</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-sm" style="color:var(--red)">${failedJobs}</div>
-          <div class="metric-label">failed</div>
-        </div>
-      </div>
-      <div class="log-box" style="margin-top:8px">${jobs.map(j => {
-        const c = j.result === 'FAILED' ? 'fail' : j.result === 'SUCCESS' ? 'pass' : '';
-        return '<span class="' + c + '">' + (j.topic||'?') + ' ' + (j.result||'?') + ' ' + (j.duration_s ? j.duration_s+'s' : '') + '</span>';
-      }).join('\n')}</div>
+    <div class="c">
+      <div class="cl">Domains</div>
+      ${Object.entries(doms).map(([n,ct],i)=>'<div class="dr"><span class="dn">'+esc(n)+'</span><div class="db"><div class="df" style="width:'+Math.round(ct/mxD*100)+'%;background:'+dc[i%dc.length]+'"></div></div><span class="dv">'+ct+'</span></div>').join("")||'<div class="st">no domain data</div>'}
     </div>
-
-    <div class="card">
-      <div class="card-title"><span class="icon">🗂</span> Domains</div>
-      ${domainBars || '<div class="metric-label">No domain data</div>'}
+    <div class="c s2">
+      <div class="cl">Self-Heal</div>
+      <div class="la2">${esc(S.self_heal_log||"").slice(0,2000)||"no issues"}</div>
     </div>
-
-    <!-- Row 3: Charts -->
-    <div class="card grid-full">
-      <div class="card-title"><span class="icon">📈</span> Trends (${history.length} data points)</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
-        <div>
-          <div class="metric-label">Feed Growth</div>
-          <div class="chart-container"><canvas id="chart-feed-trend"></canvas></div>
-        </div>
-        <div>
-          <div class="metric-label">KG Entities</div>
-          <div class="chart-container"><canvas id="chart-kg-trend"></canvas></div>
-        </div>
-        <div>
-          <div class="metric-label">Feed Error Rate %</div>
-          <div class="chart-container"><canvas id="chart-error-trend"></canvas></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Row 4: Closed Loop -->
-    <div class="card grid-full">
-      <div class="card-title"><span class="icon">🔄</span> Closed Loop Status</div>
-      <div class="loop-viz">
-        <div class="loop-node ${gatherOk ? 'loop-ok' : 'loop-fail'}">GATHER</div>
-        <div class="loop-arrow">→</div>
-        <div class="loop-node ${extractOk ? 'loop-ok' : 'loop-warn'}">EXTRACT</div>
-        <div class="loop-arrow">→</div>
-        <div class="loop-node ${assocOk ? 'loop-ok' : 'loop-warn'}">ASSOCIATE</div>
-        <div class="loop-arrow">→</div>
-        <div class="loop-node ${reasonOk ? 'loop-ok' : 'loop-fail'}">REASON</div>
-        <div class="loop-arrow">→</div>
-        <div class="loop-node loop-fail">ACT</div>
-        <div class="loop-arrow">→</div>
-      </div>
-      <div class="metric-label" style="text-align:center">
-        GATHER: ${gatherOk ? 'infra online' : 'infra down'} |
-        EXTRACT: ${(kg.entities||0)} entities |
-        ASSOCIATE: ${Math.round(assocRate*100)}% rate |
-        REASON: ${reasonOk ? '7am cron active' : 'not scheduled'} |
-        ACT: requires human
-      </div>
-    </div>
-
-    <!-- Row 5: Logs -->
-    <div class="card">
-      <div class="card-title"><span class="icon">🔧</span> Self-Heal Log</div>
-      <div class="log-box">${healLog}</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><span class="icon">📋</span> Queue Log</div>
-      <div class="log-box">${queueLog}</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><span class="icon">💎</span> Recent Evaluations</div>
-      <div class="log-box">${evals || 'None yet'}</div>
-    </div>
-
-    <!-- Row 6: System -->
-    <div class="card grid-full">
-      <div class="card-title"><span class="icon">⚙</span> System</div>
-      <div class="metric-label">
-        Cron: ${cs.active||0} active | Queue: ${cs.has_queue ? 'ON' : 'OFF'} | Reason: ${cs.has_reason ? 'ON' : 'OFF'} | Overnight: ${cs.has_overnight ? 'ON' : 'OFF'} |
-        Models: ${Object.keys(gc.byProvider||{}).length} configured |
-        Spark: ${sp.status || '?'} |
-        Dashboard: auto-refresh 60s
+    <div class="c">
+      <div class="cl">System</div>
+      <div class="st">
+        gateway ${gw.status||"?"} \u00b7 pid ${gw.pid||"?"} \u00b7 ${gw.memory_pct||"?"}% mem \u00b7 up ${gw.uptime||"?"}<br>
+        spark ${sp2.status||"?"} \u00b7 cron ${cs.active||0} active<br>
+        queue ${cs.has_queue?"on":"off"} \u00b7 overnight ${cs.has_overnight?"on":"off"} \u00b7 reason ${cs.has_reason?"on":"off"}<br>
+        evals ${S.evaluation_count||0} \u00b7 refresh 60s
       </div>
     </div>
   `;
-
-  // Draw charts after DOM update
-  setTimeout(() => {
-    const cf = document.getElementById('chart-feed-trend');
-    if (cf && feedHistory.length > 1) sparkline(cf, feedHistory, 'rgb(6,182,212)');
-    const ck = document.getElementById('chart-kg-trend');
-    if (ck && entityHistory.length > 1) sparkline(ck, entityHistory, 'rgb(59,130,246)');
-    const ce = document.getElementById('chart-error-trend');
-    if (ce && errorHistory.length > 1) sparkline(ce, errorHistory, 'rgb(239,68,68)');
-  }, 50);
+  setTimeout(()=>{
+    const cf=document.getElementById("cf");if(cf&&fH.length>1)sp(cf,fH,"rgb(100,210,255)");
+    const ck=document.getElementById("ck");if(ck&&kH.length>1)sp(ck,kH,"rgb(10,132,255)");
+    const ce=document.getElementById("ce");if(ce&&eH.length>1)sp(ce,eH,"rgb(255,69,58)");
+  },50);
 }
-
-function escHtml(s) {
-  if (!s) return '';
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-fetchData();
-setInterval(fetchData, 60000);
+ld();setInterval(ld,60000);
 </script>
 </body>
 </html>
