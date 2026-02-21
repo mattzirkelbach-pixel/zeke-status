@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-21T15:00:00.179882+00:00",
+  "timestamp": "2026-02-21T15:03:34.766093+00:00",
   "feed_lines": 196,
   "recent_feed": [
     "{\"timestamp\":\"2026-02-21T04:00:03Z\",\"topic\":\"self-improvement\",\"insights\":[\"No new developments\"],\"tools_used\":[\"web_search\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
@@ -39,12 +39,6 @@
   "self_heal_log": "# Self-Heal Log\n\n## 2026-02-21T14:30:00Z \u2014 Reasoning Cycle 2\n\n### Issue 1: ALL 8 queue jobs failed with gateway timeout (CRITICAL)\n- Symptom: Every GATHER, EXTRACT, and ASSOCIATE job failed with `Error: gateway timeout after 600000ms`\n- Queue run: 12:56-14:17 UTC (8 jobs x 601s each = ~80 minutes of failures)\n- Gateway: PID 95262, started 7:38AM EST, was 18 minutes old when first job started\n- Spark: Currently reachable at 10.0.0.143:11434 (models responding to /api/tags)\n- Diagnosis: Gateway was likely not fully initialized when queue started. The gateway's internal timeout (600000ms) is shorter than the queue script's `--timeout 900000`, so the gateway kills sessions before the queue timeout fires\n- Action taken: NOT restarting gateway (it is currently functional for this Reason session)\n- Recommendation: Add 120s startup delay or health-check loop to zeke-queue.sh before first job\n\n### Issue 2: self-improvement domain \u2014 8+ consecutive \"No new developments\" (BROKEN)\n- Symptom: Feed lines 178-182 all contain `\"insights\":[\"No new developments\"]`\n- Root cause: Search query \"self-improvement developments\" returns popscience listicles\n- Action taken: Domain flagged as RETIRED in research-priorities.md\n- Prompt rewrite DRAFTED but NOT applied to jobs.json (deferred to avoid breaking cron)\n- Proposed new search terms:\n  - \"deliberate practice randomized controlled trial 2025 2026 site:pubmed.ncbi.nlm.nih.gov\"\n  - \"spaced repetition human trial effect size 2025 2026\"\n  - \"working memory training meta-analysis 2026\"\n  - \"cognitive enhancement protocol peer-reviewed quantified outcomes\"\n- Proposed domain rename: \"self-improvement\" to \"cognitive-science\"\n\n### Issue 3: Literal shell variable timestamps in 5 entries (BUG)\n- Symptom: Feed lines 176, 177, 183, 191, 192, 193 have `$(date -u +%Y-%m-%dT%H:%M:%SZ)` as literal text\n- Root cause: Agent wraps entire echo string in single quotes, preventing shell expansion\n- Action taken: Documented. Fix requires updating ALL job prompt",
   "ops_status": "# Operational Status \u2014 2026-02-21\n\n## System Health: DEGRADED\n\n### Queue Run Summary (morning 2026-02-21)\n- Jobs attempted: 8 (6 GATHER + 1 EXTRACT + 1 ASSOCIATE)\n- Jobs succeeded: 0\n- Jobs failed: 8 (all gateway timeout at 600000ms)\n- Queue duration: 12:56-14:17 UTC (~80 minutes, all wasted)\n- Failure mode: Gateway accepting connections but agent sessions timing out\n\n### Feed Statistics\n- Total entries: 193\n- Entries added in last 24h: ~10\n- Sources: 5 from afternoon Reason cycle (high quality), 5 from morning queue pre-failure\n- Zero entries from overnight queue (all jobs failed)\n- Feed growth rate: ~10/day (down from ~15/day baseline)\n\n### Novelty Scores\n- Cycle 1 (20 entries evaluated): avg 2.05/5.0\n- Cycle 2 (10 entries evaluated): avg 3.0/5.0\n- Combined (30 entries): avg 2.4/5.0\n- High novelty (4-5): 12/30 = 40%\n- Zero/low novelty (0-1): 11/30 = 37%\n- Trend: UP (driven by Opus quality entries)\n\n### Quality Issues in Feed\n- Malformed JSON: 5 entries (single quotes, unquoted fields, stringified arrays)\n- Literal timestamps: 5 entries (shell variable not expanded)\n- Wrong data: 1 entry (Icelandic bonds instead of US Treasury)\n- Duplicates: 2 entries (same content within 1 second)\n- Total error rate: ~13/193 = 6.7% of all feed entries have quality issues\n\n### Infrastructure\n| Component       | Status  | PID   | Notes                        |\n|-----------------|---------|-------|------------------------------|\n| Gateway         | RUNNING | 95262 | 2.6% memory, accepting connections |\n| Spark server    | ONLINE  | -     | 10.0.0.143:11434, models loaded    |\n| Cloudflare tun  | RUNNING | 75194 | Operational                        |\n| Spark tunnel    | RUNNING | 1691  | Operational                        |\n| Overnight agent | LOADED  | -     | ai.openclaw.overnight              |\n\n### Self-Heal Actions\n1. Scored 10 new feed entries (appended to research-evaluations.jsonl, 30 total)\n2. Diagnosed gateway timeout (600000ms internal limit, 18-min-old gateway)\n3. Retired self-improvement domain (8+ consecutive dry runs)\n4. Drafted 5 prompt fixes (all deferred to manual review)\n5. Updated research-priorities.md with answered question tracking\n6. Updated daily-synthesis with TLT breakeven analysis\n7. Updated meta-learning with Opus vs Spark quality gap data\n\n### Recommendations (Priority Order)\n1. FIX: Add health-check loop to zeke-queue.sh before first job\n2. FIX: Investigate/increase gateway internal timeout to match script timeout\n3. APPLY: Self-improvement prompt rewrite to jobs.json\n4. APPLY: Fix timestamp generation in all job prompts (use variable, not inline)\n5. APPLY: Add \"US Treasury\" qualifier to treasury-bonds prompt\n6. MONITOR: Next queue run for gateway stability\n",
   "zeke-queue_tail": [
-    "=== ZEKE QUEUE START 2026-02-21T14:25:47Z ===",
-    "[14:25:47] GATHER treasury-bonds (6e8b2938-21a9-4bda-9b28-d6cc31f1ae0d)",
-    "Error: Reached max turns (15)=== ZEKE QUEUE END 2026-02-21T14:26:35Z feed=     194 ===",
-    "{",
-    "\"ok\": true,",
-    "\"ran\": true",
     "}",
     "duration: 893s",
     "[14:40:40] GATHER ai-agents (70e6952b-350b-4413-818b-af20a9d02c2a)",
@@ -53,7 +47,13 @@
     "\"ran\": true",
     "}",
     "duration: 584s",
-    "[14:50:24] GATHER self-improvement (fef48082-0a38-47f8-95e6-d23ad1a2fd95)"
+    "[14:50:24] GATHER self-improvement (fef48082-0a38-47f8-95e6-d23ad1a2fd95)",
+    "{",
+    "\"ok\": true,",
+    "\"ran\": true",
+    "}",
+    "duration: 683s",
+    "[15:01:47] GATHER longevity (b60e529d-0109-4cf8-a245-847651b3fcc5)"
   ],
   "zeke-reason-error_tail": [],
   "cron_job_count": 29
