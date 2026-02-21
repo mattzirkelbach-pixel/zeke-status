@@ -94,7 +94,7 @@ def get_crontab_status():
         'has_queue': any('zeke-queue' in l for l in active),
         'has_overnight': any('overnight' in l for l in active),
         'has_reason': any('zeke-reason' in l for l in active),
-        'has_status_push': any('build-status' in l for l in active),
+        'has_status_push': any('status'  in l for l in active),
     }
 
 def get_last_jobs():
