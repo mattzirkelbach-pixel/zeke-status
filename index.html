@@ -38,7 +38,6 @@ body::before{content:'';position:fixed;inset:0;background:
   pointer-events:none;z-index:0}
 .wrap{max-width:1440px;margin:0 auto;padding:16px 20px;position:relative;z-index:1}
 
-/* Header */
 .hdr{display:flex;justify-content:space-between;align-items:center;padding:8px 0 20px}
 .logo{display:flex;align-items:center;gap:12px}
 .logo-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:15px;color:#000;box-shadow:0 0 16px rgba(34,211,238,0.2)}
@@ -51,7 +50,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .cost-pill{background:var(--green-g);color:var(--green);border-color:rgba(52,211,153,0.2);font-weight:600}
 .hdr-ts{font-family:var(--mono);font-size:9px;color:var(--t3)}
 
-/* Grid */
 .grid{display:grid;grid-template-columns:300px 1fr 1fr;gap:12px}
 @media(max-width:1200px){.grid{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){.grid{grid-template-columns:1fr}}
@@ -59,7 +57,6 @@ body::before{content:'';position:fixed;inset:0;background:
 @media(max-width:1200px){.span2{grid-column:span 2}}
 @media(max-width:700px){.span2{grid-column:span 1}}
 
-/* Cards */
 .card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--r);padding:16px;transition:border-color .3s,transform .2s,box-shadow .3s;position:relative;overflow:hidden}
 .card:hover{border-color:var(--border-h);transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,0.25)}
 .card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 10%,rgba(255,255,255,0.05) 50%,transparent 90%)}
@@ -84,6 +81,7 @@ body::before{content:'';position:fixed;inset:0;background:
 .ms-nm{font-size:11px;font-weight:500}
 .ms-sb{font-size:9px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ms-sc{font-family:var(--mono);font-size:9px;color:var(--t3);flex-shrink:0}
+.ms-why{font-size:8px;color:var(--t3);margin-top:1px;font-style:italic}
 
 /* Metrics */
 .big{font-family:var(--mono);font-weight:700;font-size:34px;letter-spacing:-0.03em;line-height:1}
@@ -93,10 +91,14 @@ body::before{content:'';position:fixed;inset:0;background:
 .delta{font-family:var(--mono);font-size:10px;margin-left:4px;vertical-align:middle}
 .dup{color:var(--green)}.ddn{color:var(--red)}
 
-/* Sparkline */
-.spk{height:44px;margin-top:10px;position:relative;cursor:crosshair}
+/* Sparkline with axis */
+.spk-outer{margin-top:10px}
+.spk{height:44px;position:relative;cursor:crosshair;margin:0 28px 0 0}
 .spk canvas{width:100%;height:100%;display:block}
 .spk-tip{position:absolute;padding:3px 7px;background:rgba(0,0,0,0.9);border:1px solid var(--border-h);border-radius:5px;font-family:var(--mono);font-size:9px;pointer-events:none;opacity:0;transition:opacity .1s;white-space:nowrap;z-index:10;top:-22px}
+.spk-axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:2px;padding-right:28px}
+.spk-ymax{position:absolute;right:0;top:0;font-family:var(--mono);font-size:7px;color:var(--t3)}
+.spk-ymin{position:absolute;right:0;bottom:0;font-family:var(--mono);font-size:7px;color:var(--t3)}
 
 /* GPU gauge */
 .gw{display:flex;align-items:center;gap:16px}
@@ -108,18 +110,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .gs-r:last-child{border:none}
 .gs-r span:first-child{color:var(--t3)}
 
-/* Pipeline */
-.pipe{display:flex;align-items:stretch;justify-content:center;gap:0;padding:6px 0;flex-wrap:wrap}
-.pn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 14px;border-radius:12px;border:1.5px solid;min-width:90px;cursor:default;transition:all .25s}
-.pn:hover{transform:scale(1.05);z-index:2}
-.pn-i{font-size:18px}.pn-n{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.04em}
-.pn-s{font-family:var(--mono);font-size:8px;opacity:.5}
-.pn-m{font-family:var(--mono);font-size:7px;opacity:.35;margin-top:1px}
-.pn-ok{border-color:rgba(52,211,153,0.3);background:var(--green-g);color:var(--green)}
-.pn-go{border-color:rgba(34,211,238,0.3);background:var(--cyan-g);color:var(--cyan)}
-.pn-no{border-color:var(--border);background:var(--surface);color:var(--t3)}
-.pa{font-size:16px;color:var(--t3);padding:0 4px;display:flex;align-items:center}
-
 /* Domain bars */
 .dm{display:flex;align-items:center;gap:8px;margin:4px 0;cursor:default;padding:1px 0;transition:opacity .2s}
 .dm:hover{opacity:1!important}
@@ -129,14 +119,20 @@ body::before{content:'';position:fixed;inset:0;background:
 .dm-v{font-family:var(--mono);font-size:9px;color:var(--t3);width:24px;text-align:right}
 
 /* Feed preview */
-.fp{max-height:180px;overflow-y:auto;margin-top:8px}
+.fp{max-height:200px;overflow-y:auto;margin-top:8px}
 .fp::-webkit-scrollbar{width:3px}
 .fp::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 .fp-e{padding:6px 0;border-bottom:1px solid var(--border);cursor:default;transition:background .2s;border-radius:3px}
 .fp-e:last-child{border:none}
 .fp-e:hover{background:rgba(255,255,255,0.02)}
-.fp-t{font-family:var(--mono);font-size:8px;color:var(--t3);display:flex;justify-content:space-between}
+.fp-h{display:flex;justify-content:space-between;align-items:center}
+.fp-topic{font-family:var(--mono);font-size:8px;color:var(--cyan);text-transform:uppercase;letter-spacing:.04em}
+.fp-ts{font-family:var(--mono);font-size:7px;color:var(--t3)}
 .fp-f{font-size:10px;color:var(--t2);margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.fp-src{font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fp-src a{color:var(--t3);text-decoration:none}
+.fp-src a:hover{color:var(--cyan)}
+.fp-empty{font-size:10px;color:var(--t3);padding:20px 0;text-align:center}
 
 /* Quality grid */
 .qg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
@@ -157,11 +153,17 @@ body::before{content:'';position:fixed;inset:0;background:
 .jr:hover .jr-err{display:block}
 
 /* Schedule */
-.sched{display:flex;align-items:center;gap:4px;margin-top:8px;padding:8px 0;position:relative;height:28px}
-.sched-bg{position:absolute;left:0;right:0;height:6px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.025);border-radius:3px}
-.sched-seg{position:absolute;height:6px;top:50%;transform:translateY(-50%);border-radius:3px}
-.sched-now{position:absolute;width:2px;height:14px;background:var(--text);top:50%;transform:translate(-50%,-50%);border-radius:1px;z-index:3}
-.sched-labels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:4px}
+.sched-wrap{margin-top:6px}
+.sched{position:relative;height:24px;margin:0}
+.sched-bg{position:absolute;left:0;right:0;height:6px;top:9px;background:rgba(255,255,255,0.025);border-radius:3px}
+.sched-seg{position:absolute;height:6px;top:9px;border-radius:3px;transition:opacity .3s}
+.sched-seg:hover{opacity:1!important}
+.sched-now{position:absolute;width:2px;height:16px;background:var(--text);top:4px;border-radius:1px;z-index:3;box-shadow:0 0 4px rgba(255,255,255,0.3)}
+.sched-lbl{position:absolute;top:9px;font-family:var(--mono);font-size:7px;pointer-events:none;transform:translateY(10px)}
+.sched-times{display:flex;justify-content:space-between;font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:4px}
+.sched-legend{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap}
+.sched-leg{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:8px;color:var(--t3)}
+.sched-leg-dot{width:6px;height:6px;border-radius:2px}
 
 /* System grid */
 .sg{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
@@ -173,7 +175,16 @@ body::before{content:'';position:fixed;inset:0;background:
 .log::-webkit-scrollbar{width:3px}
 .log::-webkit-scrollbar-thumb{background:var(--border-h);border-radius:2px}
 
-/* Animate in */
+/* Stale indicator */
+.stale-badge{display:inline-flex;padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:7px;background:var(--amber-g);color:var(--amber);border:1px solid rgba(251,191,36,0.2);margin-left:6px}
+.fresh-badge{display:inline-flex;padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:7px;background:var(--green-g);color:var(--green);border:1px solid rgba(52,211,153,0.2);margin-left:6px}
+
+/* Waiting state */
+.waiting{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;color:var(--t3)}
+.waiting-icon{font-size:24px;margin-bottom:8px;opacity:.4}
+.waiting-text{font-size:10px;line-height:1.5}
+.waiting-when{font-family:var(--mono);font-size:9px;color:var(--cyan);margin-top:4px}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .card{animation:fadeUp .5s ease-out both}
 .card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.08s}
@@ -181,7 +192,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .card:nth-child(5){animation-delay:.2s}.card:nth-child(6){animation-delay:.24s}
 .card:nth-child(7){animation-delay:.28s}.card:nth-child(8){animation-delay:.32s}
 .card:nth-child(9){animation-delay:.36s}.card:nth-child(10){animation-delay:.4s}
-.card:nth-child(11){animation-delay:.44s}.card:nth-child(12){animation-delay:.48s}
 </style>
 </head>
 <body>
@@ -201,7 +211,7 @@ body::before{content:'';position:fixed;inset:0;background:
 </div>
 
 <script>
-const DATA="status.json", HIST="history.jsonl";
+const DATA="status.json",HIST="history.jsonl";
 let S={},H=[],prevFeed=null;
 
 async function load(){
@@ -220,13 +230,18 @@ function ago(ts){
   if(!ts)return"—";
   const s=(Date.now()-new Date(ts).getTime())/1000;
   if(s<0)return"just now";
-  if(s<60)return Math.round(s)+"s ago";if(s<3600)return Math.round(s/60)+"m ago";
-  if(s<86400)return Math.round(s/3600)+"h ago";return Math.round(s/86400)+"d ago";
+  if(s<60)return Math.round(s)+"s ago";
+  if(s<3600)return Math.round(s/60)+"m ago";
+  if(s<86400)return Math.round(s/3600)+"h ago";
+  return Math.round(s/86400)+"d ago";
 }
-
+function timeStr(ts){
+  if(!ts)return"";
+  try{const d=new Date(ts);return d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit',hour12:true})}catch{return""}
+}
 function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;")}
 
-function sparkline(cv,data,color,tipEl){
+function sparkline(cv,data,color,tipEl,yMinEl,yMaxEl){
   if(!data||data.length<2)return;
   const c=cv.getContext("2d"),dpr=devicePixelRatio||1,w=cv.offsetWidth,h=cv.offsetHeight;
   cv.width=w*dpr;cv.height=h*dpr;c.scale(dpr,dpr);
@@ -240,6 +255,8 @@ function sparkline(cv,data,color,tipEl){
   c.lineTo((data.length-1)*step,h);c.lineTo(0,h);c.closePath();c.fillStyle=grad;c.fill();
   const ly=pad+((mx-data[data.length-1])/rng)*(h-pad*2);
   c.beginPath();c.arc((data.length-1)*step,ly,2.5,0,Math.PI*2);c.fillStyle=color;c.fill();
+  if(yMinEl)yMinEl.textContent=mn;
+  if(yMaxEl)yMaxEl.textContent=mx;
   if(tipEl){
     cv.onmousemove=e=>{const rect=cv.getBoundingClientRect(),x=e.clientX-rect.left,idx=Math.min(Math.max(Math.round(x/step),0),data.length-1);
       tipEl.style.opacity='1';tipEl.style.left=Math.min(Math.max(x-16,0),w-50)+'px';tipEl.textContent=data[idx]};
@@ -258,16 +275,13 @@ function parseKG(s){
 }
 
 function parseFeed(entries){
-  return (entries||[]).map(raw=>{
+  return(entries||[]).map(raw=>{
     if(!raw||!raw.trim())return null;
     try{
       const d=JSON.parse(raw);
       const ts=d.timestamp||'';
-      // Skip broken timestamps and empty findings
-      if(ts.includes('$(date'))return null;
-      if(ts.includes('YYYY'))return null;
-      const finding=d.finding||((Array.isArray(d.insights)&&d.insights[0])?
-        (typeof d.insights[0]==='string'?d.insights[0]:JSON.stringify(d.insights[0]).slice(0,120)):'');
+      if(ts.includes('$(date')||ts.includes('YYYY'))return null;
+      const finding=d.finding||((Array.isArray(d.insights)&&d.insights[0])?(typeof d.insights[0]==='string'?d.insights[0]:JSON.stringify(d.insights[0]).slice(0,120)):'');
       if(!finding||finding==='No new developments'||finding.startsWith('No additional'))return null;
       return{topic:d.topic||'?',finding,source:d.source||'',ts};
     }catch{return null}
@@ -276,55 +290,94 @@ function parseFeed(entries){
 
 function calcAutonomy(kg,fq,gw,sp,feedLines){
   let stages=[];
-  // Gather: gateway+spark running AND feed grew today
   const upOk=gw.status==="RUNNING"&&sp.status==="ONLINE";
-  const feedGrew=feedLines>200; // started at 198 today
+  const feedGrew=feedLines>200;
   const gS=upOk&&feedGrew?20:upOk?12:0;
-  stages.push({name:"Gather",sub:"Autonomous web research",model:"qwen3-32b",done:gS>=20,score:gS});
-  // Extract: KG meaningful (>50 ent, <30% error rate)
+  stages.push({name:"Gather",sub:"Autonomous web research → feed",model:"qwen3-32b",done:gS>=20,score:gS,
+    why:gS>=20?"Feed growing with real sources":upOk?"Systems up but feed needs more data":"Systems offline"});
+
   const entOk=(kg.ent||0)>50;
   const qualOk=(fq.error_rate||100)<20;
   const eS=entOk&&qualOk?20:entOk?14:Math.min(12,Math.round(((kg.ent||0)/50)*12));
-  stages.push({name:"Extract",sub:"Structured knowledge",model:"qwen3-32b",done:eS>=20,score:eS});
-  // Associate: real cross-domain links with quality
+  stages.push({name:"Extract",sub:"Feed → structured knowledge graph",model:"qwen3-32b",done:eS>=20,score:eS,
+    why:eS>=20?`${kg.ent} entities, ${(fq.error_rate||0).toFixed(0)}% error`:`Need >50 entities + <20% errors (have ${kg.ent||0}, ${(fq.error_rate||0).toFixed(0)}%)`});
+
   const assocN=kg.assoc||0;
   const aS=assocN>15?20:assocN>5?14:Math.min(10,assocN*2);
-  stages.push({name:"Associate",sub:"Cross-domain connections",model:"qwen3-32b",done:aS>=20,score:aS});
-  // Reason: has run AND produced output (not just exists in crontab)
-  const rS=(kg.ins||0)>0?20:0; // insights = proof reasoning produced value
-  stages.push({name:"Reason",sub:"Deep synthesis",model:"Claude Code",done:rS>=20,score:rS});
-  // Act: self-initiated actions (not just self-heal)
-  const acS=0; // nothing yet — requires autonomous task creation
-  stages.push({name:"Act",sub:"Autonomous decisions",model:"—",done:false,score:acS});
+  stages.push({name:"Associate",sub:"Cross-domain pattern matching",model:"qwen3-32b",done:aS>=20,score:aS,
+    why:aS>=20?`${assocN} cross-domain links found`:`Need >15 associations (have ${assocN})`});
+
+  const rS=(kg.ins||0)>0?20:0;
+  stages.push({name:"Reason",sub:"Synthesis → actionable insights",model:"Claude Code",done:rS>=20,score:rS,
+    why:rS>=20?`${kg.ins} insights generated`:"Waiting for first reasoning cycle to produce insights"});
+
+  const acS=0;
+  stages.push({name:"Act",sub:"Self-directed research decisions",model:"—",done:false,score:acS,
+    why:"Requires Reason to feed back into Gather autonomously"});
+
   return{score:stages.reduce((s,st)=>s+st.score,0),stages};
 }
 
 function feedGrowthRate(hist){
-  if(!hist||hist.length<2)return null;
-  const recent=hist.slice(-6); // last ~1 hour
+  if(!hist||hist.length<3)return null;
+  const recent=hist.slice(-12);
   const oldest=recent[0],newest=recent[recent.length-1];
   if(!oldest||!newest)return null;
-  const dt=(new Date(newest.timestamp)-new Date(oldest.timestamp))/3600000; // hours
-  if(dt<0.1)return null;
+  const hrs=(new Date(newest.timestamp)-new Date(oldest.timestamp))/3600000;
+  if(hrs<0.3)return null;
   const df=(newest.feed_lines||0)-(oldest.feed_lines||0);
-  return{perHour:Math.round(df/dt*10)/10,perDay:Math.round(df/dt*24)};
+  return{perHour:Math.round(df/hrs*10)/10,perDay:Math.round(df/hrs*24)};
 }
 
-function scheduleBar(){
-  const now=new Date();
-  const h=now.getHours(),pct=(h/24)*100;
-  // Windows: 8-21 daytime, 22-4 overnight, 4-7 queue/reason
+function isStale(ts,maxMinutes){
+  if(!ts)return true;
+  return(Date.now()-new Date(ts).getTime())/60000>maxMinutes;
+}
+
+function scheduleHTML(){
+  const now=new Date();const h=now.getHours()+now.getMinutes()/60;const pct=(h/24)*100;
+  const segments=[
+    {start:4,end:7,color:'var(--purple)',label:'Reason',opacity:.3},
+    {start:8,end:21,color:'var(--cyan)',label:'Daytime',opacity:.25},
+    {start:22,end:28,color:'var(--green)',label:'Overnight',opacity:.25}, // wraps past midnight
+  ];
+  let segs='';
+  segments.forEach(s=>{
+    let st=s.start,en=Math.min(s.end,24);
+    segs+=`<div class="sched-seg" style="left:${(st/24)*100}%;width:${((en-st)/24)*100}%;background:${s.color};opacity:${s.opacity}"></div>`;
+    if(s.end>24)segs+=`<div class="sched-seg" style="left:0;width:${((s.end-24)/24)*100}%;background:${s.color};opacity:${s.opacity}"></div>`;
+  });
+
+  // What's active now
+  let activeNow='idle';
+  if(h>=22||h<4)activeNow='overnight research';
+  else if(h>=4&&h<7)activeNow='reasoning + self-heal';
+  else if(h>=8&&h<21)activeNow='daytime research';
+
+  // Next event
+  let nextEvent='',nextTime='';
+  if(h<4){nextEvent='Reasoning';nextTime='4:00 AM'}
+  else if(h<7){nextEvent='Daytime';nextTime='8:00 AM'}
+  else if(h<21){nextEvent='Overnight';nextTime='10:00 PM'}
+  else if(h<22){nextEvent='Overnight';nextTime='10:00 PM'}
+  else{nextEvent='Reasoning';nextTime='4:00 AM'}
+
   return`
-    <div style="position:relative;margin-top:6px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <div style="font-size:10px;color:var(--t2)">Now: <span style="color:var(--cyan)">${activeNow}</span></div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--t3)">Next: ${nextEvent} at ${nextTime}</div>
+    </div>
+    <div class="sched-wrap">
       <div class="sched">
         <div class="sched-bg"></div>
-        <div class="sched-seg" style="left:${(4/24)*100}%;width:${(3/24)*100}%;background:var(--purple);opacity:.25"></div>
-        <div class="sched-seg" style="left:${(8/24)*100}%;width:${(13/24)*100}%;background:var(--cyan);opacity:.2"></div>
-        <div class="sched-seg" style="left:${(22/24)*100}%;width:${(6/24)*100}%;background:var(--green);opacity:.2"></div>
+        ${segs}
         <div class="sched-now" style="left:${pct}%"></div>
       </div>
-      <div class="sched-labels">
-        <span>12am</span><span style="color:var(--purple)">4-7 reason</span><span style="color:var(--cyan)">8am-9pm daytime</span><span style="color:var(--green)">10pm overnight</span><span>12am</span>
+      <div class="sched-times"><span>12am</span><span>4am</span><span>8am</span><span>12pm</span><span>4pm</span><span>8pm</span><span>12am</span></div>
+      <div class="sched-legend">
+        <div class="sched-leg"><div class="sched-leg-dot" style="background:var(--cyan)"></div>Daytime (5 topics)</div>
+        <div class="sched-leg"><div class="sched-leg-dot" style="background:var(--green)"></div>Overnight (6 topics)</div>
+        <div class="sched-leg"><div class="sched-leg-dot" style="background:var(--purple)"></div>Reason + Self-heal</div>
       </div>
     </div>`;
 }
@@ -342,19 +395,16 @@ function render(){
   sd.style.background=health==="nominal"?"var(--green)":health==="degraded"?"var(--amber)":"var(--red)";
   sd.style.color=sd.style.background;
   document.getElementById("sh").textContent=health;
-  document.getElementById("sts").textContent=ago(S.timestamp);
+  document.getElementById("sts").textContent="updated "+ago(S.timestamp);
 
-  // Cost: count sonnet jobs
   const sonnetJobs=jobs.filter(j=>j.model&&j.model.includes('sonnet'));
-  const estCost=sonnetJobs.length*0.12;
-  document.getElementById("hcost").textContent=estCost>0?`~$${estCost.toFixed(2)}/day`:'$0/day';
+  document.getElementById("hcost").textContent=sonnetJobs.length>0?`~$${(sonnetJobs.length*0.12).toFixed(2)}/day`:'$0/day';
 
   const auto=calcAutonomy(kg,fq,gw,sp,S.feed_lines||0);
   const fH=H.map(h=>h.feed_lines).filter(v=>v!=null);
   const kH=H.map(h=>h.kg_entities).filter(v=>v!=null);
   const eH=H.map(h=>h.feed_error_rate).filter(v=>v!=null);
   const rate=feedGrowthRate(H);
-
   const feedDelta=prevFeed!==null?(S.feed_lines||0)-prevFeed:null;
   prevFeed=S.feed_lines||0;
 
@@ -368,10 +418,19 @@ function render(){
   const gpuU=gpu.gpu_util_pct||0;const gC=2*Math.PI*34;const gO=gC-(gpuU/100)*gC;
   const gCol=gpuU>50?"var(--green)":gpuU>5?"var(--amber)":"var(--t3)";
 
+  // Self-heal freshness
+  const healLog=S.self_heal_log||'';
+  const healTs=healLog.match(/(\d{4}-\d{2}-\d{2}T[\d:]+Z)/);
+  const healStale=healTs?isStale(healTs[1],360):true; // >6hrs = stale
+
+  // History time range for sparkline x-axis
+  const hFirst=H[0]?.timestamp?timeStr(H[0].timestamp):'';
+  const hLast=H[H.length-1]?.timestamp?timeStr(H[H.length-1].timestamp):'';
+
   document.getElementById("grid").innerHTML=`
     <!-- AUTONOMY -->
     <div class="card autonomy">
-      <div class="clbl"><div class="d" style="background:var(--cyan)"></div>Recursive Autonomy</div>
+      <div class="clbl"><div class="d" style="background:var(--cyan)"></div>Progress to Full Autonomy</div>
       <div class="ring-w">
         <svg viewBox="0 0 200 200" style="transform:rotate(-90deg)">
           <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="6"/>
@@ -381,12 +440,16 @@ function render(){
             <stop offset="0%" stop-color="var(--cyan)"/><stop offset="100%" stop-color="var(--purple)"/>
           </linearGradient></defs>
         </svg>
-        <div class="ring-c"><div class="ring-n">${auto.score}%</div><div class="ring-l">full autonomy</div></div>
+        <div class="ring-c"><div class="ring-n">${auto.score}%</div><div class="ring-l">5 stages to close the loop</div></div>
       </div>
       ${auto.stages.map((st,i)=>`
         <div class="ms">
           <div class="ms-ck ${st.done?'ms-ok':i===fp?'ms-go':'ms-no'}">${st.done?'✓':i===fp?'▸':'○'}</div>
-          <div class="ms-inf"><div class="ms-nm" style="color:${st.done?'var(--green)':i===fp?'var(--cyan)':'var(--t3)'}">${st.name}</div><div class="ms-sb">${st.sub} · ${st.model}</div></div>
+          <div class="ms-inf">
+            <div class="ms-nm" style="color:${st.done?'var(--green)':i===fp?'var(--cyan)':'var(--t3)'}">${st.name}</div>
+            <div class="ms-sb">${st.sub}</div>
+            <div class="ms-why">${st.why}</div>
+          </div>
           <div class="ms-sc">${st.score}/20</div>
         </div>`).join('')}
     </div>
@@ -397,10 +460,15 @@ function render(){
       <div style="display:flex;align-items:baseline;gap:6px">
         <div class="big" style="color:var(--cyan)">${S.feed_lines||0}</div>
         ${feedDelta!==null&&feedDelta>0?`<span class="delta dup">+${feedDelta}</span>`:''}
-        ${rate?`<span style="font-family:var(--mono);font-size:9px;color:var(--t3);margin-left:4px">${rate.perDay}/day</span>`:''}
+        ${rate?`<span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${rate.perDay}/day</span>`:''}
       </div>
       <div class="sml">entries · ${(fq.error_rate||0).toFixed(1)}% errors</div>
-      <div class="spk"><canvas id="cf"></canvas><div class="spk-tip" id="cft" style="color:var(--cyan)"></div></div>
+      <div class="spk-outer" style="position:relative">
+        <div class="spk"><canvas id="cf"></canvas><div class="spk-tip" id="cft" style="color:var(--cyan)"></div></div>
+        <div class="spk-ymax" id="cfy1" style="position:absolute;right:0;top:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
+        <div class="spk-ymin" id="cfy0" style="position:absolute;right:0;bottom:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
+      </div>
+      ${fH.length>1?`<div class="spk-axis"><span>${hFirst}</span><span>${hLast}</span></div>`:''}
     </div>
 
     <!-- KG -->
@@ -412,7 +480,12 @@ function render(){
         <div><div class="med">${kg.assoc||0}</div><div class="sml">links</div></div>
         <div><div class="med" style="color:${(kg.ins||0)>0?'var(--green)':'var(--t3)'}">${kg.ins||0}</div><div class="sml">insights</div></div>
       </div>
-      <div class="spk"><canvas id="ck"></canvas><div class="spk-tip" id="ckt" style="color:var(--blue)"></div></div>
+      <div class="spk-outer" style="position:relative">
+        <div class="spk"><canvas id="ck"></canvas><div class="spk-tip" id="ckt" style="color:var(--blue)"></div></div>
+        <div id="cky1" style="position:absolute;right:0;top:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
+        <div id="cky0" style="position:absolute;right:0;bottom:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
+      </div>
+      ${kH.length>1?`<div class="spk-axis"><span>${hFirst}</span><span>${hLast}</span></div>`:''}
     </div>
 
     <!-- GPU -->
@@ -434,38 +507,35 @@ function render(){
       </div>
     </div>
 
-    <!-- PIPELINE + SCHEDULE -->
+    <!-- SCHEDULE -->
     <div class="card span2">
-      <div class="clbl"><div class="d" style="background:var(--purple)"></div>Pipeline & Schedule</div>
-      <div class="pipe">
-        ${auto.stages.map((st,i)=>`
-          <div class="pn ${st.done?'pn-ok':i===fp?'pn-go':'pn-no'}">
-            <div class="pn-i">${['🔍','⛏️','🔗','🧠','⚡'][i]}</div>
-            <div class="pn-n">${st.name}</div>
-            <div class="pn-s">${st.score}/20</div>
-            <div class="pn-m">${st.model}</div>
-          </div>${i<4?'<div class="pa">→</div>':''}`).join('')}
-      </div>
-      ${scheduleBar()}
+      <div class="clbl"><div class="d" style="background:var(--purple)"></div>24-Hour Schedule</div>
+      ${scheduleHTML()}
     </div>
 
     <!-- FEED PREVIEW -->
     <div class="card span2">
-      <div class="clbl"><div class="d" style="background:var(--cyan)"></div>Latest Findings</div>
+      <div class="clbl"><div class="d" style="background:var(--cyan)"></div>Latest Findings${feedEntries.length>0?` · ${feedEntries.length} quality entries`  :''}</div>
       <div class="fp">
         ${feedEntries.length>0?feedEntries.slice(0,8).map(e=>`
           <div class="fp-e">
-            <div class="fp-t"><span style="color:var(--cyan)">${esc(e.topic)}</span><span>${esc(e.ts).slice(0,16)}</span></div>
+            <div class="fp-h"><span class="fp-topic">${esc(e.topic)}</span><span class="fp-ts">${esc(e.ts).slice(0,16)}</span></div>
             <div class="fp-f">${esc(e.finding)}</div>
-          </div>`).join(''):'<div style="font-size:10px;color:var(--t3)">no feed entries</div>'}
+            ${e.source&&e.source!=='none'&&e.source!=='synthesis'?`<div class="fp-src"><a href="${esc(e.source)}" target="_blank">${esc(e.source)}</a></div>`:''}
+          </div>`).join(''):`
+          <div class="waiting">
+            <div class="waiting-icon">🔍</div>
+            <div class="waiting-text">No quality findings yet.<br>Broken timestamps and filler entries are filtered out.</div>
+            <div class="waiting-when">Next research: overnight at 10pm or daytime at 8am</div>
+          </div>`}
       </div>
     </div>
 
     <!-- DOMAINS -->
     <div class="card">
-      <div class="clbl"><div class="d" style="background:var(--purple)"></div>Domains</div>
+      <div class="clbl"><div class="d" style="background:var(--purple)"></div>Knowledge Domains</div>
       ${Object.entries(doms).sort((a,b)=>b[1]-a[1]).map(([n,ct],i)=>`
-        <div class="dm" style="opacity:${.5+.5*ct/mxD}">
+        <div class="dm" style="opacity:${(.5+.5*ct/mxD).toFixed(2)}">
           <div class="dm-n">${esc(n)}</div>
           <div class="dm-b"><div class="dm-f" style="width:${Math.round(ct/mxD*100)}%;background:${dc[i%dc.length]}"></div></div>
           <div class="dm-v">${ct}</div>
@@ -474,37 +544,53 @@ function render(){
 
     <!-- FEED QUALITY -->
     <div class="card">
-      <div class="clbl"><div class="d" style="background:${(fq.error_rate||0)>15?'var(--red)':(fq.error_rate||0)>5?'var(--amber)':'var(--green)'}"></div>Feed Quality</div>
+      <div class="clbl"><div class="d" style="background:${(fq.error_rate||0)>15?'var(--red)':(fq.error_rate||0)>5?'var(--amber)':'var(--green)'}"></div>Feed Quality · ${(fq.error_rate||0).toFixed(1)}% error rate</div>
       <div class="qg">
         <div class="qi"><div class="qi-v" style="color:var(--red)">${fq.malformed_json||0}</div><div class="qi-l">bad json</div></div>
         <div class="qi"><div class="qi-v" style="color:var(--amber)">${fq.literal_timestamps||0}</div><div class="qi-l">bad time</div></div>
         <div class="qi"><div class="qi-v" style="color:var(--purple)">${fq.duplicates||0}</div><div class="qi-l">dupes</div></div>
         <div class="qi"><div class="qi-v" style="color:var(--t3)">${fq.no_new_dev||0}</div><div class="qi-l">no-ops</div></div>
       </div>
-      <div class="spk"><canvas id="ce"></canvas><div class="spk-tip" id="cet" style="color:var(--red)"></div></div>
+      <div class="spk-outer" style="position:relative">
+        <div class="spk"><canvas id="ce"></canvas><div class="spk-tip" id="cet" style="color:var(--red)"></div></div>
+        <div id="cey1" style="position:absolute;right:0;top:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
+        <div id="cey0" style="position:absolute;right:0;bottom:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
+      </div>
+      ${eH.length>1?`<div class="spk-axis"><span>${hFirst}</span><span>error % →</span><span>${hLast}</span></div>`:''}
     </div>
 
     <!-- JOBS -->
     <div class="card">
-      <div class="clbl"><div class="d" style="background:var(--green)"></div>Recent Jobs</div>
-      <div class="mrow" style="margin-bottom:8px">
-        <div><div class="med" style="color:var(--green)">${pJ}</div><div class="sml">passed</div></div>
-        <div><div class="med" style="color:var(--red)">${fJ}</div><div class="sml">failed</div></div>
-      </div>
-      ${jobs.slice(-8).reverse().map(j=>`
-        <div class="jr">
-          <div class="jr-d" style="background:${j.result==='FAILED'?'var(--red)':j.result==='SUCCESS'?'var(--green)':'var(--t3)'}"></div>
-          <div class="jr-n">${esc(j.topic||'?')}</div>
-          <div class="jr-t">${esc(j.time||'')}</div>
-          <div class="jr-du">${j.duration_s?j.duration_s+'s':'—'}</div>
-          ${j.error?`<div class="jr-err">${esc(j.error)}</div>`:''}
-        </div>`).join('')}
+      <div class="clbl"><div class="d" style="background:${pJ>fJ?'var(--green)':'var(--red)'}"></div>Recent Jobs${jobs.length>0?isStale(S.timestamp,120)?'<span class="stale-badge">stale</span>':'':''}</div>
+      ${jobs.length>0?`
+        <div class="mrow" style="margin-bottom:8px">
+          <div><div class="med" style="color:var(--green)">${pJ}</div><div class="sml">passed</div></div>
+          <div><div class="med" style="color:var(--red)">${fJ}</div><div class="sml">failed</div></div>
+        </div>
+        ${jobs.slice(-8).reverse().map(j=>`
+          <div class="jr">
+            <div class="jr-d" style="background:${j.result==='FAILED'?'var(--red)':j.result==='SUCCESS'?'var(--green)':'var(--t3)'}"></div>
+            <div class="jr-n">${esc(j.topic||'?')}</div>
+            <div class="jr-t">${esc(j.time||'')}</div>
+            <div class="jr-du">${j.duration_s?j.duration_s+'s':'—'}</div>
+            ${j.error?`<div class="jr-err">${esc(j.error)}</div>`:''}
+          </div>`).join('')}
+      `:`
+        <div class="waiting">
+          <div class="waiting-icon">⏳</div>
+          <div class="waiting-text">No recent job data.<br>Jobs populate from overnight and daytime runs.</div>
+          <div class="waiting-when">Next run: overnight at 10pm</div>
+        </div>`}
     </div>
 
     <!-- SELF-HEAL -->
     <div class="card">
-      <div class="clbl"><div class="d" style="background:var(--amber)"></div>Self-Heal</div>
-      <div class="log">${esc(S.self_heal_log||'').slice(0,1000)||'no issues'}</div>
+      <div class="clbl"><div class="d" style="background:var(--amber)"></div>Self-Heal${healStale?'<span class="stale-badge">stale</span>':'<span class="fresh-badge">recent</span>'}</div>
+      ${healLog.trim()?`<div class="log">${esc(healLog).slice(0,1000)}</div>`:`
+        <div class="waiting">
+          <div class="waiting-icon">🔧</div>
+          <div class="waiting-text">No self-heal activity.<br>Auto-repair runs during reasoning at 7am.</div>
+        </div>`}
     </div>
 
     <!-- SYSTEM -->
@@ -516,7 +602,7 @@ function render(){
         <div class="si"><span>memory</span><span>${gw.memory_pct||'?'}%</span></div>
         <div class="si"><span>uptime</span><span>${gw.uptime||'?'}</span></div>
         <div class="si"><span>spark</span><span>${sp.status||'?'}</span></div>
-        <div class="si"><span>cron</span><span>${cs.active||0} active</span></div>
+        <div class="si"><span>cron active</span><span>${cs.active||0}</span></div>
         <div class="si"><span>overnight</span><span>${cs.has_overnight?'✓':'✗'}</span></div>
         <div class="si"><span>reasoning</span><span>${cs.has_reason?'✓':'✗'}</span></div>
         <div class="si"><span>queue</span><span>${cs.has_queue?'✓':'✗'}</span></div>
@@ -526,9 +612,15 @@ function render(){
   `;
 
   setTimeout(()=>{
-    [['cf','cft',fH,'rgb(34,211,238)'],['ck','ckt',kH,'rgb(96,165,250)'],['ce','cet',eH,'rgb(248,113,113)']].forEach(([c,t,d,col])=>{
+    const pairs=[
+      ['cf','cft',fH,'rgb(34,211,238)','cfy0','cfy1'],
+      ['ck','ckt',kH,'rgb(96,165,250)','cky0','cky1'],
+      ['ce','cet',eH,'rgb(248,113,113)','cey0','cey1']
+    ];
+    pairs.forEach(([c,t,d,col,ymin,ymax])=>{
       const cv=document.getElementById(c),tip=document.getElementById(t);
-      if(cv&&d.length>1)sparkline(cv,d,col,tip);
+      const y0=document.getElementById(ymin),y1=document.getElementById(ymax);
+      if(cv&&d.length>1)sparkline(cv,d,col,tip,y0,y1);
     });
   },100);
 }
