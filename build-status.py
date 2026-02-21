@@ -42,7 +42,7 @@ def get_gateway_config():
     except: return {'error': 'could not read config'}
 
 def get_gateway_process():
-    pid = run("pgrep -f 'openclaw gateway'")
+    pid = run("pgrep -f 'openclaw'")
     if pid:
         return {'pid': pid, 'memory_pct': run(f"ps -p {pid} -o %mem=").strip(),
                 'uptime': run(f"ps -p {pid} -o etime=").strip(), 'status': 'RUNNING'}
