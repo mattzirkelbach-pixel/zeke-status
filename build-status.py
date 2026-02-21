@@ -129,6 +129,35 @@ def get_kg_stats():
     except Exception as e:
         return f"Error: {e}"
 
+
+def get_gpu_stats():
+    """Get GPU stats from Spark via SSH."""
+    try:
+        r = subprocess.run(
+            ['ssh', '-o', 'ConnectTimeout=5', '-o', 'BatchMode=yes', 'zirkai@10.0.0.143',
+             'nvidia-smi --query-gpu=utilization.gpu,utilization.memory,temperature.gpu,memory.used,memory.total,power.draw,power.limit,name --format=csv,noheader,nounits'],
+            capture_output=True, text=True, timeout=15
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            parts = [x.strip() for x in r.stdout.strip().split(',')]
+            if len(parts) >= 8:
+                return {
+                    'status': 'OK',
+                    'gpu_util_pct': float(parts[0]),
+                    'mem_util_pct': float(parts[1]),
+                    'temp_c': float(parts[2]),
+                    'mem_used_mb': float(parts[3]),
+                    'mem_total_mb': float(parts[4]),
+                    'power_w': float(parts[5]),
+                    'power_limit_w': float(parts[6]),
+                    'gpu_name': parts[7],
+                }
+        return {'status': 'SSH_OK_NO_DATA', 'raw': r.stdout.strip(), 'err': r.stderr.strip()[:200]}
+    except subprocess.TimeoutExpired:
+        return {'status': 'SSH_TIMEOUT'}
+    except Exception as e:
+        return {'status': 'ERROR', 'error': str(e)[:200]}
+
 now = datetime.now(timezone.utc)
 
 status = {
@@ -140,6 +169,7 @@ status = {
     'synthesis_content': read_file(sorted(glob.glob(str(MEMORY / "daily-synthesis-*.md")))[-1])[:3000] if glob.glob(str(MEMORY / "daily-synthesis-*.md")) else "",
     'priorities_updated': datetime.fromtimestamp(os.path.getmtime(MEMORY / "research-priorities.md"), tz=timezone.utc).isoformat() if (MEMORY / "research-priorities.md").exists() else None,
     'priorities_content': read_file(MEMORY / "research-priorities.md")[:2000],
+    'gpu_stats': get_gpu_stats(),
     'gateway_config': get_gateway_config(),
     'gateway_process': get_gateway_process(),
     'spark_status': get_spark_status(),
@@ -165,6 +195,8 @@ history_entry = {
     'gateway_status': status['gateway_process']['status'],
     'gateway_timeout_ms': status['gateway_config'].get('sessionTimeoutMs', 'unknown'),
     'spark_status': status['spark_status']['status'],
+    'gpu_util_pct': status.get('gpu_stats',{}).get('gpu_util_pct', None),
+    'gpu_temp_c': status.get('gpu_stats',{}).get('temp_c', None),
     'feed_error_rate': status['feed_quality']['error_rate'],
     'kg_entities': int(status['kg_stats'].split('Entities: ')[1].split('\n')[0]) if 'Entities: ' in str(status['kg_stats']) else 0,
 }

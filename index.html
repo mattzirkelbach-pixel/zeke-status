@@ -573,6 +573,35 @@ function render() {
         <div class="metric-label">${ops.jobsSucceeded}/${ops.jobsAttempted} jobs passed</div>
       </div>
 
+            <div class="card">
+        <div class="card-title"><span class="icon">🔥</span> Spark GPU</div>
+        ${(() => {
+          const gpu = state.gpu_stats || {};
+          if (gpu.status !== 'OK') return `<div class="metric-label">GPU: ${gpu.status || 'NO DATA'}</div>`;
+          return `
+            <div class="metric-row">
+              <div class="metric-item">
+                <div class="metric-sm" style="color:${gpu.gpu_util_pct > 80 ? 'var(--green)' : gpu.gpu_util_pct > 10 ? 'var(--amber)' : 'var(--text-faint)'}">${gpu.gpu_util_pct}%</div>
+                <div class="metric-label">GPU util</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-sm">${gpu.temp_c}°C</div>
+                <div class="metric-label">temp</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-sm">${Math.round(gpu.mem_used_mb/1024)}G/${Math.round(gpu.mem_total_mb/1024)}G</div>
+                <div class="metric-label">VRAM</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-sm">${Math.round(gpu.power_w)}W</div>
+                <div class="metric-label">/ ${Math.round(gpu.power_limit_w)}W</div>
+              </div>
+            </div>
+            <div class="metric-label" style="margin-top:6px">${gpu.gpu_name || ''}</div>
+          `;
+        })()}
+      </div>
+
       <!-- Row 2: Quality + Domains -->
       <div class="card">
         <div class="card-title"><span class="icon">💎</span> Research Quality</div>
