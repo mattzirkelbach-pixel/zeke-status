@@ -2,252 +2,401 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zeke Mission Control</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
-:root{
-  --bg:#08090a;--sf:#111214;--sf2:#161819;--bdr:#222426;--bdr2:#1a1b1d;
-  --tx:#e4e5e7;--mut:#7a7d82;--dim:#454750;
-  --grn:#2dd4a0;--grn2:#0d3d30;--amb:#f0b429;--amb2:#3d2e0a;
-  --red:#e5484d;--blu:#4da3ff;--pur:#9d8cff;--cyn:#22d3ee;
-  --mono:'JetBrains Mono','SF Mono','Menlo',monospace;
-  --sans:-apple-system,BlinkMacSystemFont,sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--tx);font-family:var(--sans);padding:20px 24px;max-width:960px;margin:0 auto}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;animation:fadeUp .5s ease}
-.hdr h1{font-size:22px;font-weight:700;letter-spacing:-.03em}
-.hdr-sub{font-size:10px;font-family:var(--mono);color:var(--dim);margin-top:2px}
-.dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
-.dot-g{background:var(--grn);box-shadow:0 0 6px var(--grn)}
-.dot-a{background:var(--amb);box-shadow:0 0 4px rgba(240,180,41,.3)}
-.dot-r{background:var(--red);box-shadow:0 0 6px var(--red)}
-.dot-d{background:var(--dim)}
-.dot-pulse{animation:pulse 2s infinite}
-.ind{display:inline-flex;align-items:center;gap:6px;font:500 11px var(--mono);color:var(--mut)}
-/* Activity banner */
-.banner{padding:10px 16px;border-radius:10px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;animation:fadeUp .5s ease .03s both}
-.banner-run{background:linear-gradient(90deg,rgba(45,212,160,.08),rgba(45,212,160,.02));border:1px solid var(--grn2)}
-.banner-sleep{background:linear-gradient(90deg,rgba(77,163,255,.08),rgba(77,163,255,.02));border:1px solid rgba(77,163,255,.15)}
-.banner-down{background:linear-gradient(90deg,rgba(229,72,77,.08),rgba(229,72,77,.02));border:1px solid var(--red)}
-.banner-l{display:flex;align-items:center;gap:10px}
-.banner-state{font:600 12px var(--mono)}
-.banner-detail{font:400 10px var(--mono);color:var(--dim)}
-.banner-r{font:400 10px var(--mono);color:var(--dim);text-align:right}
-/* Metrics */
-.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px;animation:fadeUp .5s ease .06s both}
-.m{padding:12px 10px;background:var(--sf);border:1px solid var(--bdr);border-radius:10px;text-align:center}
-.mv{font:700 22px var(--mono);line-height:1}
-.ml{font:500 8px var(--mono);color:var(--dim);margin-top:4px;letter-spacing:.1em}
-.ms{font:400 9px var(--mono);color:var(--dim);margin-top:2px}
-/* Grid */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;animation:fadeUp .5s ease .09s both}
-.card{padding:16px 18px;background:var(--sf);border:1px solid var(--bdr);border-radius:12px}
-.card-w{grid-column:1/-1}
-.ct{font:600 10px var(--mono);color:var(--dim);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
-/* Topology */
-.topo{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr;align-items:center;margin-bottom:14px}
-.tn{padding:12px;background:var(--sf2);border:1px solid var(--bdr);border-radius:10px;text-align:center;position:relative}
-.tn-l{font:600 11px var(--mono)}
-.tn-s{font:400 8px var(--mono);color:var(--dim);margin-top:2px}
-.tn .dot{position:absolute;top:6px;right:6px;width:6px;height:6px}
-.ta{text-align:center;color:var(--dim);font-size:14px}
-.ta.on{color:var(--grn)}
-/* Detail panels */
-.dets{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.det{padding:8px 10px;background:var(--sf2);border-radius:8px}
-.det-l{font:500 8px var(--mono);color:var(--dim);margin-bottom:2px;letter-spacing:.05em;text-transform:uppercase}
-.det-v{font:600 12px var(--mono)}
-.det-s{font:400 9px var(--mono);color:var(--dim);margin-top:1px}
-/* Hardware */
-.hw{padding:10px 12px;background:var(--sf2);border-radius:8px;border:1px solid var(--bdr2);margin-bottom:8px}
-.hw:last-child{margin-bottom:0}
-.hw-h{display:flex;justify-content:space-between;align-items:center}
-.hw-n{font:600 11px var(--mono)}
-.hw-d{font:400 9px var(--mono);color:var(--dim);margin-top:4px}
-/* Feed entries */
-.fe{font:400 10px var(--mono);padding:4px 0 4px 10px;border-left:2px solid var(--bdr2);color:var(--dim);line-height:1.4}
-.fe:first-child{border-left-color:var(--grn);color:var(--mut)}
-/* Automation layers */
-.layer{margin-bottom:12px}
-.layer:last-child{margin-bottom:0}
-.layer-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.layer-name{font:600 11px var(--mono)}
-.layer-status{font:500 9px var(--mono);padding:2px 8px;border-radius:4px}
-.layer-bar{height:6px;background:var(--sf2);border-radius:3px;overflow:hidden;margin-bottom:4px}
-.layer-fill{height:100%;border-radius:3px;transition:width .5s ease}
-.layer-items{display:flex;flex-wrap:wrap;gap:4px}
-.layer-item{font:400 9px var(--mono);padding:2px 6px;border-radius:3px;border:1px solid var(--bdr2)}
-.layer-item-done{color:var(--grn);border-color:var(--grn2)}
-.layer-item-todo{color:var(--dim)}
-/* Issues */
-.iss{font:400 10px var(--mono);color:var(--mut);padding:4px 0;border-bottom:1px solid var(--bdr2)}
-.iss:last-child{border-bottom:none}
-/* Footer */
-.ft{margin-top:20px;padding-top:12px;border-top:1px solid var(--bdr);display:flex;justify-content:space-between;font:400 9px var(--mono);color:var(--dim)}
-.ft a{color:var(--mut);text-decoration:none}
-@media(max-width:700px){.metrics{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:1fr}.card-w{grid-column:auto}.dets{grid-template-columns:1fr 1fr}}
+  :root {
+    --bg: #0a0a0f;
+    --card: #12121a;
+    --border: #1e1e2e;
+    --text: #e0e0e0;
+    --dim: #666680;
+    --accent: #4ecdc4;
+    --warn: #ff6b6b;
+    --ok: #51cf66;
+    --blue: #339af0;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    background: var(--bg);
+    color: var(--text);
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.4em;
+    color: var(--accent);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .subtitle {
+    color: var(--dim);
+    font-size: 0.75em;
+    margin-bottom: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .card h2 {
+    font-size: 0.8em;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .metric {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 0.85em;
+  }
+  .metric .label { color: var(--dim); }
+  .metric .value { color: var(--text); font-weight: 600; }
+  .metric .value.ok { color: var(--ok); }
+  .metric .value.warn { color: var(--warn); }
+  .metric .value.accent { color: var(--accent); }
+  .metric .value.blue { color: var(--blue); }
+  .wide { grid-column: 1 / -1; }
+  .job-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 8px;
+    margin: 2px 0;
+    border-radius: 4px;
+    font-size: 0.8em;
+  }
+  .job-row.ok { background: rgba(81,207,102,0.08); }
+  .job-row.fail { background: rgba(255,107,107,0.08); }
+  .job-row.timeout { background: rgba(255,165,0,0.08); }
+  .job-status { font-weight: 600; min-width: 60px; text-align: right; }
+  .job-status.ok { color: var(--ok); }
+  .job-status.fail { color: var(--warn); }
+  .job-status.timeout { color: orange; }
+  .section-title {
+    font-size: 0.75em;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 16px 0 8px;
+  }
+  #error-banner {
+    display: none;
+    background: rgba(255,107,107,0.15);
+    border: 1px solid var(--warn);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
+    color: var(--warn);
+    font-size: 0.85em;
+  }
+  .footer {
+    color: var(--dim);
+    font-size: 0.7em;
+    margin-top: 20px;
+    text-align: center;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .bar-chart {
+    display: flex;
+    gap: 3px;
+    align-items: flex-end;
+    height: 60px;
+    margin-top: 8px;
+  }
+  .bar {
+    flex: 1;
+    background: var(--accent);
+    border-radius: 2px 2px 0 0;
+    min-width: 8px;
+    position: relative;
+    opacity: 0.7;
+  }
+  .bar:hover { opacity: 1; }
+  .bar.empty { background: var(--border); }
+  .history-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    font-size: 0.78em;
+    border-bottom: 1px solid var(--border);
+  }
+  .history-row:last-child { border-bottom: none; }
 </style>
 </head>
 <body>
-<div class="hdr"><div><h1>Mission Control</h1><div class="hdr-sub" id="sub">loading...</div></div><div id="health" class="ind"><span class="dot dot-d"></span> —</div></div>
-<div id="banner"></div>
-<div class="metrics" id="met"></div>
-<div class="grid" id="grid"></div>
-<div class="ft"><span>Zeke v2 • <span id="ft-f">—</span> entries</span><a id="ft-link" href="#" target="_blank">raw diagnostic ↗</a></div>
+
+<h1>⚡ Mission Control</h1>
+<div class="subtitle" id="subtitle">loading...</div>
+<div id="error-banner"></div>
+
+<div class="grid" id="main-grid">
+  <!-- Cards injected by JS -->
+</div>
+
+<div id="jobs-section"></div>
+<div id="cycle-section"></div>
+<div id="history-section"></div>
+
+<div class="footer">
+  Zeke v2 • Auto-refresh 30s •
+  <a href="diagnostic.json" target="_blank">raw diagnostic ↗</a> •
+  <a href="cycle-report.json" target="_blank">cycle report ↗</a> •
+  <a href="cycle-history.jsonl" target="_blank">cycle history ↗</a>
+</div>
+
 <script>
-const RAW="https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main";
-let rc=0;
-function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+const $ = s => document.querySelector(s);
 
-function chart(pts,opts={}){
-  const{w=420,h=100,color='#2dd4a0'}=opts;
-  if(!pts||pts.length<2)return`<div style="height:${h}px;display:flex;align-items:center;justify-content:center"><span style="font:11px var(--mono);color:var(--dim)">Collecting data points (updates every 5min)...</span></div>`;
-  const p={t:8,r:10,b:20,l:34},cw=w-p.l-p.r,ch=h-p.t-p.b;
-  const vs=pts.map(x=>x.v),yMn=Math.min(...vs),yMx=Math.max(...vs),yr=yMx-yMn||1;
-  const tMn=pts[0].t,tMx=pts[pts.length-1].t,tr=tMx-tMn||1;
-  const X=t=>p.l+((t-tMn)/tr)*cw,Y=v=>p.t+ch-((v-yMn)/yr)*ch;
-  const gid='g'+Math.random().toString(36).slice(2,8);
-  const ld=pts.map((pt,i)=>`${i?'L':'M'} ${X(pt.t).toFixed(1)} ${Y(pt.v).toFixed(1)}`).join(' ');
-  const ad=ld+` L ${X(tMx).toFixed(1)} ${p.t+ch} L ${X(tMn).toFixed(1)} ${p.t+ch} Z`;
-  let s=`<svg width="100%" viewBox="0 0 ${w} ${h}" style="display:block;overflow:visible">`;
-  s+=`<defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity=".25"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>`;
-  [yMn,yMn+yr*.5,yMx].forEach(v=>{v=Math.round(v);s+=`<line x1="${p.l}" y1="${Y(v)}" x2="${w-p.r}" y2="${Y(v)}" stroke="var(--bdr2)" stroke-width=".5" stroke-dasharray="3,3"/><text x="${p.l-4}" y="${Y(v)+3}" text-anchor="end" fill="var(--dim)" font-size="9" font-family="var(--mono)">${v}</text>`});
-  s+=`<path d="${ad}" fill="url(#${gid})"/>`;
-  s+=`<path d="${ld}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`;
-  pts.forEach((pt,i)=>{const last=i===pts.length-1;s+=`<circle cx="${X(pt.t)}" cy="${Y(pt.v)}" r="${last?3.5:2}" fill="${last?color:color+'88'}" ${last?`stroke="var(--bg)" stroke-width="1.5"`:''}/>`});
-  const step=Math.max(1,Math.floor(pts.length/7));
-  for(let i=0;i<pts.length;i+=step)s+=`<text x="${X(pts[i].t)}" y="${h-3}" text-anchor="middle" fill="var(--dim)" font-size="8" font-family="var(--mono)">${pts[i].l||''}</text>`;
-  const last=pts[pts.length-1];
-  if(pts.length%step!==1)s+=`<text x="${X(last.t)}" y="${h-3}" text-anchor="end" fill="var(--dim)" font-size="8" font-family="var(--mono)">${last.l||''}</text>`;
-  return s+'</svg>';
+function fmt(n) { return n != null ? n.toLocaleString() : '—'; }
+function dur(s) { return s >= 60 ? (s/60).toFixed(1)+'m' : s+'s'; }
+function ago(ts) {
+  if (!ts) return '—';
+  const d = (Date.now() - new Date(ts).getTime()) / 1000;
+  if (d < 60) return Math.round(d) + 's ago';
+  if (d < 3600) return Math.round(d/60) + 'm ago';
+  if (d < 86400) return Math.round(d/3600) + 'h ago';
+  return Math.round(d/86400) + 'd ago';
 }
 
-function render(d){
-  if(!d)return;
-  const fc=d.feed?.total_lines||0;
-  const sp=d.spark||{};
-  const gw=d.gateway?.running||false;
-  const sc=d.scheduler||{};
-  const act=d.activity||{};
-  const hp=d.health||{};
-  const iss=hp.issues||[];
-  const entries=d.feed?.last_entries||[];
-  const cost=d.cost||{};
-  const auto=d.automation||{};
-  const fh=d.feed_history||[];
-  const allUp=sc.running&&gw&&sp.online;
+function statusClass(s) {
+  if (!s) return '';
+  s = s.toLowerCase();
+  if (s === 'ok' || s === 'success' || s === 'completed') return 'ok';
+  if (s.includes('timeout')) return 'timeout';
+  if (s === 'fail' || s === 'failed' || s === 'error') return 'fail';
+  return '';
+}
 
-  // Header
-  document.getElementById('sub').textContent=`${d.timestamp_local||'?'} • refresh #${rc}`;
-  const hcls=hp.status==='HEALTHY'?'dot-g dot-pulse':hp.status==='CRITICAL'?'dot-r dot-pulse':'dot-a';
-  document.getElementById('health').innerHTML=`<span class="dot ${hcls}"></span> ${hp.status||'?'}`;
-  document.getElementById('ft-f').textContent=fc;
-  document.getElementById('ft-link').href=RAW+'/diagnostic.json';
+function renderMetric(label, value, cls) {
+  return `<div class="metric"><span class="label">${label}</span><span class="value ${cls||''}">${value}</span></div>`;
+}
 
-  // Activity Banner
-  const isRunning=act.state?.includes('running');
-  const isSleep=act.state?.includes('sleep');
-  const bCls=isRunning?'banner banner-run':isSleep?'banner banner-sleep':'banner banner-down';
-  const bIcon=isRunning?'⚡':isSleep?'💤':'⚠️';
-  const bState=isRunning?'PROCESSING':isSleep?'SLEEPING BETWEEN CYCLES':act.state?.toUpperCase()||'UNKNOWN';
-  const bColor=isRunning?'var(--grn)':isSleep?'var(--blu)':'var(--red)';
-  document.getElementById('banner').innerHTML=`<div class="${bCls}">
-    <div class="banner-l"><span style="font-size:16px">${bIcon}</span><div><div class="banner-state" style="color:${bColor}">${bState}</div><div class="banner-detail">${act.last_job?'Last: '+act.last_job+' at '+(act.last_job_time||'?'):'No jobs yet'}</div></div></div>
-    <div class="banner-r">${act.next_cycle_est?'Next cycle ~'+act.next_cycle_est:''}${act.cycle_count?' • '+act.cycle_count+' cycles today':''}</div>
-  </div>`;
+function renderCard(title, content, wide) {
+  return `<div class="card ${wide?'wide':''}">${title?`<h2>${title}</h2>`:''}${content}</div>`;
+}
 
-  // Metrics
-  const sr=act.jobs_today>0?Math.round(act.success_today/act.jobs_today*100):0;
-  const costStr=cost.estimated_cost_today>0?'$'+cost.estimated_cost_today.toFixed(2):'$0';
-  const costColor=cost.is_zero_cost?'var(--grn)':'var(--amb)';
-  const costSub=cost.is_zero_cost?'local models':cost.sonnet_calls_today+' Sonnet calls';
-  document.getElementById('met').innerHTML=[
-    {l:'FEED',v:fc,c:'var(--grn)',s:'+'+String(act.feed_growth_today||0)+' today'},
-    {l:'JOBS',v:act.jobs_today||0,c:'var(--blu)',s:sr+'% success'},
-    {l:'SUCCESS',v:act.success_today||0,c:'var(--grn)',s:act.timeout_today?act.timeout_today+' timeout':''},
-    {l:'FAILS',v:act.fail_today||0,c:act.fail_today>0?'var(--red)':'var(--grn)',s:''},
-    {l:'COST',v:costStr,c:costColor,s:costSub},
-  ].map(m=>`<div class="m"><div class="mv" style="color:${m.c}">${m.v}</div><div class="ml">${m.l}</div>${m.s?`<div class="ms">${m.s}</div>`:''}</div>`).join('');
+async function loadJSON(url) {
+  try {
+    const r = await fetch(url + '?t=' + Date.now());
+    if (!r.ok) return null;
+    return await r.json();
+  } catch { return null; }
+}
 
-  let g='';
+async function loadJSONL(url) {
+  try {
+    const r = await fetch(url + '?t=' + Date.now());
+    if (!r.ok) return [];
+    const text = await r.text();
+    return text.trim().split('\n').filter(l => l.trim()).map(l => {
+      try { return JSON.parse(l); } catch { return null; }
+    }).filter(Boolean);
+  } catch { return []; }
+}
 
-  // Topology + Spark Hardware (full width)
-  const acls=allUp?'ta on':'ta';
-  g+=`<div class="card card-w"><div class="ct">System Topology</div>
-    <div class="topo">
-      <div class="tn"><span class="dot ${sc.running?'dot-g dot-pulse':'dot-r'}" style="width:6px;height:6px"></span><div class="tn-l">Scheduler</div><div class="tn-s">Python</div></div>
-      <div class="${acls}">→</div>
-      <div class="tn"><span class="dot ${gw?'dot-g':'dot-r'}" style="width:6px;height:6px"></span><div class="tn-l">Gateway</div><div class="tn-s">OpenClaw</div></div>
-      <div class="${acls}">→</div>
-      <div class="tn"><span class="dot ${sp.online?(sp.model_stuck?'dot-a':'dot-g dot-pulse'):'dot-r'}" style="width:6px;height:6px"></span><div class="tn-l">DGX Spark</div><div class="tn-s">${sp.inference_active?'inferring':'idle'}</div></div>
-    </div>
-    <div class="dets">
-      <div class="det"><div class="det-l">Scheduler</div><div class="det-v" style="color:${sc.running?'var(--tx)':'var(--red)'}">${sc.running?'PID '+(sc.pids||[])[0]:'DOWN'}</div><div class="det-s">${act.cycle_count||0} cycles today</div></div>
-      <div class="det"><div class="det-l">Spark Latency</div><div class="det-v" style="color:${sp.response_ms<2000?'var(--grn)':sp.response_ms<5000?'var(--amb)':'var(--red)'}">${sp.response_ms?sp.response_ms+'ms':'—'}</div><div class="det-s">${sp.online?'reachable':'offline'}</div></div>
-      <div class="det"><div class="det-l">VRAM</div><div class="det-v">${sp.vram_estimate_gb?sp.vram_estimate_gb+'GB':'—'}</div><div class="det-s">${sp.model_params||''} ${sp.model_quant||''}</div></div>
-      <div class="det"><div class="det-l">Feed Quality</div><div class="det-v" style="color:${(d.feed?.recent_50_clean||0)>30?'var(--grn)':'var(--amb)'}">${d.feed?.recent_50_clean||0}<span style="color:var(--dim);font-size:9px">/${(d.feed?.recent_50_clean||0)+(d.feed?.recent_50_trivial||0)+(d.feed?.recent_50_broken||0)}</span></div><div class="det-s">${d.feed?.recent_50_trivial||0} trivial, ${d.feed?.recent_50_broken||0} broken</div></div>
-    </div></div>`;
+async function render() {
+  const [diag, cycle, history] = await Promise.all([
+    loadJSON('diagnostic.json'),
+    loadJSON('cycle-report.json'),
+    loadJSONL('cycle-history.jsonl')
+  ]);
 
-  // Feed Growth (from persisted history!)
-  g+=`<div class="card"><div class="ct">Feed Growth</div>${chart(fh.length>=2?fh:null,{color:'#2dd4a0'})}<div style="display:flex;justify-content:space-between;margin-top:6px;font:9px var(--mono);color:var(--dim)"><span>${fh.length} data points</span><span>updates every 5min</span></div></div>`;
+  if (!diag) {
+    $('#error-banner').style.display = 'block';
+    $('#error-banner').textContent = '❌ Cannot load diagnostic.json — build-status.py may not be running';
+    return;
+  }
+  $('#error-banner').style.display = 'none';
 
-  // Automation Goals
-  g+=`<div class="card"><div class="ct">Automation Goals</div>`;
-  ['layer1','layer2','layer3'].forEach(k=>{
-    const layer=auto[k];if(!layer)return;
-    const items=layer.items||[];
-    const done=items.filter(i=>i.done).length;
-    const pct=items.length>0?Math.round(done/items.length*100):0;
-    const color=pct===100?'var(--grn)':pct>50?'var(--blu)':'var(--dim)';
-    const statusBg=layer.status==='DEPLOYED'?'var(--grn2)':layer.status==='IN PROGRESS'?'rgba(77,163,255,.15)':'rgba(69,71,80,.2)';
-    const statusColor=layer.status==='DEPLOYED'?'var(--grn)':layer.status==='IN PROGRESS'?'var(--blu)':'var(--dim)';
-    g+=`<div class="layer">
-      <div class="layer-hdr"><span class="layer-name">${k.replace('layer','L')} ${layer.name}</span><span class="layer-status" style="background:${statusBg};color:${statusColor}">${layer.status}</span></div>
-      <div class="layer-bar"><div class="layer-fill" style="width:${pct}%;background:${color}"></div></div>
-      <div class="layer-items">${items.map(i=>`<span class="layer-item ${i.done?'layer-item-done':'layer-item-todo'}">${i.done?'✓':''} ${i.name}</span>`).join('')}</div>
-    </div>`;
-  });
-  g+=`</div>`;
+  // Update subtitle with timestamp
+  const ts = diag.timestamp || diag.generated || diag.last_updated;
+  $('#subtitle').textContent = ts ? 'Last update: ' + ago(ts) : 'Zeke v2';
 
-  // Issues
-  if(iss.length>0){
-    g+=`<div class="card card-w" style="background:rgba(240,180,41,.04);border-color:var(--amb2)">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="dot ${iss.some(i=>i.includes('CRITICAL'))?'dot-r':'dot-a'}"></span><span style="font:600 11px var(--mono);color:var(--amb)">${iss.length} Issue${iss.length>1?'s':''}</span></div>
-      ${iss.map(i=>`<div class="iss">${esc(i)}</div>`).join('')}</div>`;
+  let cards = '';
+
+  // === SYSTEM STATUS CARD ===
+  // Adapt to whatever fields exist
+  let sysContent = '';
+  // Check for nested structures
+  const sys = diag.system || diag.health || {};
+  const sched = diag.scheduler || diag.orchestrator || {};
+
+  // Scheduler
+  if (sched.pid) sysContent += renderMetric('Scheduler PID', sched.pid, sched.running ? 'ok' : 'warn');
+  if (sched.running != null) sysContent += renderMetric('Scheduler', sched.running ? 'RUNNING' : 'STOPPED', sched.running ? 'ok' : 'warn');
+  if (sched.uptime) sysContent += renderMetric('Uptime', sched.uptime, 'blue');
+
+  // Spark
+  const spark = diag.spark || sys.spark || {};
+  if (spark.status) sysContent += renderMetric('Spark', spark.status, spark.status === 'online' ? 'ok' : 'warn');
+  if (spark.gpu_temp) sysContent += renderMetric('GPU Temp', spark.gpu_temp + '°C', spark.gpu_temp > 80 ? 'warn' : 'ok');
+  if (spark.gpu_util != null) sysContent += renderMetric('GPU Util', spark.gpu_util + '%', 'blue');
+  if (spark.vram_used) sysContent += renderMetric('VRAM', spark.vram_used, 'accent');
+  if (spark.vram) sysContent += renderMetric('VRAM', spark.vram, 'accent');
+
+  // Gateway
+  const gw = diag.gateway || sys.gateway || {};
+  if (gw.status) sysContent += renderMetric('Gateway', gw.status, gw.status === 'running' ? 'ok' : 'warn');
+  if (gw.pid) sysContent += renderMetric('Gateway PID', gw.pid);
+  if (gw.version) sysContent += renderMetric('Version', gw.version, 'blue');
+
+  // Fallback: just dump top-level non-object fields
+  if (!sysContent) {
+    for (const [k, v] of Object.entries(diag)) {
+      if (typeof v !== 'object' && !['timestamp','generated','last_updated'].includes(k)) {
+        sysContent += renderMetric(k, String(v));
+      }
+    }
+  }
+  if (sysContent) cards += renderCard('System', sysContent);
+
+  // === FEED CARD ===
+  const feed = diag.feed || diag.learning_feed || {};
+  const today = diag.today || {};
+  let feedContent = '';
+  if (feed.total != null) feedContent += renderMetric('Total Entries', fmt(feed.total), 'accent');
+  if (feed.count != null) feedContent += renderMetric('Total Entries', fmt(feed.count), 'accent');
+  if (today.feed_growth != null) feedContent += renderMetric('Today Growth', '+' + today.feed_growth, today.feed_growth > 0 ? 'ok' : 'warn');
+  if (feed.today_growth != null) feedContent += renderMetric('Today Growth', '+' + feed.today_growth, feed.today_growth > 0 ? 'ok' : 'warn');
+  if (feed.avg_quality != null) feedContent += renderMetric('Avg Quality', feed.avg_quality.toFixed(1) + '/5.0', feed.avg_quality >= 3 ? 'ok' : 'warn');
+  if (feed.quality != null) feedContent += renderMetric('Quality', typeof feed.quality === 'number' ? feed.quality.toFixed(1) + '/5.0' : feed.quality);
+  if (feed.trivial != null) feedContent += renderMetric('Trivial', feed.trivial, feed.trivial > 5 ? 'warn' : 'ok');
+  if (feed.broken != null) feedContent += renderMetric('Broken', feed.broken, feed.broken > 0 ? 'warn' : 'ok');
+
+  // Domain coverage
+  const domains = feed.domains || diag.domains || feed.domain_coverage || {};
+  if (Object.keys(domains).length > 0) {
+    feedContent += '<div style="margin-top:8px;font-size:0.75em;color:var(--dim)">DOMAINS</div>';
+    for (const [d, c] of Object.entries(domains)) {
+      feedContent += renderMetric(d, c);
+    }
+  }
+  if (feedContent) cards += renderCard('Research Feed', feedContent);
+
+  // === KNOWLEDGE GRAPH CARD ===
+  const kg = diag.kg || diag.knowledge_graph || {};
+  let kgContent = '';
+  if (kg.entities != null) kgContent += renderMetric('Entities', fmt(kg.entities), 'accent');
+  if (kg.relations != null) kgContent += renderMetric('Relations', fmt(kg.relations), 'blue');
+  if (kg.associations != null) kgContent += renderMetric('Associations', fmt(kg.associations));
+  if (kgContent) cards += renderCard('Knowledge Graph', kgContent);
+
+  // === PIPELINE / CYCLES CARD ===
+  const pipe = diag.pipeline || diag.cycles || today || {};
+  let pipeContent = '';
+  if (pipe.cycles_today != null) pipeContent += renderMetric('Cycles Today', pipe.cycles_today, 'blue');
+  if (pipe.total_cycles != null) pipeContent += renderMetric('Total Cycles', pipe.total_cycles, 'blue');
+  if (pipe.jobs_completed != null) pipeContent += renderMetric('Jobs OK', pipe.jobs_completed, 'ok');
+  if (pipe.jobs_failed != null) pipeContent += renderMetric('Jobs Failed', pipe.jobs_failed, pipe.jobs_failed > 0 ? 'warn' : 'ok');
+  if (pipe.success_rate != null) pipeContent += renderMetric('Success Rate', (typeof pipe.success_rate === 'number' ? pipe.success_rate.toFixed(0) : pipe.success_rate) + '%', pipe.success_rate >= 80 ? 'ok' : 'warn');
+  if (pipe.timeout) pipeContent += renderMetric('Timeouts', pipe.timeout, 'warn');
+  if (pipeContent) cards += renderCard('Pipeline', pipeContent);
+
+  // === COST CARD ===
+  const cost = diag.cost || {};
+  let costContent = '';
+  if (cost.today != null) costContent += renderMetric('Today', '$' + cost.today, cost.today > 1 ? 'warn' : 'ok');
+  if (cost.total != null) costContent += renderMetric('Total', '$' + cost.total);
+  if (cost.model) costContent += renderMetric('Model', cost.model, 'blue');
+  if (diag.model) costContent += renderMetric('Model', diag.model, 'blue');
+  if (costContent) cards += renderCard('Cost', costContent);
+
+  // === AUTOMATION / PHASE CARD ===
+  const auto = diag.automation || diag.autonomy || {};
+  let autoContent = '';
+  if (auto.phase) autoContent += renderMetric('Phase', auto.phase, 'accent');
+  if (auto.repairs_today != null) autoContent += renderMetric('Repairs Today', auto.repairs_today);
+  if (auto.repairs_total != null) autoContent += renderMetric('Total Repairs', auto.repairs_total);
+  if (auto.last_repair) autoContent += renderMetric('Last Repair', ago(auto.last_repair));
+  if (autoContent) cards += renderCard('Autonomy', autoContent);
+
+  $('#main-grid').innerHTML = cards || renderCard('', '<div style="color:var(--dim)">No data available</div>');
+
+  // === RECENT JOBS (from diagnostic or cycle report) ===
+  let jobs = [];
+  if (diag.recent_jobs) jobs = diag.recent_jobs;
+  else if (cycle && cycle.jobs) jobs = cycle.jobs;
+  else if (diag.jobs) jobs = diag.jobs;
+
+  if (jobs.length > 0) {
+    let jobsHtml = '<div class="section-title">Recent Jobs</div>';
+    for (const j of jobs.slice(-12)) {
+      const name = j.name || j.job || j.topic || 'unknown';
+      const status = j.status || j.result || 'unknown';
+      const sc = statusClass(status);
+      const duration = j.duration || j.duration_s;
+      const added = j.feed_added || j.entries || '';
+      jobsHtml += `<div class="job-row ${sc}">
+        <span>${name}</span>
+        <span style="color:var(--dim)">${duration ? dur(duration) : ''} ${added ? '+'+added : ''}</span>
+        <span class="job-status ${sc}">${status}</span>
+      </div>`;
+    }
+    $('#jobs-section').innerHTML = jobsHtml;
   }
 
-  // Latest entries (full width)
-  g+=`<div class="card card-w"><div class="ct">Latest Research</div>${
-    entries.length>0?entries.slice().reverse().map((e,i)=>`<div class="fe">${esc(typeof e==='string'?e:JSON.stringify(e).slice(0,100))}</div>`).join('')
-    :'<div style="font:10px var(--mono);color:var(--dim)">Waiting for entries...</div>'
-  }</div>`;
-
-  // Topic distribution
-  const topics=d.feed?.topic_distribution;
-  if(topics&&Object.keys(topics).length>0){
-    const maxV=Math.max(...Object.values(topics));
-    g+=`<div class="card card-w"><div class="ct">Topic Coverage (last 50)</div>${Object.entries(topics).map(([t,c])=>{
-      const pct=Math.round(c/maxV*100);
-      return`<div style="display:grid;grid-template-columns:140px 1fr 30px;align-items:center;gap:8px;padding:3px 0"><span style="font:10px var(--mono);color:var(--mut)">${t.slice(0,20)}</span><div style="height:10px;background:var(--sf2);border-radius:3px;overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--blu);border-radius:3px"></div></div><span style="font:10px var(--mono);color:var(--dim)">${c}</span></div>`
-    }).join('')}</div>`;
+  // === CURRENT CYCLE (from cycle-report.json) ===
+  if (cycle) {
+    let cycleHtml = '<div class="section-title">Current Cycle</div><div class="card">';
+    cycleHtml += renderMetric('Window', cycle.window || '—');
+    cycleHtml += renderMetric('Cycle #', cycle.cycle_number || '—', 'blue');
+    cycleHtml += renderMetric('Feed', (cycle.feed_before||'?') + ' → ' + (cycle.feed_after||'?'),
+      cycle.growth > 0 ? 'ok' : 'warn');
+    cycleHtml += renderMetric('Growth', '+' + (cycle.growth || 0), cycle.growth > 0 ? 'ok' : 'warn');
+    if (cycle.needs_repair) cycleHtml += renderMetric('Needs Repair', '⚠️ YES', 'warn');
+    if (cycle.feed_stagnant) cycleHtml += renderMetric('Feed Stagnant', '⚠️ YES', 'warn');
+    cycleHtml += '</div>';
+    $('#cycle-section').innerHTML = cycleHtml;
   }
 
-  document.getElementById('grid').innerHTML=g;
+  // === CYCLE HISTORY (from cycle-history.jsonl) ===
+  if (history.length > 0) {
+    let histHtml = '<div class="section-title">Cycle History (last 10)</div><div class="card">';
+
+    // Bar chart of feed growth
+    const recent = history.slice(-20);
+    if (recent.length > 1) {
+      const maxGrowth = Math.max(...recent.map(h => h.growth || 0), 1);
+      histHtml += '<div class="bar-chart">';
+      for (const h of recent) {
+        const g = h.growth || 0;
+        const pct = Math.max((g / maxGrowth) * 100, 2);
+        const color = g > 0 ? 'var(--accent)' : 'var(--warn)';
+        histHtml += `<div class="bar" style="height:${pct}%;background:${color}" title="Cycle ${h.cycle_number||'?'}: +${g}"></div>`;
+      }
+      histHtml += '</div>';
+    }
+
+    // Table of recent cycles
+    for (const h of history.slice(-10).reverse()) {
+      const ts = h.timestamp ? new Date(h.timestamp).toLocaleTimeString() : '—';
+      histHtml += `<div class="history-row">
+        <span>Cycle ${h.cycle_number||'?'}</span>
+        <span>${h.window||''}</span>
+        <span style="color:${(h.growth||0)>0?'var(--ok)':'var(--warn)'}">+${h.growth||0}</span>
+        <span style="color:var(--dim)">${ts}</span>
+      </div>`;
+    }
+    histHtml += '</div>';
+    $('#history-section').innerHTML = histHtml;
+  }
 }
 
-async function tick(){
-  rc++;
-  try{
-    const d=await fetch(RAW+'/diagnostic.json?t='+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null);
-    render(d);
-  }catch(e){console.error(e)}
-}
-tick();
-setInterval(tick,60000);
+// Initial render + auto-refresh
+render();
+setInterval(render, 30000);
 </script>
 </body>
 </html>
