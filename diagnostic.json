@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-22 06:30:01 ET",
-  "timestamp_utc": "2026-02-22T11:30:01Z",
+  "timestamp_local": "2026-02-22 06:50:00 ET",
+  "timestamp_utc": "2026-02-22T11:50:00Z",
   "processes": {
     "overnight": {
       "running": false,
@@ -8,9 +8,11 @@
       "count": 0
     },
     "daytime": {
-      "running": false,
-      "pids": [],
-      "count": 0
+      "running": true,
+      "pids": [
+        "31483"
+      ],
+      "count": 1
     },
     "queue": {
       "running": false,
@@ -25,14 +27,20 @@
     "gateway": {
       "running": true,
       "pids": [
-        "18638"
+        "18638",
+        "31335",
+        "31336",
+        "31539"
       ],
-      "count": 1
+      "count": 4
     },
     "status_push": {
-      "running": false,
-      "pids": [],
-      "count": 0
+      "running": true,
+      "pids": [
+        "31462",
+        "31465"
+      ],
+      "count": 2
     }
   },
   "gateway": {
@@ -42,20 +50,18 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3-32b-32k:latest",
-      "qwen3:8b"
+      "qwen3-32b-32k:latest"
     ]
   },
   "gpu": {
     "models_in_vram": [
-      "qwen3-32b-32k:latest",
-      "qwen3:8b"
+      "qwen3-32b-32k:latest"
     ],
     "note": "GPU util requires nvidia-smi SSH \u2014 not available remotely"
   },
   "feed": {
     "total_lines": 227,
-    "last_modified_minutes_ago": 22.0,
+    "last_modified_minutes_ago": 42.0,
     "last_real_timestamp": "2026-02-22T04:54:27Z",
     "last_5_entries": [
       "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"self-improvement\",\"insights\":[\"No new peer-reviewed studies found in 2025-2026 timeframe\"],\"tools_used\":[\"web_search\",\"exec\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
@@ -136,14 +142,15 @@
   },
   "crontab": {
     "active_entries": [
-      "0 22 * * * /Users/zekezirk/zeke-overnight.sh >> /Users/zekezirk/logs/overnight-cron.log 2>&1",
-      "*/15 * * * * bash ~/.openclaw/workspace/tools/health-check.sh > /dev/null 2>&1",
+      "0 21 * * * /bin/bash /Users/zekezirk/zeke-overnight.sh >> /Users/zekezirk/logs/overnight-cron.log 2>&1",
+      "0 5 * * * /bin/bash /Users/zekezirk/zeke-queue.sh >> /tmp/zeke-scheduler.log 2>&1",
+      "30 5 * * * /bin/bash /Users/zekezirk/zeke-reason.sh >> /tmp/zeke-reason-morning.log 2>&1",
+      "30 6 * * * /bin/bash /Users/zekezirk/zeke-daytime.sh >> /Users/zekezirk/logs/daytime-cron.log 2>&1",
+      "*/10 * * * * /bin/bash /Users/zekezirk/zeke-watchdog.sh 2>&1",
       "*/10 * * * * /bin/bash /Users/zekezirk/zeke-status-push.sh >> /tmp/gist-push.log 2>&1",
-      "0 4 * * * /bin/bash $HOME/zeke-queue.sh >> /tmp/zeke-scheduler.log 2>&1",
-      "0 12 * * * /bin/bash $HOME/zeke-reason.sh >> /tmp/zeke-reason-morning.log 2>&1",
-      "0 8 * * * /bin/bash /Users/zekezirk/zeke-daytime.sh >> /Users/zekezirk/logs/daytime-cron.log 2>&1"
+      "*/15 * * * * /bin/bash /Users/zekezirk/.openclaw/workspace/tools/health-check.sh > /dev/null 2>&1"
     ],
-    "count": 6
+    "count": 7
   },
   "lockfiles": {
     "overnight": {
@@ -157,8 +164,8 @@
       "stale": false
     },
     "daytime": {
-      "exists": false,
-      "pid": null,
+      "exists": true,
+      "pid": "31483",
       "stale": false
     },
     "queue": {
@@ -174,13 +181,24 @@
       "last_10_lines": []
     },
     "daytime": {
-      "exists": false,
-      "last_modified_minutes_ago": -1,
-      "last_10_lines": []
+      "exists": true,
+      "last_modified_minutes_ago": 0.0,
+      "last_10_lines": [
+        "[2026-02-22 06:50:00 EST] DAYTIME START (PID 31483)",
+        "[2026-02-22 06:50:00 EST] DAYTIME START (PID 31483)",
+        "[2026-02-22 06:50:00 EST] ===========================================",
+        "[2026-02-22 06:50:00 EST] ===========================================",
+        "[2026-02-22 06:50:00 EST] Pre-flight OK. Gateway=UP Spark=UP Feed=     227",
+        "[2026-02-22 06:50:00 EST] Pre-flight OK. Gateway=UP Spark=UP Feed=     227",
+        "[2026-02-22 06:50:00 EST] --- CYCLE 1 --- (feed=     227)",
+        "[2026-02-22 06:50:00 EST] --- CYCLE 1 --- (feed=     227)",
+        "[2026-02-22 06:50:00 EST]   START: treasury-bonds",
+        "[2026-02-22 06:50:00 EST]   START: treasury-bonds"
+      ]
     },
     "openclaw": {
       "exists": true,
-      "last_modified_minutes_ago": 7.1,
+      "last_modified_minutes_ago": 27.0,
       "last_10_lines": [
         "{\"0\":\"Error: gateway timeout after 600000ms\\nGateway target: ws://127.0.0.1:18789\\nSource: local loopback\\nConfig: /Users/zekezirk/.openclaw/openclaw.json\\nBind: loopback\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T09:02:51.939Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053:68\",\"fileName\":\"entry.js\",\"fileNameWithLine\":\"entry.js:2053\",\"fileColumn\":\"68\",\"fileLine\":\"2053\",\"filePath\":\"/Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js\",\"filePathWithLine\":\"/Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053\",\"method\":\"console.error\"}},\"time\":\"2026-02-22T09:02:51.941Z\"}",
         "{\"0\":\"Error: gateway timeout after 600000ms\\nGateway target: ws://127.0.0.1:18789\\nSource: local loopback\\nConfig: /Users/zekezirk/.openclaw/openclaw.json\\nBind: loopback\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T09:13:53.445Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053:68\",\"fileName\":\"entry.js\",\"fileNameWithLine\":\"entry.js:2053\",\"fileColumn\":\"68\",\"fileLine\":\"2053\",\"filePath\":\"/Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js\",\"filePathWithLine\":\"/Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053\",\"method\":\"console.error\"}},\"time\":\"2026-02-22T09:13:53.448Z\"}",
@@ -218,12 +236,12 @@
     "has_path_export": true,
     "job_ids_referenced": 6,
     "unique_job_ids": [
-      "0b8112f4-e671-4aa2-bdb1-c54f9007bd1c",
       "70e6952b-350b-4413-818b-af20a9d02c2a",
-      "fef48082-0a38-47f8-95e6-d23ad1a2fd95",
       "e791b3d8-ab30-4a9e-894c-3ca00f9d05c0",
+      "0b8112f4-e671-4aa2-bdb1-c54f9007bd1c",
+      "6e8b2938-21a9-4bda-9b28-d6cc31f1ae0d",
       "b60e529d-0109-4cf8-a245-847651b3fcc5",
-      "6e8b2938-21a9-4bda-9b28-d6cc31f1ae0d"
+      "fef48082-0a38-47f8-95e6-d23ad1a2fd95"
     ]
   },
   "schedule_analysis": {
