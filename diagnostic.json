@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-22 07:30:01 ET",
-  "timestamp_utc": "2026-02-22T12:30:01Z",
+  "timestamp_local": "2026-02-22 07:40:01 ET",
+  "timestamp_utc": "2026-02-22T12:40:01Z",
   "processes": {
     "overnight": {
       "running": false,
@@ -11,7 +11,7 @@
       "running": true,
       "pids": [
         "31483",
-        "32416"
+        "32722"
       ],
       "count": 2
     },
@@ -29,8 +29,8 @@
       "running": true,
       "pids": [
         "18638",
-        "32417",
-        "32418"
+        "32723",
+        "32724"
       ],
       "count": 3
     },
@@ -47,25 +47,27 @@
   "spark": {
     "online": true,
     "models_loaded": [
+      "qwen3:8b",
       "qwen3-32b-32k:latest"
     ]
   },
   "gpu": {
     "models_in_vram": [
+      "qwen3:8b",
       "qwen3-32b-32k:latest"
     ],
     "note": "GPU util requires nvidia-smi SSH \u2014 not available remotely"
   },
   "feed": {
-    "total_lines": 235,
-    "last_modified_minutes_ago": 6.4,
-    "last_real_timestamp": "2026-02-22T07:09:00Z",
+    "total_lines": 238,
+    "last_modified_minutes_ago": 2.5,
+    "last_real_timestamp": "2026-02-22T12:24:00Z",
     "last_5_entries": [
-      "{\"timestamp\":\"2026-02-22T11:42:00Z\",\"topic\":\"treasury bonds and interest rates\",\"finding\":\"Schwab forecasts solid 2026 returns for bonds due to central bank rate cuts\",\"source\":\"https://www.schwab.com/learn/story/fixed-income-outlook\"}",
-      "\"timestamp\":\"2026-02-21T18:00:00Z\", \"topic\":\"treasury bonds and interest rates\", \"finding\":\"TLT ETF closed at $89.41 on 2026-02-21 (Investing.com). Previous close: $89.62. NAV as of Feb 20, 2026 was $89.37 (BlackRock).\", \"source\":\"https://www.investing.com/etfs/ishares-lehman-20-year-treas,https://www.blackrock.com/us/individual/products/239454/ishares-20-year-treasury-bond-etf",
-      "{\"timestamp\":\"2026-02-22T07:09:00Z\",\"topic\":\"longevity research\",\"finding\":\"PEARL trial (2026) shows low-dose intermittent rapamycin was well-tolerated over 1 year and caused modest changes in biomarkers of biological aging (e.g., reduced senescent cells, improved immune response).\",\"source\":\"https://pmc.ncbi.nlm.nih.gov/articles/PMC12226543/\"}",
       "{\"timestamp\":\"2026-02-22T07:09:00Z\",\"topic\":\"longevity research\",\"finding\":\"Rapamycin reduces senescent cells in older adults, potentially slowing age-related diseases (confirmed via 2026 Oxford/NAD.com study).\",\"source\":\"https://pmc.ncbi.nlm.nih.gov/articles/PMC12226543/\"}",
-      "{\"timestamp\":\"2026-02-22T07:09:00Z\",\"topic\":\"longevity research\",\"finding\":\"Despite rapamycin showing immune response improvements, no clinical trials confirm it extends lifespan or slows aging in humans (as of 2026 data).\",\"source\":\"https://pmc.ncbi.nlm.nih.gov/articles/PMC12226543/\"}"
+      "{\"timestamp\":\"2026-02-22T07:09:00Z\",\"topic\":\"longevity research\",\"finding\":\"Despite rapamycin showing immune response improvements, no clinical trials confirm it extends lifespan or slows aging in humans (as of 2026 data).\",\"source\":\"https://pmc.ncbi.nlm.nih.gov/articles/PMC12226543/\"}",
+      "{\"timestamp\":\"2026-02-22T12:24:00Z\",\"topic\":\"AI agents and tool calling\",\"finding\":\"LobeHub MCP Marketplace lists Playwright MCP (Feb 22, 2026) for browser automation and Context7 MCP for real-time documentation access. Requires Node.js 18+ and provides structured web interaction without vision models.\",\"source\":\"https://lobehub.com/mcp\"}",
+      "{\"timestamp\":\"2026-02-22T12:24:00Z\",\"topic\":\"AI agents and tool calling\",\"finding\":\"Gumloop AI agent framework (Feb 22, 2026) integrates with 130+ apps, LLMs, and MCP servers. Supports multi-agent workflows via drag-and-drop interface. Used by Shopify, Instacart, and Webflow. Requires Node.js 18+ for MCP connections.\",\"source\":\"https://www.gumloop.com/blog/ai-agent-frameworks\"}",
+      "{\"timestamp\":\"2026-02-22T12:24:00Z\",\"topic\":\"AI agents and tool calling\",\"finding\":\"Dev.to article (Feb 22, 2026) clarifies LLMs require external control flow/feedback loops to function as agents. Models lack memory, outcome awareness, and cannot execute actions without explicit system implementation. Key architectural principle: Agent = LLM + execution loop with state/observability/feedback.\",\"source\":\"https://dev.to/shaheryaryousaf/why-llms-alone-are-not-agents-342e\"}"
     ],
     "recent_50_clean": 27,
     "recent_50_broken": 23
@@ -179,26 +181,24 @@
     },
     "daytime": {
       "exists": true,
-      "last_modified_minutes_ago": 9.6,
+      "last_modified_minutes_ago": 4.4,
       "last_10_lines": [
-        "[2026-02-22 06:53:28 EST] SKIP: daytime already running (PID 31483)",
-        "[2026-02-22 06:53:28 EST] SKIP: daytime already running (PID 31483)",
-        "[2026-02-22 07:05:04 EST]   OK:      treasury-bonds +5 entries (904s)",
-        "[2026-02-22 07:05:04 EST]   OK:      treasury-bonds +5 entries (904s)",
         "[2026-02-22 07:05:14 EST]   START: longevity",
         "[2026-02-22 07:05:14 EST]   START: longevity",
         "[2026-02-22 07:20:17 EST]   TIMEOUT: longevity (903s) \u2014 continuing",
         "[2026-02-22 07:20:17 EST]   TIMEOUT: longevity (903s) \u2014 continuing",
         "[2026-02-22 07:20:27 EST]   START: ai-agents",
-        "[2026-02-22 07:20:27 EST]   START: ai-agents"
+        "[2026-02-22 07:20:27 EST]   START: ai-agents",
+        "[2026-02-22 07:35:30 EST]   OK:      ai-agents +5 entries (903s)",
+        "[2026-02-22 07:35:30 EST]   OK:      ai-agents +5 entries (903s)",
+        "[2026-02-22 07:35:40 EST]   START: self-improvement",
+        "[2026-02-22 07:35:40 EST]   START: self-improvement"
       ]
     },
     "openclaw": {
       "exists": true,
-      "last_modified_minutes_ago": 9.7,
+      "last_modified_minutes_ago": 4.5,
       "last_10_lines": [
-        "{\"0\":\"[tools] exec failed: zsh:1: command not found: kg-add.py\\n\\nCommand exited with code 127\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T11:22:57.784Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43:14\",\"fileName\":\"exec-DSVXqxGa.js\",\"fileNameWithLine\":\"exec-DSVXqxGa.js:43\",\"fileColumn\":\"14\",\"fileLine\":\"43\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43\",\"method\":\"logError\"}},\"time\":\"2026-02-22T11:22:57.785Z\"}",
-        "{\"0\":\"{\\n  \\\"ok\\\": true,\\n  \\\"ran\\\": true\\n}\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T11:53:28.516Z\",\"logLevelId\":3,\"logLevelName\":\"INFO\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2051:46\",\"fileName\":\"entry.js\",\"fileNameWithLine\":\"entry.js:2051\",\"fileColumn\":\"46\",\"fileLine\":\"2051\",\"filePath\":\"/Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js\",\"filePathWithLine\":\"/Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2051\",\"method\":\"console.log\"}},\"time\":\"2026-02-22T11:53:28.519Z\"}",
         "{\"0\":\"[tools] exec failed: zsh:1: unmatched '\\n\\nCommand exited with code 1\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T11:56:51.179Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43:14\",\"fileName\":\"exec-DSVXqxGa.js\",\"fileNameWithLine\":\"exec-DSVXqxGa.js:43\",\"fileColumn\":\"14\",\"fileLine\":\"43\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43\",\"method\":\"logError\"}},\"time\":\"2026-02-22T11:56:51.181Z\"}",
         "{\"0\":\"[tools] exec failed: zsh:1: unmatched '\\n\\nCommand exited with code 1\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T11:59:42.629Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43:14\",\"fileName\":\"exec-DSVXqxGa.js\",\"fileNameWithLine\":\"exec-DSVXqxGa.js:43\",\"fileColumn\":\"14\",\"fileLine\":\"43\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43\",\"method\":\"logError\"}},\"time\":\"2026-02-22T11:59:42.629Z\"}",
         "{\"0\":\"[tools] exec failed: zsh:1: unmatched '\\n\\nCommand exited with code 1\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T12:00:40.978Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43:14\",\"fileName\":\"exec-DSVXqxGa.js\",\"fileNameWithLine\":\"exec-DSVXqxGa.js:43\",\"fileColumn\":\"14\",\"fileLine\":\"43\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43\",\"method\":\"logError\"}},\"time\":\"2026-02-22T12:00:40.978Z\"}",
@@ -206,7 +206,9 @@
         "{\"0\":\"Error: gateway timeout after 900000ms\\nGateway target: ws://127.0.0.1:18789\\nSource: local loopback\\nConfig: /Users/zekezirk/.openclaw/openclaw.json\\nBind: loopback\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T12:05:03.550Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053:68\",\"fileName\":\"entry.js\",\"fileNameWithLine\":\"entry.js:2053\",\"fileColumn\":\"68\",\"fileLine\":\"2053\",\"filePath\":\".nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js\",\"filePathWithLine\":\".nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053\",\"method\":\"console.error\"}},\"time\":\"2026-02-22T12:05:03.553Z\"}",
         "{\"0\":\"[tools] exec failed: zsh:1: unmatched '\\n\\nCommand exited with code 1\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T12:05:14.040Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43:14\",\"fileName\":\"exec-DSVXqxGa.js\",\"fileNameWithLine\":\"exec-DSVXqxGa.js:43\",\"fileColumn\":\"14\",\"fileLine\":\"43\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43\",\"method\":\"logError\"}},\"time\":\"2026-02-22T12:05:14.040Z\"}",
         "{\"0\":\"{\\\"subsystem\\\":\\\"memory\\\"}\",\"1\":{\"provider\":\"openai\",\"timeoutMs\":60000},\"2\":\"memory embeddings: query start\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"memory\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T12:09:01.109Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:412:51\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:412\",\"fileColumn\":\"51\",\"fileLine\":\"412\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:412\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T12:09:01.109Z\"}",
-        "{\"0\":\"Error: gateway timeout after 900000ms\\nGateway target: ws://127.0.0.1:18789\\nSource: local loopback\\nConfig: /Users/zekezirk/.openclaw/openclaw.json\\nBind: loopback\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T12:20:17.198Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053:68\",\"fileName\":\"entry.js\",\"fileNameWithLine\":\"entry.js:2053\",\"fileColumn\":\"68\",\"fileLine\":\"2053\",\"filePath\":\".nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js\",\"filePathWithLine\":\".nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053\",\"method\":\"console.error\"}},\"time\":\"2026-02-22T12:20:17.201Z\"}"
+        "{\"0\":\"Error: gateway timeout after 900000ms\\nGateway target: ws://127.0.0.1:18789\\nSource: local loopback\\nConfig: /Users/zekezirk/.openclaw/openclaw.json\\nBind: loopback\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T12:20:17.198Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053:68\",\"fileName\":\"entry.js\",\"fileNameWithLine\":\"entry.js:2053\",\"fileColumn\":\"68\",\"fileLine\":\"2053\",\"filePath\":\".nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js\",\"filePathWithLine\":\".nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053\",\"method\":\"console.error\"}},\"time\":\"2026-02-22T12:20:17.201Z\"}",
+        "{\"0\":\"Error: gateway timeout after 900000ms\\nGateway target: ws://127.0.0.1:18789\\nSource: local loopback\\nConfig: /Users/zekezirk/.openclaw/openclaw.json\\nBind: loopback\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T12:35:30.539Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053:68\",\"fileName\":\"entry.js\",\"fileNameWithLine\":\"entry.js:2053\",\"fileColumn\":\"68\",\"fileLine\":\"2053\",\"filePath\":\".nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js\",\"filePathWithLine\":\".nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053\",\"method\":\"console.error\"}},\"time\":\"2026-02-22T12:35:30.542Z\"}",
+        "{\"0\":\"[tools] exec failed: zsh:1: unmatched \\\"\\n\\nCommand exited with code 1\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T12:35:34.811Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43:14\",\"fileName\":\"exec-DSVXqxGa.js\",\"fileNameWithLine\":\"exec-DSVXqxGa.js:43\",\"fileColumn\":\"14\",\"fileLine\":\"43\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/exec-DSVXqxGa.js:43\",\"method\":\"logError\"}},\"time\":\"2026-02-22T12:35:34.811Z\"}"
       ]
     }
   },
@@ -233,12 +235,12 @@
     "has_path_export": true,
     "job_ids_referenced": 6,
     "unique_job_ids": [
-      "6e8b2938-21a9-4bda-9b28-d6cc31f1ae0d",
-      "70e6952b-350b-4413-818b-af20a9d02c2a",
-      "fef48082-0a38-47f8-95e6-d23ad1a2fd95",
-      "e791b3d8-ab30-4a9e-894c-3ca00f9d05c0",
       "0b8112f4-e671-4aa2-bdb1-c54f9007bd1c",
-      "b60e529d-0109-4cf8-a245-847651b3fcc5"
+      "70e6952b-350b-4413-818b-af20a9d02c2a",
+      "e791b3d8-ab30-4a9e-894c-3ca00f9d05c0",
+      "b60e529d-0109-4cf8-a245-847651b3fcc5",
+      "6e8b2938-21a9-4bda-9b28-d6cc31f1ae0d",
+      "fef48082-0a38-47f8-95e6-d23ad1a2fd95"
     ]
   },
   "schedule_analysis": {
