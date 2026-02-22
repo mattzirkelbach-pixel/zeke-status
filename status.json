@@ -1,8 +1,7 @@
 {
-  "timestamp": "2026-02-22T05:40:00.709198+00:00",
-  "feed_lines": 212,
+  "timestamp": "2026-02-22T05:50:00.287716+00:00",
+  "feed_lines": 213,
   "recent_feed": [
-    "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"cross-domain-associations\",\"insights\":[\"Discovered 6 new semantic associations between AI training schedules and spaced repetition techniques across domains\",\"Linked 1.5-day spaced repetition patterns to both tool-calling and self-improvement contexts with 0.79+ similarity scores\"],\"tools_used\":[\"exec\"],\"files_updated\":[\"memory/knowledge.db\"]}",
     "{\"timestamp\":\"2026-02-19T07:58:50.997Z\",\"topic\":\"Longevity Clinical Trials Update (2025-2026)\",\"insights\":{\"PEARL Trial\":{\"2025\":{\"low-dose_intermittent_rapamycin\":{\"tolerated\":true,\"biological_aging_biomarkers\":\"modest changes observed\"}}},\"2025 Phase 2 Trial\":{\"subjects\":\"diabetics\",\"intervention\":{\"rapamycin\":\"low-dose\",\"metformin\":\"standard\"},\"mortality_decrease\":\"29%\"},\"2026 Study\":{\"researcher\":\"Dr. Smith\",\"intervention\":{\"time-released_metformin\":\"3000mg\"},\"all-cause_mortality_reduction\":\"28%\"}},\"tools_used\":[\"web_search\",\"web_fetch\"],\"files_updated\":[\"learning-feed.jsonl\"]}",
     "{\"timestamp\":\"2026-02-21T20:17:00Z\",\"topic\":\"treasury bonds and interest rates\",\"finding\":\"TLT ETF opened at $89.41 with 12M range $83.29-$94.09\",\"source\":\"https://www.themarketsdaily.com/2026/02/21/ishares-20-year-treasury-bond-etf-tlt-holdings-raised-by-disciplina-capital-management-llc.html\"}",
     "{\"timestamp\":\"2026-02-21T20:17:00Z\",\"topic\":\"treasury bonds and interest rates\",\"finding\":\"20-year Treasury yield reached 4.08% per IDNFinancials analysis\",\"source\":\"https://www.idnfinancials.com/news/61458/us-bond-yield-up-to-4-08-expectations-of-interest-rate-cuts-subside\"}",
@@ -16,7 +15,8 @@
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"tool-calling\",\"insights\":[\"Qwen 3.5 added with agentic capabilities\",\"DeepSeek V3.2 added with 88.7% LiveCodeBench benchmark\"],\"tools_used\":[\"web_search\",\"web_fetch\"],\"files_updated\":[\"memory/knowledge.db\",\"memory/learning-feed.jsonl\"]}",
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"longevity\",\"insights\":[\"No new developments\"],\"tools_used\":[\"web_search\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
     "{\"timestamp\":\"$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")\",\"topic\":\"treasury-bonds\",\"insights\":[\"10-year US Treasury yield rose to 4.29% per trade tensions and Trump policy fears\"],\"tools_used\":[\"web_search\",\"web_fetch\",\"exec\"],\"files_updated\":[\"memory/learning-feed.jsonl\",\"memory/knowledge.db\"]}",
-    "{\"timestamp\":\"2026-02-22T05:36:41Z\",\"topic\":\"self-improvement\",\"insights\":[\"No new developments\"],\"tools_used\":[\"web_search\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}"
+    "{\"timestamp\":\"2026-02-22T05:36:41Z\",\"topic\":\"self-improvement\",\"insights\":[\"No new developments\"],\"tools_used\":[\"web_search\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
+    "{\"timestamp\": \"2026-02-22T05:48:41Z\", \"topic\": \"longevity\", \"insights\": [\"No new developments\"], \"tools_used\": [\"web_search\"], \"files_updated\": [\"memory/learning-feed.jsonl\"]}"
   ],
   "kg_stats": "Entities: 129\nRelationships: 125\nAssociations: 19\nInsights: 0\nDomains: {\n  \"treasury-bonds\": 35,\n  \"tool-calling\": 24,\n  \"ai-agents\": 21,\n  \"longevity\": 21,\n  \"cross-domain\": 11,\n  \"self-improvement\": 9,\n  \"cross-domain-associations\": 2,\n  \"local model inference\": 2,\n  \"treasury\": 2,\n  \"treasury-bounds\": 2\n}",
   "last_synthesis": "daily-synthesis-2026-02-21.md",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities - Updated 2026-02-21 (Evening)\n\nLast updated by: zeke-reason.sh (Claude Code autonomous reasoning, cycle 2)\nEvaluation basis: 30 feed entries scored across 2 cycles, avg novelty 2.5/5.0\nPrevious cycle avg: 2.05/5.0 | This cycle avg: 3.0/5.0 (Opus entries drove improvement)\n\n---\n\n## P1 \u2014 HIGHEST VALUE (execute next queue cycle)\n\n### Longevity (PROMOTED \u2014 8+ KG entities, highest novelty at 4.6/5.0)\n\nToday's Reason cycle answered 3/5 P1 questions completely. Remaining gaps:\n\n1. Rapamycin PEARL dose-response below 10mg/week: Still unanswered. 6.19kg lean mass\n   at 10mg confirmed. No sub-10mg arm found. Is there dose-finding data?\n   SEARCH: ClinicalTrials.gov NCT04488601 protocol amendments, Blagosklonny 2026.\n   STATUS: PARTIALLY ANSWERED (main outcome confirmed, dose-response gap remains)\n\n2. NAD+ precursor head-to-head RCT (NR vs NMN in humans 50+): ZERO progress. This is\n   now the #1 unanswered longevity question. We have mechanism but no comparative data.\n   SEARCH: \"nicotinamide riboside vs NMN randomized trial 2025 2026\",\n   \"NAD precursor comparison human clinical\", site:clinicaltrials.gov\n   STATUS: UNANSWERED \u2014 highest priority\n\n3. Metformin timing protocol: 3 RCTs confirm exercise blunting. What is the minimum\n   time separation between metformin dosing and exercise to preserve benefits?\n   SEARCH: \"metformin exercise timing pharmacokinetics separation hours\",\n   \"metformin half-life exercise window\"\n   STATUS: NEW \u2014 critical for Matt's protocol\n\n4. DMTF1 small molecule screening: NUS team identified target (Science Advances Jan 2026).\n   Any drug discovery programs targeting DMTF1 upregulation?\n   SEARCH: ChEMBL DMTF1, DrugBank DMTF1 modulators, \"DMTF1 drug discovery 2026\"\n   STATUS: NEW \u2014 early-stage monitoring\n\n5. p-tau217 clinical decision tree: Matt should consider testing. If elevated, what\n   interventions exist in the 3-4 year prediction window?\n   SEARCH: \"p-tau217 elevated treatment options\", \"preclinical Alzheimer interventi",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 62.0,
-    "power_w": 37.09,
+    "gpu_util_pct": 94.0,
+    "temp_c": 61.0,
+    "power_w": 38.24,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -113,9 +113,9 @@
     }
   },
   "gateway_process": {
-    "pid": "18638\n23541\n23542",
-    "memory_pct": "",
-    "uptime": "",
+    "pid": "18638",
+    "memory_pct": "2.1",
+    "uptime": "03:34:09",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -130,10 +130,10 @@
   "feed_quality": {
     "malformed_json": 9,
     "literal_timestamps": 16,
-    "duplicates": 15,
-    "no_new_dev": 11,
-    "total": 212,
-    "error_rate": 18.9
+    "duplicates": 16,
+    "no_new_dev": 12,
+    "total": 213,
+    "error_rate": 19.2
   },
   "crontab_status": {
     "total_entries": 9,
