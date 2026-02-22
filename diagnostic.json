@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-21 23:07:00 ET",
-  "timestamp_utc": "2026-02-22T04:07:00Z",
+  "timestamp_local": "2026-02-21 23:10:01 ET",
+  "timestamp_utc": "2026-02-22T04:10:01Z",
   "processes": {
     "overnight": {
       "running": true,
@@ -28,8 +28,8 @@
       "running": true,
       "pids": [
         "18638",
-        "21288",
-        "21289"
+        "21552",
+        "21553"
       ],
       "count": 3
     },
@@ -46,20 +46,22 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3:8b",
-      "qwen3-32b-32k:latest"
+      "qwen3-32b-32k:latest",
+      "nomic-embed-text:latest",
+      "qwen3:8b"
     ]
   },
   "gpu": {
     "models_in_vram": [
-      "qwen3:8b",
-      "qwen3-32b-32k:latest"
+      "qwen3-32b-32k:latest",
+      "nomic-embed-text:latest",
+      "qwen3:8b"
     ],
     "note": "GPU util requires nvidia-smi SSH \u2014 not available remotely"
   },
   "feed": {
     "total_lines": 208,
-    "last_modified_minutes_ago": 10.7,
+    "last_modified_minutes_ago": 13.7,
     "last_real_timestamp": "2026-02-22T02:44:15Z",
     "last_5_entries": [
       "{\"timestamp\":\"2026-02-21T20:17:00Z\",\"topic\":\"treasury bonds and interest rates\",\"finding\":\"No additional developments beyond four reported findings\",\"source\":\"none\"}",
@@ -123,8 +125,8 @@
       }
     ],
     "enabled_count": 6,
-    "disabled_count": 23,
-    "total": 29,
+    "disabled_count": 11,
+    "total": 17,
     "jobs_with_date_bug": [],
     "duplicate_ids": []
   },
@@ -164,18 +166,18 @@
   "logs": {
     "overnight": {
       "exists": true,
-      "last_modified_minutes_ago": 8.5,
+      "last_modified_minutes_ago": 0.8,
       "last_10_lines": [
-        "[22:58:10] Spark: len(json.load(sys.stdin).get(\"models\" models available [22:58:10] Spark: [])) models available",
-        "[22:58:10] Feed:      208 lines",
-        "",
-        "[22:58:10] === CYCLE 1 START ===",
-        "[22:58:10] Starting job 0b8112f4-e671-4aa2-bdb1-c54f9007bd1c",
+        "Source: local loopback",
+        "Config: /Users/zekezirk/.openclaw/openclaw.json",
+        "Bind: loopback",
         "Error: gateway timeout after 600000ms",
         "Gateway target: ws://127.0.0.1:18789",
         "Source: local loopback",
         "Config: /Users/zekezirk/.openclaw/openclaw.json",
-        "Bind: loopback"
+        "Bind: loopback",
+        "[23:08:12] Completed 0b8112f4-e671-4aa2-bdb1-c54f9007bd1c \u2014 exit code: 1",
+        "[23:09:12] Starting job 6e8b2938-21a9-4bda-9b28-d6cc31f1ae0d"
       ]
     },
     "daytime": {
@@ -185,31 +187,31 @@
     },
     "openclaw": {
       "exists": true,
-      "last_modified_minutes_ago": 0.3,
+      "last_modified_minutes_ago": 0.0,
       "last_10_lines": [
-        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run tool start: runId=f3b67436-db98-4fc5-83ca-84fd27c6ce8b tool=web_fetch toolCallId=call_chd2r4q3\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:06:29.411Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:06:29.411Z\"}",
-        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run tool end: runId=f3b67436-db98-4fc5-83ca-84fd27c6ce8b tool=web_fetch toolCallId=call_chd2r4q3\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:06:29.804Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:06:29.804Z\"}",
-        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run tool start: runId=7cf499b7-ec27-4b53-ad96-8abe9ae4d873 tool=read toolCallId=call_25zjyqop\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:06:30.775Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:06:30.775Z\"}",
-        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run tool end: runId=7cf499b7-ec27-4b53-ad96-8abe9ae4d873 tool=read toolCallId=call_25zjyqop\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:06:30.779Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:06:30.780Z\"}",
-        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run agent end: runId=7cf499b7-ec27-4b53-ad96-8abe9ae4d873 isError=false\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:06:43.527Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:06:43.527Z\"}",
-        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run prompt end: runId=7cf499b7-ec27-4b53-ad96-8abe9ae4d873 sessionId=06cee5fe-1c5d-4f3b-92fb-e1b306faf797 durationMs=48745\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:06:43.530Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:06:43.531Z\"}",
-        "{\"0\":\"{\\\"subsystem\\\":\\\"diagnostic\\\"}\",\"1\":\"run cleared: sessionId=06cee5fe-1c5d-4f3b-92fb-e1b306faf797 totalActive=1\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"diagnostic\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:06:43.535Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:06:43.535Z\"}",
         "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run done: runId=7cf499b7-ec27-4b53-ad96-8abe9ae4d873 sessionId=06cee5fe-1c5d-4f3b-92fb-e1b306faf797 durationMs=48768 aborted=false\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:06:43.538Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:06:43.538Z\"}",
         "{\"0\":\"{\\\"subsystem\\\":\\\"diagnostic\\\"}\",\"1\":\"lane task done: lane=main durationMs=48771 active=0 queued=0\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"diagnostic\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:06:43.541Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:06:43.541Z\"}",
-        "{\"0\":\"{\\\"subsystem\\\":\\\"diagnostic\\\"}\",\"1\":\"lane task done: lane=session:agent:main:main durationMs=48775 active=0 queued=0\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"diagnostic\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:06:43.543Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:06:43.543Z\"}"
+        "{\"0\":\"{\\\"subsystem\\\":\\\"diagnostic\\\"}\",\"1\":\"lane task done: lane=session:agent:main:main durationMs=48775 active=0 queued=0\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"diagnostic\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:06:43.543Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:06:43.543Z\"}",
+        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run tool start: runId=f3b67436-db98-4fc5-83ca-84fd27c6ce8b tool=web_fetch toolCallId=call_r2zigpnd\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:07:56.868Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:07:56.869Z\"}",
+        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run tool end: runId=f3b67436-db98-4fc5-83ca-84fd27c6ce8b tool=web_fetch toolCallId=call_r2zigpnd\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:07:57.092Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:07:57.093Z\"}",
+        "{\"0\":\"Error: gateway timeout after 600000ms\\nGateway target: ws://127.0.0.1:18789\\nSource: local loopback\\nConfig: /Users/zekezirk/.openclaw/openclaw.json\\nBind: loopback\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"openclaw\",\"date\":\"2026-02-22T04:08:12.125Z\",\"logLevelId\":5,\"logLevelName\":\"ERROR\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053:68\",\"fileName\":\"entry.js\",\"fileNameWithLine\":\"entry.js:2053\",\"fileColumn\":\"68\",\"fileLine\":\"2053\",\"filePath\":\"/Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js\",\"filePathWithLine\":\"/Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/entry.js:2053\",\"method\":\"console.error\"}},\"time\":\"2026-02-22T04:08:12.127Z\"}",
+        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run tool start: runId=f3b67436-db98-4fc5-83ca-84fd27c6ce8b tool=exec toolCallId=call_2xsy2r03\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:09:17.757Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:09:17.757Z\"}",
+        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run tool end: runId=f3b67436-db98-4fc5-83ca-84fd27c6ce8b tool=exec toolCallId=call_2xsy2r03\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:09:18.859Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:09:18.859Z\"}",
+        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run tool start: runId=f3b67436-db98-4fc5-83ca-84fd27c6ce8b tool=exec toolCallId=call_6tip6s9x\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:09:59.773Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:09:59.774Z\"}",
+        "{\"0\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"1\":\"embedded run tool end: runId=f3b67436-db98-4fc5-83ca-84fd27c6ce8b tool=exec toolCallId=call_6tip6s9x\",\"_meta\":{\"runtime\":\"node\",\"runtimeVersion\":\"24.13.0\",\"hostname\":\"unknown\",\"name\":\"{\\\"subsystem\\\":\\\"agent/embedded\\\"}\",\"parentNames\":[\"openclaw\"],\"date\":\"2026-02-22T04:10:00.020Z\",\"logLevelId\":2,\"logLevelName\":\"DEBUG\",\"path\":{\"fullFilePath\":\"file:///Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413:14\",\"fileName\":\"subsystem-CiM1FVu6.js\",\"fileNameWithLine\":\"subsystem-CiM1FVu6.js:413\",\"fileColumn\":\"14\",\"fileLine\":\"413\",\"filePath\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js\",\"filePathWithLine\":\"Users/zekezirk/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/dist/subsystem-CiM1FVu6.js:413\",\"method\":\"logToFile\"}},\"time\":\"2026-02-22T04:10:00.020Z\"}"
       ]
     }
   },
   "knowledge_graph": {
-    "entities": 118,
-    "relationships": 115,
+    "entities": 121,
+    "relationships": 117,
     "associations": 19,
     "insights": 0,
     "domains": {
       "treasury-bonds": 31,
+      "tool-calling": 23,
       "ai-agents": 21,
       "longevity": 20,
-      "tool-calling": 20,
       "cross-domain": 11,
       "self-improvement": 7,
       "cross-domain-associations": 2,
@@ -222,12 +224,12 @@
     "has_path_export": true,
     "job_ids_referenced": 6,
     "unique_job_ids": [
-      "fef48082-0a38-47f8-95e6-d23ad1a2fd95",
-      "0b8112f4-e671-4aa2-bdb1-c54f9007bd1c",
-      "6e8b2938-21a9-4bda-9b28-d6cc31f1ae0d",
-      "b60e529d-0109-4cf8-a245-847651b3fcc5",
       "e791b3d8-ab30-4a9e-894c-3ca00f9d05c0",
-      "70e6952b-350b-4413-818b-af20a9d02c2a"
+      "6e8b2938-21a9-4bda-9b28-d6cc31f1ae0d",
+      "0b8112f4-e671-4aa2-bdb1-c54f9007bd1c",
+      "fef48082-0a38-47f8-95e6-d23ad1a2fd95",
+      "70e6952b-350b-4413-818b-af20a9d02c2a",
+      "b60e529d-0109-4cf8-a245-847651b3fcc5"
     ]
   },
   "schedule_analysis": {
