@@ -1,42 +1,21 @@
 {
-  "timestamp_local": "2026-02-22 10:41:08 ET",
-  "timestamp_utc": "2026-02-22T15:41:08Z",
+  "timestamp_local": "2026-02-22 10:43:22 ET",
+  "timestamp_utc": "2026-02-22T15:43:22Z",
   "scheduler": {
     "running": true,
-    "pids": [
-      "36739"
-    ],
-    "count": 1,
-    "type": "python"
+    "pid": 36739,
+    "uptime_minutes": 23,
+    "current_window": "daytime"
   },
-  "processes": {
-    "scheduler": {
-      "running": true,
-      "pids": [
-        "36739"
-      ],
-      "count": 1
-    },
-    "guardian": {
-      "note": "cron every 60s"
-    },
-    "gateway": {
-      "running": true,
-      "pids": [
-        "36649",
-        "36909",
-        "36910"
-      ],
-      "count": 3
-    },
-    "status_push": {
-      "running": false,
-      "pids": [],
-      "count": 0
-    }
-  },
-  "gateway": {
-    "running": true
+  "feed": {
+    "total_lines": 258,
+    "last_entries": [
+      "[2026-02-22T10:05:00] treasury bonds and interest rates",
+      "[2026-02-20T00:00:00] treasury bonds and interest rates",
+      "[2026-02-22T15:30:06] longevity research",
+      "[2026-02-22T15:36:11] longevity research",
+      "[2026-02-22T15:39:44] longevity research"
+    ]
   },
   "spark": {
     "online": true,
@@ -46,38 +25,48 @@
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "loaded: qwen3-32b-32k:latest"
+    "detail": "healthy, loaded: qwen3-32b-32k:latest"
   },
-  "feed": {
-    "total_lines": 257,
-    "last_modified_minutes_ago": 3.4,
-    "last_entries": [
-      "[2026-02-22T10:00:00] treasury bonds and interest rates \u2014 No new developments found",
-      "[2026-02-22T10:05:00] treasury bonds and interest rates \u2014 TLT ETF closed at $89.41 on 2026-02-21 with 52-week range 83.30-94.09",
-      "[2026-02-20T00:00:00] treasury bonds and interest rates \u2014 US 20-year bond yield reached 4.67% on February 20, 2026 (0.02pt increase from p",
-      "[2026-02-22T15:30:06] longevity research \u2014 Mice engineered with COX7RP protein showed 6.6% longer lifespan, improved glucos",
-      "[2026-02-22T15:36:11] longevity research \u2014 2025 meta-analysis in Cureus shows autologous MSCs improve knee osteoarthritis ("
-    ],
-    "recent_50_clean": 34,
-    "recent_50_broken": 16
+  "gateway": {
+    "running": true
   },
-  "activity": {
-    "last_job": "longevity",
-    "last_job_time": "2026-02-22T10:28:19",
-    "last_cycle": "2026-02-22T10:20:00",
-    "jobs_today": 8,
-    "success_today": 1,
-    "timeout_today": 0,
-    "fail_today": 2,
-    "feed_growth_today": 3,
-    "state": "running cycle",
-    "next_cycle_est": null
+  "today": {
+    "jobs_run": 2,
+    "success": 1,
+    "timeout": 0,
+    "fail": 1,
+    "feed_growth": 3
   },
+  "cycles": [
+    {
+      "ts": "2026-02-22T10:43:22.467459",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 2,
+      "success": 1,
+      "timeout": 0,
+      "fail": 1,
+      "feed_grew": 3
+    }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 488,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "success",
+      "duration": 903,
+      "grew": 3,
+      "issues": []
+    }
+  ],
   "health": {
-    "status": "ISSUES_FOUND",
-    "issues": [
-      "WARNING: 16 broken entries in recent feed"
-    ],
-    "issue_count": 1
+    "status": "HEALTHY",
+    "issues": []
   }
 }
