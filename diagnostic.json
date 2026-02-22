@@ -1,44 +1,21 @@
 {
-  "timestamp_local": "2026-02-22 11:55:00 ET",
-  "timestamp_utc": "2026-02-22T16:55:00Z",
+  "timestamp_local": "2026-02-22 11:56:24 ET",
+  "timestamp_utc": "2026-02-22T16:56:24Z",
   "scheduler": {
     "running": true,
-    "pids": [
-      "37223",
-      "37331"
-    ],
-    "count": 2,
-    "type": "python"
+    "pid": 37331,
+    "uptime_minutes": 72,
+    "current_window": "daytime"
   },
-  "processes": {
-    "scheduler": {
-      "running": true,
-      "pids": [
-        "37223",
-        "37331"
-      ],
-      "count": 2
-    },
-    "guardian": {
-      "note": "cron every 60s"
-    },
-    "gateway": {
-      "running": true,
-      "pids": [
-        "36649",
-        "38410",
-        "38411"
-      ],
-      "count": 3
-    },
-    "status_push": {
-      "running": false,
-      "pids": [],
-      "count": 0
-    }
-  },
-  "gateway": {
-    "running": true
+  "feed": {
+    "total_lines": 269,
+    "last_entries": [
+      "[2026-02-22T16:06:00] longevity research",
+      "[2026-02-22T16:35:00] self-improvement and learning",
+      "[2026-02-22T16:35:00] self-improvement and learning",
+      "[2026-02-22T16:35:00] self-improvement and learning",
+      "[PARSE ERROR] {\"timestamp\":\"$(date -u +\"%Y-%m-%dT%H:%M:%SZ\"),\"topic\":\"self-improvement and lea"
+    ]
   },
   "spark": {
     "online": true,
@@ -48,36 +25,69 @@
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "loaded: qwen3-32b-32k:latest"
+    "detail": "healthy, loaded: qwen3-32b-32k:latest"
   },
-  "feed": {
-    "total_lines": 269,
-    "last_modified_minutes_ago": 9.6,
-    "last_entries": [
-      "[2026-02-22T16:06:00] longevity research \u2014 A 2026 PAI-1 gene mutation study in Amish populations found delayed aging and ch",
-      "[2026-02-22T16:35:00] self-improvement and learning \u2014 Orthonet 2026 study confirms deliberate practice with feedback and simulation ac",
-      "[2026-02-22T16:35:00] self-improvement and learning \u2014 Murray & H\u00e4ubl (2007) cognitive lock-in theory: Skill-based habits of use create",
-      "[2026-02-22T16:35:00] self-improvement and learning \u2014 No additional developments found",
-      "{\"timestamp\":\"$(date -u +\"%Y-%m-%dT%H:%M:%SZ\"),\"topic\":\"self-improvement and lea"
-    ],
-    "recent_50_clean": 42,
-    "recent_50_broken": 8
+  "gateway": {
+    "running": true
   },
-  "activity": {
-    "last_job": "compound-synthesis",
-    "last_job_time": "2026-02-22T11:51:28",
-    "last_cycle": "2026-02-22T10:44:00",
-    "jobs_today": 28,
-    "success_today": 8,
-    "timeout_today": 1,
-    "fail_today": 2,
-    "feed_growth_today": 24,
-    "state": "sleeping 10800s",
-    "next_cycle_est": "14:51"
+  "today": {
+    "jobs_run": 5,
+    "success": 3,
+    "timeout": 0,
+    "fail": 1,
+    "feed_growth": 11
   },
+  "cycles": [
+    {
+      "ts": "2026-02-22T11:56:24.331945",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 5,
+      "success": 3,
+      "timeout": 0,
+      "fail": 1,
+      "feed_grew": 11
+    }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "empty",
+      "duration": 679,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "success",
+      "duration": 903,
+      "grew": 3,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "success",
+      "duration": 903,
+      "grew": 3,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 903,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "bad_output",
+      "duration": 902,
+      "grew": 2,
+      "issues": []
+    }
+  ],
   "health": {
     "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
+    "issues": []
   }
 }
