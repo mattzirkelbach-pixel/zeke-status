@@ -1,8 +1,7 @@
 {
-  "timestamp": "2026-02-22T12:00:00.785575+00:00",
-  "feed_lines": 231,
+  "timestamp": "2026-02-22T12:10:00.876698+00:00",
+  "feed_lines": 232,
   "recent_feed": [
-    "2026-02-22T07:54:27Z | insight | tool-calling | 3 new model entries added (qwen3-32b-32k, DeepSeek V3.2 Speciale, Kimi K2.5) and NVIDIA local RTX deployment guide | tools=[web_search,web_fetch,exec] | source=2026-02-22T07:49:36Z-learning.jsonl",
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"treasury-bonds\",\"insights\":[\"10-year Treasury yield at 4.08% (Seeking Alpha)\",\"Sun Life reduced TLT holdings 84.1% (Dailypolitical)\",\"Disciplina raised TLT holdings 2.1% (MarketsDaily)\",\"Institutional TLT ownership 73.33% (Dailypolitical)\",\"MOVE index data missing as of 2026-02-22\"],\"tools_used\":[\"web_search\",\"web_fetch\",\"exec\"],\"files_updated\":[\"memory/learning-feed.jsonl\",\"memory/knowledge.db\"]}",
     "{\"timestamp\":\"$$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"self-improvement\",\"insights\":[\"No new developments\"],\"tools_used\":[\"web_search\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"longevity\",\"insights\":[\"Metformin blunts exercise benefits including vascular insulin sensitivity (per Journal of Clinical Endocrinology & Metabolism),\"No new NAD+ precursor RCT data found in ClinicalTrials.gov for 2026\"],\"tools_used\":[\"web_search\",\"web_fetch\",\"exec\"],\"files_updated\":[\"memory/learning-feed.jsonl\",\"memory/knowledge.db\"]}",
@@ -16,7 +15,8 @@
     "{\"timestamp\":\"2026-02-22T11:42:00Z\",\"topic\":\"treasury bonds and interest rates\",\"finding\":\"BlackRock TLT ETF NAV is $89.37 (Feb 20, 2026) with 52-week range $83.91-$92.87\",\"source\":\"https://www.blackrock.com/us/individual/products/239454/ishares-20-year-treasury-bond-etf\"}",
     "{\"timestamp\":\"2026-02-22T11:42:00Z\",\"topic\":\"treasury bonds and interest rates\",\"finding\":\"Federal Reserve maintained 3.5-3.75% key rate in Jan 2026 decision\",\"source\":\"https://www.cnbc.com/2026/01/28/fed-rate-decision-january-2026.html\"}",
     "{\"timestamp\":\"2026-02-22T11:42:00Z\",\"topic\":\"treasury bonds and interest rates\",\"finding\":\"Fidelity analysis predicts normal yield curves (long-term > short-term) by 2026\",\"source\":\"https://www.fidelity.com/learning-center/trading-investing/bond-market-outlook\"}",
-    "{\"timestamp\":\"2026-02-22T11:42:00Z\",\"topic\":\"treasury bonds and interest rates\",\"finding\":\"Schwab forecasts solid 2026 returns for bonds due to central bank rate cuts\",\"source\":\"https://www.schwab.com/learn/story/fixed-income-outlook\"}"
+    "{\"timestamp\":\"2026-02-22T11:42:00Z\",\"topic\":\"treasury bonds and interest rates\",\"finding\":\"Schwab forecasts solid 2026 returns for bonds due to central bank rate cuts\",\"source\":\"https://www.schwab.com/learn/story/fixed-income-outlook\"}",
+    "\"timestamp\":\"2026-02-21T18:00:00Z\", \"topic\":\"treasury bonds and interest rates\", \"finding\":\"TLT ETF closed at $89.41 on 2026-02-21 (Investing.com). Previous close: $89.62. NAV as of Feb 20, 2026 was $89.37 (BlackRock).\", \"source\":\"https://www.investing.com/etfs/ishares-lehman-20-year-treas,https://www.blackrock.com/us/individual/products/239454/ishares-20-year-treasury-bond-etf"
   ],
   "kg_stats": "Entities: 164\nRelationships: 161\nAssociations: 19\nInsights: 0\nDomains: {\n  \"tool-calling\": 40,\n  \"treasury-bonds\": 40,\n  \"ai-agents\": 31,\n  \"longevity\": 21,\n  \"cross-domain\": 13,\n  \"self-improvement\": 9,\n  \"Longevity\": 2,\n  \"cross-domain-associations\": 2,\n  \"local model inference\": 2,\n  \"treasury\": 2,\n  \"treasury-bounds\": 2\n}",
   "last_synthesis": "daily-synthesis-2026-02-21.md",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 63.0,
-    "power_w": 37.8,
+    "temp_c": 64.0,
+    "power_w": 41.35,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -113,7 +113,7 @@
     }
   },
   "gateway_process": {
-    "pid": "18638\n31539\n31546",
+    "pid": "18638\n32033\n32034",
     "memory_pct": "",
     "uptime": "",
     "status": "RUNNING"
@@ -122,18 +122,26 @@
     "status": "ONLINE",
     "loaded_models": [
       {
+        "name": "qwen3:8b",
+        "size_gb": 6.0
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "size_gb": 0.6
+      },
+      {
         "name": "qwen3-32b-32k:latest",
         "size_gb": 29.1
       }
     ]
   },
   "feed_quality": {
-    "malformed_json": 11,
+    "malformed_json": 12,
     "literal_timestamps": 26,
     "duplicates": 22,
     "no_new_dev": 14,
-    "total": 231,
-    "error_rate": 25.5
+    "total": 232,
+    "error_rate": 25.9
   },
   "crontab_status": {
     "total_entries": 11,
