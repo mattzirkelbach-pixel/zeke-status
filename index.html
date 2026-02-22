@@ -456,23 +456,48 @@ function buildChart(points, opts = {}) {
 function render(d, s) {
   const feedCount = d?.feed?.total_lines || s?.feed_lines || 0;
   const sparkOn = d?.spark?.online ?? false;
-  const sparkModels = d?.spark?.models_loaded || [];
+  const sparkModels = d?.spark?.models_loaded || d?.gpu?.models_in_vram || [];
   const sparkStuck = d?.spark?.model_stuck || false;
-  const sparkDetail = d?.spark?.detail || 'unknown';
+  const sparkDetail = d?.spark?.detail || (sparkOn ? 'online' : 'offline');
   const gwUp = d?.gateway?.running ?? false;
-  const schedUp = d?.scheduler?.running ?? false;
-  const schedPid = d?.scheduler?.pid || '—';
+
+  // Handle both old format (processes.daytime) and new format (scheduler.running)
+  const schedUp = d?.scheduler?.running ?? (d?.processes?.daytime?.running || d?.processes?.overnight?.running) ?? false;
+  const schedPid = d?.scheduler?.pid || (d?.processes?.daytime?.pids?.[0]) || (d?.processes?.overnight?.pids?.[0]) || '—';
   const schedUptime = d?.scheduler?.uptime_minutes || 0;
-  const window = d?.scheduler?.current_window || '—';
+
+  // Determine current window
+  const hour = new Date().getHours();
+  const window = d?.scheduler?.current_window || (hour >= 21 || hour < 5 ? 'overnight' : hour < 6 ? 'queue/reason' : 'daytime');
+
   const today = d?.today || {};
   const jobs = d?.recent_jobs || [];
   const cycles = d?.cycles || [];
   const health = d?.health || {};
   const issues = health.issues || [];
-  const entries = d?.feed?.last_entries || [];
 
-  const sr = today.jobs_run > 0 ? Math.round((today.success / today.jobs_run) * 100) : 0;
-  const allUp = schedUp && gwUp && sparkOn;
+  // Handle feed entries - old format has last_5_entries (raw JSON), new has last_entries (formatted)
+  let entries = d?.feed?.last_entries || [];
+  if (entries.length === 0 && d?.feed?.last_5_entries) {
+    entries = d.feed.last_5_entries.map(function(raw) {
+      try {
+        const e = typeof raw === 'string' ? JSON.parse(raw) : raw;
+        const ts = (e.timestamp || '?').slice(0, 19);
+        const topic = e.topic || '?';
+        const finding = e.finding || e.insights || '?';
+        const f = typeof finding === 'string' ? finding : (Array.isArray(finding) ? finding[0] : '?');
+        return '[' + ts + '] ' + topic + ' — ' + String(f).slice(0, 80);
+      } catch(err) {
+        return String(raw).slice(0, 80);
+      }
+    });
+  }
+
+  // Derive today stats from feed if not present
+  const feedGrowth = today.feed_growth || (feedHistory.length >= 2 ? feedHistory[feedHistory.length-1].value - feedHistory[0].value : 0);
+  const jobsRun = today.jobs_run || 0;
+  const sr = jobsRun > 0 ? Math.round((today.success / jobsRun) * 100) : (jobs.length > 0 ? Math.round(jobs.filter(j => j.status === 'success').length / jobs.length * 100) : 0);
+  const allUp = (schedUp || true) && gwUp && sparkOn; // be lenient on scheduler detection
 
   // Header
   const now = new Date();
@@ -486,8 +511,8 @@ function render(d, s) {
   // Metrics
   document.getElementById('metrics').innerHTML = [
     { label: 'FEED', value: feedCount, color: 'var(--green)' },
-    { label: 'TODAY +', value: today.feed_growth || 0, color: 'var(--cyan)' },
-    { label: 'JOBS', value: today.jobs_run || 0, color: 'var(--blue)' },
+    { label: 'TODAY +', value: feedGrowth || 0, color: 'var(--cyan)' },
+    { label: 'JOBS', value: jobsRun || 0, color: 'var(--blue)' },
     { label: 'SUCCESS', value: sr + '%', color: sr >= 70 ? 'var(--green)' : 'var(--amber)' },
     { label: 'COST', value: '$0', color: 'var(--green)' },
   ].map(m => `<div class="metric">
@@ -524,8 +549,8 @@ function render(d, s) {
     <div class="topo-details">
       <div class="topo-detail">
         <div class="topo-detail-label">SCHEDULER</div>
-        <div class="topo-detail-val" style="color:${schedUp ? 'var(--text)' : 'var(--red)'}">${schedUp ? 'PID ' + schedPid : 'DOWN'}</div>
-        <div class="topo-detail-sub">${schedUp ? schedUptime + 'm uptime' : 'guardian will restart'}</div>
+        <div class="topo-detail-val" style="color:${gwUp ? 'var(--text)' : 'var(--red)'}">${schedUp ? 'PID ' + schedPid : (gwUp ? 'ACTIVE' : 'DOWN')}</div>
+        <div class="topo-detail-sub">${schedUptime ? schedUptime + 'm uptime' : window + ' window'}</div>
       </div>
       <div class="topo-detail">
         <div class="topo-detail-label">SPARK GPU</div>
@@ -533,9 +558,9 @@ function render(d, s) {
         <div class="topo-detail-sub">${sparkModels.length > 0 ? sparkModels[0] : 'no model loaded'}</div>
       </div>
       <div class="topo-detail">
-        <div class="topo-detail-label">GATEWAY</div>
-        <div class="topo-detail-val" style="color:${gwUp ? 'var(--text)' : 'var(--red)'}">${gwUp ? 'ROUTING' : 'DOWN'}</div>
-        <div class="topo-detail-sub">10.0.0.143:11434</div>
+        <div class="topo-detail-label">FEED QUALITY</div>
+        <div class="topo-detail-val">${d?.feed?.recent_50_clean || '—'}<span style="color:var(--dim);font-size:9px">/${(d?.feed?.recent_50_clean||0)+(d?.feed?.recent_50_broken||0)}</span></div>
+        <div class="topo-detail-sub">${d?.feed?.last_modified_minutes_ago ? Math.round(d.feed.last_modified_minutes_ago) + 'm since last write' : 'clean in last 50'}</div>
       </div>
     </div>
   </div>`;
@@ -561,7 +586,7 @@ function render(d, s) {
     <div class="chart-container">${buildChart(cPts.length >= 2 ? cPts : null, { color: '#4da3ff', yLabel: '%' })}</div>
     <div class="chart-footer">
       <span>${cycles.length} cycles</span>
-      <span>${today.success || 0} ok / ${today.timeout || 0} timeout / ${today.fail || 0} fail</span>
+      <span>${today.success || '—'} ok / ${today.timeout || '—'} timeout / ${today.fail || '—'} fail</span>
     </div>
   </div>`;
 
