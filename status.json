@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-22T11:40:00.257543+00:00",
+  "timestamp": "2026-02-22T11:50:00.207926+00:00",
   "feed_lines": 227,
   "recent_feed": [
     "{\"timestamp\": \"2026-02-22T05:48:41Z\", \"topic\": \"longevity\", \"insights\": [\"No new developments\"], \"tools_used\": [\"web_search\"], \"files_updated\": [\"memory/learning-feed.jsonl\"]}",
@@ -27,7 +27,7 @@
     "status": "OK",
     "gpu_util_pct": 95.0,
     "temp_c": 63.0,
-    "power_w": 36.67,
+    "power_w": 37.6,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -113,9 +113,9 @@
     }
   },
   "gateway_process": {
-    "pid": "18638",
-    "memory_pct": "2.0",
-    "uptime": "09:24:08",
+    "pid": "18638\n31335\n31336\n31539\n31546",
+    "memory_pct": "",
+    "uptime": "",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -136,8 +136,8 @@
     "error_rate": 24.2
   },
   "crontab_status": {
-    "total_entries": 9,
-    "active": 6,
+    "total_entries": 11,
+    "active": 7,
     "disabled_for_maint": 0,
     "has_queue": true,
     "has_overnight": true,
@@ -214,6 +214,6 @@
     "Nested sessions share runtime resources and will crash all active sessions.",
     "To bypass this check, unset the CLAUDECODE environment variable."
   ],
-  "cron_job_count": 6,
+  "cron_job_count": 7,
   "strategic_context": "# Claude Strategic Context \u2014 Zeke Ecosystem\n\nLast updated: 2026-02-21T15:30:00Z\nPurpose: Claude's extended memory. Captures decisions, mistakes, principles, and Matt's patterns so every conversation starts informed.\n\n## Matt's Core Values\n- Never ask questions with obvious answers \u2014 make the safe/obvious choice automatically\n- Anticipate 2 steps ahead. If something will be needed, build it now\n- One complete paste block per task. Never split. Never ask \"should I?\"\n- Operational requirements BEFORE features (permissions, monitoring, error handling, self-healing)\n- Longitudinal data over snapshots \u2014 show progression over time\n- Push shareworthy things to Telegram automatically. Never push routine status.\n- Be concise. Don't describe what you built \u2014 let output speak.\n- Matt is a strategist, not an engineer. Minimize cognitive load.\n- Never touch running processes. If pipeline is active, only modify dashboard/monitoring.\n- When presenting options, choose the safe default. Only ask if genuinely ambiguous.\n\n## What's Actually Deployed (verify via endpoints, don't trust static numbers)\n- Pipeline: ~/zeke-queue.sh (GATHER x6 \u2192 EXTRACT \u2192 ASSOCIATE, 900s timeout per job)\n- Reasoning: ~/zeke-reason.sh (Claude Code Opus, 9 tasks including self-heal + ops-status)\n- Dashboard: ~/zeke-dashboard-server.py port 3333, ~/zeke-dashboard.html, launchd plist\n- Status bridge: ~/zeke-status/build-status.py + history.jsonl, GitHub push every 10min\n- Cloudflare tunnel: running but EPHEMERAL \u2014 dies on reboot, URL changes. Needs launchd plist.\n- Crontab: 11pm queue, 7am reasoning, every 10min status push\n- 29 old Sonnet cron jobs still active \u2014 don't disable until 2 successful autonomous cycles\n- byProvider: spark/qwen3-32b-32k has 6 tools (exec, read, write, web_search, memory_search, web_fetch). Memory says remove write but verify actual openclaw.json before changing.\n- Claude Code permissions: ~/.claude/settings.json allows all, --dangerously-skip-permissions in headless scripts\n\n## Decision History (with rationale)\n- Local models limited to 6 tools \u2014 param mangling above ~6\n- Local models overwrite files \u2014 use exec with >> append only (write tool removal TBD verify)\n- delivery.mode \"none\" not \"announce\" \u2014 announce without targets causes system failures\n- 900s timeout up from 600s \u2014 treasury-bonds succeeds at 893s\n- Self-improvement prompt rewritten to specific terms after 6 consecutive dry runs\n- Timestamp $(date) literals replaced with natural language instruction in 12 job prompts\n- GitHub status bridge chosen over Gist \u2014 raw.githubusercontent.com has 3-5min CDN cache\n- Sequential pipeline, not parallel \u2014 Spark loads one model at a time efficiently\n- Hybrid arch: Spark ($0) GATHER/EXTRACT/ASSOCIATE, Claude Code CLI ($0 on Max sub) REASON/SELF-HEAL\n- KG uses SQLite + nomic-embed-text, 0.92 cosine similarity dedup threshold\n\n## Mistakes Made (principles extracted)\n- STATELESS: Claude Code has zero memory between sessions. Every prompt must read existing files first, th"
 }
