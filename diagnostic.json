@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-22 3:10:00PM ET",
-  "timestamp_utc": "2026-02-22T20:10:00Z",
+  "timestamp_local": "2026-02-22 3:15:00PM ET",
+  "timestamp_utc": "2026-02-22T20:15:00Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -16,45 +16,46 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3-32b-32k:latest"
+      "qwen3-32b-32k:latest",
+      "qwen3:8b"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 48ms",
-    "response_ms": 48,
-    "vram_estimate_gb": 27.1,
-    "model_params": "32.8B",
+    "detail": "qwen3-32b-32k:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 56ms",
+    "response_ms": 56,
+    "vram_estimate_gb": 5.6,
+    "model_params": "8.2B",
     "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 289,
-    "last_modified_minutes_ago": 1.5,
+    "total_lines": 295,
+    "last_modified_minutes_ago": 3.0,
     "last_entries": [
-      "[2/22 3:01PM ET] treasury bonds and interest rates \u2014 2025 rate cut expectations continue despite higher-than-expected 10-Year Treasur",
-      "{\"timestamp\":\"2026-02-22T20:01:15Z\",\"topic\":\"treasury bonds and interest rates\",",
-      "[2/22 3:01PM ET] treasury bonds and interest rates \u2014 Confirmed 3.02% TLT price drop on April 7, 2025 and 4.49% 10-Year yield",
-      "[2/22 3:02PM ET] treasury bonds and interest rates \u2014 Persistent 4.49% 10-Year Treasury yield despite Fed Funds Futures pricing in 3/2",
-      "{\"timestamp\":\"2026-02-22T20:02:15Z\",\"topic\":\"treasury bonds and interest rates\","
+      "[2/22 3:03PM ET] treasury bonds and interest rates \u2014 Rate cut expectations persist despite 4.49% yield",
+      "{\"timestamp\":\"2026-02-22T20:04:00Z\",\"topic\":\"treasury bonds and interest rates\",",
+      "[2/22 3:04PM ET] treasury bonds and interest rates \u2014 April 7, 2025 TLT decline (3.02%) and 10-Year yield at 4.49% validated",
+      "[2/22 3:04PM ET] treasury bonds and interest rates \u2014 4.49% yield persists despite market expectations for 3/2025 Fed rate cuts",
+      "[2/22 3:04PM ET] treasury bonds and interest rates \u2014 Diminished safe-haven demand for TLT confirmed by January 9, 2026 analysis"
     ],
     "recent_50_clean": 35,
-    "recent_50_trivial": 10,
-    "recent_50_broken": 5,
+    "recent_50_trivial": 9,
+    "recent_50_broken": 6,
     "topic_distribution": {
-      "treasury bonds and interest rates": 25,
+      "treasury bonds and interest rates": 27,
       "longevity research": 9,
-      "compound-synthesis": 7,
-      "self-improvement and learning": 4
+      "compound-synthesis": 5,
+      "self-improvement and learning": 3
     }
   },
   "activity": {
-    "last_job": "longevity",
-    "last_job_time": "2/22 9:57AM ET",
+    "last_job": "ai-agents",
+    "last_job_time": "2/22 10:12AM ET",
     "last_cycle": "2/22 9:56AM ET",
-    "jobs_today": 13,
-    "success_today": 8,
+    "jobs_today": 15,
+    "success_today": 10,
     "timeout_today": 1,
     "fail_today": 4,
-    "feed_growth_today": 24,
+    "feed_growth_today": 63,
     "state": "running",
     "next_cycle_est": "9:56AM",
     "cycle_count": 7,
@@ -251,6 +252,11 @@
       "t": 1771791000589,
       "v": 289,
       "l": "3:10PM"
+    },
+    {
+      "t": 1771791300343,
+      "v": 295,
+      "l": "3:15PM"
     }
   ],
   "cost": {
@@ -348,8 +354,10 @@
     }
   },
   "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "WARNING: 6 broken entries in recent feed"
+    ],
+    "issue_count": 1
   }
 }
