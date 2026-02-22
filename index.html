@@ -3,629 +3,682 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zeke — Mission Control</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Zeke Mission Control</title>
 <style>
-:root {
-  --bg: #08090d;
-  --surface: rgba(255,255,255,0.025);
-  --glass: rgba(255,255,255,0.04);
-  --border: rgba(255,255,255,0.06);
-  --border-h: rgba(255,255,255,0.12);
-  --text: rgba(255,255,255,0.9);
-  --t2: rgba(255,255,255,0.5);
-  --t3: rgba(255,255,255,0.25);
-  --cyan: #22d3ee;
-  --cyan-g: rgba(34,211,238,0.15);
-  --green: #34d399;
-  --green-g: rgba(52,211,153,0.12);
-  --amber: #fbbf24;
-  --amber-g: rgba(251,191,36,0.12);
-  --red: #f87171;
-  --red-g: rgba(248,113,113,0.12);
-  --purple: #a78bfa;
-  --blue: #60a5fa;
-  --r: 14px;
-  --head: 'Outfit', sans-serif;
-  --mono: 'JetBrains Mono', monospace;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--head);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-body::before{content:'';position:fixed;inset:0;background:
-  radial-gradient(ellipse 80% 50% at 15% 15%, rgba(34,211,238,0.035) 0%, transparent 50%),
-  radial-gradient(ellipse 60% 40% at 85% 80%, rgba(167,139,250,0.035) 0%, transparent 50%);
-  pointer-events:none;z-index:0}
-.wrap{max-width:1440px;margin:0 auto;padding:16px 20px;position:relative;z-index:1}
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
-.hdr{display:flex;justify-content:space-between;align-items:center;padding:8px 0 20px}
-.logo{display:flex;align-items:center;gap:12px}
-.logo-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:15px;color:#000;box-shadow:0 0 16px rgba(34,211,238,0.2)}
-.logo-text{font-size:20px;font-weight:600;letter-spacing:-0.02em}
-.logo-sub{font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px}
-.hdr-right{display:flex;align-items:center;gap:12px}
-.hdr-pill{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:16px;background:var(--glass);border:1px solid var(--border);font-family:var(--mono);font-size:10px;color:var(--t2);backdrop-filter:blur(12px)}
-.hdr-dot{width:6px;height:6px;border-radius:50%;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 4px currentColor}50%{opacity:.35;box-shadow:none}}
-.cost-pill{background:var(--green-g);color:var(--green);border-color:rgba(52,211,153,0.2);font-weight:600}
-.hdr-ts{font-family:var(--mono);font-size:9px;color:var(--t3)}
+  :root {
+    --bg: #08090a;
+    --surface: #111214;
+    --surface-alt: #161819;
+    --raised: #1c1d1f;
+    --border: #222426;
+    --border-dim: #1a1b1d;
+    --text: #e4e5e7;
+    --muted: #7a7d82;
+    --dim: #454750;
+    --green: #2dd4a0;
+    --green-dim: #0d3d30;
+    --amber: #f0b429;
+    --amber-dim: #3d2e0a;
+    --red: #e5484d;
+    --red-dim: #3d1214;
+    --blue: #4da3ff;
+    --blue-dim: #152640;
+    --purple: #9d8cff;
+    --cyan: #22d3ee;
+    --mono: 'JetBrains Mono', 'SF Mono', 'Menlo', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  }
 
-.grid{display:grid;grid-template-columns:300px 1fr 1fr;gap:12px}
-@media(max-width:1200px){.grid{grid-template-columns:1fr 1fr}}
-@media(max-width:700px){.grid{grid-template-columns:1fr}}
-.span2{grid-column:span 2}
-@media(max-width:1200px){.span2{grid-column:span 2}}
-@media(max-width:700px){.span2{grid-column:span 1}}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-.card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--r);padding:16px;transition:border-color .3s,transform .2s,box-shadow .3s;position:relative;overflow:hidden}
-.card:hover{border-color:var(--border-h);transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,0.25)}
-.card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 10%,rgba(255,255,255,0.05) 50%,transparent 90%)}
-.clbl{font-family:var(--mono);font-size:8.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--t3);margin-bottom:12px;display:flex;align-items:center;gap:6px}
-.clbl .d{width:4px;height:4px;border-radius:50%}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    padding: 20px 24px;
+    max-width: 940px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
 
-/* Autonomy */
-.autonomy{grid-row:span 2;display:flex;flex-direction:column;align-items:center;padding:20px 16px;overflow:visible}
-.autonomy::before{content:'';position:absolute;inset:-30px;background:radial-gradient(ellipse at center,rgba(34,211,238,0.035),transparent 70%);pointer-events:none;border-radius:24px}
-.ring-w{position:relative;width:200px;height:200px;margin:4px 0 16px}
-.ring-w svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring-c{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-.ring-n{font-family:var(--mono);font-size:42px;font-weight:700;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.ring-l{font-size:10px;color:var(--t2);margin-top:3px}
-.ms{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);width:100%}
-.ms:last-child{border:none}
-.ms-ck{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0}
-.ms-ok{background:var(--green-g);color:var(--green);border:1px solid rgba(52,211,153,0.35)}
-.ms-go{background:var(--cyan-g);color:var(--cyan);border:1px solid rgba(34,211,238,0.35);animation:pulse 2s ease-in-out infinite}
-.ms-no{background:var(--surface);color:var(--t3);border:1px solid var(--border)}
-.ms-inf{flex:1;min-width:0}
-.ms-nm{font-size:11px;font-weight:500}
-.ms-sb{font-size:9px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ms-sc{font-family:var(--mono);font-size:9px;color:var(--t3);flex-shrink:0}
-.ms-why{font-size:8px;color:var(--t3);margin-top:1px;font-style:italic}
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  @keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 4px var(--green); }
+    50% { box-shadow: 0 0 10px var(--green), 0 0 20px rgba(45,212,160,0.2); }
+  }
 
-/* Metrics */
-.big{font-family:var(--mono);font-weight:700;font-size:34px;letter-spacing:-0.03em;line-height:1}
-.med{font-family:var(--mono);font-weight:600;font-size:22px;line-height:1}
-.sml{font-size:10px;color:var(--t3);margin-top:3px}
-.mrow{display:flex;gap:20px;flex-wrap:wrap}
-.delta{font-family:var(--mono);font-size:10px;margin-left:4px;vertical-align:middle}
-.dup{color:var(--green)}.ddn{color:var(--red)}
+  .header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    animation: fadeUp 0.5s ease;
+  }
+  .header h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+  .header-sub {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--dim);
+    margin-top: 2px;
+  }
 
-/* Sparkline with axis */
-.spk-outer{margin-top:10px}
-.spk{height:44px;position:relative;cursor:crosshair;margin:0 28px 0 0}
-.spk canvas{width:100%;height:100%;display:block}
-.spk-tip{position:absolute;padding:3px 7px;background:rgba(0,0,0,0.9);border:1px solid var(--border-h);border-radius:5px;font-family:var(--mono);font-size:9px;pointer-events:none;opacity:0;transition:opacity .1s;white-space:nowrap;z-index:10;top:-22px}
-.spk-axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:2px;padding-right:28px}
-.spk-ymax{position:absolute;right:0;top:0;font-family:var(--mono);font-size:7px;color:var(--t3)}
-.spk-ymin{position:absolute;right:0;bottom:0;font-family:var(--mono);font-size:7px;color:var(--t3)}
+  .indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--muted);
+  }
+  .indicator .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .dot-up { background: var(--green); animation: dotPulse 2s infinite; }
+  .dot-warn { background: var(--amber); }
+  .dot-down { background: var(--red); }
+  .dot-off { background: var(--dim); }
 
-/* GPU gauge */
-.gw{display:flex;align-items:center;gap:16px}
-.gr{width:80px;height:80px;position:relative;flex-shrink:0}
-.gr svg{width:100%;height:100%}
-.gr-c{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-weight:700;font-size:18px}
-.gs{flex:1}
-.gs-r{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:10px}
-.gs-r:last-child{border:none}
-.gs-r span:first-child{color:var(--t3)}
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+    animation: fadeUp 0.5s ease 0.05s both;
+  }
+  .metric {
+    padding: 12px 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-align: center;
+  }
+  .metric-val {
+    font-size: 24px;
+    font-family: var(--mono);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .metric-label {
+    font-size: 8px;
+    font-family: var(--mono);
+    color: var(--dim);
+    margin-top: 5px;
+    letter-spacing: 0.1em;
+  }
 
-/* Domain bars */
-.dm{display:flex;align-items:center;gap:8px;margin:4px 0;cursor:default;padding:1px 0;transition:opacity .2s}
-.dm:hover{opacity:1!important}
-.dm-n{font-family:var(--mono);font-size:9px;color:var(--t3);width:90px;text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dm-b{flex:1;height:8px;background:rgba(255,255,255,0.025);border-radius:4px;overflow:hidden}
-.dm-f{height:100%;border-radius:4px;transition:width .8s cubic-bezier(.4,0,.2,1)}
-.dm-v{font-family:var(--mono);font-size:9px;color:var(--t3);width:24px;text-align:right}
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    animation: fadeUp 0.5s ease 0.1s both;
+  }
 
-/* Feed preview */
-.fp{max-height:200px;overflow-y:auto;margin-top:8px}
-.fp::-webkit-scrollbar{width:3px}
-.fp::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.fp-e{padding:6px 0;border-bottom:1px solid var(--border);cursor:default;transition:background .2s;border-radius:3px}
-.fp-e:last-child{border:none}
-.fp-e:hover{background:rgba(255,255,255,0.02)}
-.fp-h{display:flex;justify-content:space-between;align-items:center}
-.fp-topic{font-family:var(--mono);font-size:8px;color:var(--cyan);text-transform:uppercase;letter-spacing:.04em}
-.fp-ts{font-family:var(--mono);font-size:7px;color:var(--t3)}
-.fp-f{font-size:10px;color:var(--t2);margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.fp-src{font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.fp-src a{color:var(--t3);text-decoration:none}
-.fp-src a:hover{color:var(--cyan)}
-.fp-empty{font-size:10px;color:var(--t3);padding:20px 0;text-align:center}
+  .card {
+    padding: 16px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .card-wide { grid-column: 1 / -1; }
+  .card-title {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-family: var(--mono);
+  }
 
-/* Quality grid */
-.qg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
-.qi{text-align:center;padding:8px 4px;border-radius:8px;background:var(--surface);transition:transform .2s}
-.qi:hover{transform:scale(1.04)}
-.qi-v{font-family:var(--mono);font-size:16px;font-weight:600}
-.qi-l{font-size:8px;color:var(--t3);margin-top:2px}
+  /* Topology */
+  .topo-nodes {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 14px;
+    padding: 8px 0;
+  }
+  .topo-node {
+    padding: 12px 14px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+  }
+  .topo-node-label {
+    font-size: 11px;
+    font-family: var(--mono);
+    font-weight: 600;
+    color: var(--text);
+  }
+  .topo-node-sub {
+    font-size: 8px;
+    font-family: var(--mono);
+    color: var(--dim);
+    margin-top: 2px;
+  }
+  .topo-node .dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .topo-arrow {
+    text-align: center;
+    color: var(--dim);
+    font-size: 16px;
+    padding: 0 6px;
+    position: relative;
+  }
+  .topo-arrow.active { color: var(--green); }
+  .topo-arrow.active::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+    transform: translate(-50%, -50%);
+  }
 
-/* Jobs */
-.jr{display:flex;align-items:center;gap:6px;padding:5px 3px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:9px;cursor:default;transition:background .2s;border-radius:3px;position:relative}
-.jr:last-child{border:none}
-.jr:hover{background:rgba(255,255,255,0.02)}
-.jr-d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.jr-n{color:var(--t2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.jr-t{color:var(--t3);width:48px;text-align:right;font-size:8px}
-.jr-du{color:var(--t3);width:36px;text-align:right}
-.jr-err{display:none;position:absolute;bottom:100%;left:20px;right:20px;padding:6px 8px;background:rgba(20,0,0,0.95);border:1px solid var(--red);border-radius:6px;font-size:9px;color:var(--red);z-index:20;white-space:normal;line-height:1.4}
-.jr:hover .jr-err{display:block}
+  .topo-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .topo-detail {
+    padding: 8px 10px;
+    background: var(--surface-alt);
+    border-radius: 8px;
+  }
+  .topo-detail-label {
+    font-size: 9px;
+    font-family: var(--mono);
+    color: var(--dim);
+    margin-bottom: 3px;
+  }
+  .topo-detail-val {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--text);
+  }
+  .topo-detail-sub {
+    font-size: 9px;
+    font-family: var(--mono);
+    color: var(--dim);
+  }
 
-/* Schedule */
-.sched-wrap{margin-top:6px}
-.sched{position:relative;height:24px;margin:0}
-.sched-bg{position:absolute;left:0;right:0;height:6px;top:9px;background:rgba(255,255,255,0.025);border-radius:3px}
-.sched-seg{position:absolute;height:6px;top:9px;border-radius:3px;transition:opacity .3s}
-.sched-seg:hover{opacity:1!important}
-.sched-now{position:absolute;width:2px;height:16px;background:var(--text);top:4px;border-radius:1px;z-index:3;box-shadow:0 0 4px rgba(255,255,255,0.3)}
-.sched-lbl{position:absolute;top:9px;font-family:var(--mono);font-size:7px;pointer-events:none;transform:translateY(10px)}
-.sched-times{display:flex;justify-content:space-between;font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:4px}
-.sched-legend{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap}
-.sched-leg{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:8px;color:var(--t3)}
-.sched-leg-dot{width:6px;height:6px;border-radius:2px}
+  /* Chart */
+  .chart-container { position: relative; }
+  .chart-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 9px;
+    font-family: var(--mono);
+    color: var(--dim);
+  }
 
-/* System grid */
-.sg{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
-.si{font-family:var(--mono);font-size:9px;color:var(--t3);display:flex;justify-content:space-between;padding:2px 0}
-.si span:last-child{color:var(--t2)}
+  /* Jobs */
+  .job-row {
+    display: grid;
+    grid-template-columns: 95px 1fr 55px 20px;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border-dim);
+  }
+  .job-name {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--muted);
+  }
+  .job-bar-bg {
+    height: 14px;
+    background: var(--surface-alt);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .job-bar {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+  .job-meta {
+    font-size: 9px;
+    font-family: var(--mono);
+    color: var(--dim);
+    text-align: right;
+  }
 
-/* Log */
-.log{font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.5;max-height:110px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;padding:8px;background:rgba(0,0,0,0.3);border-radius:8px;border:1px solid var(--border)}
-.log::-webkit-scrollbar{width:3px}
-.log::-webkit-scrollbar-thumb{background:var(--border-h);border-radius:2px}
+  /* Hardware */
+  .hw-item {
+    padding: 10px 12px;
+    background: var(--surface-alt);
+    border-radius: 8px;
+    border: 1px solid var(--border-dim);
+    margin-bottom: 8px;
+  }
+  .hw-item:last-child { margin-bottom: 0; }
+  .hw-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .hw-name {
+    font-size: 11px;
+    font-family: var(--mono);
+    font-weight: 600;
+    color: var(--text);
+  }
+  .hw-detail {
+    font-size: 9px;
+    font-family: var(--mono);
+    color: var(--dim);
+    margin-top: 4px;
+  }
 
-/* Stale indicator */
-.stale-badge{display:inline-flex;padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:7px;background:var(--amber-g);color:var(--amber);border:1px solid rgba(251,191,36,0.2);margin-left:6px}
-.fresh-badge{display:inline-flex;padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:7px;background:var(--green-g);color:var(--green);border:1px solid rgba(52,211,153,0.2);margin-left:6px}
+  /* Feed entries */
+  .feed-entry {
+    font-size: 10px;
+    font-family: var(--mono);
+    padding: 3px 0;
+    padding-left: 10px;
+    border-left: 2px solid var(--border-dim);
+    color: var(--dim);
+  }
+  .feed-entry:first-child {
+    border-left-color: var(--green);
+    color: var(--muted);
+  }
 
-/* Waiting state */
-.waiting{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;color:var(--t3)}
-.waiting-icon{font-size:24px;margin-bottom:8px;opacity:.4}
-.waiting-text{font-size:10px;line-height:1.5}
-.waiting-when{font-family:var(--mono);font-size:9px;color:var(--cyan);margin-top:4px}
+  /* Issues */
+  .issues-card {
+    background: rgba(240, 180, 41, 0.04);
+    border-color: var(--amber-dim);
+  }
+  .issue-item {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--muted);
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border-dim);
+  }
+  .issue-item:last-child { border-bottom: none; }
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.card{animation:fadeUp .5s ease-out both}
-.card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.08s}
-.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.16s}
-.card:nth-child(5){animation-delay:.2s}.card:nth-child(6){animation-delay:.24s}
-.card:nth-child(7){animation-delay:.28s}.card:nth-child(8){animation-delay:.32s}
-.card:nth-child(9){animation-delay:.36s}.card:nth-child(10){animation-delay:.4s}
+  .footer {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    font-family: var(--mono);
+    color: var(--dim);
+  }
+  .footer a { color: var(--muted); text-decoration: none; }
+  .footer a:hover { color: var(--text); }
+
+  @media (max-width: 700px) {
+    .metrics { grid-template-columns: repeat(3, 1fr); }
+    .grid { grid-template-columns: 1fr; }
+    .card-wide { grid-column: auto; }
+    .topo-details { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="hdr">
-    <div class="logo">
-      <div class="logo-mark">Z</div>
-      <div><div class="logo-text">Zeke</div><div class="logo-sub">mission control</div></div>
-    </div>
-    <div class="hdr-right">
-      <div class="hdr-pill cost-pill" id="hcost">$0/day</div>
-      <div class="hdr-pill"><div class="hdr-dot" id="sd"></div><span id="sh">loading</span></div>
-      <div class="hdr-ts" id="sts"></div>
-    </div>
+
+<div class="header">
+  <div>
+    <h1>Mission Control</h1>
+    <div class="header-sub" id="header-sub">loading...</div>
   </div>
-  <div class="grid" id="grid"></div>
+  <div id="health-indicator" class="indicator">
+    <span class="dot dot-off"></span> LOADING
+  </div>
+</div>
+
+<div class="metrics" id="metrics"></div>
+
+<div class="grid" id="grid"></div>
+
+<div class="footer">
+  <span>Zeke v2 • Layer 1 Scheduler • <span id="footer-feed">—</span> entries</span>
+  <a href="https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/diagnostic.json" target="_blank">raw diagnostic ↗</a>
 </div>
 
 <script>
-const DATA="status.json",HIST="history.jsonl";
-let S={},H=[],prevFeed=null;
+// ============================================================
+// STATE
+// ============================================================
+const GITHUB_RAW = "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main";
+let refreshCount = 0;
+let feedHistory = [];
+let cycleHistory = [];
 
-async function load(){
-  try{
-    const[a,b]=await Promise.allSettled([
-      fetch(DATA+"?_="+Date.now()).then(r=>r.json()),
-      fetch(HIST+"?_="+Date.now()).then(r=>r.text())
+// ============================================================
+// SVG CHART BUILDER
+// ============================================================
+function buildChart(points, opts = {}) {
+  const {
+    width = 400, height = 110, color = '#2dd4a0',
+    yLabel = '', showDots = true
+  } = opts;
+
+  if (!points || points.length < 2) {
+    return `<div style="width:${width}px;height:${height}px;display:flex;align-items:center;justify-content:center">
+      <span style="font-size:11px;font-family:var(--mono);color:var(--dim)">Waiting for data...</span></div>`;
+  }
+
+  const pad = { top: 8, right: 10, bottom: 22, left: 36 };
+  const w = width - pad.left - pad.right;
+  const h = height - pad.top - pad.bottom;
+  const vals = points.map(p => p.value);
+  const yMin = Math.min(...vals);
+  const yMax = Math.max(...vals);
+  const yRange = yMax - yMin || 1;
+  const tMin = points[0].time;
+  const tMax = points[points.length - 1].time;
+  const tRange = tMax - tMin || 1;
+
+  const toX = t => pad.left + ((t - tMin) / tRange) * w;
+  const toY = v => pad.top + h - ((v - yMin) / yRange) * h;
+
+  const pathPts = points.map(p => `${toX(p.time).toFixed(1)},${toY(p.value).toFixed(1)}`);
+  const lineD = pathPts.map((pt, i) => `${i === 0 ? 'M' : 'L'} ${pt}`).join(' ');
+  const areaD = lineD + ` L ${toX(tMax).toFixed(1)} ${(pad.top + h).toFixed(1)} L ${toX(tMin).toFixed(1)} ${(pad.top + h).toFixed(1)} Z`;
+
+  const gradId = 'g' + Math.random().toString(36).slice(2, 8);
+
+  // Y labels
+  const yTicks = [yMin, yMin + yRange * 0.5, yMax].map(v => Math.round(v));
+  let yGrids = yTicks.map(v => `<line x1="${pad.left}" y1="${toY(v).toFixed(1)}" x2="${width - pad.right}" y2="${toY(v).toFixed(1)}" stroke="var(--border-dim)" stroke-width="0.5" stroke-dasharray="3,3"/>
+    <text x="${pad.left - 4}" y="${(toY(v) + 3).toFixed(1)}" text-anchor="end" fill="var(--dim)" font-size="9" font-family="var(--mono)">${v}</text>`).join('\n');
+
+  // Time labels — pick ~6 evenly spaced
+  const step = Math.max(1, Math.floor(points.length / 6));
+  let timeTicks = [];
+  for (let i = 0; i < points.length; i += step) timeTicks.push(points[i]);
+  if (timeTicks[timeTicks.length - 1] !== points[points.length - 1]) timeTicks.push(points[points.length - 1]);
+  let timeLabels = timeTicks.map(p =>
+    `<text x="${toX(p.time).toFixed(1)}" y="${height - 4}" text-anchor="middle" fill="var(--dim)" font-size="8" font-family="var(--mono)">${p.label}</text>`
+  ).join('\n');
+
+  // Dots
+  let dots = '';
+  if (showDots) {
+    dots = points.map((p, i) => {
+      const isLast = i === points.length - 1;
+      return `<circle cx="${toX(p.time).toFixed(1)}" cy="${toY(p.value).toFixed(1)}" r="${isLast ? 3.5 : 2}" fill="${isLast ? color : color + '88'}" ${isLast ? `stroke="var(--bg)" stroke-width="1.5"` : ''}/>`;
+    }).join('\n');
+  }
+
+  return `<svg width="100%" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMidYMid meet" style="display:block;overflow:visible">
+    <defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${color}" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
+    </linearGradient></defs>
+    ${yGrids}
+    <path d="${areaD}" fill="url(#${gradId})"/>
+    <path d="${lineD}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    ${dots}
+    ${timeLabels}
+  </svg>`;
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function render(d, s) {
+  const feedCount = d?.feed?.total_lines || s?.feed_lines || 0;
+  const sparkOn = d?.spark?.online ?? false;
+  const sparkModels = d?.spark?.models_loaded || [];
+  const sparkStuck = d?.spark?.model_stuck || false;
+  const sparkDetail = d?.spark?.detail || 'unknown';
+  const gwUp = d?.gateway?.running ?? false;
+  const schedUp = d?.scheduler?.running ?? false;
+  const schedPid = d?.scheduler?.pid || '—';
+  const schedUptime = d?.scheduler?.uptime_minutes || 0;
+  const window = d?.scheduler?.current_window || '—';
+  const today = d?.today || {};
+  const jobs = d?.recent_jobs || [];
+  const cycles = d?.cycles || [];
+  const health = d?.health || {};
+  const issues = health.issues || [];
+  const entries = d?.feed?.last_entries || [];
+
+  const sr = today.jobs_run > 0 ? Math.round((today.success / today.jobs_run) * 100) : 0;
+  const allUp = schedUp && gwUp && sparkOn;
+
+  // Header
+  const now = new Date();
+  document.getElementById('header-sub').textContent =
+    `${window} • refresh #${refreshCount} • ${now.toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}`;
+
+  const hDot = health.status === 'HEALTHY' ? 'dot-up' : issues.some(i => i.includes('CRITICAL')) ? 'dot-down' : 'dot-warn';
+  document.getElementById('health-indicator').innerHTML =
+    `<span class="dot ${hDot}"></span> ${health.status || 'UNKNOWN'}`;
+
+  // Metrics
+  document.getElementById('metrics').innerHTML = [
+    { label: 'FEED', value: feedCount, color: 'var(--green)' },
+    { label: 'TODAY +', value: today.feed_growth || 0, color: 'var(--cyan)' },
+    { label: 'JOBS', value: today.jobs_run || 0, color: 'var(--blue)' },
+    { label: 'SUCCESS', value: sr + '%', color: sr >= 70 ? 'var(--green)' : 'var(--amber)' },
+    { label: 'COST', value: '$0', color: 'var(--green)' },
+  ].map(m => `<div class="metric">
+    <div class="metric-val" style="color:${m.color}">${m.value}</div>
+    <div class="metric-label">${m.label}</div>
+  </div>`).join('');
+
+  // Grid
+  let grid = '';
+
+  // 1. System Topology — full width
+  const arrowClass = allUp ? 'topo-arrow active' : 'topo-arrow';
+  grid += `<div class="card card-wide">
+    <div class="card-title">System Topology</div>
+    <div class="topo-nodes">
+      <div class="topo-node">
+        <span class="dot ${schedUp ? 'dot-up' : 'dot-down'}"></span>
+        <div class="topo-node-label">Scheduler</div>
+        <div class="topo-node-sub">Python</div>
+      </div>
+      <div class="${arrowClass}">→</div>
+      <div class="topo-node">
+        <span class="dot ${gwUp ? 'dot-up' : 'dot-down'}"></span>
+        <div class="topo-node-label">Gateway</div>
+        <div class="topo-node-sub">OpenClaw</div>
+      </div>
+      <div class="${arrowClass}">→</div>
+      <div class="topo-node">
+        <span class="dot ${sparkOn ? (sparkStuck ? 'dot-warn' : 'dot-up') : 'dot-down'}"></span>
+        <div class="topo-node-label">DGX Spark</div>
+        <div class="topo-node-sub">${sparkModels[0] || 'idle'}</div>
+      </div>
+    </div>
+    <div class="topo-details">
+      <div class="topo-detail">
+        <div class="topo-detail-label">SCHEDULER</div>
+        <div class="topo-detail-val" style="color:${schedUp ? 'var(--text)' : 'var(--red)'}">${schedUp ? 'PID ' + schedPid : 'DOWN'}</div>
+        <div class="topo-detail-sub">${schedUp ? schedUptime + 'm uptime' : 'guardian will restart'}</div>
+      </div>
+      <div class="topo-detail">
+        <div class="topo-detail-label">SPARK GPU</div>
+        <div class="topo-detail-val" style="color:${sparkOn ? (sparkStuck ? 'var(--amber)' : 'var(--text)') : 'var(--red)'}">${sparkOn ? (sparkStuck ? 'STUCK' : 'HEALTHY') : 'OFFLINE'}</div>
+        <div class="topo-detail-sub">${sparkModels.length > 0 ? sparkModels[0] : 'no model loaded'}</div>
+      </div>
+      <div class="topo-detail">
+        <div class="topo-detail-label">GATEWAY</div>
+        <div class="topo-detail-val" style="color:${gwUp ? 'var(--text)' : 'var(--red)'}">${gwUp ? 'ROUTING' : 'DOWN'}</div>
+        <div class="topo-detail-sub">10.0.0.143:11434</div>
+      </div>
+    </div>
+  </div>`;
+
+  // 2. Feed Growth chart
+  grid += `<div class="card">
+    <div class="card-title">Feed Growth</div>
+    <div class="chart-container">${buildChart(feedHistory, { color: '#2dd4a0', yLabel: 'entries' })}</div>
+    <div class="chart-footer">
+      <span>${feedHistory.length} data points</span>
+      <span>refreshes every 60s</span>
+    </div>
+  </div>`;
+
+  // 3. Success Rate chart
+  const cPts = cycles.map((c, i) => ({
+    time: new Date(c.ts).getTime() || Date.now() - (cycles.length - i) * 3600000,
+    value: c.jobs > 0 ? Math.round((c.success / c.jobs) * 100) : 0,
+    label: (() => { try { return new Date(c.ts).toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit',hour12:false}); } catch(e) { return ''; }})(),
+  }));
+  grid += `<div class="card">
+    <div class="card-title">Cycle Success Rate</div>
+    <div class="chart-container">${buildChart(cPts.length >= 2 ? cPts : null, { color: '#4da3ff', yLabel: '%' })}</div>
+    <div class="chart-footer">
+      <span>${cycles.length} cycles</span>
+      <span>${today.success || 0} ok / ${today.timeout || 0} timeout / ${today.fail || 0} fail</span>
+    </div>
+  </div>`;
+
+  // 4. Job Results
+  const maxDur = Math.max(...jobs.map(j => j.duration || 0), 60);
+  const statusColors = { success: 'var(--green)', timeout: 'var(--amber)', fail: 'var(--red)', bad_output: 'var(--purple)', empty: 'var(--amber)' };
+  const jobRows = jobs.length > 0 ? jobs.map(j => {
+    const col = statusColors[j.status] || 'var(--dim)';
+    const pct = Math.max((j.duration / maxDur) * 100, 5);
+    const dotCls = j.status === 'success' ? 'dot-up' : j.status === 'timeout' || j.status === 'empty' ? 'dot-warn' : 'dot-down';
+    return `<div class="job-row">
+      <span class="job-name">${j.name}</span>
+      <div class="job-bar-bg"><div class="job-bar" style="width:${pct}%;background:linear-gradient(90deg,${col}33,${col}66)"></div></div>
+      <span class="job-meta">${j.duration}s ${j.grew > 0 ? '<span style="color:var(--green)">+' + j.grew + '</span>' : ''}</span>
+      <span class="dot ${dotCls}" style="width:7px;height:7px"></span>
+    </div>`;
+  }).join('') : '<div style="font-size:11px;font-family:var(--mono);color:var(--dim);text-align:center;padding:20px">Waiting for first cycle...</div>';
+
+  grid += `<div class="card">
+    <div class="card-title">Last Cycle Jobs</div>
+    ${jobRows}
+  </div>`;
+
+  // 5. Hardware & Connections
+  grid += `<div class="card">
+    <div class="card-title">Hardware & Connections</div>
+    <div class="hw-item">
+      <div class="hw-header">
+        <span class="hw-name">Mac Mini (Host)</span>
+        <span class="indicator"><span class="dot dot-up" style="width:6px;height:6px"></span> LOCAL</span>
+      </div>
+      <div class="hw-detail">OpenClaw gateway • Python scheduler • cron guardian</div>
+    </div>
+    <div class="hw-item" ${sparkStuck ? 'style="border-color:var(--amber-dim)"' : ''}>
+      <div class="hw-header">
+        <span class="hw-name">DGX Spark (GPU)</span>
+        <span class="indicator"><span class="dot ${sparkOn ? (sparkStuck ? 'dot-warn' : 'dot-up') : 'dot-down'}" style="width:6px;height:6px"></span> ${sparkOn ? '10.0.0.143' : 'OFFLINE'}</span>
+      </div>
+      <div class="hw-detail">128GB VRAM • Ollama ${sparkModels.length > 0 ? '• ' + sparkModels.join(', ') : '• idle'}</div>
+      ${sparkStuck ? '<div class="hw-detail" style="color:var(--amber)">⚠ Model appears stuck — scheduler will handle</div>' : ''}
+    </div>
+    <div class="hw-item">
+      <div class="hw-header">
+        <span class="hw-name">Network Path</span>
+        <span class="indicator"><span class="dot ${allUp ? 'dot-up' : 'dot-warn'}" style="width:6px;height:6px"></span> LAN</span>
+      </div>
+      <div class="hw-detail">Mac Mini → Gateway :18789 → Spark :11434 • GitHub push every cycle</div>
+    </div>
+    <div class="hw-item">
+      <div class="hw-header">
+        <span class="hw-name">Telegram</span>
+        <span class="indicator"><span class="dot dot-up" style="width:6px;height:6px"></span> @Zekevonz_bot</span>
+      </div>
+      <div class="hw-detail">Delivery channel • action-required insights only</div>
+    </div>
+  </div>`;
+
+  // 6. Health Issues (if any)
+  if (issues.length > 0) {
+    grid += `<div class="card card-wide issues-card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span class="dot ${issues.some(i => i.includes('CRITICAL')) ? 'dot-down' : 'dot-warn'}" style="width:8px;height:8px"></span>
+        <span style="font-size:12px;font-family:var(--mono);font-weight:600;color:var(--amber)">${issues.length} Issue${issues.length > 1 ? 's' : ''} Detected</span>
+      </div>
+      ${issues.map(i => `<div class="issue-item">${escHtml(i)}</div>`).join('')}
+    </div>`;
+  }
+
+  // 7. Latest Feed Entries
+  grid += `<div class="card card-wide">
+    <div class="card-title">Latest Feed Entries</div>
+    ${entries.length > 0
+      ? entries.map((e, i) => `<div class="feed-entry" ${i === 0 ? 'style="border-left-color:var(--green);color:var(--muted)"' : ''}>${escHtml(typeof e === 'string' ? e.slice(0, 80) : JSON.stringify(e).slice(0, 80))}</div>`).join('')
+      : '<div style="font-size:10px;font-family:var(--mono);color:var(--dim)">Waiting for diagnostic data...</div>'
+    }
+  </div>`;
+
+  document.getElementById('grid').innerHTML = grid;
+  document.getElementById('footer-feed').textContent = feedCount;
+}
+
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+// ============================================================
+// FETCH
+// ============================================================
+async function fetchAndRender() {
+  refreshCount++;
+  try {
+    const [dRes, sRes] = await Promise.all([
+      fetch(GITHUB_RAW + '/diagnostic.json?t=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null),
+      fetch(GITHUB_RAW + '/status.json?t=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null),
     ]);
-    if(a.status==='fulfilled')S=a.value;
-    if(b.status==='fulfilled')H=b.value.trim().split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
-  }catch(e){console.error(e)}
-  render();
-}
 
-function ago(ts){
-  if(!ts)return"—";
-  const s=(Date.now()-new Date(ts).getTime())/1000;
-  if(s<0)return"just now";
-  if(s<60)return Math.round(s)+"s ago";
-  if(s<3600)return Math.round(s/60)+"m ago";
-  if(s<86400)return Math.round(s/3600)+"h ago";
-  return Math.round(s/86400)+"d ago";
-}
-function timeStr(ts){
-  if(!ts)return"";
-  try{const d=new Date(ts);return d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit',hour12:true})}catch{return""}
-}
-function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+    const now = new Date();
+    const label = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
 
-function sparkline(cv,data,color,tipEl,yMinEl,yMaxEl){
-  if(!data||data.length<2)return;
-  const c=cv.getContext("2d"),dpr=devicePixelRatio||1,w=cv.offsetWidth,h=cv.offsetHeight;
-  cv.width=w*dpr;cv.height=h*dpr;c.scale(dpr,dpr);
-  const mx=Math.max(...data),mn=Math.min(...data),rng=mx-mn||1,pad=3,step=w/(data.length-1);
-  const base=color.match(/[\d.]+/g);
-  const grad=c.createLinearGradient(0,0,0,h);
-  if(base&&base.length>=3){grad.addColorStop(0,`rgba(${base[0]},${base[1]},${base[2]},0.15)`);grad.addColorStop(1,`rgba(${base[0]},${base[1]},${base[2]},0)`);}
-  c.beginPath();
-  data.forEach((v,i)=>{const x=i*step,y=pad+((mx-v)/rng)*(h-pad*2);i===0?c.moveTo(x,y):c.lineTo(x,y)});
-  c.strokeStyle=color;c.lineWidth=1.5;c.stroke();
-  c.lineTo((data.length-1)*step,h);c.lineTo(0,h);c.closePath();c.fillStyle=grad;c.fill();
-  const ly=pad+((mx-data[data.length-1])/rng)*(h-pad*2);
-  c.beginPath();c.arc((data.length-1)*step,ly,2.5,0,Math.PI*2);c.fillStyle=color;c.fill();
-  if(yMinEl)yMinEl.textContent=mn;
-  if(yMaxEl)yMaxEl.textContent=mx;
-  if(tipEl){
-    cv.onmousemove=e=>{const rect=cv.getBoundingClientRect(),x=e.clientX-rect.left,idx=Math.min(Math.max(Math.round(x/step),0),data.length-1);
-      tipEl.style.opacity='1';tipEl.style.left=Math.min(Math.max(x-16,0),w-50)+'px';tipEl.textContent=data[idx]};
-    cv.onmouseleave=()=>{tipEl.style.opacity='0'};
+    // Feed history
+    const fc = dRes?.feed?.total_lines || sRes?.feed_lines;
+    if (fc) {
+      feedHistory.push({ time: now.getTime(), value: fc, label });
+      if (feedHistory.length > 48) feedHistory = feedHistory.slice(-48);
+    }
+
+    render(dRes, sRes);
+  } catch (e) {
+    console.error('Fetch error:', e);
   }
 }
 
-function parseKG(s){
-  const r={};if(!s)return r;
-  let m=s.match(/Entities: (\d+)/);if(m)r.ent=+m[1];
-  m=s.match(/Relationships: (\d+)/);if(m)r.rel=+m[1];
-  m=s.match(/Associations: (\d+)/);if(m)r.assoc=+m[1];
-  m=s.match(/Insights: (\d+)/);if(m)r.ins=+m[1];
-  const dm=s.match(/Domains: (\{[\s\S]*\})/);if(dm)try{r.dom=JSON.parse(dm[1])}catch{}
-  return r;
-}
-
-function parseFeed(entries){
-  return(entries||[]).map(raw=>{
-    if(!raw||!raw.trim())return null;
-    try{
-      const d=JSON.parse(raw);
-      const ts=d.timestamp||'';
-      if(ts.includes('$(date')||ts.includes('YYYY'))return null;
-      const finding=d.finding||((Array.isArray(d.insights)&&d.insights[0])?(typeof d.insights[0]==='string'?d.insights[0]:JSON.stringify(d.insights[0]).slice(0,120)):'');
-      if(!finding||finding==='No new developments'||finding.startsWith('No additional'))return null;
-      return{topic:d.topic||'?',finding,source:d.source||'',ts};
-    }catch{return null}
-  }).filter(Boolean).reverse();
-}
-
-function calcAutonomy(kg,fq,gw,sp,feedLines){
-  let stages=[];
-  const upOk=gw.status==="RUNNING"&&sp.status==="ONLINE";
-  const feedGrew=feedLines>200;
-  const gS=upOk&&feedGrew?20:upOk?12:0;
-  stages.push({name:"Gather",sub:"Autonomous web research → feed",model:"qwen3-32b",done:gS>=20,score:gS,
-    why:gS>=20?"Feed growing with real sources":upOk?"Systems up but feed needs more data":"Systems offline"});
-
-  const entOk=(kg.ent||0)>50;
-  const qualOk=(fq.error_rate||100)<20;
-  const eS=entOk&&qualOk?20:entOk?14:Math.min(12,Math.round(((kg.ent||0)/50)*12));
-  stages.push({name:"Extract",sub:"Feed → structured knowledge graph",model:"qwen3-32b",done:eS>=20,score:eS,
-    why:eS>=20?`${kg.ent} entities, ${(fq.error_rate||0).toFixed(0)}% error`:`Need >50 entities + <20% errors (have ${kg.ent||0}, ${(fq.error_rate||0).toFixed(0)}%)`});
-
-  const assocN=kg.assoc||0;
-  const aS=assocN>15?20:assocN>5?14:Math.min(10,assocN*2);
-  stages.push({name:"Associate",sub:"Cross-domain pattern matching",model:"qwen3-32b",done:aS>=20,score:aS,
-    why:aS>=20?`${assocN} cross-domain links found`:`Need >15 associations (have ${assocN})`});
-
-  const rS=(kg.ins||0)>0?20:0;
-  stages.push({name:"Reason",sub:"Synthesis → actionable insights",model:"Claude Code",done:rS>=20,score:rS,
-    why:rS>=20?`${kg.ins} insights generated`:"Waiting for first reasoning cycle to produce insights"});
-
-  const acS=0;
-  stages.push({name:"Act",sub:"Self-directed research decisions",model:"—",done:false,score:acS,
-    why:"Requires Reason to feed back into Gather autonomously"});
-
-  return{score:stages.reduce((s,st)=>s+st.score,0),stages};
-}
-
-function feedGrowthRate(hist){
-  if(!hist||hist.length<3)return null;
-  const recent=hist.slice(-12);
-  const oldest=recent[0],newest=recent[recent.length-1];
-  if(!oldest||!newest)return null;
-  const hrs=(new Date(newest.timestamp)-new Date(oldest.timestamp))/3600000;
-  if(hrs<0.3)return null;
-  const df=(newest.feed_lines||0)-(oldest.feed_lines||0);
-  return{perHour:Math.round(df/hrs*10)/10,perDay:Math.round(df/hrs*24)};
-}
-
-function isStale(ts,maxMinutes){
-  if(!ts)return true;
-  return(Date.now()-new Date(ts).getTime())/60000>maxMinutes;
-}
-
-function scheduleHTML(){
-  const now=new Date();const h=now.getHours()+now.getMinutes()/60;const pct=(h/24)*100;
-  const segments=[
-    {start:4,end:7,color:'var(--purple)',label:'Reason',opacity:.3},
-    {start:8,end:21,color:'var(--cyan)',label:'Daytime',opacity:.25},
-    {start:22,end:28,color:'var(--green)',label:'Overnight',opacity:.25}, // wraps past midnight
-  ];
-  let segs='';
-  segments.forEach(s=>{
-    let st=s.start,en=Math.min(s.end,24);
-    segs+=`<div class="sched-seg" style="left:${(st/24)*100}%;width:${((en-st)/24)*100}%;background:${s.color};opacity:${s.opacity}"></div>`;
-    if(s.end>24)segs+=`<div class="sched-seg" style="left:0;width:${((s.end-24)/24)*100}%;background:${s.color};opacity:${s.opacity}"></div>`;
-  });
-
-  // What's active now
-  let activeNow='idle';
-  if(h>=22||h<4)activeNow='overnight research';
-  else if(h>=4&&h<7)activeNow='reasoning + self-heal';
-  else if(h>=8&&h<21)activeNow='daytime research';
-
-  // Next event
-  let nextEvent='',nextTime='';
-  if(h<4){nextEvent='Reasoning';nextTime='4:00 AM'}
-  else if(h<7){nextEvent='Daytime';nextTime='8:00 AM'}
-  else if(h<21){nextEvent='Overnight';nextTime='10:00 PM'}
-  else if(h<22){nextEvent='Overnight';nextTime='10:00 PM'}
-  else{nextEvent='Reasoning';nextTime='4:00 AM'}
-
-  return`
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-      <div style="font-size:10px;color:var(--t2)">Now: <span style="color:var(--cyan)">${activeNow}</span></div>
-      <div style="font-family:var(--mono);font-size:9px;color:var(--t3)">Next: ${nextEvent} at ${nextTime}</div>
-    </div>
-    <div class="sched-wrap">
-      <div class="sched">
-        <div class="sched-bg"></div>
-        ${segs}
-        <div class="sched-now" style="left:${pct}%"></div>
-      </div>
-      <div class="sched-times"><span>12am</span><span>4am</span><span>8am</span><span>12pm</span><span>4pm</span><span>8pm</span><span>12am</span></div>
-      <div class="sched-legend">
-        <div class="sched-leg"><div class="sched-leg-dot" style="background:var(--cyan)"></div>Daytime (5 topics)</div>
-        <div class="sched-leg"><div class="sched-leg-dot" style="background:var(--green)"></div>Overnight (6 topics)</div>
-        <div class="sched-leg"><div class="sched-leg-dot" style="background:var(--purple)"></div>Reason + Self-heal</div>
-      </div>
-    </div>`;
-}
-
-function render(){
-  const gw=S.gateway_process||{},gpu=S.gpu_stats||{},sp=S.spark_status||{};
-  const fq=S.feed_quality||{},cs=S.crontab_status||{},kg=parseKG(S.kg_stats);
-  const jobs=S.last_jobs||[],feedEntries=parseFeed(S.recent_feed);
-
-  const on=gw.status==="RUNNING"&&sp.status==="ONLINE";
-  const fails=jobs.filter(j=>j.result==="FAILED").length;
-  const health=!on?"offline":fails>jobs.length/2?"degraded":"nominal";
-
-  const sd=document.getElementById("sd");
-  sd.style.background=health==="nominal"?"var(--green)":health==="degraded"?"var(--amber)":"var(--red)";
-  sd.style.color=sd.style.background;
-  document.getElementById("sh").textContent=health;
-  document.getElementById("sts").textContent="updated "+ago(S.timestamp);
-
-  const sonnetJobs=jobs.filter(j=>j.model&&j.model.includes('sonnet'));
-  document.getElementById("hcost").textContent=sonnetJobs.length>0?`~$${(sonnetJobs.length*0.12).toFixed(2)}/day`:'$0/day';
-
-  const auto=calcAutonomy(kg,fq,gw,sp,S.feed_lines||0);
-  const fH=H.map(h=>h.feed_lines).filter(v=>v!=null);
-  const kH=H.map(h=>h.kg_entities).filter(v=>v!=null);
-  const eH=H.map(h=>h.feed_error_rate).filter(v=>v!=null);
-  const rate=feedGrowthRate(H);
-  const feedDelta=prevFeed!==null?(S.feed_lines||0)-prevFeed:null;
-  prevFeed=S.feed_lines||0;
-
-  const dc=["#22d3ee","#34d399","#fbbf24","#a78bfa","#60a5fa","#fb923c","#f87171","#e879f9"];
-  const doms=kg.dom||{};const mxD=Math.max(...Object.values(doms),1);
-  const pJ=jobs.filter(j=>j.result==="SUCCESS").length;
-  const fJ=jobs.filter(j=>j.result==="FAILED").length;
-  const fp=auto.stages.findIndex(s=>!s.done);
-
-  const circ=2*Math.PI*92;const aOff=circ-(auto.score/100)*circ;
-  const gpuU=gpu.gpu_util_pct||0;const gC=2*Math.PI*34;const gO=gC-(gpuU/100)*gC;
-  const gCol=gpuU>50?"var(--green)":gpuU>5?"var(--amber)":"var(--t3)";
-
-  // Self-heal freshness
-  const healLog=S.self_heal_log||'';
-  const healTs=healLog.match(/(\d{4}-\d{2}-\d{2}T[\d:]+Z)/);
-  const healStale=healTs?isStale(healTs[1],360):true; // >6hrs = stale
-
-  // History time range for sparkline x-axis
-  const hFirst=H[0]?.timestamp?timeStr(H[0].timestamp):'';
-  const hLast=H[H.length-1]?.timestamp?timeStr(H[H.length-1].timestamp):'';
-
-  document.getElementById("grid").innerHTML=`
-    <!-- AUTONOMY -->
-    <div class="card autonomy">
-      <div class="clbl"><div class="d" style="background:var(--cyan)"></div>Progress to Full Autonomy</div>
-      <div class="ring-w">
-        <svg viewBox="0 0 200 200" style="transform:rotate(-90deg)">
-          <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="6"/>
-          <circle cx="100" cy="100" r="92" fill="none" stroke="url(#ag)" stroke-width="6" stroke-linecap="round"
-            stroke-dasharray="${circ}" stroke-dashoffset="${aOff}" style="transition:stroke-dashoffset 2s cubic-bezier(.4,0,.2,1)"/>
-          <defs><linearGradient id="ag" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="var(--cyan)"/><stop offset="100%" stop-color="var(--purple)"/>
-          </linearGradient></defs>
-        </svg>
-        <div class="ring-c"><div class="ring-n">${auto.score}%</div><div class="ring-l">5 stages to close the loop</div></div>
-      </div>
-      ${auto.stages.map((st,i)=>`
-        <div class="ms">
-          <div class="ms-ck ${st.done?'ms-ok':i===fp?'ms-go':'ms-no'}">${st.done?'✓':i===fp?'▸':'○'}</div>
-          <div class="ms-inf">
-            <div class="ms-nm" style="color:${st.done?'var(--green)':i===fp?'var(--cyan)':'var(--t3)'}">${st.name}</div>
-            <div class="ms-sb">${st.sub}</div>
-            <div class="ms-why">${st.why}</div>
-          </div>
-          <div class="ms-sc">${st.score}/20</div>
-        </div>`).join('')}
-    </div>
-
-    <!-- FEED -->
-    <div class="card">
-      <div class="clbl"><div class="d" style="background:var(--cyan)"></div>Research Feed</div>
-      <div style="display:flex;align-items:baseline;gap:6px">
-        <div class="big" style="color:var(--cyan)">${S.feed_lines||0}</div>
-        ${feedDelta!==null&&feedDelta>0?`<span class="delta dup">+${feedDelta}</span>`:''}
-        ${rate?`<span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${rate.perDay}/day</span>`:''}
-      </div>
-      <div class="sml">entries · ${(fq.error_rate||0).toFixed(1)}% errors</div>
-      <div class="spk-outer" style="position:relative">
-        <div class="spk"><canvas id="cf"></canvas><div class="spk-tip" id="cft" style="color:var(--cyan)"></div></div>
-        <div class="spk-ymax" id="cfy1" style="position:absolute;right:0;top:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
-        <div class="spk-ymin" id="cfy0" style="position:absolute;right:0;bottom:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
-      </div>
-      ${fH.length>1?`<div class="spk-axis"><span>${hFirst}</span><span>${hLast}</span></div>`:''}
-    </div>
-
-    <!-- KG -->
-    <div class="card">
-      <div class="clbl"><div class="d" style="background:var(--blue)"></div>Knowledge Graph</div>
-      <div class="mrow">
-        <div><div class="big" style="color:var(--blue)">${kg.ent||0}</div><div class="sml">entities</div></div>
-        <div><div class="med">${kg.rel||0}</div><div class="sml">relations</div></div>
-        <div><div class="med">${kg.assoc||0}</div><div class="sml">links</div></div>
-        <div><div class="med" style="color:${(kg.ins||0)>0?'var(--green)':'var(--t3)'}">${kg.ins||0}</div><div class="sml">insights</div></div>
-      </div>
-      <div class="spk-outer" style="position:relative">
-        <div class="spk"><canvas id="ck"></canvas><div class="spk-tip" id="ckt" style="color:var(--blue)"></div></div>
-        <div id="cky1" style="position:absolute;right:0;top:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
-        <div id="cky0" style="position:absolute;right:0;bottom:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
-      </div>
-      ${kH.length>1?`<div class="spk-axis"><span>${hFirst}</span><span>${hLast}</span></div>`:''}
-    </div>
-
-    <!-- GPU -->
-    <div class="card">
-      <div class="clbl"><div class="d" style="background:${gCol}"></div>DGX Spark · ${esc(gpu.gpu_name||'')}</div>
-      <div class="gw">
-        <div class="gr">
-          <svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="4.5"/>
-            <circle cx="38" cy="38" r="34" fill="none" stroke="${gCol}" stroke-width="4.5" stroke-linecap="round"
-              stroke-dasharray="${gC}" stroke-dashoffset="${gO}" transform="rotate(-90 38 38)" style="transition:stroke-dashoffset 1s"/></svg>
-          <div class="gr-c" style="color:${gCol}">${Math.round(gpuU)}%</div>
-        </div>
-        <div class="gs">
-          <div class="gs-r"><span>temp</span><span>${gpu.temp_c!=null?gpu.temp_c+'°C':'—'}</span></div>
-          <div class="gs-r"><span>power</span><span>${gpu.power_w!=null?Math.round(gpu.power_w)+'W':'—'}</span></div>
-          <div class="gs-r"><span>model</span><span style="font-size:9px">${(sp.loaded_models||[]).map(m=>m.name).join(', ')||'idle'}</span></div>
-          <div class="gs-r"><span>vram</span><span>${(sp.loaded_models||[]).map(m=>m.size_gb+'GB').join(', ')||'—'}</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SCHEDULE -->
-    <div class="card span2">
-      <div class="clbl"><div class="d" style="background:var(--purple)"></div>24-Hour Schedule</div>
-      ${scheduleHTML()}
-    </div>
-
-    <!-- FEED PREVIEW -->
-    <div class="card span2">
-      <div class="clbl"><div class="d" style="background:var(--cyan)"></div>Latest Findings${feedEntries.length>0?` · ${feedEntries.length} quality entries`  :''}</div>
-      <div class="fp">
-        ${feedEntries.length>0?feedEntries.slice(0,8).map(e=>`
-          <div class="fp-e">
-            <div class="fp-h"><span class="fp-topic">${esc(e.topic)}</span><span class="fp-ts">${esc(e.ts).slice(0,16)}</span></div>
-            <div class="fp-f">${esc(e.finding)}</div>
-            ${e.source&&e.source!=='none'&&e.source!=='synthesis'?`<div class="fp-src"><a href="${esc(e.source)}" target="_blank">${esc(e.source)}</a></div>`:''}
-          </div>`).join(''):`
-          <div class="waiting">
-            <div class="waiting-icon">🔍</div>
-            <div class="waiting-text">No quality findings yet.<br>Broken timestamps and filler entries are filtered out.</div>
-            <div class="waiting-when">Next research: overnight at 10pm or daytime at 8am</div>
-          </div>`}
-      </div>
-    </div>
-
-    <!-- DOMAINS -->
-    <div class="card">
-      <div class="clbl"><div class="d" style="background:var(--purple)"></div>Knowledge Domains</div>
-      ${Object.entries(doms).sort((a,b)=>b[1]-a[1]).map(([n,ct],i)=>`
-        <div class="dm" style="opacity:${(.5+.5*ct/mxD).toFixed(2)}">
-          <div class="dm-n">${esc(n)}</div>
-          <div class="dm-b"><div class="dm-f" style="width:${Math.round(ct/mxD*100)}%;background:${dc[i%dc.length]}"></div></div>
-          <div class="dm-v">${ct}</div>
-        </div>`).join('')||'<div style="font-size:10px;color:var(--t3)">—</div>'}
-    </div>
-
-    <!-- FEED QUALITY -->
-    <div class="card">
-      <div class="clbl"><div class="d" style="background:${(fq.error_rate||0)>15?'var(--red)':(fq.error_rate||0)>5?'var(--amber)':'var(--green)'}"></div>Feed Quality · ${(fq.error_rate||0).toFixed(1)}% error rate</div>
-      <div class="qg">
-        <div class="qi"><div class="qi-v" style="color:var(--red)">${fq.malformed_json||0}</div><div class="qi-l">bad json</div></div>
-        <div class="qi"><div class="qi-v" style="color:var(--amber)">${fq.literal_timestamps||0}</div><div class="qi-l">bad time</div></div>
-        <div class="qi"><div class="qi-v" style="color:var(--purple)">${fq.duplicates||0}</div><div class="qi-l">dupes</div></div>
-        <div class="qi"><div class="qi-v" style="color:var(--t3)">${fq.no_new_dev||0}</div><div class="qi-l">no-ops</div></div>
-      </div>
-      <div class="spk-outer" style="position:relative">
-        <div class="spk"><canvas id="ce"></canvas><div class="spk-tip" id="cet" style="color:var(--red)"></div></div>
-        <div id="cey1" style="position:absolute;right:0;top:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
-        <div id="cey0" style="position:absolute;right:0;bottom:0;font-family:var(--mono);font-size:7px;color:var(--t3)"></div>
-      </div>
-      ${eH.length>1?`<div class="spk-axis"><span>${hFirst}</span><span>error % →</span><span>${hLast}</span></div>`:''}
-    </div>
-
-    <!-- JOBS -->
-    <div class="card">
-      <div class="clbl"><div class="d" style="background:${pJ>fJ?'var(--green)':'var(--red)'}"></div>Recent Jobs${jobs.length>0?isStale(S.timestamp,120)?'<span class="stale-badge">stale</span>':'':''}</div>
-      ${jobs.length>0?`
-        <div class="mrow" style="margin-bottom:8px">
-          <div><div class="med" style="color:var(--green)">${pJ}</div><div class="sml">passed</div></div>
-          <div><div class="med" style="color:var(--red)">${fJ}</div><div class="sml">failed</div></div>
-        </div>
-        ${jobs.slice(-8).reverse().map(j=>`
-          <div class="jr">
-            <div class="jr-d" style="background:${j.result==='FAILED'?'var(--red)':j.result==='SUCCESS'?'var(--green)':'var(--t3)'}"></div>
-            <div class="jr-n">${esc(j.topic||'?')}</div>
-            <div class="jr-t">${esc(j.time||'')}</div>
-            <div class="jr-du">${j.duration_s?j.duration_s+'s':'—'}</div>
-            ${j.error?`<div class="jr-err">${esc(j.error)}</div>`:''}
-          </div>`).join('')}
-      `:`
-        <div class="waiting">
-          <div class="waiting-icon">⏳</div>
-          <div class="waiting-text">No recent job data.<br>Jobs populate from overnight and daytime runs.</div>
-          <div class="waiting-when">Next run: overnight at 10pm</div>
-        </div>`}
-    </div>
-
-    <!-- SELF-HEAL -->
-    <div class="card">
-      <div class="clbl"><div class="d" style="background:var(--amber)"></div>Self-Heal${healStale?'<span class="stale-badge">stale</span>':'<span class="fresh-badge">recent</span>'}</div>
-      ${healLog.trim()?`<div class="log">${esc(healLog).slice(0,1000)}</div>`:`
-        <div class="waiting">
-          <div class="waiting-icon">🔧</div>
-          <div class="waiting-text">No self-heal activity.<br>Auto-repair runs during reasoning at 7am.</div>
-        </div>`}
-    </div>
-
-    <!-- SYSTEM -->
-    <div class="card">
-      <div class="clbl"><div class="d" style="background:var(--t3)"></div>System</div>
-      <div class="sg">
-        <div class="si"><span>gateway</span><span>${gw.status||'?'}</span></div>
-        <div class="si"><span>pid</span><span>${gw.pid||'?'}</span></div>
-        <div class="si"><span>memory</span><span>${gw.memory_pct||'?'}%</span></div>
-        <div class="si"><span>uptime</span><span>${gw.uptime||'?'}</span></div>
-        <div class="si"><span>spark</span><span>${sp.status||'?'}</span></div>
-        <div class="si"><span>cron active</span><span>${cs.active||0}</span></div>
-        <div class="si"><span>overnight</span><span>${cs.has_overnight?'✓':'✗'}</span></div>
-        <div class="si"><span>reasoning</span><span>${cs.has_reason?'✓':'✗'}</span></div>
-        <div class="si"><span>queue</span><span>${cs.has_queue?'✓':'✗'}</span></div>
-        <div class="si"><span>refresh</span><span>60s</span></div>
-      </div>
-    </div>
-  `;
-
-  setTimeout(()=>{
-    const pairs=[
-      ['cf','cft',fH,'rgb(34,211,238)','cfy0','cfy1'],
-      ['ck','ckt',kH,'rgb(96,165,250)','cky0','cky1'],
-      ['ce','cet',eH,'rgb(248,113,113)','cey0','cey1']
-    ];
-    pairs.forEach(([c,t,d,col,ymin,ymax])=>{
-      const cv=document.getElementById(c),tip=document.getElementById(t);
-      const y0=document.getElementById(ymin),y1=document.getElementById(ymax);
-      if(cv&&d.length>1)sparkline(cv,d,col,tip,y0,y1);
-    });
-  },100);
-}
-
-load();setInterval(load,60000);
+// Boot
+fetchAndRender();
+setInterval(fetchAndRender, 60000);
 </script>
 </body>
 </html>
