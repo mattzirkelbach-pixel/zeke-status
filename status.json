@@ -1,8 +1,7 @@
 {
-  "timestamp": "2026-02-23T06:35:01.010432+00:00",
-  "feed_lines": 136,
+  "timestamp": "2026-02-23T06:37:24.205875+00:00",
+  "feed_lines": 137,
   "recent_feed": [
-    "{\"timestamp\":\"2026-02-22T20:46:00Z\",\"topic\":\"AI agents and tool calling\",\"finding\":\"No new developments found\",\"source\":\"none\"}",
     "{\"timestamp\":\"2026-02-22T21:01:00Z\",\"topic\":\"self-improvement and learning\",\"finding\":\"2026 Smith et al study found 60% memory retention improvement in spaced repetition users with 7-8 hours of sleep\",\"source\":\"https://health-orbit.com/2026/02/11/neuroplasticity-workouts-7-exercises-to-rewire-habits-in-21-days/\"}",
     "{\"timestamp\":\"2026-02-22T21:01:00Z\",\"topic\":\"self-improvement and learning\",\"finding\":\"2026 Johnson & Lee study shows cross-lateral movement increases hemispheric communication by 50%\",\"source\":\"https://health-orbit.com/2026/02/11/neuroplasticity-workouts-7-exercises-to-rewire-habits-in-21-days/\"}",
     "{\"timestamp\":\"2026-02-22T21:01:00Z\",\"topic\":\"self-improvement and learning\",\"finding\":\"2026 Chun & Turk-Browne study shows neural efficiency improves 34% with targeted sub-skill practice\",\"source\":\"https://health-orbit.com/2026/02/11/neuroplasticity-workouts-7-exercises-to-rewire-habits-in-21-days/\"}",
@@ -16,7 +15,8 @@
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"self-improvement\",\"insights\":[\"No new developments\"],\"tools_used\":[\"web_search\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"tool-calling\",\"insights\":[\"MiniMax-M2.1 supports Rust/Java/Go/C++ with 85% confidence\",\"Ollama 0.17 architecture improvements confirmed\"],\"tools_used\":[\"web_search\",\"web_fetch\",\"exec\"],\"files_updated\":[\"memory/learning-feed.jsonl\",\"memory/knowledge.db\"]}",
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"ai-agents\",\"insights\":[\"No new developments in MCP protocol or framework updates within past 48 hours\"],\"tools_used\":[\"web_search\",\"exec\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
-    "{\"timestamp\":\"2026-02-23T00:53:00Z\",\"topic\":\"tool-calling\",\"insights\":[\"No new developments in local model tool-calling from web_search (Ollama 0.17 remains latest with 40% prompt speed improvement, qwen3-32b-32k still dominant)\",\"Query focused on Ollama/vLLM benchmarks, new models, and structured output but yielded no 48h updates\"],\"tools_used\":[\"web_search\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}"
+    "{\"timestamp\":\"2026-02-23T00:53:00Z\",\"topic\":\"tool-calling\",\"insights\":[\"No new developments in local model tool-calling from web_search (Ollama 0.17 remains latest with 40% prompt speed improvement, qwen3-32b-32k still dominant)\",\"Query focused on Ollama/vLLM benchmarks, new models, and structured output but yielded no 48h updates\"],\"tools_used\":[\"web_search\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
+    "{\"topic\": \"longevity research\", \"finding\": \"Rapamycin participated in PEARL trial with low-dose intermittent dosing showing modest biomarker changes in biological aging without proven clinical benefits, source: https://pmc.ncbi.nlm.nih.gov/articles/PMC12226543\"}"
   ],
   "kg_stats": "Entities: 187\nRelationships: 187\nAssociations: 36\nInsights: 0\nDomains: {\n  \"treasury-bonds\": 44,\n  \"tool-calling\": 42,\n  \"ai-agents\": 35,\n  \"longevity\": 27,\n  \"cross-domain\": 15,\n  \"self-improvement\": 10,\n  \"senolytics\": 4,\n  \"Longevity\": 2,\n  \"cross-domain-associations\": 2,\n  \"local model inference\": 2,\n  \"treasury\": 2,\n  \"treasury-bounds\": 2\n}",
   "last_synthesis": "daily-synthesis-2026-02-21.md",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities - Updated 2026-02-21 (Evening)\n\nLast updated by: zeke-reason.sh (Claude Code autonomous reasoning, cycle 2)\nEvaluation basis: 30 feed entries scored across 2 cycles, avg novelty 2.5/5.0\nPrevious cycle avg: 2.05/5.0 | This cycle avg: 3.0/5.0 (Opus entries drove improvement)\n\n---\n\n## P1 \u2014 HIGHEST VALUE (execute next queue cycle)\n\n### Longevity (PROMOTED \u2014 8+ KG entities, highest novelty at 4.6/5.0)\n\nToday's Reason cycle answered 3/5 P1 questions completely. Remaining gaps:\n\n1. Rapamycin PEARL dose-response below 10mg/week: Still unanswered. 6.19kg lean mass\n   at 10mg confirmed. No sub-10mg arm found. Is there dose-finding data?\n   SEARCH: ClinicalTrials.gov NCT04488601 protocol amendments, Blagosklonny 2026.\n   STATUS: PARTIALLY ANSWERED (main outcome confirmed, dose-response gap remains)\n\n2. NAD+ precursor head-to-head RCT (NR vs NMN in humans 50+): ZERO progress. This is\n   now the #1 unanswered longevity question. We have mechanism but no comparative data.\n   SEARCH: \"nicotinamide riboside vs NMN randomized trial 2025 2026\",\n   \"NAD precursor comparison human clinical\", site:clinicaltrials.gov\n   STATUS: UNANSWERED \u2014 highest priority\n\n3. Metformin timing protocol: 3 RCTs confirm exercise blunting. What is the minimum\n   time separation between metformin dosing and exercise to preserve benefits?\n   SEARCH: \"metformin exercise timing pharmacokinetics separation hours\",\n   \"metformin half-life exercise window\"\n   STATUS: NEW \u2014 critical for Matt's protocol\n\n4. DMTF1 small molecule screening: NUS team identified target (Science Advances Jan 2026).\n   Any drug discovery programs targeting DMTF1 upregulation?\n   SEARCH: ChEMBL DMTF1, DrugBank DMTF1 modulators, \"DMTF1 drug discovery 2026\"\n   STATUS: NEW \u2014 early-stage monitoring\n\n5. p-tau217 clinical decision tree: Matt should consider testing. If elevated, what\n   interventions exist in the 3-4 year prediction window?\n   SEARCH: \"p-tau217 elevated treatment options\", \"preclinical Alzheimer interventi",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
+    "gpu_util_pct": 96.0,
     "temp_c": 67.0,
-    "power_w": 36.65,
+    "power_w": 62.49,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -113,7 +113,7 @@
     }
   },
   "gateway_process": {
-    "pid": "46493\n60589\n60590\n60619\n60620",
+    "pid": "46493\n60948\n60949",
     "memory_pct": "",
     "uptime": "",
     "status": "RUNNING"
@@ -124,20 +124,16 @@
       {
         "name": "qwen3-32b-32k:latest",
         "size_gb": 29.1
-      },
-      {
-        "name": "nomic-embed-text:latest",
-        "size_gb": 0.6
       }
     ]
   },
   "feed_quality": {
     "malformed_json": 1,
     "literal_timestamps": 11,
-    "duplicates": 119,
+    "duplicates": 120,
     "no_new_dev": 3,
-    "total": 136,
-    "error_rate": 96.3
+    "total": 137,
+    "error_rate": 96.4
   },
   "crontab_status": {
     "total_entries": 6,
