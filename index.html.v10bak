@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zeke Mission Control</title>
+<style>
+:root{--bg:#0b0d11;--card:#13161d;--border:#1c2030;--text:#d4d4d8;--dim:#5a5f73;
+--accent:#4ecdc4;--ok:#22c55e;--warn:#ef4444;--orange:#f59e0b;--blue:#3b82f6;--purple:#a78bfa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono','Fira Code','Cascadia Code',monospace;background:var(--bg);
+color:var(--text);padding:14px 18px;max-width:1300px;margin:0 auto;font-size:13px}
+.hdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
+h1{font-size:1.2em;color:var(--accent);letter-spacing:.5px}
+.badge{font-size:.8em;font-weight:700;padding:2px 8px;border-radius:4px}
+.badge.ok{background:rgba(34,197,94,.15);color:var(--ok)}
+.badge.warn{background:rgba(239,68,68,.15);color:var(--warn)}
+.badge.issues{background:rgba(245,158,11,.15);color:var(--orange)}
+.sub{color:var(--dim);font-size:.7em;margin-bottom:12px}
+.banner{border-radius:6px;padding:8px 12px;margin-bottom:10px;font-size:.8em}
+.banner.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);color:var(--warn)}
+.banner.ok{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);color:var(--ok)}
+.top{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.tm{flex:1;min-width:100px;background:var(--card);border:1px solid var(--border);
+border-radius:6px;padding:8px 10px;text-align:center}
+.tm .v{font-size:1.4em;font-weight:700;line-height:1.2}
+.tm .l{font-size:.6em;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+.tm .s{font-size:.65em;color:var(--dim)}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px;margin-bottom:10px}
+.c{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
+.c h2{font-size:.65em;color:var(--dim);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px}
+.r{display:flex;justify-content:space-between;padding:2px 0;font-size:.82em}
+.r .l{color:var(--dim)}.r .v{font-weight:600}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.accent{color:var(--accent)}
+.blue{color:var(--blue)}.orange{color:var(--orange)}.purple{color:var(--purple)}
+.wide{grid-column:1/-1}
+.topo{display:flex;align-items:center;gap:6px;margin:8px 0}
+.node{background:#1a1d27;border:1px solid var(--border);border-radius:6px;
+padding:6px 14px;text-align:center;flex:1;position:relative}
+.node .n{font-weight:700;font-size:.82em}.node .d{font-size:.62em;color:var(--dim)}
+.dot{position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%}
+.dot.on{background:var(--ok)}.dot.off{background:var(--warn)}.dot.idle{background:var(--orange)}
+.arr{color:var(--dim);font-size:.65em}
+.job{display:flex;justify-content:space-between;align-items:center;
+padding:4px 8px;margin:1px 0;border-radius:3px;font-size:.78em}
+.job.success{background:rgba(34,197,94,.05)}.job.fail,.job.FAILED{background:rgba(239,68,68,.05)}
+.job.bad_output{background:rgba(245,158,11,.05)}.job.timeout{background:rgba(245,158,11,.05)}
+.st{font-weight:700;min-width:65px;text-align:right}
+.st.success{color:var(--ok)}.st.fail,.st.FAILED{color:var(--warn)}
+.st.bad_output{color:var(--orange)}.st.timeout{color:var(--orange)}
+.chart{height:65px;display:flex;align-items:flex-end;gap:1px;margin-top:4px}
+.bar{flex:1;min-width:3px;border-radius:2px 2px 0 0;transition:opacity .2s}
+.bar:hover{opacity:1!important}
+.tbar{display:flex;align-items:center;gap:4px;font-size:.75em;margin:1px 0}
+.tfill{height:7px;border-radius:3px;background:var(--accent);opacity:.6}
+.sec{font-size:.65em;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin:10px 0 5px}
+.fe{font-size:.72em;padding:2px 0;border-bottom:1px solid var(--border);color:var(--dim)}
+.fe:last-child{border-bottom:none}
+.footer{color:var(--dim);font-size:.62em;margin-top:14px;text-align:center}
+.footer a{color:var(--accent);text-decoration:none}
+</style></head><body>
+
+<div class="hdr"><h1>⚡ Mission Control</h1><div class="badge" id="badge">...</div></div>
+<div class="sub" id="sub">loading...</div>
+<div id="banners"></div>
+<div class="top" id="top"></div>
+<div id="topo"></div>
+<div class="g" id="g1"></div>
+<div id="jobs"></div>
+<div class="g" id="g2"></div>
+<div id="growth"></div>
+
+<div class="footer">
+Zeke v2 Mission Control v10 • 30s refresh •
+<a href="diagnostic.json">diagnostic</a> •
+<a href="status.json">status</a> •
+<a href="daily-snapshots.jsonl">snapshots</a>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const R=(l,v,c)=>`<div class="r"><span class="l">${l}</span><span class="v ${c||''}">${v}</span></div>`;
+const fmt=n=>n!=null?n.toLocaleString():'—';
+const dur=s=>s>=60?(s/60).toFixed(1)+'m':s+'s';
+
+function ago(ts){
+  if(!ts)return'—';
+  let d;try{d=new Date(ts)}catch{return ts}
+  const s=(Date.now()-d.getTime())/1000;
+  if(isNaN(s)||s<0)return ts;
+  if(s<120)return Math.round(s)+'s ago';
+  if(s<7200)return Math.round(s/60)+'m ago';
+  if(s<172800)return Math.round(s/3600)+'h ago';
+  return Math.round(s/86400)+'d ago';
+}
+
+async function loadJSON(u){try{const r=await fetch(u+'?t='+Date.now());return r.ok?r.json():null}catch{return null}}
+async function loadJSONL(u){try{const r=await fetch(u+'?t='+Date.now());if(!r.ok)return[];
+const t=await r.text();return t.trim().split('\n').filter(l=>l.trim()).map(l=>{
+try{return JSON.parse(l)}catch{return null}}).filter(Boolean)}catch{return[]}}
+
+async function render(){
+  const [d,s,snaps]=await Promise.all([
+    loadJSON('diagnostic.json'),loadJSON('status.json'),loadJSONL('daily-snapshots.jsonl')]);
+  if(!d){$('#sub').textContent='❌ No data';return}
+
+  const a=d.activity||{}, f=d.feed||{}, c=d.cost||{}, sp=d.spark||{},
+        sc=d.scheduler||{}, gw=d.gateway||{}, h=d.health||{};
+
+  // Header
+  const rc=(window._rc=(window._rc||0)+1);
+  $('#sub').textContent=(d.timestamp_local||'')+' • #'+rc;
+  const hs=h.status||'UNKNOWN';
+  const b=$('#badge');
+  b.textContent=hs==='HEALTHY'?'HEALTHY':hs==='ISSUES_FOUND'?'⚠ '+(h.issue_count||'')+ ' ISSUE'+(h.issue_count>1?'S':''):hs;
+  b.className='badge '+(hs==='HEALTHY'?'ok':hs==='ISSUES_FOUND'?'issues':'warn');
+
+  // Banners
+  let ban='';
+  if(h.issues?.length) ban+=h.issues.map(i=>'<div class="banner warn">'+i+'</div>').join('');
+  if(c.is_zero_cost) ban+='<div class="banner ok">💰 $0 operation — all local Spark inference</div>';
+  $('#banners').innerHTML=ban;
+
+  // Top metrics
+  const sr=a.jobs_today>0?Math.round(a.success_today/a.jobs_today*100):0;
+  let tm='';
+  tm+=`<div class="tm"><div class="v accent">${fmt(f.total_lines||0)}</div><div class="l">Feed</div><div class="s">+${a.feed_growth_today||0} today</div></div>`;
+  tm+=`<div class="tm"><div class="v blue">${fmt(a.jobs_today||0)}</div><div class="l">Jobs</div><div class="s">${sr}% success</div></div>`;
+  tm+=`<div class="tm"><div class="v" style="color:var(--ok)">${a.success_today||0}</div><div class="l">OK</div><div class="s">${a.cycle_count||0} cycles</div></div>`;
+  tm+=`<div class="tm"><div class="v" style="color:var(--warn)">${(a.fail_today||0)+(a.timeout_today||0)}</div><div class="l">Fail</div><div class="s">${a.timeout_today||0} timeout</div></div>`;
+  const costV=c.is_zero_cost?'$0':'$'+(c.estimated_cost_today||0).toFixed(2);
+  tm+=`<div class="tm"><div class="v" style="color:${c.is_zero_cost?'var(--ok)':'var(--orange)'}">${costV}</div><div class="l">Cost</div><div class="s">${c.model?.split(' ')[0]||'—'}</div></div>`;
+  $('#top').innerHTML=tm;
+
+  // Topology
+  const spOnline=sp.online===true||(sp.online!==false&&sp.detail);
+  const spState=sp.inference_active?'inferring':sp.model_stuck?'⚠ stuck':'idle';
+  let tp='<div class="topo">';
+  tp+=`<div class="node"><div class="dot ${sc.running?'on':'off'}"></div><div class="n">Scheduler</div><div class="d">${sc.type||'python'} PID ${(sc.pids||[])[0]||'—'}</div></div>`;
+  tp+='<div class="arr">→</div>';
+  tp+=`<div class="node"><div class="dot ${gw.running?'on':'off'}"></div><div class="n">Gateway</div><div class="d">OpenClaw</div></div>`;
+  tp+='<div class="arr">→</div>';
+  tp+=`<div class="node"><div class="dot ${spOnline?sp.inference_active?'on':'idle':'off'}"></div><div class="n">DGX Spark</div><div class="d">${spState}</div></div>`;
+  tp+='</div>';
+  $('#topo').innerHTML=tp;
+
+  // Grid 1: Spark + Activity + Feed Quality
+  let g1='';
+
+  // Spark
+  let spC='';
+  spC+=R('Status',spOnline?'ONLINE':'UNREACHABLE',spOnline?'ok':'warn');
+  if(sp.detail){
+    const parts=(sp.detail||'').split('•').map(s=>s.trim());
+    if(parts[0])spC+=R('Model',parts[0],'accent');
+    if(parts[1])spC+=R('VRAM',parts[1],'blue');
+    if(parts[2])spC+=R('Size',parts[2]);
+    if(parts[3])spC+=R('Quant',parts[3]);
+    if(parts[4])spC+=R('Latency',parts[4],parseInt(parts[4])<100?'ok':'orange');
+  } else {
+    spC+=R('VRAM',(sp.vram_estimate_gb||'—')+'GB','blue');
+    spC+=R('Latency',(sp.response_ms||'—')+'ms');
+  }
+  g1+=`<div class="c"><h2>DGX Spark</h2>${spC}</div>`;
+
+  // Activity
+  let actC='';
+  actC+=R('State',a.state||'—',a.state?.includes('sleep')?'blue':a.state?.includes('idle')?'orange':'ok');
+  actC+=R('Last Job',a.last_job||'—','accent');
+  actC+=R('Last Job Time',a.last_job_time||'—');
+  actC+=R('Last Cycle',a.last_cycle||'—');
+  actC+=R('Next Cycle',a.next_cycle_est||'—','blue');
+  actC+=R('Cycles Today',a.cycle_count||0,'blue');
+  g1+=`<div class="c"><h2>Activity</h2>${actC}</div>`;
+
+  // Feed quality from diagnostic
+  let fqC='';
+  const cl=f.recent_50_clean||0, tr=f.recent_50_trivial||0, br=f.recent_50_broken||0;
+  const t50=cl+tr+br||1;
+  fqC+=R('Clean (last 50)',cl+'/'+t50,cl/t50>.6?'ok':'warn');
+  fqC+=R('Trivial',tr,tr>5?'orange':'ok');
+  fqC+=R('Broken',br,br>5?'warn':'ok');
+  fqC+=R('Last Write',f.last_modified_minutes_ago!=null?f.last_modified_minutes_ago+'m ago':'—');
+  // Topic bars
+  const topics=f.topic_distribution||{};
+  if(Object.keys(topics).length){
+    const mx=Math.max(...Object.values(topics),1);
+    for(const[t,n]of Object.entries(topics).sort((a,b)=>b[1]-a[1]).slice(0,6)){
+      fqC+=`<div class="tbar"><span style="min-width:130px;font-size:.7em">${t.substring(0,25)}</span><div class="tfill" style="width:${Math.max(n/mx*100,8)}%"></div><span style="font-size:.7em">${n}</span></div>`;
+    }
+  }
+  g1+=`<div class="c"><h2>Feed Quality</h2>${fqC}</div>`;
+  $('#g1').innerHTML=g1;
+
+  // Jobs from status.json
+  let jobsH='';
+  const jobs=s?.last_jobs||[];
+  if(jobs.length){
+    jobsH='<div class="sec">Recent Jobs</div>';
+    for(const j of jobs){
+      const nm=j.name||j.job||j.topic||'?';
+      const st=j.status||j.result||'?';
+      const d2=j.duration||j.duration_s;
+      const gr=j.grew!=null?j.grew:j.feed_added;
+      jobsH+=`<div class="job ${st}"><span>${nm}</span><span style="color:var(--dim)">${d2?dur(d2):''} ${gr!=null&&gr>0?'<span class="ok">+'+gr+'</span>':''}</span><span class="st ${st}">${st}</span></div>`;
+    }
+  }
+  // Also show from diagnostic activity
+  if(!jobs.length&&d.feed_history?.length){
+    // Use feed history as proxy
+  }
+  $('#jobs').innerHTML=jobsH;
+
+  // Grid 2: KG + GPU + Deep Quality
+  let g2='';
+  // KG
+  if(s?.kg_stats){
+    const kg=s.kg_stats;
+    let kgC='';
+    if(typeof kg==='string'){
+      // Parse the formatted string
+      const lines=kg.split('\n').filter(l=>l.trim());
+      for(const line of lines){
+        const m=line.match(/^\s*(.+?):\s*(.+)$/);
+        if(m){
+          const isNum=/^\d/.test(m[2]);
+          kgC+=R(m[1].trim(),m[2].trim(),isNum?'accent':'');
+        } else if(line.trim().startsWith('{')||line.trim().startsWith('"')){
+          // JSON blob — skip or format
+        }
+      }
+      if(!kgC) kgC=`<pre style="font-size:.72em;color:var(--dim);white-space:pre-wrap">${kg.substring(0,400)}</pre>`;
+    } else {
+      kgC+=R('Entities',fmt(kg.entities||kg.Entities||0),'accent');
+      kgC+=R('Relations',fmt(kg.relations||kg.Relationships||0),'blue');
+      kgC+=R('Associations',fmt(kg.associations||kg.Associations||0),'purple');
+    }
+    g2+=`<div class="c"><h2>Knowledge Graph</h2>${kgC}</div>`;
+  }
+
+  // GPU from status.json
+  if(s?.gpu_stats){
+    const gpu=s.gpu_stats;
+    let gpuC='';
+    const gst=gpu.status||'unknown';
+    gpuC+=R('Status',gst,gst.includes('OK')||gst==='active'?'ok':gst.includes('NO_DATA')?'orange':'warn');
+    if(gpu.gpu_util_pct!=null)gpuC+=R('GPU Util',gpu.gpu_util_pct+'%','blue');
+    if(gpu.temp_c!=null)gpuC+=R('Temp',gpu.temp_c+'°C',gpu.temp_c>80?'warn':'ok');
+    if(gpu.power_w!=null)gpuC+=R('Power',gpu.power_w+'W');
+    if(gpu.gpu_name)gpuC+=R('GPU',gpu.gpu_name,'accent');
+    g2+=`<div class="c"><h2>GPU</h2>${gpuC}</div>`;
+  }
+
+  // Deep feed quality from status.json
+  if(s?.feed_quality){
+    const fq=s.feed_quality;
+    let dqC='';
+    dqC+=R('Total',fq.total||'—');
+    const er=fq.error_rate;
+    // error_rate might be 0-1 decimal or already a percentage
+    const erPct=er!=null?(er>1?er.toFixed(1):(er*100).toFixed(1))+'%':'—';
+    dqC+=R('Error Rate',erPct,er>0.2?'warn':'ok');
+    dqC+=R('Malformed',fq.malformed_json||0,fq.malformed_json>5?'warn':'ok');
+    dqC+=R('Literal Timestamps',fq.literal_timestamps||0,fq.literal_timestamps>5?'orange':'ok');
+    dqC+=R('Duplicates',fq.duplicates||0,fq.duplicates>20?'warn':'ok');
+    dqC+=R('No New Dev',fq.no_new_dev||0);
+    g2+=`<div class="c"><h2>Feed Quality (Deep)</h2>${dqC}</div>`;
+  }
+
+  // Automation layers
+  const auto=d.automation||{};
+  if(Object.keys(auto).length){
+    let autoC='';
+    for(const[layer,val]of Object.entries(auto)){
+      if(typeof val==='string'){
+        autoC+=R(layer,val,val.includes('DEPLOYED')?'ok':val.includes('PROGRESS')?'orange':'blue');
+      } else if(typeof val==='object'&&val){
+        autoC+=R(layer,val.status||val.state||JSON.stringify(val).substring(0,50));
+      }
+    }
+    g2+=`<div class="c"><h2>Automation</h2>${autoC}</div>`;
+  }
+  $('#g2').innerHTML=g2;
+
+  // Growth chart from feed_history + snapshots
+  let grH='';
+  const fh=d.feed_history||[];
+  if(fh.length>2){
+    grH+='<div class="sec">Feed Growth (Today)</div><div class="c">';
+    const vals=fh.map(h=>{
+      if(typeof h==='object')return{t:h.t||'',v:h.v||h.value||0};
+      return{t:'',v:h};
+    });
+    const vs=vals.map(x=>x.v);
+    const mn=Math.min(...vs),mx=Math.max(...vs),rng=mx-mn||1;
+    grH+='<div class="chart">';
+    for(let i=0;i<vals.length;i++){
+      const pct=Math.max(((vals[i].v-mn)/rng)*100,2);
+      grH+=`<div class="bar" style="height:${pct}%;background:var(--accent);opacity:${.3+.7*(i/vals.length)}" title="${vals[i].t}: ${vals[i].v}"></div>`;
+    }
+    grH+='</div>';
+    grH+=`<div style="display:flex;justify-content:space-between;font-size:.6em;color:var(--dim);margin-top:2px"><span>${mn}</span><span>${vals.length} snapshots today</span><span>${mx}</span></div>`;
+    grH+='</div>';
+  }
+
+  // Longitudinal snapshots chart (multi-day view)
+  if(snaps.length>1){
+    grH+='<div class="sec">System Growth (Longitudinal)</div><div class="c">';
+    const sv=snaps.map(s=>s.feed_total||0);
+    const smn=Math.min(...sv),smx=Math.max(...sv),srng=smx-smn||1;
+    grH+='<div class="chart">';
+    for(let i=0;i<snaps.length;i++){
+      const pct=Math.max(((sv[i]-smn)/srng)*100,3);
+      const label=snaps[i].date+' '+snaps[i].hour;
+      const ev=snaps[i].event||'';
+      const color=ev.includes('clean')?'var(--orange)':'var(--accent)';
+      grH+=`<div class="bar" style="height:${pct}%;background:${color};opacity:${.3+.7*(i/snaps.length)}" title="${label}: ${sv[i]} entries${ev?' ('+ev+')':''}"></div>`;
+    }
+    grH+='</div>';
+    grH+=`<div style="display:flex;justify-content:space-between;font-size:.6em;color:var(--dim);margin-top:2px"><span>${snaps[0].date}</span><span>${snaps.length} snapshots</span><span>${snaps[snaps.length-1].date}</span></div>`;
+
+    // Table of recent snapshots
+    grH+='<div style="margin-top:8px">';
+    for(const snap of snaps.slice(-8).reverse()){
+      const ev=snap.event||'';
+      const evTag=ev.includes('clean')?'<span class="orange"> [clean]</span>':'';
+      grH+=`<div class="r"><span class="l">${snap.date} ${snap.hour}</span><span class="v accent">${snap.feed_total} entries${evTag}</span></div>`;
+    }
+    grH+='</div></div>';
+  }
+
+  // Latest research entries
+  const entries=f.last_entries||[];
+  if(entries.length){
+    grH+='<div class="sec">Latest Research</div><div class="c">';
+    for(const e of entries.slice(-6)){
+      if(typeof e==='object'){
+        const topic=e.topic||e.domain||'';
+        const finding=(e.finding||e.insight||e.content||'').substring(0,140);
+        const ts=e.timestamp||'';
+        grH+=`<div class="fe"><span class="accent">[${topic}]</span> ${finding} <span style="color:var(--dim);font-size:.85em">${ts?ago(ts):''}</span></div>`;
+      } else if(typeof e==='string'){
+        grH+=`<div class="fe">${e.substring(0,160)}</div>`;
+      }
+    }
+    grH+='</div>';
+  }
+
+  $('#growth').innerHTML=grH;
+}
+
+render();
+setInterval(render,30000);
+</script></body></html>
