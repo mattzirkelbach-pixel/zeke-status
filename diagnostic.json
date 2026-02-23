@@ -1,41 +1,42 @@
 {
-  "timestamp_local": "2026-02-22 21:10:10 ET",
-  "timestamp_utc": "2026-02-23T02:10:10Z",
+  "timestamp_local": "2026-02-22 22:31:07 ET",
+  "timestamp_utc": "2026-02-23T03:31:07Z",
   "scheduler": {
     "running": true,
     "pid": 52656,
-    "uptime_minutes": 54,
+    "uptime_minutes": 135,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 126,
+    "total_lines": 131,
     "last_entries": [
-      "[2026-02-22T20:46:00] AI agents and tool calling",
-      "[2026-02-22T21:01:00] self-improvement and learning",
-      "[2026-02-22T21:01:00] self-improvement and learning",
-      "[2026-02-22T21:01:00] self-improvement and learning",
-      "[2026-02-22T21:07:00] compound-synthesis"
+      "[\"$(date -u +%Y-%m-%] self-improvement",
+      "[?] longevity research",
+      "[?] longevity research",
+      "['2026-02-23T02:59:0] ai-agents",
+      "[$(date -u +%Y-%m-%d] treasury-bonds"
     ]
   },
   "spark": {
     "online": true,
     "models_loaded": [
+      "qwen3:8b",
       "qwen3-32b-32k:latest"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: qwen3-32b-32k:latest"
+    "detail": "healthy, loaded: qwen3:8b, qwen3-32b-32k:latest"
   },
   "gateway": {
     "running": true
   },
   "today": {
-    "jobs_run": 5,
+    "jobs_run": 11,
     "success": 5,
-    "timeout": 0,
-    "fail": 0,
-    "feed_growth": 16
+    "timeout": 2,
+    "fail": 4,
+    "feed_growth": 21
   },
   "cycles": [
     {
@@ -47,6 +48,16 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 16
+    },
+    {
+      "ts": "2026-02-22T22:31:07.629040",
+      "window": "overnight",
+      "cycle": 1,
+      "jobs": 6,
+      "success": 0,
+      "timeout": 2,
+      "fail": 4,
+      "feed_grew": 5
     }
   ],
   "recent_jobs": [
@@ -90,6 +101,58 @@
       "status": "success",
       "duration": 170,
       "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "timeout",
+      "duration": 900,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration": 378,
+      "grew": 1,
+      "issues": [
+        "literal $(date) in timestamp",
+        "trivial content"
+      ]
+    },
+    {
+      "name": "longevity",
+      "status": "bad_output",
+      "duration": 900,
+      "grew": 2,
+      "issues": [
+        "no timestamp",
+        "no timestamp"
+      ]
+    },
+    {
+      "name": "ai-agents",
+      "status": "bad_output",
+      "duration": 814,
+      "grew": 1,
+      "issues": [
+        "bad timestamp format: '2026-02-23T02:59:05"
+      ]
+    },
+    {
+      "name": "tool-calling",
+      "status": "bad_output",
+      "duration": 900,
+      "grew": 1,
+      "issues": [
+        "literal $(date) in timestamp"
+      ]
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "timeout",
+      "duration": 900,
+      "grew": 0,
       "issues": []
     }
   ],
