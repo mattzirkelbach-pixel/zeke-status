@@ -1,0 +1,109 @@
+{
+  "timestamp": "2026-02-22T20:29:17.808336",
+  "timestamp_utc": "2026-02-23T01:29:17.808360+00:00",
+  "purpose": "Pre-autonomy-push checkpoint. Full system state capture.",
+  "processes": {
+    "scheduler_pids": [
+      "52656"
+    ],
+    "gateway_pids": [
+      "46493",
+      "52664",
+      "52665"
+    ],
+    "ttyd_pids": [
+      "42402"
+    ],
+    "dashboard_pids": [
+      "5321"
+    ]
+  },
+  "spark": {
+    "api_ps": "{\"models\":[{\"name\":\"qwen3-32b-32k:latest\",\"model\":\"qwen3-32b-32k:latest\",\"size\":29082999936,\"digest\":\"0c14295ea8ae48bd33e58c72e5975258c3c69c9c08f7eea6f015124fe72eb55f\",\"details\":{\"parent_model\":\"\",\"format\":\"gguf\",\"family\":\"qwen3\",\"families\":[\"qwen3\"],\"parameter_size\":\"32.8B\",\"quantization_level\":\"Q4_K_M\"},\"expires_at\":\"2026-02-22T20:32:37.513277857-05:00\",\"size_vram\":29082999936,\"context_length\":32768}]}",
+    "models_available": "deepseek-r1-32b-32k:latest\nqwen3-32b-32k:latest\ndeepseek-r1:32b\nqwen3:32b\nqwen3:8b\nnomic-embed-text:latest\nglm-4.7-flash:latest\nqwen3-coder:latest\nqwen2.5-coder:32b"
+  },
+  "feed": {
+    "path": "/Users/zekezirk/.openclaw/workspace/memory/learning-feed.jsonl",
+    "line_count": 113,
+    "size_bytes": 36016,
+    "last_modified": "2026-02-22T20:27:37.516668"
+  },
+  "crontab": "* * * * * python3 /Users/zekezirk/zeke-scheduler.py --guardian >> /tmp/zeke-guardian.log 2>&1\n*/5 * * * * /Users/zekezirk/zeke-status-push.sh >> /tmp/zeke-push.log 2>&1\n0 4 * * * rm -f ~/.openclaw/agents/main/sessions/*.jsonl ~/.openclaw/agents/main/sessions/sessions.json 2>/dev/null\n*/15 * * * * /usr/bin/python3 /Users/zekezirk/zeke-status/record-snapshot.py\n*/10 * * * * /usr/bin/python3 /Users/zekezirk/zeke-watchdog.py >> /tmp/zeke-watchdog.log 2>&1",
+  "launchd_agents": "5321\t0\tcom.zeke.dashboard\n1691\t0\tcom.openclaw.spark-tunnel\n42402\t0\tcom.ttyd.terminal\n75194\t0\tai.openclaw.cloudflare-tunnel\n46493\t0\tai.openclaw.gateway\n-\t-15\tai.openclaw.overnight",
+  "openclaw_config": {
+    "byprovider_models": "{\n  \"spark/qwen3:32b\": {\n    \"allow\": [\n      \"exec\",\n      \"read\",\n      \"web_search\",\n      \"memory_search\",\n      \"web_fetch\"\n    ]\n  },\n  \"spark/qwen3:8b\": {\n    \"allow\": [\n      \"read\",\n      \"memory_search\",\n      \"session_status\"\n    ]\n  },\n  \"spark/qwen3-32b-32k\": {\n    \"allow\": [\n      \"exec\",\n      \"read\",\n      \"web_search\",\n      \"memory_search\",\n      \"web_fetch\"\n    ]\n  },\n  \"spark/glm-4.7-flash\": {\n    \"allow\": [\n      \"exec\",\n      \"read\",\n      \"web_search\",\n      \"memory_search\",\n      \"web_fetch\"\n    ]\n  },\n  \"spark/qwen3-coder:latest\": {\n    \"allow\": [\n      \"exec\",\n      \"read\",\n      \"web_search\",\n      \"memory_search\",\n      \"web_fetch\"\n    ]\n  },\n  \"spark/qwen2.5-coder:32b\": {\n    \"allow\": [\n      \"exec\",\n      \"read\",\n      \"web_search\",\n      \"memory_search\",\n      \"web_fetch\"\n    ]\n  },\n  \"spark/deepseek-r1:32b\": {\n    \"allow\": [\n      \"exec\",\n      \"read\",\n      \"web_search\",\n      \"memory_search\",\n      \"web_fetch\"\n    ]\n  },\n  \"spark/deepseek-r1-32b-32k\": {\n    \"allow\": [\n      \"exec\",\n      \"read\"\n    ]\n  }\n}"
+  },
+  "status_files": {
+    "diagnostic.json": 671,
+    "status.json": 223,
+    "cycle-report.json": true,
+    "cycle-history.jsonl": 5,
+    "daily-snapshots.jsonl": 3,
+    "repair-log.jsonl": 1
+  },
+  "session_files": {
+    "count": "30",
+    "total_size": "6.8M"
+  },
+  "git": {
+    "branch": "main",
+    "last_commit": "73db454 auto: diagnostic 20:25",
+    "status": ""
+  },
+  "disk": {
+    "free": "146Gi"
+  },
+  "watchdog_state": {
+    "last_feed_count": 111,
+    "last_feed_check": "2026-02-22T20:20:00.311848",
+    "repairs_today": [
+      {
+        "time": "2026-02-22T20:15:05.369037",
+        "reasons": [
+          "scheduler_down"
+        ],
+        "success": true,
+        "output_tail": "**Repair complete.** \n\n- **Issue:** Scheduler was not running\n- **Fix:** Restarted `zeke-scheduler.py` (PID 52656)\n- **Startup:** Clean \u2014 preflight OK, feed=110, spark=healthy, gateway=UP, first job (",
+        "returncode": 0
+      }
+    ],
+    "last_alert": {
+      "scheduler_down": "2026-02-22T20:15:05.368959"
+    },
+    "total_repairs": 1,
+    "installed": "2026-02-22T20:12:42.919478"
+  },
+  "scripts": {
+    "zeke-watchdog.py": true,
+    "zeke-scheduler.py": true,
+    "zeke-dedup.py": false,
+    "zeke-status-push.sh": true,
+    "zeke-queue.sh": true,
+    "zeke-reason.sh": true,
+    "build-status.py": true,
+    "record-snapshot.py": true,
+    "quality-scorer.py": false
+  },
+  "dashboard": {
+    "index_size": 24053,
+    "version": "v11",
+    "url": "https://mattzirkelbach-pixel.github.io/zeke-status/"
+  },
+  "autonomy_stack": {
+    "L1_execution": "DEPLOYED \u2014 scheduler, guardian, gateway, quality gate, spark probe, structured logging, status push",
+    "L2_oversight": "DEPLOYED \u2014 dashboard v11, cycle reporting, health detection, self-repair (Phase 2), Telegram alerts",
+    "L3_intelligence": "PARTIAL \u2014 quality scorer deployed, insight delivery deployed, auto-dedup pending deploy",
+    "phase1_cycle_reports": "DEPLOYED",
+    "phase2_self_repair": "DEPLOYED + VERIFIED (scheduler kill test \u2192 35s auto-repair)",
+    "phase3_quality_scoring": "DEPLOYING (in autonomy-push, not yet live)",
+    "phase4_insight_delivery": "DEPLOYING (in autonomy-push, not yet live)"
+  },
+  "known_issues": [
+    "Feed Audit in status.json still shows 92.2% error rate (stale from pre-clean, will refresh)",
+    "Dashboard v11 has minor nit: Activity card shows 'Last Job' label twice",
+    "Jobs section shows entries with '?' for nameless jobs",
+    "Longitudinal chart only has 2 snapshots so far \u2014 needs time to populate",
+    "Phase 3 prompt rewriting not yet automated \u2014 quality scorer is the foundation",
+    "Cowork agent unused"
+  ]
+}
