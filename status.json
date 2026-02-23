@@ -1,8 +1,7 @@
 {
-  "timestamp": "2026-02-23T11:10:01.040335+00:00",
-  "feed_lines": 146,
+  "timestamp": "2026-02-23T11:15:00.161061+00:00",
+  "feed_lines": 147,
   "recent_feed": [
-    "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"self-improvement\",\"insights\":[\"No new developments\"],\"tools_used\":[\"web_search\",\"web_fetch\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"self-improvement\",\"insights\":[\"No new developments\"],\"tools_used\":[\"web_search\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"tool-calling\",\"insights\":[\"MiniMax-M2.1 supports Rust/Java/Go/C++ with 85% confidence\",\"Ollama 0.17 architecture improvements confirmed\"],\"tools_used\":[\"web_search\",\"web_fetch\",\"exec\"],\"files_updated\":[\"memory/learning-feed.jsonl\",\"memory/knowledge.db\"]}",
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"ai-agents\",\"insights\":[\"No new developments in MCP protocol or framework updates within past 48 hours\"],\"tools_used\":[\"web_search\",\"exec\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
@@ -16,7 +15,8 @@
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"tool-calling\",\"insights\":[\"Ollama 0.17 released with 40% faster prompt eval and 18% faster token gen in GPU, but no explicit tool calling improvements mentioned.\"],\"tools_used\":[\"web_search\",\"web_fetch\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"tool-calling\",\"insights\":[\"No new developments in qwen3 tool calling templates, vLLM benchmarks, or OpenClaw GitHub issues.\"],\"tools_used\":[\"web_search\",\"web_fetch\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
     "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"self-improvement\",\"insights\":[\"No new developments\"],\"tools_used\":[\"web_search\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}",
-    "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"longevity\",\"insights\":[\"Columbia University 2024 study: Low-dose rapamycin delayed ovarian aging in women by 20%\",\"Cell Reports Medicine 2025: Rapamycin enabled successful pregnancies in IVF failures\"],\"tools_used\":[\"web_search\",\"web_fetch\",\"exec\"],\"files_updated\":[\"memory/learning-feed.jsonl\",\"memory/knowledge.db\"]}"
+    "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"longevity\",\"insights\":[\"Columbia University 2024 study: Low-dose rapamycin delayed ovarian aging in women by 20%\",\"Cell Reports Medicine 2025: Rapamycin enabled successful pregnancies in IVF failures\"],\"tools_used\":[\"web_search\",\"web_fetch\",\"exec\"],\"files_updated\":[\"memory/learning-feed.jsonl\",\"memory/knowledge.db\"]}",
+    "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"topic\":\"tool-calling\",\"insights\":[\"No new developments\"],\"tools_used\":[\"web_search\"],\"files_updated\":[\"memory/learning-feed.jsonl\"]}"
   ],
   "kg_stats": "Entities: 213\nRelationships: 214\nAssociations: 36\nInsights: 0\nDomains: {\n  \"treasury-bonds\": 45,\n  \"tool-calling\": 43,\n  \"ai-agents\": 40,\n  \"longevity\": 34,\n  \"cross-domain\": 15,\n  \"self-improvement\": 12,\n  \"local model inference\": 6,\n  \"senolytics\": 4,\n  \"10-year_Treasury_yield\": 2,\n  \"10-year_Treasury_yield_adjustment_intervals\": 2,\n  \"Longevity\": 2,\n  \"cross-domain-associations\": 2,\n  \"spaced_repetition_intervals\": 2,\n  \"treasury\": 2,\n  \"treasury-bounds\": 2\n}",
   "last_synthesis": "daily-synthesis-2026-02-21.md",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 64.0,
-    "power_w": 37.43,
+    "temp_c": 65.0,
+    "power_w": 38.6,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -122,6 +122,10 @@
     "status": "ONLINE",
     "loaded_models": [
       {
+        "name": "qwen3:8b",
+        "size_gb": 6.0
+      },
+      {
         "name": "qwen3-32b-32k:latest",
         "size_gb": 29.1
       }
@@ -129,10 +133,10 @@
   },
   "feed_quality": {
     "malformed_json": 1,
-    "literal_timestamps": 20,
+    "literal_timestamps": 21,
     "duplicates": 121,
-    "no_new_dev": 4,
-    "total": 146,
+    "no_new_dev": 5,
+    "total": 147,
     "error_rate": 97.3
   },
   "crontab_status": {
