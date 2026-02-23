@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-22 7:45:00PM ET",
-  "timestamp_utc": "2026-02-23T00:45:00Z",
+  "timestamp_local": "2026-02-22 7:50:01PM ET",
+  "timestamp_utc": "2026-02-23T00:50:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -13,38 +13,36 @@
     "running": true
   },
   "spark": {
-    "online": true,
-    "models_loaded": [
-      "qwen3-32b-32k:latest"
-    ],
+    "online": false,
+    "models_loaded": [],
     "model_stuck": false,
-    "inference_active": true,
-    "detail": "qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 30ms",
-    "response_ms": 30,
-    "vram_estimate_gb": 27.1,
-    "model_params": "32.8B",
-    "model_quant": "Q4_K_M"
+    "inference_active": false,
+    "detail": "unreachable",
+    "response_ms": null,
+    "vram_estimate_gb": null,
+    "model_params": null,
+    "model_quant": null
   },
   "feed": {
-    "total_lines": 104,
-    "last_modified_minutes_ago": 3.7,
+    "total_lines": 106,
+    "last_modified_minutes_ago": 0.7,
     "last_entries": [
-      "[2/22 5:47PM ET] AI agents and tool calling \u2014 2026 IEEE paper on decentralized control: 25% efficiency gain in logistics via m",
-      "[2/22 5:47PM ET] AI agents and tool calling \u2014 CrewAI (2026) introduced role-based agents for multi-agent coordination. 40% tas",
       "[2/22 5:47PM ET] AI agents and tool calling \u2014 2026 EU AI Act compliance mandates transparency for agentic NPCs: mandatory synt",
       "[2/22 9:53PM ET] compound-synthesis \u2014 Longevity research on cognitive preservation (sleep optimization, light exposure",
-      "[2/22 7:35PM ET] longevity research \u2014 No new developments found \u26a0"
+      "[2/22 7:35PM ET] longevity research \u2014 No new developments found \u26a0",
+      "[2/22 7:42PM ET] AI agents and tool calling \u2014 Graph-of-Agents (GoA) framework achieves 89.4% accuracy on MMLU-Pro by using 3 a",
+      "[2/22 7:48PM ET] AI agents and tool calling \u2014 mcp-agent 2026 implements full MCP protocol support with built-in workflows (map"
     ],
     "recent_50_clean": 49,
     "recent_50_trivial": 1,
     "recent_50_broken": 0,
     "topic_distribution": {
       "treasury bonds and interest rates": 27,
-      "compound-synthesis": 7,
-      "AI agents and tool calling": 7,
+      "AI agents and tool calling": 9,
+      "compound-synthesis": 6,
       "self-improvement and learning": 4,
-      "longevity research": 2,
-      "rapamycin clinical trials": 1
+      "rapamycin clinical trials": 1,
+      "senolytics": 1
     }
   },
   "activity": {
@@ -527,6 +525,11 @@
       "t": 1771807500813,
       "v": 104,
       "l": "7:45PM"
+    },
+    {
+      "t": 1771807809099,
+      "v": 106,
+      "l": "7:50PM"
     }
   ],
   "cost": {
@@ -624,8 +627,10 @@
     }
   },
   "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
+    "status": "CRITICAL",
+    "issues": [
+      "CRITICAL: Spark offline"
+    ],
+    "issue_count": 1
   }
 }
