@@ -5,398 +5,348 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zeke Mission Control</title>
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --card: #12121a;
-    --border: #1e1e2e;
-    --text: #e0e0e0;
-    --dim: #666680;
-    --accent: #4ecdc4;
-    --warn: #ff6b6b;
-    --ok: #51cf66;
-    --blue: #339af0;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-    background: var(--bg);
-    color: var(--text);
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  h1 {
-    font-size: 1.4em;
-    color: var(--accent);
-    margin-bottom: 6px;
-    letter-spacing: 0.5px;
-  }
-  .subtitle {
-    color: var(--dim);
-    font-size: 0.75em;
-    margin-bottom: 20px;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px;
-  }
-  .card h2 {
-    font-size: 0.8em;
-    color: var(--dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-  }
-  .metric {
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 0;
-    font-size: 0.85em;
-  }
-  .metric .label { color: var(--dim); }
-  .metric .value { color: var(--text); font-weight: 600; }
-  .metric .value.ok { color: var(--ok); }
-  .metric .value.warn { color: var(--warn); }
-  .metric .value.accent { color: var(--accent); }
-  .metric .value.blue { color: var(--blue); }
-  .wide { grid-column: 1 / -1; }
-  .job-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 8px;
-    margin: 2px 0;
-    border-radius: 4px;
-    font-size: 0.8em;
-  }
-  .job-row.ok { background: rgba(81,207,102,0.08); }
-  .job-row.fail { background: rgba(255,107,107,0.08); }
-  .job-row.timeout { background: rgba(255,165,0,0.08); }
-  .job-status { font-weight: 600; min-width: 60px; text-align: right; }
-  .job-status.ok { color: var(--ok); }
-  .job-status.fail { color: var(--warn); }
-  .job-status.timeout { color: orange; }
-  .section-title {
-    font-size: 0.75em;
-    color: var(--dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 16px 0 8px;
-  }
-  #error-banner {
-    display: none;
-    background: rgba(255,107,107,0.15);
-    border: 1px solid var(--warn);
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 16px;
-    color: var(--warn);
-    font-size: 0.85em;
-  }
-  .footer {
-    color: var(--dim);
-    font-size: 0.7em;
-    margin-top: 20px;
-    text-align: center;
-  }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .bar-chart {
-    display: flex;
-    gap: 3px;
-    align-items: flex-end;
-    height: 60px;
-    margin-top: 8px;
-  }
-  .bar {
-    flex: 1;
-    background: var(--accent);
-    border-radius: 2px 2px 0 0;
-    min-width: 8px;
-    position: relative;
-    opacity: 0.7;
-  }
-  .bar:hover { opacity: 1; }
-  .bar.empty { background: var(--border); }
-  .history-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 3px 0;
-    font-size: 0.78em;
-    border-bottom: 1px solid var(--border);
-  }
-  .history-row:last-child { border-bottom: none; }
+:root {
+  --bg: #0b0d11; --card: #13161d; --border: #1c2030;
+  --text: #d4d4d8; --dim: #5a5f73; --accent: #4ecdc4;
+  --ok: #22c55e; --warn: #ef4444; --orange: #f59e0b; --blue: #3b82f6;
+  --purple: #a78bfa;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono','Fira Code','Cascadia Code','JetBrains Mono',monospace;background:var(--bg);color:var(--text);padding:16px 20px;max-width:1280px;margin:0 auto;font-size:13px}
+h1{font-size:1.3em;color:var(--accent);letter-spacing:0.5px;display:inline}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.health{font-size:0.85em;font-weight:700}
+.health.ok{color:var(--ok)}.health.warn{color:var(--warn)}.health.issues{color:var(--orange)}
+.sub{color:var(--dim);font-size:0.75em;margin-bottom:14px}
+.top-metrics{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tm{flex:1;min-width:120px;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px 12px;text-align:center}
+.tm .val{font-size:1.5em;font-weight:700;line-height:1.2}
+.tm .label{font-size:0.65em;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+.tm .sub-val{font-size:0.7em;color:var(--dim)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px;margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.card h2{font-size:0.7em;color:var(--dim);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px}
+.row{display:flex;justify-content:space-between;padding:3px 0;font-size:0.85em}
+.row .l{color:var(--dim)}.row .v{font-weight:600}
+.v.ok{color:var(--ok)}.v.warn{color:var(--warn)}.v.accent{color:var(--accent)}.v.blue{color:var(--blue)}.v.orange{color:var(--orange)}.v.purple{color:var(--purple)}
+.wide{grid-column:1/-1}
+.job{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;margin:2px 0;border-radius:4px;font-size:0.8em}
+.job.success{background:rgba(34,197,94,0.06)}.job.fail{background:rgba(239,68,68,0.06)}.job.bad_output{background:rgba(245,158,11,0.06)}.job.timeout{background:rgba(245,158,11,0.06)}
+.job .st{font-weight:700;min-width:70px;text-align:right}
+.job .st.success{color:var(--ok)}.job .st.fail{color:var(--warn)}.job .st.bad_output{color:var(--orange)}.job .st.timeout{color:var(--orange)}
+.chart{height:70px;display:flex;align-items:flex-end;gap:2px;margin-top:6px}
+.bar{flex:1;min-width:4px;border-radius:2px 2px 0 0;transition:opacity 0.2s;cursor:crosshair}
+.bar:hover{opacity:1!important}
+.topo{display:flex;align-items:center;gap:8px;margin:8px 0}
+.node{background:#1a1d27;border:1px solid var(--border);border-radius:6px;padding:8px 16px;text-align:center;flex:1;position:relative}
+.node .name{font-weight:700;font-size:0.85em}.node .desc{font-size:0.65em;color:var(--dim)}
+.node .dot{position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%}
+.dot.on{background:var(--ok)}.dot.off{background:var(--warn)}
+.arrow{color:var(--dim);font-size:0.7em}
+.footer{color:var(--dim);font-size:0.65em;margin-top:16px;text-align:center}
+.footer a{color:var(--accent);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.issue-banner{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:6px;padding:8px 12px;margin-bottom:12px;color:var(--warn);font-size:0.8em}
+.feed-entry{font-size:0.75em;padding:3px 0;border-bottom:1px solid var(--border);color:var(--dim)}
+.feed-entry:last-child{border-bottom:none}
+.topic-bar{display:flex;align-items:center;gap:6px;font-size:0.78em;margin:2px 0}
+.topic-fill{height:8px;border-radius:4px;background:var(--accent);opacity:0.6}
 </style>
 </head>
 <body>
 
-<h1>⚡ Mission Control</h1>
-<div class="subtitle" id="subtitle">loading...</div>
-<div id="error-banner"></div>
-
-<div class="grid" id="main-grid">
-  <!-- Cards injected by JS -->
+<div class="header">
+  <div><h1>⚡ Mission Control</h1></div>
+  <div class="health" id="health-badge">loading</div>
 </div>
+<div class="sub" id="sub">loading...</div>
+<div id="issues-banner"></div>
 
+<div class="top-metrics" id="top-metrics"></div>
+<div class="grid" id="grid1"></div>
+<div id="topo-section"></div>
+<div class="grid" id="grid2"></div>
 <div id="jobs-section"></div>
-<div id="cycle-section"></div>
-<div id="history-section"></div>
+<div class="grid" id="grid3"></div>
 
 <div class="footer">
   Zeke v2 • Auto-refresh 30s •
-  <a href="diagnostic.json" target="_blank">raw diagnostic ↗</a> •
-  <a href="cycle-report.json" target="_blank">cycle report ↗</a> •
-  <a href="cycle-history.jsonl" target="_blank">cycle history ↗</a>
+  <a href="diagnostic.json">raw diagnostic</a> •
+  <a href="status.json">full status</a> •
+  <a href="cycle-report.json">cycle report</a> •
+  <a href="cycle-history.jsonl">cycle history</a>
 </div>
 
 <script>
-const $ = s => document.querySelector(s);
+const $=s=>document.querySelector(s);
+const fmt=n=>n!=null?n.toLocaleString():'—';
+const pct=(a,b)=>b>0?Math.round(a/b*100)+'%':'—';
 
-function fmt(n) { return n != null ? n.toLocaleString() : '—'; }
-function dur(s) { return s >= 60 ? (s/60).toFixed(1)+'m' : s+'s'; }
-function ago(ts) {
-  if (!ts) return '—';
-  const d = (Date.now() - new Date(ts).getTime()) / 1000;
-  if (d < 60) return Math.round(d) + 's ago';
-  if (d < 3600) return Math.round(d/60) + 'm ago';
-  if (d < 86400) return Math.round(d/3600) + 'h ago';
-  return Math.round(d/86400) + 'd ago';
+function ago(ts){
+  if(!ts)return'—';
+  // Handle both ISO and "2/22 1:53PM ET" formats
+  let d;
+  if(ts.includes('T'))d=new Date(ts);
+  else{try{d=new Date(ts)}catch{return ts}}
+  const s=(Date.now()-d.getTime())/1000;
+  if(isNaN(s)||s<0)return ts;
+  if(s<60)return Math.round(s)+'s ago';
+  if(s<3600)return Math.round(s/60)+'m ago';
+  if(s<86400)return Math.round(s/3600)+'h ago';
+  return Math.round(s/86400)+'d ago';
 }
 
-function statusClass(s) {
-  if (!s) return '';
-  s = s.toLowerCase();
-  if (s === 'ok' || s === 'success' || s === 'completed') return 'ok';
-  if (s.includes('timeout')) return 'timeout';
-  if (s === 'fail' || s === 'failed' || s === 'error') return 'fail';
-  return '';
-}
+function dur(s){return s>=60?(s/60).toFixed(1)+'m':s+'s'}
+function R(l,v,c){return`<div class="row"><span class="l">${l}</span><span class="v ${c||''}">${v}</span></div>`}
 
-function renderMetric(label, value, cls) {
-  return `<div class="metric"><span class="label">${label}</span><span class="value ${cls||''}">${value}</span></div>`;
-}
+async function loadJSON(u){try{const r=await fetch(u+'?t='+Date.now());return r.ok?r.json():null}catch{return null}}
+async function loadJSONL(u){try{const r=await fetch(u+'?t='+Date.now());if(!r.ok)return[];const t=await r.text();return t.trim().split('\n').filter(l=>l.trim()).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean)}catch{return[]}}
 
-function renderCard(title, content, wide) {
-  return `<div class="card ${wide?'wide':''}">${title?`<h2>${title}</h2>`:''}${content}</div>`;
-}
-
-async function loadJSON(url) {
-  try {
-    const r = await fetch(url + '?t=' + Date.now());
-    if (!r.ok) return null;
-    return await r.json();
-  } catch { return null; }
-}
-
-async function loadJSONL(url) {
-  try {
-    const r = await fetch(url + '?t=' + Date.now());
-    if (!r.ok) return [];
-    const text = await r.text();
-    return text.trim().split('\n').filter(l => l.trim()).map(l => {
-      try { return JSON.parse(l); } catch { return null; }
-    }).filter(Boolean);
-  } catch { return []; }
-}
-
-async function render() {
-  const [diag, cycle, history] = await Promise.all([
+async function render(){
+  const [d, s, cr, ch] = await Promise.all([
     loadJSON('diagnostic.json'),
+    loadJSON('status.json'),
     loadJSON('cycle-report.json'),
     loadJSONL('cycle-history.jsonl')
   ]);
 
-  if (!diag) {
-    $('#error-banner').style.display = 'block';
-    $('#error-banner').textContent = '❌ Cannot load diagnostic.json — build-status.py may not be running';
-    return;
-  }
-  $('#error-banner').style.display = 'none';
+  if(!d){$('#sub').textContent='❌ Cannot load diagnostic.json';return}
 
-  // Update subtitle with timestamp
-  const ts = diag.timestamp || diag.generated || diag.last_updated;
-  $('#subtitle').textContent = ts ? 'Last update: ' + ago(ts) : 'Zeke v2';
+  // === HEADER ===
+  $('#sub').textContent = (d.timestamp_local||'') + ' • refresh #' + (window._rc=(window._rc||0)+1);
+  const hs = d.health?.status||'UNKNOWN';
+  const hb = $('#health-badge');
+  hb.textContent = hs==='HEALTHY'?'● HEALTHY':hs==='ISSUES_FOUND'?'⚠ '+d.health.issue_count+' ISSUE'+(d.health.issue_count>1?'S':''):'● '+hs;
+  hb.className = 'health '+(hs==='HEALTHY'?'ok':hs==='ISSUES_FOUND'?'issues':'warn');
 
-  let cards = '';
+  // Issues banner
+  const ib=$('#issues-banner');
+  if(d.health?.issues?.length){
+    ib.innerHTML='<div class="issue-banner">'+d.health.issues.map(i=>'⚠️ '+i).join('<br>')+'</div>';
+  } else ib.innerHTML='';
 
-  // === SYSTEM STATUS CARD ===
-  // Adapt to whatever fields exist
-  let sysContent = '';
-  // Check for nested structures
-  const sys = diag.system || diag.health || {};
-  const sched = diag.scheduler || diag.orchestrator || {};
+  // === TOP METRICS ===
+  const a = d.activity||{};
+  const f = d.feed||{};
+  const c = d.cost||{};
+  const sr = a.jobs_today>0?Math.round(a.success_today/a.jobs_today*100):0;
+  let tm = '';
+  tm += `<div class="tm"><div class="val" style="color:var(--accent)">${fmt(f.total_lines||0)}</div><div class="label">Feed</div><div class="sub-val">+${fmt(a.feed_growth_today||0)} today</div></div>`;
+  tm += `<div class="tm"><div class="val" style="color:var(--blue)">${fmt(a.jobs_today||0)}</div><div class="label">Jobs</div><div class="sub-val">${sr}% success</div></div>`;
+  tm += `<div class="tm"><div class="val" style="color:var(--ok)">${fmt(a.success_today||0)}</div><div class="label">Success</div><div class="sub-val">${a.cycle_count||0} cycles</div></div>`;
+  tm += `<div class="tm"><div class="val" style="color:var(--warn)">${fmt(a.fail_today||0)}</div><div class="label">Fails</div><div class="sub-val">${a.timeout_today||0} timeout</div></div>`;
+  const costStr = c.is_zero_cost ? '$0' : '$'+(c.estimated_cost_today||0).toFixed(2);
+  tm += `<div class="tm"><div class="val" style="color:${c.is_zero_cost?'var(--ok)':'var(--orange)'};">${costStr}</div><div class="label">Cost</div><div class="sub-val">${c.sonnet_calls_today||0} Sonnet calls</div></div>`;
+  $('#top-metrics').innerHTML = tm;
 
-  // Scheduler
-  if (sched.pid) sysContent += renderMetric('Scheduler PID', sched.pid, sched.running ? 'ok' : 'warn');
-  if (sched.running != null) sysContent += renderMetric('Scheduler', sched.running ? 'RUNNING' : 'STOPPED', sched.running ? 'ok' : 'warn');
-  if (sched.uptime) sysContent += renderMetric('Uptime', sched.uptime, 'blue');
+  // === SYSTEM TOPOLOGY ===
+  const sc = d.scheduler||{};
+  const gw = d.gateway||{};
+  const sp = d.spark||{};
+  let topo = '<div class="topo">';
+  topo += `<div class="node"><div class="dot ${sc.running?'on':'off'}"></div><div class="name">Scheduler</div><div class="desc">${sc.type||'python'} • PID ${(sc.pids||[])[0]||'—'}</div></div>`;
+  topo += '<div class="arrow">→</div>';
+  topo += `<div class="node"><div class="dot ${gw.running?'on':'off'}"></div><div class="name">Gateway</div><div class="desc">OpenClaw</div></div>`;
+  topo += '<div class="arrow">→</div>';
+  topo += `<div class="node"><div class="dot ${sp.online?'on':'off'}"></div><div class="name">DGX Spark</div><div class="desc">${sp.inference_active?'inferring':'idle'}${sp.model_stuck?' ⚠️stuck':''}</div></div>`;
+  topo += '</div>';
+  $('#topo-section').innerHTML = topo;
 
-  // Spark
-  const spark = diag.spark || sys.spark || {};
-  if (spark.status) sysContent += renderMetric('Spark', spark.status, spark.status === 'online' ? 'ok' : 'warn');
-  if (spark.gpu_temp) sysContent += renderMetric('GPU Temp', spark.gpu_temp + '°C', spark.gpu_temp > 80 ? 'warn' : 'ok');
-  if (spark.gpu_util != null) sysContent += renderMetric('GPU Util', spark.gpu_util + '%', 'blue');
-  if (spark.vram_used) sysContent += renderMetric('VRAM', spark.vram_used, 'accent');
-  if (spark.vram) sysContent += renderMetric('VRAM', spark.vram, 'accent');
+  // === GRID ROW 1: Spark + Activity + Feed Quality ===
+  let g1 = '';
+  // Spark card
+  let sparkC = '';
+  sparkC += R('Status', sp.online?'ONLINE':'OFFLINE', sp.online?'ok':'warn');
+  sparkC += R('Model', sp.detail?.split('•')[0]?.trim()||'—', 'accent');
+  sparkC += R('VRAM', (sp.vram_estimate_gb||'—')+'GB', 'blue');
+  sparkC += R('Params', sp.model_params||'—');
+  sparkC += R('Quant', sp.model_quant||'—');
+  sparkC += R('Latency', (sp.response_ms||'—')+'ms', sp.response_ms<100?'ok':'orange');
+  g1 += `<div class="card"><h2>DGX Spark</h2>${sparkC}</div>`;
 
-  // Gateway
-  const gw = diag.gateway || sys.gateway || {};
-  if (gw.status) sysContent += renderMetric('Gateway', gw.status, gw.status === 'running' ? 'ok' : 'warn');
-  if (gw.pid) sysContent += renderMetric('Gateway PID', gw.pid);
-  if (gw.version) sysContent += renderMetric('Version', gw.version, 'blue');
+  // Activity card
+  let actC = '';
+  actC += R('State', a.state||'—', a.state?.includes('sleep')?'blue':'ok');
+  actC += R('Last Job', a.last_job||'—', 'accent');
+  actC += R('Last Job Time', a.last_job_time||'—');
+  actC += R('Last Cycle', a.last_cycle||'—');
+  actC += R('Next Cycle', a.next_cycle_est||'—', 'blue');
+  actC += R('Model', c.model||'—', 'purple');
+  g1 += `<div class="card"><h2>Activity</h2>${actC}</div>`;
 
-  // Fallback: just dump top-level non-object fields
-  if (!sysContent) {
-    for (const [k, v] of Object.entries(diag)) {
-      if (typeof v !== 'object' && !['timestamp','generated','last_updated'].includes(k)) {
-        sysContent += renderMetric(k, String(v));
-      }
+  // Feed quality card
+  let fqC = '';
+  const clean=f.recent_50_clean||0, trivial=f.recent_50_trivial||0, broken=f.recent_50_broken||0;
+  const total50=clean+trivial+broken;
+  fqC += R('Clean (last 50)', clean+'/'+total50, clean>25?'ok':'warn');
+  fqC += R('Trivial', trivial, trivial>5?'orange':'ok');
+  fqC += R('Broken', broken, broken>5?'warn':'ok');
+  fqC += R('Last Modified', (f.last_modified_minutes_ago||'—')+' min ago');
+  // Topic distribution
+  const topics = f.topic_distribution||{};
+  if(Object.keys(topics).length){
+    fqC += '<div style="margin-top:6px;font-size:0.7em;color:var(--dim)">TOPIC DISTRIBUTION</div>';
+    const maxT = Math.max(...Object.values(topics),1);
+    for(const[t,n]of Object.entries(topics).sort((a,b)=>b[1]-a[1]).slice(0,8)){
+      fqC += `<div class="topic-bar"><span style="min-width:120px">${t}</span><div class="topic-fill" style="width:${Math.max(n/maxT*100,8)}%"></div><span>${n}</span></div>`;
     }
   }
-  if (sysContent) cards += renderCard('System', sysContent);
+  g1 += `<div class="card"><h2>Feed Quality</h2>${fqC}</div>`;
+  $('#grid1').innerHTML = g1;
 
-  // === FEED CARD ===
-  const feed = diag.feed || diag.learning_feed || {};
-  const today = diag.today || {};
-  let feedContent = '';
-  if (feed.total != null) feedContent += renderMetric('Total Entries', fmt(feed.total), 'accent');
-  if (feed.count != null) feedContent += renderMetric('Total Entries', fmt(feed.count), 'accent');
-  if (today.feed_growth != null) feedContent += renderMetric('Today Growth', '+' + today.feed_growth, today.feed_growth > 0 ? 'ok' : 'warn');
-  if (feed.today_growth != null) feedContent += renderMetric('Today Growth', '+' + feed.today_growth, feed.today_growth > 0 ? 'ok' : 'warn');
-  if (feed.avg_quality != null) feedContent += renderMetric('Avg Quality', feed.avg_quality.toFixed(1) + '/5.0', feed.avg_quality >= 3 ? 'ok' : 'warn');
-  if (feed.quality != null) feedContent += renderMetric('Quality', typeof feed.quality === 'number' ? feed.quality.toFixed(1) + '/5.0' : feed.quality);
-  if (feed.trivial != null) feedContent += renderMetric('Trivial', feed.trivial, feed.trivial > 5 ? 'warn' : 'ok');
-  if (feed.broken != null) feedContent += renderMetric('Broken', feed.broken, feed.broken > 0 ? 'warn' : 'ok');
-
-  // Domain coverage
-  const domains = feed.domains || diag.domains || feed.domain_coverage || {};
-  if (Object.keys(domains).length > 0) {
-    feedContent += '<div style="margin-top:8px;font-size:0.75em;color:var(--dim)">DOMAINS</div>';
-    for (const [d, c] of Object.entries(domains)) {
-      feedContent += renderMetric(d, c);
+  // === GRID ROW 2: Feed Growth Chart + KG (from status.json) ===
+  let g2 = '';
+  // Feed history chart
+  const fh = d.feed_history||[];
+  if(fh.length>1){
+    const vals = fh.map(h=>typeof h==='object'?(h.v||h.value||0):h);
+    const min=Math.min(...vals), max=Math.max(...vals);
+    const range=max-min||1;
+    let chartHtml='<div class="chart">';
+    const slice = fh.slice(-60);
+    const sliceVals = slice.map(h=>typeof h==='object'?(h.v||h.value||0):h);
+    const smin=Math.min(...sliceVals),smax=Math.max(...sliceVals),srange=smax-smin||1;
+    for(let i=0;i<slice.length;i++){
+      const v=sliceVals[i];
+      const pct=Math.max(((v-smin)/srange)*100,3);
+      const ts=typeof slice[i]==='object'?(slice[i].t||slice[i].timestamp||''):'';
+      chartHtml+=`<div class="bar" style="height:${pct}%;background:var(--accent);opacity:${0.4+0.6*(i/slice.length)}" title="${ts}: ${v} entries"></div>`;
     }
+    chartHtml+='</div>';
+    chartHtml+=`<div style="display:flex;justify-content:space-between;font-size:0.65em;color:var(--dim);margin-top:2px"><span>${smin}</span><span>${slice.length} snapshots</span><span>${smax}</span></div>`;
+    g2+=`<div class="card"><h2>Feed Growth</h2>${chartHtml}</div>`;
   }
-  if (feedContent) cards += renderCard('Research Feed', feedContent);
 
-  // === KNOWLEDGE GRAPH CARD ===
-  const kg = diag.kg || diag.knowledge_graph || {};
-  let kgContent = '';
-  if (kg.entities != null) kgContent += renderMetric('Entities', fmt(kg.entities), 'accent');
-  if (kg.relations != null) kgContent += renderMetric('Relations', fmt(kg.relations), 'blue');
-  if (kg.associations != null) kgContent += renderMetric('Associations', fmt(kg.associations));
-  if (kgContent) cards += renderCard('Knowledge Graph', kgContent);
+  // KG from status.json
+  if(s && s.kg_stats){
+    const kg=s.kg_stats;
+    let kgC='';
+    if(typeof kg==='string'){
+      // It's a formatted string
+      kgC+=`<div style="font-size:0.85em;white-space:pre-line">${kg}</div>`;
+    } else {
+      kgC+=R('Entities',fmt(kg.Entities||kg.entities||0),'accent');
+      kgC+=R('Relations',fmt(kg.Relationships||kg.relations||0),'blue');
+      kgC+=R('Associations',fmt(kg.Associations||kg.associations||0),'purple');
+    }
+    g2+=`<div class="card"><h2>Knowledge Graph</h2>${kgC}</div>`;
+  }
 
-  // === PIPELINE / CYCLES CARD ===
-  const pipe = diag.pipeline || diag.cycles || today || {};
-  let pipeContent = '';
-  if (pipe.cycles_today != null) pipeContent += renderMetric('Cycles Today', pipe.cycles_today, 'blue');
-  if (pipe.total_cycles != null) pipeContent += renderMetric('Total Cycles', pipe.total_cycles, 'blue');
-  if (pipe.jobs_completed != null) pipeContent += renderMetric('Jobs OK', pipe.jobs_completed, 'ok');
-  if (pipe.jobs_failed != null) pipeContent += renderMetric('Jobs Failed', pipe.jobs_failed, pipe.jobs_failed > 0 ? 'warn' : 'ok');
-  if (pipe.success_rate != null) pipeContent += renderMetric('Success Rate', (typeof pipe.success_rate === 'number' ? pipe.success_rate.toFixed(0) : pipe.success_rate) + '%', pipe.success_rate >= 80 ? 'ok' : 'warn');
-  if (pipe.timeout) pipeContent += renderMetric('Timeouts', pipe.timeout, 'warn');
-  if (pipeContent) cards += renderCard('Pipeline', pipeContent);
+  // GPU stats from status.json
+  if(s && s.gpu_stats){
+    const gpu=s.gpu_stats;
+    let gpuC='';
+    gpuC+=R('Status',gpu.status||'—',gpu.status==='active'||gpu.status==='online'?'ok':'warn');
+    gpuC+=R('GPU Util',(gpu.gpu_util_pct!=null?gpu.gpu_util_pct+'%':'—'),'blue');
+    gpuC+=R('Temperature',(gpu.temp_c!=null?gpu.temp_c+'°C':'—'),gpu.temp_c>80?'warn':'ok');
+    gpuC+=R('Power',(gpu.power_w!=null?gpu.power_w+'W':'—'));
+    gpuC+=R('GPU',gpu.gpu_name||'—','accent');
+    g2+=`<div class="card"><h2>GPU Stats</h2>${gpuC}</div>`;
+  }
 
-  // === COST CARD ===
-  const cost = diag.cost || {};
-  let costContent = '';
-  if (cost.today != null) costContent += renderMetric('Today', '$' + cost.today, cost.today > 1 ? 'warn' : 'ok');
-  if (cost.total != null) costContent += renderMetric('Total', '$' + cost.total);
-  if (cost.model) costContent += renderMetric('Model', cost.model, 'blue');
-  if (diag.model) costContent += renderMetric('Model', diag.model, 'blue');
-  if (costContent) cards += renderCard('Cost', costContent);
+  $('#grid2').innerHTML=g2;
 
-  // === AUTOMATION / PHASE CARD ===
-  const auto = diag.automation || diag.autonomy || {};
-  let autoContent = '';
-  if (auto.phase) autoContent += renderMetric('Phase', auto.phase, 'accent');
-  if (auto.repairs_today != null) autoContent += renderMetric('Repairs Today', auto.repairs_today);
-  if (auto.repairs_total != null) autoContent += renderMetric('Total Repairs', auto.repairs_total);
-  if (auto.last_repair) autoContent += renderMetric('Last Repair', ago(auto.last_repair));
-  if (autoContent) cards += renderCard('Autonomy', autoContent);
-
-  $('#main-grid').innerHTML = cards || renderCard('', '<div style="color:var(--dim)">No data available</div>');
-
-  // === RECENT JOBS (from diagnostic or cycle report) ===
+  // === JOBS SECTION ===
+  // Try last_jobs from status.json first, then fall back to feed.last_entries from diagnostic
   let jobs = [];
-  if (diag.recent_jobs) jobs = diag.recent_jobs;
-  else if (cycle && cycle.jobs) jobs = cycle.jobs;
-  else if (diag.jobs) jobs = diag.jobs;
+  if(s && s.last_jobs) jobs = s.last_jobs;
+  else if(d.activity?.recent_jobs) jobs = d.activity.recent_jobs;
 
-  if (jobs.length > 0) {
-    let jobsHtml = '<div class="section-title">Recent Jobs</div>';
-    for (const j of jobs.slice(-12)) {
-      const name = j.name || j.job || j.topic || 'unknown';
-      const status = j.status || j.result || 'unknown';
-      const sc = statusClass(status);
-      const duration = j.duration || j.duration_s;
-      const added = j.feed_added || j.entries || '';
-      jobsHtml += `<div class="job-row ${sc}">
-        <span>${name}</span>
-        <span style="color:var(--dim)">${duration ? dur(duration) : ''} ${added ? '+'+added : ''}</span>
-        <span class="job-status ${sc}">${status}</span>
-      </div>`;
+  // Also check cycle report
+  if(!jobs.length && cr && cr.jobs) jobs = cr.jobs;
+
+  let jobsHtml = '';
+  if(jobs.length){
+    jobsHtml='<div style="font-size:0.7em;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin:12px 0 6px">Recent Jobs</div>';
+    for(const j of jobs){
+      const name=j.name||j.job||j.topic||'?';
+      const st=j.status||j.result||'?';
+      const d2=j.duration||j.duration_s;
+      const g=j.grew||j.feed_added||j.entries_added;
+      jobsHtml+=`<div class="job ${st}"><span>${name}</span><span style="color:var(--dim)">${d2?dur(d2):''} ${g!=null?'<span style="color:var(--ok)">+'+g+'</span>':''}</span><span class="st ${st}">${st}</span></div>`;
     }
-    $('#jobs-section').innerHTML = jobsHtml;
   }
 
-  // === CURRENT CYCLE (from cycle-report.json) ===
-  if (cycle) {
-    let cycleHtml = '<div class="section-title">Current Cycle</div><div class="card">';
-    cycleHtml += renderMetric('Window', cycle.window || '—');
-    cycleHtml += renderMetric('Cycle #', cycle.cycle_number || '—', 'blue');
-    cycleHtml += renderMetric('Feed', (cycle.feed_before||'?') + ' → ' + (cycle.feed_after||'?'),
-      cycle.growth > 0 ? 'ok' : 'warn');
-    cycleHtml += renderMetric('Growth', '+' + (cycle.growth || 0), cycle.growth > 0 ? 'ok' : 'warn');
-    if (cycle.needs_repair) cycleHtml += renderMetric('Needs Repair', '⚠️ YES', 'warn');
-    if (cycle.feed_stagnant) cycleHtml += renderMetric('Feed Stagnant', '⚠️ YES', 'warn');
-    cycleHtml += '</div>';
-    $('#cycle-section').innerHTML = cycleHtml;
+  // Cycle report section
+  if(cr){
+    jobsHtml+='<div style="font-size:0.7em;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin:12px 0 6px">Cycle Report</div><div class="card">';
+    jobsHtml+=R('Window',cr.window||'—');
+    jobsHtml+=R('Cycle #',cr.cycle_number||'—','blue');
+    jobsHtml+=R('Feed',`${cr.feed_before||'?'} → ${cr.feed_after||'?'}`);
+    jobsHtml+=R('Growth','+'+(cr.growth||0),cr.growth>0?'ok':'warn');
+    if(cr.needs_repair)jobsHtml+=R('Needs Repair','⚠️ YES','warn');
+    if(cr.feed_stagnant)jobsHtml+=R('Feed Stagnant','⚠️ YES','warn');
+    jobsHtml+='</div>';
   }
 
-  // === CYCLE HISTORY (from cycle-history.jsonl) ===
-  if (history.length > 0) {
-    let histHtml = '<div class="section-title">Cycle History (last 10)</div><div class="card">';
+  // Cycle history bar chart
+  if(ch.length>1){
+    const maxG=Math.max(...ch.map(h=>h.growth||0),1);
+    jobsHtml+='<div style="font-size:0.7em;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin:12px 0 6px">Cycle History</div><div class="card"><div class="chart">';
+    for(const h of ch.slice(-30)){
+      const g=h.growth||0;
+      const p=Math.max((g/maxG)*100,3);
+      jobsHtml+=`<div class="bar" style="height:${p}%;background:${g>0?'var(--accent)':'var(--warn)'}" title="Cycle ${h.cycle_number||'?'}: +${g}"></div>`;
+    }
+    jobsHtml+='</div></div>';
+  }
 
-    // Bar chart of feed growth
-    const recent = history.slice(-20);
-    if (recent.length > 1) {
-      const maxGrowth = Math.max(...recent.map(h => h.growth || 0), 1);
-      histHtml += '<div class="bar-chart">';
-      for (const h of recent) {
-        const g = h.growth || 0;
-        const pct = Math.max((g / maxGrowth) * 100, 2);
-        const color = g > 0 ? 'var(--accent)' : 'var(--warn)';
-        histHtml += `<div class="bar" style="height:${pct}%;background:${color}" title="Cycle ${h.cycle_number||'?'}: +${g}"></div>`;
+  $('#jobs-section').innerHTML=jobsHtml;
+
+  // === GRID 3: Automation + Latest Feed Entries ===
+  let g3='';
+
+  // Automation layers
+  const auto=d.automation||{};
+  if(Object.keys(auto).length){
+    let autoC='';
+    for(const[layer,val]of Object.entries(auto)){
+      if(typeof val==='object'&&val!==null){
+        const st=val.status||val.state||'—';
+        autoC+=R(layer.replace('layer','L'),st,st.includes('DEPLOY')||st.includes('deploy')?'ok':st.includes('PLAN')?'orange':'blue');
+        if(val.description)autoC+=`<div style="font-size:0.7em;color:var(--dim);padding:0 0 4px">${val.description}</div>`;
+      } else {
+        autoC+=R(layer,String(val||'—'));
       }
-      histHtml += '</div>';
     }
-
-    // Table of recent cycles
-    for (const h of history.slice(-10).reverse()) {
-      const ts = h.timestamp ? new Date(h.timestamp).toLocaleTimeString() : '—';
-      histHtml += `<div class="history-row">
-        <span>Cycle ${h.cycle_number||'?'}</span>
-        <span>${h.window||''}</span>
-        <span style="color:${(h.growth||0)>0?'var(--ok)':'var(--warn)'}">+${h.growth||0}</span>
-        <span style="color:var(--dim)">${ts}</span>
-      </div>`;
-    }
-    histHtml += '</div>';
-    $('#history-section').innerHTML = histHtml;
+    g3+=`<div class="card"><h2>Automation Layers</h2>${autoC}</div>`;
   }
+
+  // Latest feed entries
+  const entries=f.last_entries||[];
+  if(entries.length){
+    let entC='';
+    for(const e of entries.slice(-8)){
+      if(typeof e==='object'){
+        const topic=e.topic||e.domain||'—';
+        const ts=e.timestamp||'';
+        const finding=(e.finding||e.insight||e.content||'').substring(0,120);
+        entC+=`<div class="feed-entry"><span style="color:var(--accent)">[${topic}]</span> ${finding} <span style="color:var(--dim)">${ts?ago(ts):''}</span></div>`;
+      } else if(typeof e==='string'){
+        entC+=`<div class="feed-entry">${e.substring(0,150)}</div>`;
+      }
+    }
+    g3+=`<div class="card"><h2>Latest Research</h2>${entC}</div>`;
+  }
+
+  // Feed quality from status.json
+  if(s && s.feed_quality){
+    const fq=s.feed_quality;
+    let fqC2='';
+    fqC2+=R('Total Evaluated',fq.total||'—');
+    fqC2+=R('Error Rate',(fq.error_rate!=null?(fq.error_rate*100).toFixed(1)+'%':fq.error_rate||'—'),fq.error_rate>0.2?'warn':'ok');
+    fqC2+=R('Malformed JSON',fq.malformed_json||0,fq.malformed_json>0?'warn':'ok');
+    fqC2+=R('Literal Timestamps',fq.literal_timestamps||0,fq.literal_timestamps>0?'orange':'ok');
+    fqC2+=R('Duplicates',fq.duplicates||0,fq.duplicates>0?'orange':'ok');
+    fqC2+=R('No New Dev',fq.no_new_dev||0);
+    g3+=`<div class="card"><h2>Feed Quality (Deep)</h2>${fqC2}</div>`;
+  }
+
+  $('#grid3').innerHTML=g3;
 }
 
-// Initial render + auto-refresh
 render();
-setInterval(render, 30000);
+setInterval(render,30000);
 </script>
 </body>
 </html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zeke Mission Control</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card: #12121a;
+    --border: #1e1e2e;
+    --text: #e0e0e0;
+    --dim: #666680;
+    --accent: #4ecdc4;
+    --warn: #ff6b6b;
+    --ok: #51cf66;
+    --blue: #339af0;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    background: var(--bg);
+    color: var(--text);
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.4em;
+    color: var(--accent);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .subtitle {
+    color: var(--dim);
+    font-size: 0.75em;
+    margin-bottom: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .card h2 {
+    font-size: 0.8em;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .metric {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 0.85em;
+  }
+  .metric .label { color: var(--dim); }
+  .metric .value { color: var(--text); font-weight: 600; }
+  .metric .value.ok { color: var(--ok); }
+  .metric .value.warn { color: var(--warn); }
+  .metric .value.accent { color: var(--accent); }
+  .metric .value.blue { color: var(--blue); }
+  .wide { grid-column: 1 / -1; }
+  .job-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 8px;
+    margin: 2px 0;
+    border-radius: 4px;
+    font-size: 0.8em;
+  }
+  .job-row.ok { background: rgba(81,207,102,0.08); }
+  .job-row.fail { background: rgba(255,107,107,0.08); }
+  .job-row.timeout { background: rgba(255,165,0,0.08); }
+  .job-status { font-weight: 600; min-width: 60px; text-align: right; }
+  .job-status.ok { color: var(--ok); }
+  .job-status.fail { color: var(--warn); }
+  .job-status.timeout { color: orange; }
+  .section-title {
+    font-size: 0.75em;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 16px 0 8px;
+  }
+  #error-banner {
+    display: none;
+    background: rgba(255,107,107,0.15);
+    border: 1px solid var(--warn);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
+    color: var(--warn);
+    font-size: 0.85em;
+  }
+  .footer {
+    color: var(--dim);
+    font-size: 0.7em;
+    margin-top: 20px;
+    text-align: center;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .bar-chart {
+    display: flex;
+    gap: 3px;
+    align-items: flex-end;
+    height: 60px;
+    margin-top: 8px;
+  }
+  .bar {
+    flex: 1;
+    background: var(--accent);
+    border-radius: 2px 2px 0 0;
+    min-width: 8px;
+    position: relative;
+    opacity: 0.7;
+  }
+  .bar:hover { opacity: 1; }
+  .bar.empty { background: var(--border); }
+  .history-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    font-size: 0.78em;
+    border-bottom: 1px solid var(--border);
+  }
+  .history-row:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+
+<h1>⚡ Mission Control</h1>
+<div class="subtitle" id="subtitle">loading...</div>
+<div id="error-banner"></div>
+
+<div class="grid" id="main-grid">
+  <!-- Cards injected by JS -->
+</div>
+
+<div id="jobs-section"></div>
+<div id="cycle-section"></div>
+<div id="history-section"></div>
+
+<div class="footer">
+  Zeke v2 • Auto-refresh 30s •
+  <a href="diagnostic.json" target="_blank">raw diagnostic ↗</a> •
+  <a href="cycle-report.json" target="_blank">cycle report ↗</a> •
+  <a href="cycle-history.jsonl" target="_blank">cycle history ↗</a>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+
+function fmt(n) { return n != null ? n.toLocaleString() : '—'; }
+function dur(s) { return s >= 60 ? (s/60).toFixed(1)+'m' : s+'s'; }
+function ago(ts) {
+  if (!ts) return '—';
+  const d = (Date.now() - new Date(ts).getTime()) / 1000;
+  if (d < 60) return Math.round(d) + 's ago';
+  if (d < 3600) return Math.round(d/60) + 'm ago';
+  if (d < 86400) return Math.round(d/3600) + 'h ago';
+  return Math.round(d/86400) + 'd ago';
+}
+
+function statusClass(s) {
+  if (!s) return '';
+  s = s.toLowerCase();
+  if (s === 'ok' || s === 'success' || s === 'completed') return 'ok';
+  if (s.includes('timeout')) return 'timeout';
+  if (s === 'fail' || s === 'failed' || s === 'error') return 'fail';
+  return '';
+}
+
+function renderMetric(label, value, cls) {
+  return `<div class="metric"><span class="label">${label}</span><span class="value ${cls||''}">${value}</span></div>`;
+}
+
+function renderCard(title, content, wide) {
+  return `<div class="card ${wide?'wide':''}">${title?`<h2>${title}</h2>`:''}${content}</div>`;
+}
+
+async function loadJSON(url) {
+  try {
+    const r = await fetch(url + '?t=' + Date.now());
+    if (!r.ok) return null;
+    return await r.json();
+  } catch { return null; }
+}
+
+async function loadJSONL(url) {
+  try {
+    const r = await fetch(url + '?t=' + Date.now());
+    if (!r.ok) return [];
+    const text = await r.text();
+    return text.trim().split('\n').filter(l => l.trim()).map(l => {
+      try { return JSON.parse(l); } catch { return null; }
+    }).filter(Boolean);
+  } catch { return []; }
+}
+
+async function render() {
+  const [diag, cycle, history] = await Promise.all([
+    loadJSON('diagnostic.json'),
+    loadJSON('cycle-report.json'),
+    loadJSONL('cycle-history.jsonl')
+  ]);
+
+  if (!diag) {
+    $('#error-banner').style.display = 'block';
+    $('#error-banner').textContent = '❌ Cannot load diagnostic.json — build-status.py may not be running';
+    return;
+  }
+  $('#error-banner').style.display = 'none';
+
+  // Update subtitle with timestamp
+  const ts = diag.timestamp || diag.generated || diag.last_updated;
+  $('#subtitle').textContent = ts ? 'Last update: ' + ago(ts) : 'Zeke v2';
+
+  let cards = '';
+
+  // === SYSTEM STATUS CARD ===
+  // Adapt to whatever fields exist
+  let sysContent = '';
+  // Check for nested structures
+  const sys = diag.system || diag.health || {};
+  const sched = diag.scheduler || diag.orchestrator || {};
+
+  // Scheduler
+  if (sched.pid) sysContent += renderMetric('Scheduler PID', sched.pid, sched.running ? 'ok' : 'warn');
+  if (sched.running != null) sysContent += renderMetric('Scheduler', sched.running ? 'RUNNING' : 'STOPPED', sched.running ? 'ok' : 'warn');
+  if (sched.uptime) sysContent += renderMetric('Uptime', sched.uptime, 'blue');
+
+  // Spark
+  const spark = diag.spark || sys.spark || {};
+  if (spark.status) sysContent += renderMetric('Spark', spark.status, spark.status === 'online' ? 'ok' : 'warn');
+  if (spark.gpu_temp) sysContent += renderMetric('GPU Temp', spark.gpu_temp + '°C', spark.gpu_temp > 80 ? 'warn' : 'ok');
+  if (spark.gpu_util != null) sysContent += renderMetric('GPU Util', spark.gpu_util + '%', 'blue');
+  if (spark.vram_used) sysContent += renderMetric('VRAM', spark.vram_used, 'accent');
+  if (spark.vram) sysContent += renderMetric('VRAM', spark.vram, 'accent');
+
+  // Gateway
+  const gw = diag.gateway || sys.gateway || {};
+  if (gw.status) sysContent += renderMetric('Gateway', gw.status, gw.status === 'running' ? 'ok' : 'warn');
+  if (gw.pid) sysContent += renderMetric('Gateway PID', gw.pid);
+  if (gw.version) sysContent += renderMetric('Version', gw.version, 'blue');
+
+  // Fallback: just dump top-level non-object fields
+  if (!sysContent) {
+    for (const [k, v] of Object.entries(diag)) {
+      if (typeof v !== 'object' && !['timestamp','generated','last_updated'].includes(k)) {
+        sysContent += renderMetric(k, String(v));
+      }
+    }
+  }
+  if (sysContent) cards += renderCard('System', sysContent);
+
+  // === FEED CARD ===
+  const feed = diag.feed || diag.learning_feed || {};
+  const today = diag.today || {};
+  let feedContent = '';
+  if (feed.total != null) feedContent += renderMetric('Total Entries', fmt(feed.total), 'accent');
+  if (feed.count != null) feedContent += renderMetric('Total Entries', fmt(feed.count), 'accent');
+  if (today.feed_growth != null) feedContent += renderMetric('Today Growth', '+' + today.feed_growth, today.feed_growth > 0 ? 'ok' : 'warn');
+  if (feed.today_growth != null) feedContent += renderMetric('Today Growth', '+' + feed.today_growth, feed.today_growth > 0 ? 'ok' : 'warn');
+  if (feed.avg_quality != null) feedContent += renderMetric('Avg Quality', feed.avg_quality.toFixed(1) + '/5.0', feed.avg_quality >= 3 ? 'ok' : 'warn');
+  if (feed.quality != null) feedContent += renderMetric('Quality', typeof feed.quality === 'number' ? feed.quality.toFixed(1) + '/5.0' : feed.quality);
+  if (feed.trivial != null) feedContent += renderMetric('Trivial', feed.trivial, feed.trivial > 5 ? 'warn' : 'ok');
+  if (feed.broken != null) feedContent += renderMetric('Broken', feed.broken, feed.broken > 0 ? 'warn' : 'ok');
+
+  // Domain coverage
+  const domains = feed.domains || diag.domains || feed.domain_coverage || {};
+  if (Object.keys(domains).length > 0) {
+    feedContent += '<div style="margin-top:8px;font-size:0.75em;color:var(--dim)">DOMAINS</div>';
+    for (const [d, c] of Object.entries(domains)) {
+      feedContent += renderMetric(d, c);
+    }
+  }
+  if (feedContent) cards += renderCard('Research Feed', feedContent);
+
+  // === KNOWLEDGE GRAPH CARD ===
+  const kg = diag.kg || diag.knowledge_graph || {};
+  let kgContent = '';
+  if (kg.entities != null) kgContent += renderMetric('Entities', fmt(kg.entities), 'accent');
+  if (kg.relations != null) kgContent += renderMetric('Relations', fmt(kg.relations), 'blue');
+  if (kg.associations != null) kgContent += renderMetric('Associations', fmt(kg.associations));
+  if (kgContent) cards += renderCard('Knowledge Graph', kgContent);
+
+  // === PIPELINE / CYCLES CARD ===
+  const pipe = diag.pipeline || diag.cycles || today || {};
+  let pipeContent = '';
+  if (pipe.cycles_today != null) pipeContent += renderMetric('Cycles Today', pipe.cycles_today, 'blue');
+  if (pipe.total_cycles != null) pipeContent += renderMetric('Total Cycles', pipe.total_cycles, 'blue');
+  if (pipe.jobs_completed != null) pipeContent += renderMetric('Jobs OK', pipe.jobs_completed, 'ok');
+  if (pipe.jobs_failed != null) pipeContent += renderMetric('Jobs Failed', pipe.jobs_failed, pipe.jobs_failed > 0 ? 'warn' : 'ok');
+  if (pipe.success_rate != null) pipeContent += renderMetric('Success Rate', (typeof pipe.success_rate === 'number' ? pipe.success_rate.toFixed(0) : pipe.success_rate) + '%', pipe.success_rate >= 80 ? 'ok' : 'warn');
+  if (pipe.timeout) pipeContent += renderMetric('Timeouts', pipe.timeout, 'warn');
+  if (pipeContent) cards += renderCard('Pipeline', pipeContent);
+
+  // === COST CARD ===
+  const cost = diag.cost || {};
+  let costContent = '';
+  if (cost.today != null) costContent += renderMetric('Today', '$' + cost.today, cost.today > 1 ? 'warn' : 'ok');
+  if (cost.total != null) costContent += renderMetric('Total', '$' + cost.total);
+  if (cost.model) costContent += renderMetric('Model', cost.model, 'blue');
+  if (diag.model) costContent += renderMetric('Model', diag.model, 'blue');
+  if (costContent) cards += renderCard('Cost', costContent);
+
+  // === AUTOMATION / PHASE CARD ===
+  const auto = diag.automation || diag.autonomy || {};
+  let autoContent = '';
+  if (auto.phase) autoContent += renderMetric('Phase', auto.phase, 'accent');
+  if (auto.repairs_today != null) autoContent += renderMetric('Repairs Today', auto.repairs_today);
+  if (auto.repairs_total != null) autoContent += renderMetric('Total Repairs', auto.repairs_total);
+  if (auto.last_repair) autoContent += renderMetric('Last Repair', ago(auto.last_repair));
+  if (autoContent) cards += renderCard('Autonomy', autoContent);
+
+  $('#main-grid').innerHTML = cards || renderCard('', '<div style="color:var(--dim)">No data available</div>');
+
+  // === RECENT JOBS (from diagnostic or cycle report) ===
+  let jobs = [];
+  if (diag.recent_jobs) jobs = diag.recent_jobs;
+  else if (cycle && cycle.jobs) jobs = cycle.jobs;
+  else if (diag.jobs) jobs = diag.jobs;
+
+  if (jobs.length > 0) {
+    let jobsHtml = '<div class="section-title">Recent Jobs</div>';
+    for (const j of jobs.slice(-12)) {
+      const name = j.name || j.job || j.topic || 'unknown';
+      const status = j.status || j.result || 'unknown';
+      const sc = statusClass(status);
+      const duration = j.duration || j.duration_s;
+      const added = j.feed_added || j.entries || '';
+      jobsHtml += `<div class="job-row ${sc}">
+        <span>${name}</span>
+        <span style="color:var(--dim)">${duration ? dur(duration) : ''} ${added ? '+'+added : ''}</span>
+        <span class="job-status ${sc}">${status}</span>
+      </div>`;
+    }
+    $('#jobs-section').innerHTML = jobsHtml;
+  }
+
+  // === CURRENT CYCLE (from cycle-report.json) ===
+  if (cycle) {
+    let cycleHtml = '<div class="section-title">Current Cycle</div><div class="card">';
+    cycleHtml += renderMetric('Window', cycle.window || '—');
+    cycleHtml += renderMetric('Cycle #', cycle.cycle_number || '—', 'blue');
+    cycleHtml += renderMetric('Feed', (cycle.feed_before||'?') + ' → ' + (cycle.feed_after||'?'),
+      cycle.growth > 0 ? 'ok' : 'warn');
+    cycleHtml += renderMetric('Growth', '+' + (cycle.growth || 0), cycle.growth > 0 ? 'ok' : 'warn');
+    if (cycle.needs_repair) cycleHtml += renderMetric('Needs Repair', '⚠️ YES', 'warn');
+    if (cycle.feed_stagnant) cycleHtml += renderMetric('Feed Stagnant', '⚠️ YES', 'warn');
+    cycleHtml += '</div>';
+    $('#cycle-section').innerHTML = cycleHtml;
+  }
+
+  // === CYCLE HISTORY (from cycle-history.jsonl) ===
+  if (history.length > 0) {
+    let histHtml = '<div class="section-title">Cycle History (last 10)</div><div class="card">';
+
+    // Bar chart of feed growth
+    const recent = history.slice(-20);
+    if (recent.length > 1) {
+      const maxGrowth = Math.max(...recent.map(h => h.growth || 0), 1);
+      histHtml += '<div class="bar-chart">';
+      for (const h of recent) {
+        const g = h.growth || 0;
+        const pct = Math.max((g / maxGrowth) * 100, 2);
+        const color = g > 0 ? 'var(--accent)' : 'var(--warn)';
+        histHtml += `<div class="bar" style="height:${pct}%;background:${color}" title="Cycle ${h.cycle_number||'?'}: +${g}"></div>`;
+      }
+      histHtml += '</div>';
+    }
+
+    // Table of recent cycles
+    for (const h of history.slice(-10).reverse()) {
+      const ts = h.timestamp ? new Date(h.timestamp).toLocaleTimeString() : '—';
+      histHtml += `<div class="history-row">
+        <span>Cycle ${h.cycle_number||'?'}</span>
+        <span>${h.window||''}</span>
+        <span style="color:${(h.growth||0)>0?'var(--ok)':'var(--warn)'}">+${h.growth||0}</span>
+        <span style="color:var(--dim)">${ts}</span>
+      </div>`;
+    }
+    histHtml += '</div>';
+    $('#history-section').innerHTML = histHtml;
+  }
+}
+
+// Initial render + auto-refresh
+render();
+setInterval(render, 30000);
+</script>
+</body>
+</html>
