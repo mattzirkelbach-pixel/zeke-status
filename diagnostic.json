@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-22 7:50:01PM ET",
-  "timestamp_utc": "2026-02-23T00:50:01Z",
+  "timestamp_local": "2026-02-22 7:55:00PM ET",
+  "timestamp_utc": "2026-02-23T00:55:00Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -13,33 +13,35 @@
     "running": true
   },
   "spark": {
-    "online": false,
-    "models_loaded": [],
+    "online": true,
+    "models_loaded": [
+      "qwen3-32b-32k:latest"
+    ],
     "model_stuck": false,
-    "inference_active": false,
-    "detail": "unreachable",
-    "response_ms": null,
-    "vram_estimate_gb": null,
-    "model_params": null,
-    "model_quant": null
+    "inference_active": true,
+    "detail": "qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 33ms",
+    "response_ms": 33,
+    "vram_estimate_gb": 27.1,
+    "model_params": "32.8B",
+    "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 106,
-    "last_modified_minutes_ago": 0.7,
+    "total_lines": 108,
+    "last_modified_minutes_ago": 0.4,
     "last_entries": [
-      "[2/22 5:47PM ET] AI agents and tool calling \u2014 2026 EU AI Act compliance mandates transparency for agentic NPCs: mandatory synt",
-      "[2/22 9:53PM ET] compound-synthesis \u2014 Longevity research on cognitive preservation (sleep optimization, light exposure",
       "[2/22 7:35PM ET] longevity research \u2014 No new developments found \u26a0",
       "[2/22 7:42PM ET] AI agents and tool calling \u2014 Graph-of-Agents (GoA) framework achieves 89.4% accuracy on MMLU-Pro by using 3 a",
-      "[2/22 7:48PM ET] AI agents and tool calling \u2014 mcp-agent 2026 implements full MCP protocol support with built-in workflows (map"
+      "[2/22 7:48PM ET] AI agents and tool calling \u2014 mcp-agent 2026 implements full MCP protocol support with built-in workflows (map",
+      "[2/22 7:51PM ET] AI agents and tool calling \u2014 MCP (Model Context Protocol) by Anthropic provides standardized LLM-to-tool inte",
+      "[2/22 7:51PM ET] AI agents and tool calling \u2014 No new developments found \u26a0"
     ],
-    "recent_50_clean": 49,
-    "recent_50_trivial": 1,
+    "recent_50_clean": 48,
+    "recent_50_trivial": 2,
     "recent_50_broken": 0,
     "topic_distribution": {
       "treasury bonds and interest rates": 27,
-      "AI agents and tool calling": 9,
-      "compound-synthesis": 6,
+      "AI agents and tool calling": 11,
+      "compound-synthesis": 4,
       "self-improvement and learning": 4,
       "rapamycin clinical trials": 1,
       "senolytics": 1
@@ -530,6 +532,11 @@
       "t": 1771807809099,
       "v": 106,
       "l": "7:50PM"
+    },
+    {
+      "t": 1771808100278,
+      "v": 108,
+      "l": "7:55PM"
     }
   ],
   "cost": {
@@ -627,10 +634,8 @@
     }
   },
   "health": {
-    "status": "CRITICAL",
-    "issues": [
-      "CRITICAL: Spark offline"
-    ],
-    "issue_count": 1
+    "status": "HEALTHY",
+    "issues": [],
+    "issue_count": 0
   }
 }
