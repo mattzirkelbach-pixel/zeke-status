@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-02-23 14:18:15 ET",
-  "timestamp_utc": "2026-02-23T19:18:15Z",
+  "timestamp_local": "2026-02-23 14:38:28 ET",
+  "timestamp_utc": "2026-02-23T19:38:28Z",
   "scheduler": {
     "running": true,
     "pid": 82874,
-    "uptime_minutes": 31,
+    "uptime_minutes": 51,
     "current_window": "daytime"
   },
   "feed": {
@@ -20,23 +20,23 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3:8b",
       "qwen3-32b-32k:latest",
+      "qwen3:8b",
       "nomic-embed-text:latest"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: qwen3:8b, qwen3-32b-32k:latest, nomic-embed-text:latest"
+    "detail": "healthy, loaded: qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest"
   },
   "gateway": {
     "running": true
   },
   "today": {
-    "jobs_run": 5,
+    "jobs_run": 10,
     "success": 0,
     "timeout": 0,
-    "fail": 5,
+    "fail": 10,
     "feed_growth": 0
   },
   "cycles": [
@@ -44,6 +44,16 @@
       "ts": "2026-02-23T13:48:05.655564",
       "window": "daytime",
       "cycle": 1,
+      "jobs": 5,
+      "success": 0,
+      "timeout": 0,
+      "fail": 5,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-02-23T14:38:28.096145",
+      "window": "daytime",
+      "cycle": 2,
       "jobs": 5,
       "success": 0,
       "timeout": 0,
@@ -86,27 +96,47 @@
       "duration": 0,
       "grew": 0,
       "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 92,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "fail",
+      "duration": 458,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 167,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "fail",
+      "duration": 186,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "fail",
+      "duration": 255,
+      "grew": 0,
+      "issues": []
     }
   ],
   "health": {
     "status": "ISSUES_FOUND",
     "issues": [
-      "WARNING: Feed not updated in 121m"
+      "WARNING: Feed not updated in 141m"
     ]
-  },
-  "activity": {
-    "last_job": "compound-synthesis",
-    "last_job_time": "14:34:02",
-    "last_cycle": "13:48:05",
-    "jobs_today": 10,
-    "success_today": 0,
-    "timeout_today": 0,
-    "fail_today": 0,
-    "feed_growth_today": 0,
-    "state": "running",
-    "next_cycle_est": "15:05",
-    "cycle_count": 1,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
   }
 }
