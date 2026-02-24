@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-02-24 05:47:42 ET",
-  "timestamp_utc": "2026-02-24T10:47:42Z",
+  "timestamp_local": "2026-02-24 05:48:33 ET",
+  "timestamp_utc": "2026-02-24T10:48:33Z",
   "scheduler": {
     "running": true,
     "pid": 92513,
-    "uptime_minutes": 652,
+    "uptime_minutes": 653,
     "current_window": "queue/reason"
   },
   "feed": {
@@ -30,7 +30,7 @@
     "detail": "healthy, loaded: qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest"
   },
   "gateway": {
-    "running": true
+    "running": false
   },
   "today": {
     "jobs_run": 100,
@@ -40,16 +40,6 @@
     "feed_growth": 12
   },
   "cycles": [
-    {
-      "ts": "2026-02-24T05:17:23.193635",
-      "window": "reason",
-      "cycle": 3,
-      "jobs": 1,
-      "success": 0,
-      "timeout": 0,
-      "fail": 1,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-02-24T05:18:19.293725",
       "window": "reason",
@@ -139,16 +129,19 @@
       "timeout": 0,
       "fail": 1,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-02-24T05:48:33.504769",
+      "window": "reason",
+      "cycle": 13,
+      "jobs": 1,
+      "success": 0,
+      "timeout": 0,
+      "fail": 1,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
-    {
-      "name": "tool-calling",
-      "status": "fail",
-      "duration": 402,
-      "grew": 0,
-      "issues": []
-    },
     {
       "name": "compound-synthesis",
       "status": "fail",
@@ -281,10 +274,19 @@
       "duration": 161,
       "grew": 0,
       "issues": []
+    },
+    {
+      "name": "quality-eval",
+      "status": "fail",
+      "duration": 39,
+      "grew": 0,
+      "issues": []
     }
   ],
   "health": {
-    "status": "HEALTHY",
-    "issues": []
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "CRITICAL: Gateway not running"
+    ]
   }
 }
