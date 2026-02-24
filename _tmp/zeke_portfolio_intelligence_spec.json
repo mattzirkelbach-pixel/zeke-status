@@ -1,0 +1,656 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "created": "2026-02-24",
+    "owner": "Matt",
+    "project": "Zeke Portfolio Intelligence Module",
+    "description": "Complete state export for building a real-time trading dashboard with autonomous signal generation based on Camel Finance cycle theory and macro thesis positioning.",
+    "update_cadence": "Manual export from Claude project; target: Zeke auto-syncs via API feeds"
+  },
+
+  "accounts": {
+    "etrade_brokerage": {
+      "account_id": "xxxx-3254",
+      "type": "individual_brokerage",
+      "tax_treatment": "taxable",
+      "platform": "E*TRADE",
+      "capabilities": ["equities", "options", "futures", "options_on_futures"],
+      "preferred_instruments": "Section 1256 only (GLD/SLV options, /GC /SI futures+options, SPX/VIX/RUT index options)",
+      "tax_note": "1256 contracts get 60/40 LTCG/STCG regardless of holding period. Saves ~10.2% per $100K gains at Matt's bracket vs regular equity options.",
+      "positions": [
+        {
+          "symbol": "GLD",
+          "type": "call_option",
+          "strike": 470.00,
+          "expiry": "2026-12-18",
+          "quantity": 2,
+          "cost_basis_total": 10971.03,
+          "cost_per_share": 54.855,
+          "entry_date": "2026-02-24",
+          "section_1256": true,
+          "phase": "phase_1_tranche_1",
+          "thesis": "Ride current gold weekly cycle uptrend, exit May/June before expected broad drawdown"
+        },
+        {
+          "symbol": "GLD",
+          "type": "call_option",
+          "strike": 500.00,
+          "expiry": "2026-12-18",
+          "quantity": 1,
+          "cost_basis_total": 4222.51,
+          "cost_per_share": 42.225,
+          "entry_date": "2026-02-24",
+          "section_1256": true,
+          "phase": "phase_1_tranche_1",
+          "thesis": "Leverage leg — pays off big if gold pushes through $5,500+ (GLD ~$500+)"
+        },
+        {
+          "symbol": "SILJ",
+          "type": "call_option",
+          "strike": 30.00,
+          "expiry": "2027-01-15",
+          "quantity": 25,
+          "cost_basis_total": 22687.85,
+          "cost_per_share": 9.07,
+          "entry_date": "2026-02-17",
+          "section_1256": false,
+          "tax_note": "Regular equity option — NOT 1256. Would have been better in 401k. Lesson learned.",
+          "thesis": "Junior silver miners leveraged play on silver/metals cycle"
+        },
+        {
+          "symbol": "GDX",
+          "type": "call_option",
+          "strike": 95.00,
+          "expiry": "2026-12-18",
+          "quantity": 10,
+          "cost_basis_total": 20005.14,
+          "cost_per_share": 20.00,
+          "entry_date": "2026-02-17",
+          "section_1256": false,
+          "tax_note": "Regular equity option — NOT 1256. Would have been better in 401k.",
+          "thesis": "Senior gold miners leveraged play on gold cycle"
+        }
+      ]
+    },
+    "robinhood_401k": {
+      "account_id": "robinhood_401k",
+      "type": "401k",
+      "tax_treatment": "tax_deferred",
+      "platform": "Robinhood",
+      "capabilities": ["equities", "options", "futures_limited"],
+      "preferred_instruments": "Miners (GDX, SILJ, SLV) — tax treatment irrelevant in 401k, optimize for thesis expression",
+      "positions": [
+        {
+          "note": "Recently purchased miners — exact positions not yet captured. Query Matt for screenshot."
+        }
+      ]
+    }
+  },
+
+  "trade_plan": {
+    "total_capital": {"min": 40000, "max": 50000, "currency": "USD"},
+    "structure": "two_phase",
+
+    "phase_1": {
+      "name": "Ride Weekly Cycle Uptrend",
+      "status": "active",
+      "target_exit": "May-June 2026",
+      "capital_deployed": 15193.54,
+      "capital_remaining_for_phase_1": {"min": 8000, "max": 15000},
+      "instruments": "GLD Dec 2026 calls (1256)",
+      "tranches": {
+        "tranche_1": {
+          "status": "filled",
+          "date": "2026-02-24",
+          "positions": ["GLD Dec26 $470C x2", "GLD Dec26 $500C x1"],
+          "cost": 15193.54
+        },
+        "tranche_2": {
+          "status": "pending",
+          "trigger": "Next confirmed daily cycle low with confirmation signal",
+          "target_allocation": {"min": 8000, "max": 10000},
+          "instruments": "Same strikes: GLD Dec26 $470C and $500C",
+          "confirmation_required": true
+        },
+        "tranche_3": {
+          "status": "conditional",
+          "trigger": "Second daily cycle low — only if daily cycles are right-translating (bullish weekly confirmation)",
+          "target_allocation": 5000,
+          "skip_condition": "If left-translated daily cycles or cycle failures observed — preserve capital for Phase 2"
+        }
+      },
+      "exit_triggers": {
+        "early_warning_scale_25_50_pct": [
+          "Daily cycle begins left-translating (top forms before midpoint)",
+          "Daily cycle failure (price closes below prior daily cycle low)",
+          "GLD approaches $520-540 (gold ~$5,700-5,900)",
+          "Weekly cycle reaches week 18+ with RSI bearish divergence"
+        ],
+        "strong_exit_scale_75_100_pct": [
+          "Multiple consecutive left-translated daily cycles",
+          "GLD breaks below prior daily cycle low on heavy volume",
+          "Broad equity market showing weekly cycle topping (SPX)",
+          "Weekly cycle reaches week 22-26 timing window",
+          "Credit spreads widening, VIX term structure inverting"
+        ],
+        "hard_stop": {
+          "level": "GLD $430 (gold ~$4,750)",
+          "action": "Exit all Phase 1 positions, preserve capital for Phase 2",
+          "rationale": "Below early Feb correction low = weekly cycle failure = thesis invalidated"
+        }
+      }
+    },
+
+    "phase_2": {
+      "name": "Post-Drawdown Reload — Fed Pivot Commodity Supercycle",
+      "status": "waiting",
+      "expected_entry": "Mid-Late 2026",
+      "capital_available": "Phase 1 dry powder ($15-20K) + Phase 1 profits",
+      "instruments": "GLD Jan 2028 LEAPS (1256)",
+      "entry_conditions": [
+        "Broad equity market drawdown confirmed (Camel's thesis)",
+        "Gold sells off in sympathy (liquidity crunch pattern)",
+        "Fed responds with rate cuts, QE, or emergency liquidity",
+        "Gold/GLD forms confirmed weekly cycle low",
+        "Implied volatility has declined from crisis peak"
+      ],
+      "position_structure": {
+        "core": {"strike": "ITM by $20-30", "allocation_pct": 55, "expiry": "Jan 2028", "rationale": "High delta, minimal theta, ride the printing wave"},
+        "growth": {"strike": "ATM to slightly OTM", "allocation_pct": 30, "expiry": "Jan 2028", "rationale": "Leverage to recovery and new ATHs"},
+        "moonshot": {"strike": "10-15% OTM", "allocation_pct": 15, "expiry": "Jan 2028", "rationale": "Asymmetric bet on gold $6,000+ / GLD $540+"}
+      }
+    }
+  },
+
+  "cycle_theory_engine": {
+    "source": "Camel Finance — Updated Cycle Trading Theory",
+    "framework": "fractal_cycle_analysis",
+    "description": "Cycles of shorter duration exist inside cycles of longer duration. Larger cycles influence direction of shorter cycles. All cycles measured low-to-low.",
+
+    "instruments": {
+      "XAUUSD": {
+        "name": "Gold Spot",
+        "daily_cycle": {"min_days": 22, "max_days": 28, "typical": 25},
+        "weekly_cycle": {"min_weeks": 22, "max_weeks": 26, "typical": 24},
+        "macro_cycle": {"years": 8},
+        "low_pattern": "2_drives",
+        "notes": "Gold exhibits 2 drives pattern into cycle lows (swing low → bounce → undercut → new cycle). Also can produce timing-based lows (sideways chop, then breakout with no visible low)."
+      },
+      "SPX": {
+        "name": "S&P 500",
+        "daily_cycle": {"min_days": 36, "max_days": 44, "typical": 40},
+        "weekly_cycle": {"min_weeks": 22, "max_weeks": 26, "typical": 24},
+        "low_pattern": "2_drives",
+        "notes": "SPX also exhibits 2 drives pattern. Used for broad market drawdown monitoring."
+      },
+      "BTC": {
+        "name": "Bitcoin",
+        "daily_cycle": {"min_days": 18, "max_days": 25, "typical": 21},
+        "low_pattern": "v_shaped",
+        "notes": "Bitcoin does NOT produce 2 drives. Plunges into lows and violently bounces — V-shaped cycle lows."
+      }
+    },
+
+    "current_cycle_state": {
+      "as_of": "2026-02-24",
+      "gold": {
+        "daily_cycle": {
+          "current_day_count": 21,
+          "estimated_dcl_date": "~2026-02-03 to 2026-02-05",
+          "estimated_dcl_price_gold": 4750,
+          "estimated_dcl_price_gld": 430,
+          "phase": "late_cycle",
+          "translation": "right_translated_so_far",
+          "status": "Approaching daily cycle high or already in decline into next DCL"
+        },
+        "weekly_cycle": {
+          "current_week_count": 8,
+          "estimated_wcl_date": "~2026-01-02 to 2026-01-06",
+          "estimated_wcl_price_gold": 4331,
+          "estimated_wcl_price_gld": 393,
+          "midpoint_week": 13,
+          "phase": "early_cycle_pre_midpoint",
+          "translation": "too_early_to_determine",
+          "expected_top_window": "Week 18-22 (~May-June 2026)",
+          "status": "Bullish — significant room to run before midpoint"
+        },
+        "macro_cycle": {
+          "phase": "mid_cycle_secular_bull",
+          "tailwinds": [
+            "Central bank buying (PBoC 15 consecutive months)",
+            "De-dollarization structural trend",
+            "Rate cut expectations (2-3 cuts priced in 2026)",
+            "Geopolitical risk premium (Iran, trade wars, Eastern Europe)",
+            "ETF inflows 801 tonnes in 2025 — 2nd largest on record"
+          ]
+        }
+      }
+    },
+
+    "cycle_definitions": {
+      "right_translated": {
+        "definition": "Cycle top forms AFTER the midpoint",
+        "signal": "bullish",
+        "expectation": "Short, sharp correction into next cycle low. Next low likely higher than prior low."
+      },
+      "left_translated": {
+        "definition": "Cycle top forms BEFORE the midpoint",
+        "signal": "bearish",
+        "expectation": "Longer decline, cycle failure likely (close below prior cycle low). Next low likely lower."
+      },
+      "mid_translated": {
+        "definition": "Cycle top forms AT the midpoint",
+        "signal": "neutral_to_bullish"
+      },
+      "cycle_failure": {
+        "definition": "Price closes below the prior cycle low within the current cycle",
+        "signal": "bearish",
+        "action": "Expect continued decline and lower low. Early warning of larger cycle topping."
+      },
+      "cycle_inversion": {
+        "definition": "Half cycle low is forced into becoming an early cycle low",
+        "signal": "very_bullish",
+        "notes": "Indicates seller exhaustion, often followed by violent rally. Watch for confirmation signals at half cycle low."
+      },
+      "timing_based_low": {
+        "definition": "Price trades sideways into timing window, then pushes up without visible decline",
+        "signal": "bullish",
+        "notes": "No clear swing low visible. Confirmed by trendline break or MA cross. Must respect confirmation signals."
+      }
+    },
+
+    "confirmation_signals": {
+      "description": "ALWAYS wait for confirmation before entering. 70-80% of lows form inside timing window, but 20-30% form outside.",
+      "methods": [
+        {
+          "name": "swing_low",
+          "definition": "A low followed by a candle that opens above the body of the low and closes above the upper wick of the low candle",
+          "stop_loss": "Place slightly below the swing low",
+          "priority": 1
+        },
+        {
+          "name": "moving_average_cross",
+          "definition": "Price closes above the 10-period SMA after a suspected cycle low",
+          "indicator": "SMA(10) on daily chart",
+          "stop_loss": "Place slightly below the cycle low",
+          "priority": 2
+        },
+        {
+          "name": "oscillator_reversal",
+          "definition": "Momentum oscillator confirms reversal from oversold/bearish to bullish",
+          "indicators": ["RSI(14)", "MACD", "CCI", "DSS_Stochastic"],
+          "stop_loss": "Place slightly below the cycle low",
+          "priority": 3
+        },
+        {
+          "name": "trendline_breakout",
+          "definition": "Price closes above a descending trendline connecting recent swing highs/wicks",
+          "stop_loss": "Place slightly below the cycle low",
+          "priority": 4
+        }
+      ],
+      "rule": "Execute on confirmation even if it occurs slightly outside the expected timing window. Missing the new cycle is worse than a slightly late entry."
+    },
+
+    "nuances": {
+      "rule_of_alternation": "Shorter cycles tend to be followed by longer cycles and vice versa. If a cycle forms earlier than expected, expect the next to run longer than expected.",
+      "two_drives_pattern": {
+        "applies_to": ["XAUUSD", "SPX", "NDX", "DJI"],
+        "definition": "Swing low → counter-trend bounce → undercut of low (lower low or double bottom) → swing low → new cycle begins",
+        "variations": ["Perfect: two consecutive lower lows", "Double bottom: equal low", "Occasional: higher low on second drive"]
+      },
+      "v_shaped_low": {
+        "applies_to": ["BTC"],
+        "definition": "Sharp plunge into cycle low with violent bounce — no 2 drives, just a V-shape"
+      },
+      "fractal_confirmation": {
+        "bullish_weekly": "Expect multiple right-translated daily cycles without cycle failure",
+        "bearish_weekly": "Expect first daily cycle to right-translate, then multiple left-translated + failed daily cycles",
+        "bullish_weekly_final_dc": "Typical to see one left-translated daily cycle at the end of a bullish weekly cycle before decline into WCL"
+      }
+    }
+  },
+
+  "dashboard_requirements": {
+    "description": "Real-time portfolio intelligence dashboard for Zeke to render and manage",
+
+    "panels": {
+      "portfolio_overview": {
+        "description": "Live P&L across all positions and accounts",
+        "data_sources": ["E*TRADE API or scrape", "Robinhood API", "Yahoo Finance for pricing"],
+        "fields_per_position": [
+          "symbol", "strike", "expiry", "quantity", "cost_basis",
+          "current_price", "current_value", "unrealized_pnl", "pnl_pct",
+          "delta", "gamma", "theta", "vega", "iv",
+          "days_to_expiry", "section_1256", "phase"
+        ],
+        "aggregations": [
+          "total_portfolio_value", "total_unrealized_pnl", "total_pnl_pct",
+          "pnl_by_account", "pnl_by_phase", "1256_vs_non1256_breakdown",
+          "estimated_tax_liability_at_current_gains"
+        ]
+      },
+
+      "cycle_tracker": {
+        "description": "Visual cycle timing display with current position in daily/weekly/macro cycles",
+        "instruments_tracked": ["XAUUSD", "GLD", "SLV", "SPX", "GDX", "SILJ"],
+        "visualizations": [
+          {
+            "type": "cycle_timeline",
+            "description": "Horizontal bar showing current day/week count within min/max window, midpoint marked, current position highlighted",
+            "color_coding": {
+              "pre_midpoint": "green",
+              "post_midpoint": "yellow",
+              "timing_window": "orange",
+              "past_window": "red"
+            }
+          },
+          {
+            "type": "translation_indicator",
+            "description": "Shows whether current cycle top has formed before/after midpoint — RT/LT/MT badge with color",
+            "badges": {
+              "right_translated": {"color": "green", "label": "RT — Bullish"},
+              "left_translated": {"color": "red", "label": "LT — Bearish"},
+              "mid_translated": {"color": "yellow", "label": "MT — Neutral"},
+              "pending": {"color": "gray", "label": "Pending — Top not yet formed"}
+            }
+          },
+          {
+            "type": "cycle_failure_monitor",
+            "description": "Real-time check: has current cycle price closed below prior cycle low? Binary alert.",
+            "alert_level": "critical"
+          },
+          {
+            "type": "price_chart_overlay",
+            "description": "Daily candlestick chart with cycle lows (green arrows), cycle highs (red arrows), midpoint (blue vertical), 10-SMA, and trendlines auto-drawn"
+          }
+        ]
+      },
+
+      "confirmation_signal_scanner": {
+        "description": "Automated detection of Camel confirmation signals at suspected cycle lows",
+        "signals_monitored": [
+          {
+            "name": "swing_low_detector",
+            "logic": "Identify candle that opens above body of prior low candle AND closes above upper wick of prior low candle",
+            "timeframe": "daily",
+            "alert": true
+          },
+          {
+            "name": "sma_cross_detector",
+            "logic": "Price closes above SMA(10) after being below it for 2+ days",
+            "timeframe": "daily",
+            "alert": true
+          },
+          {
+            "name": "rsi_reversal_detector",
+            "logic": "RSI(14) crosses above 30 from below (oversold reversal) OR RSI crosses above 50 from below",
+            "timeframe": "daily",
+            "alert": true
+          },
+          {
+            "name": "macd_cross_detector",
+            "logic": "MACD line crosses above signal line while both are below zero (bullish cross from oversold)",
+            "timeframe": "daily",
+            "alert": true
+          },
+          {
+            "name": "trendline_break_detector",
+            "logic": "Auto-draw descending trendline from last 2-3 swing highs. Alert when daily close breaks above trendline.",
+            "timeframe": "daily",
+            "alert": true
+          }
+        ],
+        "composite_score": {
+          "description": "Score 0-4 based on how many confirmation signals are firing simultaneously",
+          "thresholds": {
+            "0": "No confirmation — do not enter",
+            "1": "Weak confirmation — caution",
+            "2": "Moderate confirmation — consider entry",
+            "3-4": "Strong confirmation — high confidence entry"
+          }
+        }
+      },
+
+      "scenario_modeler": {
+        "description": "Options P&L projections across price/time/IV scenarios",
+        "axes": {
+          "price": {"range": "GLD $400 to $600", "step": 10},
+          "time": {"range": "2026-02-24 to 2026-12-18", "step": "weekly"},
+          "iv": {"range": "-30% to +50% from current", "step": "10%"}
+        },
+        "model": "Black-Scholes",
+        "outputs": [
+          "per_position_value", "total_portfolio_value",
+          "delta_exposure", "theta_burn_rate",
+          "breakeven_prices_at_expiry", "max_profit_scenarios"
+        ]
+      },
+
+      "macro_condition_tracker": {
+        "description": "Five-factor assessment of conditions supporting gold thesis",
+        "factors": [
+          {
+            "name": "Fed Policy",
+            "indicators": ["Fed Funds Rate", "Rate cut expectations (CME FedWatch)", "QE/QT balance sheet"],
+            "bullish_for_gold": "Dovish pivot, rate cuts, QE restart",
+            "bearish_for_gold": "Hawkish hold, rate hikes, QT acceleration"
+          },
+          {
+            "name": "Inflation",
+            "indicators": ["CPI headline/core", "PCE", "Breakeven inflation rates"],
+            "bullish_for_gold": "Persistent above-target inflation, stagflation risk",
+            "bearish_for_gold": "Sharp disinflation, deflation risk"
+          },
+          {
+            "name": "Growth / Recession Risk",
+            "indicators": ["GDP", "ISM PMI", "NFP", "Jobless claims", "Retail sales", "Yield curve"],
+            "bullish_for_gold": "Slowing growth, rising recession probability, weak labor market",
+            "bearish_for_gold": "Strong growth reacceleration, tight labor market"
+          },
+          {
+            "name": "USD / Term Premium",
+            "indicators": ["DXY", "10Y yield", "Term premium estimates", "Treasury auction demand"],
+            "bullish_for_gold": "Weak dollar, rising term premium, poor auction demand",
+            "bearish_for_gold": "Strong dollar, falling yields due to growth optimism"
+          },
+          {
+            "name": "Global Flows / Central Banks",
+            "indicators": ["Central bank gold purchases (WGC data)", "ETF flows (GLD/IAU)", "COMEX positioning", "PBoC reserves"],
+            "bullish_for_gold": "Continued CB buying, ETF inflows, de-dollarization",
+            "bearish_for_gold": "CB selling, ETF outflows, dollar re-accumulation"
+          }
+        ],
+        "scoring": {
+          "per_factor": {"bullish": 1, "neutral": 0, "bearish": -1},
+          "composite": {"range": "-5 to +5", "interpretation": "+3 to +5 = strong bullish, 0 to +2 = neutral/mild, -1 to -5 = bearish"}
+        }
+      },
+
+      "trade_action_engine": {
+        "description": "Autonomous signal generator — tells Matt what to do next based on current state",
+        "signal_types": [
+          {
+            "signal": "TRANCHE_2_ENTRY",
+            "conditions": [
+              "Daily cycle day count ≥ 22 (in timing window for DCL)",
+              "Confirmation score ≥ 2",
+              "Weekly cycle still pre-midpoint (week < 13)",
+              "No cycle failure on weekly level"
+            ],
+            "action": "Buy ~$8-10K GLD Dec26 $470C/$500C at confirmed DCL",
+            "priority": "high"
+          },
+          {
+            "signal": "TRANCHE_3_ENTRY",
+            "conditions": [
+              "Tranche 2 filled",
+              "Second DCL confirmed with right-translation on prior daily cycle",
+              "Weekly cycle still bullish (no failures, RT daily cycles dominant)"
+            ],
+            "action": "Buy ~$5K additional GLD Dec26 calls",
+            "priority": "medium"
+          },
+          {
+            "signal": "SCALE_OUT_25_50",
+            "conditions": [
+              "Daily cycle left-translating OR daily cycle failure",
+              "Weekly cycle past midpoint (week > 13)",
+              "GLD > $520"
+            ],
+            "action": "Sell 25-50% of Phase 1 positions",
+            "priority": "high"
+          },
+          {
+            "signal": "SCALE_OUT_75_100",
+            "conditions": [
+              "Multiple LT daily cycles OR weekly in timing window (week 22-26)",
+              "SPX showing weekly topping signals",
+              "VIX term structure inverting OR credit spreads widening"
+            ],
+            "action": "Sell 75-100% of Phase 1 positions, move to cash for Phase 2",
+            "priority": "critical"
+          },
+          {
+            "signal": "HARD_STOP",
+            "conditions": ["GLD daily close < $430"],
+            "action": "Exit ALL Phase 1 positions immediately",
+            "priority": "critical"
+          },
+          {
+            "signal": "PHASE_2_ENTRY",
+            "conditions": [
+              "Broad equity drawdown confirmed (SPX -15%+ from highs)",
+              "Fed has announced rate cuts or emergency measures",
+              "Gold/GLD has formed confirmed WCL",
+              "IV has declined from crisis peak",
+              "GLD Jan 2028 LEAPS available with acceptable spreads"
+            ],
+            "action": "Deploy remaining capital into Jan 2028 LEAPS tiered structure",
+            "priority": "critical"
+          },
+          {
+            "signal": "OPPORTUNITY_SCAN",
+            "description": "Scan for new opportunities across related instruments",
+            "watch_list": [
+              {"symbol": "SLV", "reason": "Silver cycle may diverge from gold — watch for independent entry"},
+              {"symbol": "SPX", "reason": "If broad drawdown thesis plays out, SPX puts or VIX calls (1256) could hedge or amplify"},
+              {"symbol": "/GC", "reason": "E*TRADE futures — cleanest 1256 if short-duration gold directional trade needed"},
+              {"symbol": "/SI", "reason": "Silver futures — same as /GC for silver"},
+              {"symbol": "TLT", "reason": "Existing LEAPS position in Robinhood — monitor for Phase 2 correlation with gold thesis"}
+            ]
+          }
+        ]
+      },
+
+      "alerts_and_notifications": {
+        "channels": ["dashboard_popup", "push_notification", "email_optional"],
+        "alert_rules": [
+          {"event": "GLD crosses above $500", "type": "target_hit", "severity": "info"},
+          {"event": "GLD crosses above $520", "type": "target_hit", "severity": "warning"},
+          {"event": "GLD crosses below $450", "type": "stop_warning", "severity": "warning"},
+          {"event": "GLD crosses below $430", "type": "hard_stop", "severity": "critical"},
+          {"event": "Daily cycle day count enters timing window (day 22+)", "type": "cycle_timing", "severity": "info"},
+          {"event": "Confirmation signal composite score ≥ 2 during timing window", "type": "entry_signal", "severity": "high"},
+          {"event": "Daily cycle failure detected", "type": "bearish_warning", "severity": "warning"},
+          {"event": "Weekly cycle enters timing window (week 22+)", "type": "exit_preparation", "severity": "high"},
+          {"event": "SPX drops 5%+ from recent high", "type": "drawdown_watch", "severity": "info"},
+          {"event": "SPX drops 15%+ from recent high", "type": "phase_2_preparation", "severity": "high"},
+          {"event": "Fed announces emergency rate cut or QE", "type": "phase_2_trigger", "severity": "critical"},
+          {"event": "Options theta exceeds $50/day across portfolio", "type": "decay_warning", "severity": "warning"},
+          {"event": "Position IV rank > 80th percentile", "type": "iv_elevated", "severity": "info"},
+          {"event": "Position IV rank < 20th percentile", "type": "iv_cheap", "severity": "info"}
+        ]
+      }
+    },
+
+    "data_feeds_required": {
+      "real_time_pricing": {
+        "symbols": ["GLD", "SLV", "GDX", "SILJ", "XAUUSD", "XAGUSD", "SPX", "VIX", "DXY", "TLT", "/GC", "/SI"],
+        "frequency": "1-minute during market hours, 15-minute after hours",
+        "sources": ["Yahoo Finance API", "Alpha Vantage", "Polygon.io", "CBOE delayed", "TradingView webhook"]
+      },
+      "options_chain_data": {
+        "symbols": ["GLD", "SLV", "SPX"],
+        "fields": ["bid", "ask", "last", "volume", "open_interest", "iv", "delta", "gamma", "theta", "vega"],
+        "frequency": "5-minute during market hours",
+        "sources": ["E*TRADE API", "OPRA via Polygon", "Yahoo Finance options"]
+      },
+      "technical_indicators": {
+        "computed_locally": true,
+        "indicators": [
+          {"name": "SMA", "periods": [10, 20, 50, 200], "timeframe": "daily"},
+          {"name": "RSI", "period": 14, "timeframe": "daily"},
+          {"name": "MACD", "fast": 12, "slow": 26, "signal": 9, "timeframe": "daily"},
+          {"name": "Stochastic", "k": 14, "d": 3, "timeframe": "daily"},
+          {"name": "ATR", "period": 14, "timeframe": "daily"},
+          {"name": "Bollinger_Bands", "period": 20, "std": 2, "timeframe": "daily"}
+        ]
+      },
+      "macro_data": {
+        "sources": ["FRED API", "CME FedWatch", "TradingEconomics API", "World Gold Council"],
+        "series": [
+          {"name": "Fed Funds Rate", "id": "FEDFUNDS", "frequency": "monthly"},
+          {"name": "CPI", "id": "CPIAUCSL", "frequency": "monthly"},
+          {"name": "Core CPI", "id": "CPILFESL", "frequency": "monthly"},
+          {"name": "10Y Treasury", "id": "DGS10", "frequency": "daily"},
+          {"name": "2Y Treasury", "id": "DGS2", "frequency": "daily"},
+          {"name": "Breakeven 10Y", "id": "T10YIE", "frequency": "daily"},
+          {"name": "Initial Jobless Claims", "id": "ICSA", "frequency": "weekly"},
+          {"name": "ISM Manufacturing PMI", "id": "MANEMP", "frequency": "monthly"},
+          {"name": "VIX", "id": "VIXCLS", "frequency": "daily"},
+          {"name": "DXY", "source": "yahoo_finance", "symbol": "DX-Y.NYB", "frequency": "daily"},
+          {"name": "GLD ETF Flows", "source": "etf.com or WGC", "frequency": "weekly"}
+        ]
+      }
+    },
+
+    "capabilities_for_zeke": {
+      "description": "What Zeke needs to be able to do to fully manage this system",
+      "core": [
+        "Ingest and store OHLCV daily candle data for all tracked instruments",
+        "Compute technical indicators (SMA, RSI, MACD, Stochastic, trendlines)",
+        "Implement cycle counting algorithm: detect swing lows, measure low-to-low, track day/week counts",
+        "Classify cycle translation (RT/LT/MT) by comparing cycle high timing to midpoint",
+        "Detect cycle failures (close below prior cycle low)",
+        "Run confirmation signal composite scoring at suspected cycle lows",
+        "Calculate Black-Scholes option valuations with Greeks for all positions",
+        "Generate P&L heatmaps across price/time/IV scenarios",
+        "Track macro data releases and score the 5-factor framework",
+        "Fire alerts based on rules engine (price levels, cycle events, macro triggers)"
+      ],
+      "advanced": [
+        "Auto-detect 2 drives pattern into cycle lows using swing detection",
+        "Auto-draw trendlines from recent swing highs for breakout detection",
+        "Backtest cycle timing accuracy on historical data per instrument",
+        "Track rule of alternation: if last cycle was short, expect next to be long",
+        "Monitor cross-asset correlation (gold vs SPX vs DXY) for divergence signals",
+        "Scan options chains for optimal strike/expiry combinations based on current thesis phase",
+        "Estimate tax impact of closing positions (1256 vs non-1256 treatment)",
+        "Generate natural language trade recommendations based on composite state"
+      ],
+      "integration": [
+        "E*TRADE API for live position data and potential order execution",
+        "Robinhood API (unofficial) for 401k position monitoring",
+        "Claude API for natural language analysis and thesis refinement",
+        "Webhook or push notification system for real-time alerts",
+        "Dashboard rendering (React, D3, or Plotly for visualizations)"
+      ]
+    }
+  },
+
+  "tax_optimization_rules": {
+    "section_1256_instruments": {
+      "confirmed_1256": ["/GC", "/SI", "/ZB", "/ES", "/NQ", "SPX options", "VIX options", "RUT options", "XSP options"],
+      "widely_treated_1256": ["GLD options", "SLV options", "IAU options"],
+      "NOT_1256": ["GDX options", "SILJ options", "SLV equity", "GLD equity", "any stock/ETF equity options"],
+      "tax_treatment": "60% LTCG (15-20%) + 40% STCG (37%) = effective ~26.8% vs 37% for regular short-term",
+      "savings_per_100k": 10200,
+      "mark_to_market": "Open 1256 positions marked to market at year-end — unrealized gains/losses reported on Form 6781"
+    },
+    "routing_rules": {
+      "taxable_accounts": "ONLY use 1256 instruments for new positions",
+      "401k": "Tax treatment irrelevant — optimize for thesis expression (miners, leveraged ETFs, whatever fits)"
+    }
+  }
+}
