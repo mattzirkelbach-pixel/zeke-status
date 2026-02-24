@@ -4,6 +4,33 @@ import json, subprocess, os, glob, sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
+# --- GPU MONITORING (added by fix-dashboard.py) ---
+def probe_gpu():
+    """Get GPU metrics from Spark via SSH."""
+    import subprocess
+    try:
+        result = subprocess.run(
+            ["ssh", "-o", "ConnectTimeout=5", "-o", "StrictHostKeyChecking=no",
+             "zirkai@spark-7027",
+             "nvidia-smi --query-gpu=temperature.gpu,utilization.gpu,power.draw --format=csv,noheader,nounits 2>/dev/null || echo ERR"],
+            capture_output=True, text=True, timeout=10
+        )
+        output = result.stdout.strip()
+        if output and output != 'ERR' and ',' in output:
+            parts = [p.strip() for p in output.split(',')]
+            temp = int(parts[0]) if parts[0].isdigit() else None
+            util = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else None
+            power = parts[2] if len(parts) > 2 else None
+            status = "healthy"
+            if temp and temp > 85: status = "HOT"
+            elif temp and temp > 75: status = "warm"
+            return {"temperature_c": temp, "utilization_pct": util, "power_w": power, "status": status}
+        return {"status": "unreachable", "error": output[:100]}
+    except Exception as e:
+        return {"status": "probe_failed", "error": str(e)[:100]}
+# --- END GPU MONITORING ---
+
+
 HOME = Path.home()
 WORKSPACE = HOME / ".openclaw" / "workspace"
 MEMORY = WORKSPACE / "memory"
@@ -125,6 +152,12 @@ def get_kg_stats():
         for row in db.execute("SELECT domain, COUNT(*) FROM entities GROUP BY domain ORDER BY COUNT(*) DESC"):
             domains[row[0]] = row[1]
         db.close()
+        # GPU monitoring
+        try:
+            if isinstance(status, dict) and "gpu" not in status:
+                status["gpu"] = probe_gpu()
+        except: pass
+
         return f"Entities: {ent}\nRelationships: {rel}\nAssociations: {assoc}\nInsights: {ins}\nDomains: {json.dumps(domains, indent=2)}"
     except Exception as e:
         return f"Error: {e}"
