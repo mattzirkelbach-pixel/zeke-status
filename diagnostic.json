@@ -1,55 +1,45 @@
 {
-  "timestamp_local": "2026-02-24 09:11:38 ET",
-  "timestamp_utc": "2026-02-24T14:11:38Z",
+  "timestamp_local": "2026-02-24 09:38:02 ET",
+  "timestamp_utc": "2026-02-24T14:38:02Z",
   "scheduler": {
     "running": true,
     "pid": 92513,
-    "uptime_minutes": 856,
+    "uptime_minutes": 882,
     "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 265,
+    "total_lines": 288,
     "last_entries": [
-      "[2026-02-24T13:36:00] compound-synthesis",
-      "[2026-02-24T13:36:00] compound-synthesis",
-      "[2026-02-24T13:36:00] compound-synthesis",
-      "[2026-02-24T13:36:00] compound-synthesis",
-      "[2026-02-24T13:36:00] compound-synthesis"
+      "[2026-02-24T09:30:00] compound-synthesis",
+      "[2026-02-24T09:30:00] compound-synthesis",
+      "[2026-02-24T09:30:00] compound-synthesis",
+      "[2026-02-24T09:30:00] cross-domain-synthesis",
+      "[2026-02-24T09:30:00] compound-synthesis"
     ]
   },
   "spark": {
     "online": true,
     "models_loaded": [
       "qwen3-32b-32k:latest",
-      "nomic-embed-text:latest",
-      "qwen3:8b"
+      "qwen3:8b",
+      "nomic-embed-text:latest"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b"
+    "detail": "healthy, loaded: qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest"
   },
   "gateway": {
     "running": true
   },
   "today": {
     "jobs_run": 100,
-    "success": 13,
-    "timeout": 4,
-    "fail": 80,
-    "feed_growth": 56
+    "success": 15,
+    "timeout": 3,
+    "fail": 78,
+    "feed_growth": 79
   },
   "cycles": [
-    {
-      "ts": "2026-02-24T05:53:23.600154",
-      "window": "reason",
-      "cycle": 19,
-      "jobs": 1,
-      "success": 0,
-      "timeout": 0,
-      "fail": 1,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-02-24T05:54:32.098570",
       "window": "reason",
@@ -139,44 +129,19 @@
       "timeout": 0,
       "fail": 3,
       "feed_grew": 16
+    },
+    {
+      "ts": "2026-02-24T09:38:02.176456",
+      "window": "daytime",
+      "cycle": 5,
+      "jobs": 5,
+      "success": 2,
+      "timeout": 0,
+      "fail": 2,
+      "feed_grew": 23
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 241,
-      "grew": 2,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "success",
-      "duration": 111,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 146,
-      "grew": 3,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "empty",
-      "duration": 194,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "compound-synthesis",
-      "status": "success",
-      "duration": 30,
-      "grew": 1,
-      "issues": []
-    },
     {
       "name": "treasury-bonds",
       "status": "fail",
@@ -285,25 +250,47 @@
       "duration": 298,
       "grew": 8,
       "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "bad_output",
+      "duration": 260,
+      "grew": 8,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "empty",
+      "duration": 247,
+      "grew": 4,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 50,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 536,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration": 435,
+      "grew": 10,
+      "issues": [
+        "literal $(date) in timestamp"
+      ]
     }
   ],
   "health": {
     "status": "HEALTHY",
     "issues": []
-  },
-  "activity": {
-    "last_job": "compound-synthesis",
-    "last_job_time": "09:30:36",
-    "last_cycle": "08:41:28",
-    "jobs_today": 154,
-    "success_today": 29,
-    "timeout_today": 5,
-    "fail_today": 15,
-    "feed_growth_today": 83,
-    "state": "running",
-    "next_cycle_est": "10:05",
-    "cycle_count": 46,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
   }
 }
