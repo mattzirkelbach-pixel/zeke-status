@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-02-23 19:35:41 ET",
-  "timestamp_utc": "2026-02-24T00:35:41Z",
+  "timestamp_local": "2026-02-23 19:56:28 ET",
+  "timestamp_utc": "2026-02-24T00:56:28Z",
   "scheduler": {
     "running": true,
     "pid": 92513,
-    "uptime_minutes": 40,
+    "uptime_minutes": 61,
     "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 168,
+    "total_lines": 188,
     "last_entries": [
-      "[PARSE ERROR] {\"timestamp\":\"2026-02-23T17:12:00Z\",\"topic\":\"self-improvement and learning\",\"fin",
-      "[2026-02-23T21:59:32] longevity research",
-      "[2026-02-23T19:01:00] AI agents and tool calling",
-      "[2026-02-23T19:04:00] compound-synthesis",
-      "[2026-02-23T19:04:35] compound-synthesis"
+      "[2026-02-23T19:54:00] compound-synthesis",
+      "[2026-02-23T19:54:00] compound-synthesis",
+      "[2026-02-23T19:54:00] compound-synthesis",
+      "[2026-02-23T19:54:00] compound-synthesis",
+      "[PARSE ERROR] {\"timestamp\":\"2026-02-23T19:54:00Z\",\"topic\":\"compound-synthesis\",\"finding\":\"Rapa"
     ]
   },
   "spark": {
@@ -33,11 +33,11 @@
     "running": true
   },
   "today": {
-    "jobs_run": 5,
-    "success": 2,
+    "jobs_run": 10,
+    "success": 5,
     "timeout": 0,
-    "fail": 2,
-    "feed_growth": 4
+    "fail": 4,
+    "feed_growth": 24
   },
   "cycles": [
     {
@@ -49,6 +49,16 @@
       "timeout": 0,
       "fail": 2,
       "feed_grew": 4
+    },
+    {
+      "ts": "2026-02-23T19:56:28.365762",
+      "window": "daytime",
+      "cycle": 2,
+      "jobs": 5,
+      "success": 3,
+      "timeout": 0,
+      "fail": 2,
+      "feed_grew": 20
     }
   ],
   "recent_jobs": [
@@ -86,25 +96,47 @@
       "duration": 54,
       "grew": 2,
       "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 87,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "bad_output",
+      "duration": 319,
+      "grew": 4,
+      "issues": [
+        "literal $(date) in timestamp"
+      ]
+    },
+    {
+      "name": "ai-agents",
+      "status": "success",
+      "duration": 577,
+      "grew": 8,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration": 103,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration": 106,
+      "grew": 6,
+      "issues": []
     }
   ],
   "health": {
     "status": "HEALTHY",
     "issues": []
-  },
-  "activity": {
-    "last_job": "compound-synthesis",
-    "last_job_time": "19:54:31",
-    "last_cycle": "19:05:33",
-    "jobs_today": 10,
-    "success_today": 5,
-    "timeout_today": 0,
-    "fail_today": 2,
-    "feed_growth_today": 13,
-    "state": "running",
-    "next_cycle_est": "20:25",
-    "cycle_count": 1,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
   }
 }
