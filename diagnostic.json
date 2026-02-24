@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-02-24 06:01:03 ET",
-  "timestamp_utc": "2026-02-24T11:01:03Z",
+  "timestamp_local": "2026-02-24 06:13:59 ET",
+  "timestamp_utc": "2026-02-24T11:13:59Z",
   "scheduler": {
     "running": true,
     "pid": 92513,
-    "uptime_minutes": 665,
+    "uptime_minutes": 678,
     "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 219,
+    "total_lines": 227,
     "last_entries": [
-      "[2026-02-25T03:22:13] ai-agents",
-      "[PARSE ERROR] 2026-02-24T08:53:00Z,treasury-bonds,20Y yield at 3.85% from FRED,https://fred.st",
-      "[PARSE ERROR] {\"timestamp\":\"$(python3 -c \"import datetime;print(datetime.datetime.now(datetime",
-      "[NOW] tool-calling",
-      "[PARSE ERROR] {\"timestamp\":\"$(python3 -c \"import datetime;print(datetime.datetime.now(datetime"
+      "[2026-02-24T11:07:51] AI agents and tool calling",
+      "[2026-02-24T11:07:51] AI agents and tool calling",
+      "[2026-02-24T11:14:31] AI agents and tool calling",
+      "[2026-02-24T06:09:00] self-improvement and learning",
+      "[2026-02-24T09:05:00] compound-synthesis"
     ]
   },
   "spark": {
@@ -34,22 +34,12 @@
   },
   "today": {
     "jobs_run": 100,
-    "success": 2,
+    "success": 6,
     "timeout": 5,
-    "fail": 93,
-    "feed_growth": 11
+    "fail": 88,
+    "feed_growth": 19
   },
   "cycles": [
-    {
-      "ts": "2026-02-24T05:50:21.047138",
-      "window": "reason",
-      "cycle": 15,
-      "jobs": 1,
-      "success": 0,
-      "timeout": 0,
-      "fail": 1,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-02-24T05:50:55.347558",
       "window": "reason",
@@ -139,44 +129,19 @@
       "timeout": 0,
       "fail": 1,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-02-24T06:13:59.933090",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 5,
+      "success": 4,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 8
     }
   ],
   "recent_jobs": [
-    {
-      "name": "quality-eval",
-      "status": "fail",
-      "duration": 25,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "quality-eval",
-      "status": "fail",
-      "duration": 39,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "quality-eval",
-      "status": "fail",
-      "duration": 97,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "quality-eval",
-      "status": "fail",
-      "duration": 34,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "quality-eval",
-      "status": "timeout",
-      "duration": 900,
-      "grew": 0,
-      "issues": []
-    },
     {
       "name": "quality-eval",
       "status": "fail",
@@ -281,25 +246,45 @@
       "duration": 229,
       "grew": 0,
       "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 241,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "success",
+      "duration": 111,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "success",
+      "duration": 146,
+      "grew": 3,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "empty",
+      "duration": 194,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration": 30,
+      "grew": 1,
+      "issues": []
     }
   ],
   "health": {
     "status": "HEALTHY",
     "issues": []
-  },
-  "activity": {
-    "last_job": "self-improvement",
-    "last_job_time": "06:09:54",
-    "last_cycle": "06:01:03",
-    "jobs_today": 133,
-    "success_today": 16,
-    "timeout_today": 5,
-    "fail_today": 11,
-    "feed_growth_today": 47,
-    "state": "running",
-    "next_cycle_est": "06:12",
-    "cycle_count": 42,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
   }
 }
