@@ -323,7 +323,7 @@ async function render(){
   actC+=Row('State',a.state||'—',stateColor);
   actC+=Row('Last Job',a.last_job||'—','c-accent');
   const ljRel=relTime(a.last_job_time);
-  actC+=Row('Last Job',ljRel,ljRel.includes('ago')?'c-ok':'');
+  actC+=Row('Last Run',ljRel,ljRel.includes('ago')?'c-ok':'');
   const lcRel=relTime(a.last_cycle);
   actC+=Row('Last Cycle',lcRel,lcRel.includes('ago')?'c-ok':'');
   actC+=Row('Next Cycle',a.next_cycle_est||'—','c-blue');
@@ -428,8 +428,8 @@ async function render(){
   let gl='';
 
   // KG — parse string, show only key metrics
-  if(s?.kg_stats){
-    const kg=s.kg_stats;
+  if(d?.kg_stats){
+    const kg=d.kg_stats;
     let kgC='';
     if(typeof kg==='string'){
       const lines=kg.split('\n');
@@ -449,8 +449,8 @@ async function render(){
   }
 
   // GPU
-  if(s?.gpu_stats){
-    const gpu=s.gpu_stats;
+  if(d?.gpu_stats){
+    const gpu=d.gpu_stats;
     let gpuC='';
     const gst=gpu.status||'unknown';
     gpuC+=Row('Status',gst.includes('OK')?'Online':gst,gst.includes('OK')?'c-ok':'c-orange');
@@ -475,9 +475,9 @@ async function render(){
     gl+=`<div class="card"><h2>Automation</h2>${autoC}</div>`;
   }
 
-  // Feed Quality Deep (from status.json)
-  if(s?.feed_quality){
-    const fq=s.feed_quality;
+  // Feed Quality Deep (from diagnostic.json)
+  if(d?.feed_quality){
+    const fq=d.feed_quality;
     let dqC='';
     dqC+=Row('Total Evaluated',fq.total||'—','');
     // error_rate is already a percentage number

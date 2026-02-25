@@ -292,17 +292,100 @@ def update_feed_history(feed_count):
 # ============================================================
 # BUILD DIAGNOSTIC
 # ============================================================
+import sqlite3
+
+def get_kg_stats():
+    """Knowledge graph stats from SQLite."""
+    try:
+        db_path = os.path.join(HOME, ".openclaw/workspace/memory/knowledge.db")
+        db = sqlite3.connect(db_path)
+        ent = db.execute("SELECT COUNT(*) FROM entities").fetchone()[0]
+        rel = db.execute("SELECT COUNT(*) FROM relationships").fetchone()[0]
+        assoc = db.execute("SELECT COUNT(*) FROM associations").fetchone()[0]
+        tables = [t[0] for t in db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
+        ins = db.execute("SELECT COUNT(*) FROM insights").fetchone()[0] if 'insights' in tables else 0
+        db.close()
+        return {"entities": ent, "relations": rel, "associations": assoc, "insights": ins}
+    except Exception as e:
+        return {"error": str(e)[:100]}
+
+def get_gpu_stats():
+    """GPU stats from DGX Spark via SSH."""
+    try:
+        r = subprocess.run(
+            ['ssh', '-o', 'ConnectTimeout=5', '-o', 'BatchMode=yes', 'zirkai@spark-7027',
+             'nvidia-smi --query-gpu=utilization.gpu,temperature.gpu,power.draw,name --format=csv,noheader,nounits'],
+            capture_output=True, text=True, timeout=15
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            parts = [x.strip() for x in r.stdout.strip().split(',')]
+            def sf(v):
+                try: return float(v)
+                except: return None
+            return {
+                'status': 'OK',
+                'gpu_util_pct': sf(parts[0]) if len(parts) > 0 else None,
+                'temp_c': sf(parts[1]) if len(parts) > 1 else None,
+                'power_w': sf(parts[2]) if len(parts) > 2 else None,
+                'gpu_name': parts[3].strip() if len(parts) > 3 else 'unknown',
+            }
+        return {'status': 'SSH_OK_NO_DATA'}
+    except subprocess.TimeoutExpired:
+        return {'status': 'SSH_TIMEOUT'}
+    except Exception as e:
+        return {'status': 'ERROR', 'error': str(e)[:200]}
+
+def get_feed_quality_audit():
+    """Proper feed quality audit — fixed dedup that doesn't flag everything."""
+    issues = {'malformed_json': 0, 'literal_timestamps': 0, 'duplicates': 0, 'total': 0}
+    seen = set()
+    try:
+        with open(FEED) as f:
+            for line in f:
+                line = line.strip()
+                if not line: continue
+                issues['total'] += 1
+                if '$(date' in line or '$date' in line: issues['literal_timestamps'] += 1
+                try:
+                    d = json.loads(line)
+                    # Dedup on topic + first 60 chars of finding (not just topic alone)
+                    finding = d.get('finding', d.get('insights', ''))
+                    if isinstance(finding, list): finding = finding[0] if finding else ''
+                    key = f"{d.get('topic','')}|{str(finding)[:60]}"
+                    if key in seen: issues['duplicates'] += 1
+                    seen.add(key)
+                except json.JSONDecodeError: issues['malformed_json'] += 1
+    except: pass
+    bad = issues['malformed_json'] + issues['literal_timestamps'] + issues['duplicates']
+    issues['error_rate'] = round(bad / max(issues['total'], 1) * 100, 1)
+    return issues
+
+# ============================================================
+# MERGE MODE: Read scheduler's diagnostic, enrich with our data
+# ============================================================
 now = datetime.datetime.now()
 now_utc = datetime.datetime.utcnow()
 
+# Read existing diagnostic.json (written by scheduler)
+existing = {}
+try:
+    with open(DIAG_OUT) as f:
+        existing = json.load(f)
+except: pass
+
+# Compute our enrichments
 spark = check_spark()
 feed = check_feed()
 activity = read_scheduler_log()
 scheduler = check_process("zeke-scheduler")
 gateway_proc = check_process("openclaw")
 feed_history = update_feed_history(feed.get("total_lines", 0))
+kg_stats = get_kg_stats()
+gpu_stats = get_gpu_stats()
+feed_quality = get_feed_quality_audit()
 
-diag = {
+# Build enrichment overlay
+enrichment = {
     "timestamp_local": now.strftime("%Y-%m-%d %I:%M:%S%p ET").replace(" 0", " "),
     "timestamp_utc": now_utc.strftime("%Y-%m-%dT%H:%M:%SZ"),
     "scheduler": {**scheduler, "type": "python"},
@@ -311,6 +394,9 @@ diag = {
     "feed": feed,
     "activity": activity,
     "feed_history": feed_history,
+    "kg_stats": kg_stats,
+    "gpu_stats": gpu_stats,
+    "feed_quality": feed_quality,
     "cost": {
         "model": "spark/qwen3-32b-32k (local, $0)",
         "sonnet_calls_today": activity["sonnet_calls"],
@@ -318,43 +404,10 @@ diag = {
         "is_zero_cost": activity["estimated_cost"] == 0,
     },
     "automation": {
-        "layer1": {
-            "name": "Execution",
-            "status": "DEPLOYED",
-            "items": [
-                {"name": "Python scheduler", "done": True},
-                {"name": "Guardian auto-restart", "done": True},
-                {"name": "Quality gate (feed validation)", "done": True},
-                {"name": "Spark health probe", "done": True},
-                {"name": "Structured JSON logging", "done": True},
-                {"name": "5-min diagnostic push", "done": True},
-            ],
-        },
-        "layer2": {
-            "name": "Oversight",
-            "status": "IN PROGRESS",
-            "items": [
-                {"name": "Dashboard with live metrics", "done": True},
-                {"name": "Feed history tracking", "done": True},
-                {"name": "Health issue detection", "done": True},
-                {"name": "Prompt quality supervisor", "done": False},
-                {"name": "Auto-dedup feed cleaner", "done": False},
-                {"name": "Performance trend analysis", "done": False},
-            ],
-        },
-        "layer3": {
-            "name": "Intelligence",
-            "status": "PLANNED",
-            "items": [
-                {"name": "Cross-topic synthesis", "done": False},
-                {"name": "Research priority optimization", "done": False},
-                {"name": "Autonomous prompt evolution", "done": False},
-                {"name": "Insight quality scoring", "done": False},
-                {"name": "Telegram digest generation", "done": False},
-            ],
-        },
+        "layer1": "DEPLOYED",
+        "layer2": "IN PROGRESS",
+        "layer3": "PLANNED",
     },
-    "health": {"status": "HEALTHY", "issues": []},
 }
 
 # Health checks
@@ -376,13 +429,23 @@ if feed.get("recent_50_trivial", 0) > 10:
 if spark.get("response_ms") and spark["response_ms"] > 5000:
     issues.append(f"WARNING: Spark slow ({spark['response_ms']}ms)")
 
-diag["health"]["status"] = "HEALTHY" if not issues else ("CRITICAL" if any("CRITICAL" in i for i in issues) else "ISSUES_FOUND")
-diag["health"]["issues"] = issues
-diag["health"]["issue_count"] = len(issues)
+enrichment["health"] = {
+    "status": "HEALTHY" if not issues else ("CRITICAL" if any("CRITICAL" in i for i in issues) else "ISSUES_FOUND"),
+    "issues": issues,
+    "issue_count": len(issues),
+}
+
+# Merge: scheduler owns cycles/recent_jobs/today, we own everything else
+diag = {**enrichment}
+
+# Preserve scheduler-written fields if they exist
+for key in ("cycles", "recent_jobs", "today"):
+    if key in existing:
+        diag[key] = existing[key]
 
 with open(DIAG_OUT, "w") as f:
     json.dump(diag, f, indent=2)
 
-print(f"Diagnostic written: {DIAG_OUT}")
+print(f"Diagnostic enriched: {DIAG_OUT}")
 print(f"Health: {diag['health']['status']}")
-print(f"Feed: {feed.get('total_lines', '?')} | Spark: {spark.get('detail','?')} | Cost: ${activity['estimated_cost']}")
+print(f"Feed: {feed.get('total_lines', '?')} | KG: {kg_stats.get('entities','?')} entities | GPU: {gpu_stats.get('temp_c','?')}°C")
