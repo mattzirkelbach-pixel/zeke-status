@@ -1,85 +1,35 @@
 {
-  "timestamp": "2026-02-25T08:46:07.144554",
-  "window": "daytime",
-  "cycle": 2,
-  "feed_before": 499,
-  "feed_after": 515,
-  "feed_growth": 16,
-  "jobs": {
-    "total": 5,
-    "success": 5,
-    "fail": 0,
-    "timeout": 0
+  "timestamp": "2026-02-25T13:50:00.859508+00:00",
+  "feed_total": 515,
+  "feed_previous": 510,
+  "feed_growth": 5,
+  "feed_stagnant": false,
+  "spark": {
+    "online": true,
+    "model_loaded": true,
+    "models": [
+      "qwen3-32b-32k:latest",
+      "qwen3:8b",
+      "nomic-embed-text:latest"
+    ]
   },
-  "job_details": [
-    {
-      "uuid": "314bad3a-440",
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration_s": 116,
-      "feed_grew": 2,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 2,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "cbe020d2-08f",
-      "name": "longevity",
-      "status": "success",
-      "duration_s": 298,
-      "feed_grew": 4,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 3,
-      "entries_cleaned": 1,
-      "trivial_entries": 1,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "f7e83946-64a",
-      "name": "ai-agents",
-      "status": "success",
-      "duration_s": 119,
-      "feed_grew": 5,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 3,
-      "entries_cleaned": 2,
-      "trivial_entries": 0,
-      "broken_entries": 2
-    },
-    {
-      "uuid": "89f00ae9-165",
-      "name": "self-improvement",
-      "status": "success",
-      "duration_s": 357,
-      "feed_grew": 6,
-      "entry_valid": true,
-      "issues": [
-        "literal $(date) in timestamp",
-        "trivial content"
-      ],
-      "valid_entries": 3,
-      "entries_cleaned": 3,
-      "trivial_entries": 2,
-      "broken_entries": 1
-    },
-    {
-      "uuid": "8b5fdbe2-63b",
-      "name": "compound-synthesis",
-      "status": "success",
-      "duration_s": 129,
-      "feed_grew": 5,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 5,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    }
-  ],
-  "failures": [],
+  "scheduler": {
+    "running": true,
+    "pids": [
+      "81788",
+      "81790"
+    ]
+  },
+  "gateway": {
+    "running": true,
+    "pids": [
+      "80325"
+    ]
+  },
+  "jobs_today": 8,
+  "success_today": 2,
+  "fails_today": 1,
+  "timeouts_today": 0,
   "needs_repair": false,
-  "feed_stagnant": false
+  "repair_reasons": []
 }
