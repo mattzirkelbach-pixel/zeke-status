@@ -100,9 +100,8 @@ def get_feed_quality():
                 if '"No new developments"' in line: issues['no_new_dev'] += 1
                 try:
                     d = json.loads(line)
-                    ins = d.get('insights', d.get('finding', d.get('content', '')))
-                    ins_str = json.dumps(ins) if isinstance(ins, list) else str(ins)
-                    key = f"{d.get('topic','')}|{ins_str[:200]}"
+                    ins = d.get('insights', [])
+                    key = f"{d.get('topic','')}|{ins[0] if isinstance(ins, list) and ins else ''}"
                     if key in seen: issues['duplicates'] += 1
                     seen.add(key)
                 except json.JSONDecodeError: issues['malformed_json'] += 1

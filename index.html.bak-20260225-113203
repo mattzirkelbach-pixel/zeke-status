@@ -353,7 +353,7 @@ async function render(){
   $('#grid-main').innerHTML=g;
 
   // ── Jobs ──
-  const jobs=(d?.recent_jobs||s?.last_jobs||[]).filter(j=>j.topic||j.name);
+  const jobs=(s?.last_jobs||[]).filter(j=>j.topic||j.name);
   let jH='';
   if(jobs.length){
     jH='<div class="section-title">Recent Jobs</div>';

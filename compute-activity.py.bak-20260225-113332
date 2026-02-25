@@ -5,8 +5,7 @@ from pathlib import Path
 from datetime import datetime, timezone, timedelta
 
 HOME = Path.home()
-LOG_DIR = HOME / "logs"
-SCHED_LOG = LOG_DIR / f"scheduler-{datetime.now().strftime('%Y-%m-%d')}.log"
+SCHED_LOG = Path("/tmp/scheduler.log")
 DIAG = HOME / "zeke-status/diagnostic.json"
 LOG_DIR = HOME / "zeke-status/logs"
 
