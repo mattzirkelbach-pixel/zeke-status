@@ -1,125 +1,35 @@
 {
-  "timestamp": "2026-02-25T07:52:56.192520",
-  "window": "daytime",
-  "cycle": 1,
-  "feed_before": 492,
-  "feed_after": 496,
-  "feed_growth": 4,
-  "jobs": {
-    "total": 5,
-    "success": 2,
-    "fail": 1,
-    "timeout": 0
-  },
-  "job_details": [
-    {
-      "uuid": "314bad3a-440",
-      "name": "treasury-bonds",
-      "status": "bad_output",
-      "duration_s": 265,
-      "feed_grew": 3,
-      "entry_valid": false,
-      "issues": [
-        "literal $(date) in timestamp"
-      ],
-      "valid_entries": 0,
-      "entries_cleaned": 3,
-      "trivial_entries": 0,
-      "broken_entries": 3
-    },
-    {
-      "uuid": "cbe020d2-08f",
-      "name": "longevity",
-      "status": "success",
-      "duration_s": 147,
-      "feed_grew": 3,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 3,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "f7e83946-64a",
-      "name": "ai-agents",
-      "status": "bad_output",
-      "duration_s": 347,
-      "feed_grew": 3,
-      "entry_valid": false,
-      "issues": [],
-      "valid_entries": 0,
-      "entries_cleaned": 3,
-      "trivial_entries": 0,
-      "broken_entries": 3
-    },
-    {
-      "uuid": "89f00ae9-165",
-      "name": "self-improvement",
-      "status": "success",
-      "duration_s": 142,
-      "feed_grew": 2,
-      "entry_valid": true,
-      "issues": [
-        "literal $(date) in timestamp"
-      ],
-      "valid_entries": 1,
-      "entries_cleaned": 1,
-      "trivial_entries": 0,
-      "broken_entries": 1
-    },
-    {
-      "uuid": "8b5fdbe2-63b",
-      "name": "compound-synthesis",
-      "status": "fail",
-      "duration_s": 40,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
-    }
-  ],
-  "failures": [
-    {
-      "uuid": "314bad3a-440",
-      "name": "treasury-bonds",
-      "status": "bad_output",
-      "duration_s": 265,
-      "feed_grew": 3,
-      "entry_valid": false,
-      "issues": [
-        "literal $(date) in timestamp"
-      ],
-      "valid_entries": 0,
-      "entries_cleaned": 3,
-      "trivial_entries": 0,
-      "broken_entries": 3
-    },
-    {
-      "uuid": "f7e83946-64a",
-      "name": "ai-agents",
-      "status": "bad_output",
-      "duration_s": 347,
-      "feed_grew": 3,
-      "entry_valid": false,
-      "issues": [],
-      "valid_entries": 0,
-      "entries_cleaned": 3,
-      "trivial_entries": 0,
-      "broken_entries": 3
-    },
-    {
-      "uuid": "8b5fdbe2-63b",
-      "name": "compound-synthesis",
-      "status": "fail",
-      "duration_s": 40,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
-    }
-  ],
-  "needs_repair": true,
+  "timestamp": "2026-02-25T13:00:01.110363+00:00",
+  "feed_total": 496,
+  "feed_previous": 495,
+  "feed_growth": 1,
   "feed_stagnant": false,
-  "repair_dispatched": true,
-  "repair_result": "unknown"
+  "spark": {
+    "online": true,
+    "model_loaded": true,
+    "models": [
+      "qwen3-32b-32k:latest",
+      "qwen3:8b",
+      "nomic-embed-text:latest"
+    ]
+  },
+  "scheduler": {
+    "running": true,
+    "pids": [
+      "81788",
+      "81790"
+    ]
+  },
+  "gateway": {
+    "running": true,
+    "pids": [
+      "80325"
+    ]
+  },
+  "jobs_today": 8,
+  "success_today": 2,
+  "fails_today": 1,
+  "timeouts_today": 0,
+  "needs_repair": false,
+  "repair_reasons": []
 }
