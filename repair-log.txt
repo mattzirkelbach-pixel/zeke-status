@@ -1,0 +1,75 @@
+ZEKE SELF-REPAIR LOG
+Date: 2026-02-24 23:00 ET
+Triggered by: All 6 overnight research jobs failing with 0 feed growth
+
+== DIAGNOSIS ==
+
+Symptoms:
+- Scheduler log shows 3+ consecutive overnight cycles with 100% job failure
+- All jobs exit with code 0 and report {"ok": true, "ran": true}
+- Feed stuck at 260 entries across all overnight cycles today
+- Daytime window had partial success earlier (self-improvement: +5, compound-synthesis: +2)
+
+Infrastructure status:
+- Gateway: UP (OpenClaw web interface responding)
+- Spark GPU: HEALTHY (qwen3-32b-32k loaded, 29GB VRAM, nomic-embed-text loaded)
+- Feed file: writable, valid JSON entries
+- Scheduler: running (PID 52304)
+
+== ROOT CAUSE ==
+
+The overnight job prompts were too complex for Qwen3-32B. They required a 5-step pipeline:
+1. Read memory/research-priorities.md
+2. Run bash kgstats.sh + python3 kg-query.py --domain X --recent 48
+3. Web search for new developments
+4. Extract triples and insert via kg-add.py pipe syntax
+5. Write backup to learning-feed.jsonl with inline $(python3 -c ...) timestamps
+
+The model consistently:
+- Ran python3 on .sh shell scripts (wrong interpreter)
+- Used relative paths that don't resolve from the exec working directory
+- Hallucinated irrelevant commands (flatpak install, etc.)
+- Got stuck in error loops and never reached the feed append step
+- Returned "summary" text without ever executing the exec tool
+
+Meanwhile, daytime prompts worked because they used a simpler 4-step flow:
+web_search -> web_fetch -> exec append to feed -> fallback entry
+
+== FIX APPLIED ==
+
+Replaced overnight prompts for all 6 jobs with simplified versions modeled on
+the proven daytime template:
+
+Jobs updated:
+1. overnight-test-treasury-bonds  (2878 -> 1529 chars)
+2. overnight-test-longevity       (3092 -> 1443 chars)
+3. overnight-test-ai-agents       (3061 -> 1475 chars)
+4. overnight-test-self-improvement (3076 -> 1479 chars)
+5. overnight-test-tool-calling    (3045 -> 1458 chars)
+6. overnight-test-compound        (3446 -> 1195 chars)
+
+Changes:
+- Removed KG pipeline (kgstats.sh, kg-query.py, kg-add.py steps)
+- Removed research-priorities.md pre-read
+- Removed inline $(python3 ...) timestamp generation
+- Replaced with direct: web_search -> web_fetch -> exec >> append
+- All paths now absolute: /Users/zekezirk/.openclaw/workspace/memory/learning-feed.jsonl
+- compound-synthesis uses read tool -> synthesize -> exec append (no web search)
+
+Backup: ~/.openclaw/cron/jobs.json.bak-repair-20260224-*
+
+== VERIFICATION ==
+
+Test run (self-improvement/compound-synthesis job):
+- Feed before: 261
+- Feed after:  274
+- Growth: +13 valid entries
+- All entries valid JSON with proper topic/finding/source fields
+
+== NOTES ==
+
+- KG insertion can still happen via the separate kg-extractor scheduled job
+- The overnight prompts now match the daytime pattern that has been proven to work
+- The scheduler will automatically use the new prompts on its next cycle (reads
+  jobs.json at exec time, not at startup)
+- Gateway was restarted to ensure clean session state
