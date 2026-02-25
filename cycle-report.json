@@ -1,36 +1,82 @@
 {
-  "timestamp": "2026-02-25T17:10:00.819980+00:00",
-  "feed_total": 557,
-  "feed_previous": 552,
-  "feed_growth": 5,
-  "feed_stagnant": false,
-  "spark": {
-    "online": true,
-    "model_loaded": true,
-    "models": [
-      "qwen3-32b-32k:latest",
-      "nomic-embed-text:latest",
-      "qwen3:8b"
-    ]
+  "timestamp": "2026-02-25T12:17:48.519736",
+  "window": "daytime",
+  "cycle": 2,
+  "feed_before": 552,
+  "feed_after": 564,
+  "feed_growth": 12,
+  "jobs": {
+    "total": 5,
+    "success": 5,
+    "fail": 0,
+    "timeout": 0
   },
-  "scheduler": {
-    "running": true,
-    "pids": [
-      "90564"
-    ]
-  },
-  "gateway": {
-    "running": true,
-    "pids": [
-      "80325",
-      "92038",
-      "92039"
-    ]
-  },
-  "jobs_today": 84,
-  "success_today": 62,
-  "fails_today": 8,
-  "timeouts_today": 0,
+  "job_details": [
+    {
+      "uuid": "314bad3a-440",
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration_s": 108,
+      "feed_grew": 2,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 2,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "cbe020d2-08f",
+      "name": "longevity",
+      "status": "success",
+      "duration_s": 189,
+      "feed_grew": 3,
+      "entry_valid": true,
+      "issues": [
+        "literal $(date) in timestamp"
+      ],
+      "valid_entries": 1,
+      "entries_cleaned": 2,
+      "trivial_entries": 0,
+      "broken_entries": 2
+    },
+    {
+      "uuid": "f7e83946-64a",
+      "name": "ai-agents",
+      "status": "success",
+      "duration_s": 152,
+      "feed_grew": 3,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 3,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "89f00ae9-165",
+      "name": "self-improvement",
+      "status": "success",
+      "duration_s": 110,
+      "feed_grew": 2,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 2,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "8b5fdbe2-63b",
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration_s": 116,
+      "feed_grew": 4,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 4,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    }
+  ],
+  "failures": [],
   "needs_repair": false,
-  "repair_reasons": []
+  "feed_stagnant": false
 }
