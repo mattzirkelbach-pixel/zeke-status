@@ -1,36 +1,105 @@
 {
-  "timestamp": "2026-02-25T21:00:01.346883+00:00",
-  "feed_total": 623,
-  "feed_previous": 618,
-  "feed_growth": 5,
+  "timestamp": "2026-02-25T16:05:44.923052",
+  "window": "daytime",
+  "cycle": 7,
+  "feed_before": 618,
+  "feed_after": 631,
+  "feed_growth": 13,
+  "jobs": {
+    "total": 5,
+    "success": 3,
+    "fail": 1,
+    "timeout": 0
+  },
+  "job_details": [
+    {
+      "uuid": "314bad3a-440",
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration_s": 86,
+      "feed_grew": 1,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 1,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "cbe020d2-08f",
+      "name": "longevity",
+      "status": "success",
+      "duration_s": 340,
+      "feed_grew": 15,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 4,
+      "entries_cleaned": 11,
+      "trivial_entries": 0,
+      "broken_entries": 11
+    },
+    {
+      "uuid": "f7e83946-64a",
+      "name": "ai-agents",
+      "status": "fail",
+      "duration_s": 60,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "89f00ae9-165",
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration_s": 64,
+      "feed_grew": 1,
+      "entry_valid": false,
+      "issues": [],
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "trivial_entries": 0,
+      "broken_entries": 1
+    },
+    {
+      "uuid": "8b5fdbe2-63b",
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration_s": 338,
+      "feed_grew": 8,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 8,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "f7e83946-64a",
+      "name": "ai-agents",
+      "status": "fail",
+      "duration_s": 60,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "89f00ae9-165",
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration_s": 64,
+      "feed_grew": 1,
+      "entry_valid": false,
+      "issues": [],
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "trivial_entries": 0,
+      "broken_entries": 1
+    }
+  ],
+  "needs_repair": true,
   "feed_stagnant": false,
-  "spark": {
-    "online": true,
-    "model_loaded": true,
-    "models": [
-      "qwen3-32b-32k:latest",
-      "qwen3:8b",
-      "nomic-embed-text:latest"
-    ]
-  },
-  "scheduler": {
-    "running": true,
-    "pids": [
-      "90564"
-    ]
-  },
-  "gateway": {
-    "running": true,
-    "pids": [
-      "80325",
-      "99633",
-      "99634"
-    ]
-  },
-  "jobs_today": 140,
-  "success_today": 110,
-  "fails_today": 10,
-  "timeouts_today": 0,
-  "needs_repair": false,
-  "repair_reasons": []
+  "repair_dispatched": true,
+  "repair_result": "unknown"
 }
