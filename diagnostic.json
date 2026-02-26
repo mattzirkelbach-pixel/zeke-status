@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-25 11:45:01PM ET",
-  "timestamp_utc": "2026-02-26T04:45:01Z",
+  "timestamp_local": "2026-02-25 11:50:01PM ET",
+  "timestamp_utc": "2026-02-26T04:50:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -21,31 +21,32 @@
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 25ms",
-    "response_ms": 25,
+    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 27ms",
+    "response_ms": 27,
     "vram_estimate_gb": 0.6,
     "model_params": "137M",
     "model_quant": "F16"
   },
   "feed": {
-    "total_lines": 819,
+    "total_lines": 826,
     "last_modified_minutes_ago": 0.1,
     "last_entries": [
-      "[2/25 11:35PM ET] AI agents and tool calling \u2014 OpenAgents 2026 implements native MCP+A2A protocol support enabling cross-framew",
-      "[2/25 11:38PM ET] AI agents and tool calling \u2014 OpenAgents (2026) now provides native MCP + A2A protocol support for cross-frame",
-      "[2/25 10:35PM ET] AI agents and tool calling \u2014 LangGraph v1.0 in 2025 added durable state management with human-in-the-loop edi",
-      "[2/25 6:41PM ET] compound-synthesis \u2014 AI tool calling workflows can leverage dopamine-targeted learning principles for",
-      "{\"timestamp\": \"$(date +\"%Y-%m-%dT%H:%M:%SZ\")\",\"topic\":\"local model tool calling\""
+      "[2/25 11:48PM ET] local model tool calling \u2014 Ollama 2026 now supports streaming responses with tool calling",
+      "[$(date +\"%Y-%m-%dT%H:%M:%SZ\")] local model tool calling \u2014 Ollama now supports streaming responses with tool calling, enabling real-time to",
+      "[2/25 10:43PM ET] local model tool calling \u2014 Qwen3 provides Hermes-style tool use templates for improved function calling, in",
+      "[$(date +%Y-%m-%d)T$(date +%H:%M:%S)Z] local model tool calling \u2014 Ollama now supports streaming responses with tool calling. This enables all chat",
+      "[2/25 11:49PM ET] treasury bonds and interest rates \u2014 Fed officials were divided on future interest rate decisions, with some suggesti"
     ],
-    "recent_50_clean": 49,
+    "recent_50_clean": 46,
     "recent_50_trivial": 0,
-    "recent_50_broken": 1,
+    "recent_50_broken": 4,
     "topic_distribution": {
-      "AI agents and tool calling": 15,
-      "compound-synthesis": 14,
+      "compound-synthesis": 12,
       "longevity research": 11,
-      "local model tool calling": 5,
-      "self-improvement": 4
+      "AI agents and tool calling": 11,
+      "local model tool calling": 9,
+      "self-improvement": 4,
+      "treasury bonds and interest rates": 1
     }
   },
   "activity": {
@@ -1468,6 +1469,11 @@
       "t": 1772081101923,
       "v": 819,
       "l": "11:45PM"
+    },
+    {
+      "t": 1772081401601,
+      "v": 826,
+      "l": "11:50PM"
     }
   ],
   "kg_stats": {
@@ -1479,16 +1485,16 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 67.0,
-    "power_w": 37.17,
+    "temp_c": 65.0,
+    "power_w": 41.66,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
-    "malformed_json": 5,
-    "literal_timestamps": 8,
+    "malformed_json": 6,
+    "literal_timestamps": 11,
     "duplicates": 61,
-    "total": 819,
-    "error_rate": 9.0
+    "total": 826,
+    "error_rate": 9.4
   },
   "cost": {
     "model": "spark/qwen3-32b-32k (local, $0)",
