@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-25 11:00:01PM ET",
-  "timestamp_utc": "2026-02-26T04:00:01Z",
+  "timestamp_local": "2026-02-25 11:05:02PM ET",
+  "timestamp_utc": "2026-02-26T04:05:02Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -21,32 +21,32 @@
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 100ms",
-    "response_ms": 100,
+    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 26ms",
+    "response_ms": 26,
     "vram_estimate_gb": 0.6,
     "model_params": "137M",
     "model_quant": "F16"
   },
   "feed": {
-    "total_lines": 788,
-    "last_modified_minutes_ago": 0.6,
+    "total_lines": 797,
+    "last_modified_minutes_ago": 1.1,
     "last_entries": [
-      "[2/25 5:50PM ET] longevity research \u2014 2026 PEARL trial: Low-dose intermittent rapamycin showed modest changes in bioma",
-      "[2/25 5:50PM ET] longevity research \u2014 PEARL trial (2023) showed intermittent low-dose rapamycin well-tolerated in 1-ye",
-      "[2/25 5:50PM ET] longevity research \u2014 Small study suggests low-dose rapamycin may reduce biological age by ~4 years us",
-      "[2/25 5:50PM ET] longevity research \u2014 Rapamycin shows limited clinical evidence for longevity benefits in healthy adul",
-      "[2/25 5:50PM ET] longevity research \u2014 Rapamycin trials show limited evidence for slowing aging in healthy adults. A 20"
+      "",
+      "Key limitations: No human lifespan extension evidence, mixed muscle health outco",
+      "}",
+      "[2/25 5:50PM ET] longevity research \u2014 The PEARL trial showed low-dose intermittent rapamycin improved biomarkers of ag",
+      "{'timestamp':'2026-02-25T22:50:00Z','topic':'longevity research','finding':'In a"
     ],
-    "recent_50_clean": 49,
+    "recent_50_clean": 41,
     "recent_50_trivial": 0,
-    "recent_50_broken": 1,
+    "recent_50_broken": 9,
     "topic_distribution": {
-      "longevity research": 12,
-      "compound-synthesis": 11,
-      "self-improvement": 10,
-      "AI agents and tool calling": 8,
+      "longevity research": 11,
+      "compound-synthesis": 9,
+      "self-improvement": 8,
       "treasury bonds and interest rates": 6,
-      "local model tool calling": 2
+      "AI agents and tool calling": 6,
+      "local model tool calling": 1
     }
   },
   "activity": {
@@ -1419,6 +1419,11 @@
       "t": 1772078401904,
       "v": 788,
       "l": "11:00PM"
+    },
+    {
+      "t": 1772078702374,
+      "v": 797,
+      "l": "11:05PM"
     }
   ],
   "kg_stats": {
@@ -1430,16 +1435,16 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 96.0,
-    "temp_c": 64.0,
-    "power_w": 37.06,
+    "temp_c": 65.0,
+    "power_w": 41.29,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
-    "malformed_json": 5,
+    "malformed_json": 12,
     "literal_timestamps": 7,
     "duplicates": 61,
-    "total": 788,
-    "error_rate": 9.3
+    "total": 796,
+    "error_rate": 10.1
   },
   "cost": {
     "model": "spark/qwen3-32b-32k (local, $0)",
@@ -1453,9 +1458,11 @@
     "layer3": "PLANNED"
   },
   "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "WARNING: 9 broken entries in recent feed"
+    ],
+    "issue_count": 1
   },
   "cycles": [
     {
