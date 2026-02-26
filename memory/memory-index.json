@@ -1,0 +1,49 @@
+{
+  "_description": "Quick-read memory state. Fetched at conversation start via web_fetch or MCP.",
+  "_updated": "2026-02-26T17:04:31.139473",
+  "_access": {
+    "github": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/memory-index.json",
+    "dependencies": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/dependencies.json",
+    "anti_patterns": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/anti-patterns.md",
+    "session_journal": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/session-journal.jsonl"
+  },
+  "system_state": {
+    "feed_entries": 1174,
+    "kg_entities": 303,
+    "active_openclaw_jobs": 11,
+    "cron_jobs": 13,
+    "cost_per_day": "$0",
+    "l2_completion": "80%"
+  },
+  "last_session": {
+    "date": "2026-02-26",
+    "summary": "L2 rebuild, self-repair deploy, research job restoration",
+    "next_priorities": [
+      "Phase 3: prompt optimizer",
+      "Verify overnight feed growth",
+      "Check 5am nightly synthesis",
+      "Dashboard quality trend chart"
+    ]
+  },
+  "active_crons": [
+    "guardian (every 1min) \u2014 scheduler keepalive",
+    "watchdog (every 10min) \u2014 system health + auto-repair",
+    "mcp-watchdog (every 5min) \u2014 MCP server health",
+    "status-push (every 5min) \u2014 dashboard + memory to GitHub",
+    "snapshots (every 15min) \u2014 feed history",
+    "quality-scorer (every 3h at :45) \u2014 score feed entries",
+    "self-repair (every 30min) \u2014 detect failures, dispatch claude -p",
+    "camel-pipeline (every 6h) \u2014 YouTube transcript analysis",
+    "dedup (3am daily) \u2014 feed deduplication",
+    "session-purge (4am daily) \u2014 prevent gateway bloat",
+    "nightly-synthesis (5am daily) \u2014 cross-domain insights via claude -p",
+    "price-fetch (6am daily) \u2014 market data update",
+    "trade-alerts (every 10min weekdays 6am-5pm) \u2014 portfolio monitoring"
+  ],
+  "known_fragile": [
+    "MCP connector drops silently \u2014 server stays up, fix: remove/re-add in Settings",
+    "Scheduler maps job names by string match \u2014 don't rename or delete without checking lines 221-240",
+    "Gateway needs restart after config changes \u2014 also purge sessions",
+    "Local models break above 6 tools \u2014 byProvider restriction is load-bearing"
+  ]
+}

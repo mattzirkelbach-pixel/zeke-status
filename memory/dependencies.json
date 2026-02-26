@@ -1,0 +1,79 @@
+{
+  "_description": "What depends on what. CHECK THIS BEFORE DELETING OR MODIFYING ANYTHING.",
+  "_updated": "2026-02-26T17:04:31.139227",
+  "critical_mappings": [
+    {
+      "source": "~/zeke-scheduler.py lines 221-228",
+      "depends_on": "~/.openclaw/cron/jobs.json (overnight research job names)",
+      "note": "Scheduler dispatches jobs BY NAME. If job name missing from jobs.json, that research topic produces nothing.",
+      "job_names": [
+        "overnight-test-treasury-bonds",
+        "overnight-test-self-improvement",
+        "overnight-test-longevity",
+        "overnight-test-ai-agents",
+        "overnight-test-tool-calling",
+        "overnight-test-compound"
+      ]
+    },
+    {
+      "source": "~/zeke-scheduler.py lines 230-240",
+      "depends_on": "~/.openclaw/cron/jobs.json (daytime/reason job names)",
+      "note": "Same pattern as overnight. Maps job names to display names.",
+      "job_names": [
+        "kg-extractor"
+      ]
+    },
+    {
+      "source": "~/zeke-self-repair.py",
+      "depends_on": "~/zeke-status/cycle-report.json",
+      "note": "Reads needs_repair flag and failed job list from cycle reporter"
+    },
+    {
+      "source": "~/zeke-quality-scorer.py",
+      "depends_on": "~/.openclaw/workspace/memory/learning-feed.jsonl",
+      "note": "Reads feed entries, writes scores to feed-quality-scores.jsonl"
+    },
+    {
+      "source": "~/zeke-nightly-synthesis.sh",
+      "depends_on": [
+        "learning-feed.jsonl",
+        "feed-quality-scores.jsonl"
+      ],
+      "note": "Reads both via claude -p, writes daily-synthesis.md and research-priorities.md"
+    },
+    {
+      "source": "~/zeke-status/build-status.py",
+      "depends_on": [
+        "~/.openclaw/openclaw.json",
+        "learning-feed.jsonl",
+        "cycle-report.json"
+      ],
+      "note": "Reads all to build dashboard data, pushes to GitHub every 5min"
+    },
+    {
+      "source": "OpenClaw gateway",
+      "depends_on": [
+        "~/.openclaw/openclaw.json",
+        "~/.openclaw/cron/jobs.json"
+      ],
+      "note": "MUST restart gateway after changes to either file. Also purge sessions."
+    },
+    {
+      "source": "All local model jobs",
+      "depends_on": "openclaw.json byProvider tool restrictions",
+      "note": "Local models limited to 6 tools. NEVER give full 24-tool set. Write tool REMOVED."
+    },
+    {
+      "source": "MCP server (port 8100)",
+      "depends_on": "~/zeke-portfolio/mcp/server.py",
+      "note": "Tailscale funnel proxies 443\u21928100. Launchd auto-restarts. MCP watchdog every 5min."
+    }
+  ],
+  "file_relationships": {
+    "~/.openclaw/openclaw.json": "Gateway config. Models, tools, byProvider restrictions. Gateway restart required after changes.",
+    "~/.openclaw/cron/jobs.json": "All OpenClaw cron jobs. Scheduler maps job names to UUIDs. Gateway restart required after changes.",
+    "~/zeke-scheduler.py": "Main orchestrator. Runs overnight/daytime/reason windows. DO NOT patch incrementally \u2014 rewrite sections completely.",
+    "~/.openclaw/workspace/memory/learning-feed.jsonl": "THE critical file. 1174 entries. NEVER overwrite. Append only via exec >>.",
+    "~/zeke-status/": "Dashboard data. Pushed to GitHub every 5min. Memory system lives here too."
+  }
+}
