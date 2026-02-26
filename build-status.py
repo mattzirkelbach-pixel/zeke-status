@@ -126,20 +126,74 @@ def get_crontab_status():
     }
 
 def get_last_jobs():
-    log_lines = tail_lines('/tmp/zeke-queue.log', 40)
-    jobs = []
-    current = {}
-    for line in log_lines:
-        if any(k in line for k in ['GATHER', 'EXTRACT', 'ASSOCIATE']):
-            if current: jobs.append(current)
-            parts = line.split()
-            current = {'topic': parts[2] if len(parts) > 2 else '?', 'time': parts[0].strip('[]') if parts else '?'}
-        elif 'FAILED' in line: current['result'] = 'FAILED'
-        elif 'SUCCESS' in line or 'DONE' in line: current['result'] = 'SUCCESS'
-        elif 'duration' in line: current['duration_s'] = line.split(':')[-1].strip().rstrip('s')
-        elif 'Error' in line: current['error'] = line.strip()[:100]
-    if current: jobs.append(current)
-    return jobs[-8:]
+    """Get recent jobs from cycle-history.jsonl, grouped by cycle."""
+    history_file = STATUS_DIR / "cycle-history.jsonl"
+    if not history_file.exists():
+        return [], []
+
+    # Read last 4 cycles that have job_details
+    cycles = []
+    try:
+        lines = history_file.read_text().strip().split('\n')
+        for line in reversed(lines):
+            if not line.strip():
+                continue
+            try:
+                entry = json.loads(line)
+                if "job_details" in entry and entry["job_details"]:
+                    cycles.append(entry)
+                    if len(cycles) >= 4:
+                        break
+            except:
+                continue
+    except:
+        return [], []
+
+    cycles.reverse()  # oldest first
+
+    # Build flat job list (backward compat) and cycle-grouped list
+    flat_jobs = []
+    cycle_groups = []
+    for cyc in cycles:
+        ts = cyc.get("timestamp", "")
+        # Parse timestamp for display
+        try:
+            from datetime import datetime as dt
+            if "T" in ts:
+                parsed = dt.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
+                time_str = parsed.strftime("%-I:%M %p")
+            else:
+                time_str = ts
+        except:
+            time_str = ts[:16] if ts else "?"
+
+        cycle_info = {
+            "cycle": cyc.get("cycle", "?"),
+            "window": cyc.get("window", "?"),
+            "timestamp": ts,
+            "time_display": time_str,
+            "feed_growth": cyc.get("feed_growth", cyc.get("feed_after", 0) - cyc.get("feed_before", 0)),
+            "jobs": []
+        }
+
+        for job in cyc.get("job_details", []):
+            j = {
+                "name": job.get("name", "?"),
+                "status": job.get("status", "?"),
+                "duration": job.get("duration_s", job.get("duration", 0)),
+                "grew": job.get("feed_grew", job.get("feed_added", 0)),
+                "issues": job.get("issues", []),
+                "valid_entries": job.get("valid_entries", None),
+                "broken_entries": job.get("broken_entries", None),
+                "cycle_time": time_str,
+                "cycle_num": cyc.get("cycle", "?"),
+            }
+            flat_jobs.append(j)
+            cycle_info["jobs"].append(j)
+
+        cycle_groups.append(cycle_info)
+
+    return flat_jobs[-20:], cycle_groups
 
 def get_kg_stats():
     try:
@@ -193,6 +247,8 @@ def get_gpu_stats():
 
 now = datetime.now(timezone.utc)
 
+_flat_jobs, _cycle_groups = get_last_jobs()
+
 status = {
     'timestamp': now.isoformat(),
     'feed_lines': int(run(f"wc -l < '{FEED}'", "0")),
@@ -208,7 +264,8 @@ status = {
     'spark_status': get_spark_status(),
     'feed_quality': get_feed_quality(),
     'crontab_status': get_crontab_status(),
-    'last_jobs': get_last_jobs(),
+    'last_jobs': _flat_jobs,
+    'recent_cycles': _cycle_groups,
     'evaluation_count': int(run(f"wc -l < '{MEMORY}/research-evaluations.jsonl'", "0")),
     'recent_evaluations': tail_lines(MEMORY / "research-evaluations.jsonl", 10),
     'self_heal_log': read_file(MEMORY / "self-heal-log.md")[:2000],

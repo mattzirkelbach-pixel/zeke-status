@@ -43,6 +43,17 @@ body {
 .banner.warn { background:rgba(248,113,113,.06); border:1px solid rgba(248,113,113,.15); color:var(--warn); }
 .banner.ok { background:rgba(52,211,153,.06); border:1px solid rgba(52,211,153,.15); color:var(--ok); }
 
+.cycle-header {
+  display:flex; align-items:center; gap:8px; padding:8px 12px 4px;
+  border-top:1px solid var(--border); margin-top:6px;
+  font-family:'JetBrains Mono',monospace; font-size:12px;
+}
+.cycle-header:first-child { border-top:none; margin-top:0; }
+.cycle-label { color:var(--text2); font-weight:600; }
+.cycle-time { color:var(--text3); }
+.cycle-grew { font-weight:600; margin-left:auto; }
+.job-issues { font-size:11px; margin-left:4px; }
+
 /* ── Top Metrics ── */
 .metrics { display:flex; gap:8px; margin-bottom:16px; }
 .metric {
@@ -352,12 +363,34 @@ async function render(){
   g+=`<div class="card"><h2>Feed Quality</h2>${fqC}</div>`;
   $('#grid-main').innerHTML=g;
 
-  // ── Jobs ──
-  const jobs=(d?.recent_jobs||s?.last_jobs||[]).filter(j=>j.topic||j.name);
+  // ── Jobs (cycle-grouped with timestamps) ──
+  const cycles=d?.recent_cycles||[];
+  const fallbackJobs=(d?.recent_jobs||s?.last_jobs||[]).filter(j=>j.topic||j.name);
   let jH='';
-  if(jobs.length){
+
+  if(cycles.length){
     jH='<div class="section-title">Recent Jobs</div>';
-    for(const j of jobs){
+    for(const cyc of cycles){
+      const cTime=cyc.time_display||'?';
+      const cNum=cyc.cycle||'?';
+      const cGrew=cyc.feed_growth||0;
+      jH+=`<div class="cycle-header"><span class="cycle-label">Cycle ${cNum}</span><span class="cycle-time">${cTime}</span><span class="cycle-grew c-ok">+${cGrew}</span></div>`;
+      for(const j of (cyc.jobs||[])){
+        const nm=j.name||'—';
+        const st=j.status||'—';
+        const d2=j.duration;
+        const gr=j.grew;
+        const issues=(j.issues||[]);
+        let issueHtml='';
+        if(issues.length){
+          issueHtml=`<span class="job-issues c-orange"> ⚠ ${issues.join(', ')}</span>`;
+        }
+        jH+=`<div class="job-row ${st}"><span class="job-name">${nm}</span><span class="job-meta">${d2?dur(d2):''} ${gr!=null&&gr>0?'<span class="c-ok"> +'+gr+'</span>':''}${issueHtml}</span><span class="job-status ${st}">${st}</span></div>`;
+      }
+    }
+  } else if(fallbackJobs.length){
+    jH='<div class="section-title">Recent Jobs</div>';
+    for(const j of fallbackJobs){
       const nm=j.topic||j.name||j.job||'—';
       const st=j.result||j.status||'—';
       const d2=j.duration_s||j.duration;
