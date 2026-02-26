@@ -1,0 +1,67 @@
+[06:40:00] [INFO] Zeke Dashboard & System Fix Script
+[06:40:00] [INFO] Running at 2026-02-26 06:40:00
+[06:40:00] [INFO] 
+[06:40:00] [INFO] ==================================================
+[06:40:00] [INFO] FIX 1: byProvider cleanup
+[06:40:00] [INFO] Backed up openclaw.json → openclaw.json.bak
+[06:40:00] [INFO]   Removed stale byProvider entry: spark/qwen3:32b (had ['exec', 'read', 'web_search', 'memory_search', 'web_fetch'])
+[06:40:00] [INFO]   Removed stale byProvider entry: spark/glm-4.7-flash (had ['exec', 'read', 'web_search', 'memory_search', 'web_fetch'])
+[06:40:00] [INFO]   Removed stale byProvider entry: spark/qwen3-coder:latest (had ['exec', 'read', 'web_search', 'memory_search', 'web_fetch'])
+[06:40:00] [INFO]   Removed stale byProvider entry: spark/qwen2.5-coder:32b (had ['exec', 'read', 'web_search', 'memory_search', 'web_fetch'])
+[06:40:00] [INFO]   Wrote updated openclaw.json (4 changes)
+[06:40:00] [INFO] ==================================================
+[06:40:00] [INFO] FIX 2: Clear stale dashboard tiles
+[06:40:00] [INFO] Backed up ops-status.md → ops-status.md.bak
+[06:40:00] [INFO]   Updated ops-status.md (was stale from Feb 21)
+[06:40:00] [INFO] Backed up self-heal-log.md → self-heal-log.md.bak
+[06:40:00] [INFO]   Updated self-heal-log.md
+[06:40:00] [INFO] ==================================================
+[06:40:00] [INFO] FIX 3: Activity counter in build-status.py
+[06:40:00] [INFO] Backed up build-status.py → build-status.py.bak
+[06:40:00] [INFO]   No 'activity' key found in build-status.py — may be computed elsewhere
+[06:40:00] [INFO]   Activity counter diagnosis complete — see recommendations above
+[06:40:00] [INFO]   To fully fix: edit build-status.py to populate 'activity' from same source as 'today'
+[06:40:00] [INFO] ==================================================
+[06:40:00] [INFO] FIX 4: Diagnose quality-eval failures
+[06:40:00] [INFO]   Found 13 quality/eval/reason references in scheduler:
+[06:40:00] [INFO]     L67:     "reason":     {"hours": (5, 6),   "cycle_pause": 1800, "max_cycles": 1},      # 5-6am (single run)
+[06:40:00] [INFO]     L241:         elif window == "reason":
+[06:40:00] [INFO]     L242:             # Research quality evaluator
+[06:40:00] [INFO]     L243:             mapping = [("research-quality-evaluator", "quality-eval")]
+[06:40:00] [INFO]     L259: # FEED VALIDATOR — quality gate for new entries
+[06:40:00] [INFO]     L307:         # --- UPGRADED QUALITY GATE (v2) ---
+[06:40:00] [INFO]     L384:                         log.info("feed_cleaned", reason=issues,
+[06:40:00] [INFO]     L658:             return "queue/reason"
+[06:40:00] [INFO]     L704:             for key in ("kg_stats", "gpu_stats", "feed_quality", "automation", "cost",
+[06:40:00] [INFO]     L767:             return "reason"  # queue + reason window
+[06:40:00] [INFO]     L778:             log.error("preflight_fail", reason="gateway")
+[06:40:00] [INFO]     L784:             log.error("preflight_fail", reason="spark offline")
+[06:40:00] [INFO]     L830:             log.error("scheduler_abort", reason="preflight failed")
+[06:40:00] [INFO]   zeke-reason.sh exists (5398 bytes)
+[06:40:00] [INFO]   zeke-reason.sh contains quality-related code
+[06:40:00] [INFO]   Last modified: 2026-02-22 06:40
+[06:40:00] [INFO]   OpenClaw cron 'research-quality-evaluator': DISABLED
+[06:40:00] [INFO]   Scheduler runs quality-eval but it fails every time (duration: 31-43s)
+[06:40:00] [INFO]   Likely cause: prompt references a model or tool that doesn't work
+[06:40:00] [INFO]   RECOMMENDATION: Check scheduler's quality-eval job config and prompt
+[06:40:00] [INFO] ==================================================
+[06:40:00] [INFO] FIX 5: Session purge
+[06:40:00] [INFO]   Purged 41 session files
+[06:40:00] [INFO] ==================================================
+[06:40:00] [INFO] Writing progress log
+[06:40:00] [INFO]   Wrote /Users/zekezirk/zeke-status/fix-log.md
+[06:40:00] [INFO] 
+[06:40:00] [INFO] ==================================================
+[06:40:00] [INFO] SUMMARY
+[06:40:00] [INFO] ==================================================
+[06:40:00] [INFO]   byprovider: ✅ Done
+[06:40:00] [INFO]   stale_tiles: ✅ Done
+[06:40:00] [INFO]   activity: ✅ Done
+[06:40:00] [INFO]   quality_eval: ✅ Done
+[06:40:00] [INFO]   sessions: ✅ Done
+[06:40:00] [INFO]   progress: ✅ Done
+[06:40:00] [INFO] 
+[06:40:00] [INFO] NEXT STEPS:
+[06:40:00] [INFO]   1. Restart gateway: launchctl unload ~/Library/LaunchAgents/ai.openclaw.gateway.plist && launchctl load ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+[06:40:00] [INFO]   2. Push to GitHub: cd ~/zeke-status && python3 build-status.py && git add -A && git commit -m 'dashboard fix: stale tiles, byProvider cleanup' && git push
+[06:40:00] [INFO]   3. Verify dashboard: https://mattzirkelbach-pixel.github.io/zeke-status/

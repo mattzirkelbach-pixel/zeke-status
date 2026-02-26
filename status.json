@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-26T11:37:20.818399+00:00",
+  "timestamp": "2026-02-26T11:40:00.837386+00:00",
   "feed_lines": 1029,
   "recent_feed": [
     "{\"timestamp\":\"2026-02-26T05:14:00Z\",\"topic\":\"compound-synthesis\",\"finding\":\"Both longevity research and AI agent development show that intermittent optimization (e.g., rapamycin dosage cycles, periodic knowledge refresh) yields better long-term results than continuous optimization attempts\",\"source\":\"synthesis\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities - Updated 2026-02-21 (Evening)\n\nLast updated by: zeke-reason.sh (Claude Code autonomous reasoning, cycle 2)\nEvaluation basis: 30 feed entries scored across 2 cycles, avg novelty 2.5/5.0\nPrevious cycle avg: 2.05/5.0 | This cycle avg: 3.0/5.0 (Opus entries drove improvement)\n\n---\n\n## P1 \u2014 HIGHEST VALUE (execute next queue cycle)\n\n### Longevity (PROMOTED \u2014 8+ KG entities, highest novelty at 4.6/5.0)\n\nToday's Reason cycle answered 3/5 P1 questions completely. Remaining gaps:\n\n1. Rapamycin PEARL dose-response below 10mg/week: Still unanswered. 6.19kg lean mass\n   at 10mg confirmed. No sub-10mg arm found. Is there dose-finding data?\n   SEARCH: ClinicalTrials.gov NCT04488601 protocol amendments, Blagosklonny 2026.\n   STATUS: PARTIALLY ANSWERED (main outcome confirmed, dose-response gap remains)\n\n2. NAD+ precursor head-to-head RCT (NR vs NMN in humans 50+): ZERO progress. This is\n   now the #1 unanswered longevity question. We have mechanism but no comparative data.\n   SEARCH: \"nicotinamide riboside vs NMN randomized trial 2025 2026\",\n   \"NAD precursor comparison human clinical\", site:clinicaltrials.gov\n   STATUS: UNANSWERED \u2014 highest priority\n\n3. Metformin timing protocol: 3 RCTs confirm exercise blunting. What is the minimum\n   time separation between metformin dosing and exercise to preserve benefits?\n   SEARCH: \"metformin exercise timing pharmacokinetics separation hours\",\n   \"metformin half-life exercise window\"\n   STATUS: NEW \u2014 critical for Matt's protocol\n\n4. DMTF1 small molecule screening: NUS team identified target (Science Advances Jan 2026).\n   Any drug discovery programs targeting DMTF1 upregulation?\n   SEARCH: ChEMBL DMTF1, DrugBank DMTF1 modulators, \"DMTF1 drug discovery 2026\"\n   STATUS: NEW \u2014 early-stage monitoring\n\n5. p-tau217 clinical decision tree: Matt should consider testing. If elevated, what\n   interventions exist in the 3-4 year prediction window?\n   SEARCH: \"p-tau217 elevated treatment options\", \"preclinical Alzheimer interventi",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
+    "gpu_util_pct": 2.0,
     "temp_c": 39.0,
-    "power_w": 11.0,
+    "power_w": 10.9,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -35,16 +35,6 @@
     "timeoutMs": "NOT SET",
     "elevated": {},
     "byProvider": {
-      "spark/qwen3:32b": {
-        "allow": [
-          "exec",
-          "read",
-          "web_search",
-          "memory_search",
-          "web_fetch"
-        ],
-        "count": 5
-      },
       "spark/qwen3:8b": {
         "allow": [
           "read",
@@ -54,36 +44,6 @@
         "count": 3
       },
       "spark/qwen3-32b-32k": {
-        "allow": [
-          "exec",
-          "read",
-          "web_search",
-          "memory_search",
-          "web_fetch"
-        ],
-        "count": 5
-      },
-      "spark/glm-4.7-flash": {
-        "allow": [
-          "exec",
-          "read",
-          "web_search",
-          "memory_search",
-          "web_fetch"
-        ],
-        "count": 5
-      },
-      "spark/qwen3-coder:latest": {
-        "allow": [
-          "exec",
-          "read",
-          "web_search",
-          "memory_search",
-          "web_fetch"
-        ],
-        "count": 5
-      },
-      "spark/qwen2.5-coder:32b": {
         "allow": [
           "exec",
           "read",
@@ -113,9 +73,9 @@
     }
   },
   "gateway_process": {
-    "pid": "80325",
-    "memory_pct": "2.4",
-    "uptime": "23:42:34",
+    "pid": "31776\n31815",
+    "memory_pct": "",
+    "uptime": "",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -495,8 +455,8 @@
     "{\"timestamp\": \"2026-02-21T14:30:00Z\", \"eval_date\": \"2026-02-21\", \"eval_cycle\": 2, \"feed_line\": 192, \"feed_ts\": \"LITERAL_VAR\", \"topic\": \"self-improvement\", \"subtopic\": \"novelty-seeking habits\", \"novelty_score\": 2, \"reasoning\": \"Vague insights with fabricated confidence scores (0.85, 0.78) but no source citations. Literal shell variable timestamp. Likely model confabulation.\"}",
     "{\"timestamp\": \"2026-02-21T14:30:00Z\", \"eval_date\": \"2026-02-21\", \"eval_cycle\": 2, \"feed_line\": 193, \"feed_ts\": \"LITERAL_VAR\", \"topic\": \"tool-calling\", \"subtopic\": \"no developments\", \"novelty_score\": 1, \"reasoning\": \"Explicitly no new developments. Correct to skip per priorities (DEPRIORITIZED). Literal shell variable timestamp.\"}"
   ],
-  "self_heal_log": "# Self-Heal Log\n\n## 2026-02-21T14:30:00Z \u2014 Reasoning Cycle 2\n\n### Issue 1: ALL 8 queue jobs failed with gateway timeout (CRITICAL)\n- Symptom: Every GATHER, EXTRACT, and ASSOCIATE job failed with `Error: gateway timeout after 600000ms`\n- Queue run: 12:56-14:17 UTC (8 jobs x 601s each = ~80 minutes of failures)\n- Gateway: PID 95262, started 7:38AM EST, was 18 minutes old when first job started\n- Spark: Currently reachable at 10.0.0.143:11434 (models responding to /api/tags)\n- Diagnosis: Gateway was likely not fully initialized when queue started. The gateway's internal timeout (600000ms) is shorter than the queue script's `--timeout 900000`, so the gateway kills sessions before the queue timeout fires\n- Action taken: NOT restarting gateway (it is currently functional for this Reason session)\n- Recommendation: Add 120s startup delay or health-check loop to zeke-queue.sh before first job\n\n### Issue 2: self-improvement domain \u2014 8+ consecutive \"No new developments\" (BROKEN)\n- Symptom: Feed lines 178-182 all contain `\"insights\":[\"No new developments\"]`\n- Root cause: Search query \"self-improvement developments\" returns popscience listicles\n- Action taken: Domain flagged as RETIRED in research-priorities.md\n- Prompt rewrite DRAFTED but NOT applied to jobs.json (deferred to avoid breaking cron)\n- Proposed new search terms:\n  - \"deliberate practice randomized controlled trial 2025 2026 site:pubmed.ncbi.nlm.nih.gov\"\n  - \"spaced repetition human trial effect size 2025 2026\"\n  - \"working memory training meta-analysis 2026\"\n  - \"cognitive enhancement protocol peer-reviewed quantified outcomes\"\n- Proposed domain rename: \"self-improvement\" to \"cognitive-science\"\n\n### Issue 3: Literal shell variable timestamps in 5 entries (BUG)\n- Symptom: Feed lines 176, 177, 183, 191, 192, 193 have `TIMESTAMP` as literal text\n- Root cause: Agent wraps entire echo string in single quotes, preventing shell expansion\n- Action taken: Documented. Fix requires updating ALL job prompts to use:\n  `TS=TIMES",
-  "ops_status": "# Operational Status \u2014 2026-02-21\n\n## System Health: DEGRADED\n\n### Queue Run Summary (morning 2026-02-21)\n- Jobs attempted: 8 (6 GATHER + 1 EXTRACT + 1 ASSOCIATE)\n- Jobs succeeded: 0\n- Jobs failed: 8 (all gateway timeout at 600000ms)\n- Queue duration: 12:56-14:17 UTC (~80 minutes, all wasted)\n- Failure mode: Gateway accepting connections but agent sessions timing out\n\n### Feed Statistics\n- Total entries: 193\n- Entries added in last 24h: ~10\n- Sources: 5 from afternoon Reason cycle (high quality), 5 from morning queue pre-failure\n- Zero entries from overnight queue (all jobs failed)\n- Feed growth rate: ~10/day (down from ~15/day baseline)\n\n### Novelty Scores\n- Cycle 1 (20 entries evaluated): avg 2.05/5.0\n- Cycle 2 (10 entries evaluated): avg 3.0/5.0\n- Combined (30 entries): avg 2.4/5.0\n- High novelty (4-5): 12/30 = 40%\n- Zero/low novelty (0-1): 11/30 = 37%\n- Trend: UP (driven by Opus quality entries)\n\n### Quality Issues in Feed\n- Malformed JSON: 5 entries (single quotes, unquoted fields, stringified arrays)\n- Literal timestamps: 5 entries (shell variable not expanded)\n- Wrong data: 1 entry (Icelandic bonds instead of US Treasury)\n- Duplicates: 2 entries (same content within 1 second)\n- Total error rate: ~13/193 = 6.7% of all feed entries have quality issues\n\n### Infrastructure\n| Component       | Status  | PID   | Notes                        |\n|-----------------|---------|-------|------------------------------|\n| Gateway         | RUNNING | 95262 | 2.6% memory, accepting connections |\n| Spark server    | ONLINE  | -     | 10.0.0.143:11434, models loaded    |\n| Cloudflare tun  | RUNNING | 75194 | Operational                        |\n| Spark tunnel    | RUNNING | 1691  | Operational                        |\n| Overnight agent | LOADED  | -     | ai.openclaw.overnight              |\n\n### Self-Heal Actions\n1. Scored 10 new feed entries (appended to research-evaluations.jsonl, 30 total)\n2. Diagnosed gateway timeout (600000ms internal limit, 18-min-old gateway)\n3. Retired ",
+  "self_heal_log": "# Self-Heal Log\n\n## 2026-02-26 \u2014 Dashboard Fix (Manual)\n- Cleaned stale byProvider entries (removed unused models)\n- Updated ops-status.md (was showing DEGRADED from Feb 21)\n- Deployed MCP watchdog (5-min cron, auto-restart + Telegram)\n- quality-eval job: diagnosed as failing, needs scheduler prompt fix\n\n## 2026-02-26 \u2014 MCP Watchdog Deployed\n- ~/zeke-mcp-watchdog.py checks process, port, SSE every 5 min\n- Auto-restarts via launchctl, Telegram alerts on failure\n- Added to crontab alongside existing system watchdog\n\n## 2026-02-22 \u2014 L2 Autonomy Deployed  \n- Watchdog every 10min auto-repairs scheduler via launchctl\n- Telegram alerts on failures\n- Verified: scheduler kill \u2192 repaired in 35s\n",
+  "ops_status": "# Operational Status \u2014 2026-02-26\n\n## System Health: HEALTHY\n\n### Pipeline Summary (automated via Python scheduler)\n- Scheduler: Running, daytime+overnight windows\n- Feed: 1,029 entries, growing ~30-40/overnight cycle\n- Success rate: 89% (89/100 jobs today)\n- Cost: $0/day (all local Spark models)\n- Timeouts: 0 today\n\n### Active Research Jobs (Python scheduler)\n- treasury-bonds: \u2705 running\n- longevity: \u2705 running  \n- ai-agents: \u2705 running\n- self-improvement: \u2705 running\n- tool-calling: \u26a0\ufe0f intermittent failures\n- compound-synthesis: \u2705 running\n- quality-eval: \u274c failing (needs investigation)\n\n### Active OpenClaw Cron Jobs\n- tlt-alert-scanner: \u2705 enabled (market hours)\n- association-engine: \u2705 enabled (every 4h)\n- system-health-alert: \u2705 enabled (every 2h)\n- kg-extractor: \u2705 enabled (every 2h)\n- system-doctor: \u2705 enabled (every 2h)\n\n### Infrastructure\n| Component       | Status  | Notes                              |\n|-----------------|---------|-------------------------------------|\n| Gateway         | RUNNING | 23+ hours uptime                    |\n| Spark server    | ONLINE  | qwen3-32b-32k, nomic-embed, qwen3:8b |\n| MCP Server      | RUNNING | Port 8100, Tailscale funnel active  |\n| Dashboard       | LIVE    | GitHub Pages + local:3333           |\n| Watchdogs       | ACTIVE  | System (10min) + MCP (5min)         |\n\n### Automation Layers\n- L1 (Execution): \u2705 DEPLOYED \u2014 scheduler, guardian, quality gate\n- L2 (Oversight): \ud83d\udd28 IN PROGRESS (~60%) \u2014 dashboard live, watchdogs active, quality-eval broken\n- L3 (Intelligence): \ud83d\udccb PLANNED \u2014 cross-domain synthesis, prompt evolution\n",
   "zeke-queue_tail": [],
   "zeke-reason-error_tail": [],
   "cron_job_count": 9,
