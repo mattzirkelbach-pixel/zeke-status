@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-26 12:10:01AM ET",
-  "timestamp_utc": "2026-02-26T05:10:01Z",
+  "timestamp_local": "2026-02-26 12:15:01AM ET",
+  "timestamp_utc": "2026-02-26T05:15:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -21,32 +21,32 @@
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 30ms",
-    "response_ms": 30,
+    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 32ms",
+    "response_ms": 32,
     "vram_estimate_gb": 0.6,
     "model_params": "137M",
     "model_quant": "F16"
   },
   "feed": {
-    "total_lines": 828,
-    "last_modified_minutes_ago": 3.3,
+    "total_lines": 831,
+    "last_modified_minutes_ago": 1.2,
     "last_entries": [
-      "[2/25 11:49PM ET] treasury bonds and interest rates \u2014 Fed officials in January meeting suggested resuming rate cuts only if inflation ",
-      "[2/25 6:59PM ET] compound-synthesis \u2014 Hierarchical memory systems in AI agents mirror biological multi-timescale memor",
-      "[2/25 7:01PM ET] longevity research \u2014 C15:0 (pentadecanoic acid) shown in 2026 pilot studies to improve cellular resil",
       "[2/25 7:01PM ET] C15:0 Metabolic Research \u2014 C15:0 (an odd-chain saturated fatty acid) demonstrates 24% improvement in cellul",
-      "[2/25 7:01PM ET] longevity research \u2014 24% improvement in cellular resilience (pilot studies) with C15:0 supplementatio"
+      "[2/25 7:01PM ET] longevity research \u2014 24% improvement in cellular resilience (pilot studies) with C15:0 supplementatio",
+      "{\"timestamp\":\"$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")\",\"topic\":\"treasury bonds and inte",
+      "{'timestamp':'2026-02-26T05:13:23Z','topic':'treasury bonds and interest rates',",
+      "[$(date +\"%Y-%m-%dT%H:%M:%SZ\")] treasury bonds and interest rates \u2014 FOMC minutes indicated negligible change in the expected trajectory of the feder"
     ],
-    "recent_50_clean": 50,
+    "recent_50_clean": 47,
     "recent_50_trivial": 0,
-    "recent_50_broken": 0,
+    "recent_50_broken": 3,
     "topic_distribution": {
       "longevity research": 13,
-      "compound-synthesis": 11,
       "AI agents and tool calling": 11,
+      "compound-synthesis": 10,
       "local model tool calling": 7,
-      "self-improvement": 4,
-      "treasury bonds and interest rates": 3
+      "treasury bonds and interest rates": 4,
+      "self-improvement": 2
     }
   },
   "activity": {
@@ -1499,6 +1499,11 @@
       "t": 1772082601559,
       "v": 828,
       "l": "12:10AM"
+    },
+    {
+      "t": 1772082901941,
+      "v": 831,
+      "l": "12:15AM"
     }
   ],
   "kg_stats": {
@@ -1510,16 +1515,16 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 62.0,
-    "power_w": 30.54,
+    "temp_c": 64.0,
+    "power_w": 37.06,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
-    "malformed_json": 4,
-    "literal_timestamps": 7,
+    "malformed_json": 6,
+    "literal_timestamps": 9,
     "duplicates": 62,
-    "total": 828,
-    "error_rate": 8.8
+    "total": 831,
+    "error_rate": 9.3
   },
   "cost": {
     "model": "spark/qwen3-32b-32k (local, $0)",
