@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-26T11:22:11.051569+00:00",
+  "timestamp": "2026-02-26T11:25:01.315623+00:00",
   "feed_lines": 1029,
   "recent_feed": [
     "{\"timestamp\":\"2026-02-26T05:14:00Z\",\"topic\":\"compound-synthesis\",\"finding\":\"Both longevity research and AI agent development show that intermittent optimization (e.g., rapamycin dosage cycles, periodic knowledge refresh) yields better long-term results than continuous optimization attempts\",\"source\":\"synthesis\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities - Updated 2026-02-21 (Evening)\n\nLast updated by: zeke-reason.sh (Claude Code autonomous reasoning, cycle 2)\nEvaluation basis: 30 feed entries scored across 2 cycles, avg novelty 2.5/5.0\nPrevious cycle avg: 2.05/5.0 | This cycle avg: 3.0/5.0 (Opus entries drove improvement)\n\n---\n\n## P1 \u2014 HIGHEST VALUE (execute next queue cycle)\n\n### Longevity (PROMOTED \u2014 8+ KG entities, highest novelty at 4.6/5.0)\n\nToday's Reason cycle answered 3/5 P1 questions completely. Remaining gaps:\n\n1. Rapamycin PEARL dose-response below 10mg/week: Still unanswered. 6.19kg lean mass\n   at 10mg confirmed. No sub-10mg arm found. Is there dose-finding data?\n   SEARCH: ClinicalTrials.gov NCT04488601 protocol amendments, Blagosklonny 2026.\n   STATUS: PARTIALLY ANSWERED (main outcome confirmed, dose-response gap remains)\n\n2. NAD+ precursor head-to-head RCT (NR vs NMN in humans 50+): ZERO progress. This is\n   now the #1 unanswered longevity question. We have mechanism but no comparative data.\n   SEARCH: \"nicotinamide riboside vs NMN randomized trial 2025 2026\",\n   \"NAD precursor comparison human clinical\", site:clinicaltrials.gov\n   STATUS: UNANSWERED \u2014 highest priority\n\n3. Metformin timing protocol: 3 RCTs confirm exercise blunting. What is the minimum\n   time separation between metformin dosing and exercise to preserve benefits?\n   SEARCH: \"metformin exercise timing pharmacokinetics separation hours\",\n   \"metformin half-life exercise window\"\n   STATUS: NEW \u2014 critical for Matt's protocol\n\n4. DMTF1 small molecule screening: NUS team identified target (Science Advances Jan 2026).\n   Any drug discovery programs targeting DMTF1 upregulation?\n   SEARCH: ChEMBL DMTF1, DrugBank DMTF1 modulators, \"DMTF1 drug discovery 2026\"\n   STATUS: NEW \u2014 early-stage monitoring\n\n5. p-tau217 clinical decision tree: Matt should consider testing. If elevated, what\n   interventions exist in the 3-4 year prediction window?\n   SEARCH: \"p-tau217 elevated treatment options\", \"preclinical Alzheimer interventi",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 1.0,
-    "temp_c": 40.0,
-    "power_w": 11.05,
+    "gpu_util_pct": 0.0,
+    "temp_c": 39.0,
+    "power_w": 11.1,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -115,7 +115,7 @@
   "gateway_process": {
     "pid": "80325",
     "memory_pct": "2.4",
-    "uptime": "23:27:20",
+    "uptime": "23:30:12",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -144,8 +144,8 @@
     "error_rate": 5.4
   },
   "crontab_status": {
-    "total_entries": 9,
-    "active": 8,
+    "total_entries": 10,
+    "active": 9,
     "disabled_for_maint": 0,
     "has_queue": false,
     "has_overnight": false,
@@ -499,6 +499,6 @@
   "ops_status": "# Operational Status \u2014 2026-02-21\n\n## System Health: DEGRADED\n\n### Queue Run Summary (morning 2026-02-21)\n- Jobs attempted: 8 (6 GATHER + 1 EXTRACT + 1 ASSOCIATE)\n- Jobs succeeded: 0\n- Jobs failed: 8 (all gateway timeout at 600000ms)\n- Queue duration: 12:56-14:17 UTC (~80 minutes, all wasted)\n- Failure mode: Gateway accepting connections but agent sessions timing out\n\n### Feed Statistics\n- Total entries: 193\n- Entries added in last 24h: ~10\n- Sources: 5 from afternoon Reason cycle (high quality), 5 from morning queue pre-failure\n- Zero entries from overnight queue (all jobs failed)\n- Feed growth rate: ~10/day (down from ~15/day baseline)\n\n### Novelty Scores\n- Cycle 1 (20 entries evaluated): avg 2.05/5.0\n- Cycle 2 (10 entries evaluated): avg 3.0/5.0\n- Combined (30 entries): avg 2.4/5.0\n- High novelty (4-5): 12/30 = 40%\n- Zero/low novelty (0-1): 11/30 = 37%\n- Trend: UP (driven by Opus quality entries)\n\n### Quality Issues in Feed\n- Malformed JSON: 5 entries (single quotes, unquoted fields, stringified arrays)\n- Literal timestamps: 5 entries (shell variable not expanded)\n- Wrong data: 1 entry (Icelandic bonds instead of US Treasury)\n- Duplicates: 2 entries (same content within 1 second)\n- Total error rate: ~13/193 = 6.7% of all feed entries have quality issues\n\n### Infrastructure\n| Component       | Status  | PID   | Notes                        |\n|-----------------|---------|-------|------------------------------|\n| Gateway         | RUNNING | 95262 | 2.6% memory, accepting connections |\n| Spark server    | ONLINE  | -     | 10.0.0.143:11434, models loaded    |\n| Cloudflare tun  | RUNNING | 75194 | Operational                        |\n| Spark tunnel    | RUNNING | 1691  | Operational                        |\n| Overnight agent | LOADED  | -     | ai.openclaw.overnight              |\n\n### Self-Heal Actions\n1. Scored 10 new feed entries (appended to research-evaluations.jsonl, 30 total)\n2. Diagnosed gateway timeout (600000ms internal limit, 18-min-old gateway)\n3. Retired ",
   "zeke-queue_tail": [],
   "zeke-reason-error_tail": [],
-  "cron_job_count": 8,
+  "cron_job_count": 9,
   "strategic_context": "# Claude Strategic Context \u2014 Zeke Ecosystem\n\nLast updated: 2026-02-21T15:30:00Z\nPurpose: Claude's extended memory. Captures decisions, mistakes, principles, and Matt's patterns so every conversation starts informed.\n\n## Matt's Core Values\n- Never ask questions with obvious answers \u2014 make the safe/obvious choice automatically\n- Anticipate 2 steps ahead. If something will be needed, build it now\n- One complete paste block per task. Never split. Never ask \"should I?\"\n- Operational requirements BEFORE features (permissions, monitoring, error handling, self-healing)\n- Longitudinal data over snapshots \u2014 show progression over time\n- Push shareworthy things to Telegram automatically. Never push routine status.\n- Be concise. Don't describe what you built \u2014 let output speak.\n- Matt is a strategist, not an engineer. Minimize cognitive load.\n- Never touch running processes. If pipeline is active, only modify dashboard/monitoring.\n- When presenting options, choose the safe default. Only ask if genuinely ambiguous.\n\n## What's Actually Deployed (verify via endpoints, don't trust static numbers)\n- Pipeline: ~/zeke-queue.sh (GATHER x6 \u2192 EXTRACT \u2192 ASSOCIATE, 900s timeout per job)\n- Reasoning: ~/zeke-reason.sh (Claude Code Opus, 9 tasks including self-heal + ops-status)\n- Dashboard: ~/zeke-dashboard-server.py port 3333, ~/zeke-dashboard.html, launchd plist\n- Status bridge: ~/zeke-status/build-status.py + history.jsonl, GitHub push every 10min\n- Cloudflare tunnel: running but EPHEMERAL \u2014 dies on reboot, URL changes. Needs launchd plist.\n- Crontab: 11pm queue, 7am reasoning, every 10min status push\n- 29 old Sonnet cron jobs still active \u2014 don't disable until 2 successful autonomous cycles\n- byProvider: spark/qwen3-32b-32k has 6 tools (exec, read, write, web_search, memory_search, web_fetch). Memory says remove write but verify actual openclaw.json before changing.\n- Claude Code permissions: ~/.claude/settings.json allows all, --dangerously-skip-permissions in headless scripts\n\n## Decision History (with rationale)\n- Local models limited to 6 tools \u2014 param mangling above ~6\n- Local models overwrite files \u2014 use exec with >> append only (write tool removal TBD verify)\n- delivery.mode \"none\" not \"announce\" \u2014 announce without targets causes system failures\n- 900s timeout up from 600s \u2014 treasury-bonds succeeds at 893s\n- Self-improvement prompt rewritten to specific terms after 6 consecutive dry runs\n- Timestamp TIMESTAMP literals replaced with natural language instruction in 12 job prompts\n- GitHub status bridge chosen over Gist \u2014 raw.githubusercontent.com has 3-5min CDN cache\n- Sequential pipeline, not parallel \u2014 Spark loads one model at a time efficiently\n- Hybrid arch: Spark ($0) GATHER/EXTRACT/ASSOCIATE, Claude Code CLI ($0 on Max sub) REASON/SELF-HEAL\n- KG uses SQLite + nomic-embed-text, 0.92 cosine similarity dedup threshold\n\n## Mistakes Made (principles extracted)\n- STATELESS: Claude Code has zero memory between sessions. Every prompt must read existing files first, "
 }
