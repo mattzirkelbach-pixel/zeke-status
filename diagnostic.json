@@ -1,16 +1,33 @@
 {
-  "timestamp_local": "2026-02-26 10:55:01AM ET",
-  "timestamp_utc": "2026-02-26T15:55:01Z",
+  "timestamp_local": "2026-02-26 10:58:25 ET",
+  "timestamp_utc": "2026-02-26T15:58:25Z",
   "scheduler": {
     "running": true,
-    "pids": [
-      "39485"
-    ],
-    "count": 1,
-    "type": "python"
+    "pid": 39485,
+    "uptime_minutes": 40,
+    "current_window": "daytime"
   },
-  "gateway": {
-    "running": true
+  "feed": {
+    "total_lines": 1086,
+    "last_entries": [
+      "[2026-02-26T21:00:00] compound-synthesis",
+      "[2026-02-26T21:00:00] compound-synthesis",
+      "[2026-02-26T20:00:00] compound-synthesis",
+      "[2026-02-26T20:00:00] compound-synthesis",
+      "[2026-02-26T20:00:00] compound-synthesis"
+    ],
+    "topic_distribution": {
+      "compound-synthesis": 14,
+      "longevity research": 9,
+      "self-improvement": 5,
+      "AI agents and tool calling": 4,
+      "AI agent memory architecture": 3,
+      "AI agent persistent memory": 2
+    },
+    "recent_50_clean": 50,
+    "recent_50_trivial": 0,
+    "recent_50_broken": 0,
+    "last_modified_minutes_ago": 27.5
   },
   "spark": {
     "online": true,
@@ -20,49 +37,103 @@
       "nomic-embed-text:latest"
     ],
     "model_stuck": false,
+    "stuck_model": null,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 27ms",
-    "response_ms": 27,
-    "vram_estimate_gb": 0.6,
-    "model_params": "137M",
-    "model_quant": "F16"
+    "detail": "healthy, loaded: qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest"
   },
-  "feed": {
-    "total_lines": 1086,
-    "last_modified_minutes_ago": 27.5,
-    "last_entries": [
-      "[2/26 4:00PM ET] compound-synthesis \u2014 Hierarchical pathway optimization in AI agent memory systems mirrors longevity r",
-      "[2/26 4:00PM ET] compound-synthesis \u2014 Modular memory hierarchies in AI agents (MAGMA) mirror longevity research on cel",
-      "[2/26 3:00PM ET] compound-synthesis \u2014 Modular memory systems in AI agents (MAGMA framework) and longevity research on ",
-      "[2/26 3:00PM ET] compound-synthesis \u2014 Modular hierarchy in AI agent memory systems (MAGMA) mirrors longevity research ",
-      "[2/26 3:00PM ET] compound-synthesis \u2014 Modular hierarchy in AI agent memory systems mirrors longevity research on metab"
-    ],
-    "recent_50_clean": 50,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 0,
-    "topic_distribution": {
-      "compound-synthesis": 14,
-      "longevity research": 9,
-      "self-improvement": 5,
-      "AI agents and tool calling": 4,
-      "AI agent memory architecture": 3,
-      "AI agent persistent memory": 2
+  "gateway": {
+    "running": true
+  },
+  "today": {
+    "jobs_run": 5,
+    "success": 5,
+    "timeout": 0,
+    "fail": 0,
+    "feed_growth": 12
+  },
+  "cycles": [
+    {
+      "ts": "2026-02-26T10:28:06.257263",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 5,
+      "success": 5,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 12
     }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 70,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "success",
+      "duration": 164,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "success",
+      "duration": 90,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 83,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration": 145,
+      "grew": 6,
+      "issues": []
+    }
+  ],
+  "health": {
+    "status": "HEALTHY",
+    "issues": []
   },
-  "activity": {
-    "last_job": "compound-synthesis",
-    "last_job_time": "2/26 5:25AM ET",
-    "last_cycle": "2/26 5:18AM ET",
-    "jobs_today": 5,
-    "success_today": 5,
-    "timeout_today": 0,
-    "fail_today": 0,
-    "feed_growth_today": 12,
-    "state": "idle (heartbeat)",
-    "next_cycle_est": "5:58AM",
-    "cycle_count": 1,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "kg_stats": {
+    "entities": 309,
+    "relations": 308,
+    "associations": 96,
+    "insights": 0
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 1.0,
+    "temp_c": 38.0,
+    "power_w": 10.93,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 6,
+    "literal_timestamps": 7,
+    "duplicates": 83,
+    "total": 1086,
+    "error_rate": 8.8
+  },
+  "automation": {
+    "layer1": "DEPLOYED",
+    "layer2": "IN PROGRESS",
+    "layer3": "PLANNED"
+  },
+  "cost": {
+    "model": "spark/qwen3-32b-32k (local, $0)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": true
   },
   "feed_history": [
     {
@@ -1506,96 +1577,19 @@
       "l": "10:55AM"
     }
   ],
-  "kg_stats": {
-    "entities": 309,
-    "relations": 308,
-    "associations": 96,
-    "insights": 0
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 1.0,
-    "temp_c": 38.0,
-    "power_w": 10.93,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 6,
-    "literal_timestamps": 7,
-    "duplicates": 83,
-    "total": 1086,
-    "error_rate": 8.8
-  },
-  "cost": {
-    "model": "spark/qwen3-32b-32k (local, $0)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": true
-  },
-  "automation": {
-    "layer1": "DEPLOYED",
-    "layer2": "IN PROGRESS",
-    "layer3": "PLANNED"
-  },
-  "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
-  },
-  "cycles": [
-    {
-      "ts": "2026-02-26T10:28:06.257263",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 5,
-      "success": 5,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 12
-    }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 70,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "success",
-      "duration": 164,
-      "grew": 2,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 90,
-      "grew": 2,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "success",
-      "duration": 83,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "compound-synthesis",
-      "status": "success",
-      "duration": 145,
-      "grew": 6,
-      "issues": []
-    }
-  ],
-  "today": {
-    "jobs_run": 5,
-    "success": 5,
-    "timeout": 0,
-    "fail": 0,
-    "feed_growth": 12
+  "activity": {
+    "last_job": "compound-synthesis",
+    "last_job_time": "2/26 5:25AM ET",
+    "last_cycle": "2/26 5:18AM ET",
+    "jobs_today": 5,
+    "success_today": 5,
+    "timeout_today": 0,
+    "fail_today": 0,
+    "feed_growth_today": 12,
+    "state": "idle (heartbeat)",
+    "next_cycle_est": "5:58AM",
+    "cycle_count": 1,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   }
 }
