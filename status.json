@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-26T21:10:01.069887+00:00",
+  "timestamp": "2026-02-26T21:15:00.859984+00:00",
   "feed_lines": 1174,
   "recent_feed": [
     "{\"timestamp\":\"2026-02-25T18:00:00Z\",\"topic\":\"self-improvement\",\"finding\":\"A 2025 pilot RCT found that 12 weeks of PATH neurotraining significantly improved working memory in healthy adults compared to a control group (p<0.05).\",\"source\":\"https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0331193&type=printable\"}",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 62.0,
-    "power_w": 39.7,
+    "temp_c": 63.0,
+    "power_w": 35.45,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -104,8 +104,8 @@
     "error_rate": 5.2
   },
   "crontab_status": {
-    "total_entries": 10,
-    "active": 9,
+    "total_entries": 12,
+    "active": 10,
     "disabled_for_maint": 0,
     "has_queue": false,
     "has_overnight": false,
@@ -621,6 +621,6 @@
   "ops_status": "# Operational Status \u2014 2026-02-26\n\n## System Health: HEALTHY\n\n### Pipeline Summary (automated via Python scheduler)\n- Scheduler: Running, daytime+overnight windows\n- Feed: 1,029 entries, growing ~30-40/overnight cycle\n- Success rate: 89% (89/100 jobs today)\n- Cost: $0/day (all local Spark models)\n- Timeouts: 0 today\n\n### Active Research Jobs (Python scheduler)\n- treasury-bonds: \u2705 running\n- longevity: \u2705 running  \n- ai-agents: \u2705 running\n- self-improvement: \u2705 running\n- tool-calling: \u26a0\ufe0f intermittent failures\n- compound-synthesis: \u2705 running\n- quality-eval: \u274c failing (needs investigation)\n\n### Active OpenClaw Cron Jobs\n- tlt-alert-scanner: \u2705 enabled (market hours)\n- association-engine: \u2705 enabled (every 4h)\n- system-health-alert: \u2705 enabled (every 2h)\n- kg-extractor: \u2705 enabled (every 2h)\n- system-doctor: \u2705 enabled (every 2h)\n\n### Infrastructure\n| Component       | Status  | Notes                              |\n|-----------------|---------|-------------------------------------|\n| Gateway         | RUNNING | 23+ hours uptime                    |\n| Spark server    | ONLINE  | qwen3-32b-32k, nomic-embed, qwen3:8b |\n| MCP Server      | RUNNING | Port 8100, Tailscale funnel active  |\n| Dashboard       | LIVE    | GitHub Pages + local:3333           |\n| Watchdogs       | ACTIVE  | System (10min) + MCP (5min)         |\n\n### Automation Layers\n- L1 (Execution): \u2705 DEPLOYED \u2014 scheduler, guardian, quality gate\n- L2 (Oversight): \ud83d\udd28 IN PROGRESS (~60%) \u2014 dashboard live, watchdogs active, quality-eval broken\n- L3 (Intelligence): \ud83d\udccb PLANNED \u2014 cross-domain synthesis, prompt evolution\n",
   "zeke-queue_tail": [],
   "zeke-reason-error_tail": [],
-  "cron_job_count": 9,
+  "cron_job_count": 10,
   "strategic_context": "# Claude Strategic Context \u2014 Zeke Ecosystem\n\nLast updated: 2026-02-21T15:30:00Z\nPurpose: Claude's extended memory. Captures decisions, mistakes, principles, and Matt's patterns so every conversation starts informed.\n\n## Matt's Core Values\n- Never ask questions with obvious answers \u2014 make the safe/obvious choice automatically\n- Anticipate 2 steps ahead. If something will be needed, build it now\n- One complete paste block per task. Never split. Never ask \"should I?\"\n- Operational requirements BEFORE features (permissions, monitoring, error handling, self-healing)\n- Longitudinal data over snapshots \u2014 show progression over time\n- Push shareworthy things to Telegram automatically. Never push routine status.\n- Be concise. Don't describe what you built \u2014 let output speak.\n- Matt is a strategist, not an engineer. Minimize cognitive load.\n- Never touch running processes. If pipeline is active, only modify dashboard/monitoring.\n- When presenting options, choose the safe default. Only ask if genuinely ambiguous.\n\n## What's Actually Deployed (verify via endpoints, don't trust static numbers)\n- Pipeline: ~/zeke-queue.sh (GATHER x6 \u2192 EXTRACT \u2192 ASSOCIATE, 900s timeout per job)\n- Reasoning: ~/zeke-reason.sh (Claude Code Opus, 9 tasks including self-heal + ops-status)\n- Dashboard: ~/zeke-dashboard-server.py port 3333, ~/zeke-dashboard.html, launchd plist\n- Status bridge: ~/zeke-status/build-status.py + history.jsonl, GitHub push every 10min\n- Cloudflare tunnel: running but EPHEMERAL \u2014 dies on reboot, URL changes. Needs launchd plist.\n- Crontab: 11pm queue, 7am reasoning, every 10min status push\n- 29 old Sonnet cron jobs still active \u2014 don't disable until 2 successful autonomous cycles\n- byProvider: spark/qwen3-32b-32k has 6 tools (exec, read, write, web_search, memory_search, web_fetch). Memory says remove write but verify actual openclaw.json before changing.\n- Claude Code permissions: ~/.claude/settings.json allows all, --dangerously-skip-permissions in headless scripts\n\n## Decision History (with rationale)\n- Local models limited to 6 tools \u2014 param mangling above ~6\n- Local models overwrite files \u2014 use exec with >> append only (write tool removal TBD verify)\n- delivery.mode \"none\" not \"announce\" \u2014 announce without targets causes system failures\n- 900s timeout up from 600s \u2014 treasury-bonds succeeds at 893s\n- Self-improvement prompt rewritten to specific terms after 6 consecutive dry runs\n- Timestamp TIMESTAMP literals replaced with natural language instruction in 12 job prompts\n- GitHub status bridge chosen over Gist \u2014 raw.githubusercontent.com has 3-5min CDN cache\n- Sequential pipeline, not parallel \u2014 Spark loads one model at a time efficiently\n- Hybrid arch: Spark ($0) GATHER/EXTRACT/ASSOCIATE, Claude Code CLI ($0 on Max sub) REASON/SELF-HEAL\n- KG uses SQLite + nomic-embed-text, 0.92 cosine similarity dedup threshold\n\n## Mistakes Made (principles extracted)\n- STATELESS: Claude Code has zero memory between sessions. Every prompt must read existing files first, "
 }
