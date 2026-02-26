@@ -26,3 +26,8 @@
 - **NEVER make MCP the only path to critical data.** Use GitHub (web_fetch) as reliable backup. MCP is convenience, not foundation.
 - **NEVER store sensitive data (tokens, keys) in GitHub-pushed directories.** Keep in ~/.zeke-telegram.env with chmod 600.
 - **Gateway must restart after jobs.json or openclaw.json changes.** Also purge sessions directory.
+
+## MCP Connector Stability
+- **SSE keepalive is required.** MCP SDK omits EventSourceResponse ping param. Fix: monkey-patch ping=15. (2/26)
+- **Track issues:** #20335, #18557, #1026, #15232, #5826, anthropics/claude-ai-mcp#5
+- **SSE being deprecated** in favor of Streamable HTTP. Migrate when claude.ai support stabilizes.

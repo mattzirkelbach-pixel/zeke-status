@@ -1,6 +1,6 @@
 {
   "_description": "Quick-read memory state. Fetched at conversation start via web_fetch or MCP.",
-  "_updated": "2026-02-26T17:04:31.139473",
+  "_updated": "2026-02-26T18:44:48.366848",
   "_access": {
     "github": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/memory-index.json",
     "dependencies": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/dependencies.json",
@@ -17,7 +17,7 @@
   },
   "last_session": {
     "date": "2026-02-26",
-    "summary": "L2 rebuild, self-repair deploy, research job restoration",
+    "summary": "Memory system + MCP keepalive patch",
     "next_priorities": [
       "Phase 3: prompt optimizer",
       "Verify overnight feed growth",
@@ -44,6 +44,7 @@
     "MCP connector drops silently \u2014 server stays up, fix: remove/re-add in Settings",
     "Scheduler maps job names by string match \u2014 don't rename or delete without checking lines 221-240",
     "Gateway needs restart after config changes \u2014 also purge sessions",
-    "Local models break above 6 tools \u2014 byProvider restriction is load-bearing"
+    "Local models break above 6 tools \u2014 byProvider restriction is load-bearing",
+    "MCP SSE keepalive patched (ping=15s) \u2014 monitor if drops still occur"
   ]
 }
