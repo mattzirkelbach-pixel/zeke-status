@@ -1,34 +1,42 @@
 {
-  "timestamp": "2026-02-26T10:40:01.016037+00:00",
-  "feed_total": 1021,
-  "feed_previous": 1021,
+  "timestamp": "2026-02-26T05:49:26.243692",
+  "window": "reason",
+  "cycle": 2,
+  "feed_before": 1021,
+  "feed_after": 1021,
   "feed_growth": 0,
-  "feed_stagnant": false,
-  "spark": {
-    "online": true,
-    "model_loaded": true,
-    "models": [
-      "qwen3-32b-32k:latest",
-      "qwen3:8b",
-      "nomic-embed-text:latest"
-    ]
+  "jobs": {
+    "total": 1,
+    "success": 0,
+    "fail": 1,
+    "timeout": 0
   },
-  "scheduler": {
-    "running": true,
-    "pids": [
-      "90564"
-    ]
-  },
-  "gateway": {
-    "running": true,
-    "pids": [
-      "80325"
-    ]
-  },
-  "jobs_today": 0,
-  "success_today": 0,
-  "fails_today": 0,
-  "timeouts_today": 0,
-  "needs_repair": false,
-  "repair_reasons": []
+  "job_details": [
+    {
+      "uuid": "57047c78-66a",
+      "name": "quality-eval",
+      "status": "fail",
+      "duration_s": 43,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "57047c78-66a",
+      "name": "quality-eval",
+      "status": "fail",
+      "duration_s": 43,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    }
+  ],
+  "needs_repair": true,
+  "feed_stagnant": true,
+  "repair_dispatched": true,
+  "repair_result": "unknown"
 }
