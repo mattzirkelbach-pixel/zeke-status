@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-27 6:00:01AM ET",
-  "timestamp_utc": "2026-02-27T11:00:01Z",
+  "timestamp_local": "2026-02-27 6:05:01AM ET",
+  "timestamp_utc": "2026-02-27T11:05:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -15,21 +15,21 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3:8b",
       "qwen3-32b-32k:latest",
-      "nomic-embed-text:latest"
+      "nomic-embed-text:latest",
+      "qwen3:8b"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3:8b, qwen3-32b-32k:latest, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 33ms",
-    "response_ms": 33,
-    "vram_estimate_gb": 0.6,
-    "model_params": "137M",
-    "model_quant": "F16"
+    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 31ms",
+    "response_ms": 31,
+    "vram_estimate_gb": 5.6,
+    "model_params": "8.2B",
+    "model_quant": "Q4_K_M"
   },
   "feed": {
     "total_lines": 32,
-    "last_modified_minutes_ago": 45.9,
+    "last_modified_minutes_ago": 50.9,
     "last_entries": [
       "[2/27 10:08AM ET] compound-synthesis \u2014 Regular low-dose rapamycin interventions improve bone-muscle health while multi-",
       "[2/27 10:08AM ET] compound-synthesis \u2014 Regular low-dose rapamycin interventions improve muscle-bone health while multi-",
@@ -50,26 +50,21 @@
     }
   },
   "activity": {
-    "last_job": "treasury-bonds",
+    "last_job": "compound-synthesis",
     "last_job_time": "2/27 1:00AM ET",
     "last_cycle": "2/27 1:00AM ET",
-    "jobs_today": 42,
+    "jobs_today": 47,
     "success_today": 31,
     "timeout_today": 0,
-    "fail_today": 11,
+    "fail_today": 16,
     "feed_growth_today": 66,
-    "state": "running",
+    "state": "cycle complete",
     "next_cycle_est": "11:59PM",
     "cycle_count": 54,
     "sonnet_calls": 0,
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772115902113,
-      "v": 1061,
-      "l": "9:25AM"
-    },
     {
       "t": 1772116202201,
       "v": 1061,
@@ -1504,19 +1499,24 @@
       "t": 1772190001702,
       "v": 32,
       "l": "6:00AM"
+    },
+    {
+      "t": 1772190301514,
+      "v": 32,
+      "l": "6:05AM"
     }
   ],
   "kg_stats": {
-    "entities": 332,
-    "relations": 324,
+    "entities": 336,
+    "relations": 328,
     "associations": 100,
     "insights": 0
   },
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 43.0,
-    "power_w": 46.6,
+    "temp_c": 67.0,
+    "power_w": 41.62,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
