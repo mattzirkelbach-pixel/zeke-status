@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-26 7:25:02PM ET",
-  "timestamp_utc": "2026-02-27T00:25:02Z",
+  "timestamp_local": "2026-02-26 7:30:01PM ET",
+  "timestamp_utc": "2026-02-27T00:30:02Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -22,32 +22,32 @@
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 27ms",
-    "response_ms": 27,
+    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 29ms",
+    "response_ms": 29,
     "vram_estimate_gb": 0.6,
     "model_params": "137M",
     "model_quant": "F16"
   },
   "feed": {
-    "total_lines": 1177,
-    "last_modified_minutes_ago": 1.2,
+    "total_lines": 1182,
+    "last_modified_minutes_ago": 0.3,
     "last_entries": [
-      "[2/26 7:00AM ET] AI agent persistent memory architecture \u2014 MAGMA proposes a multi-graph memory architecture for AI agents in January 2026",
-      "[2/26 11:07AM ET] AI agents and tool calling \u2014 GitHub project (2026-01) MAGMA introduces a Multi-Graph based Agentic Memory Arc",
-      "timestamp: topic:longevity finding:Partial reprogramming of engram neurons in ag",
-      "[2/26 2:22PM ET] longevity \u2014 Partial reprogramming of memory-encoding neurons in aged mice using OSK gene the",
-      "[2/26 2:22PM ET] longevity \u2014 Partial reprogramming of neurons encoding memory using OSK gene therapy reversed"
+      "{\"timestamp\":\"$(date -u +\"%Y-%m-%dT%H:%M:%SZ\"),\"topic\":\"longevity\",\"finding\":\"Se",
+      "\",\"source\":\"https://www.frontiersin.org/journals/aging/articles/10.3389/fragi.20",
+      "{\"timestamp\":\"\"2026-02-27T00:28:30Z\",\"topic\":\"treasury-bonds\",\"finding\":\"10-year",
+      "timestamp:$(date -Iseconds) topic:treasury-bonds finding:10-year Treasury yield ",
+      "{\"timestamp\":\"$(date -u +\"%Y-%m-%dT%H:%M:%SZ\" -r \"/Users/zekezirk/.openclaw/work"
     ],
-    "recent_50_clean": 49,
+    "recent_50_clean": 44,
     "recent_50_trivial": 0,
-    "recent_50_broken": 1,
+    "recent_50_broken": 6,
     "topic_distribution": {
       "AI agents and tool calling": 10,
-      "longevity research": 6,
       "compound-synthesis": 6,
+      "longevity research": 5,
       "self-improvement": 4,
-      "AI agent memory": 3,
-      "AI agent orchestration": 3
+      "AI agent orchestration": 3,
+      "treasury bonds and interest rates": 3
     }
   },
   "activity": {
@@ -66,11 +66,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772067909552,
-      "v": 693,
-      "l": "8:05PM"
-    },
     {
       "t": 1772068216222,
       "v": 693,
@@ -1505,6 +1500,11 @@
       "t": 1772151902443,
       "v": 1177,
       "l": "7:25PM"
+    },
+    {
+      "t": 1772152202127,
+      "v": 1182,
+      "l": "7:30PM"
     }
   ],
   "kg_stats": {
@@ -1515,17 +1515,17 @@
   },
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 66.0,
-    "power_w": 41.24,
+    "gpu_util_pct": 95.0,
+    "temp_c": 64.0,
+    "power_w": 37.24,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
-    "malformed_json": 7,
-    "literal_timestamps": 7,
+    "malformed_json": 12,
+    "literal_timestamps": 10,
     "duplicates": 90,
-    "total": 1177,
-    "error_rate": 8.8
+    "total": 1182,
+    "error_rate": 9.5
   },
   "cost": {
     "model": "spark/qwen3-32b-32k (local, $0)",
@@ -1539,9 +1539,11 @@
     "layer3": "PLANNED"
   },
   "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "WARNING: 6 broken entries in recent feed"
+    ],
+    "issue_count": 1
   },
   "cycles": [
     {
