@@ -1,148 +1,71 @@
 {
-  "timestamp_local": "2026-02-26 20:17:41 ET",
-  "timestamp_utc": "2026-02-27T01:17:41Z",
+  "timestamp_local": "2026-02-26 8:20:01PM ET",
+  "timestamp_utc": "2026-02-27T01:20:01Z",
   "scheduler": {
     "running": true,
-    "pid": 59435,
-    "uptime_minutes": 54,
-    "current_window": "daytime"
-  },
-  "feed": {
-    "total_lines": 1202,
-    "last_entries": [
-      "[PARSE ERROR] \"timestamp\": \"2026-02-26T20:12:00-05:00\",",
-      "[PARSE ERROR] \"topic\": \"AI agents\",",
-      "[PARSE ERROR] \"finding\": \"The paper 'The Landscape of Emerging AI Agent Architectures for Reas",
-      "[PARSE ERROR] \"source\": \"https://arxiv.org/html/2404.11584v1\"",
-      "[PARSE ERROR] }"
+    "pids": [
+      "59433",
+      "59435"
     ],
-    "topic_distribution": {
-      "AI agents and tool calling": 10,
-      "compound-synthesis": 7,
-      "self-improvement": 5,
-      "longevity research": 4,
-      "cross-domain-associations": 4,
-      "treasury bonds and interest rates": 3
-    },
-    "recent_50_clean": 49,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 1,
-    "last_modified_minutes_ago": 3.3
+    "count": 2,
+    "type": "python"
+  },
+  "gateway": {
+    "running": true
   },
   "spark": {
     "online": true,
     "models_loaded": [
       "qwen3-32b-32k:latest",
-      "qwen3:8b",
-      "nomic-embed-text:latest"
+      "nomic-embed-text:latest",
+      "qwen3:8b"
     ],
     "model_stuck": false,
-    "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest"
+    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 27ms",
+    "response_ms": 27,
+    "vram_estimate_gb": 5.6,
+    "model_params": "8.2B",
+    "model_quant": "Q4_K_M"
   },
-  "gateway": {
-    "running": true
-  },
-  "today": {
-    "jobs_run": 5,
-    "success": 5,
-    "timeout": 0,
-    "fail": 0,
-    "feed_growth": 17
-  },
-  "cycles": [
-    {
-      "ts": "2026-02-26T19:47:25.423854",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 5,
-      "success": 5,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 17
+  "feed": {
+    "total_lines": 1203,
+    "last_modified_minutes_ago": 1.2,
+    "last_entries": [
+      "\"topic\": \"AI agents\",",
+      "\"finding\": \"The paper 'The Landscape of Emerging AI Agent Architectures for Reas",
+      "\"source\": \"https://arxiv.org/html/2404.11584v1\"",
+      "}",
+      "{\"timestamp\":\"2026-02-26T20:12:00-05:00\",\"topic\":\"AI agents\",\"finding\":\"Decentra"
+    ],
+    "recent_50_clean": 35,
+    "recent_50_trivial": 0,
+    "recent_50_broken": 15,
+    "topic_distribution": {
+      "self-improvement": 5,
+      "compound-synthesis": 5,
+      "cross-domain-associations": 4,
+      "longevity research": 3,
+      "AI agents and tool calling": 3,
+      "treasury bonds and interest rates": 3
     }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 436,
-      "grew": 7,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "success",
-      "duration": 266,
-      "grew": 3,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 407,
-      "grew": 3,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "success",
-      "duration": 102,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "compound-synthesis",
-      "status": "success",
-      "duration": 203,
-      "grew": 3,
-      "issues": [
-        "literal $(date) in timestamp"
-      ]
-    }
-  ],
-  "health": {
-    "status": "HEALTHY",
-    "issues": []
   },
-  "kg_stats": {
-    "entities": 330,
-    "relations": 321,
-    "associations": 100,
-    "insights": 0
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 66.0,
-    "power_w": 36.3,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 7,
-    "literal_timestamps": 8,
-    "duplicates": 91,
-    "total": 1188,
-    "error_rate": 8.9
-  },
-  "automation": {
-    "layer1": "DEPLOYED",
-    "layer2": "IN PROGRESS",
-    "layer3": "PLANNED"
-  },
-  "cost": {
-    "model": "spark/qwen3-32b-32k (local, $0)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": true
+  "activity": {
+    "last_job": "compound-synthesis",
+    "last_job_time": "2/26 3:18PM ET",
+    "last_cycle": "2/26 3:17PM ET",
+    "jobs_today": 100,
+    "success_today": 37,
+    "timeout_today": 0,
+    "fail_today": 63,
+    "feed_growth_today": 124,
+    "state": "cycle complete",
+    "next_cycle_est": "3:17PM",
+    "cycle_count": 28,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772070904352,
-      "v": 703,
-      "l": "8:55PM"
-    },
     {
       "t": 1772071205554,
       "v": 703,
@@ -1577,21 +1500,107 @@
       "t": 1772154902028,
       "v": 1188,
       "l": "8:15PM"
+    },
+    {
+      "t": 1772155201827,
+      "v": 1203,
+      "l": "8:20PM"
     }
   ],
-  "activity": {
-    "last_job": "compound-synthesis",
-    "last_job_time": "2/26 2:43PM ET",
-    "last_cycle": "2/26 2:22PM ET",
-    "jobs_today": 95,
-    "success_today": 37,
-    "timeout_today": 0,
-    "fail_today": 58,
-    "feed_growth_today": 124,
-    "state": "idle (heartbeat)",
-    "next_cycle_est": "3:17PM",
-    "cycle_count": 27,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "kg_stats": {
+    "entities": 330,
+    "relations": 321,
+    "associations": 100,
+    "insights": 0
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 96.0,
+    "temp_c": 66.0,
+    "power_w": 37.4,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 21,
+    "literal_timestamps": 9,
+    "duplicates": 91,
+    "total": 1203,
+    "error_rate": 10.1
+  },
+  "cost": {
+    "model": "spark/qwen3-32b-32k (local, $0)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": true
+  },
+  "automation": {
+    "layer1": "DEPLOYED",
+    "layer2": "IN PROGRESS",
+    "layer3": "PLANNED"
+  },
+  "health": {
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "WARNING: 15 broken entries in recent feed"
+    ],
+    "issue_count": 1
+  },
+  "cycles": [
+    {
+      "ts": "2026-02-26T19:47:25.423854",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 5,
+      "success": 5,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 17
+    }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 436,
+      "grew": 7,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "success",
+      "duration": 266,
+      "grew": 3,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "success",
+      "duration": 407,
+      "grew": 3,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 102,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration": 203,
+      "grew": 3,
+      "issues": [
+        "literal $(date) in timestamp"
+      ]
+    }
+  ],
+  "today": {
+    "jobs_run": 5,
+    "success": 5,
+    "timeout": 0,
+    "fail": 0,
+    "feed_growth": 17
   }
 }
