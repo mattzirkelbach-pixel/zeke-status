@@ -31,3 +31,15 @@
 - **SSE keepalive is required.** MCP SDK omits EventSourceResponse ping param. Fix: monkey-patch ping=15. (2/26)
 - **Track issues:** #20335, #18557, #1026, #15232, #5826, anthropics/claude-ai-mcp#5
 - **SSE being deprecated** in favor of Streamable HTTP. Migrate when claude.ai support stabilizes.
+
+
+## OpenClaw cron job field names (learned 2/26 evening)
+- NEVER use `payload.prompt` — OpenClaw ignores it completely
+- ALWAYS use `payload.message` — this is the only field OpenClaw reads for cron job prompts
+- `delivery.mode` must be `"none"` for research jobs. `"announce"` requires a target config or job fails with "delivery target is missing"
+- When rewriting jobs.json, ALWAYS check existing working jobs for the correct field structure before writing new ones
+
+## Gateway freezing from concurrent jobs (learned 2/26 evening)  
+- Multiple openclaw-cron processes running simultaneously will freeze the gateway
+- Guardian may crash-loop (restart every 60s) if scheduler dies on startup
+- Fix: kill all openclaw processes, purge sessions, let guardian restart cleanly

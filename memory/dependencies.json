@@ -75,5 +75,11 @@
     "~/zeke-scheduler.py": "Main orchestrator. Runs overnight/daytime/reason windows. DO NOT patch incrementally \u2014 rewrite sections completely.",
     "~/.openclaw/workspace/memory/learning-feed.jsonl": "THE critical file. 1174 entries. NEVER overwrite. Append only via exec >>.",
     "~/zeke-status/": "Dashboard data. Pushed to GitHub every 5min. Memory system lives here too."
+  },
+  "openclaw_cron_jobs": {
+    "payload_field": "message (NOT prompt)",
+    "delivery_mode": "none for research jobs",
+    "model_field": "payload.model (e.g. spark/qwen3-32b-32k)",
+    "note": "L2 rebuild on 2/26 broke all research jobs by using wrong field names"
   }
 }
