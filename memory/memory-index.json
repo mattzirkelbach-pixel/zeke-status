@@ -1,6 +1,6 @@
 {
   "_description": "Quick-read memory state. Fetched at conversation start via web_fetch or MCP.",
-  "_updated": "2026-02-26T18:44:48.366848",
+  "_updated": "2026-02-27T16:00:10.539005",
   "_access": {
     "github": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/memory-index.json",
     "dependencies": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/dependencies.json",
@@ -8,7 +8,7 @@
     "session_journal": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/session-journal.jsonl"
   },
   "system_state": {
-    "feed_entries": 1175,
+    "feed_entries": 1428,
     "kg_entities": 303,
     "active_openclaw_jobs": 11,
     "cron_jobs": 13,
@@ -17,9 +17,9 @@
     "feed_stagnant": false
   },
   "last_session": {
-    "date": "2026-02-27T00:24:04.069926+00:00",
-    "summary": "Emergency recovery: L2 rebuild had set wrong delivery mode and wrong payload field on all research jobs. Fixed both, feed growing again.",
-    "key_fix": "delivery.mode none + payload.message (not prompt)"
+    "date": "2026-02-27T10:59:00Z",
+    "summary": "Trade alert engine v2 deployed. FOMO discipline codified. Anti-patterns updated with trading rules.",
+    "key_fix": "Alert engine replaces emotion with data-driven triggers"
   },
   "active_crons": [
     "guardian (every 1min) \u2014 scheduler keepalive",
@@ -34,7 +34,7 @@
     "session-purge (4am daily) \u2014 prevent gateway bloat",
     "nightly-synthesis (5am daily) \u2014 cross-domain insights via claude -p",
     "price-fetch (6am daily) \u2014 market data update",
-    "trade-alerts (every 10min weekdays 6am-5pm) \u2014 portfolio monitoring"
+    "trade-alerts v2 (every 10min weekdays 6am-5pm) \u2014 DCL triggers, morning briefing, execution orders via Telegram"
   ],
   "known_fragile": [
     "MCP connector drops silently \u2014 server stays up, fix: remove/re-add in Settings",
@@ -47,5 +47,18 @@
   "known_fragile_points": [
     "OpenClaw payload.message vs payload.prompt \u2014 only message works",
     "delivery.mode must be none for research jobs"
-  ]
+  ],
+  "trading_state": {
+    "phase": "Phase 1 \u2014 ride weekly cycle",
+    "cycle_day": 20,
+    "cycle_day_range": "22-28",
+    "weekly_week": 8,
+    "weekly_range": "22-26",
+    "last_dcl": "2026-01-30",
+    "tranche_1": "FILLED 2/24 (GLD Dec26 470C x2, 500C x1)",
+    "tranche_2": "PENDING \u2014 waiting DCL confirmation",
+    "slv_entry": "PENDING \u2014 waiting DCL confirmation",
+    "alert_engine": "v2 live, Telegram connected",
+    "fomo_rule": "No alert = no entry. Period."
+  }
 }
