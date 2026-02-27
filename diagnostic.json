@@ -1,13 +1,10 @@
 {
-  "timestamp_local": "2026-02-27 3:35:01AM ET",
-  "timestamp_utc": "2026-02-27T08:35:01Z",
+  "timestamp_local": "2026-02-27 3:39:55AM ET",
+  "timestamp_utc": "2026-02-27T08:39:55Z",
   "scheduler": {
-    "running": true,
-    "pids": [
-      "59433",
-      "59435"
-    ],
-    "count": 2,
+    "running": false,
+    "pids": [],
+    "count": 0,
     "type": "python"
   },
   "gateway": {
@@ -22,32 +19,32 @@
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 27ms",
-    "response_ms": 27,
+    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 14ms",
+    "response_ms": 14,
     "vram_estimate_gb": 5.6,
     "model_params": "8.2B",
     "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 1522,
-    "last_modified_minutes_ago": 0.5,
+    "total_lines": 1527,
+    "last_modified_minutes_ago": 0.6,
     "last_entries": [
-      "[2/27 3:30AM ET] treasury-bonds \u2014 The US10-year Treasury yield as of 2026 is maintained via Fed policy and reflect",
-      "[2/27 3:31AM ET] self-improvement \u2014 Spaced repetition and active recall improves academic performance by reducing fo",
-      "[2/27 3:31AM ET] self-improvement \u2014 Spaced repetition practice over multiple sessions improves long-term retention b",
-      "[2/27 3:31AM ET] self-improvement \u2014 Spaced repetition practice over multiple sessions improves long-term retention b",
-      "[2/27 3:34AM ET] longevity \u2014 Rapamycin mitigated bone loss in men and muscle loss in women with 10 mg weekly "
+      "[2/27 3:34AM ET] longevity \u2014 Rapamycin 10 mg weekly prevented muscle loss in women and bone loss in men in a ",
+      "[2/27 3:34AM ET] longevity \u2014 Rapamycin 10 mg weekly prevented muscle loss in women and bone loss in men in a ",
+      "[2/27 3:37AM ET] ai-agents \u2014 Top scoring agents score 20 percent on SWE-bench and 43 percent on SWE-bench Lit",
+      "\"{\\\"timestamp\\\":\\\"2026-02-27T08:36:00Z\\\",\\\"topic\\\":\\\"ai-agents\\\",\\\"finding\\\":\\\"T",
+      "[2/27 3:36AM ET] ai-agents \u2014 Top scoring AI agents score 20% on SWE-bench and 43% on SWE-bench Lite as of Aug"
     ],
-    "recent_50_clean": 49,
+    "recent_50_clean": 48,
     "recent_50_trivial": 0,
-    "recent_50_broken": 1,
+    "recent_50_broken": 2,
     "topic_distribution": {
-      "self-improvement": 16,
-      "treasury-bonds": 11,
-      "tool-calling": 7,
+      "self-improvement": 13,
+      "treasury-bonds": 10,
+      "ai-agents": 7,
+      "tool-calling": 6,
       "compound-synthesis": 6,
-      "ai-agents": 5,
-      "longevity": 4
+      "longevity": 6
     }
   },
   "activity": {
@@ -66,11 +63,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772104206755,
-      "v": 1027,
-      "l": "6:10AM"
-    },
     {
       "t": 1772104505724,
       "v": 1029,
@@ -1505,6 +1497,11 @@
       "t": 1772181301522,
       "v": 1522,
       "l": "3:35AM"
+    },
+    {
+      "t": 1772181595252,
+      "v": 1527,
+      "l": "3:39AM"
     }
   ],
   "kg_stats": {
@@ -1515,17 +1512,17 @@
   },
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 66.0,
-    "power_w": 38.33,
+    "gpu_util_pct": 0.0,
+    "temp_c": 53.0,
+    "power_w": 12.8,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 24,
     "literal_timestamps": 12,
-    "duplicates": 161,
-    "total": 1522,
-    "error_rate": 12.9
+    "duplicates": 163,
+    "total": 1526,
+    "error_rate": 13.0
   },
   "cost": {
     "model": "spark/qwen3-32b-32k (local, $0)",
@@ -1539,9 +1536,11 @@
     "layer3": "PLANNED"
   },
   "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "WARNING: Scheduler not running"
+    ],
+    "issue_count": 1
   },
   "cycles": [
     {
