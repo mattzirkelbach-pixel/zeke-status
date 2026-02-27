@@ -1,6 +1,6 @@
 {
   "_description": "Quick-read memory state. Fetched at conversation start via web_fetch or MCP.",
-  "_updated": "2026-02-27T16:00:10.539005",
+  "_updated": "2026-02-27T23:28:42.226331+00:00",
   "_access": {
     "github": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/memory-index.json",
     "dependencies": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/dependencies.json",
@@ -8,40 +8,42 @@
     "session_journal": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/session-journal.jsonl"
   },
   "system_state": {
-    "feed_entries": 1428,
+    "feed_entries": 1585,
     "kg_entities": 303,
     "active_openclaw_jobs": 11,
     "cron_jobs": 13,
-    "cost_per_day": "$0",
+    "cost_per_day": "<$1",
     "l2_completion": "80%",
     "feed_stagnant": false
   },
   "last_session": {
-    "date": "2026-02-27T10:59:00Z",
-    "summary": "Trade alert engine v2 deployed. FOMO discipline codified. Anti-patterns updated with trading rules.",
-    "key_fix": "Alert engine replaces emotion with data-driven triggers"
+    "date": "2026-02-27T23:28:42.226597+00:00",
+    "summary": "Spark contention fix, 50-video backfill launched, temporal decay in dashboard, site crawler ready",
+    "key_fix": "spark_lock.py prevents scheduler/pipeline collision on Ollama"
   },
   "active_crons": [
-    "guardian (every 1min) \u2014 scheduler keepalive",
-    "watchdog (every 10min) \u2014 system health + auto-repair",
-    "mcp-watchdog (every 5min) \u2014 MCP server health",
-    "status-push (every 5min) \u2014 dashboard + memory to GitHub",
-    "snapshots (every 15min) \u2014 feed history",
-    "quality-scorer (every 3h at :45) \u2014 score feed entries",
-    "self-repair (every 30min) \u2014 detect failures, dispatch claude -p",
-    "camel-pipeline (every 6h) \u2014 YouTube transcript analysis",
-    "dedup (3am daily) \u2014 feed deduplication",
-    "session-purge (4am daily) \u2014 prevent gateway bloat",
-    "nightly-synthesis (5am daily) \u2014 cross-domain insights via claude -p",
-    "price-fetch (6am daily) \u2014 market data update",
-    "trade-alerts v2 (every 10min weekdays 6am-5pm) \u2014 DCL triggers, morning briefing, execution orders via Telegram"
+    "guardian (1min) \u2014 scheduler keepalive",
+    "watchdog (10min) \u2014 system health + auto-repair",
+    "mcp-watchdog (5min) \u2014 MCP server health",
+    "status-push (5min) \u2014 dashboard + memory to GitHub",
+    "snapshots (15min) \u2014 feed history",
+    "feed-guardian (15min) \u2014 feed integrity",
+    "quality-scorer (3h@:45) \u2014 score feed entries",
+    "self-repair (30min) \u2014 detect failures, dispatch claude -p",
+    "camel-pipeline-v2 (6h) \u2014 YouTube transcript analysis w/ chunking + thesis ledger",
+    "dedup (3am) \u2014 feed deduplication",
+    "session-purge (4am) \u2014 prevent gateway bloat",
+    "nightly-synthesis (5am) \u2014 cross-domain insights via claude -p",
+    "price-fetch (6am) \u2014 market data update",
+    "trade-alerts v2 (10min weekdays) \u2014 DCL triggers, Telegram alerts"
   ],
   "known_fragile": [
     "MCP connector drops silently \u2014 server stays up, fix: remove/re-add in Settings",
     "Scheduler maps job names by string match \u2014 don't rename or delete without checking lines 221-240",
     "Gateway needs restart after config changes \u2014 also purge sessions",
     "Local models break above 6 tools \u2014 byProvider restriction is load-bearing",
-    "MCP SSE keepalive patched (ping=15s) \u2014 monitor if drops still occur"
+    "MCP SSE keepalive patched (ping=15s) \u2014 monitor if drops still occur",
+    "Spark lock (spark_lock.py) is advisory \u2014 processes must import and use it. Stale lock auto-clears 10min."
   ],
   "last_updated": "2026-02-27T00:24:04.069926+00:00",
   "known_fragile_points": [
