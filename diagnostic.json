@@ -1,16 +1,33 @@
 {
-  "timestamp_local": "2026-02-27 4:05:02AM ET",
-  "timestamp_utc": "2026-02-27T09:05:02Z",
+  "timestamp_local": "2026-02-27 04:05:19 ET",
+  "timestamp_utc": "2026-02-27T09:05:19Z",
   "scheduler": {
     "running": true,
-    "pids": [
-      "95355"
-    ],
-    "count": 1,
-    "type": "python"
+    "pid": 95355,
+    "uptime_minutes": 25,
+    "current_window": "overnight"
   },
-  "gateway": {
-    "running": true
+  "feed": {
+    "total_lines": 1556,
+    "last_entries": [
+      "[2026-02-27T09:02:45] compound-synthesis",
+      "[2026-02-27T04:02:00] compound-synthesis",
+      "[2026-02-27T09:02:30] compound-synthesis",
+      "[2026-02-27T09:02:00] compound-synthesis",
+      "[2026-02-27T09:03:21] compound-synthesis"
+    ],
+    "topic_distribution": {
+      "ai-agents": 10,
+      "compound-synthesis": 10,
+      "longevity": 9,
+      "self-improvement": 7,
+      "tool-calling": 7,
+      "treasury-bonds": 5
+    },
+    "recent_50_clean": 48,
+    "recent_50_trivial": 0,
+    "recent_50_broken": 2,
+    "last_modified_minutes_ago": 0.3
   },
   "spark": {
     "online": true,
@@ -20,49 +37,162 @@
       "qwen3:8b"
     ],
     "model_stuck": false,
+    "stuck_model": null,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 27ms",
-    "response_ms": 27,
-    "vram_estimate_gb": 5.6,
-    "model_params": "8.2B",
-    "model_quant": "Q4_K_M"
+    "detail": "healthy, loaded: qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b"
   },
-  "feed": {
-    "total_lines": 1556,
-    "last_modified_minutes_ago": 0.3,
-    "last_entries": [
-      "[2/27 4:02AM ET] compound-synthesis \u2014 Rapamycin weekly dosing preserves muscle and bone through spaced low-dose admini",
-      "[2/26 11:02PM ET] compound-synthesis \u2014 Rapamycins weekly 10 mg dosing prevents muscle and bone loss through spaced low-",
-      "[2/27 4:02AM ET] compound-synthesis \u2014 Rapamycins weekly low-dose muscle preservation parallels spaced repetition learn",
-      "[2/27 4:02AM ET] compound-synthesis \u2014 Rapamycins weekly low-dose muscle preservation parallels LLMs regular function c",
-      "[2/27 4:03AM ET] compound-synthesis \u2014 Regular weekly rapamycin doses improve muscle and bone health similar to how spa"
-    ],
-    "recent_50_clean": 48,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 2,
-    "topic_distribution": {
-      "ai-agents": 10,
-      "compound-synthesis": 10,
-      "longevity": 9,
-      "self-improvement": 7,
-      "tool-calling": 7,
-      "treasury-bonds": 5
+  "gateway": {
+    "running": true
+  },
+  "today": {
+    "jobs_run": 12,
+    "success": 11,
+    "timeout": 0,
+    "fail": 1,
+    "feed_growth": 27
+  },
+  "cycles": [
+    {
+      "ts": "2026-02-27T03:50:25.463278",
+      "window": "overnight",
+      "cycle": 1,
+      "jobs": 6,
+      "success": 5,
+      "timeout": 0,
+      "fail": 1,
+      "feed_grew": 15
+    },
+    {
+      "ts": "2026-02-27T04:05:17.622654",
+      "window": "overnight",
+      "cycle": 2,
+      "jobs": 6,
+      "success": 6,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 12
     }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 53,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 90,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "success",
+      "duration": 147,
+      "grew": 3,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 5,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "tool-calling",
+      "status": "success",
+      "duration": 114,
+      "grew": 4,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration": 151,
+      "grew": 4,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 67,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 80,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "success",
+      "duration": 76,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "success",
+      "duration": 49,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "tool-calling",
+      "status": "success",
+      "duration": 169,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration": 149,
+      "grew": 5,
+      "issues": []
+    }
+  ],
+  "health": {
+    "status": "HEALTHY",
+    "issues": []
   },
-  "activity": {
-    "last_job": "compound-synthesis",
-    "last_job_time": "2/26 11:02PM ET",
-    "last_cycle": "2/26 10:54PM ET",
-    "jobs_today": 11,
-    "success_today": 10,
-    "timeout_today": 0,
-    "fail_today": 1,
-    "feed_growth_today": 22,
-    "state": "running",
-    "next_cycle_est": "10:54PM",
-    "cycle_count": 2,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "kg_stats": {
+    "entities": 332,
+    "relations": 324,
+    "associations": 100,
+    "insights": 0
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 95.0,
+    "temp_c": 64.0,
+    "power_w": 41.46,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 24,
+    "literal_timestamps": 12,
+    "duplicates": 163,
+    "total": 1526,
+    "error_rate": 13.0
+  },
+  "automation": {
+    "layer1": "DEPLOYED",
+    "layer2": "IN PROGRESS",
+    "layer3": "PLANNED"
+  },
+  "cost": {
+    "model": "spark/qwen3-32b-32k (local, $0)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": true
   },
   "feed_history": [
     {
@@ -1506,103 +1636,19 @@
       "l": "4:05AM"
     }
   ],
-  "kg_stats": {
-    "entities": 332,
-    "relations": 324,
-    "associations": 100,
-    "insights": 0
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 64.0,
-    "power_w": 41.46,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 24,
-    "literal_timestamps": 12,
-    "duplicates": 163,
-    "total": 1526,
-    "error_rate": 13.0
-  },
-  "cost": {
-    "model": "spark/qwen3-32b-32k (local, $0)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": true
-  },
-  "automation": {
-    "layer1": "DEPLOYED",
-    "layer2": "IN PROGRESS",
-    "layer3": "PLANNED"
-  },
-  "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
-  },
-  "cycles": [
-    {
-      "ts": "2026-02-27T03:50:25.463278",
-      "window": "overnight",
-      "cycle": 1,
-      "jobs": 6,
-      "success": 5,
-      "timeout": 0,
-      "fail": 1,
-      "feed_grew": 15
-    }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 53,
-      "grew": 2,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "success",
-      "duration": 90,
-      "grew": 2,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "success",
-      "duration": 147,
-      "grew": 3,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "fail",
-      "duration": 5,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "tool-calling",
-      "status": "success",
-      "duration": 114,
-      "grew": 4,
-      "issues": []
-    },
-    {
-      "name": "compound-synthesis",
-      "status": "success",
-      "duration": 151,
-      "grew": 4,
-      "issues": []
-    }
-  ],
-  "today": {
-    "jobs_run": 6,
-    "success": 5,
-    "timeout": 0,
-    "fail": 1,
-    "feed_growth": 15
+  "activity": {
+    "last_job": "compound-synthesis",
+    "last_job_time": "2/26 11:02PM ET",
+    "last_cycle": "2/26 10:54PM ET",
+    "jobs_today": 11,
+    "success_today": 10,
+    "timeout_today": 0,
+    "fail_today": 1,
+    "feed_growth_today": 22,
+    "state": "running",
+    "next_cycle_est": "10:54PM",
+    "cycle_count": 2,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   }
 }
