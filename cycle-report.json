@@ -1,102 +1,35 @@
 {
-  "timestamp": "2026-02-27T00:46:47.113304",
-  "window": "overnight",
-  "cycle": 15,
-  "feed_before": 1362,
-  "feed_after": 1378,
-  "feed_growth": 16,
-  "jobs": {
-    "total": 6,
-    "success": 5,
-    "fail": 1,
-    "timeout": 0
-  },
-  "job_details": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration_s": 193,
-      "feed_grew": 3,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 3,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "success",
-      "duration_s": 164,
-      "feed_grew": 5,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 5,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "3cd4b17d-448",
-      "name": "longevity",
-      "status": "fail",
-      "duration_s": 36,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
-    },
-    {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
-      "status": "success",
-      "duration_s": 45,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "9df9cf14-e1c",
-      "name": "tool-calling",
-      "status": "success",
-      "duration_s": 118,
-      "feed_grew": 2,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 2,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "e9961e6e-4e4",
-      "name": "compound-synthesis",
-      "status": "success",
-      "duration_s": 74,
-      "feed_grew": 5,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 5,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    }
-  ],
-  "failures": [
-    {
-      "uuid": "3cd4b17d-448",
-      "name": "longevity",
-      "status": "fail",
-      "duration_s": 36,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
-    }
-  ],
-  "needs_repair": true,
+  "timestamp": "2026-02-27T06:00:00.503823+00:00",
+  "feed_total": 1390,
+  "feed_previous": 1378,
+  "feed_growth": 12,
   "feed_stagnant": false,
-  "repair_dispatched": true,
-  "repair_result": "unknown"
+  "spark": {
+    "online": true,
+    "model_loaded": true,
+    "models": [
+      "qwen3-32b-32k:latest",
+      "qwen3:8b",
+      "nomic-embed-text:latest"
+    ]
+  },
+  "scheduler": {
+    "running": true,
+    "pids": [
+      "59433",
+      "59435"
+    ]
+  },
+  "gateway": {
+    "running": true,
+    "pids": [
+      "80136"
+    ]
+  },
+  "jobs_today": 0,
+  "success_today": 0,
+  "fails_today": 0,
+  "timeouts_today": 0,
+  "needs_repair": false,
+  "repair_reasons": []
 }
