@@ -1,33 +1,16 @@
 {
-  "timestamp_local": "2026-02-26 19:08:43 ET",
-  "timestamp_utc": "2026-02-27T00:08:43Z",
+  "timestamp_local": "2026-02-26 7:10:02PM ET",
+  "timestamp_utc": "2026-02-27T00:10:02Z",
   "scheduler": {
     "running": true,
-    "pid": 58328,
-    "uptime_minutes": 0,
-    "current_window": "daytime"
-  },
-  "feed": {
-    "total_lines": 1174,
-    "last_entries": [
-      "[2026-02-26T16:07:00] AI agents in 2026",
-      "[2026-02-26T18:08:28] AI agent memory",
-      "[2026-02-26T21:08:27] AI agent memory and tool calling",
-      "[2026-02-26T12:00:00] AI agent persistent memory architecture",
-      "[2026-02-26T16:07:00] AI agents and tool calling"
+    "pids": [
+      "58500"
     ],
-    "topic_distribution": {
-      "AI agents and tool calling": 10,
-      "compound-synthesis": 8,
-      "longevity research": 6,
-      "treasury bonds and interest rates": 4,
-      "self-improvement": 4,
-      "AI agent memory": 3
-    },
-    "recent_50_clean": 50,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 0,
-    "last_modified_minutes_ago": 175.6
+    "count": 1,
+    "type": "python"
+  },
+  "gateway": {
+    "running": true
   },
   "spark": {
     "online": true,
@@ -37,84 +20,51 @@
       "nomic-embed-text:latest"
     ],
     "model_stuck": false,
-    "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: qwen3:8b, qwen3-32b-32k:latest, nomic-embed-text:latest"
+    "detail": "qwen3:8b, qwen3-32b-32k:latest, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 29ms",
+    "response_ms": 29,
+    "vram_estimate_gb": 0.6,
+    "model_params": "137M",
+    "model_quant": "F16"
   },
-  "gateway": {
-    "running": true
-  },
-  "today": {
-    "jobs_run": 1,
-    "success": 0,
-    "timeout": 0,
-    "fail": 1,
-    "feed_growth": 0
-  },
-  "cycles": [
-    {
-      "ts": "2026-02-26T19:08:39.342017",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 1,
-      "success": 0,
-      "timeout": 0,
-      "fail": 1,
-      "feed_grew": 0
+  "feed": {
+    "total_lines": 1174,
+    "last_modified_minutes_ago": 180.6,
+    "last_entries": [
+      "[2/26 11:07AM ET] AI agents in 2026 \u2014 Multi-agent systems moved from demos to production in 2026, with frameworks like",
+      "[2/26 1:08PM ET] AI agent memory \u2014 MAGMA framework introduced in 2026 with multi-graph architecture for agents",
+      "[2/26 4:08PM ET] AI agent memory and tool calling \u2014 MAGMA introduces a multi-graph architecture for agentic memory. Memory is organi",
+      "[2/26 7:00AM ET] AI agent persistent memory architecture \u2014 MAGMA proposes a multi-graph memory architecture for AI agents in January 2026",
+      "[2/26 11:07AM ET] AI agents and tool calling \u2014 GitHub project (2026-01) MAGMA introduces a Multi-Graph based Agentic Memory Arc"
+    ],
+    "recent_50_clean": 50,
+    "recent_50_trivial": 0,
+    "recent_50_broken": 0,
+    "topic_distribution": {
+      "AI agents and tool calling": 10,
+      "compound-synthesis": 8,
+      "longevity research": 6,
+      "treasury bonds and interest rates": 4,
+      "self-improvement": 4,
+      "AI agent memory": 3
     }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration": 38,
-      "grew": 0,
-      "issues": []
-    }
-  ],
-  "health": {
-    "status": "ISSUES_FOUND",
-    "issues": [
-      "WARNING: Feed not updated in 179m"
-    ]
   },
-  "kg_stats": {
-    "entities": 325,
-    "relations": 317,
-    "associations": 98,
-    "insights": 0
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 65.0,
-    "power_w": 40.88,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 6,
-    "literal_timestamps": 7,
-    "duplicates": 90,
-    "total": 1174,
-    "error_rate": 8.8
-  },
-  "automation": {
-    "layer1": "DEPLOYED",
-    "layer2": "IN PROGRESS",
-    "layer3": "PLANNED"
-  },
-  "cost": {
-    "model": "spark/qwen3-32b-32k (local, $0)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": true
+  "activity": {
+    "last_job": "longevity",
+    "last_job_time": "2/26 2:09PM ET",
+    "last_cycle": "2/26 2:09PM ET",
+    "jobs_today": 82,
+    "success_today": 32,
+    "timeout_today": 0,
+    "fail_today": 50,
+    "feed_growth_today": 107,
+    "state": "running",
+    "next_cycle_est": "2:05PM",
+    "cycle_count": 24,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772066702387,
-      "v": 688,
-      "l": "7:45PM"
-    },
     {
       "t": 1772067003464,
       "v": 690,
@@ -1549,21 +1499,77 @@
       "t": 1772150702111,
       "v": 1174,
       "l": "7:05PM"
+    },
+    {
+      "t": 1772151002432,
+      "v": 1174,
+      "l": "7:10PM"
     }
   ],
-  "activity": {
-    "last_job": "treasury-bonds",
-    "last_job_time": "2/26 2:03PM ET",
-    "last_cycle": "2/26 2:03PM ET",
-    "jobs_today": 78,
-    "success_today": 32,
-    "timeout_today": 0,
-    "fail_today": 46,
-    "feed_growth_today": 107,
-    "state": "running",
-    "next_cycle_est": "2:05PM",
-    "cycle_count": 22,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "kg_stats": {
+    "entities": 325,
+    "relations": 317,
+    "associations": 98,
+    "insights": 0
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 95.0,
+    "temp_c": 63.0,
+    "power_w": 40.59,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 6,
+    "literal_timestamps": 7,
+    "duplicates": 90,
+    "total": 1174,
+    "error_rate": 8.8
+  },
+  "cost": {
+    "model": "spark/qwen3-32b-32k (local, $0)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": true
+  },
+  "automation": {
+    "layer1": "DEPLOYED",
+    "layer2": "IN PROGRESS",
+    "layer3": "PLANNED"
+  },
+  "health": {
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "WARNING: Feed stale (180m)"
+    ],
+    "issue_count": 1
+  },
+  "cycles": [
+    {
+      "ts": "2026-02-26T19:08:39.342017",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 1,
+      "success": 0,
+      "timeout": 0,
+      "fail": 1,
+      "feed_grew": 0
+    }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 38,
+      "grew": 0,
+      "issues": []
+    }
+  ],
+  "today": {
+    "jobs_run": 1,
+    "success": 0,
+    "timeout": 0,
+    "fail": 1,
+    "feed_growth": 0
   }
 }
