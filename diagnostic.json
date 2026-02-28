@@ -1,45 +1,21 @@
 {
-  "timestamp_local": "2026-02-28 7:15:01AM ET",
-  "timestamp_utc": "2026-02-28T12:15:01Z",
+  "timestamp_local": "2026-02-28 07:16:36 ET",
+  "timestamp_utc": "2026-02-28T12:16:36Z",
   "scheduler": {
     "running": true,
-    "pids": [
-      "82677"
-    ],
-    "count": 1,
-    "type": "python"
-  },
-  "gateway": {
-    "running": true
-  },
-  "spark": {
-    "online": true,
-    "models_loaded": [
-      "qwen3:8b",
-      "qwen3-32b-32k:latest",
-      "nomic-embed-text:latest"
-    ],
-    "model_stuck": false,
-    "inference_active": true,
-    "detail": "qwen3:8b, qwen3-32b-32k:latest, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 29ms",
-    "response_ms": 29,
-    "vram_estimate_gb": 0.6,
-    "model_params": "137M",
-    "model_quant": "F16"
+    "pid": 82677,
+    "uptime_minutes": 76,
+    "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 1868,
-    "last_modified_minutes_ago": 1.0,
+    "total_lines": 1871,
     "last_entries": [
-      "[2/28 7:07AM ET] longevity \u2014 Females using 10 mg of rapamycin had significant improvements in lean tissue mas",
-      "[2/28 8:08AM ET] ai-agents \u2014 Claude Code achieves 87.3% task completion on real-world software engineering be",
-      "[2/28 8:10AM ET] self-improvement \u2014 Spaced repetition improves clinical knowledge retention by 58 percent when using",
-      "[2/28 8:10AM ET] self-improvement \u2014 Spaced repetition with 1.5-day intervals achieves 58.03% retention vs 43.20% wit",
-      "[2/28 7:13PM ET] compound-synthesis \u2014 Consistent low-dose rapamycin improves bone density while spaced repetition leve"
+      "[2026-02-28T13:10:00] self-improvement",
+      "[2026-03-01T00:13:00] compound-synthesis",
+      "[2026-02-28T13:13:00] compound-synthesis",
+      "[2026-02-28T13:13:00] compound-synthesis",
+      "[2026-02-28T13:13:00] compound-synthesis"
     ],
-    "recent_50_clean": 50,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 0,
     "topic_distribution": {
       "self-improvement": 16,
       "compound-synthesis": 13,
@@ -47,22 +23,208 @@
       "tool-calling": 4,
       "treasury-bonds": 3,
       "longevity": 3
-    }
+    },
+    "recent_50_clean": 50,
+    "recent_50_trivial": 0,
+    "recent_50_broken": 0,
+    "last_modified_minutes_ago": 1.0
   },
-  "activity": {
-    "last_job": "compound-synthesis",
-    "last_job_time": "2/28 2:13AM ET",
-    "last_cycle": "2/28 2:06AM ET",
-    "jobs_today": 14,
-    "success_today": 7,
-    "timeout_today": 0,
-    "fail_today": 7,
-    "feed_growth_today": 11,
-    "state": "running",
-    "next_cycle_est": "2:05AM",
-    "cycle_count": 59,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "spark": {
+    "online": true,
+    "models_loaded": [
+      "qwen3-32b-32k:latest",
+      "qwen3:8b",
+      "nomic-embed-text:latest"
+    ],
+    "model_stuck": false,
+    "stuck_model": null,
+    "inference_active": true,
+    "detail": "healthy, loaded: qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest"
+  },
+  "gateway": {
+    "running": true
+  },
+  "today": {
+    "jobs_run": 15,
+    "success": 8,
+    "timeout": 0,
+    "fail": 7,
+    "feed_growth": 17
+  },
+  "cycles": [
+    {
+      "ts": "2026-02-28T06:01:00.884631",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 5,
+      "success": 0,
+      "timeout": 0,
+      "fail": 5,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-02-28T06:35:55.465419",
+      "window": "daytime",
+      "cycle": 2,
+      "jobs": 5,
+      "success": 3,
+      "timeout": 0,
+      "fail": 2,
+      "feed_grew": 8
+    },
+    {
+      "ts": "2026-02-28T07:16:34.890726",
+      "window": "daytime",
+      "cycle": 3,
+      "jobs": 5,
+      "success": 5,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 9
+    }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 2,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "fail",
+      "duration": 1,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 1,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "fail",
+      "duration": 1,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "fail",
+      "duration": 1,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "bad_output",
+      "duration": 33,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "bad_output",
+      "duration": 30,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "success",
+      "duration": 44,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 65,
+      "grew": 3,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration": 47,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 44,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "success",
+      "duration": 63,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "success",
+      "duration": 118,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 172,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration": 170,
+      "grew": 4,
+      "issues": []
+    }
+  ],
+  "health": {
+    "status": "HEALTHY",
+    "issues": []
+  },
+  "kg_stats": {
+    "entities": 350,
+    "relations": 346,
+    "associations": 133,
+    "insights": 0
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 95.0,
+    "temp_c": 66.0,
+    "power_w": 53.59,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 1,
+    "literal_timestamps": 6,
+    "duplicates": 196,
+    "total": 1868,
+    "error_rate": 10.9
+  },
+  "automation": {
+    "layer1": "L1 Execution \u2014 DEPLOYED",
+    "layer2": "L2 Oversight \u2014 DEPLOYED",
+    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
+    "layer4": "L4 Recursive Learning \u2014 PLANNED"
+  },
+  "cost": {
+    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": false
   },
   "feed_history": [
     {
@@ -1506,198 +1668,19 @@
       "l": "7:15AM"
     }
   ],
-  "kg_stats": {
-    "entities": 350,
-    "relations": 346,
-    "associations": 133,
-    "insights": 0
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 66.0,
-    "power_w": 53.59,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 1,
-    "literal_timestamps": 6,
-    "duplicates": 196,
-    "total": 1868,
-    "error_rate": 10.9
-  },
-  "cost": {
-    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": false
-  },
-  "automation": {
-    "layer1": "L1 Execution \u2014 DEPLOYED",
-    "layer2": "L2 Oversight \u2014 DEPLOYED",
-    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
-    "layer4": "L4 Recursive Learning \u2014 PLANNED"
-  },
-  "compute_tiers": {
-    "architecture": "tiered_dispatch",
-    "layers": {
-      "L0_python": {
-        "status": "active",
-        "cost": "$0",
-        "role": "Fetch, transform, schedule"
-      },
-      "L1_vector": {
-        "status": "planned",
-        "cost": "$0",
-        "role": "Embeddings + ChromaDB RAG"
-      },
-      "L2_triage": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3:8b classification"
-      },
-      "L3_api": {
-        "status": "active",
-        "cost": "paid",
-        "role": "Haiku/Sonnet/Opus"
-      },
-      "L4_batch": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3-32b overnight"
-      }
-    },
-    "budget": {
-      "haiku_spent": 0,
-      "haiku_limit": 1.0,
-      "sonnet_spent": 0,
-      "sonnet_limit": 0.5,
-      "total_spent": 0,
-      "total_limit": 2.0,
-      "date": "2026-02-27"
-    },
-    "models_hot": [
-      {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
-        "name": "qwen3-32b-32k:latest",
-        "vram_gb": 27.1,
-        "params": "32.8B"
-      },
-      {
-        "name": "nomic-embed-text:latest",
-        "vram_gb": 0.6,
-        "params": "137M"
-      }
-    ]
-  },
-  "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
-  },
-  "cycles": [
-    {
-      "ts": "2026-02-28T06:01:00.884631",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 5,
-      "success": 0,
-      "timeout": 0,
-      "fail": 5,
-      "feed_grew": 0
-    },
-    {
-      "ts": "2026-02-28T06:35:55.465419",
-      "window": "daytime",
-      "cycle": 2,
-      "jobs": 5,
-      "success": 3,
-      "timeout": 0,
-      "fail": 2,
-      "feed_grew": 8
-    }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration": 2,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "fail",
-      "duration": 1,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "fail",
-      "duration": 1,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "fail",
-      "duration": 1,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "compound-synthesis",
-      "status": "fail",
-      "duration": 1,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "bad_output",
-      "duration": 33,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "bad_output",
-      "duration": 30,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 44,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "success",
-      "duration": 65,
-      "grew": 3,
-      "issues": []
-    },
-    {
-      "name": "compound-synthesis",
-      "status": "success",
-      "duration": 47,
-      "grew": 2,
-      "issues": []
-    }
-  ],
-  "today": {
-    "jobs_run": 10,
-    "success": 3,
-    "timeout": 0,
-    "fail": 7,
-    "feed_growth": 8
+  "activity": {
+    "last_job": "compound-synthesis",
+    "last_job_time": "2/28 2:13AM ET",
+    "last_cycle": "2/28 2:06AM ET",
+    "jobs_today": 14,
+    "success_today": 7,
+    "timeout_today": 0,
+    "fail_today": 7,
+    "feed_growth_today": 11,
+    "state": "running",
+    "next_cycle_est": "2:05AM",
+    "cycle_count": 59,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   }
 }
