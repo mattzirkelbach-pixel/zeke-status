@@ -101,7 +101,6 @@ body{
 /* ── Grid layouts ── */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
 
 /* ── Generic card ── */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:13px 16px;}
@@ -169,17 +168,57 @@ body{
 }
 .footer a{color:var(--accent);text-decoration:none;}
 
-/* KG force graph */
-#kg-graph{width:100%;height:280px;background:var(--bg);border-radius:6px;overflow:hidden;cursor:grab;}
-#kg-graph:active{cursor:grabbing;}
-.kg-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
-.kg-legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text2);}
-.kg-legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.kg-tooltip{position:fixed;background:rgba(10,12,20,.95);border:1px solid var(--border2);border-radius:6px;
-  padding:6px 10px;font-size:11px;color:var(--text);pointer-events:none;z-index:999;max-width:220px;display:none;}
+/* ── Knowledge Graph animated viz ── */
+.kg-viz{
+  position:relative;height:130px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:10px;
+}
+.kg-ring{
+  position:absolute;border-radius:50%;border:1px solid;
+  animation:kgpulse 3s ease-in-out infinite;
+}
+.kg-ring-1{width:106px;height:106px;border-color:rgba(77,216,192,.3);animation-delay:0s;}
+.kg-ring-2{width:78px;height:78px;border-color:rgba(96,165,250,.3);animation-delay:1s;}
+.kg-ring-3{width:52px;height:52px;border-color:rgba(167,139,250,.3);animation-delay:2s;}
+@keyframes kgpulse{
+  0%,100%{transform:scale(1);opacity:.6;}
+  50%{transform:scale(1.08);opacity:1;}
+}
+.kg-core{position:relative;z-index:2;text-align:center;}
+.kg-total{font-family:'JetBrains Mono',monospace;font-size:1.5em;font-weight:700;color:var(--accent);line-height:1;}
+.kg-total-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-top:2px;}
+/* Satellite pill nodes */
+.kg-node{
+  position:absolute;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+  padding:2px 8px;border-radius:12px;white-space:nowrap;
+  pointer-events:none;
+}
+.kg-node.n-entities{
+  background:rgba(77,216,192,.1);color:var(--accent);
+  border:1px solid rgba(77,216,192,.35);
+  top:6px;left:50%;transform:translateX(-50%);
+}
+.kg-node.n-relations{
+  background:rgba(96,165,250,.1);color:var(--blue);
+  border:1px solid rgba(96,165,250,.35);
+  bottom:6px;left:22%;
+}
+.kg-node.n-assoc{
+  background:rgba(167,139,250,.1);color:var(--purple);
+  border:1px solid rgba(167,139,250,.35);
+  bottom:6px;right:10%;
+}
+/* KG mini sparkline */
+.kg-spark{display:flex;align-items:flex-end;gap:1px;height:20px;margin-top:2px;}
+.ks-bar{flex:1;min-width:2px;border-radius:1px 1px 0 0;opacity:.45;background:var(--accent);}
+.ks-bar.latest{opacity:1;background:var(--ok);}
+.kg-spark-label{
+  display:flex;justify-content:space-between;
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:3px;
+}
 </style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 </head>
 <body>
 
@@ -208,7 +247,7 @@ body{
   <!-- 4. CHARTS: Today + All-Time side by side -->
   <div class="grid2" id="charts"></div>
 
-  <!-- 5. KNOWLEDGE + GPU + FEED QUALITY -->
+  <!-- 5. KNOWLEDGE GRAPH + GPU + FEED QUALITY -->
   <div class="grid3" id="grid3"></div>
 
   <!-- 6. RESEARCH TOPICS + RECENT JOBS -->
@@ -222,7 +261,7 @@ body{
 </div>
 
 <div class="footer">
-  Mission Control v14 · 30s auto-refresh ·
+  Mission Control v15 · 30s auto-refresh ·
   <a href="diagnostic.json">diagnostic.json</a> ·
   <a href="daily-snapshots.jsonl">snapshots</a>
 </div>
@@ -272,7 +311,7 @@ async function render(){
   const cc = a.cycle_count||(d.cycles||[]).length||0;
   const sr = pct(sc_ok, jt);
   const costStr = cost.is_zero_cost ? '$0.00' : '$'+(cost.estimated_cost_today||0).toFixed(2);
-  const kgNodes = (kg.entities||0)+(kg.relations||0);
+  const kgNodes = (kg.entities||0)+(kg.relations||0)+(kg.associations||0);
 
   $('#statbar').innerHTML = `
     <div class="stat">
@@ -408,15 +447,53 @@ async function render(){
   }
   $('#charts').innerHTML = todayCard + longCard;
 
-  // ── 5. Knowledge / GPU / Feed Quality ──
-  // KG
-  let kgHtml = KV('Entities', fmt(kg.entities||0), 'c-accent')
-    + KV('Relations', fmt(kg.relations||0), 'c-blue')
-    + KV('Associations', fmt(kg.associations||0), 'c-purple');
-  if((kg.insights||0)>0) kgHtml += KV('Insights', fmt(kg.insights), 'c-orange');
-  kgHtml += '<div class="divider"></div>';
-  kgHtml += KV('RAG Vectors', '913+', 'c-ok');
-  kgHtml += KV('Corpus', '27 transcripts · 59 lessons', 'c-dim');
+  // ── 5. Knowledge Graph (animated) + GPU + Feed Quality ──
+
+  // KG: build node counts and sparkline from snapshots
+  const ents = kg.entities||0;
+  const rels = kg.relations||0;
+  const assoc = kg.associations||0;
+  const totalNodes = ents + rels + assoc;
+
+  // Build sparkline: sample feed_total from snapshots as proxy for KG growth
+  // (kg_stats history not tracked separately — feed growth correlates)
+  const sparkSnaps = snaps.slice(-30); // last 30 snapshots
+  let kgSparkHtml = '';
+  if(sparkSnaps.length > 1){
+    const sv = sparkSnaps.map(s => s.feed_total||0);
+    const mn = Math.min(...sv), mx = Math.max(...sv), rng = mx-mn||1;
+    kgSparkHtml = `<div class="kg-spark">` +
+      sv.map((v,i) => {
+        const h = Math.max(((v-mn)/rng)*100, 8);
+        const isLast = i === sv.length-1;
+        return `<div class="ks-bar${isLast?' latest':''}" style="height:${h}%"></div>`;
+      }).join('') +
+    `</div>
+    <div class="kg-spark-label">
+      <span>${sparkSnaps[0]?.date||''}</span>
+      <span>+${sparkSnaps[sparkSnaps.length-1]?.feed_total - sparkSnaps[0]?.feed_total || 0} entries</span>
+    </div>`;
+  }
+
+  const kgCard = `<div class="card">
+    <div class="card-title">Knowledge Graph</div>
+    <div class="kg-viz">
+      <div class="kg-ring kg-ring-1"></div>
+      <div class="kg-ring kg-ring-2"></div>
+      <div class="kg-ring kg-ring-3"></div>
+      <div class="kg-core">
+        <div class="kg-total">${fmt(totalNodes)}</div>
+        <div class="kg-total-lbl">nodes</div>
+      </div>
+      <div class="kg-node n-entities">${fmt(ents)} entities</div>
+      <div class="kg-node n-relations">${fmt(rels)} relations</div>
+      <div class="kg-node n-assoc">${fmt(assoc)} assoc</div>
+    </div>
+    ${kgSparkHtml}
+    <div class="divider"></div>
+    ${KV('RAG Vectors', '913+', 'c-ok')}
+    ${KV('Corpus', '27 transcripts · 59 lessons', 'c-dim')}
+  </div>`;
 
   // GPU
   let gpuHtml = '';
@@ -461,39 +538,21 @@ async function render(){
     if(fq.literal_timestamps>0) fqHtml += KV('Bad timestamps', fq.literal_timestamps, 'c-orange');
   }
 
-  $('#grid3').innerHTML = `
-    <div class="card" style="grid-column:span 2">
-      <div class="card-title" style="margin-bottom:8px">Knowledge Graph
-        <span style="font-size:10px;color:var(--text2);font-weight:400;margin-left:8px">${fmt(kg.entities||0)} entities · ${fmt(kg.relations||0)} relations · hover to explore</span>
-      </div>
-      <svg id="kg-graph"></svg>
-      <div class="kg-legend" id="kg-legend"></div>
-      <div class="divider" style="margin-top:10px"></div>
-      <div style="display:flex;gap:16px;margin-top:6px">
-        ${KV('Entities', fmt(kg.entities||0), 'c-accent')}
-        ${KV('Relations', fmt(kg.relations||0), 'c-blue')}
-        ${KV('Associations', fmt(kg.associations||0), 'c-purple')}
-        ${KV('RAG Vectors', '913+', 'c-ok')}
-        ${KV('Corpus', '27 transcripts · 59 lessons', 'c-dim')}
-      </div>
-    </div>
-    <div class="card"><div class="card-title">DGX Spark · NVIDIA GB10</div>${gpuHtml}</div>
-    <div class="card"><div class="card-title">Feed Quality</div>${fqHtml}</div>`;
+  $('#grid3').innerHTML = kgCard +
+    `<div class="card"><div class="card-title">DGX Spark · NVIDIA GB10</div>${gpuHtml}</div>` +
+    `<div class="card"><div class="card-title">Feed Quality</div>${fqHtml}</div>`;
 
   // ── 6. Topics + Jobs ──
   const topics = f.topic_distribution||{};
-  // Merge messy duplicate keys
   const merged = {};
   for(const [k,v] of Object.entries(topics)){
     const clean = k.toLowerCase().replace(/\s+/g,' ').trim();
-    // Normalize common dupes
     const norm = clean
       .replace('longevity research','longevity')
       .replace('ai agents and tool calling','ai-agents')
       .replace('treasury bonds and interest rates','treasury-bonds');
     merged[norm] = (merged[norm]||0)+v;
   }
-  // Also pull from last snapshot for better numbers
   const lastSnap = snaps[snaps.length-1];
   if(lastSnap?.topic_counts){
     for(const [k,v] of Object.entries(lastSnap.topic_counts)){
@@ -515,12 +574,9 @@ async function render(){
     </div>`;
   }).join('');
 
-  // Jobs — cycles have {ts, cycle, jobs:N, success:N, fail:N, feed_grew} (counts, not list)
-  // Use recent_jobs list which has actual job names
   const recentJobs = (d.recent_jobs||[]).filter(j=>j.name).slice(0,12);
   let jobsHtml = '';
   if(recentJobs.length){
-    // Group into pseudo-cycles using the cycle data for headers
     const cycles = (d.cycles||[]).slice(-4).reverse();
     if(cycles.length){
       for(const cyc of cycles){
@@ -534,7 +590,6 @@ async function render(){
           <span class="c-grew">+${cyc.feed_grew||0}</span>
         </div>`;
       }
-      // Then show the flat job list below
       jobsHtml += '<div class="divider" style="margin-top:4px"></div>';
     }
     for(const j of recentJobs){
@@ -569,114 +624,5 @@ async function render(){
 
 render();
 setInterval(render, 30000);
-
-// ── KG Force-Directed Graph ──────────────────────────────────────────────────
-const KG_DOMAIN_COLORS = {
-  'longevity':      '#34d399',
-  'treasury-bonds': '#60a5fa',
-  'ai-agents':      '#a78bfa',
-  'tool-calling':   '#fb923c',
-  'self-improvement':'#f472b6',
-  'cross-domain':   '#facc15',
-  'unknown':        '#6b7280',
-};
-const KG_DOMAIN_LABELS = {
-  'longevity': 'Longevity', 'treasury-bonds': 'Treasury',
-  'ai-agents': 'AI Agents', 'tool-calling': 'Tools',
-  'self-improvement': 'Self-Improvement', 'cross-domain': 'Cross-Domain',
-  'unknown': 'Other',
-};
-
-async function renderKGGraph() {
-  const RAW = 'https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/kg_graph.json';
-  let graph;
-  try { graph = await fetch(RAW).then(r => r.json()); }
-  catch(e) { console.warn('KG graph load failed', e); return; }
-
-  const { nodes, links } = graph;
-  const el = document.getElementById('kg-graph');
-  if (!el) return;
-
-  const W = el.parentElement.offsetWidth - 32;
-  const H = 280;
-  el.setAttribute('width', W);
-  el.setAttribute('height', H);
-
-  const svg = d3.select('#kg-graph');
-  svg.selectAll('*').remove();
-
-  // Tooltip
-  let tip = document.querySelector('.kg-tooltip');
-  if (!tip) { tip = document.createElement('div'); tip.className = 'kg-tooltip'; document.body.appendChild(tip); }
-
-  // Legend
-  const legendEl = document.getElementById('kg-legend');
-  if (legendEl) {
-    const domains = [...new Set(nodes.map(n => n.domain))].filter(d => KG_DOMAIN_COLORS[d]);
-    legendEl.innerHTML = domains.map(d =>
-      `<div class="kg-legend-item"><div class="kg-legend-dot" style="background:${KG_DOMAIN_COLORS[d]||'#6b7280'}"></div>${KG_DOMAIN_LABELS[d]||d}</div>`
-    ).join('');
-  }
-
-  const domainCount = {};
-  nodes.forEach(n => domainCount[n.domain] = (domainCount[n.domain]||0) + 1);
-
-  // Simulation
-  const sim = d3.forceSimulation(nodes)
-    .force('link', d3.forceLink(links).id(d => d.id).distance(38).strength(d => d.strength * 0.5))
-    .force('charge', d3.forceManyBody().strength(-60))
-    .force('center', d3.forceCenter(W/2, H/2))
-    .force('collide', d3.forceCollide(7))
-    .alphaDecay(0.025);
-
-  // Zoom + pan
-  const g = svg.append('g');
-  svg.call(d3.zoom().scaleExtent([0.3, 4]).on('zoom', e => g.attr('transform', e.transform)));
-
-  // Links
-  const link = g.append('g').attr('stroke-opacity', 0.2)
-    .selectAll('line').data(links).join('line')
-    .attr('stroke', d => {
-      const sn = nodes.find(n=>n.id===d.source.id||n.id===d.source);
-      return KG_DOMAIN_COLORS[sn?.domain] || '#6b7280';
-    })
-    .attr('stroke-width', d => Math.max(0.5, d.strength * 1.5));
-
-  // Nodes
-  const node = g.append('g')
-    .selectAll('circle').data(nodes).join('circle')
-    .attr('r', d => {
-      const cnt = links.filter(l => l.source.id===d.id||l.target.id===d.id||l.source===d.id||l.target===d.id).length;
-      return Math.max(3, Math.min(9, 2.5 + cnt * 0.7));
-    })
-    .attr('fill', d => KG_DOMAIN_COLORS[d.domain] || '#6b7280')
-    .attr('fill-opacity', 0.85)
-    .attr('stroke', '#0e1117').attr('stroke-width', 0.5)
-    .call(d3.drag()
-      .on('start', (e,d) => { if(!e.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
-      .on('drag', (e,d) => { d.fx=e.x; d.fy=e.y; })
-      .on('end', (e,d) => { if(!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; }))
-    .on('mouseover', (e,d) => {
-      const connCount = links.filter(l=>l.source.id===d.id||l.target.id===d.id||l.source===d.id||l.target===d.id).length;
-      tip.innerHTML = `<strong>${d.name}</strong><br><span style="color:#94a3b8">${d.domain} · ${d.type}</span><br>conf: ${d.conf} · links: ${connCount}`;
-      tip.style.display = 'block';
-    })
-    .on('mousemove', e => { tip.style.left=(e.clientX+12)+'px'; tip.style.top=(e.clientY-8)+'px'; })
-    .on('mouseout', () => { tip.style.display='none'; });
-
-  sim.on('tick', () => {
-    link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
-        .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
-    node.attr('cx',d=>Math.max(8,Math.min(W-8,d.x))).attr('cy',d=>Math.max(8,Math.min(H-8,d.y)));
-  });
-
-  // Pulse new nodes (recent = high id) 
-  const maxId = Math.max(...nodes.map(n=>n.id));
-  node.filter(d=>d.id > maxId - 20)
-    .attr('stroke','#facc15').attr('stroke-width',1.5).attr('stroke-opacity',0.8);
-}
-
-renderKGGraph();
-
 </script>
 </body></html>
