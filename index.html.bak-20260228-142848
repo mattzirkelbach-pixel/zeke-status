@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zeke Mission Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0e14; --surface:#14171f; --surface2:#1a1e28;
+  --border:#232838; --border2:#2d3348;
+  --text:#e2e4ea; --text2:#a0a5b8; --text3:#636a82;
+  --accent:#4dd8c0; --accent2:#3bbfa9;
+  --ok:#34d399; --warn:#f87171; --orange:#fbbf24; --blue:#60a5fa; --purple:#a78bfa;
+  --r:10px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'DM Sans',-apple-system,sans-serif;
+  background:var(--bg); color:var(--text);
+  font-size:13px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+
+/* ── Sticky header ── */
+.topbar{
+  position:sticky; top:0; z-index:100;
+  display:flex; align-items:center; gap:14px;
+  padding:10px 20px 9px;
+  background:var(--bg); border-bottom:1px solid var(--border);
+}
+.title{font-size:1.1em;font-weight:700;letter-spacing:-0.3px;}
+.title em{color:var(--accent);font-style:normal;}
+.badge{
+  font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600;
+  padding:3px 10px; border-radius:20px; letter-spacing:0.4px;
+}
+.badge.ok{background:rgba(52,211,153,.1);color:var(--ok);border:1px solid rgba(52,211,153,.2);}
+.badge.warn{background:rgba(248,113,113,.1);color:var(--warn);border:1px solid rgba(248,113,113,.2);}
+.badge.issues{background:rgba(251,191,36,.1);color:var(--orange);border:1px solid rgba(251,191,36,.2);}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.topbar-ts{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);}
+
+/* ── Page wrapper ── */
+.page{padding:14px 20px 32px; max-width:1340px; margin:0 auto;}
+
+/* ── Stat bar ── */
+.statbar{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;}
+.stat{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:12px 14px;text-align:center;
+}
+.stat .val{font-family:'JetBrains Mono',monospace;font-size:1.55em;font-weight:700;line-height:1.1;}
+.stat .lbl{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:1.1px;margin-top:3px;}
+.stat .sub{font-size:11px;color:var(--text3);margin-top:1px;}
+
+/* ── Autonomy progress bar section ── */
+.autonomy{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:14px 18px;margin-bottom:12px;
+}
+.section-label{
+  font-size:10px;font-weight:700;color:var(--text3);
+  text-transform:uppercase;letter-spacing:1.3px;margin-bottom:11px;
+}
+.layers{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.layer{border-radius:8px;padding:11px 13px;border:1px solid var(--border2);position:relative;overflow:hidden;}
+.layer::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.layer.deployed::before{background:var(--ok);}
+.layer.progress::before{background:var(--orange);}
+.layer.planned::before{background:var(--border2);}
+.layer.deployed{background:rgba(52,211,153,.05);}
+.layer.progress{background:rgba(251,191,36,.05);}
+.layer.planned{background:rgba(30,34,48,.5);}
+.layer-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-bottom:3px;}
+.layer-name{font-size:12px;font-weight:600;}
+.layer.deployed .layer-name{color:var(--ok);}
+.layer.progress .layer-name{color:var(--orange);}
+.layer.planned .layer-name{color:var(--text3);}
+.layer-status{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-top:5px;}
+.layer.deployed .layer-status{color:var(--ok);}
+.layer.progress .layer-status{color:var(--orange);}
+.layer.planned .layer-status{color:var(--text3);}
+.layer-desc{font-size:10px;color:var(--text3);margin-top:2px;}
+
+/* ── Infra pipeline ── */
+.pipeline{display:flex;gap:6px;align-items:center;margin-bottom:12px;}
+.pipe-node{
+  flex:1;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:9px 12px;position:relative;min-width:0;
+}
+.pipe-node.wide{flex:1.6;}
+.pipe-dot{position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;}
+.pipe-dot.on{background:var(--ok);box-shadow:0 0 6px rgba(52,211,153,.6);}
+.pipe-dot.off{background:var(--warn);}
+.pipe-dot.idle{background:var(--orange);box-shadow:0 0 5px rgba(251,191,36,.5);}
+.pipe-name{font-weight:600;font-size:12px;white-space:nowrap;}
+.pipe-desc{font-size:11px;color:var(--text3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pipe-arrow{color:var(--text3);font-size:14px;flex-shrink:0;padding:0 2px;}
+
+/* ── Grid layouts ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
+
+/* ── Generic card ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:13px 16px;}
+.card-title{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:9px;}
+.kv{display:flex;justify-content:space-between;align-items:baseline;padding:2.5px 0;}
+.kv .k{font-size:12px;color:var(--text2);}
+.kv .v{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;}
+.divider{height:1px;background:var(--border);margin:7px 0;}
+.c-ok{color:var(--ok);} .c-warn{color:var(--warn);} .c-accent{color:var(--accent);}
+.c-blue{color:var(--blue);} .c-orange{color:var(--orange);} .c-purple{color:var(--purple);} .c-dim{color:var(--text3);}
+
+/* ── Inline bar chart (fixed height, no overflow) ── */
+.chart-meta{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-bottom:6px;}
+.chart-area{height:60px;display:flex;align-items:flex-end;gap:1px;overflow:hidden;}
+.bar{flex:1;min-width:2px;border-radius:2px 2px 0 0;background:var(--accent);cursor:default;}
+.bar:hover{filter:brightness(1.2);}
+.chart-axis{
+  display:flex;justify-content:space-between;
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);
+  margin-top:4px;
+}
+
+/* ── Topic bars ── */
+.topic-row{display:flex;align-items:center;gap:8px;padding:2.5px 0;}
+.topic-name{font-size:11px;color:var(--text2);min-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.t-bg{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;}
+.t-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent2),var(--accent));}
+.t-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);min-width:28px;text-align:right;}
+
+/* ── Job list ── */
+.jobs-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:13px 16px;margin-bottom:12px;}
+.cycle-hdr{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 0 3px;border-top:1px solid var(--border);
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+}
+.cycle-hdr:first-child{border-top:none;padding-top:0;}
+.c-label{color:var(--text2);font-weight:600;}
+.c-time{color:var(--text3);}
+.c-grew{margin-left:auto;font-weight:600;color:var(--ok);}
+.job-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:4px 8px;margin:1px 0;border-radius:5px;font-size:12px;
+}
+.job-row.success{background:rgba(52,211,153,.04);}
+.job-row.fail{background:rgba(248,113,113,.04);}
+.job-row.timeout,.job-row.bad_output{background:rgba(251,191,36,.04);}
+.j-name{font-weight:500;}
+.j-meta{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
+.j-status{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;min-width:55px;text-align:right;}
+.j-status.success{color:var(--ok);} .j-status.fail{color:var(--warn);} .j-status.timeout{color:var(--orange);}
+
+/* ── Research feed ── */
+.feed-item{padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.feed-item:last-child{border-bottom:none;}
+.feed-topic{color:var(--accent);font-weight:500;}
+.feed-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-left:6px;}
+.feed-finding{color:var(--text2);line-height:1.45;margin-top:2px;}
+
+/* ── Footer ── */
+.footer{
+  border-top:1px solid var(--border);padding:9px 20px;
+  display:flex;justify-content:center;gap:16px;
+  font-size:11px;color:var(--text3);
+}
+.footer a{color:var(--accent);text-decoration:none;}
+
+/* KG force graph */
+#kg-graph{width:100%;height:280px;background:var(--bg);border-radius:6px;overflow:hidden;cursor:grab;}
+#kg-graph:active{cursor:grabbing;}
+.kg-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.kg-legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text2);}
+.kg-legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.kg-tooltip{position:fixed;background:rgba(10,12,20,.95);border:1px solid var(--border2);border-radius:6px;
+  padding:6px 10px;font-size:11px;color:var(--text);pointer-events:none;z-index:999;max-width:220px;display:none;}
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="title"><em>⚡</em> Zeke Mission Control</div>
+  <div class="badge" id="badge">loading</div>
+  <div class="topbar-right">
+    <div class="topbar-ts" id="ts">—</div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- 1. STAT BAR -->
+  <div class="statbar" id="statbar"></div>
+
+  <!-- 2. AUTONOMY LAYERS -->
+  <div class="autonomy">
+    <div class="section-label">Recursive Autonomy Progress</div>
+    <div class="layers" id="layers"></div>
+  </div>
+
+  <!-- 3. PIPELINE -->
+  <div class="pipeline" id="pipeline"></div>
+
+  <!-- 4. CHARTS: Today + All-Time side by side -->
+  <div class="grid2" id="charts"></div>
+
+  <!-- 5. KNOWLEDGE + GPU + FEED QUALITY -->
+  <div class="grid3" id="grid3"></div>
+
+  <!-- 6. RESEARCH TOPICS + RECENT JOBS -->
+  <div class="grid2" id="grid2b"></div>
+
+  <!-- 7. LATEST RESEARCH -->
+  <div class="card" id="research" style="margin-bottom:12px">
+    <div class="card-title">Latest Research</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Mission Control v14 · 30s auto-refresh ·
+  <a href="diagnostic.json">diagnostic.json</a> ·
+  <a href="daily-snapshots.jsonl">snapshots</a>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const fmt=n=>n!=null?n.toLocaleString():'—';
+const pct=(a,b)=>b>0?Math.round(a/b*100):0;
+const dur=s=>{const n=parseFloat(s);return isNaN(n)?'':n>=60?(n/60).toFixed(1)+'m':Math.round(n)+'s';};
+function KV(k,v,c){return `<div class="kv"><span class="k">${k}</span><span class="v ${c||''}">${v}</span></div>`;}
+
+async function J(u){
+  try{const r=await fetch(u+'?t='+Date.now());return r.ok?r.json():null}catch{return null}
+}
+async function JL(u){
+  try{
+    const r=await fetch(u+'?t='+Date.now());
+    if(!r.ok)return[];
+    return(await r.text()).trim().split('\n').filter(Boolean)
+      .map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
+  }catch{return[];}
+}
+
+async function render(){
+  const [d, snaps] = await Promise.all([J('diagnostic.json'), JL('daily-snapshots.jsonl')]);
+  if(!d){$('#ts').textContent='Cannot load diagnostic.json'; return;}
+
+  const a=d.activity||{}, f=d.feed||{}, sp=d.spark||{},
+        sc=d.scheduler||{}, gw=d.gateway||{}, h=d.health||{},
+        kg=d.kg_stats||{}, gpu=d.gpu_stats||{}, cost=d.cost||{},
+        auto=d.automation||{}, today=d.today||{};
+
+  // ── Header ──
+  $('#ts').textContent = (d.timestamp_local||'').replace(' ET','') + ' ET';
+  const hs = h.status||'UNKNOWN';
+  const bdg = $('#badge');
+  if(hs==='HEALTHY'){bdg.textContent='● Healthy';bdg.className='badge ok';}
+  else if(hs==='ISSUES_FOUND'){bdg.textContent='⚠ '+(h.issue_count||'?')+' Issue'+(h.issue_count!==1?'s':'');bdg.className='badge issues';}
+  else{bdg.textContent='● '+hs;bdg.className='badge warn';}
+
+  // ── 1. Stat bar ──
+  const jt = a.jobs_today||today.jobs_run||0;
+  const sc_ok = a.success_today||today.success||0;
+  const fails = (a.fail_today||today.fail||0)+(a.timeout_today||today.timeout||0);
+  const fg = a.feed_growth_today||today.feed_growth||0;
+  const fl = f.total_lines||0;
+  const cc = a.cycle_count||(d.cycles||[]).length||0;
+  const sr = pct(sc_ok, jt);
+  const costStr = cost.is_zero_cost ? '$0.00' : '$'+(cost.estimated_cost_today||0).toFixed(2);
+  const kgNodes = (kg.entities||0)+(kg.relations||0);
+
+  $('#statbar').innerHTML = `
+    <div class="stat">
+      <div class="val c-accent">${fmt(fl)}</div>
+      <div class="lbl">Feed Entries</div>
+      <div class="sub">+${fg} today</div>
+    </div>
+    <div class="stat">
+      <div class="val c-blue">${jt}</div>
+      <div class="lbl">Jobs Today</div>
+      <div class="sub">${sr}% success</div>
+    </div>
+    <div class="stat">
+      <div class="val c-purple">${fmt(cc)}</div>
+      <div class="lbl">Cycles Run</div>
+      <div class="sub">total lifetime</div>
+    </div>
+    <div class="stat">
+      <div class="val" style="color:${fails>5?'var(--warn)':fails>0?'var(--orange)':'var(--ok)'}">${fails}</div>
+      <div class="lbl">Failed</div>
+      <div class="sub">${a.timeout_today||0} timeouts</div>
+    </div>
+    <div class="stat">
+      <div class="val c-ok">${costStr}</div>
+      <div class="lbl">API Cost Today</div>
+      <div class="sub">$2.00/day cap</div>
+    </div>`;
+
+  // ── 2. Autonomy layers ──
+  const layerDefs = [
+    {k:'layer1', name:'L1 · Execution',    desc:'Scheduler, jobs, task dispatch'},
+    {k:'layer2', name:'L2 · Oversight',    desc:'Self-repair, health watchdog'},
+    {k:'layer3', name:'L3 · Intelligence', desc:'RAG, synthesis, research feed'},
+    {k:'layer4', name:'L4 · Recursive Learning', desc:'Self-directed goal setting'},
+  ];
+  $('#layers').innerHTML = layerDefs.map(x=>{
+    const raw = auto[x.k]||'';
+    const dep = raw.includes('DEPLOYED'), prog = raw.includes('IN PROGRESS');
+    const cls = dep?'deployed':prog?'progress':'planned';
+    const status = dep?'✓ Deployed':prog?'⟳ In Progress':'◌ Planned';
+    return `<div class="layer ${cls}">
+      <div class="layer-num">${x.k.replace('layer','L').toUpperCase()}</div>
+      <div class="layer-name">${x.name}</div>
+      <div class="layer-status">${status}</div>
+      <div class="layer-desc">${x.desc}</div>
+    </div>`;
+  }).join('');
+
+  // ── 3. Pipeline ──
+  const models = (sp.models_loaded||[]).map(m=>m.replace(':latest','').replace('-32k','').replace('qwen3','q3'));
+  const spDot = sp.online?(sp.inference_active?'on':'idle'):'off';
+  const pidList = sc.pids||[sc.pid];
+  const pid = pidList[0]||'—';
+  const upmin = sc.uptime_minutes||0;
+  const topicCount = Object.keys(f.topic_distribution||{}).length;
+
+  $('#pipeline').innerHTML = `
+    <div class="pipe-node">
+      <div class="pipe-dot ${sc.running?'on':'off'}"></div>
+      <div class="pipe-name">Scheduler</div>
+      <div class="pipe-desc">PID ${pid} · ${upmin}m up</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-node">
+      <div class="pipe-dot ${gw.running?'on':'off'}"></div>
+      <div class="pipe-name">Gateway</div>
+      <div class="pipe-desc">OpenClaw</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-node">
+      <div class="pipe-dot ${spDot}"></div>
+      <div class="pipe-name">DGX Spark</div>
+      <div class="pipe-desc">${models.join(' · ')||'—'}</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-node wide">
+      <div class="pipe-dot on"></div>
+      <div class="pipe-name">Knowledge Base</div>
+      <div class="pipe-desc">${fmt(fl)} entries · ${topicCount} topics · ${kgNodes} KG nodes · 913+ vectors</div>
+    </div>`;
+
+  // ── 4. Charts ──
+  function makeChart(vals, labs, accentColor){
+    const mn=Math.min(...vals), mx=Math.max(...vals), rng=mx-mn||1;
+    const step=Math.max(1,Math.floor(vals.length/80));
+    const sv=vals.filter((_,i)=>i%step===0);
+    const sl=labs.filter((_,i)=>i%step===0);
+    const bars=sv.map((v,i)=>{
+      const h=Math.max(((v-mn)/rng)*100,3);
+      const op=(.28+.72*(i/sv.length)).toFixed(2);
+      const col=accentColor||'var(--accent)';
+      return `<div class="bar" style="height:${h}%;opacity:${op};background:${col}" title="${sl[i]||''}: ${v}"></div>`;
+    }).join('');
+    const axL=sl[0]||'', axM=sl[Math.floor(sl.length/2)]||'', axR=sl[sl.length-1]||'';
+    return `<div class="chart-area">${bars}</div><div class="chart-axis"><span>${axL}</span><span>${axM}</span><span>${axR}</span></div>`;
+  }
+
+  const fh = d.feed_history||[];
+  let todayCard='', longCard='';
+
+  if(fh.length>3){
+    const vals=fh.map(x=>typeof x==='object'?(x.v||x.value||0):Number(x)||0);
+    const labs=fh.map(x=>typeof x==='object'?(x.l||''):'');
+    const mn=Math.min(...vals), mx=Math.max(...vals);
+    todayCard=`<div class="card">
+      <div class="card-title">Feed Growth — Today</div>
+      <div class="chart-meta">${mn.toLocaleString()} → ${mx.toLocaleString()} entries · ${fh.length} data points</div>
+      ${makeChart(vals, labs, 'var(--accent)')}
+    </div>`;
+  }
+
+  if(snaps.length>1){
+    const sv=snaps.map(s=>s.feed_total||0);
+    const sl=snaps.map(s=>`${s.date} ${s.hour}`);
+    const cols=snaps.map(s=>s.event?.includes('clean')?'var(--orange)':'var(--accent)');
+    const mn=Math.min(...sv), mx=Math.max(...sv), rng=mx-mn||1;
+    const step=Math.max(1,Math.floor(sv.length/80));
+    const ssv=sv.filter((_,i)=>i%step===0);
+    const ssl=sl.filter((_,i)=>i%step===0);
+    const ssc=cols.filter((_,i)=>i%step===0);
+    const bars=ssv.map((v,i)=>{
+      const h=Math.max(((v-mn)/rng)*100,3);
+      const op=(.2+.8*(i/ssv.length)).toFixed(2);
+      return `<div class="bar" style="height:${h}%;opacity:${op};background:${ssc[i]}" title="${ssl[i]}: ${v}"></div>`;
+    }).join('');
+    const axL=ssl[0]||'', axM=ssl[Math.floor(ssl.length/2)]||'', axR=ssl[ssl.length-1]||'';
+    longCard=`<div class="card">
+      <div class="card-title">Cumulative Knowledge — All Time</div>
+      <div class="chart-meta">${snaps[0].feed_total?.toLocaleString()||'—'} → ${snaps[snaps.length-1].feed_total?.toLocaleString()||'—'} · ${snaps.length} snapshots</div>
+      <div class="chart-area">${bars}</div>
+      <div class="chart-axis"><span>${axL}</span><span>${axM}</span><span>${axR}</span></div>
+    </div>`;
+  }
+  $('#charts').innerHTML = todayCard + longCard;
+
+  // ── 5. Knowledge / GPU / Feed Quality ──
+  // KG
+  let kgHtml = KV('Entities', fmt(kg.entities||0), 'c-accent')
+    + KV('Relations', fmt(kg.relations||0), 'c-blue')
+    + KV('Associations', fmt(kg.associations||0), 'c-purple');
+  if((kg.insights||0)>0) kgHtml += KV('Insights', fmt(kg.insights), 'c-orange');
+  kgHtml += '<div class="divider"></div>';
+  kgHtml += KV('RAG Vectors', '913+', 'c-ok');
+  kgHtml += KV('Corpus', '27 transcripts · 59 lessons', 'c-dim');
+
+  // GPU
+  let gpuHtml = '';
+  const gname = gpu.gpu_name||'GB10';
+  gpuHtml += KV('GPU', gname, 'c-accent');
+  if(gpu.temp_c!=null){
+    const tcol = gpu.temp_c>80?'c-warn':gpu.temp_c>70?'c-orange':'c-ok';
+    gpuHtml += KV('Temp', gpu.temp_c+'°C', tcol);
+  }
+  if(gpu.gpu_util_pct!=null){
+    const ucol = gpu.gpu_util_pct>85?'c-orange':'c-blue';
+    gpuHtml += KV('Utilization', gpu.gpu_util_pct+'%', ucol);
+  }
+  if(gpu.power_w!=null) gpuHtml += KV('Power', gpu.power_w+'W', '');
+  gpuHtml += '<div class="divider"></div>';
+  const hotModels = (d.compute_tiers?.models_hot||[]);
+  if(hotModels.length){
+    for(const m of hotModels){
+      const short = m.name.replace(':latest','').replace('-32k','');
+      gpuHtml += KV(short, `${m.params} · ${m.vram_gb}GB`, 'c-dim');
+    }
+  } else {
+    gpuHtml += KV('qwen3-32b', '32B · ~64GB', 'c-dim');
+    gpuHtml += KV('qwen3-8b', '8B · ~16GB', 'c-dim');
+    gpuHtml += KV('nomic-embed', 'embeddings', 'c-dim');
+  }
+
+  // Feed quality
+  const fq = d.feed_quality||{};
+  const cl = f.recent_50_clean||0, tr = f.recent_50_trivial||0, br = f.recent_50_broken||0;
+  const tot50 = cl+tr+br||50;
+  let fqHtml = KV('Clean (last 50)', `${cl} / ${tot50}`, cl/tot50>.8?'c-ok':cl/tot50>.6?'c-orange':'c-warn');
+  if(tr>0) fqHtml += KV('Trivial', tr, 'c-orange');
+  if(br>0) fqHtml += KV('Broken', br, 'c-warn');
+  const lastWrite = f.last_modified_minutes_ago;
+  fqHtml += KV('Last write', lastWrite!=null?lastWrite+'m ago':'—', lastWrite<5?'c-ok':'c-orange');
+  if(fq.total){
+    fqHtml += '<div class="divider"></div>';
+    const er = fq.error_rate||0;
+    fqHtml += KV('Error rate', er.toFixed(1)+'%', er>20?'c-warn':er>5?'c-orange':'c-ok');
+    if(fq.duplicates>0) fqHtml += KV('Duplicates', fq.duplicates, 'c-orange');
+    if(fq.literal_timestamps>0) fqHtml += KV('Bad timestamps', fq.literal_timestamps, 'c-orange');
+  }
+
+  $('#grid3').innerHTML = `
+    <div class="card" style="grid-column:span 2">
+      <div class="card-title" style="margin-bottom:8px">Knowledge Graph
+        <span style="font-size:10px;color:var(--text2);font-weight:400;margin-left:8px">${fmt(kg.entities||0)} entities · ${fmt(kg.relations||0)} relations · hover to explore</span>
+      </div>
+      <svg id="kg-graph"></svg>
+      <div class="kg-legend" id="kg-legend"></div>
+      <div class="divider" style="margin-top:10px"></div>
+      <div style="display:flex;gap:16px;margin-top:6px">
+        ${KV('Entities', fmt(kg.entities||0), 'c-accent')}
+        ${KV('Relations', fmt(kg.relations||0), 'c-blue')}
+        ${KV('Associations', fmt(kg.associations||0), 'c-purple')}
+        ${KV('RAG Vectors', '913+', 'c-ok')}
+        ${KV('Corpus', '27 transcripts · 59 lessons', 'c-dim')}
+      </div>
+    </div>
+    <div class="card"><div class="card-title">DGX Spark · NVIDIA GB10</div>${gpuHtml}</div>
+    <div class="card"><div class="card-title">Feed Quality</div>${fqHtml}</div>`;
+
+  // ── 6. Topics + Jobs ──
+  const topics = f.topic_distribution||{};
+  // Merge messy duplicate keys
+  const merged = {};
+  for(const [k,v] of Object.entries(topics)){
+    const clean = k.toLowerCase().replace(/\s+/g,' ').trim();
+    // Normalize common dupes
+    const norm = clean
+      .replace('longevity research','longevity')
+      .replace('ai agents and tool calling','ai-agents')
+      .replace('treasury bonds and interest rates','treasury-bonds');
+    merged[norm] = (merged[norm]||0)+v;
+  }
+  // Also pull from last snapshot for better numbers
+  const lastSnap = snaps[snaps.length-1];
+  if(lastSnap?.topic_counts){
+    for(const [k,v] of Object.entries(lastSnap.topic_counts)){
+      const norm = k.toLowerCase().replace(/\s+/g,' ').trim()
+        .replace('longevity research','longevity')
+        .replace('ai agents and tool calling','ai-agents')
+        .replace('treasury bonds and interest rates','treasury-bonds');
+      merged[norm] = Math.max(merged[norm]||0, v);
+    }
+  }
+  const topicList = Object.entries(merged).sort((a,b)=>b[1]-a[1]).slice(0,9);
+  const tmx = Math.max(...topicList.map(e=>e[1]),1);
+  const topicsHtml = topicList.map(([t,n])=>{
+    const disp = t.length>26?t.substring(0,24)+'…':t;
+    return `<div class="topic-row">
+      <span class="topic-name" title="${t}">${disp}</span>
+      <div class="t-bg"><div class="t-fill" style="width:${Math.max(n/tmx*100,4)}%"></div></div>
+      <span class="t-count">${n}</span>
+    </div>`;
+  }).join('');
+
+  // Jobs — cycles have {ts, cycle, jobs:N, success:N, fail:N, feed_grew} (counts, not list)
+  // Use recent_jobs list which has actual job names
+  const recentJobs = (d.recent_jobs||[]).filter(j=>j.name).slice(0,12);
+  let jobsHtml = '';
+  if(recentJobs.length){
+    // Group into pseudo-cycles using the cycle data for headers
+    const cycles = (d.cycles||[]).slice(-4).reverse();
+    if(cycles.length){
+      for(const cyc of cycles){
+        const t = new Date(cyc.ts);
+        const hhmm = t.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});
+        jobsHtml += `<div class="cycle-hdr">
+          <span class="c-label">Cycle ${cyc.cycle}</span>
+          <span class="c-time">${hhmm}</span>
+          <span style="color:var(--text3);margin:0 4px">·</span>
+          <span style="color:var(--text3);font-size:10px;">${cyc.success||0}ok ${cyc.fail||0}fail</span>
+          <span class="c-grew">+${cyc.feed_grew||0}</span>
+        </div>`;
+      }
+      // Then show the flat job list below
+      jobsHtml += '<div class="divider" style="margin-top:4px"></div>';
+    }
+    for(const j of recentJobs){
+      const st = j.status||'—';
+      const grew = j.grew||0;
+      jobsHtml += `<div class="job-row ${st}">
+        <span class="j-name">${j.name}</span>
+        <span class="j-meta">${dur(j.duration)} ${grew>0?`<span class="c-ok">+${grew}</span>`:''}</span>
+        <span class="j-status ${st}">${st}</span>
+      </div>`;
+    }
+  }
+
+  $('#grid2b').innerHTML = `
+    <div class="card"><div class="card-title">Research Topics by Volume</div>${topicsHtml}</div>
+    <div class="card" style="overflow:hidden;"><div class="card-title">Recent Jobs</div>${jobsHtml||'<div class="c-dim" style="font-size:12px">No jobs yet</div>'}</div>`;
+
+  // ── 7. Research feed ──
+  const entries = (f.last_entries||[]).filter(e=>typeof e==='object').slice(-6).reverse();
+  const feedHtml = entries.map(e=>{
+    let ts = '';
+    try{ts = new Date(e.timestamp).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});}catch{}
+    const finding = (e.finding||e.insight||'').substring(0,240);
+    return `<div class="feed-item">
+      <span class="feed-topic">${e.topic||''}</span><span class="feed-time">${ts}</span>
+      <div class="feed-finding">${finding}</div>
+    </div>`;
+  }).join('');
+  $('#research').innerHTML = `<div class="card-title">Latest Research</div>` +
+    (feedHtml||'<div class="c-dim" style="font-size:12px">No entries yet</div>');
+}
+
+render();
+setInterval(render, 30000);
+
+// ── KG Force-Directed Graph ──────────────────────────────────────────────────
+const KG_DOMAIN_COLORS = {
+  'longevity':      '#34d399',
+  'treasury-bonds': '#60a5fa',
+  'ai-agents':      '#a78bfa',
+  'tool-calling':   '#fb923c',
+  'self-improvement':'#f472b6',
+  'cross-domain':   '#facc15',
+  'unknown':        '#6b7280',
+};
+const KG_DOMAIN_LABELS = {
+  'longevity': 'Longevity', 'treasury-bonds': 'Treasury',
+  'ai-agents': 'AI Agents', 'tool-calling': 'Tools',
+  'self-improvement': 'Self-Improvement', 'cross-domain': 'Cross-Domain',
+  'unknown': 'Other',
+};
+
+async function renderKGGraph() {
+  const RAW = 'https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/kg_graph.json';
+  let graph;
+  try { graph = await fetch(RAW).then(r => r.json()); }
+  catch(e) { console.warn('KG graph load failed', e); return; }
+
+  const { nodes, links } = graph;
+  const el = document.getElementById('kg-graph');
+  if (!el) return;
+
+  const W = el.parentElement.offsetWidth - 32;
+  const H = 280;
+  el.setAttribute('width', W);
+  el.setAttribute('height', H);
+
+  const svg = d3.select('#kg-graph');
+  svg.selectAll('*').remove();
+
+  // Tooltip
+  let tip = document.querySelector('.kg-tooltip');
+  if (!tip) { tip = document.createElement('div'); tip.className = 'kg-tooltip'; document.body.appendChild(tip); }
+
+  // Legend
+  const legendEl = document.getElementById('kg-legend');
+  if (legendEl) {
+    const domains = [...new Set(nodes.map(n => n.domain))].filter(d => KG_DOMAIN_COLORS[d]);
+    legendEl.innerHTML = domains.map(d =>
+      `<div class="kg-legend-item"><div class="kg-legend-dot" style="background:${KG_DOMAIN_COLORS[d]||'#6b7280'}"></div>${KG_DOMAIN_LABELS[d]||d}</div>`
+    ).join('');
+  }
+
+  const domainCount = {};
+  nodes.forEach(n => domainCount[n.domain] = (domainCount[n.domain]||0) + 1);
+
+  // Simulation
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(38).strength(d => d.strength * 0.5))
+    .force('charge', d3.forceManyBody().strength(-60))
+    .force('center', d3.forceCenter(W/2, H/2))
+    .force('collide', d3.forceCollide(7))
+    .alphaDecay(0.025);
+
+  // Zoom + pan
+  const g = svg.append('g');
+  svg.call(d3.zoom().scaleExtent([0.3, 4]).on('zoom', e => g.attr('transform', e.transform)));
+
+  // Links
+  const link = g.append('g').attr('stroke-opacity', 0.2)
+    .selectAll('line').data(links).join('line')
+    .attr('stroke', d => {
+      const sn = nodes.find(n=>n.id===d.source.id||n.id===d.source);
+      return KG_DOMAIN_COLORS[sn?.domain] || '#6b7280';
+    })
+    .attr('stroke-width', d => Math.max(0.5, d.strength * 1.5));
+
+  // Nodes
+  const node = g.append('g')
+    .selectAll('circle').data(nodes).join('circle')
+    .attr('r', d => {
+      const cnt = links.filter(l => l.source.id===d.id||l.target.id===d.id||l.source===d.id||l.target===d.id).length;
+      return Math.max(3, Math.min(9, 2.5 + cnt * 0.7));
+    })
+    .attr('fill', d => KG_DOMAIN_COLORS[d.domain] || '#6b7280')
+    .attr('fill-opacity', 0.85)
+    .attr('stroke', '#0e1117').attr('stroke-width', 0.5)
+    .call(d3.drag()
+      .on('start', (e,d) => { if(!e.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on('drag', (e,d) => { d.fx=e.x; d.fy=e.y; })
+      .on('end', (e,d) => { if(!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; }))
+    .on('mouseover', (e,d) => {
+      const connCount = links.filter(l=>l.source.id===d.id||l.target.id===d.id||l.source===d.id||l.target===d.id).length;
+      tip.innerHTML = `<strong>${d.name}</strong><br><span style="color:#94a3b8">${d.domain} · ${d.type}</span><br>conf: ${d.conf} · links: ${connCount}`;
+      tip.style.display = 'block';
+    })
+    .on('mousemove', e => { tip.style.left=(e.clientX+12)+'px'; tip.style.top=(e.clientY-8)+'px'; })
+    .on('mouseout', () => { tip.style.display='none'; });
+
+  sim.on('tick', () => {
+    link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+        .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    node.attr('cx',d=>Math.max(8,Math.min(W-8,d.x))).attr('cy',d=>Math.max(8,Math.min(H-8,d.y)));
+  });
+
+  // Pulse new nodes (recent = high id) 
+  const maxId = Math.max(...nodes.map(n=>n.id));
+  node.filter(d=>d.id > maxId - 20)
+    .attr('stroke','#facc15').attr('stroke-width',1.5).attr('stroke-opacity',0.8);
+}
+
+renderKGGraph();
+
+</script>
+</body></html>
