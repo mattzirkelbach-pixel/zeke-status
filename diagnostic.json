@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-27 11:00:05PM ET",
-  "timestamp_utc": "2026-02-28T04:00:05Z",
+  "timestamp_local": "2026-02-27 11:01:26PM ET",
+  "timestamp_utc": "2026-02-28T04:01:26Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -15,27 +15,27 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3:8b",
       "qwen3-32b-32k:latest",
+      "qwen3:8b",
       "nomic-embed-text:latest"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3:8b, qwen3-32b-32k:latest, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 53ms",
-    "response_ms": 53,
+    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 16ms",
+    "response_ms": 16,
     "vram_estimate_gb": 0.6,
     "model_params": "137M",
     "model_quant": "F16"
   },
   "feed": {
-    "total_lines": 1713,
-    "last_modified_minutes_ago": 0.7,
+    "total_lines": 1714,
+    "last_modified_minutes_ago": 0.5,
     "last_entries": [
-      "[2/27 5:50PM ET] tool-calling \u2014 Top models reach 80%+ multi-step tool-use accuracy on the Berkeley Function-Call",
       "[2/27 6:56PM ET] treasury-bonds \u2014 The US 10-year Treasury yield is 4.00% on February 27 2026 according to TradingE",
       "[2/27 10:58PM ET] self-improvement \u2014 Spaced repetition leverages how your brain naturally forms memories to maximize ",
       "[2/27 6:57PM ET] self-improvement \u2014 Spaced repetition improves long-term retention by 50 percent compared to massed ",
-      "[2/27 11:58PM ET] self-improvement \u2014 Spaced repetition improves long-term retention by 50 percent compared to massed "
+      "[2/27 11:58PM ET] self-improvement \u2014 Spaced repetition improves long-term retention by 50 percent compared to massed ",
+      "[2/27 6:00PM ET] longevity \u2014 Rapamycin increases lean tissue mass in women, phase 3 trial, 100000 participant"
     ],
     "recent_50_clean": 45,
     "recent_50_trivial": 5,
@@ -44,20 +44,20 @@
       "tool-calling": 13,
       "ai-agents": 9,
       "self-improvement": 8,
-      "compound-synthesis": 7,
-      "treasury-bonds": 4,
-      "longevity": 4
+      "compound-synthesis": 6,
+      "longevity": 5,
+      "treasury-bonds": 4
     }
   },
   "activity": {
-    "last_job": "self-improvement",
-    "last_job_time": "2/27 5:57PM ET",
+    "last_job": "ai-agents",
+    "last_job_time": "2/27 6:01PM ET",
     "last_cycle": "2/27 5:56PM ET",
-    "jobs_today": 216,
-    "success_today": 154,
+    "jobs_today": 217,
+    "success_today": 155,
     "timeout_today": 0,
     "fail_today": 62,
-    "feed_growth_today": 371,
+    "feed_growth_today": 372,
     "state": "running",
     "next_cycle_est": "5:56PM",
     "cycle_count": 89,
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772173202203,
-      "v": 1405,
-      "l": "1:20AM"
-    },
     {
       "t": 1772173484685,
       "v": 1413,
@@ -1504,6 +1499,11 @@
       "t": 1772251205736,
       "v": 1713,
       "l": "11:00PM"
+    },
+    {
+      "t": 1772251286594,
+      "v": 1714,
+      "l": "11:01PM"
     }
   ],
   "kg_stats": {
@@ -1514,16 +1514,16 @@
   },
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 58.0,
-    "power_w": 13.45,
+    "gpu_util_pct": 94.0,
+    "temp_c": 59.0,
+    "power_w": 41.45,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 3,
     "literal_timestamps": 8,
     "duplicates": 222,
-    "total": 1713,
+    "total": 1714,
     "error_rate": 13.6
   },
   "cost": {
@@ -1578,14 +1578,14 @@
     },
     "models_hot": [
       {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
         "name": "qwen3-32b-32k:latest",
         "vram_gb": 27.1,
         "params": "32.8B"
+      },
+      {
+        "name": "qwen3:8b",
+        "vram_gb": 5.6,
+        "params": "8.2B"
       },
       {
         "name": "nomic-embed-text:latest",
