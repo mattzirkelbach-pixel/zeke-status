@@ -195,6 +195,34 @@ def get_last_jobs():
 
     return flat_jobs[-20:], cycle_groups
 
+def get_kg_graph():
+    """Export KG as node/link graph for D3 force-directed visualization."""
+    try:
+        db = sqlite3.connect(str(WORKSPACE / "memory" / "knowledge.db"))
+        domain_map = {
+            'treasury': 'treasury-bonds', 'treasury-bounds': 'treasury-bonds',
+            '10-year_Treasury_yield': 'treasury-bonds',
+            '10-year_Treasury_yield_adjustment_intervals': 'treasury-bonds',
+            'senolytics': 'longevity', 'circadian biology': 'longevity', 'Longevity': 'longevity',
+            'local model inference': 'tool-calling', 'tool-calling-improvements': 'tool-calling',
+            'self_improvement': 'self-improvement', 'compound-synthesis': 'cross-domain',
+            'cross-domain-associations': 'cross-domain', 'AI development': 'ai-agents',
+            'ai-agents,longevity': 'cross-domain', 'finance-cycles': 'cross-domain',
+            'spaced_repetition_intervals': 'self-improvement',
+        }
+        ents = db.execute('SELECT id, name, entity_type, domain, confidence FROM entities').fetchall()
+        rels = db.execute('SELECT entity_a_id, entity_b_id, relationship_type, strength FROM relationships').fetchall()
+        db.close()
+        node_ids = {e[0] for e in ents}
+        nodes = [{'id': e[0], 'name': e[1][:45], 'type': e[2] or 'concept',
+                  'domain': domain_map.get(e[3], e[3] or 'unknown'), 'conf': round(e[4] or 0.8, 2)}
+                 for e in ents]
+        links = [{'source': r[0], 'target': r[1], 'type': r[2], 'strength': round(r[3] or 0.7, 2)}
+                 for r in rels if r[0] in node_ids and r[1] in node_ids and r[0] != r[1]]
+        return {'nodes': nodes, 'links': links}
+    except Exception as e:
+        return {'nodes': [], 'links': [], 'error': str(e)}
+
 def get_kg_stats():
     try:
         db = sqlite3.connect(str(WORKSPACE / "memory" / "knowledge.db"))
@@ -278,6 +306,10 @@ status = {
 
 with open(STATUS_DIR / "status.json", 'w') as f:
     json.dump(status, f, indent=2)
+
+with open(STATUS_DIR / "kg_graph.json", 'w') as f:
+    json.dump(get_kg_graph(), f)
+
 
 history_entry = {
     'timestamp': now.isoformat(),
