@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-27 10:47:00PM ET",
-  "timestamp_utc": "2026-02-28T03:47:00Z",
+  "timestamp_local": "2026-02-27 10:50:03PM ET",
+  "timestamp_utc": "2026-02-28T03:50:03Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -16,26 +16,26 @@
     "online": true,
     "models_loaded": [
       "qwen3-32b-32k:latest",
-      "qwen3:8b",
-      "nomic-embed-text:latest"
+      "nomic-embed-text:latest",
+      "qwen3:8b"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 50ms",
-    "response_ms": 50,
-    "vram_estimate_gb": 0.6,
-    "model_params": "137M",
-    "model_quant": "F16"
+    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 1936ms",
+    "response_ms": 1936,
+    "vram_estimate_gb": 5.6,
+    "model_params": "8.2B",
+    "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 1703,
-    "last_modified_minutes_ago": 1.8,
+    "total_lines": 1706,
+    "last_modified_minutes_ago": 0.2,
     "last_entries": [
-      "[2/27 10:19PM ET] ai-agents \u2014 Claude Code resolves 70 percent of SWE-bench tasks autonomously",
-      "[2/27 10:33PM ET] tool-calling \u2014 Top models on the Berkeley Function-Calling Leaderboard (BFCL) reach over 80% ac",
-      "[2/27 11:33PM ET] tool-calling \u2014 The Berkeley Function Calling Leaderboard benchmarks LLM tool-use accuracy, with",
       "[2/27 10:43PM ET] treasury-bonds \u2014 The US 10-year Treasury yield trades below 4 percent in early 2026 as the Fed ho",
-      "[2/27 11:44PM ET] self-improvement \u2014 Spaced repetition improves long-term retention by 50 percent compared to massed "
+      "[2/27 11:44PM ET] self-improvement \u2014 Spaced repetition improves long-term retention by 50 percent compared to massed ",
+      "[2/27 11:46PM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be",
+      "[2/27 10:46PM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be",
+      "[2/27 10:46PM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be"
     ],
     "recent_50_clean": 45,
     "recent_50_trivial": 5,
@@ -43,8 +43,8 @@
     "topic_distribution": {
       "tool-calling": 11,
       "compound-synthesis": 11,
-      "self-improvement": 9,
-      "ai-agents": 6,
+      "ai-agents": 9,
+      "self-improvement": 6,
       "longevity": 5,
       "treasury-bonds": 3
     }
@@ -53,11 +53,11 @@
     "last_job": "ai-agents",
     "last_job_time": "2/27 5:46PM ET",
     "last_cycle": "2/27 5:42PM ET",
-    "jobs_today": 211,
-    "success_today": 150,
+    "jobs_today": 212,
+    "success_today": 151,
     "timeout_today": 0,
     "fail_today": 61,
-    "feed_growth_today": 360,
+    "feed_growth_today": 363,
     "state": "running",
     "next_cycle_est": "5:42PM",
     "cycle_count": 88,
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772172499142,
-      "v": 1396,
-      "l": "1:08AM"
-    },
     {
       "t": 1772172713083,
       "v": 1397,
@@ -1504,6 +1499,11 @@
       "t": 1772250420871,
       "v": 1703,
       "l": "10:47PM"
+    },
+    {
+      "t": 1772250605916,
+      "v": 1706,
+      "l": "10:50PM"
     }
   ],
   "kg_stats": {
@@ -1514,17 +1514,17 @@
   },
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 55.0,
-    "power_w": 13.11,
+    "gpu_util_pct": 2.0,
+    "temp_c": 58.0,
+    "power_w": 13.41,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 3,
     "literal_timestamps": 8,
-    "duplicates": 215,
-    "total": 1703,
-    "error_rate": 13.3
+    "duplicates": 218,
+    "total": 1706,
+    "error_rate": 13.4
   },
   "cost": {
     "model": "spark/qwen3-32b-32k (local, $0)",
@@ -1583,14 +1583,14 @@
         "params": "32.8B"
       },
       {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
         "name": "nomic-embed-text:latest",
         "vram_gb": 0.6,
         "params": "137M"
+      },
+      {
+        "name": "qwen3:8b",
+        "vram_gb": 5.6,
+        "params": "8.2B"
       }
     ]
   },
