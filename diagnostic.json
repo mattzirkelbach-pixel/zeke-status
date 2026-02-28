@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-02-28 5:20:01AM ET",
-  "timestamp_utc": "2026-02-28T10:20:01Z",
+  "timestamp_local": "2026-02-28 5:25:01AM ET",
+  "timestamp_utc": "2026-02-28T10:25:01Z",
   "scheduler": {
     "running": true,
     "pids": [
-      "81096"
+      "81291"
     ],
     "count": 1,
     "type": "python"
@@ -15,21 +15,21 @@
   "spark": {
     "online": true,
     "models_loaded": [
+      "qwen3:8b",
       "qwen3-32b-32k:latest",
-      "nomic-embed-text:latest",
-      "qwen3:8b"
+      "nomic-embed-text:latest"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 33ms",
-    "response_ms": 33,
-    "vram_estimate_gb": 5.6,
-    "model_params": "8.2B",
-    "model_quant": "Q4_K_M"
+    "detail": "qwen3:8b, qwen3-32b-32k:latest, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 28ms",
+    "response_ms": 28,
+    "vram_estimate_gb": 0.6,
+    "model_params": "137M",
+    "model_quant": "F16"
   },
   "feed": {
     "total_lines": 1841,
-    "last_modified_minutes_ago": 17.8,
+    "last_modified_minutes_ago": 22.8,
     "last_entries": [
       "[2/28 5:59AM ET] compound-synthesis \u2014 Consistent low-dose rapamycin for bone maintenance parallels spaced repetition f",
       "[2/27 11:59PM ET] compound-synthesis \u2014 Consistent low-dose rapamycin for bone maintenance parallels spaced repetition f",
@@ -52,7 +52,7 @@
   "activity": {
     "last_job": null,
     "last_job_time": null,
-    "last_cycle": "2/28 12:20AM ET",
+    "last_cycle": "2/28 12:25AM ET",
     "jobs_today": 0,
     "success_today": 0,
     "timeout_today": 0,
@@ -60,16 +60,11 @@
     "feed_growth_today": 0,
     "state": "running",
     "next_cycle_est": null,
-    "cycle_count": 17,
+    "cycle_count": 22,
     "sonnet_calls": 0,
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772199901925,
-      "v": 1415,
-      "l": "8:45AM"
-    },
     {
       "t": 1772200201852,
       "v": 1415,
@@ -1504,6 +1499,11 @@
       "t": 1772274001910,
       "v": 1841,
       "l": "5:20AM"
+    },
+    {
+      "t": 1772274301371,
+      "v": 1841,
+      "l": "5:25AM"
     }
   ],
   "kg_stats": {
@@ -1514,9 +1514,9 @@
   },
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 38.0,
-    "power_w": 10.7,
+    "gpu_util_pct": 2.0,
+    "temp_c": 41.0,
+    "power_w": 11.09,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
@@ -1578,6 +1578,11 @@
     },
     "models_hot": [
       {
+        "name": "qwen3:8b",
+        "vram_gb": 5.6,
+        "params": "8.2B"
+      },
+      {
         "name": "qwen3-32b-32k:latest",
         "vram_gb": 27.1,
         "params": "32.8B"
@@ -1586,11 +1591,6 @@
         "name": "nomic-embed-text:latest",
         "vram_gb": 0.6,
         "params": "137M"
-      },
-      {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
       }
     ]
   },
