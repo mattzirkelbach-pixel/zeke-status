@@ -448,10 +448,10 @@ enrichment = {
     "gpu_stats": gpu_stats,
     "feed_quality": feed_quality,
     "cost": {
-        "model": "tiered dispatch (Spark + Haiku + Sonnet)",
+        "model": "spark/qwen3-32b-32k (local, $0)",
         "sonnet_calls_today": activity["sonnet_calls"],
         "estimated_cost_today": activity["estimated_cost"],
-        "is_zero_cost": False,  # Tiered dispatch intentionally uses API
+        "is_zero_cost": activity["estimated_cost"] == 0,
     },
     "automation": {
         "layer1": "L1 Execution — DEPLOYED",

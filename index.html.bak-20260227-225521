@@ -293,7 +293,7 @@ async function render(){
   mt+=`<div class="metric"><div class="val c-blue">${fmt(a.jobs_today||0)}</div><div class="label">Jobs Run</div><div class="detail">${sr}% success rate</div></div>`;
   mt+=`<div class="metric"><div class="val c-ok">${a.cycle_count||0}</div><div class="label">Cycles</div><div class="detail">${a.success_today||0} jobs succeeded</div></div>`;
   mt+=`<div class="metric"><div class="val" style="color:${(a.fail_today||0)>0?'var(--warn)':'var(--ok)'}">${(a.fail_today||0)+(a.timeout_today||0)}</div><div class="label">Failed</div><div class="detail">${a.timeout_today||0} timeouts</div></div>`;
-  mt+=`<div class="metric"><div class="val" style="color:var(--ok)">${costV}</div><div class="label">API Cost</div><div class="detail">${ct.budget?.total_limit?'$'+ct.budget.total_limit+'/day cap':'tiered dispatch'}</div></div>`;
+  mt+=`<div class="metric"><div class="val" style="color:var(--ok)">${costV}</div><div class="label">Cost</div><div class="detail">${(c.model||'').split('(')[0].trim()}</div></div>`;
   $('#metrics').innerHTML=mt;
 
   // ── Topology ──
