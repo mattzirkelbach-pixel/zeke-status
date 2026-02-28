@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-28 2:20:05PM ET",
-  "timestamp_utc": "2026-02-28T19:20:05Z",
+  "timestamp_local": "2026-02-28 2:25:01PM ET",
+  "timestamp_utc": "2026-02-28T19:25:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -13,47 +13,51 @@
     "running": true
   },
   "spark": {
-    "online": false,
-    "models_loaded": [],
+    "online": true,
+    "models_loaded": [
+      "qwen3-32b-32k:latest",
+      "nomic-embed-text:latest",
+      "qwen3:8b"
+    ],
     "model_stuck": false,
-    "inference_active": false,
-    "detail": "unreachable",
-    "response_ms": null,
-    "vram_estimate_gb": null,
-    "model_params": null,
-    "model_quant": null
+    "inference_active": true,
+    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 174ms",
+    "response_ms": 174,
+    "vram_estimate_gb": 5.6,
+    "model_params": "8.2B",
+    "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 2107,
-    "last_modified_minutes_ago": 6.7,
+    "total_lines": 2112,
+    "last_modified_minutes_ago": 0.1,
     "last_entries": [
-      "[2/28 2:11PM ET] tool-calling \u2014 Confident AI\u2019s tool correctness metric evaluates LLM agents\u2019 function call accur",
-      "[2/28 2:11PM ET] tool-calling \u2014 Label Studio guide recommends using precision, recall, and F1 scores alongside a",
-      "[2/28 2:13PM ET] tool-calling \u2014 Top models on the Berkeley Function-Calling Leaderboard achieve over 80% accurac",
-      "[2/28 7:12AM ET] compound-synthesis \u2014 Microdose consistency yields 25 percent greater results than infrequent larger d",
-      "[2/28 9:12AM ET] compound-synthesis \u2014 Age-related muscle loss in women and bone loss in men are preventable with rapam"
+      "[2/28 2:21PM ET] treasury-bonds \u2014 The US 10-year Treasury yield traded at 3.95% as of February 27, 2026",
+      "[2/28 12:18PM ET] treasury-bonds \u2014 The US 10-year Treasury yield trades near 4.5 percent in early 2026 as the Fed h",
+      "[2/28 9:21AM ET] longevity \u2014 Rapamycin 10mg weekly in clinical trial prevented muscle loss in women and bone ",
+      "[2/28 9:21AM ET] longevity \u2014 Rapamycin 10 mg dosage prevented muscle loss in women and bone loss in men in th",
+      "[2/28 9:24AM ET] ai-agents \u2014 Claude Code achieves strongest performance in complex reasoning tasks and debugg"
     ],
     "recent_50_clean": 48,
     "recent_50_trivial": 0,
     "recent_50_broken": 2,
     "topic_distribution": {
+      "longevity": 9,
       "self-improvement": 8,
-      "longevity": 7,
-      "treasury-bonds": 6,
-      "ai-agents": 5,
+      "treasury-bonds": 8,
+      "ai-agents": 6,
       "tool-calling": 5,
       "compound-synthesis": 2
     }
   },
   "activity": {
-    "last_job": "treasury-bonds",
-    "last_job_time": "2/28 9:18AM ET",
+    "last_job": "ai-agents",
+    "last_job_time": "2/28 9:24AM ET",
     "last_cycle": "2/28 9:18AM ET",
-    "jobs_today": 65,
-    "success_today": 46,
+    "jobs_today": 67,
+    "success_today": 48,
     "timeout_today": 0,
     "fail_today": 19,
-    "feed_growth_today": 113,
+    "feed_growth_today": 117,
     "state": "running",
     "next_cycle_est": "9:18AM",
     "cycle_count": 70,
@@ -61,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772232305754,
-      "v": 1578,
-      "l": "5:45PM"
-    },
     {
       "t": 1772232612538,
       "v": 1582,
@@ -1500,6 +1499,11 @@
       "t": 1772306405915,
       "v": 2107,
       "l": "2:20PM"
+    },
+    {
+      "t": 1772306701986,
+      "v": 2112,
+      "l": "2:25PM"
     }
   ],
   "kg_stats": {
@@ -1510,17 +1514,17 @@
   },
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 2.0,
-    "temp_c": 42.0,
-    "power_w": 11.28,
+    "gpu_util_pct": 94.0,
+    "temp_c": 63.0,
+    "power_w": 37.14,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 4,
     "literal_timestamps": 9,
-    "duplicates": 264,
-    "total": 2107,
-    "error_rate": 13.1
+    "duplicates": 265,
+    "total": 2112,
+    "error_rate": 13.2
   },
   "cost": {
     "model": "tiered dispatch (Spark + Haiku + Sonnet)",
@@ -1591,11 +1595,9 @@
     ]
   },
   "health": {
-    "status": "CRITICAL",
-    "issues": [
-      "CRITICAL: Spark offline"
-    ],
-    "issue_count": 1
+    "status": "HEALTHY",
+    "issues": [],
+    "issue_count": 0
   },
   "cycles": [
     {
