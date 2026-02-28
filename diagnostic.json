@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-28 7:10:02AM ET",
-  "timestamp_utc": "2026-02-28T12:10:02Z",
+  "timestamp_local": "2026-02-28 7:15:01AM ET",
+  "timestamp_utc": "2026-02-28T12:15:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -15,49 +15,49 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3-32b-32k:latest",
       "qwen3:8b",
+      "qwen3-32b-32k:latest",
       "nomic-embed-text:latest"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 26ms",
-    "response_ms": 26,
+    "detail": "qwen3:8b, qwen3-32b-32k:latest, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 29ms",
+    "response_ms": 29,
     "vram_estimate_gb": 0.6,
     "model_params": "137M",
     "model_quant": "F16"
   },
   "feed": {
-    "total_lines": 1865,
+    "total_lines": 1868,
     "last_modified_minutes_ago": 1.0,
     "last_entries": [
-      "[2/28 7:36AM ET] compound-synthesis \u2014 Low-dose consistent interventions outperform intensive single sessions across bo",
-      "[2/28 9:34AM ET] compound-synthesis \u2014 Consistent low-dose rapamycin improves bone maintenance while spaced repetition ",
-      "[2/28 7:06AM ET] treasury-bonds \u2014 The US 10-year Treasury yield is approximately 4.09 percent in early 2026 as geo",
       "[2/28 7:07AM ET] longevity \u2014 Females using 10 mg of rapamycin had significant improvements in lean tissue mas",
-      "[2/28 8:08AM ET] ai-agents \u2014 Claude Code achieves 87.3% task completion on real-world software engineering be"
+      "[2/28 8:08AM ET] ai-agents \u2014 Claude Code achieves 87.3% task completion on real-world software engineering be",
+      "[2/28 8:10AM ET] self-improvement \u2014 Spaced repetition improves clinical knowledge retention by 58 percent when using",
+      "[2/28 8:10AM ET] self-improvement \u2014 Spaced repetition with 1.5-day intervals achieves 58.03% retention vs 43.20% wit",
+      "[2/28 7:13PM ET] compound-synthesis \u2014 Consistent low-dose rapamycin improves bone density while spaced repetition leve"
     ],
     "recent_50_clean": 50,
     "recent_50_trivial": 0,
     "recent_50_broken": 0,
     "topic_distribution": {
-      "self-improvement": 15,
+      "self-improvement": 16,
       "compound-synthesis": 13,
       "ai-agents": 11,
-      "treasury-bonds": 4,
       "tool-calling": 4,
+      "treasury-bonds": 3,
       "longevity": 3
     }
   },
   "activity": {
-    "last_job": "ai-agents",
-    "last_job_time": "2/28 2:08AM ET",
+    "last_job": "compound-synthesis",
+    "last_job_time": "2/28 2:13AM ET",
     "last_cycle": "2/28 2:06AM ET",
-    "jobs_today": 12,
-    "success_today": 5,
+    "jobs_today": 14,
+    "success_today": 7,
     "timeout_today": 0,
     "fail_today": 7,
-    "feed_growth_today": 8,
+    "feed_growth_today": 11,
     "state": "running",
     "next_cycle_est": "2:05AM",
     "cycle_count": 59,
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772206502420,
-      "v": 1428,
-      "l": "10:35AM"
-    },
     {
       "t": 1772206801636,
       "v": 1429,
@@ -1504,6 +1499,11 @@
       "t": 1772280602166,
       "v": 1865,
       "l": "7:10AM"
+    },
+    {
+      "t": 1772280901776,
+      "v": 1868,
+      "l": "7:15AM"
     }
   ],
   "kg_stats": {
@@ -1514,17 +1514,17 @@
   },
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 60.0,
-    "power_w": 35.23,
+    "gpu_util_pct": 95.0,
+    "temp_c": 66.0,
+    "power_w": 53.59,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 1,
     "literal_timestamps": 6,
-    "duplicates": 195,
-    "total": 1865,
-    "error_rate": 10.8
+    "duplicates": 196,
+    "total": 1868,
+    "error_rate": 10.9
   },
   "cost": {
     "model": "tiered dispatch (Spark + Haiku + Sonnet)",
@@ -1578,14 +1578,14 @@
     },
     "models_hot": [
       {
-        "name": "qwen3-32b-32k:latest",
-        "vram_gb": 27.1,
-        "params": "32.8B"
-      },
-      {
         "name": "qwen3:8b",
         "vram_gb": 5.6,
         "params": "8.2B"
+      },
+      {
+        "name": "qwen3-32b-32k:latest",
+        "vram_gb": 27.1,
+        "params": "32.8B"
       },
       {
         "name": "nomic-embed-text:latest",
