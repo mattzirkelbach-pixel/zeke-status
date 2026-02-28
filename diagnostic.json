@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-28 1:00:01PM ET",
-  "timestamp_utc": "2026-02-28T18:00:01Z",
+  "timestamp_local": "2026-02-28 1:05:01PM ET",
+  "timestamp_utc": "2026-02-28T18:05:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -16,48 +16,48 @@
     "online": true,
     "models_loaded": [
       "qwen3-32b-32k:latest",
-      "qwen3:8b",
-      "nomic-embed-text:latest"
+      "nomic-embed-text:latest",
+      "qwen3:8b"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 27ms",
-    "response_ms": 27,
-    "vram_estimate_gb": 0.6,
-    "model_params": "137M",
-    "model_quant": "F16"
+    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 29ms",
+    "response_ms": 29,
+    "vram_estimate_gb": 5.6,
+    "model_params": "8.2B",
+    "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 2084,
-    "last_modified_minutes_ago": 0.2,
+    "total_lines": 2087,
+    "last_modified_minutes_ago": 1.4,
     "last_entries": [
-      "[2/28 12:56PM ET] treasury-bonds \u2014 The 10-year Treasury yield is 4.09 percent in early 2026",
-      "[2/28 7:56AM ET] treasury-bonds \u2014 The US 10-year Treasury yield trades near 4.5 percent in early 2026 as the Fed h",
-      "[2/28 12:56PM ET] treasury-bonds \u2014 The US 10-year Treasury yield trades near 4.5 percent in early 2026 as the Fed h",
       "[2/28 12:58PM ET] longevity \u2014 Rapamycin 10 mg weekly improved bone mass in men and muscle mass in women per PE",
-      "[2/28 12:58PM ET] longevity \u2014 Rapamycin improved muscle mass in women and bone mass in men in the PEARL trial,"
+      "[2/28 12:58PM ET] longevity \u2014 Rapamycin improved muscle mass in women and bone mass in men in the PEARL trial,",
+      "[2/28 8:00AM ET] ai-agents \u2014 Lovable achieved 8/10 in a comprehensive 2026 benchmark for autonomous software ",
+      "[2/28 2:00PM ET] ai-agents \u2014 Lovable scores 8/10 in autonomous SaaS benchmarks with TotalumSDK database",
+      "[2/28 8:02AM ET] self-improvement \u2014 Spaced repetition improves long-term retention by 50 percent compared to massed "
     ],
     "recent_50_clean": 50,
     "recent_50_trivial": 0,
     "recent_50_broken": 0,
     "topic_distribution": {
-      "self-improvement": 8,
-      "longevity": 5,
-      "ai-agents": 5,
+      "self-improvement": 9,
+      "ai-agents": 6,
+      "longevity": 3,
       "treasury-bonds": 3,
       "compound-synthesis": 2,
       "tool-calling": 2
     }
   },
   "activity": {
-    "last_job": "longevity",
-    "last_job_time": "2/28 7:57AM ET",
+    "last_job": "compound-synthesis",
+    "last_job_time": "2/28 8:04AM ET",
     "last_cycle": "2/28 7:55AM ET",
-    "jobs_today": 56,
-    "success_today": 39,
+    "jobs_today": 59,
+    "success_today": 42,
     "timeout_today": 0,
     "fail_today": 17,
-    "feed_growth_today": 99,
+    "feed_growth_today": 105,
     "state": "running",
     "next_cycle_est": "7:55AM",
     "cycle_count": 68,
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772227501448,
-      "v": 1551,
-      "l": "4:25PM"
-    },
     {
       "t": 1772227802173,
       "v": 1556,
@@ -1504,6 +1499,11 @@
       "t": 1772301601899,
       "v": 2084,
       "l": "1:00PM"
+    },
+    {
+      "t": 1772301901661,
+      "v": 2087,
+      "l": "1:05PM"
     }
   ],
   "kg_stats": {
@@ -1515,15 +1515,15 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 63.0,
-    "power_w": 36.8,
+    "temp_c": 75.0,
+    "power_w": 79.89,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 4,
     "literal_timestamps": 7,
-    "duplicates": 258,
-    "total": 2084,
+    "duplicates": 259,
+    "total": 2087,
     "error_rate": 12.9
   },
   "cost": {
@@ -1583,14 +1583,14 @@
         "params": "32.8B"
       },
       {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
         "name": "nomic-embed-text:latest",
         "vram_gb": 0.6,
         "params": "137M"
+      },
+      {
+        "name": "qwen3:8b",
+        "vram_gb": 5.6,
+        "params": "8.2B"
       }
     ]
   },
