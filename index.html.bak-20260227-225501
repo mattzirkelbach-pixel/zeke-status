@@ -494,52 +494,18 @@ async function render(){
     gl+=`<div class="card"><h2>GPU</h2>${gpuC}</div>`;
   }
 
-  // Automation Layers
+  // Automation
   const auto=d.automation||{};
   if(Object.keys(auto).length){
     let autoC='';
+    const layerNames={layer1:'L1 · Execution',layer2:'L2 · Oversight',layer3:'L3 · Intelligence'};
     for(const[k,v]of Object.entries(auto)){
-      const val=typeof v==='string'?v:JSON.stringify(v);
-      const cls=val.includes('DEPLOYED')?'c-ok':val.includes('PROGRESS')?'c-orange':'c-purple';
-      autoC+=Row(k.replace('layer','L'),val,cls);
+      const label=layerNames[k]||k;
+      const val=typeof v==='string'?v:(v?.status||JSON.stringify(v));
+      const cls=val?.includes('DEPLOYED')?'c-ok':val?.includes('PROGRESS')?'c-orange':'c-blue';
+      autoC+=Row(label,val,cls);
     }
-    gl+=`<div class="card"><h2>Autonomy Layers</h2>${autoC}</div>`;
-  }
-
-  // Compute Architecture
-  const ct=d.compute_tiers||{};
-  if(ct.layers||ct.budget){
-    let ctC='';
-    // Compute layers
-    if(ct.layers){
-      for(const[k,v]of Object.entries(ct.layers)){
-        const st=v.status||'?';
-        const cls=st==='active'?'c-ok':st==='planned'?'c-purple':'c-orange';
-        ctC+=Row(k.replace('_',' '),v.role+' ('+v.cost+')',cls);
-      }
-    }
-    // Budget
-    if(ct.budget&&ct.budget.total_spent!=null){
-      const b=ct.budget;
-      const pct=b.total_limit>0?Math.round(b.total_spent/b.total_limit*100):0;
-      ctC+=`<div style="margin-top:6px;border-top:1px solid var(--border);padding-top:6px">`;
-      ctC+=Row('API Budget','$'+b.total_spent.toFixed(2)+' / $'+b.total_limit.toFixed(2),pct>80?'c-warn':pct>50?'c-orange':'c-ok');
-      if(b.haiku_spent>0)ctC+=Row('Haiku','$'+b.haiku_spent.toFixed(3),'c-blue');
-      if(b.sonnet_spent>0)ctC+=Row('Sonnet','$'+b.sonnet_spent.toFixed(3),'c-purple');
-      ctC+=`</div>`;
-    }
-    // Hot models
-    if(ct.models_hot&&ct.models_hot.length){
-      ctC+=`<div style="margin-top:6px;border-top:1px solid var(--border);padding-top:6px">`;
-      const totalVram=ct.models_hot.reduce((s,m)=>s+m.vram_gb,0);
-      ctC+=Row('Hot VRAM',totalVram.toFixed(1)+'GB / 128GB','c-accent');
-      for(const m of ct.models_hot){
-        const short=m.name.replace(':latest','').replace('-32k','');
-        ctC+=Row(short,m.params+' · '+m.vram_gb+'GB','c-dim');
-      }
-      ctC+=`</div>`;
-    }
-    gl+=`<div class="card"><h2>Compute Architecture</h2>${ctC}</div>`;
+    gl+=`<div class="card"><h2>Automation</h2>${autoC}</div>`;
   }
 
   // Feed Quality Deep (from diagnostic.json)
