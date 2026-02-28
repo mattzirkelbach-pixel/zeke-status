@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-28 11:05:02AM ET",
-  "timestamp_utc": "2026-02-28T16:05:02Z",
+  "timestamp_local": "2026-02-28 11:10:04AM ET",
+  "timestamp_utc": "2026-02-28T16:10:04Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -15,49 +15,49 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nomic-embed-text:latest",
       "qwen3-32b-32k:latest",
+      "nomic-embed-text:latest",
       "qwen3:8b"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "nomic-embed-text:latest, qwen3-32b-32k:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 84ms",
-    "response_ms": 84,
+    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 57ms",
+    "response_ms": 57,
     "vram_estimate_gb": 5.6,
     "model_params": "8.2B",
     "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 1970,
-    "last_modified_minutes_ago": 0.4,
+    "total_lines": 1972,
+    "last_modified_minutes_ago": 0.2,
     "last_entries": [
-      "[2/28 6:01AM ET] longevity \u2014 Rapamycin improved muscle mass and bone health in the landmark PEARL clinical tr",
-      "[2/28 11:03AM ET] Camel Finance: Exactly as Expected and Sentiment Sours \u2014  \u26a0",
-      "[2/28 11:02AM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be",
-      "[2/28 11:03AM ET] Camel Finance: A Risk Off Moment is Brewing! \u2014  \u26a0",
-      "[2/28 11:04AM ET] Camel Finance: Kemo predicted this months ago! \u2014  \u26a0"
+      "[2/28 12:02PM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be",
+      "[2/28 12:02PM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be",
+      "[2/28 12:02PM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be",
+      "[2/28 11:08AM ET] self-improvement \u2014 Spaced repetition improves retention by 50 percent in controlled studies",
+      "[2/28 11:14AM ET] compound-synthesis \u2014 Rapamycin weekly and spaced repetition both demonstrate cumulative small interve"
     ],
-    "recent_50_clean": 44,
-    "recent_50_trivial": 3,
+    "recent_50_clean": 47,
+    "recent_50_trivial": 0,
     "recent_50_broken": 3,
     "topic_distribution": {
-      "compound-synthesis": 16,
-      "longevity": 7,
-      "ai-agents": 7,
+      "compound-synthesis": 17,
+      "ai-agents": 10,
+      "longevity": 6,
+      "self-improvement": 6,
       "tool-calling": 6,
-      "self-improvement": 5,
-      "treasury-bonds": 4
+      "treasury-bonds": 3
     }
   },
   "activity": {
-    "last_job": "ai-agents",
-    "last_job_time": "2/28 6:02AM ET",
+    "last_job": "compound-synthesis",
+    "last_job_time": "2/28 6:09AM ET",
     "last_cycle": "2/28 5:59AM ET",
-    "jobs_today": 42,
-    "success_today": 31,
+    "jobs_today": 44,
+    "success_today": 33,
     "timeout_today": 0,
     "fail_today": 11,
-    "feed_growth_today": 71,
+    "feed_growth_today": 79,
     "state": "running",
     "next_cycle_est": "5:59AM",
     "cycle_count": 65,
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772220601942,
-      "v": 1511,
-      "l": "2:30PM"
-    },
     {
       "t": 1772220901693,
       "v": 1514,
@@ -1504,6 +1499,11 @@
       "t": 1772294702892,
       "v": 1970,
       "l": "11:05AM"
+    },
+    {
+      "t": 1772295004348,
+      "v": 1972,
+      "l": "11:10AM"
     }
   ],
   "kg_stats": {
@@ -1514,17 +1514,17 @@
   },
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 63.0,
-    "power_w": 39.99,
+    "gpu_util_pct": 95.0,
+    "temp_c": 61.0,
+    "power_w": 39.38,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 4,
     "literal_timestamps": 7,
-    "duplicates": 241,
-    "total": 1970,
-    "error_rate": 12.8
+    "duplicates": 244,
+    "total": 1972,
+    "error_rate": 12.9
   },
   "cost": {
     "model": "tiered dispatch (Spark + Haiku + Sonnet)",
@@ -1578,14 +1578,14 @@
     },
     "models_hot": [
       {
-        "name": "nomic-embed-text:latest",
-        "vram_gb": 0.6,
-        "params": "137M"
-      },
-      {
         "name": "qwen3-32b-32k:latest",
         "vram_gb": 27.1,
         "params": "32.8B"
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "vram_gb": 0.6,
+        "params": "137M"
       },
       {
         "name": "qwen3:8b",
