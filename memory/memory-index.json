@@ -8,7 +8,7 @@
     "session_journal": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/session-journal.jsonl"
   },
   "system_state": {
-    "feed_entries": 1585,
+    "feed_entries": 1590,
     "kg_entities": 303,
     "active_openclaw_jobs": 11,
     "cron_jobs": 13,
@@ -17,9 +17,9 @@
     "feed_stagnant": false
   },
   "last_session": {
-    "date": "2026-02-27T23:28:42.226597+00:00",
-    "summary": "Spark contention fix, 50-video backfill launched, temporal decay in dashboard, site crawler ready",
-    "key_fix": "spark_lock.py prevents scheduler/pipeline collision on Ollama"
+    "date": "2026-02-28T01:24:25.052114+00:00",
+    "summary": "Mid-session checkpoint: backfill running, crawl strategy ready, temporal decay verified",
+    "key_fix": "Backfill running autonomously, crawler script ready for CF site, temporal decay live"
   },
   "active_crons": [
     "guardian (1min) \u2014 scheduler keepalive",
@@ -43,7 +43,8 @@
     "Gateway needs restart after config changes \u2014 also purge sessions",
     "Local models break above 6 tools \u2014 byProvider restriction is load-bearing",
     "MCP SSE keepalive patched (ping=15s) \u2014 monitor if drops still occur",
-    "Spark lock (spark_lock.py) is advisory \u2014 processes must import and use it. Stale lock auto-clears 10min."
+    "Spark lock (spark_lock.py) is advisory \u2014 processes must import and use it. Stale lock auto-clears 10min.",
+    "osascript Chrome control requires 'Allow JS from Apple Events' in Chrome settings"
   ],
   "last_updated": "2026-02-27T00:24:04.069926+00:00",
   "known_fragile_points": [
