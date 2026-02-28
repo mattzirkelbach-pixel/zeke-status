@@ -360,56 +360,6 @@ def get_feed_quality_audit():
     issues['error_rate'] = round(bad / max(issues['total'], 1) * 100, 1)
     return issues
 
-
-def get_compute_tiers():
-    """Get compute architecture tier status and dispatch budget."""
-    tiers = {
-        "architecture": "tiered_dispatch",
-        "layers": {
-            "L0_python": {"status": "active", "cost": "$0", "role": "Fetch, transform, schedule"},
-            "L1_vector": {"status": "planned", "cost": "$0", "role": "Embeddings + ChromaDB RAG"},
-            "L2_triage": {"status": "active", "cost": "$0", "role": "qwen3:8b classification"},
-            "L3_api": {"status": "active", "cost": "paid", "role": "Haiku/Sonnet/Opus"},
-            "L4_batch": {"status": "active", "cost": "$0", "role": "qwen3-32b overnight"},
-        },
-        "budget": {},
-        "models_hot": [],
-    }
-    # Read dispatch budget
-    budget_file = os.path.join(HOME, ".zeke-dispatch-budget.json")
-    try:
-        with open(budget_file) as f:
-            budget = json.load(f)
-        tiers["budget"] = {
-            "haiku_spent": round(budget.get("tier2", {}).get("spent", 0), 4),
-            "haiku_limit": budget.get("tier2", {}).get("limit", 1.0),
-            "sonnet_spent": round(budget.get("tier3", {}).get("spent", 0), 4),
-            "sonnet_limit": budget.get("tier3", {}).get("limit", 0.5),
-            "total_spent": round(sum(t.get("spent", 0) for t in budget.values() if isinstance(t, dict)), 4),
-            "total_limit": 2.0,
-            "date": budget.get("date", ""),
-        }
-    except:
-        tiers["budget"] = {"status": "no_budget_file"}
-    # Get hot models from Spark
-    try:
-        r = subprocess.run(
-            ["curl", "-s", "--max-time", "5", f"{SPARK}/api/ps"],
-            capture_output=True, text=True, timeout=8
-        )
-        if r.returncode == 0:
-            data = json.loads(r.stdout)
-            for m in data.get("models", []):
-                vram = m.get("size_vram", 0) / (1024**3)
-                tiers["models_hot"].append({
-                    "name": m.get("name", "?"),
-                    "vram_gb": round(vram, 1),
-                    "params": m.get("details", {}).get("parameter_size", "?"),
-                })
-    except:
-        pass
-    return tiers
-
 # ============================================================
 # MERGE MODE: Read scheduler's diagnostic, enrich with our data
 # ============================================================
