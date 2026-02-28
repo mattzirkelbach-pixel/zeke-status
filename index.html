@@ -168,7 +168,18 @@ body{
   font-size:11px;color:var(--text3);
 }
 .footer a{color:var(--accent);text-decoration:none;}
+
+/* KG force graph */
+#kg-graph{width:100%;height:280px;background:var(--bg);border-radius:6px;overflow:hidden;cursor:grab;}
+#kg-graph:active{cursor:grabbing;}
+.kg-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.kg-legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text2);}
+.kg-legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.kg-tooltip{position:fixed;background:rgba(10,12,20,.95);border:1px solid var(--border2);border-radius:6px;
+  padding:6px 10px;font-size:11px;color:var(--text);pointer-events:none;z-index:999;max-width:220px;display:none;}
 </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 </head>
 <body>
 
@@ -451,7 +462,21 @@ async function render(){
   }
 
   $('#grid3').innerHTML = `
-    <div class="card"><div class="card-title">Knowledge Graph</div>${kgHtml}</div>
+    <div class="card" style="grid-column:span 2">
+      <div class="card-title" style="margin-bottom:8px">Knowledge Graph
+        <span style="font-size:10px;color:var(--text2);font-weight:400;margin-left:8px">${fmt(kg.entities||0)} entities · ${fmt(kg.relations||0)} relations · hover to explore</span>
+      </div>
+      <svg id="kg-graph"></svg>
+      <div class="kg-legend" id="kg-legend"></div>
+      <div class="divider" style="margin-top:10px"></div>
+      <div style="display:flex;gap:16px;margin-top:6px">
+        ${KV('Entities', fmt(kg.entities||0), 'c-accent')}
+        ${KV('Relations', fmt(kg.relations||0), 'c-blue')}
+        ${KV('Associations', fmt(kg.associations||0), 'c-purple')}
+        ${KV('RAG Vectors', '913+', 'c-ok')}
+        ${KV('Corpus', '27 transcripts · 59 lessons', 'c-dim')}
+      </div>
+    </div>
     <div class="card"><div class="card-title">DGX Spark · NVIDIA GB10</div>${gpuHtml}</div>
     <div class="card"><div class="card-title">Feed Quality</div>${fqHtml}</div>`;
 
@@ -544,5 +569,114 @@ async function render(){
 
 render();
 setInterval(render, 30000);
+
+// ── KG Force-Directed Graph ──────────────────────────────────────────────────
+const KG_DOMAIN_COLORS = {
+  'longevity':      '#34d399',
+  'treasury-bonds': '#60a5fa',
+  'ai-agents':      '#a78bfa',
+  'tool-calling':   '#fb923c',
+  'self-improvement':'#f472b6',
+  'cross-domain':   '#facc15',
+  'unknown':        '#6b7280',
+};
+const KG_DOMAIN_LABELS = {
+  'longevity': 'Longevity', 'treasury-bonds': 'Treasury',
+  'ai-agents': 'AI Agents', 'tool-calling': 'Tools',
+  'self-improvement': 'Self-Improvement', 'cross-domain': 'Cross-Domain',
+  'unknown': 'Other',
+};
+
+async function renderKGGraph() {
+  const RAW = 'https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/kg_graph.json';
+  let graph;
+  try { graph = await fetch(RAW).then(r => r.json()); }
+  catch(e) { console.warn('KG graph load failed', e); return; }
+
+  const { nodes, links } = graph;
+  const el = document.getElementById('kg-graph');
+  if (!el) return;
+
+  const W = el.parentElement.offsetWidth - 32;
+  const H = 280;
+  el.setAttribute('width', W);
+  el.setAttribute('height', H);
+
+  const svg = d3.select('#kg-graph');
+  svg.selectAll('*').remove();
+
+  // Tooltip
+  let tip = document.querySelector('.kg-tooltip');
+  if (!tip) { tip = document.createElement('div'); tip.className = 'kg-tooltip'; document.body.appendChild(tip); }
+
+  // Legend
+  const legendEl = document.getElementById('kg-legend');
+  if (legendEl) {
+    const domains = [...new Set(nodes.map(n => n.domain))].filter(d => KG_DOMAIN_COLORS[d]);
+    legendEl.innerHTML = domains.map(d =>
+      `<div class="kg-legend-item"><div class="kg-legend-dot" style="background:${KG_DOMAIN_COLORS[d]||'#6b7280'}"></div>${KG_DOMAIN_LABELS[d]||d}</div>`
+    ).join('');
+  }
+
+  const domainCount = {};
+  nodes.forEach(n => domainCount[n.domain] = (domainCount[n.domain]||0) + 1);
+
+  // Simulation
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(38).strength(d => d.strength * 0.5))
+    .force('charge', d3.forceManyBody().strength(-60))
+    .force('center', d3.forceCenter(W/2, H/2))
+    .force('collide', d3.forceCollide(7))
+    .alphaDecay(0.025);
+
+  // Zoom + pan
+  const g = svg.append('g');
+  svg.call(d3.zoom().scaleExtent([0.3, 4]).on('zoom', e => g.attr('transform', e.transform)));
+
+  // Links
+  const link = g.append('g').attr('stroke-opacity', 0.2)
+    .selectAll('line').data(links).join('line')
+    .attr('stroke', d => {
+      const sn = nodes.find(n=>n.id===d.source.id||n.id===d.source);
+      return KG_DOMAIN_COLORS[sn?.domain] || '#6b7280';
+    })
+    .attr('stroke-width', d => Math.max(0.5, d.strength * 1.5));
+
+  // Nodes
+  const node = g.append('g')
+    .selectAll('circle').data(nodes).join('circle')
+    .attr('r', d => {
+      const cnt = links.filter(l => l.source.id===d.id||l.target.id===d.id||l.source===d.id||l.target===d.id).length;
+      return Math.max(3, Math.min(9, 2.5 + cnt * 0.7));
+    })
+    .attr('fill', d => KG_DOMAIN_COLORS[d.domain] || '#6b7280')
+    .attr('fill-opacity', 0.85)
+    .attr('stroke', '#0e1117').attr('stroke-width', 0.5)
+    .call(d3.drag()
+      .on('start', (e,d) => { if(!e.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on('drag', (e,d) => { d.fx=e.x; d.fy=e.y; })
+      .on('end', (e,d) => { if(!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; }))
+    .on('mouseover', (e,d) => {
+      const connCount = links.filter(l=>l.source.id===d.id||l.target.id===d.id||l.source===d.id||l.target===d.id).length;
+      tip.innerHTML = `<strong>${d.name}</strong><br><span style="color:#94a3b8">${d.domain} · ${d.type}</span><br>conf: ${d.conf} · links: ${connCount}`;
+      tip.style.display = 'block';
+    })
+    .on('mousemove', e => { tip.style.left=(e.clientX+12)+'px'; tip.style.top=(e.clientY-8)+'px'; })
+    .on('mouseout', () => { tip.style.display='none'; });
+
+  sim.on('tick', () => {
+    link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+        .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    node.attr('cx',d=>Math.max(8,Math.min(W-8,d.x))).attr('cy',d=>Math.max(8,Math.min(H-8,d.y)));
+  });
+
+  // Pulse new nodes (recent = high id) 
+  const maxId = Math.max(...nodes.map(n=>n.id));
+  node.filter(d=>d.id > maxId - 20)
+    .attr('stroke','#facc15').attr('stroke-width',1.5).attr('stroke-opacity',0.8);
+}
+
+renderKGGraph();
+
 </script>
 </body></html>
