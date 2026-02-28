@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-28 3:00:01PM ET",
-  "timestamp_utc": "2026-02-28T20:00:01Z",
+  "timestamp_local": "2026-02-28 3:05:01PM ET",
+  "timestamp_utc": "2026-02-28T20:05:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -15,49 +15,49 @@
   "spark": {
     "online": true,
     "models_loaded": [
+      "qwen3-32b-32k:latest",
       "nomic-embed-text:latest",
-      "qwen3:8b",
-      "qwen3-32b-32k:latest"
+      "qwen3:8b"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 27ms",
-    "response_ms": 27,
-    "vram_estimate_gb": 27.1,
-    "model_params": "32.8B",
+    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 30ms",
+    "response_ms": 30,
+    "vram_estimate_gb": 5.6,
+    "model_params": "8.2B",
     "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 2117,
-    "last_modified_minutes_ago": 31.3,
+    "total_lines": 2121,
+    "last_modified_minutes_ago": 0.6,
     "last_entries": [
-      "[2/28 9:25AM ET] self-improvement \u2014 Emotional salience enhances retention of connected mundane events by 40 percent ",
-      "[2/28 2:26PM ET] self-improvement \u2014 Memories with high emotional salience strengthen connected fragile memories by u",
-      "[2/28 12:27PM ET] compound-synthesis \u2014 Microdosing consistency yields 300x better muscle retention in longevity studies",
-      "[2/28 12:27PM ET] compound-synthesis \u2014 Age-related muscle loss prevention through rapamycin complements spaced repetiti",
-      "[2/28 12:27PM ET] compound-synthesis \u2014 Low-dose consistent interventions outperform intensive single sessions across bo"
+      "[2/28 12:27PM ET] compound-synthesis \u2014 Low-dose consistent interventions outperform intensive single sessions across bo",
+      "[2/28 1:00PM ET] treasury-bonds \u2014 The US 10-year Treasury yield is at 3.95 percent according to Trading Economics",
+      "[2/28 3:02PM ET] longevity \u2014 10 mg rapamycin prevented bone loss in men and muscle loss in women with no seve",
+      "[2/28 3:02PM ET] longevity \u2014 Rapamycin at 10mg weekly dose prevented muscle loss in women and bone loss in me",
+      "[2/28 1:03PM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be"
     ],
     "recent_50_clean": 48,
     "recent_50_trivial": 0,
     "recent_50_broken": 2,
     "topic_distribution": {
+      "longevity": 11,
       "self-improvement": 10,
-      "longevity": 9,
-      "treasury-bonds": 8,
-      "ai-agents": 6,
+      "treasury-bonds": 9,
+      "ai-agents": 7,
       "tool-calling": 5,
       "compound-synthesis": 5
     }
   },
   "activity": {
-    "last_job": "treasury-bonds",
-    "last_job_time": "2/28 10:00AM ET",
+    "last_job": "self-improvement",
+    "last_job_time": "2/28 10:04AM ET",
     "last_cycle": "2/28 10:00AM ET",
-    "jobs_today": 70,
-    "success_today": 51,
+    "jobs_today": 73,
+    "success_today": 54,
     "timeout_today": 0,
     "fail_today": 19,
-    "feed_growth_today": 123,
+    "feed_growth_today": 127,
     "state": "running",
     "next_cycle_est": "9:59AM",
     "cycle_count": 71,
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772234701612,
-      "v": 1585,
-      "l": "6:25PM"
-    },
     {
       "t": 1772235002631,
       "v": 1586,
@@ -1504,6 +1499,11 @@
       "t": 1772308801438,
       "v": 2117,
       "l": "3:00PM"
+    },
+    {
+      "t": 1772309101922,
+      "v": 2121,
+      "l": "3:05PM"
     }
   ],
   "kg_stats": {
@@ -1514,16 +1514,16 @@
   },
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 38.0,
-    "power_w": 10.84,
+    "gpu_util_pct": 95.0,
+    "temp_c": 56.0,
+    "power_w": 22.75,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 4,
     "literal_timestamps": 9,
-    "duplicates": 266,
-    "total": 2117,
+    "duplicates": 267,
+    "total": 2121,
     "error_rate": 13.2
   },
   "cost": {
@@ -1578,6 +1578,11 @@
     },
     "models_hot": [
       {
+        "name": "qwen3-32b-32k:latest",
+        "vram_gb": 27.1,
+        "params": "32.8B"
+      },
+      {
         "name": "nomic-embed-text:latest",
         "vram_gb": 0.6,
         "params": "137M"
@@ -1586,11 +1591,6 @@
         "name": "qwen3:8b",
         "vram_gb": 5.6,
         "params": "8.2B"
-      },
-      {
-        "name": "qwen3-32b-32k:latest",
-        "vram_gb": 27.1,
-        "params": "32.8B"
       }
     ]
   },
