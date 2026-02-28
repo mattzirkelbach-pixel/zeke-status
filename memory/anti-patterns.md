@@ -70,3 +70,11 @@
 - Pattern: write script → make executable → `bash script.sh &` → return immediately
 - For multi-hour jobs: write to research-queue.jsonl or add one-shot cron entry
 - NEVER try to babysit a long process through sequential MCP calls
+
+## Claude Session Timeout Pattern (2026-02-27)
+- Claude.ai conversations timeout on long tasks. Working memory evaporates.
+- ALWAYS checkpoint to Layer 2 (GitHub memory) mid-conversation, not just at end
+- Pattern: do work → journal entry → git push → continue work
+- For long-running tasks: write autonomous scripts, fire-and-forget, check results next session
+- NEVER try to maintain state across multiple tool calls for hours-long processes
+- Use `get_session_context` as FIRST call in every new conversation to reload state
