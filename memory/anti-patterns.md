@@ -52,3 +52,21 @@
 - **SLV entry is SEPARATE capital from GLD.** Never reduce GLD allocation to fund SLV. Both fire on same trigger (gold DCL), both go in E*TRADE (1256).
 - **No hedging decisions without pulling full data first.** Don't react to a single price move. Pull prices → portfolio → cycle state → trade plan → THEN decide.
 - **Size with conviction, not anxiety.** FOMO-driven entries are undersized (rushed) or oversized (compensating). Planned entries have pre-set allocations.
+
+## Spark Contention (2026-02-27)
+- Multiple consumers (scheduler, camel pipeline, self-repair) hit Ollama with no coordination
+- Ollama queues internally but jobs can timeout waiting
+- FIX: spark_lock.py advisory lock with PID-alive checks and 10min staleness
+- All Spark consumers must acquire/release lock around inference calls
+
+## Feed Deduplication (2026-02-27)
+- v1 pipeline used `https://youtube.com/watch?v=ID`, v2 used `youtube/ID`
+- Same video appeared 3-6x in feed, poisoning quality scores
+- FIX: Normalize all camel sources to `youtube/{VIDEO_ID}` format
+- Pipeline now does dedup check before writing
+
+## MCP Timeout Pattern (2026-02-27)
+- MCP exec_command has 30s timeout - NOT for long-running processes
+- Pattern: write script → make executable → `bash script.sh &` → return immediately
+- For multi-hour jobs: write to research-queue.jsonl or add one-shot cron entry
+- NEVER try to babysit a long process through sequential MCP calls
