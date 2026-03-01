@@ -277,69 +277,6 @@ body{
   <!-- 3. PIPELINE -->
   <div class="pipeline" id="pipeline"></div>
 
-  <!-- 3b. SYSTEM HEALTH ROW -->
-  <div class="syshealth" id="syshealth">
-    <div class="sh-card">
-      <div class="sh-label">TCC Prompts</div>
-      <div class="sh-val c-ok">0</div>
-      <div class="sh-sub">FDA fully granted · 2026-03-01</div>
-    </div>
-    <div class="sh-card">
-      <div class="sh-label">LaunchAgents</div>
-      <div class="sh-val c-accent">22</div>
-      <div class="sh-sub">All scripts valid · 0 ghosts</div>
-    </div>
-    <div class="sh-card">
-      <div class="sh-label">FDA Grants</div>
-      <div class="sh-grant"><span class="dot"></span>python3.14 · Full Disk Access</div>
-      <div class="sh-grant"><span class="dot"></span>claude-code · Full Disk Access</div>
-      <div class="sh-grant"><span class="dot"></span>node · Full Disk Access</div>
-      <div class="sh-grant"><span class="dot"></span>terminal · Full Disk Access</div>
-    </div>
-    <div class="sh-card">
-      <div class="sh-label">Next Block</div>
-      <div class="sh-val" style="font-size:1em;color:var(--blue)">Block 3</div>
-      <div class="sh-sub">RAG feedback loop · embed→ChromaDB→context-aware API</div>
-    </div>
-  </div>
-
-  <!-- 3c. DOMAIN REGISTRY -->
-  <div class="autonomy" style="margin-bottom:12px">
-    <div class="section-label">Domain Registry · 5 Active · 2 Merged 2026-03-01</div>
-    <div class="domain-grid" id="domains">
-      <div class="domain-card">
-        <div class="domain-name">camel-finance</div>
-        <div class="domain-cap">cap: 50/day · pipeline-driven</div>
-        <div class="domain-q hi">8.0 / 10</div>
-        <div class="domain-note">YouTube transcripts · thesis ledger</div>
-      </div>
-      <div class="domain-card">
-        <div class="domain-name">treasury-bonds</div>
-        <div class="domain-cap">cap: 4/day · openclaw-cron</div>
-        <div class="domain-q mid">5.0 / 10</div>
-        <div class="domain-note">TLT · yields · 1256 rules ← merged personal-finance</div>
-      </div>
-      <div class="domain-card">
-        <div class="domain-name">ai-agents</div>
-        <div class="domain-cap">cap: 3/day · openclaw-cron</div>
-        <div class="domain-q lo">3.3 / 10</div>
-        <div class="domain-note">MCP · local models ← merged tool-calling</div>
-      </div>
-      <div class="domain-card">
-        <div class="domain-name">longevity</div>
-        <div class="domain-cap">cap: 2/day · openclaw-cron</div>
-        <div class="domain-q lo">3.3 / 10</div>
-        <div class="domain-note">senolytics · NAD+ · rapamycin</div>
-      </div>
-      <div class="domain-card">
-        <div class="domain-name">self-improvement</div>
-        <div class="domain-cap">cap: 2/day · openclaw-cron</div>
-        <div class="domain-q lo">3.3 / 10</div>
-        <div class="domain-note">spaced repetition · habits</div>
-      </div>
-    </div>
-  </div>
-
   <!-- 4. CHARTS: Today + All-Time side by side -->
   <div class="grid2" id="charts"></div>
 
@@ -354,19 +291,12 @@ body{
     <div class="card-title">Latest Research</div>
   </div>
 
-  <!-- 8. SESSION CHANGELOG -->
-  <div class="changelog" id="changelog">
-    <div class="card-title">Session Changelog</div>
-    <div id="changelog-entries"><div class="c-dim" style="font-size:12px">Loading...</div></div>
-  </div>
-
 </div>
 
 <div class="footer">
-  Mission Control v16 · 30s auto-refresh ·
+  Mission Control v15 · 30s auto-refresh ·
   <a href="diagnostic.json">diagnostic.json</a> ·
-  <a href="daily-snapshots.jsonl">snapshots</a> ·
-  <a href="memory/session-journal.jsonl">journal</a>
+  <a href="daily-snapshots.jsonl">snapshots</a>
 </div>
 
 <script>
