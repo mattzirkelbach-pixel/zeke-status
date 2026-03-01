@@ -1,0 +1,80 @@
+{
+  "_description": "Canonical domain registry. Add domains here only. Scheduler and queue read from this.",
+  "_updated": "2026-03-01",
+  "_protocol": "Add domain: (1) entry here (2) domains/{name}.md (3) OpenClaw job. NO scheduler edits.",
+  "domains": [
+    {
+      "name": "camel-finance",
+      "description": "Camel Finance cycle theory, trade calls, gold/silver/SPX/BTC analysis",
+      "job_id": null,
+      "pipeline": "camel-yt-pipeline-v2.py",
+      "daily_cap": 50,
+      "quality_weight": 1.0,
+      "avg_quality": 8.0,
+      "domain_file": "camel-finance",
+      "active": true,
+      "priority_boost": 2
+    },
+    {
+      "name": "treasury-bonds",
+      "description": "TLT position, 10Y yield, Fed rate trajectory, Treasury auction data",
+      "job_id": "overnight-test-treasury-bonds",
+      "pipeline": "openclaw-cron",
+      "daily_cap": 4,
+      "quality_weight": 0.8,
+      "avg_quality": 5.0,
+      "domain_file": "treasury-bonds",
+      "active": true,
+      "priority_boost": 1
+    },
+    {
+      "name": "longevity",
+      "description": "Lifespan extension, senolytics, rapamycin, NAD+, clinical trials",
+      "job_id": "overnight-test-longevity",
+      "pipeline": "openclaw-cron",
+      "daily_cap": 2,
+      "quality_weight": 0.5,
+      "avg_quality": 3.3,
+      "domain_file": "longevity",
+      "active": true,
+      "priority_boost": 0
+    },
+    {
+      "name": "ai-agents",
+      "description": "Autonomous AI agents, MCP, tool calling, agent benchmarks, production patterns",
+      "job_id": "overnight-test-ai-agents",
+      "pipeline": "openclaw-cron",
+      "daily_cap": 2,
+      "quality_weight": 0.5,
+      "avg_quality": 3.3,
+      "domain_file": "ai-agents",
+      "active": true,
+      "priority_boost": 0
+    },
+    {
+      "name": "self-improvement",
+      "description": "Learning science, habit formation, spaced repetition, cognitive protocols",
+      "job_id": "overnight-test-self-improvement",
+      "pipeline": "openclaw-cron",
+      "daily_cap": 2,
+      "quality_weight": 0.5,
+      "avg_quality": 3.3,
+      "domain_file": "self-improvement",
+      "active": true,
+      "priority_boost": 0
+    },
+    {
+      "name": "tool-calling",
+      "description": "LLM function calling reliability, MCP implementations, local model tool use",
+      "job_id": "overnight-test-tool-calling",
+      "pipeline": "openclaw-cron",
+      "daily_cap": 1,
+      "quality_weight": 0.3,
+      "avg_quality": 3.3,
+      "domain_file": null,
+      "active": true,
+      "priority_boost": 0,
+      "note": "No domain file yet. Lowest priority \u2014 subsumes into ai-agents eventually."
+    }
+  ]
+}
