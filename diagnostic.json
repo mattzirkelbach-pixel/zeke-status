@@ -1,17 +1,33 @@
 {
-  "timestamp_local": "2026-03-01 1:44:36PM ET",
-  "timestamp_utc": "2026-03-01T18:44:36Z",
+  "timestamp_local": "2026-03-01 13:46:11 ET",
+  "timestamp_utc": "2026-03-01T18:46:11Z",
   "scheduler": {
     "running": true,
-    "pids": [
-      "73573",
-      "73770"
-    ],
-    "count": 2,
-    "type": "python"
+    "pid": 73770,
+    "uptime_minutes": 7,
+    "current_window": "daytime"
   },
-  "gateway": {
-    "running": true
+  "feed": {
+    "total_lines": 549,
+    "last_entries": [
+      "[2026-03-01T18:43:45] ai-agents",
+      "[2026-03-01T18:44:11] self-improvement",
+      "[2026-03-01T18:44:56] queue-research-gld",
+      "[2026-03-01T17:44:00] compound-synthesis",
+      "[2026-03-01T22:44:56] compound-synthesis"
+    ],
+    "topic_distribution": {
+      "ai-agents": 11,
+      "longevity": 10,
+      "compound-synthesis": 9,
+      "self-improvement": 7,
+      "queue-research-tlt": 5,
+      "treasury-bonds": 2
+    },
+    "recent_50_clean": 49,
+    "recent_50_trivial": 0,
+    "recent_50_broken": 1,
+    "last_modified_minutes_ago": 0.2
   },
   "spark": {
     "online": true,
@@ -21,49 +37,106 @@
       "qwen3-32b-32k:latest"
     ],
     "model_stuck": false,
+    "stuck_model": null,
     "inference_active": true,
-    "detail": "nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 14ms",
-    "response_ms": 14,
-    "vram_estimate_gb": 27.1,
-    "model_params": "32.8B",
-    "model_quant": "Q4_K_M"
+    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest"
   },
-  "feed": {
-    "total_lines": 546,
-    "last_modified_minutes_ago": 0.2,
-    "last_entries": [
-      "[3/01 1:33PM ET] ai-agents \u2014 Advanced AI agents including Claude Code and Cursor achieve 70%+ on SWE-bench fo",
-      "[3/01 2:42PM ET] ai-agents \u2014 Claude Code handles small-to-medium scoped tasks with low friction",
-      "[3/01 8:42AM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be",
-      "[3/01 1:43PM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be",
-      "[3/01 1:44PM ET] self-improvement \u2014 Spaced repetition improves retention by 50 percent in controlled educational stu"
-    ],
-    "recent_50_clean": 49,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 1,
-    "topic_distribution": {
-      "ai-agents": 11,
-      "longevity": 10,
-      "compound-synthesis": 9,
-      "self-improvement": 7,
-      "queue-research-tlt": 5,
-      "treasury-bonds": 2
+  "gateway": {
+    "running": true
+  },
+  "today": {
+    "jobs_run": 5,
+    "success": 3,
+    "timeout": 0,
+    "fail": 1,
+    "feed_growth": 7
+  },
+  "cycles": [
+    {
+      "ts": "2026-03-01T13:46:09.751650",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 5,
+      "success": 3,
+      "timeout": 0,
+      "fail": 1,
+      "feed_grew": 7
     }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 43,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "success",
+      "duration": 88,
+      "grew": 3,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ]
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 39,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration": 62,
+      "grew": 3,
+      "issues": []
+    }
+  ],
+  "health": {
+    "status": "HEALTHY",
+    "issues": []
   },
-  "activity": {
-    "last_job": "self-improvement",
-    "last_job_time": "3/01 8:43AM ET",
-    "last_cycle": "3/01 8:38AM ET",
-    "jobs_today": 71,
-    "success_today": 46,
-    "timeout_today": 0,
-    "fail_today": 25,
-    "feed_growth_today": 132,
-    "state": "running",
-    "next_cycle_est": "9:04AM",
-    "cycle_count": 71,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "kg_stats": {
+    "entities": 361,
+    "relations": 366,
+    "associations": 136,
+    "insights": 0
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 94.0,
+    "temp_c": 63.0,
+    "power_w": 36.36,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 0,
+    "literal_timestamps": 0,
+    "duplicates": 60,
+    "total": 546,
+    "error_rate": 11.0
+  },
+  "automation": {
+    "layer1": "L1 Execution \u2014 DEPLOYED",
+    "layer2": "L2 Oversight \u2014 DEPLOYED",
+    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
+    "layer4": "L4 Recursive Learning \u2014 PLANNED"
+  },
+  "cost": {
+    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": false
   },
   "feed_history": [
     {
@@ -1507,146 +1580,19 @@
       "l": "1:44PM"
     }
   ],
-  "kg_stats": {
-    "entities": 361,
-    "relations": 366,
-    "associations": 136,
-    "insights": 0
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 63.0,
-    "power_w": 36.36,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 0,
-    "literal_timestamps": 0,
-    "duplicates": 60,
-    "total": 546,
-    "error_rate": 11.0
-  },
-  "cost": {
-    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": false
-  },
-  "automation": {
-    "layer1": "L1 Execution \u2014 DEPLOYED",
-    "layer2": "L2 Oversight \u2014 DEPLOYED",
-    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
-    "layer4": "L4 Recursive Learning \u2014 PLANNED"
-  },
-  "compute_tiers": {
-    "architecture": "tiered_dispatch",
-    "layers": {
-      "L0_python": {
-        "status": "active",
-        "cost": "$0",
-        "role": "Fetch, transform, schedule"
-      },
-      "L1_vector": {
-        "status": "planned",
-        "cost": "$0",
-        "role": "Embeddings + ChromaDB RAG"
-      },
-      "L2_triage": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3:8b classification"
-      },
-      "L3_api": {
-        "status": "active",
-        "cost": "paid",
-        "role": "Haiku/Sonnet/Opus"
-      },
-      "L4_batch": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3-32b overnight"
-      }
-    },
-    "budget": {
-      "haiku_spent": 0,
-      "haiku_limit": 1.0,
-      "sonnet_spent": 0,
-      "sonnet_limit": 0.5,
-      "total_spent": 0,
-      "total_limit": 2.0,
-      "date": "2026-03-01"
-    },
-    "models_hot": [
-      {
-        "name": "nomic-embed-text:latest",
-        "vram_gb": 0.6,
-        "params": "137M"
-      },
-      {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
-        "name": "qwen3-32b-32k:latest",
-        "vram_gb": 27.1,
-        "params": "32.8B"
-      }
-    ]
-  },
-  "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
-  },
-  "cycles": [
-    {
-      "ts": "2026-03-01T13:37:58.437190",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 4,
-      "success": 2,
-      "timeout": 0,
-      "fail": 2,
-      "feed_grew": 13
-    }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration": 119,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "bad_output",
-      "duration": 235,
-      "grew": 2,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 153,
-      "grew": 7,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "success",
-      "duration": 139,
-      "grew": 4,
-      "issues": []
-    }
-  ],
-  "today": {
-    "jobs_run": 4,
-    "success": 2,
-    "timeout": 0,
-    "fail": 2,
-    "feed_growth": 13
+  "activity": {
+    "last_job": "self-improvement",
+    "last_job_time": "3/01 8:43AM ET",
+    "last_cycle": "3/01 8:38AM ET",
+    "jobs_today": 71,
+    "success_today": 46,
+    "timeout_today": 0,
+    "fail_today": 25,
+    "feed_growth_today": 132,
+    "state": "running",
+    "next_cycle_est": "9:04AM",
+    "cycle_count": 71,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   }
 }
