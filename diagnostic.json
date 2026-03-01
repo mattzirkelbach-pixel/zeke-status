@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-28 9:15:01PM ET",
-  "timestamp_utc": "2026-03-01T02:15:01Z",
+  "timestamp_local": "2026-02-28 9:20:01PM ET",
+  "timestamp_utc": "2026-03-01T02:20:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -15,49 +15,49 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nomic-embed-text:latest",
       "qwen3-32b-32k:latest",
+      "nomic-embed-text:latest",
       "qwen3:8b"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "nomic-embed-text:latest, qwen3-32b-32k:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 27ms",
+    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 27ms",
     "response_ms": 27,
     "vram_estimate_gb": 5.6,
     "model_params": "8.2B",
     "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 2185,
-    "last_modified_minutes_ago": 0.1,
+    "total_lines": 2193,
+    "last_modified_minutes_ago": 0.7,
     "last_entries": [
-      "[2/28 8:32PM ET] camel-finance-cycle-analysis \u2014 The video outlines a brewing risk-off environment with Bitcoin and SPX both show",
-      "[2/28 8:46PM ET] ai-agents \u2014 Lovable agent scores 8/10 in 2026 autonomous coding benchmark",
-      "[2/28 10:18PM ET] compound-synthesis \u2014 Low-dose rapamycin timing coincides with bear market patience in Bitcoin cycle a",
-      "[2/28 11:33PM ET] compound-synthesis \u2014 Patience for better entry points in Bitcoin bear market suggests optimal timing ",
-      "[2/28 9:14PM ET] camel-finance-cycle-analysis \u2014 The video presents a bearish outlook on the SPX and 10-year yield, with a key fo"
+      "[2/28 9:17PM ET] longevity \u2014 Rapamycin 10 mg weekly in PEARL trial improved bone mass in men and muscle mass ",
+      "[2/28 10:17PM ET] longevity \u2014 Rapamycin 10 mg dose prevented muscle loss in women and bone loss in men in 48-w",
+      "[2/28 4:16PM ET] longevity \u2014 Rapamycin 10 mg dose improved bone mineral content in men by significant margin ",
+      "[2/28 9:17PM ET] longevity \u2014 Rapamycin 10 mg prevented muscle loss in women and bone loss in men in the PEARL",
+      "[2/28 9:17PM ET] longevity \u2014 Rapamycin mitigated muscle loss in women and bone loss in men in the PEARL trial"
     ],
-    "recent_50_clean": 38,
-    "recent_50_trivial": 12,
+    "recent_50_clean": 39,
+    "recent_50_trivial": 11,
     "recent_50_broken": 0,
     "topic_distribution": {
-      "camel-finance-cycle-analysis": 21,
-      "compound-synthesis": 11,
-      "self-improvement": 4,
+      "camel-finance-cycle-analysis": 20,
+      "longevity": 8,
+      "compound-synthesis": 8,
+      "self-improvement": 6,
       "tool-calling": 4,
-      "treasury-bonds": 3,
-      "longevity": 3
+      "ai-agents": 2
     }
   },
   "activity": {
-    "last_job": "treasury-bonds",
-    "last_job_time": "2/28 4:12PM ET",
+    "last_job": "ai-agents",
+    "last_job_time": "2/28 4:19PM ET",
     "last_cycle": "2/28 4:12PM ET",
-    "jobs_today": 91,
-    "success_today": 66,
+    "jobs_today": 94,
+    "success_today": 69,
     "timeout_today": 0,
     "fail_today": 25,
-    "feed_growth_today": 156,
+    "feed_growth_today": 166,
     "state": "running",
     "next_cycle_est": "3:39PM",
     "cycle_count": 80,
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772254332398,
-      "v": 1771,
-      "l": "11:52PM"
-    },
     {
       "t": 1772254501635,
       "v": 1774,
@@ -1504,6 +1499,11 @@
       "t": 1772331301810,
       "v": 2185,
       "l": "9:15PM"
+    },
+    {
+      "t": 1772331601583,
+      "v": 2193,
+      "l": "9:20PM"
     }
   ],
   "kg_stats": {
@@ -1514,17 +1514,17 @@
   },
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 68.0,
-    "power_w": 42.01,
+    "gpu_util_pct": 95.0,
+    "temp_c": 64.0,
+    "power_w": 38.08,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 4,
     "literal_timestamps": 9,
-    "duplicates": 292,
-    "total": 2185,
-    "error_rate": 14.0
+    "duplicates": 297,
+    "total": 2193,
+    "error_rate": 14.1
   },
   "cost": {
     "model": "tiered dispatch (Spark + Haiku + Sonnet)",
@@ -1578,14 +1578,14 @@
     },
     "models_hot": [
       {
-        "name": "nomic-embed-text:latest",
-        "vram_gb": 0.6,
-        "params": "137M"
-      },
-      {
         "name": "qwen3-32b-32k:latest",
         "vram_gb": 27.1,
         "params": "32.8B"
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "vram_gb": 0.6,
+        "params": "137M"
       },
       {
         "name": "qwen3:8b",
@@ -1597,7 +1597,7 @@
   "health": {
     "status": "ISSUES_FOUND",
     "issues": [
-      "WARNING: 12 trivial entries in recent feed"
+      "WARNING: 11 trivial entries in recent feed"
     ],
     "issue_count": 1
   },
