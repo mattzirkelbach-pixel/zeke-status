@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-03-01 11:42:07AM ET",
-  "timestamp_utc": "2026-03-01T16:42:07Z",
+  "timestamp_local": "2026-03-01 11:47:18AM ET",
+  "timestamp_utc": "2026-03-01T16:47:18Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -15,49 +15,49 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3:8b",
       "nomic-embed-text:latest",
+      "qwen3:8b",
       "qwen3-32b-32k:latest"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3:8b, nomic-embed-text:latest, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 1105ms",
-    "response_ms": 1105,
+    "detail": "nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 51ms",
+    "response_ms": 51,
     "vram_estimate_gb": 27.1,
     "model_params": "32.8B",
     "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 494,
-    "last_modified_minutes_ago": 0.2,
+    "total_lines": 499,
+    "last_modified_minutes_ago": 1.0,
     "last_entries": [
-      "[3/01 11:40AM ET] macroalf-commentary \u2014 Supreme Court vs Tariffs: A Guide (Fri, 31 Oct 2025 14:23:26 GMT): We will soon ",
-      "[3/01 11:40AM ET] options-flow-gld \u2014 GLD options: fetch failed",
-      "[3/01 11:40AM ET] options-flow-slv \u2014 SLV options: fetch failed",
-      "[3/01 11:40AM ET] treasury-auction-calendar \u2014 Upcoming auctions: 13-Week on 2026-03-02T00:00:00 ($89000000000B) | 26-Week on 2",
-      "[2/27 5:00AM ET] treasury-bonds \u2014 The US 10-year Treasury yield trades near 4.5 percent in early 2026 as the Fed h"
+      "[3/01 11:43AM ET] longevity \u2014 Rapamycin extended median lifespan in mice by 9%-14% in mid-life studies by inhi",
+      "[3/01 11:42AM ET] longevity \u2014 Rapamycin extended median lifespan in multiple mammalian studies at low doses by",
+      "[3/01 8:45PM ET] ai-agents \u2014 Lovable AI agent scores 8/10 in SWE-bench autonomous multi-tenant CRM SaaS devel",
+      "[3/01 11:45AM ET] ai-agents \u2014 Lovable achieves 8/10 in 2026 AI coding agent benchmark for autonomous SaaS deve",
+      "[3/01 11:46AM ET] queue-research-tlt \u2014 <|im_start|>\n<|im_start|><|im_start|>\n<|im_start|>\n\nFINDING: As of 2026-03-01, F"
     ],
     "recent_50_clean": 50,
     "recent_50_trivial": 0,
     "recent_50_broken": 0,
     "topic_distribution": {
-      "compound-synthesis": 11,
-      "ai-agents": 8,
+      "ai-agents": 10,
+      "compound-synthesis": 8,
       "macroalf-commentary": 8,
-      "longevity": 3,
-      "tool-calling": 2,
+      "longevity": 5,
+      "queue-research-tlt": 3,
       "queue-research-iren": 2
     }
   },
   "activity": {
-    "last_job": "treasury-bonds",
-    "last_job_time": "3/01 6:41AM ET",
+    "last_job": "compound-synthesis",
+    "last_job_time": "3/01 6:47AM ET",
     "last_cycle": "3/01 6:41AM ET",
-    "jobs_today": 45,
-    "success_today": 29,
+    "jobs_today": 49,
+    "success_today": 33,
     "timeout_today": 0,
     "fail_today": 16,
-    "feed_growth_today": 87,
+    "feed_growth_today": 93,
     "state": "running",
     "next_cycle_est": "6:40AM",
     "cycle_count": 65,
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772309101922,
-      "v": 2121,
-      "l": "3:05PM"
-    },
     {
       "t": 1772309401252,
       "v": 2126,
@@ -1504,6 +1499,11 @@
       "t": 1772383328710,
       "v": 494,
       "l": "11:42AM"
+    },
+    {
+      "t": 1772383638859,
+      "v": 499,
+      "l": "11:47AM"
     }
   ],
   "kg_stats": {
@@ -1515,16 +1515,16 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 53.0,
-    "power_w": 38.12,
+    "temp_c": 60.0,
+    "power_w": 39.03,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 0,
     "literal_timestamps": 0,
     "duplicates": 49,
-    "total": 494,
-    "error_rate": 9.9
+    "total": 499,
+    "error_rate": 9.8
   },
   "cost": {
     "model": "tiered dispatch (Spark + Haiku + Sonnet)",
@@ -1578,14 +1578,14 @@
     },
     "models_hot": [
       {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
         "name": "nomic-embed-text:latest",
         "vram_gb": 0.6,
         "params": "137M"
+      },
+      {
+        "name": "qwen3:8b",
+        "vram_gb": 5.6,
+        "params": "8.2B"
       },
       {
         "name": "qwen3-32b-32k:latest",
