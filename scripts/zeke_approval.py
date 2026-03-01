@@ -43,7 +43,13 @@ def request_approval(title, description, type="custom", source="unknown",
     if type not in VALID_TYPES:
         raise ValueError(f"Unknown type '{type}'")
     approvals = _expire_stale(_load())
-    approval_id = str(uuid.uuid4())[:8]
+    # Human-readable ID: TYPE-SLUG-NNN (e.g. remediation-camel-finance-001)
+    slug = title.lower()[:30].replace(" ", "-").replace("_", "-")
+    import re as _re
+    slug = _re.sub(r"[^a-z0-9-]", "", slug).strip("-")[:20]
+    existing_same_type = [a for a in approvals if a.get("type") == type]
+    seq = str(len(existing_same_type) + 1).zfill(3)
+    approval_id = f"{type[:10]}-{slug[:15]}-{seq}"
     now = datetime.datetime.now(datetime.timezone.utc)
     expires_at = (now + datetime.timedelta(hours=expires_hours)).isoformat()
     entry = {
@@ -117,9 +123,15 @@ def summary():
         "total": len(approvals),
         "pending": len(pending),
         "top_pending": [
-            {"id":a["id"],"priority":a["priority"],"type":a["type"],
-             "title":a["title"][:60],"source":a["source"],
-             "expires_at":a.get("expires_at","")[:16]}
+            {
+                "id": a["id"],
+                "priority": a["priority"],
+                "type": a["type"],
+                "title": a["title"],
+                "approve_does": a.get("consequences", {}).get("approve", ""),
+                "reject_does": a.get("consequences", {}).get("reject", ""),
+                "expires": a.get("expires_at", "")[:16]
+            }
             for a in sorted(pending, key=lambda x: -x["priority"])[:5]
         ]
     }

@@ -24,6 +24,15 @@ Output:
 import json
 import datetime
 from pathlib import Path
+import sys as _sys
+_sys.path.insert(0, str(Path.home()))
+try:
+    from zeke_approval import request_approval, check_approved
+    APPROVALS_AVAILABLE = True
+except ImportError:
+    APPROVALS_AVAILABLE = False
+    def request_approval(*a, **k): return None
+    def check_approved(id): return False
 from collections import defaultdict
 
 HOME = Path.home()
@@ -68,7 +77,7 @@ TOPIC_TO_DOMAIN = {
 
 # Thresholds
 STRONG_THRESHOLD = 3.8    # avg >= this: boost pending tasks +1
-WEAK_THRESHOLD = 3.0      # avg < this: queue remediation task
+WEAK_THRESHOLD = 2.8      # avg < this: queue remediation task (lowered from 3.0 — early warning, approved 2026-03-01)
 DECLINE_THRESHOLD = 3.8   # avg < this AND trend↓: queue quality-audit task
 MIN_SAMPLES = 5           # need at least this many scored entries to act
 
@@ -245,21 +254,27 @@ def main():
                         boosts += 1
                         log(f"  BOOST {domain}: task '{task['label'][:40]}' {old_p}→{task['priority']}")
 
-        # WEAK domain: queue remediation task
+        # WEAK domain: request human approval before remediation
         if tier == "WEAK":
-            label = f"Quality remediation: {domain} avg={h['avg']:.2f} — improve source quality"
-            prompt = (
-                f"Domain '{domain}' has an average quality score of {h['avg']:.2f}/5.0 "
-                f"(n={h['n']}, trend={h['trend']}). This is below the acceptable threshold of {WEAK_THRESHOLD}. "
-                f"Analyze: (1) What types of findings is this domain producing that score poorly? "
-                f"(2) What are better sources or query strategies for this domain? "
-                f"(3) Write 2-3 example high-quality findings (score 4-5) that this domain SHOULD be producing. "
-                f"(4) Output specific recommendations to improve the research job prompt for this domain."
+            approval_id = request_approval(
+                title=f"Remediate {domain} quality (avg {h['avg']:.2f}, WEAK)",
+                description=(
+                    f"Domain '{domain}' avg={h['avg']:.2f}/5.0 (n={h['n']}, trend={h['trend']}). "
+                    f"Below WEAK threshold of {WEAK_THRESHOLD}. "
+                    f"Plan: queue Spark analysis to diagnose low-scoring entries and improve source prompts."
+                ),
+                type="remediation",
+                source="zeke-quality-weights.py",
+                context={"domain": domain, "avg": h["avg"], "n": h["n"], "trend": h["trend"], "threshold": WEAK_THRESHOLD},
+                consequences={
+                    "approve": f"Queue Spark remediation task for {domain}. Analyze poor entries, improve prompt.",
+                    "reject": f"Skip remediation. Re-audit {domain} in 7 days."
+                },
+                priority=7,
+                expires_hours=72
             )
-            added = queue_task(tasks, label, prompt, priority=7, instrument=domain.upper(), source="quality-weights")
-            if added:
-                remediation_added += 1
-                log(f"  REMEDIATION queued: {domain} (avg={h['avg']:.2f})")
+            log(f"  APPROVAL requested [{approval_id}]: remediation for {domain} (avg={h['avg']:.2f})")
+            remediation_added += 1
 
         # DECLINING domain (OK tier but trending down): queue audit task
         if tier == "OK" and trend == "down":
