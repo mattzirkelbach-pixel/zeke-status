@@ -17,7 +17,7 @@
     },
     {
       "name": "treasury-bonds",
-      "description": "TLT position, 10Y yield, Fed rate trajectory, Treasury auction data",
+      "description": "TLT position, 10Y yield, Fed rate trajectory, Treasury auction data, tax routing, Section 1256 rules (merged personal-finance 2026-03-01)",
       "job_id": "overnight-test-treasury-bonds",
       "pipeline": "openclaw-cron",
       "daily_cap": 4,
@@ -41,10 +41,10 @@
     },
     {
       "name": "ai-agents",
-      "description": "Autonomous AI agents, MCP, tool calling, agent benchmarks, production patterns",
+      "description": "Autonomous AI agents, MCP, tool calling, local model infrastructure (merged tool-calling domain 2026-03-01)",
       "job_id": "overnight-test-ai-agents",
       "pipeline": "openclaw-cron",
-      "daily_cap": 2,
+      "daily_cap": 3,
       "quality_weight": 0.5,
       "avg_quality": 3.3,
       "domain_file": "ai-agents",
@@ -62,19 +62,17 @@
       "domain_file": "self-improvement",
       "active": true,
       "priority_boost": 0
-    },
-    {
-      "name": "tool-calling",
-      "description": "LLM function calling reliability, MCP implementations, local model tool use",
-      "job_id": "overnight-test-tool-calling",
-      "pipeline": "openclaw-cron",
-      "daily_cap": 1,
-      "quality_weight": 0.3,
-      "avg_quality": 3.3,
-      "domain_file": null,
-      "active": true,
-      "priority_boost": 0,
-      "note": "No domain file yet. Lowest priority \u2014 subsumes into ai-agents eventually."
     }
+  ],
+  "_operations": {
+    "compound-synthesis": {
+      "job_id": "overnight-test-compound",
+      "type": "cross-domain synthesis",
+      "note": "Not a research domain \u2014 reads feed, synthesizes cross-topic insights. Reclassified as operation 2026-03-01."
+    }
+  },
+  "_merges": [
+    "tool-calling -> ai-agents (2026-03-01): no domain file, topic fully contained in ai-agents",
+    "personal-finance -> treasury-bonds (2026-03-01): orphan file, no job, TLT-specific content only"
   ]
 }
