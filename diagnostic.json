@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-03-01 5:10:01AM ET",
-  "timestamp_utc": "2026-03-01T10:10:01Z",
+  "timestamp_local": "2026-03-01 5:15:01AM ET",
+  "timestamp_utc": "2026-03-01T10:15:01Z",
   "scheduler": {
     "running": true,
     "pids": [
-      "53735"
+      "53931"
     ],
     "count": 1,
     "type": "python"
@@ -15,21 +15,21 @@
   "spark": {
     "online": true,
     "models_loaded": [
+      "qwen3:8b",
       "qwen3-32b-32k:latest",
-      "nomic-embed-text:latest",
-      "qwen3:8b"
+      "nomic-embed-text:latest"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 34ms",
-    "response_ms": 34,
-    "vram_estimate_gb": 5.6,
-    "model_params": "8.2B",
-    "model_quant": "Q4_K_M"
+    "detail": "qwen3:8b, qwen3-32b-32k:latest, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 33ms",
+    "response_ms": 33,
+    "vram_estimate_gb": 0.6,
+    "model_params": "137M",
+    "model_quant": "F16"
   },
   "feed": {
     "total_lines": 2393,
-    "last_modified_minutes_ago": 6.2,
+    "last_modified_minutes_ago": 11.2,
     "last_entries": [
       "[3/01 5:00AM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be",
       "[3/01 5:01AM ET] tool-calling \u2014 BFCL evaluations show that top models achieve over 80% accuracy in multi-step fu",
@@ -52,7 +52,7 @@
   "activity": {
     "last_job": null,
     "last_job_time": null,
-    "last_cycle": "3/01 12:10AM ET",
+    "last_cycle": "3/01 12:15AM ET",
     "jobs_today": 0,
     "success_today": 0,
     "timeout_today": 0,
@@ -60,16 +60,11 @@
     "feed_growth_today": 0,
     "state": "running",
     "next_cycle_est": null,
-    "cycle_count": 6,
+    "cycle_count": 11,
     "sonnet_calls": 0,
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772285702111,
-      "v": 1907,
-      "l": "8:35AM"
-    },
     {
       "t": 1772286001491,
       "v": 1909,
@@ -1504,6 +1499,11 @@
       "t": 1772359801865,
       "v": 2393,
       "l": "5:10AM"
+    },
+    {
+      "t": 1772360101495,
+      "v": 2393,
+      "l": "5:15AM"
     }
   ],
   "kg_stats": {
@@ -1515,7 +1515,7 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 0.0,
-    "temp_c": 39.0,
+    "temp_c": 38.0,
     "power_w": 10.7,
     "gpu_name": "NVIDIA GB10"
   },
@@ -1578,6 +1578,11 @@
     },
     "models_hot": [
       {
+        "name": "qwen3:8b",
+        "vram_gb": 5.6,
+        "params": "8.2B"
+      },
+      {
         "name": "qwen3-32b-32k:latest",
         "vram_gb": 27.1,
         "params": "32.8B"
@@ -1586,11 +1591,6 @@
         "name": "nomic-embed-text:latest",
         "vram_gb": 0.6,
         "params": "137M"
-      },
-      {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
       }
     ]
   },
