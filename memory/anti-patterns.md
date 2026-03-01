@@ -95,3 +95,15 @@
 - Creating a 7KB markdown file that nothing reads = documentation theater = pure bloat
 - Every file created adds to context load, compaction pressure, and maintenance surface
 - Default: do the work in-context, surface the key finding to Matt, write to an existing structured file only if persistence is needed
+
+## MCP Tool Call Size Limit (learned 2026-03-01)
+- MCP rejects large payloads. Never write 150+ line files via write_file in one call.
+- Correct: exec_command with python3 -c for targeted edits, or write to /tmp then move.
+- Timeout = almost always payload size, not network.
+
+## Signal Urgency Tiers - No Throttle on CRITICAL (learned 2026-03-01)
+- CRITICAL (urgency=3): always fires, zero rate limit. DCL confirm, hard stop, cycle failure.
+- WATCH (urgency=2): 4h cooldown per type, max 5/day.
+- INFO (urgency=1): 24h cooldown, max 2/day.
+- Design signals algorithmically for ANY instrument, not just current positions.
+- Feed-discovered patterns must be able to surface new signals Matt did not define.
