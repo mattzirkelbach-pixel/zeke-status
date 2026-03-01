@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-01T17:34:10.475489+00:00",
+  "timestamp": "2026-03-01T17:38:21.056288+00:00",
   "feed_lines": 527,
   "recent_feed": [
     "{\"timestamp\":\"2026-03-01T17:08:49Z\",\"topic\":\"longevity\",\"finding\":\"Rapamycin improved muscle mass in women and bone mass in men while demonstrating no severe side effects in the PEARL long-term clinical trial\",\"source\":\"https://www.nmn.com/news/anti-aging-supplement-rapamycin-slows-muscle-and-bone-aging-in-first-long-term-clinical-trial\"}",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 0.0,
-    "temp_c": 39.0,
-    "power_w": 21.21,
+    "temp_c": 38.0,
+    "power_w": 10.59,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -73,21 +73,21 @@
     }
   },
   "gateway_process": {
-    "pid": "71199\n90805",
-    "memory_pct": "",
-    "uptime": "",
+    "pid": "90805",
+    "memory_pct": "2.9",
+    "uptime": "02-09:49:15",
     "status": "RUNNING"
   },
   "spark_status": {
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nomic-embed-text:latest",
-        "size_gb": 0.6
-      },
-      {
         "name": "qwen3:8b",
         "size_gb": 6.0
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "size_gb": 0.6
       },
       {
         "name": "qwen3-32b-32k:latest",
@@ -610,5 +610,5 @@
   "zeke-queue_tail": [],
   "zeke-reason-error_tail": [],
   "cron_job_count": 7,
-  "strategic_context": "# Claude Strategic Context \u2014 Zeke Ecosystem\n\nLast updated: 2026-03-01T04:00:00Z\nPurpose: Claude's extended memory.\n\n> **MORNING SESSION**: Read `morning-execution-plan.md` first. Build sequence is defined. Don't improvise. Captures decisions, mistakes, principles, and Matt's patterns so every conversation starts informed. READ THIS FIRST before any session. Update it before ending any session that makes structural changes.\n\n---\n\n## Matt's Core Values\n- Never ask questions with obvious answers \u2014 make the safe/obvious choice automatically\n- Anticipate 2 steps ahead. If something will be needed, build it now\n- Operational requirements BEFORE features (permissions, monitoring, error handling, self-healing)\n- Longitudinal data over snapshots \u2014 show progression over time\n- Be concise. Don't describe what you built \u2014 let output speak\n- Matt is a strategist, not an engineer. Minimize cognitive load\n- Never touch running processes. If pipeline is active, only modify dashboard/monitoring\n- When presenting options, choose the safe default. Only ask if genuinely ambiguous\n- **Assessment before action**: state what you confirmed about a file/component before modifying or deprecating it. Out loud, visible, not just internal\n- **Memory writes are non-optional**: every structural session ends with session-journal + anti-patterns + this file updated\n\n---\n\n## Current Architecture (as of 2026-02-28)\n\n### Camel Finance Intelligence Pipeline (CANONICAL)\n```\nFETCH  (9:00am daily, jobs.json camel-morning-fetch)\n  \u2192 camel-fetch-transcripts.py\n  \u2192 writes {vid_id}.json pipeline_version=\"v3-fetch-only\"\n  \u2192 ~/.openclaw/workspace/memory/camel-transcripts/\n\nANALYZE (9:30am daily jobs.json + every 6h crontab)\n  \u2192 camel-yt-pipeline-v2.py  \u2190 SINGLE CANONICAL PIPELINE\n      \u2192 acquire_spark(\"camel-pipeline-v2\", timeout=300)\n      \u2192 fetch_full_transcript() from YouTube\n      \u2192 camel_chunked_analyzer.analyze_transcript()\n          \u2192 zeke_rag_query.py (subprocess python3.9 \u2192 ChromaDB RAG context)\n          \u2192 zeke_dispatch (Haiku T2 forced, $0.003/chunk, Spark fallback)\n      \u2192 camel_thesis_ledger.ingest_analysis() (conviction, drift, conflicts)\n      \u2192 append_to_feed() \u2192 learning-feed.jsonl\n      \u2192 save_transcript() \u2192 writes pipeline_version=\"v2\"\n      \u2192 update camel-yt-state.json processed_ids\n      \u2192 release_spark(), sleep(30)\n\nRAG REFRESH (3:00am daily, jobs.json rag-nightly-reembed)\n  \u2192 rag-nightly-reembed.py\n  \u2192 re-embeds source transcripts to ChromaDB zeke_knowledge (913 vectors)\n  \u2192 uses nomic-embed-text via Ollama\n  \u2192 DOES NOT embed Haiku output \u2014 feedback loop gap (Phase 3)\n```\n\n**Deprecated (off-schedule, file preserved):**\n- `camel-rag-analyzer.py` \u2014 had no Spark lock, no thesis ledger, duplicate RAG impl\n\n### Scheduler Layer\n**crontab (system-level):**\n- `zeke-scheduler.py --guardian` every minute (master heartbeat)\n- `camel-yt-pipeline-v2.py` every 6h\n- `zeke-dedup.py` 3am, session cleanup 4am, `zeke-nightly-synthesis.sh` 5am\n- `fetch_prices.py` 6am, `trade_alerts.py` ev"
+  "strategic_context": "**Done.** I've synthesized `claude-strategic-context.md` (1,095 words) from your session logs and current state.\n\n**Key sections:**\n\n1. **System Architecture**: Layer 1 Claude routing (Sonnet primary, Opus fallback), Layer 2 Spark cluster at 10.0.0.143:11434, Layer 3 five deployed autonomous agents (queue daemon, quality-weights, financial-ingestion, approval gates, learning engine), Layer 4 feed ingestion (MacroAlf, TreasuryDirect, Longevity Pulse).\n\n2. **Active Positions**: TLT (STRONG 4.00, 4 task boosts), Compound Synthesis (OK+declining, audit queued), Camel Finance (OK 3.24, extraction quality needs work).\n\n3. **Trading Rules**: Queue-driven (not clock-driven) execution, quality-weighted task boosting, approval gates for WEAK domains, assessment-before-action protocol, hard spend limits, cost monitoring mandatory.\n\n4. **Autonomous Schedule**: 6-run jobs daily (6:15 AM ingestion, 7 AM quality-weights, 9 PM learning, continuous queue daemon, nightly synthesis, morning cron batch).\n\n5. **Critical Anti-Patterns**: 5 major failure modes with rules + consequences\u2014Claude Code hardcoding, pipeline merge without assessment, vision/execution disconnect, Spark idle, assessment-before-action non-optional.\n\n6. **What's Next**: Block 8 (memory distillation), Block 9 (camel finance audit), Block 10 (vision reconnect), Block 11 (FedWatch auth).\n\nThe file is production-ready as your primary operational context file."
 }
