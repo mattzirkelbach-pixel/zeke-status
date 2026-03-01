@@ -1,17 +1,33 @@
 {
-  "timestamp_local": "2026-03-01 2:19:51PM ET",
-  "timestamp_utc": "2026-03-01T19:19:51Z",
+  "timestamp_local": "2026-03-01 14:22:05 ET",
+  "timestamp_utc": "2026-03-01T19:22:05Z",
   "scheduler": {
     "running": true,
-    "pids": [
-      "73573",
-      "73770"
-    ],
-    "count": 2,
-    "type": "python"
+    "pid": 73770,
+    "uptime_minutes": 43,
+    "current_window": "daytime"
   },
-  "gateway": {
-    "running": true
+  "feed": {
+    "total_lines": 576,
+    "last_entries": [
+      "[2026-02-28T10:00:00] treasury-bonds",
+      "[2026-03-01T19:19:19] treasury-bonds",
+      "[2026-03-01T19:20:00] longevity",
+      "[2026-03-01T19:20:33] longevity",
+      "[2026-03-01T19:20:00] longevity"
+    ],
+    "topic_distribution": {
+      "compound-synthesis": 11,
+      "self-improvement": 11,
+      "ai-agents": 10,
+      "queue-research-tlt": 4,
+      "longevity": 4,
+      "tool-calling": 3
+    },
+    "recent_50_clean": 49,
+    "recent_50_trivial": 0,
+    "recent_50_broken": 1,
+    "last_modified_minutes_ago": 0.3
   },
   "spark": {
     "online": true,
@@ -21,49 +37,155 @@
       "qwen3-32b-32k:latest"
     ],
     "model_stuck": false,
+    "stuck_model": null,
     "inference_active": true,
-    "detail": "nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 18ms",
-    "response_ms": 18,
-    "vram_estimate_gb": 27.1,
-    "model_params": "32.8B",
-    "model_quant": "Q4_K_M"
+    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest"
   },
-  "feed": {
-    "total_lines": 573,
-    "last_modified_minutes_ago": 0.3,
-    "last_entries": [
-      "[3/01 2:15PM ET] compound-synthesis \u2014 Spaced repetition improves retention by 50 percent in educational studies and AI",
-      "[3/01 7:00PM ET] compound-synthesis \u2014 Low-dose consistent interventions outperform intensive single sessions across bo",
-      "[3/01 2:18PM ET] queue-research-tlt \u2014 <|im_start|>\n<|im_start|><|im_start|>\n<|im_start|>\n\n<|im_start|>\n\nFINDING: The U",
-      "[2/28 5:00AM ET] treasury-bonds \u2014 The US 10-year Treasury yield trades near 4.5 percent in early 2026 as the Fed h",
-      "[3/01 2:19PM ET] treasury-bonds \u2014 The US 10-year Treasury yield is 3.949 percent as of February 2026"
-    ],
-    "recent_50_clean": 49,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 1,
-    "topic_distribution": {
-      "compound-synthesis": 11,
-      "self-improvement": 11,
-      "ai-agents": 10,
-      "queue-research-tlt": 4,
-      "longevity": 4,
-      "tool-calling": 3
+  "gateway": {
+    "running": true
+  },
+  "today": {
+    "jobs_run": 10,
+    "success": 4,
+    "timeout": 0,
+    "fail": 3,
+    "feed_growth": 9
+  },
+  "cycles": [
+    {
+      "ts": "2026-03-01T13:46:09.751650",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 5,
+      "success": 3,
+      "timeout": 0,
+      "fail": 1,
+      "feed_grew": 7
+    },
+    {
+      "ts": "2026-03-01T14:22:03.259601",
+      "window": "daytime",
+      "cycle": 2,
+      "jobs": 5,
+      "success": 1,
+      "timeout": 0,
+      "fail": 2,
+      "feed_grew": 2
     }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 43,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "success",
+      "duration": 88,
+      "grew": 3,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ]
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 39,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration": 62,
+      "grew": 3,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ]
+    },
+    {
+      "name": "longevity",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 32,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ]
+    }
+  ],
+  "health": {
+    "status": "HEALTHY",
+    "issues": []
   },
-  "activity": {
-    "last_job": "self-improvement",
-    "last_job_time": "3/01 9:19AM ET",
-    "last_cycle": "3/01 9:18AM ET",
-    "jobs_today": 77,
-    "success_today": 50,
-    "timeout_today": 0,
-    "fail_today": 27,
-    "feed_growth_today": 143,
-    "state": "running",
-    "next_cycle_est": "9:18AM",
-    "cycle_count": 73,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "kg_stats": {
+    "entities": 362,
+    "relations": 367,
+    "associations": 136,
+    "insights": 0
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 95.0,
+    "temp_c": 65.0,
+    "power_w": 41.83,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 1,
+    "literal_timestamps": 0,
+    "duplicates": 71,
+    "total": 573,
+    "error_rate": 12.6
+  },
+  "automation": {
+    "layer1": "L1 Execution \u2014 DEPLOYED",
+    "layer2": "L2 Oversight \u2014 DEPLOYED",
+    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
+    "layer4": "L4 Recursive Learning \u2014 PLANNED"
+  },
+  "cost": {
+    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": false
   },
   "feed_history": [
     {
@@ -1507,155 +1629,19 @@
       "l": "2:19PM"
     }
   ],
-  "kg_stats": {
-    "entities": 362,
-    "relations": 367,
-    "associations": 136,
-    "insights": 0
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 65.0,
-    "power_w": 41.83,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 1,
-    "literal_timestamps": 0,
-    "duplicates": 71,
-    "total": 573,
-    "error_rate": 12.6
-  },
-  "cost": {
-    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": false
-  },
-  "automation": {
-    "layer1": "L1 Execution \u2014 DEPLOYED",
-    "layer2": "L2 Oversight \u2014 DEPLOYED",
-    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
-    "layer4": "L4 Recursive Learning \u2014 PLANNED"
-  },
-  "compute_tiers": {
-    "architecture": "tiered_dispatch",
-    "layers": {
-      "L0_python": {
-        "status": "active",
-        "cost": "$0",
-        "role": "Fetch, transform, schedule"
-      },
-      "L1_vector": {
-        "status": "planned",
-        "cost": "$0",
-        "role": "Embeddings + ChromaDB RAG"
-      },
-      "L2_triage": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3:8b classification"
-      },
-      "L3_api": {
-        "status": "active",
-        "cost": "paid",
-        "role": "Haiku/Sonnet/Opus"
-      },
-      "L4_batch": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3-32b overnight"
-      }
-    },
-    "budget": {
-      "haiku_spent": 0,
-      "haiku_limit": 1.0,
-      "sonnet_spent": 0,
-      "sonnet_limit": 0.5,
-      "total_spent": 0,
-      "total_limit": 2.0,
-      "date": "2026-03-01"
-    },
-    "models_hot": [
-      {
-        "name": "nomic-embed-text:latest",
-        "vram_gb": 0.6,
-        "params": "137M"
-      },
-      {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
-        "name": "qwen3-32b-32k:latest",
-        "vram_gb": 27.1,
-        "params": "32.8B"
-      }
-    ]
-  },
-  "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
-  },
-  "cycles": [
-    {
-      "ts": "2026-03-01T13:48:02.982627",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 5,
-      "success": 4,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 13
-    }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 41,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "success",
-      "duration": 58,
-      "grew": 2,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 109,
-      "grew": 5,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "unknown",
-      "duration": 0,
-      "grew": 0,
-      "issues": [
-        "spark_locked"
-      ]
-    },
-    {
-      "name": "compound-synthesis",
-      "status": "success",
-      "duration": 110,
-      "grew": 5,
-      "issues": []
-    }
-  ],
-  "today": {
-    "jobs_run": 5,
-    "success": 4,
-    "timeout": 0,
-    "fail": 0,
-    "feed_growth": 13
+  "activity": {
+    "last_job": "self-improvement",
+    "last_job_time": "3/01 9:19AM ET",
+    "last_cycle": "3/01 9:18AM ET",
+    "jobs_today": 77,
+    "success_today": 50,
+    "timeout_today": 0,
+    "fail_today": 27,
+    "feed_growth_today": 143,
+    "state": "running",
+    "next_cycle_est": "9:18AM",
+    "cycle_count": 73,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   }
 }
