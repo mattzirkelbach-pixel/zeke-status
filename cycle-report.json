@@ -1,36 +1,116 @@
 {
-  "timestamp": "2026-03-01T12:50:00.823223+00:00",
-  "feed_total": 2424,
-  "feed_previous": 2418,
-  "feed_growth": 6,
+  "timestamp": "2026-03-01T07:51:54.263557",
+  "window": "daytime",
+  "cycle": 4,
+  "feed_before": 2418,
+  "feed_after": 2427,
+  "feed_growth": 9,
+  "jobs": {
+    "total": 5,
+    "success": 2,
+    "fail": 2,
+    "timeout": 0
+  },
+  "job_details": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration_s": 25,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "success",
+      "duration_s": 70,
+      "feed_grew": 3,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 3,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "fail",
+      "duration_s": 32,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration_s": 36,
+      "feed_grew": 1,
+      "entry_valid": false,
+      "issues": [
+        "bad timestamp format: $DATE"
+      ],
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "trivial_entries": 0,
+      "broken_entries": 1
+    },
+    {
+      "uuid": "e9961e6e-4e4",
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration_s": 172,
+      "feed_grew": 6,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 6,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration_s": 25,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "fail",
+      "duration_s": 32,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration_s": 36,
+      "feed_grew": 1,
+      "entry_valid": false,
+      "issues": [
+        "bad timestamp format: $DATE"
+      ],
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "trivial_entries": 0,
+      "broken_entries": 1
+    }
+  ],
+  "needs_repair": true,
   "feed_stagnant": false,
-  "spark": {
-    "online": true,
-    "model_loaded": true,
-    "models": [
-      "qwen3-32b-32k:latest",
-      "qwen3:8b",
-      "nomic-embed-text:latest"
-    ]
-  },
-  "scheduler": {
-    "running": true,
-    "pids": [
-      "55698"
-    ]
-  },
-  "gateway": {
-    "running": true,
-    "pids": [
-      "59505",
-      "59506",
-      "90805"
-    ]
-  },
-  "jobs_today": 40,
-  "success_today": 16,
-  "fails_today": 2,
-  "timeouts_today": 0,
-  "needs_repair": false,
-  "repair_reasons": []
+  "repair_dispatched": true,
+  "repair_result": "error"
 }
