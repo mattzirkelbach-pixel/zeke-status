@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-28 9:50:01PM ET",
-  "timestamp_utc": "2026-03-01T02:50:01Z",
+  "timestamp_local": "2026-02-28 9:55:01PM ET",
+  "timestamp_utc": "2026-03-01T02:55:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -16,37 +16,37 @@
     "online": true,
     "models_loaded": [
       "qwen3-32b-32k:latest",
-      "nomic-embed-text:latest",
-      "qwen3:8b"
+      "qwen3:8b",
+      "nomic-embed-text:latest"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 29ms",
-    "response_ms": 29,
-    "vram_estimate_gb": 5.6,
-    "model_params": "8.2B",
-    "model_quant": "Q4_K_M"
+    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 2036ms",
+    "response_ms": 2036,
+    "vram_estimate_gb": 0.6,
+    "model_params": "137M",
+    "model_quant": "F16"
   },
   "feed": {
-    "total_lines": 2224,
-    "last_modified_minutes_ago": 0.9,
+    "total_lines": 2227,
+    "last_modified_minutes_ago": 1.0,
     "last_entries": [
-      "[2/28 6:42PM ET] treasury-bonds \u2014 The US 10-year Treasury yield was 3.95% on February 27, 2026.",
-      "[2/28 11:45PM ET] self-improvement \u2014 Spaced repetition with 1.5-day intervals improves retention by 58.03% compared t",
-      "[2/28 9:47PM ET] longevity \u2014 Rapamycin prevents muscle loss in women and bone loss in men at 10 mg weekly dos",
       "[3/01 10:34PM ET] ai-agents \u2014 Claude Code achieves 70 percent success rate on complex multi-tenant SaaS benchm",
-      "[2/28 9:34PM ET] ai-agents \u2014 Claude Code achieves 70 percent benchmark score on autonomous coding"
+      "[2/28 9:34PM ET] ai-agents \u2014 Claude Code achieves 70 percent benchmark score on autonomous coding",
+      "[3/01 9:49AM ET] tool-calling \u2014 The Berkeley Function-Calling Leaderboard benchmarks LLM tool-use accuracy, with",
+      "[2/28 9:49PM ET] tool-calling \u2014 Confident AI's tool correctness metric evaluates LLM agent's ability to call too",
+      "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] tool-calling \u2014 The tool correctness metric assesses an LLM agent ability to call the correct to"
     ],
-    "recent_50_clean": 49,
+    "recent_50_clean": 48,
     "recent_50_trivial": 1,
-    "recent_50_broken": 0,
+    "recent_50_broken": 1,
     "topic_distribution": {
       "ai-agents": 13,
       "longevity": 10,
-      "compound-synthesis": 8,
-      "self-improvement": 6,
-      "camel-finance-cycle-analysis": 5,
-      "tool-calling": 5
+      "tool-calling": 8,
+      "compound-synthesis": 7,
+      "self-improvement": 5,
+      "camel-finance-cycle-analysis": 4
     }
   },
   "activity": {
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772255627315,
-      "v": 1783,
-      "l": "12:13AM"
-    },
     {
       "t": 1772255702453,
       "v": 1784,
@@ -1504,6 +1499,11 @@
       "t": 1772333401849,
       "v": 2224,
       "l": "9:50PM"
+    },
+    {
+      "t": 1772333704009,
+      "v": 2227,
+      "l": "9:55PM"
     }
   ],
   "kg_stats": {
@@ -1515,16 +1515,16 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 65.0,
-    "power_w": 76.13,
+    "temp_c": 63.0,
+    "power_w": 36.04,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 4,
-    "literal_timestamps": 9,
-    "duplicates": 307,
-    "total": 2224,
-    "error_rate": 14.4
+    "literal_timestamps": 10,
+    "duplicates": 308,
+    "total": 2227,
+    "error_rate": 14.5
   },
   "cost": {
     "model": "tiered dispatch (Spark + Haiku + Sonnet)",
@@ -1583,14 +1583,14 @@
         "params": "32.8B"
       },
       {
-        "name": "nomic-embed-text:latest",
-        "vram_gb": 0.6,
-        "params": "137M"
-      },
-      {
         "name": "qwen3:8b",
         "vram_gb": 5.6,
         "params": "8.2B"
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "vram_gb": 0.6,
+        "params": "137M"
       }
     ]
   },
