@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-03-01 11:01:14AM ET",
-  "timestamp_utc": "2026-03-01T16:01:14Z",
+  "timestamp_local": "2026-03-01 11:06:16AM ET",
+  "timestamp_utc": "2026-03-01T16:06:16Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -15,49 +15,49 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3:8b",
       "nomic-embed-text:latest",
+      "qwen3:8b",
       "qwen3-32b-32k:latest"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3:8b, nomic-embed-text:latest, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 14ms",
-    "response_ms": 14,
+    "detail": "nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 15ms",
+    "response_ms": 15,
     "vram_estimate_gb": 27.1,
     "model_params": "32.8B",
     "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 464,
-    "last_modified_minutes_ago": 8.7,
+    "total_lines": 469,
+    "last_modified_minutes_ago": 1.6,
     "last_entries": [
-      "[3/01 10:27AM ET] compound-synthesis \u2014 Low-dose consistent interventions like rapamycin and spaced repetition outperfor",
-      "[3/01 10:27AM ET] compound-synthesis \u2014 Low-dose consistent interventions like rapamycin and spaced repetition outperfor",
-      "[3/01 10:31AM ET] queue-research-tlt \u2014 <|im_start|><|im_start|><|im_start|>\n<|im_start|><|im_start|>\n\n<|im_start|>\n\nFIN",
-      "[3/01 10:42AM ET] queue-research-xauusd \u2014 <|im_start|>\n<|im_start|><|im_start|><|im_start|>\n<|im_start|><|im_start|>\n\n<|im",
-      "[3/01 10:52AM ET] queue-research-btc \u2014 <|im_start|>\n<|im_start|><|im_start|><|im_start|>\n<|im_start|><|im_start|>\n\n<|im"
+      "[3/01 11:01AM ET] longevity \u2014 Rapamycin 10mg slowed muscle and bone aging in PEARL trial phase 1 with no serio",
+      "[3/01 11:01AM ET] longevity \u2014 Rapamycin 10mg improved bone mineral content in men and slowed muscle loss in wo",
+      "[3/01 11:03AM ET] queue-research-xagusd \u2014 <|im_start|><|im_start|>\n<|im_start|><|im_start|>\n\n<|im_start|>\n\nFINDING: COMEX ",
+      "[3/01 11:03AM ET] ai-agents \u2014 Claude Code resolves real software engineering tasks autonomously with 70 percen",
+      "[3/01 11:03AM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be"
     ],
     "recent_50_clean": 50,
     "recent_50_trivial": 0,
     "recent_50_broken": 0,
     "topic_distribution": {
-      "compound-synthesis": 14,
-      "ai-agents": 10,
-      "longevity": 6,
+      "ai-agents": 12,
+      "compound-synthesis": 11,
+      "longevity": 8,
       "self-improvement": 5,
-      "queue-research-xauusd": 4,
-      "queue-research-tlt": 3
+      "queue-research-xauusd": 3,
+      "treasury-bonds": 2
     }
   },
   "activity": {
-    "last_job": "treasury-bonds",
-    "last_job_time": "3/01 6:00AM ET",
+    "last_job": "ai-agents",
+    "last_job_time": "3/01 6:03AM ET",
     "last_cycle": "3/01 6:00AM ET",
-    "jobs_today": 40,
-    "success_today": 26,
+    "jobs_today": 42,
+    "success_today": 27,
     "timeout_today": 0,
-    "fail_today": 14,
-    "feed_growth_today": 77,
+    "fail_today": 15,
+    "feed_growth_today": 79,
     "state": "running",
     "next_cycle_est": "6:00AM",
     "cycle_count": 64,
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772306701986,
-      "v": 2112,
-      "l": "2:25PM"
-    },
     {
       "t": 1772307010558,
       "v": 2117,
@@ -1504,6 +1499,11 @@
       "t": 1772380874287,
       "v": 464,
       "l": "11:01AM"
+    },
+    {
+      "t": 1772381176489,
+      "v": 469,
+      "l": "11:06AM"
     }
   ],
   "kg_stats": {
@@ -1515,16 +1515,16 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 52.0,
-    "power_w": 37.92,
+    "temp_c": 65.0,
+    "power_w": 37.93,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 0,
     "literal_timestamps": 0,
-    "duplicates": 37,
-    "total": 464,
-    "error_rate": 8.0
+    "duplicates": 38,
+    "total": 469,
+    "error_rate": 8.1
   },
   "cost": {
     "model": "tiered dispatch (Spark + Haiku + Sonnet)",
@@ -1578,14 +1578,14 @@
     },
     "models_hot": [
       {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
         "name": "nomic-embed-text:latest",
         "vram_gb": 0.6,
         "params": "137M"
+      },
+      {
+        "name": "qwen3:8b",
+        "vram_gb": 5.6,
+        "params": "8.2B"
       },
       {
         "name": "qwen3-32b-32k:latest",
