@@ -1,6 +1,6 @@
 {
   "_description": "Quick-read memory state. Fetched at conversation start via web_fetch or MCP.",
-  "_updated": "2026-02-27T23:28:42.226331+00:00",
+  "_updated": "2026-03-01T15:14:55.680758+00:00",
   "_access": {
     "github": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/memory-index.json",
     "dependencies": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/dependencies.json",
@@ -8,18 +8,24 @@
     "session_journal": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/session-journal.jsonl"
   },
   "system_state": {
-    "feed_entries": 1590,
-    "kg_entities": 303,
-    "active_openclaw_jobs": 11,
-    "cron_jobs": 13,
-    "cost_per_day": "<$1",
-    "l2_completion": "80%",
-    "feed_stagnant": false
+    "feed_entries": 431,
+    "domains_active": 5,
+    "launchagents": 22,
+    "launchagents_all_valid": true,
+    "tcc_prompts": 0,
+    "fda_fully_granted": true,
+    "block_3_rag": "NEXT",
+    "cowork": "claude.ai central tab - Phase 4 integration pending"
   },
   "last_session": {
-    "date": "2026-02-28T01:24:25.052114+00:00",
-    "summary": "Mid-session checkpoint: backfill running, crawl strategy ready, temporal decay verified",
-    "key_fix": "Backfill running autonomously, crawler script ready for CF site, temporal decay live"
+    "date": "2026-03-01T15:14:55.680763+00:00",
+    "summary": "Full day: Block 1+2 complete, FDA unlocked, LaunchAgents clean, anti-patterns updated, dashboard rebuilt",
+    "key_changes": [
+      "domain scrub (5 domains)",
+      "FDA grants (0 TCC prompts)",
+      "LaunchAgent audit (22 valid)",
+      "camel-backfill fixed"
+    ]
   },
   "active_crons": [
     "guardian (1min) \u2014 scheduler keepalive",
@@ -63,5 +69,12 @@
     "slv_entry": "PENDING \u2014 waiting DCL confirmation",
     "alert_engine": "v2 live, Telegram connected",
     "fomo_rule": "No alert = no entry. Period."
-  }
+  },
+  "architecture_layers": {
+    "L1": "DEPLOYED",
+    "L2": "DEPLOYED",
+    "L3": "IN PROGRESS",
+    "L4": "PLANNED"
+  },
+  "dashboard_rule": "MANDATORY: every major session must rebuild index.html before push"
 }
