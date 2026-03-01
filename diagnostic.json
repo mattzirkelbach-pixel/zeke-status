@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-03-01 9:45:02AM ET",
-  "timestamp_utc": "2026-03-01T14:45:02Z",
+  "timestamp_local": "2026-03-01 9:50:04AM ET",
+  "timestamp_utc": "2026-03-01T14:50:04Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -21,29 +21,29 @@
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3:8b, nomic-embed-text:latest, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 49ms",
-    "response_ms": 49,
+    "detail": "qwen3:8b, nomic-embed-text:latest, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 43ms",
+    "response_ms": 43,
     "vram_estimate_gb": 27.1,
     "model_params": "32.8B",
     "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 428,
-    "last_modified_minutes_ago": 0.4,
+    "total_lines": 438,
+    "last_modified_minutes_ago": 1.0,
     "last_entries": [
-      "[3/01 9:38AM ET] longevity \u2014 Rapamycin 10mg dose prevented muscle loss in women and bone loss in men in first",
-      "[3/01 9:40AM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be",
-      "[3/01 9:40AM ET] ai-agents \u2014 2026 benchmark shows frontier AI agents like Claude and GPT-4o achieving over 70",
-      "[3/01 9:41AM ET] queue-research-iren \u2014 <|im_start|><|im_start|>\n<|im_start|><|im_start|>\n\n<|im_start|>\n\nFINDING: IREN a",
-      "[3/01 9:46AM ET] compound-synthesis \u2014 Spaced repetition improves retention over cramming while low treasury yields sig"
+      "\"finding\": \"Spaced repetition boosts retention by 20 percent while treasury bond",
+      "\"source\": \"synthesis\"",
+      "}",
+      "[3/01 9:43AM ET] compound-synthesis \u2014 Spaced repetition outperforms cramming while treasury bond yields signal macroec",
+      "\"{\"timestamp\":\"2026-03-01T14:43:00Z\",\"topic\":\"compound-synthesis\",\"finding\":\"Spa"
     ],
-    "recent_50_clean": 50,
+    "recent_50_clean": 43,
     "recent_50_trivial": 0,
-    "recent_50_broken": 0,
+    "recent_50_broken": 7,
     "topic_distribution": {
-      "treasury-bonds": 23,
-      "camel-finance-cycle-analysis": 10,
-      "compound-synthesis": 5,
+      "treasury-bonds": 20,
+      "compound-synthesis": 8,
+      "camel-finance-cycle-analysis": 3,
       "longevity": 3,
       "queue-research-xauusd": 2,
       "ai-agents": 2
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772302202115,
-      "v": 2087,
-      "l": "1:10PM"
-    },
     {
       "t": 1772302515767,
       "v": 2087,
@@ -1504,6 +1499,11 @@
       "t": 1772376302507,
       "v": 428,
       "l": "9:45AM"
+    },
+    {
+      "t": 1772376604518,
+      "v": 438,
+      "l": "9:50AM"
     }
   ],
   "kg_stats": {
@@ -1515,16 +1515,16 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 63.0,
-    "power_w": 37.67,
+    "temp_c": 61.0,
+    "power_w": 35.15,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
-    "malformed_json": 0,
+    "malformed_json": 7,
     "literal_timestamps": 0,
-    "duplicates": 26,
-    "total": 428,
-    "error_rate": 6.1
+    "duplicates": 27,
+    "total": 438,
+    "error_rate": 7.8
   },
   "cost": {
     "model": "tiered dispatch (Spark + Haiku + Sonnet)",
@@ -1595,9 +1595,11 @@
     ]
   },
   "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "WARNING: 7 broken entries in recent feed"
+    ],
+    "issue_count": 1
   },
   "cycles": [
     {
