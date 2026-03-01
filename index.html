@@ -54,7 +54,7 @@ body{
 .stat .lbl{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:1.1px;margin-top:3px;}
 .stat .sub{font-size:11px;color:var(--text3);margin-top:1px;}
 
-/* ── Autonomy progress bar section ── */
+/* ── Autonomy section ── */
 .autonomy{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r);padding:14px 18px;margin-bottom:12px;
@@ -112,7 +112,7 @@ body{
 .c-ok{color:var(--ok);} .c-warn{color:var(--warn);} .c-accent{color:var(--accent);}
 .c-blue{color:var(--blue);} .c-orange{color:var(--orange);} .c-purple{color:var(--purple);} .c-dim{color:var(--text3);}
 
-/* ── Inline bar chart (fixed height, no overflow) ── */
+/* ── Charts ── */
 .chart-meta{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-bottom:6px;}
 .chart-area{height:60px;display:flex;align-items:flex-end;gap:1px;overflow:hidden;}
 .bar{flex:1;min-width:2px;border-radius:2px 2px 0 0;background:var(--accent);cursor:default;}
@@ -160,15 +160,41 @@ body{
 .feed-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-left:6px;}
 .feed-finding{color:var(--text2);line-height:1.45;margin-top:2px;}
 
-/* ── Footer ── */
-.footer{
-  border-top:1px solid var(--border);padding:9px 20px;
-  display:flex;justify-content:center;gap:16px;
-  font-size:11px;color:var(--text3);
-}
-.footer a{color:var(--accent);text-decoration:none;}
+/* ── System Health row ── */
+.syshealth{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;}
+.sh-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:11px 14px;}
+.sh-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.1px;margin-bottom:7px;}
+.sh-val{font-family:'JetBrains Mono',monospace;font-size:1.4em;font-weight:700;}
+.sh-sub{font-size:10px;color:var(--text3);margin-top:3px;}
+.sh-grant{display:flex;align-items:center;gap:6px;padding:2px 0;font-size:11px;color:var(--text2);}
+.sh-dot{width:6px;height:6px;border-radius:50%;background:var(--ok);flex-shrink:0;}
+.sh-dot.warn{background:var(--warn);}
 
-/* ── Knowledge Graph animated viz ── */
+/* ── Domain registry ── */
+.domain-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.domain-card{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 12px;}
+.domain-name{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:4px;}
+.domain-cap{font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
+.domain-q{display:inline-block;padding:2px 7px;border-radius:10px;font-size:9px;font-weight:700;margin-top:5px;}
+.domain-q.hi{background:rgba(52,211,153,.1);color:var(--ok);border:1px solid rgba(52,211,153,.2);}
+.domain-q.mid{background:rgba(251,191,36,.1);color:var(--orange);border:1px solid rgba(251,191,36,.2);}
+.domain-q.lo{background:rgba(99,106,130,.1);color:var(--text3);border:1px solid rgba(99,106,130,.2);}
+.domain-note{font-size:9px;color:var(--text3);margin-top:4px;line-height:1.4;}
+
+/* ── Session changelog ── */
+.changelog{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:12px;}
+.cl-entry{padding:6px 0;border-bottom:1px solid var(--border);}
+.cl-entry:last-child{border-bottom:none;padding-bottom:0;}
+.cl-ts{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);}
+.cl-type{display:inline-block;padding:1px 7px;border-radius:10px;font-size:9px;font-weight:700;margin:0 6px;text-transform:uppercase;letter-spacing:.5px;}
+.cl-type.SESSION_COMPLETE{background:rgba(52,211,153,.1);color:var(--ok);border:1px solid rgba(52,211,153,.2);}
+.cl-type.SYSTEM_CLEANUP{background:rgba(96,165,250,.1);color:var(--blue);border:1px solid rgba(96,165,250,.2);}
+.cl-type.PERMISSION_AUDIT{background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.2);}
+.cl-type.SCRUB_COMPLETE{background:rgba(251,191,36,.1);color:var(--orange);border:1px solid rgba(251,191,36,.2);}
+.cl-type.SCRUB_CHECKPOINT{background:rgba(99,106,130,.1);color:var(--text3);border:1px solid rgba(99,106,130,.2);}
+.cl-summary{font-size:12px;color:var(--text2);margin-top:2px;line-height:1.4;}
+
+/* ── KG viz ── */
 .kg-viz{
   position:relative;height:130px;
   display:flex;align-items:center;justify-content:center;
@@ -188,69 +214,27 @@ body{
 .kg-core{position:relative;z-index:2;text-align:center;}
 .kg-total{font-family:'JetBrains Mono',monospace;font-size:1.5em;font-weight:700;color:var(--accent);line-height:1;}
 .kg-total-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-top:2px;}
-/* Satellite pill nodes */
 .kg-node{
   position:absolute;
   font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
   padding:2px 8px;border-radius:12px;white-space:nowrap;
   pointer-events:none;
 }
-.kg-node.n-entities{
-  background:rgba(77,216,192,.1);color:var(--accent);
-  border:1px solid rgba(77,216,192,.35);
-  top:6px;left:50%;transform:translateX(-50%);
-}
-.kg-node.n-relations{
-  background:rgba(96,165,250,.1);color:var(--blue);
-  border:1px solid rgba(96,165,250,.35);
-  bottom:6px;left:22%;
-}
-.kg-node.n-assoc{
-  background:rgba(167,139,250,.1);color:var(--purple);
-  border:1px solid rgba(167,139,250,.35);
-  bottom:6px;right:10%;
-}
-/* KG mini sparkline */
+.kg-node.n-entities{background:rgba(77,216,192,.1);color:var(--accent);border:1px solid rgba(77,216,192,.35);top:6px;left:50%;transform:translateX(-50%);}
+.kg-node.n-relations{background:rgba(96,165,250,.1);color:var(--blue);border:1px solid rgba(96,165,250,.35);bottom:6px;left:22%;}
+.kg-node.n-assoc{background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.35);bottom:6px;right:10%;}
 .kg-spark{display:flex;align-items:flex-end;gap:1px;height:20px;margin-top:2px;}
 .ks-bar{flex:1;min-width:2px;border-radius:1px 1px 0 0;opacity:.45;background:var(--accent);}
 .ks-bar.latest{opacity:1;background:var(--ok);}
-.kg-spark-label{
-  display:flex;justify-content:space-between;
-  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:3px;
+.kg-spark-label{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:3px;}
+
+/* ── Footer ── */
+.footer{
+  border-top:1px solid var(--border);padding:9px 20px;
+  display:flex;justify-content:center;gap:16px;
+  font-size:11px;color:var(--text3);
 }
-/* ── System Health row ── */
-.syshealth{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;}
-.sh-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;}
-.sh-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.1px;margin-bottom:6px;}
-.sh-val{font-family:'JetBrains Mono',monospace;font-size:1.3em;font-weight:700;}
-.sh-sub{font-size:10px;color:var(--text3);margin-top:2px;}
-.sh-grant{display:flex;align-items:center;gap:5px;padding:1.5px 0;font-size:11px;color:var(--text2);}
-.sh-grant .dot{width:6px;height:6px;border-radius:50%;background:var(--ok);flex-shrink:0;}
-.sh-grant .dot.warn{background:var(--warn);}
-
-/* ── Domain registry ── */
-.domain-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;}
-.domain-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:10px 13px;}
-.domain-name{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:3px;}
-.domain-cap{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);}
-.domain-q{display:inline-block;padding:1px 6px;border-radius:10px;font-size:9px;font-weight:700;margin-top:4px;}
-.domain-q.hi{background:rgba(52,211,153,.1);color:var(--ok);border:1px solid rgba(52,211,153,.2);}
-.domain-q.mid{background:rgba(251,191,36,.1);color:var(--orange);border:1px solid rgba(251,191,36,.2);}
-.domain-q.lo{background:rgba(99,106,130,.1);color:var(--text3);border:1px solid rgba(99,106,130,.2);}
-.domain-note{font-size:9px;color:var(--text3);margin-top:3px;}
-
-/* ── Session changelog ── */
-.changelog{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:13px 16px;margin-bottom:12px;}
-.cl-entry{padding:5px 0;border-bottom:1px solid var(--border);}
-.cl-entry:last-child{border-bottom:none;}
-.cl-ts{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);}
-.cl-type{display:inline-block;padding:1px 7px;border-radius:10px;font-size:9px;font-weight:700;margin:0 6px;text-transform:uppercase;}
-.cl-type.SESSION_COMPLETE{background:rgba(52,211,153,.1);color:var(--ok);border:1px solid rgba(52,211,153,.2);}
-.cl-type.SYSTEM_CLEANUP{background:rgba(96,165,250,.1);color:var(--blue);border:1px solid rgba(96,165,250,.2);}
-.cl-type.PERMISSION_AUDIT{background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.2);}
-.cl-type.SCRUB_COMPLETE{background:rgba(251,191,36,.1);color:var(--orange);border:1px solid rgba(251,191,36,.2);}
-.cl-type.SCRUB_CHECKPOINT{background:rgba(99,106,130,.1);color:var(--text3);border:1px solid rgba(99,106,130,.2);}
-.cl-summary{font-size:12px;color:var(--text2);margin-top:2px;}
+.footer a{color:var(--accent);text-decoration:none;}
 </style>
 </head>
 <body>
@@ -277,7 +261,7 @@ body{
   <!-- 3. PIPELINE -->
   <div class="pipeline" id="pipeline"></div>
 
-  <!-- 3b. SYSTEM HEALTH ROW -->
+  <!-- 3b. SYSTEM HEALTH -->
   <div class="syshealth" id="syshealth">
     <div class="sh-card">
       <div class="sh-label">TCC Prompts</div>
@@ -287,66 +271,66 @@ body{
     <div class="sh-card">
       <div class="sh-label">LaunchAgents</div>
       <div class="sh-val c-accent">22</div>
-      <div class="sh-sub">All scripts valid · 0 ghosts</div>
+      <div class="sh-sub">All scripts valid · 0 ghosts removed</div>
     </div>
     <div class="sh-card">
       <div class="sh-label">FDA Grants</div>
-      <div class="sh-grant"><span class="dot"></span>python3.14 · Full Disk Access</div>
-      <div class="sh-grant"><span class="dot"></span>claude-code · Full Disk Access</div>
-      <div class="sh-grant"><span class="dot"></span>node · Full Disk Access</div>
-      <div class="sh-grant"><span class="dot"></span>terminal · Full Disk Access</div>
+      <div class="sh-grant"><span class="sh-dot"></span>python3.14 · Full Disk Access</div>
+      <div class="sh-grant"><span class="sh-dot"></span>claude-code · Full Disk Access</div>
+      <div class="sh-grant"><span class="sh-dot"></span>node · Full Disk Access</div>
+      <div class="sh-grant"><span class="sh-dot"></span>terminal · Full Disk Access</div>
     </div>
     <div class="sh-card">
       <div class="sh-label">Next Block</div>
-      <div class="sh-val" style="font-size:1em;color:var(--blue)">Block 3</div>
-      <div class="sh-sub">RAG feedback loop · embed→ChromaDB→context-aware API</div>
+      <div class="sh-val c-blue" style="font-size:.9em;padding-top:2px">Block 3 · RAG</div>
+      <div class="sh-sub">embed synthesis → ChromaDB → context-aware API calls</div>
     </div>
   </div>
 
   <!-- 3c. DOMAIN REGISTRY -->
   <div class="autonomy" style="margin-bottom:12px">
     <div class="section-label">Domain Registry · 5 Active · 2 Merged 2026-03-01</div>
-    <div class="domain-grid" id="domains">
+    <div class="domain-grid">
       <div class="domain-card">
         <div class="domain-name">camel-finance</div>
-        <div class="domain-cap">cap: 50/day · pipeline-driven</div>
+        <div class="domain-cap">cap 50/day · pipeline</div>
         <div class="domain-q hi">8.0 / 10</div>
-        <div class="domain-note">YouTube transcripts · thesis ledger</div>
+        <div class="domain-note">YouTube transcripts · thesis ledger · cycle signals</div>
       </div>
       <div class="domain-card">
         <div class="domain-name">treasury-bonds</div>
-        <div class="domain-cap">cap: 4/day · openclaw-cron</div>
+        <div class="domain-cap">cap 4/day · openclaw-cron</div>
         <div class="domain-q mid">5.0 / 10</div>
-        <div class="domain-note">TLT · yields · 1256 rules ← merged personal-finance</div>
+        <div class="domain-note">TLT · yields · 1256 rules<br>← merged personal-finance</div>
       </div>
       <div class="domain-card">
         <div class="domain-name">ai-agents</div>
-        <div class="domain-cap">cap: 3/day · openclaw-cron</div>
+        <div class="domain-cap">cap 3/day · openclaw-cron</div>
         <div class="domain-q lo">3.3 / 10</div>
-        <div class="domain-note">MCP · local models ← merged tool-calling</div>
+        <div class="domain-note">MCP · local models · autonomy<br>← merged tool-calling</div>
       </div>
       <div class="domain-card">
         <div class="domain-name">longevity</div>
-        <div class="domain-cap">cap: 2/day · openclaw-cron</div>
+        <div class="domain-cap">cap 2/day · openclaw-cron</div>
         <div class="domain-q lo">3.3 / 10</div>
-        <div class="domain-note">senolytics · NAD+ · rapamycin</div>
+        <div class="domain-note">senolytics · NAD+ · rapamycin · trials</div>
       </div>
       <div class="domain-card">
         <div class="domain-name">self-improvement</div>
-        <div class="domain-cap">cap: 2/day · openclaw-cron</div>
+        <div class="domain-cap">cap 2/day · openclaw-cron</div>
         <div class="domain-q lo">3.3 / 10</div>
-        <div class="domain-note">spaced repetition · habits</div>
+        <div class="domain-note">spaced repetition · habits · cognition</div>
       </div>
     </div>
   </div>
 
-  <!-- 4. CHARTS: Today + All-Time side by side -->
+  <!-- 4. CHARTS -->
   <div class="grid2" id="charts"></div>
 
-  <!-- 5. KNOWLEDGE GRAPH + GPU + FEED QUALITY -->
+  <!-- 5. KG + GPU + FEED QUALITY -->
   <div class="grid3" id="grid3"></div>
 
-  <!-- 6. RESEARCH TOPICS + RECENT JOBS -->
+  <!-- 6. TOPICS + JOBS -->
   <div class="grid2" id="grid2b"></div>
 
   <!-- 7. LATEST RESEARCH -->
@@ -370,14 +354,15 @@ body{
 </div>
 
 <script>
-const $=s=>document.querySelector(s);
-const fmt=n=>n!=null?n.toLocaleString():'—';
-const pct=(a,b)=>b>0?Math.round(a/b*100):0;
-const dur=s=>{const n=parseFloat(s);return isNaN(n)?'':n>=60?(n/60).toFixed(1)+'m':Math.round(n)+'s';};
-function KV(k,v,c){return `<div class="kv"><span class="k">${k}</span><span class="v ${c||''}">${v}</span></div>`;}
+const $ = s => document.querySelector(s);
+const fmt = n => n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'K':String(n||0);
+const pct = (a,b) => b?Math.round(a/b*100):0;
+const dur = s => !s?'':s<60?s+'s':Math.round(s/60)+'m';
+const KV = (k,v,c='') => `<div class="kv"><span class="k">${k}</span><span class="v ${c}">${v}</span></div>`;
 
 async function J(u){
-  try{const r=await fetch(u+'?t='+Date.now());return r.ok?r.json():null}catch{return null}
+  try{const r=await fetch(u+'?t='+Date.now());if(!r.ok)return null;return await r.json();}
+  catch{return null;}
 }
 async function JL(u){
   try{
@@ -445,10 +430,10 @@ async function render(){
 
   // ── 2. Autonomy layers ──
   const layerDefs = [
-    {k:'layer1', name:'L1 · Execution',    desc:'Scheduler, jobs, task dispatch'},
-    {k:'layer2', name:'L2 · Oversight',    desc:'Self-repair, health watchdog'},
-    {k:'layer3', name:'L3 · Intelligence', desc:'RAG, synthesis, research feed'},
-    {k:'layer4', name:'L4 · Recursive Learning', desc:'Self-directed goal setting'},
+    {k:'layer1', name:'L1 · Execution',    desc:'Scheduler · queue daemon · 22 LaunchAgents'},
+    {k:'layer2', name:'L2 · Oversight',    desc:'Self-repair · watchdog · feed-guardian'},
+    {k:'layer3', name:'L3 · Intelligence', desc:'RAG (Block 3 next) · synthesis → queue tasks'},
+    {k:'layer4', name:'L4 · Recursive Learning', desc:'Self-directed goals · Cowork approval loop'},
   ];
   $('#layers').innerHTML = layerDefs.map(x=>{
     const raw = auto[x.k]||'';
@@ -550,35 +535,24 @@ async function render(){
   }
   $('#charts').innerHTML = todayCard + longCard;
 
-  // ── 5. Knowledge Graph (animated) + GPU + Feed Quality ──
-
-  // KG: build node counts and sparkline from snapshots
-  const ents = kg.entities||0;
-  const rels = kg.relations||0;
-  const assoc = kg.associations||0;
+  // ── 5. KG + GPU + Feed Quality ──
+  const ents = kg.entities||0, rels = kg.relations||0, assoc = kg.associations||0;
   const totalNodes = ents + rels + assoc;
-
-  // Build sparkline: sample feed_total from snapshots as proxy for KG growth
-  // (kg_stats history not tracked separately — feed growth correlates)
-  const sparkSnaps = snaps.slice(-30); // last 30 snapshots
+  const sparkSnaps = snaps.slice(-30);
   let kgSparkHtml = '';
-  if(sparkSnaps.length > 1){
-    const sv = sparkSnaps.map(s => s.feed_total||0);
-    const mn = Math.min(...sv), mx = Math.max(...sv), rng = mx-mn||1;
-    kgSparkHtml = `<div class="kg-spark">` +
-      sv.map((v,i) => {
-        const h = Math.max(((v-mn)/rng)*100, 8);
-        const isLast = i === sv.length-1;
+  if(sparkSnaps.length>1){
+    const sv=sparkSnaps.map(s=>s.feed_total||0);
+    const mn=Math.min(...sv), mx=Math.max(...sv), rng=mx-mn||1;
+    kgSparkHtml=`<div class="kg-spark">`+
+      sv.map((v,i)=>{
+        const h=Math.max(((v-mn)/rng)*100,8);
+        const isLast=i===sv.length-1;
         return `<div class="ks-bar${isLast?' latest':''}" style="height:${h}%"></div>`;
-      }).join('') +
-    `</div>
-    <div class="kg-spark-label">
-      <span>${sparkSnaps[0]?.date||''}</span>
-      <span>+${sparkSnaps[sparkSnaps.length-1]?.feed_total - sparkSnaps[0]?.feed_total || 0} entries</span>
-    </div>`;
+      }).join('')+
+    `</div><div class="kg-spark-label"><span>${sparkSnaps[0]?.date||''}</span><span>+${(sparkSnaps[sparkSnaps.length-1]?.feed_total||0)-(sparkSnaps[0]?.feed_total||0)} entries</span></div>`;
   }
 
-  const kgCard = `<div class="card">
+  const kgCard=`<div class="card">
     <div class="card-title">Knowledge Graph</div>
     <div class="kg-viz">
       <div class="kg-ring kg-ring-1"></div>
@@ -598,78 +572,55 @@ async function render(){
     ${KV('Corpus', '27 transcripts · 59 lessons', 'c-dim')}
   </div>`;
 
-  // GPU
-  let gpuHtml = '';
-  const gname = gpu.gpu_name||'GB10';
-  gpuHtml += KV('GPU', gname, 'c-accent');
-  if(gpu.temp_c!=null){
-    const tcol = gpu.temp_c>80?'c-warn':gpu.temp_c>70?'c-orange':'c-ok';
-    gpuHtml += KV('Temp', gpu.temp_c+'°C', tcol);
-  }
-  if(gpu.gpu_util_pct!=null){
-    const ucol = gpu.gpu_util_pct>85?'c-orange':'c-blue';
-    gpuHtml += KV('Utilization', gpu.gpu_util_pct+'%', ucol);
-  }
-  if(gpu.power_w!=null) gpuHtml += KV('Power', gpu.power_w+'W', '');
-  gpuHtml += '<div class="divider"></div>';
-  const hotModels = (d.compute_tiers?.models_hot||[]);
-  if(hotModels.length){
-    for(const m of hotModels){
-      const short = m.name.replace(':latest','').replace('-32k','');
-      gpuHtml += KV(short, `${m.params} · ${m.vram_gb}GB`, 'c-dim');
-    }
-  } else {
-    gpuHtml += KV('qwen3-32b', '32B · ~64GB', 'c-dim');
-    gpuHtml += KV('qwen3-8b', '8B · ~16GB', 'c-dim');
-    gpuHtml += KV('nomic-embed', 'embeddings', 'c-dim');
-  }
+  let gpuHtml='';
+  const gname=gpu.gpu_name||'GB10';
+  gpuHtml+=KV('GPU',gname,'c-accent');
+  if(gpu.temp_c!=null){const tc=gpu.temp_c>80?'c-warn':gpu.temp_c>70?'c-orange':'c-ok';gpuHtml+=KV('Temp',gpu.temp_c+'°C',tc);}
+  if(gpu.gpu_util_pct!=null){gpuHtml+=KV('Utilization',gpu.gpu_util_pct+'%',gpu.gpu_util_pct>85?'c-orange':'c-blue');}
+  if(gpu.power_w!=null)gpuHtml+=KV('Power',gpu.power_w+'W','');
+  gpuHtml+='<div class="divider"></div>';
+  const hotModels=(d.compute_tiers?.models_hot||[]);
+  if(hotModels.length){for(const m of hotModels){gpuHtml+=KV(m.name.replace(':latest','').replace('-32k',''),`${m.params} · ${m.vram_gb}GB`,'c-dim');}}
+  else{gpuHtml+=KV('qwen3-32b','32B · ~64GB','c-dim');gpuHtml+=KV('qwen3-8b','8B · ~16GB','c-dim');gpuHtml+=KV('nomic-embed','embeddings','c-dim');}
 
-  // Feed quality
-  const fq = d.feed_quality||{};
-  const cl = f.recent_50_clean||0, tr = f.recent_50_trivial||0, br = f.recent_50_broken||0;
-  const tot50 = cl+tr+br||50;
-  let fqHtml = KV('Clean (last 50)', `${cl} / ${tot50}`, cl/tot50>.8?'c-ok':cl/tot50>.6?'c-orange':'c-warn');
-  if(tr>0) fqHtml += KV('Trivial', tr, 'c-orange');
-  if(br>0) fqHtml += KV('Broken', br, 'c-warn');
-  const lastWrite = f.last_modified_minutes_ago;
-  fqHtml += KV('Last write', lastWrite!=null?lastWrite+'m ago':'—', lastWrite<5?'c-ok':'c-orange');
-  if(fq.total){
-    fqHtml += '<div class="divider"></div>';
-    const er = fq.error_rate||0;
-    fqHtml += KV('Error rate', er.toFixed(1)+'%', er>20?'c-warn':er>5?'c-orange':'c-ok');
-    if(fq.duplicates>0) fqHtml += KV('Duplicates', fq.duplicates, 'c-orange');
-    if(fq.literal_timestamps>0) fqHtml += KV('Bad timestamps', fq.literal_timestamps, 'c-orange');
-  }
+  const fq=d.feed_quality||{};
+  const cl=f.recent_50_clean||0, tr=f.recent_50_trivial||0, br=f.recent_50_broken||0;
+  const tot50=cl+tr+br||50;
+  let fqHtml=KV('Clean (last 50)',`${cl}/${tot50}`,cl/tot50>.8?'c-ok':cl/tot50>.6?'c-orange':'c-warn');
+  if(tr>0)fqHtml+=KV('Trivial',tr,'c-orange');
+  if(br>0)fqHtml+=KV('Broken',br,'c-warn');
+  const lastWrite=f.last_modified_minutes_ago;
+  fqHtml+=KV('Last write',lastWrite!=null?lastWrite+'m ago':'—',lastWrite<5?'c-ok':'c-orange');
+  if(fq.total){fqHtml+='<div class="divider"></div>';const er=fq.error_rate||0;fqHtml+=KV('Error rate',er.toFixed(1)+'%',er>20?'c-warn':er>5?'c-orange':'c-ok');if(fq.duplicates>0)fqHtml+=KV('Duplicates',fq.duplicates,'c-orange');}
 
-  $('#grid3').innerHTML = kgCard +
-    `<div class="card"><div class="card-title">DGX Spark · NVIDIA GB10</div>${gpuHtml}</div>` +
+  $('#grid3').innerHTML=kgCard+
+    `<div class="card"><div class="card-title">DGX Spark · NVIDIA GB10</div>${gpuHtml}</div>`+
     `<div class="card"><div class="card-title">Feed Quality</div>${fqHtml}</div>`;
 
   // ── 6. Topics + Jobs ──
-  const topics = f.topic_distribution||{};
-  const merged = {};
+  const topics=f.topic_distribution||{};
+  const merged={};
   for(const [k,v] of Object.entries(topics)){
-    const clean = k.toLowerCase().replace(/\s+/g,' ').trim();
-    const norm = clean
+    const norm=k.toLowerCase().replace(/\s+/g,' ').trim()
       .replace('longevity research','longevity')
       .replace('ai agents and tool calling','ai-agents')
       .replace('treasury bonds and interest rates','treasury-bonds');
-    merged[norm] = (merged[norm]||0)+v;
+    merged[norm]=(merged[norm]||0)+v;
   }
-  const lastSnap = snaps[snaps.length-1];
+  const lastSnap=snaps[snaps.length-1];
   if(lastSnap?.topic_counts){
     for(const [k,v] of Object.entries(lastSnap.topic_counts)){
-      const norm = k.toLowerCase().replace(/\s+/g,' ').trim()
+      const norm=k.toLowerCase().replace(/\s+/g,' ').trim()
         .replace('longevity research','longevity')
         .replace('ai agents and tool calling','ai-agents')
         .replace('treasury bonds and interest rates','treasury-bonds');
-      merged[norm] = Math.max(merged[norm]||0, v);
+      merged[norm]=Math.max(merged[norm]||0,v);
     }
   }
-  const topicList = Object.entries(merged).sort((a,b)=>b[1]-a[1]).slice(0,9);
-  const tmx = Math.max(...topicList.map(e=>e[1]),1);
-  const topicsHtml = topicList.map(([t,n])=>{
-    const disp = t.length>26?t.substring(0,24)+'…':t;
+  const topicList=Object.entries(merged).sort((a,b)=>b[1]-a[1]).slice(0,9);
+  const tmx=Math.max(...topicList.map(e=>e[1]),1);
+  const topicsHtml=topicList.map(([t,n])=>{
+    const disp=t.length>26?t.substring(0,24)+'…':t;
     return `<div class="topic-row">
       <span class="topic-name" title="${t}">${disp}</span>
       <div class="t-bg"><div class="t-fill" style="width:${Math.max(n/tmx*100,4)}%"></div></div>
@@ -677,28 +628,27 @@ async function render(){
     </div>`;
   }).join('');
 
-  const recentJobs = (d.recent_jobs||[]).filter(j=>j.name).slice(0,12);
-  let jobsHtml = '';
+  const recentJobs=(d.recent_jobs||[]).filter(j=>j.name).slice(0,12);
+  let jobsHtml='';
   if(recentJobs.length){
-    const cycles = (d.cycles||[]).slice(-4).reverse();
+    const cycles=(d.cycles||[]).slice(-4).reverse();
     if(cycles.length){
       for(const cyc of cycles){
-        const t = new Date(cyc.ts);
-        const hhmm = t.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});
-        jobsHtml += `<div class="cycle-hdr">
+        const t=new Date(cyc.ts);
+        const hhmm=t.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});
+        jobsHtml+=`<div class="cycle-hdr">
           <span class="c-label">Cycle ${cyc.cycle}</span>
           <span class="c-time">${hhmm}</span>
           <span style="color:var(--text3);margin:0 4px">·</span>
-          <span style="color:var(--text3);font-size:10px;">${cyc.success||0}ok ${cyc.fail||0}fail</span>
+          <span style="color:var(--text3);font-size:10px">${cyc.success||0}ok ${cyc.fail||0}fail</span>
           <span class="c-grew">+${cyc.feed_grew||0}</span>
         </div>`;
       }
-      jobsHtml += '<div class="divider" style="margin-top:4px"></div>';
+      jobsHtml+='<div class="divider" style="margin-top:4px"></div>';
     }
     for(const j of recentJobs){
-      const st = j.status||'—';
-      const grew = j.grew||0;
-      jobsHtml += `<div class="job-row ${st}">
+      const st=j.status||'—', grew=j.grew||0;
+      jobsHtml+=`<div class="job-row ${st}">
         <span class="j-name">${j.name}</span>
         <span class="j-meta">${dur(j.duration)} ${grew>0?`<span class="c-ok">+${grew}</span>`:''}</span>
         <span class="j-status ${st}">${st}</span>
@@ -706,23 +656,38 @@ async function render(){
     }
   }
 
-  $('#grid2b').innerHTML = `
+  $('#grid2b').innerHTML=`
     <div class="card"><div class="card-title">Research Topics by Volume</div>${topicsHtml}</div>
-    <div class="card" style="overflow:hidden;"><div class="card-title">Recent Jobs</div>${jobsHtml||'<div class="c-dim" style="font-size:12px">No jobs yet</div>'}</div>`;
+    <div class="card" style="overflow:hidden"><div class="card-title">Recent Jobs</div>${jobsHtml||'<div class="c-dim" style="font-size:12px">No jobs yet</div>'}</div>`;
 
   // ── 7. Research feed ──
-  const entries = (f.last_entries||[]).filter(e=>typeof e==='object').slice(-6).reverse();
-  const feedHtml = entries.map(e=>{
-    let ts = '';
-    try{ts = new Date(e.timestamp).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});}catch{}
-    const finding = (e.finding||e.insight||'').substring(0,240);
+  const entries=(f.last_entries||[]).filter(e=>typeof e==='object').slice(-6).reverse();
+  const feedHtml=entries.map(e=>{
+    let ts='';
+    try{ts=new Date(e.timestamp).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});}catch{}
+    const finding=(e.finding||e.insight||'').substring(0,240);
     return `<div class="feed-item">
       <span class="feed-topic">${e.topic||''}</span><span class="feed-time">${ts}</span>
       <div class="feed-finding">${finding}</div>
     </div>`;
   }).join('');
-  $('#research').innerHTML = `<div class="card-title">Latest Research</div>` +
+  $('#research').innerHTML=`<div class="card-title">Latest Research</div>`+
     (feedHtml||'<div class="c-dim" style="font-size:12px">No entries yet</div>');
+
+  // ── 8. Session Changelog ──
+  const journal = await JL('memory/session-journal.jsonl');
+  const sessions = journal.filter(e=>e.session_id||e.type).slice(-10).reverse();
+  const typeMap={SESSION_COMPLETE:1,SYSTEM_CLEANUP:1,PERMISSION_AUDIT:1,SCRUB_COMPLETE:1,SCRUB_CHECKPOINT:1};
+  const clHtml = sessions.length ? sessions.map(e=>{
+    let ts='';
+    try{const d=new Date(e.timestamp);ts=d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});}catch{}
+    const type=e.type||'';
+    return `<div class="cl-entry">
+      <span class="cl-ts">${ts}</span>${type?`<span class="cl-type ${type}">${type.replace(/_/g,' ')}</span>`:''}
+      <div class="cl-summary">${e.summary||e.session_id||''}</div>
+    </div>`;
+  }).join('') : '<div class="c-dim" style="font-size:12px">No entries</div>';
+  $('#changelog-entries').innerHTML = clHtml;
 }
 
 render();

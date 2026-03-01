@@ -56,3 +56,32 @@
 - Anti-patterns file is not enough — it captures lessons but not decisions
 - The journal is how the next Claude session knows what architectural state it inherits
 - Every session that makes a structural decision (not just file change) needs a journal entry with: what decided, why, what comes next
+
+## Dashboard Must Reflect System State (learned 2026-03-01)
+- **Every major session that changes system architecture MUST rebuild index.html**
+- The dashboard at https://mattzirkelbach-pixel.github.io/zeke-status/ is Matt's primary GUI when not in chat
+- If the dashboard doesn't reflect current state, Matt is flying blind between sessions
+- Protocol: after memory sync, update index.html sections for: autonomy layers, system health, domain count, known blockers
+- Push to GitHub = deploy. Dashboard serves from GitHub Pages immediately.
+
+## LaunchAgent Hygiene (learned 2026-03-01)
+- **Ghost plists (pointing to missing/archived scripts) accumulate silently and show in macOS System Settings as duplicates**
+- Run audit: compare all plist ProgramArguments targets against filesystem — any MISSING = remove and unload
+- .bak files in ~/Library/LaunchAgents/ should NEVER exist — macOS tries to load them, fails, shows as duplicates
+- RunAtLoad=true on one-shot tasks (backfill, deploys) causes exit code 1 at login — use StartInterval instead
+- Cleanup protocol: unload → move to zeke-backups/ → journal the removal
+
+## FDA = Permanent Autonomy Unlock (learned 2026-03-01)
+- **python3.14 + claude-code need Full Disk Access or they generate TCC permission dialogs constantly**
+- python3 prompts kTCCServiceSystemPolicyAppData every ~few minutes = the approval queue at the Mac mini
+- Fix is permanent: System Settings → Privacy & Security → Full Disk Access → add python3 + claude-code
+- FDA covers ALL sub-services: AppData, SysAdminFiles, Downloads, Documents, Desktop, MediaLibrary
+- After granting: 0 TCC prompts. The queue disappears.
+- Confirmed grants 2026-03-01: python3.14, claude-code, node, sshd-keygen-wrapper, terminal, claude-desktop
+
+## Cowork Integration Points (learned 2026-03-01)
+- **Cowork is the central tab in claude.ai** — not a separate app to install
+- Best integration: pending-approval.json pattern (Phase 4) — queue autonomous decisions for remote review
+- Second fit: file management layer — archiving synthesis outputs, organizing zeke-backups/, graduated domain files
+- Does NOT replace Python pipeline — Cowork handles human-in-the-loop touchpoints, Python handles data flow
+- Claude Code on the right panel in claude.ai = the execution agent for agentic tasks
