@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-03-01 4:20:01AM ET",
-  "timestamp_utc": "2026-03-01T09:20:01Z",
+  "timestamp_local": "2026-03-01 4:25:01AM ET",
+  "timestamp_utc": "2026-03-01T09:25:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -16,35 +16,35 @@
     "online": true,
     "models_loaded": [
       "qwen3-32b-32k:latest",
-      "qwen3:8b",
-      "nomic-embed-text:latest"
+      "nomic-embed-text:latest",
+      "qwen3:8b"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 28ms",
-    "response_ms": 28,
-    "vram_estimate_gb": 0.6,
-    "model_params": "137M",
-    "model_quant": "F16"
+    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 35ms",
+    "response_ms": 35,
+    "vram_estimate_gb": 5.6,
+    "model_params": "8.2B",
+    "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 2344,
-    "last_modified_minutes_ago": 3.4,
+    "total_lines": 2350,
+    "last_modified_minutes_ago": 0.6,
     "last_entries": [
-      "[3/01 4:13AM ET] tool-calling \u2014 The model has to format the arguments properly to call the tool",
-      "[2/28 10:23PM ET] tool-calling \u2014 The Symflower blog 2025 post states even well-tuned LLM agents have function-cal",
-      "[3/01 4:15AM ET] compound-synthesis \u2014 Spaced repetition improves knowledge retention through distributed study while r",
-      "[3/01 4:17AM ET] compound-synthesis \u2014 Low-dose consistent interventions outperform intensive single sessions across bo",
-      "[3/01 4:18AM ET] compound-synthesis \u2014 Rapamycin prevents degenerative bone loss while spaced repetition triples retent"
+      "[3/01 5:19AM ET] self-improvement \u2014 Double-spaced spaced repetition improves medical education retention by 58.03% v",
+      "[2/28 11:20PM ET] longevity \u2014 Rapamycin extended median lifespan in multiple mammalian studies at low doses by",
+      "[3/01 4:24AM ET] longevity \u2014 Rapamycin reduced phosphorylated S6 levels by 28 in phase 2 trials at 2mg daily",
+      "[3/01 4:21AM ET] longevity \u2014 Rapamycin extended median lifespan in multiple mammalian studies at low doses by",
+      "[2/28 6:24PM ET] ai-agents \u2014 Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-be"
     ],
     "recent_50_clean": 50,
     "recent_50_trivial": 0,
     "recent_50_broken": 0,
     "topic_distribution": {
-      "self-improvement": 16,
-      "compound-synthesis": 12,
-      "ai-agents": 10,
-      "longevity": 6,
+      "self-improvement": 14,
+      "ai-agents": 11,
+      "compound-synthesis": 10,
+      "longevity": 9,
       "tool-calling": 5,
       "treasury-bonds": 1
     }
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772280901776,
-      "v": 1868,
-      "l": "7:15AM"
-    },
     {
       "t": 1772281201297,
       "v": 1871,
@@ -1504,6 +1499,11 @@
       "t": 1772356731081,
       "v": 2344,
       "l": "4:18AM"
+    },
+    {
+      "t": 1772357101379,
+      "v": 2350,
+      "l": "4:25AM"
     }
   ],
   "kg_stats": {
@@ -1514,17 +1514,17 @@
   },
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 61.0,
-    "power_w": 40.03,
+    "gpu_util_pct": 96.0,
+    "temp_c": 64.0,
+    "power_w": 51.29,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 0,
     "literal_timestamps": 9,
-    "duplicates": 259,
-    "total": 2344,
-    "error_rate": 11.4
+    "duplicates": 263,
+    "total": 2350,
+    "error_rate": 11.6
   },
   "cost": {
     "model": "tiered dispatch (Spark + Haiku + Sonnet)",
@@ -1583,14 +1583,14 @@
         "params": "32.8B"
       },
       {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
         "name": "nomic-embed-text:latest",
         "vram_gb": 0.6,
         "params": "137M"
+      },
+      {
+        "name": "qwen3:8b",
+        "vram_gb": 5.6,
+        "params": "8.2B"
       }
     ]
   },
