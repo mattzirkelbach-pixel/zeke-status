@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-02-28 11:40:02PM ET",
-  "timestamp_utc": "2026-03-01T04:40:02Z",
+  "timestamp_local": "2026-02-28 11:45:02PM ET",
+  "timestamp_utc": "2026-03-01T04:45:02Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -15,27 +15,27 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3:8b",
       "qwen3-32b-32k:latest",
+      "qwen3:8b",
       "nomic-embed-text:latest"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3:8b, qwen3-32b-32k:latest, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 27ms",
-    "response_ms": 27,
+    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 26ms",
+    "response_ms": 26,
     "vram_estimate_gb": 0.6,
     "model_params": "137M",
     "model_quant": "F16"
   },
   "feed": {
-    "total_lines": 2286,
-    "last_modified_minutes_ago": 0.6,
+    "total_lines": 2291,
+    "last_modified_minutes_ago": 1.2,
     "last_entries": [
-      "[2/28 11:16PM ET] longevity \u2014 Rapamycin improves muscle mass in women and bone mass in men with no serious adv",
-      "[2/28 11:16PM ET] longevity \u2014 Rapamycin improves muscle mass in women and bone mass in men with no serious adv",
-      "[2/28 11:16PM ET] longevity \u2014 Rapamycin improves muscle mass in women and bone mass in men in the PEARL trial ",
-      "[2/28 11:36PM ET] camel-finance-cycle-analysis \u2014 The video presents a bearish outlook for both the S&P 500 and Bitcoin, with a fo",
-      "[2/28 11:37PM ET] longevity \u2014 Rapamycin extended median lifespan in multiple mammalian studies at low doses by"
+      "[3/01 12:41AM ET] tool-calling \u2014 The Berkeley Function-Calling Leaderboard evaluates LLMs on tool accuracy with c",
+      "[2026-02-29T04:41:00] tool-calling \u2014 The Berkeley Function Calling Leaderboard (BFCL) V4 evaluates LLMs ability to ca",
+      "[2026-02-29T04:41:00] tool-calling \u2014 Berkeley Function Calling Leaderboard (BFCL) V4 evaluates LLMs ability to call f",
+      "[3/01 12:41AM ET] tool-calling \u2014 The Berkeley Function Calling Leaderboard (BFCL) benchmarks LLM tool-use accurac",
+      "[2026-02-29T04:41:00] tool-calling \u2014 The Berkeley Function Calling Leaderboard (BFCL) V4 evaluates LLMs' ability to c"
     ],
     "recent_50_clean": 50,
     "recent_50_trivial": 0,
@@ -50,13 +50,13 @@
     }
   },
   "activity": {
-    "last_job": "ai-agents",
-    "last_job_time": "2/28 6:39PM ET",
+    "last_job": "tool-calling",
+    "last_job_time": "2/28 6:41PM ET",
     "last_cycle": "2/28 6:24PM ET",
-    "jobs_today": 173,
+    "jobs_today": 174,
     "success_today": 106,
     "timeout_today": 0,
-    "fail_today": 67,
+    "fail_today": 68,
     "feed_growth_today": 264,
     "state": "running",
     "next_cycle_est": "6:24PM",
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772261702315,
-      "v": 1894,
-      "l": "1:55AM"
-    },
     {
       "t": 1772261970890,
       "v": 1896,
@@ -1504,6 +1499,11 @@
       "t": 1772340002537,
       "v": 2286,
       "l": "11:40PM"
+    },
+    {
+      "t": 1772340302379,
+      "v": 2291,
+      "l": "11:45PM"
     }
   ],
   "kg_stats": {
@@ -1515,16 +1515,16 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 62.0,
-    "power_w": 39.71,
+    "temp_c": 63.0,
+    "power_w": 36.46,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 5,
     "literal_timestamps": 11,
-    "duplicates": 336,
-    "total": 2286,
-    "error_rate": 15.4
+    "duplicates": 339,
+    "total": 2291,
+    "error_rate": 15.5
   },
   "cost": {
     "model": "tiered dispatch (Spark + Haiku + Sonnet)",
@@ -1578,14 +1578,14 @@
     },
     "models_hot": [
       {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
         "name": "qwen3-32b-32k:latest",
         "vram_gb": 27.1,
         "params": "32.8B"
+      },
+      {
+        "name": "qwen3:8b",
+        "vram_gb": 5.6,
+        "params": "8.2B"
       },
       {
         "name": "nomic-embed-text:latest",
