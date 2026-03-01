@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-03-01 12:25:01AM ET",
-  "timestamp_utc": "2026-03-01T05:25:01Z",
+  "timestamp_local": "2026-03-01 12:30:01AM ET",
+  "timestamp_utc": "2026-03-01T05:30:01Z",
   "scheduler": {
     "running": true,
     "pids": [
@@ -16,35 +16,35 @@
     "online": true,
     "models_loaded": [
       "qwen3-32b-32k:latest",
-      "qwen3:8b",
-      "nomic-embed-text:latest"
+      "nomic-embed-text:latest",
+      "qwen3:8b"
     ],
     "model_stuck": false,
     "inference_active": true,
-    "detail": "qwen3-32b-32k:latest, qwen3:8b, nomic-embed-text:latest \u2022 0.6GB VRAM \u2022 137M \u2022 F16 \u2022 34ms",
-    "response_ms": 34,
-    "vram_estimate_gb": 0.6,
-    "model_params": "137M",
-    "model_quant": "F16"
+    "detail": "qwen3-32b-32k:latest, nomic-embed-text:latest, qwen3:8b \u2022 5.6GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 29ms",
+    "response_ms": 29,
+    "vram_estimate_gb": 5.6,
+    "model_params": "8.2B",
+    "model_quant": "Q4_K_M"
   },
   "feed": {
-    "total_lines": 2324,
-    "last_modified_minutes_ago": 1.6,
+    "total_lines": 2329,
+    "last_modified_minutes_ago": 1.5,
     "last_entries": [
-      "[3/01 12:18AM ET] compound-synthesis \u2014 Repeating small dose patterns improve retention gains across both longevity rese",
-      "[3/01 7:18AM ET] compound-synthesis \u2014 Regular weekly dose patterns and spaced repetition intervals show parallel effec",
-      "[3/01 12:18AM ET] compound-synthesis \u2014 Consistent low-dose interventions in longevity research align with iterative tra",
-      "[3/01 12:18AM ET] compound-synthesis \u2014 Consistent low-dose interventions in longevity research align with iterative tra",
-      "[3/01 12:18AM ET] compound-synthesis \u2014 Consistent low-dose interventions in longevity research align with iterative tra"
+      "[3/01 12:25AM ET] treasury-bonds \u2014 The US 10-year Treasury yield trades near 3.95 percent on February 27 2026 as th",
+      "[2/28 11:26PM ET] self-improvement \u2014 Spaced repetition improves academic performance by 10 percentage points among ph",
+      "[3/01 10:00AM ET] self-improvement \u2014 Spaced repetition achieves 58% retention with 1.5-day intervals in learning stud",
+      "[3/01 12:28AM ET] longevity \u2014 Rapamycin improves muscle mass in women and bone mass in men in PEARL trial with",
+      "[3/01 7:27AM ET] longevity \u2014 Rapamycin improves muscle mass in women and bone mass in men with no serious sid"
     ],
     "recent_50_clean": 50,
     "recent_50_trivial": 0,
     "recent_50_broken": 0,
     "topic_distribution": {
-      "compound-synthesis": 13,
+      "compound-synthesis": 12,
       "tool-calling": 11,
-      "self-improvement": 8,
-      "longevity": 8,
+      "longevity": 10,
+      "self-improvement": 7,
       "ai-agents": 6,
       "treasury-bonds": 3
     }
@@ -65,11 +65,6 @@
     "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1772264509510,
-      "v": 1942,
-      "l": "2:41AM"
-    },
     {
       "t": 1772264701759,
       "v": 1944,
@@ -1504,6 +1499,11 @@
       "t": 1772342637888,
       "v": 2324,
       "l": "12:23AM"
+    },
+    {
+      "t": 1772343001581,
+      "v": 2329,
+      "l": "12:30AM"
     }
   ],
   "kg_stats": {
@@ -1515,16 +1515,16 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 0.0,
-    "temp_c": 45.0,
-    "power_w": 11.5,
+    "temp_c": 59.0,
+    "power_w": 13.39,
     "gpu_name": "NVIDIA GB10"
   },
   "feed_quality": {
     "malformed_json": 5,
     "literal_timestamps": 11,
-    "duplicates": 355,
-    "total": 2324,
-    "error_rate": 16.0
+    "duplicates": 358,
+    "total": 2329,
+    "error_rate": 16.1
   },
   "cost": {
     "model": "tiered dispatch (Spark + Haiku + Sonnet)",
@@ -1583,14 +1583,14 @@
         "params": "32.8B"
       },
       {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
         "name": "nomic-embed-text:latest",
         "vram_gb": 0.6,
         "params": "137M"
+      },
+      {
+        "name": "qwen3:8b",
+        "vram_gb": 5.6,
+        "params": "8.2B"
       }
     ]
   },
