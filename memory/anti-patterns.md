@@ -85,3 +85,13 @@
 - Second fit: file management layer — archiving synthesis outputs, organizing zeke-backups/, graduated domain files
 - Does NOT replace Python pipeline — Cowork handles human-in-the-loop touchpoints, Python handles data flow
 - Claude Code on the right panel in claude.ai = the execution agent for agentic tasks
+
+## Machine-Readable vs Human-Readable — File Creation Rule (learned 2026-03-01)
+- **Before creating any file, ask: who reads this — a human or a machine?**
+- Machine-consumed → JSON, JSONL, structured fields. Never markdown prose.
+- Human-consumed → markdown only if the human explicitly asked for it
+- **NEVER create a markdown "vision" or "audit" file unless Matt requests it**
+- The correct output for a spec audit is: (1) verbal summary to Matt in chat, (2) maybe a JSON field update in project-state.md, (3) a feed entry if it's a finding
+- Creating a 7KB markdown file that nothing reads = documentation theater = pure bloat
+- Every file created adds to context load, compaction pressure, and maintenance surface
+- Default: do the work in-context, surface the key finding to Matt, write to an existing structured file only if persistence is needed
