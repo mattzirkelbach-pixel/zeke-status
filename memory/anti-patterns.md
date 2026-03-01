@@ -107,3 +107,11 @@
 - INFO (urgency=1): 24h cooldown, max 2/day.
 - Design signals algorithmically for ANY instrument, not just current positions.
 - Feed-discovered patterns must be able to surface new signals Matt did not define.
+
+## One Block Per Session Boundary (learned 2026-03-01)
+- ONE queue task per execution boundary. Full stop.
+- After any block: verify syntax + dry-run, write journal, git commit, THEN stop.
+- If user asks to "run next block" mid-conversation: do it, then surface results, then stop.
+- Chaining blocks without committing journal = guaranteed crash and orphaned state
+- The signal that context is getting long: MCP starts timing out. That is the hard stop.
+- Recovery from crash: read session-journal.jsonl + check what files exist before touching anything.
