@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-02-28T22:12:46.122971",
+  "timestamp": "2026-02-28T22:16:07.893045",
   "window": "overnight",
-  "cycle": 6,
-  "feed_before": 2228,
-  "feed_after": 2230,
+  "cycle": 7,
+  "feed_before": 2232,
+  "feed_after": 2234,
   "feed_growth": 2,
   "jobs": {
     "total": 6,
-    "success": 0,
-    "fail": 6,
+    "success": 2,
+    "fail": 4,
     "timeout": 0
   },
   "job_details": [
@@ -16,7 +16,7 @@
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
       "status": "fail",
-      "duration_s": 2,
+      "duration_s": 1,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
@@ -45,22 +45,26 @@
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "fail",
-      "duration_s": 1,
-      "feed_grew": 0,
-      "entry_valid": false,
+      "status": "success",
+      "duration_s": 2,
+      "feed_grew": 1,
+      "entry_valid": true,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "valid_entries": 1,
+      "trivial_entries": 0,
+      "broken_entries": 0
     },
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "fail",
+      "status": "success",
       "duration_s": 1,
-      "feed_grew": 0,
-      "entry_valid": false,
+      "feed_grew": 1,
+      "entry_valid": true,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "valid_entries": 1,
+      "trivial_entries": 0,
+      "broken_entries": 0
     },
     {
       "uuid": "e9961e6e-4e4",
@@ -78,7 +82,7 @@
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
       "status": "fail",
-      "duration_s": 2,
+      "duration_s": 1,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
@@ -97,26 +101,6 @@
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
-      "duration_s": 1,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
-    },
-    {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
-      "status": "fail",
-      "duration_s": 1,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
-    },
-    {
-      "uuid": "9df9cf14-e1c",
-      "name": "tool-calling",
       "status": "fail",
       "duration_s": 1,
       "feed_grew": 0,
