@@ -1,67 +1,22 @@
 {
-  "timestamp": "2026-03-01T23:58:02.310696",
+  "timestamp": "2026-03-01T23:59:25.391075",
   "window": "overnight",
-  "cycle": 11,
-  "feed_before": 1127,
-  "feed_after": 1138,
-  "feed_growth": 11,
+  "cycle": 13,
+  "feed_before": 1126,
+  "feed_after": 1139,
+  "feed_growth": 13,
   "jobs": {
     "total": 6,
-    "success": 3,
-    "fail": 0,
+    "success": 5,
+    "fail": 1,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "unknown",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
-    },
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "unknown",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
-    },
-    {
-      "uuid": "3cd4b17d-448",
-      "name": "longevity",
       "status": "success",
-      "duration_s": 40,
-      "feed_grew": 2,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 2,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
-      "status": "unknown",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
-    },
-    {
-      "uuid": "9df9cf14-e1c",
-      "name": "tool-calling",
-      "status": "success",
-      "duration_s": 86,
+      "duration_s": 62,
       "feed_grew": 1,
       "entry_valid": true,
       "issues": [],
@@ -70,51 +25,74 @@
       "broken_entries": 0
     },
     {
-      "uuid": "e9961e6e-4e4",
-      "name": "compound-synthesis",
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
       "status": "success",
-      "duration_s": 67,
+      "duration_s": 241,
       "feed_grew": 3,
       "entry_valid": true,
       "issues": [],
       "valid_entries": 3,
       "trivial_entries": 0,
       "broken_entries": 0
-    }
-  ],
-  "failures": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "unknown",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
     },
     {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "unknown",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "success",
+      "duration_s": 98,
+      "feed_grew": 4,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 4,
+      "trivial_entries": 0,
+      "broken_entries": 0
     },
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "unknown",
-      "duration_s": 0,
+      "status": "success",
+      "duration_s": 88,
+      "feed_grew": 3,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 3,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "9df9cf14-e1c",
+      "name": "tool-calling",
+      "status": "success",
+      "duration_s": 67,
+      "feed_grew": 2,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 2,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "e9961e6e-4e4",
+      "name": "compound-synthesis",
+      "status": "fail",
+      "duration_s": 4,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "e9961e6e-4e4",
+      "name": "compound-synthesis",
+      "status": "fail",
+      "duration_s": 4,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
     }
   ],
   "needs_repair": true,
