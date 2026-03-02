@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-02T06:37:21.484738+00:00",
+  "timestamp": "2026-03-02T06:37:45.982214+00:00",
   "feed_lines": 1244,
   "recent_feed": [
     "{\"timestamp\":\"2026-03-02T06:15:00Z\",\"topic\":\"ai-agents\",\"finding\":\"Frontier AI agents including Claude and GPT-4o achieve over 70 percent on SWE-bench verified resolving real software engineering tasks autonomously.\",\"source\":\"fallback\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 61.0,
-    "power_w": 36.81,
+    "gpu_util_pct": 0.0,
+    "temp_c": 55.0,
+    "power_w": 12.88,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -73,9 +73,9 @@
     }
   },
   "gateway_process": {
-    "pid": "7109\n7110\n95513",
-    "memory_pct": "",
-    "uptime": "",
+    "pid": "95513",
+    "memory_pct": "3.0",
+    "uptime": "04:37:36",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -113,74 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "tool-calling",
-      "status": "success",
-      "duration": 81,
-      "grew": 5,
-      "issues": [],
-      "valid_entries": 5,
-      "broken_entries": 0,
-      "cycle_time": "1:06 AM",
-      "cycle_num": 19
-    },
-    {
-      "name": "compound-synthesis",
-      "status": "unknown",
-      "duration": 0,
-      "grew": 0,
-      "issues": [
-        "spark_locked"
-      ],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "1:06 AM",
-      "cycle_num": 19
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 122,
-      "grew": 6,
-      "issues": [],
-      "valid_entries": 6,
-      "broken_entries": 0,
-      "cycle_time": "1:11 AM",
-      "cycle_num": 20
-    },
-    {
-      "name": "self-improvement",
-      "status": "success",
-      "duration": 57,
-      "grew": 4,
-      "issues": [],
-      "valid_entries": 4,
-      "broken_entries": 0,
-      "cycle_time": "1:11 AM",
-      "cycle_num": 20
-    },
-    {
-      "name": "longevity",
-      "status": "success",
-      "duration": 127,
-      "grew": 5,
-      "issues": [],
-      "valid_entries": 5,
-      "broken_entries": 0,
-      "cycle_time": "1:11 AM",
-      "cycle_num": 20
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 123,
-      "grew": 2,
-      "issues": [],
-      "valid_entries": 2,
-      "broken_entries": 0,
-      "cycle_time": "1:11 AM",
-      "cycle_num": 20
-    },
     {
       "name": "tool-calling",
       "status": "fail",
@@ -346,88 +278,83 @@
       "broken_entries": 0,
       "cycle_time": "1:24 AM",
       "cycle_num": 21
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 53,
+      "grew": 1,
+      "issues": [],
+      "valid_entries": 1,
+      "broken_entries": 0,
+      "cycle_time": "1:37 AM",
+      "cycle_num": 22
+    },
+    {
+      "name": "self-improvement",
+      "status": "success",
+      "duration": 63,
+      "grew": 4,
+      "issues": [],
+      "valid_entries": 4,
+      "broken_entries": 0,
+      "cycle_time": "1:37 AM",
+      "cycle_num": 22
+    },
+    {
+      "name": "longevity",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "1:37 AM",
+      "cycle_num": 22
+    },
+    {
+      "name": "ai-agents",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "1:37 AM",
+      "cycle_num": 22
+    },
+    {
+      "name": "tool-calling",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "1:37 AM",
+      "cycle_num": 22
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "1:37 AM",
+      "cycle_num": 22
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 19,
-      "window": "overnight",
-      "timestamp": "2026-03-02T01:06:06.550985",
-      "time_display": "1:06 AM",
-      "feed_growth": 19,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 93,
-          "grew": 4,
-          "issues": [],
-          "valid_entries": 4,
-          "broken_entries": 0,
-          "cycle_time": "1:06 AM",
-          "cycle_num": 19
-        },
-        {
-          "name": "self-improvement",
-          "status": "success",
-          "duration": 82,
-          "grew": 3,
-          "issues": [],
-          "valid_entries": 3,
-          "broken_entries": 0,
-          "cycle_time": "1:06 AM",
-          "cycle_num": 19
-        },
-        {
-          "name": "longevity",
-          "status": "unknown",
-          "duration": 0,
-          "grew": 0,
-          "issues": [
-            "spark_locked"
-          ],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "1:06 AM",
-          "cycle_num": 19
-        },
-        {
-          "name": "ai-agents",
-          "status": "success",
-          "duration": 46,
-          "grew": 3,
-          "issues": [],
-          "valid_entries": 3,
-          "broken_entries": 0,
-          "cycle_time": "1:06 AM",
-          "cycle_num": 19
-        },
-        {
-          "name": "tool-calling",
-          "status": "success",
-          "duration": 81,
-          "grew": 5,
-          "issues": [],
-          "valid_entries": 5,
-          "broken_entries": 0,
-          "cycle_time": "1:06 AM",
-          "cycle_num": 19
-        },
-        {
-          "name": "compound-synthesis",
-          "status": "unknown",
-          "duration": 0,
-          "grew": 0,
-          "issues": [
-            "spark_locked"
-          ],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "1:06 AM",
-          "cycle_num": 19
-        }
-      ]
-    },
     {
       "cycle": 20,
       "window": "overnight",
@@ -662,6 +589,89 @@
           "broken_entries": 0,
           "cycle_time": "1:24 AM",
           "cycle_num": 21
+        }
+      ]
+    },
+    {
+      "cycle": 22,
+      "window": "overnight",
+      "timestamp": "2026-03-02T01:37:45.905259",
+      "time_display": "1:37 AM",
+      "feed_growth": 5,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "success",
+          "duration": 53,
+          "grew": 1,
+          "issues": [],
+          "valid_entries": 1,
+          "broken_entries": 0,
+          "cycle_time": "1:37 AM",
+          "cycle_num": 22
+        },
+        {
+          "name": "self-improvement",
+          "status": "success",
+          "duration": 63,
+          "grew": 4,
+          "issues": [],
+          "valid_entries": 4,
+          "broken_entries": 0,
+          "cycle_time": "1:37 AM",
+          "cycle_num": 22
+        },
+        {
+          "name": "longevity",
+          "status": "unknown",
+          "duration": 0,
+          "grew": 0,
+          "issues": [
+            "spark_locked"
+          ],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "1:37 AM",
+          "cycle_num": 22
+        },
+        {
+          "name": "ai-agents",
+          "status": "unknown",
+          "duration": 0,
+          "grew": 0,
+          "issues": [
+            "spark_locked"
+          ],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "1:37 AM",
+          "cycle_num": 22
+        },
+        {
+          "name": "tool-calling",
+          "status": "unknown",
+          "duration": 0,
+          "grew": 0,
+          "issues": [
+            "spark_locked"
+          ],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "1:37 AM",
+          "cycle_num": 22
+        },
+        {
+          "name": "compound-synthesis",
+          "status": "unknown",
+          "duration": 0,
+          "grew": 0,
+          "issues": [
+            "spark_locked"
+          ],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "1:37 AM",
+          "cycle_num": 22
         }
       ]
     }
