@@ -1,16 +1,33 @@
 {
-  "timestamp_local": "2026-03-02 6:09:19AM ET",
-  "timestamp_utc": "2026-03-02T11:09:19Z",
+  "timestamp_local": "2026-03-02 06:11:15 ET",
+  "timestamp_utc": "2026-03-02T11:11:15Z",
   "scheduler": {
     "running": true,
-    "pids": [
-      "17587"
-    ],
-    "count": 1,
-    "type": "python"
+    "pid": 17587,
+    "uptime_minutes": 11,
+    "current_window": "daytime"
   },
-  "gateway": {
-    "running": true
+  "feed": {
+    "total_lines": 1554,
+    "last_entries": [
+      "[2026-03-02T11:07:19] tool-calling",
+      "[2026-03-02T11:06:00] tool-calling",
+      "[2026-03-01T23:06:00] tool-calling",
+      "[2026-03-02T11:07:19] tool-calling",
+      "[2026-03-02T11:07:19] tool-calling"
+    ],
+    "topic_distribution": {
+      "queue-research-general": 30,
+      "tool-calling": 11,
+      "self-improvement": 2,
+      "camel-synthesis-overnight": 1,
+      "camel-finance-cycle-analysis": 1,
+      "treasury-bonds": 1
+    },
+    "recent_50_clean": 47,
+    "recent_50_trivial": 1,
+    "recent_50_broken": 2,
+    "last_modified_minutes_ago": 0.2
   },
   "spark": {
     "online": true,
@@ -20,49 +37,104 @@
       "qwen3-32b-32k:latest"
     ],
     "model_stuck": false,
+    "stuck_model": null,
     "inference_active": true,
-    "detail": "qwen3:8b, nomic-embed-text:latest, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 18ms",
-    "response_ms": 18,
-    "vram_estimate_gb": 27.1,
-    "model_params": "32.8B",
-    "model_quant": "Q4_K_M"
+    "detail": "healthy, loaded: qwen3:8b, nomic-embed-text:latest, qwen3-32b-32k:latest"
   },
-  "feed": {
-    "total_lines": 1553,
-    "last_modified_minutes_ago": 0.2,
-    "last_entries": [
-      "{\"timestamp\":\"$(date +\"%Y-%m-%dT%H:%M:%SZ\")\",\"topic\":\"ai-agents\",\"finding\":\"Lova",
-      "[3/02 6:07AM ET] tool-calling \u2014 The Confident AI blog mentions that using an LLM to evaluate tool correctness is",
-      "[3/02 6:06AM ET] tool-calling \u2014 The Berkeley Function-Calling Leaderboard benchmarks LLM tool-use accuracy, with",
-      "[3/01 6:06PM ET] tool-calling \u2014 The Berkeley Function-Calling Leaderboard benchmarks LLM tool-use accuracy, with",
-      "[3/02 6:07AM ET] tool-calling \u2014 The Berkeley Function-Calling Leaderboard benchmarks LLM tool-use accuracy with "
-    ],
-    "recent_50_clean": 47,
-    "recent_50_trivial": 1,
-    "recent_50_broken": 2,
-    "topic_distribution": {
-      "queue-research-general": 30,
-      "tool-calling": 11,
-      "self-improvement": 2,
-      "camel-synthesis-overnight": 1,
-      "camel-finance-cycle-analysis": 1,
-      "treasury-bonds": 1
+  "gateway": {
+    "running": true
+  },
+  "today": {
+    "jobs_run": 5,
+    "success": 0,
+    "timeout": 0,
+    "fail": 5,
+    "feed_growth": 0
+  },
+  "cycles": [
+    {
+      "ts": "2026-03-02T06:01:07.908311",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 5,
+      "success": 0,
+      "timeout": 0,
+      "fail": 5,
+      "feed_grew": 0
     }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    }
+  ],
+  "health": {
+    "status": "HEALTHY",
+    "issues": []
   },
-  "activity": {
-    "last_job": "compound-synthesis",
-    "last_job_time": "3/02 1:00AM ET",
-    "last_cycle": "3/02 1:00AM ET",
-    "jobs_today": 5,
-    "success_today": 0,
-    "timeout_today": 0,
-    "fail_today": 5,
-    "feed_growth_today": 0,
-    "state": "idle (heartbeat)",
-    "next_cycle_est": "1:31AM",
-    "cycle_count": 56,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "kg_stats": {
+    "entities": 363,
+    "relations": 368,
+    "associations": 136,
+    "insights": 0
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 95.0,
+    "temp_c": 63.0,
+    "power_w": 36.13,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 2,
+    "literal_timestamps": 0,
+    "duplicates": 104,
+    "total": 639,
+    "error_rate": 16.6
+  },
+  "automation": {
+    "layer1": "L1 Execution \u2014 DEPLOYED",
+    "layer2": "L2 Oversight \u2014 DEPLOYED",
+    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
+    "layer4": "L4 Recursive Learning \u2014 PLANNED"
+  },
+  "cost": {
+    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": false
   },
   "feed_history": [
     {
@@ -1506,153 +1578,19 @@
       "l": "6:09AM"
     }
   ],
-  "kg_stats": {
-    "entities": 363,
-    "relations": 368,
-    "associations": 136,
-    "insights": 0
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 63.0,
-    "power_w": 36.13,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 2,
-    "literal_timestamps": 0,
-    "duplicates": 104,
-    "total": 639,
-    "error_rate": 16.6
-  },
-  "cost": {
-    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": false
-  },
-  "automation": {
-    "layer1": "L1 Execution \u2014 DEPLOYED",
-    "layer2": "L2 Oversight \u2014 DEPLOYED",
-    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
-    "layer4": "L4 Recursive Learning \u2014 PLANNED"
-  },
-  "compute_tiers": {
-    "architecture": "tiered_dispatch",
-    "layers": {
-      "L0_python": {
-        "status": "active",
-        "cost": "$0",
-        "role": "Fetch, transform, schedule"
-      },
-      "L1_vector": {
-        "status": "planned",
-        "cost": "$0",
-        "role": "Embeddings + ChromaDB RAG"
-      },
-      "L2_triage": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3:8b classification"
-      },
-      "L3_api": {
-        "status": "active",
-        "cost": "paid",
-        "role": "Haiku/Sonnet/Opus"
-      },
-      "L4_batch": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3-32b overnight"
-      }
-    },
-    "budget": {
-      "haiku_spent": 0,
-      "haiku_limit": 1.0,
-      "sonnet_spent": 0,
-      "sonnet_limit": 0.5,
-      "total_spent": 0,
-      "total_limit": 2.0,
-      "date": "2026-03-02"
-    },
-    "models_hot": [
-      {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
-        "name": "nomic-embed-text:latest",
-        "vram_gb": 0.6,
-        "params": "137M"
-      },
-      {
-        "name": "qwen3-32b-32k:latest",
-        "vram_gb": 27.1,
-        "params": "32.8B"
-      }
-    ]
-  },
-  "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
-  },
-  "cycles": [
-    {
-      "ts": "2026-03-02T06:01:07.908311",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 5,
-      "success": 0,
-      "timeout": 0,
-      "fail": 5,
-      "feed_grew": 0
-    }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "compound-synthesis",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    }
-  ],
-  "today": {
-    "jobs_run": 5,
-    "success": 0,
-    "timeout": 0,
-    "fail": 5,
-    "feed_growth": 0
+  "activity": {
+    "last_job": "compound-synthesis",
+    "last_job_time": "3/02 1:00AM ET",
+    "last_cycle": "3/02 1:00AM ET",
+    "jobs_today": 5,
+    "success_today": 0,
+    "timeout_today": 0,
+    "fail_today": 5,
+    "feed_growth_today": 0,
+    "state": "idle (heartbeat)",
+    "next_cycle_est": "1:31AM",
+    "cycle_count": 56,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   }
 }
