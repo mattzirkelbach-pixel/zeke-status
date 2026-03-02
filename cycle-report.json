@@ -1,26 +1,36 @@
 {
-  "timestamp": "2026-03-01T21:07:44.798826",
-  "window": "daytime",
-  "cycle": 13,
-  "feed_before": 901,
-  "feed_after": 917,
-  "feed_growth": 16,
+  "timestamp": "2026-03-01T21:13:22.999826",
+  "window": "overnight",
+  "cycle": 1,
+  "feed_before": 903,
+  "feed_after": 926,
+  "feed_growth": 23,
   "jobs": {
-    "total": 5,
-    "success": 5,
-    "fail": 0,
+    "total": 6,
+    "success": 3,
+    "fail": 1,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
+      "status": "fail",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "or: gateway closed (1006 abnormal closure (no close frame)): no close reason\nGateway target: ws://127.0.0.1:18789\nSource: local loopback\nConfig: /Users/zekezirk/.openclaw/openclaw.json\nBind: loopback\n"
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
       "status": "success",
-      "duration_s": 51,
-      "feed_grew": 1,
+      "duration_s": 69,
+      "feed_grew": 4,
       "entry_valid": true,
       "issues": [],
-      "valid_entries": 1,
+      "valid_entries": 4,
       "trivial_entries": 0,
       "broken_entries": 0
     },
@@ -28,52 +38,86 @@
       "uuid": "3cd4b17d-448",
       "name": "longevity",
       "status": "success",
-      "duration_s": 43,
-      "feed_grew": 1,
+      "duration_s": 67,
+      "feed_grew": 4,
       "entry_valid": true,
       "issues": [],
-      "valid_entries": 1,
+      "valid_entries": 4,
       "trivial_entries": 0,
       "broken_entries": 0
     },
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "success",
-      "duration_s": 63,
-      "feed_grew": 3,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 3,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
     },
     {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
+      "uuid": "9df9cf14-e1c",
+      "name": "tool-calling",
       "status": "success",
-      "duration_s": 65,
-      "feed_grew": 3,
+      "duration_s": 231,
+      "feed_grew": 10,
       "entry_valid": true,
       "issues": [],
-      "valid_entries": 3,
+      "valid_entries": 9,
+      "entries_cleaned": 1,
       "trivial_entries": 0,
-      "broken_entries": 0
+      "broken_entries": 1
     },
     {
       "uuid": "e9961e6e-4e4",
       "name": "compound-synthesis",
-      "status": "success",
-      "duration_s": 121,
-      "feed_grew": 8,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 8,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
     }
   ],
-  "failures": [],
-  "needs_repair": false,
-  "feed_stagnant": false
+  "failures": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "or: gateway closed (1006 abnormal closure (no close frame)): no close reason\nGateway target: ws://127.0.0.1:18789\nSource: local loopback\nConfig: /Users/zekezirk/.openclaw/openclaw.json\nBind: loopback\n"
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
+    },
+    {
+      "uuid": "e9961e6e-4e4",
+      "name": "compound-synthesis",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
+    }
+  ],
+  "needs_repair": true,
+  "feed_stagnant": false,
+  "repair_dispatched": true,
+  "repair_result": "error"
 }
