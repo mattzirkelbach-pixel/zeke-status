@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-02T00:48:09.961454+00:00",
+  "timestamp": "2026-03-02T00:48:21.545876+00:00",
   "feed_lines": 785,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-02T00:34:08.122849Z\", \"topic\": \"queue-research-general\", \"finding\": \"<|im_start|>\\n<|im_start|>\\n<|im_start|>\\n\\nFINDING: The IREN risk model update by March 18 will incorporate the new cardiovascular safety requirement, which could delay the drug\\u2019s FDA approval timeline by 4\\u20136 months based on Biogen\\u2019s 2024 experience with similar regulatory changes.  \\nIMPLICATION: Re-evaluate the $50C May26 IREN options position by reducing exposure due to increased regulatory uncertainty and potential earnings date shift beyond May 2026.  \\nCONFIDENCE: Medium \\u2014 based on Biogen\\u2019s historical precedent but lacks IREN-specific guidance.  \\nNEXT_TASK: Query IREN\\u2019s March 18 regulatory update call transcript for confirmation of 4\\u20136 month delay estimates.\", \"source\": \"spark-queue/followup_followup_followup_followup_te-longevit-20260301-2a7a11e9\", \"instrument\": \"GENERAL\", \"task_label\": \"Follow-up: Update the IREN risk model by March 18 to reflect the new ca\", \"priority_was\": 3}",
@@ -24,8 +24,11 @@
   "priorities_updated": "2026-03-01T10:00:52.261529+00:00",
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
-    "status": "SSH_OK_NO_DATA",
-    "raw": ""
+    "status": "OK",
+    "gpu_util_pct": 94.0,
+    "temp_c": 62.0,
+    "power_w": 40.27,
+    "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
     "sessionTimeoutMs": "NOT SET",
@@ -76,8 +79,21 @@
     "status": "RUNNING"
   },
   "spark_status": {
-    "status": "UNREACHABLE",
-    "loaded_models": []
+    "status": "ONLINE",
+    "loaded_models": [
+      {
+        "name": "nomic-embed-text:latest",
+        "size_gb": 0.6
+      },
+      {
+        "name": "qwen3:8b",
+        "size_gb": 6.0
+      },
+      {
+        "name": "qwen3-32b-32k:latest",
+        "size_gb": 29.1
+      }
+    ]
   },
   "feed_quality": {
     "malformed_json": 2,
