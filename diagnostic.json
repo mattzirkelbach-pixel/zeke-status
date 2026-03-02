@@ -1,17 +1,33 @@
 {
-  "timestamp_local": "2026-03-02 5:49:18PM ET",
-  "timestamp_utc": "2026-03-02T22:49:18Z",
+  "timestamp_local": "2026-03-02 17:51:55 ET",
+  "timestamp_utc": "2026-03-02T22:51:55Z",
   "scheduler": {
     "running": true,
-    "pids": [
-      "40928",
-      "41089"
-    ],
-    "count": 2,
-    "type": "python"
+    "pid": 40928,
+    "uptime_minutes": 4,
+    "current_window": "daytime"
   },
-  "gateway": {
-    "running": true
+  "feed": {
+    "total_lines": 2064,
+    "last_entries": [
+      "[2026-03-02T22:20:00] self-improvement",
+      "[2026-03-02T22:47:12] longevity",
+      "[2026-03-02T22:47:07] longevity",
+      "[2026-03-02T17:48:00] treasury-bonds",
+      "[2026-02-27T15:48:00] treasury-bonds"
+    ],
+    "topic_distribution": {
+      "self-improvement": 14,
+      "ai-agents": 12,
+      "compound-synthesis": 6,
+      "longevity": 5,
+      "treasury-bonds": 1,
+      "Confluence TLT: 67% \u2014 \ud83d\udfe1 MODERATE CONFLUENCE": 1
+    },
+    "recent_50_clean": 50,
+    "recent_50_trivial": 0,
+    "recent_50_broken": 0,
+    "last_modified_minutes_ago": 1.5
   },
   "spark": {
     "online": true,
@@ -21,49 +37,76 @@
       "qwen3-32b-32k:latest"
     ],
     "model_stuck": false,
+    "stuck_model": null,
     "inference_active": true,
-    "detail": "nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 15ms",
-    "response_ms": 15,
-    "vram_estimate_gb": 27.1,
-    "model_params": "32.8B",
-    "model_quant": "Q4_K_M"
+    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest"
   },
-  "feed": {
-    "total_lines": 2062,
-    "last_modified_minutes_ago": 1.5,
-    "last_entries": [
-      "[3/02 12:20PM ET] self-improvement \u2014 Spaced repetition improves retention by 58.03% versus 43.20% single spacing in p",
-      "[3/02 5:20PM ET] self-improvement \u2014 Spaced repetition improves retention by 58.03% vs 43.20% with single spacing (Co",
-      "[3/02 5:20PM ET] self-improvement \u2014 Spaced repetition improves retention by 58.03% vs 43.20% with single spacing (Co",
-      "[3/02 5:47PM ET] longevity \u2014 Rapamycin 10 mg dose in PEARL trial improved bone mineral content in males, meas",
-      "[3/02 5:47PM ET] longevity \u2014 Rapamycin 10mg weekly improved bone mineral content in men and lean tissue mass "
-    ],
-    "recent_50_clean": 50,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 0,
-    "topic_distribution": {
-      "self-improvement": 14,
-      "ai-agents": 12,
-      "compound-synthesis": 6,
-      "longevity": 5,
-      "treasury-bonds": 1,
-      "Confluence TLT: 67% \u2014 \ud83d\udfe1 MODERATE CONFLUENCE": 1
+  "gateway": {
+    "running": true
+  },
+  "today": {
+    "jobs_run": 1,
+    "success": 1,
+    "timeout": 0,
+    "fail": 0,
+    "feed_growth": 3
+  },
+  "cycles": [
+    {
+      "ts": "2026-03-02T17:51:53.367735",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 3
     }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 211,
+      "grew": 3,
+      "issues": []
+    }
+  ],
+  "health": {
+    "status": "HEALTHY",
+    "issues": []
   },
-  "activity": {
-    "last_job": "treasury-bonds",
-    "last_job_time": "3/02 12:48PM ET",
-    "last_cycle": "3/02 12:48PM ET",
-    "jobs_today": 92,
-    "success_today": 50,
-    "timeout_today": 0,
-    "fail_today": 42,
-    "feed_growth_today": 150,
-    "state": "running",
-    "next_cycle_est": "12:55PM",
-    "cycle_count": 77,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "kg_stats": {
+    "entities": 369,
+    "relations": 378,
+    "associations": 137,
+    "insights": 0
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 94.0,
+    "temp_c": 62.0,
+    "power_w": 40.16,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 2,
+    "literal_timestamps": 0,
+    "duplicates": 104,
+    "total": 639,
+    "error_rate": 16.6
+  },
+  "automation": {
+    "layer1": "L1 Execution \u2014 DEPLOYED",
+    "layer2": "L2 Oversight \u2014 DEPLOYED",
+    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
+    "layer4": "L4 Recursive Learning \u2014 PLANNED"
+  },
+  "cost": {
+    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": false
   },
   "feed_history": [
     {
@@ -1507,132 +1550,19 @@
       "l": "5:49PM"
     }
   ],
-  "kg_stats": {
-    "entities": 369,
-    "relations": 378,
-    "associations": 137,
-    "insights": 0
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 62.0,
-    "power_w": 40.16,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 2,
-    "literal_timestamps": 0,
-    "duplicates": 104,
-    "total": 639,
-    "error_rate": 16.6
-  },
-  "cost": {
-    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": false
-  },
-  "automation": {
-    "layer1": "L1 Execution \u2014 DEPLOYED",
-    "layer2": "L2 Oversight \u2014 DEPLOYED",
-    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
-    "layer4": "L4 Recursive Learning \u2014 PLANNED"
-  },
-  "compute_tiers": {
-    "architecture": "tiered_dispatch",
-    "layers": {
-      "L0_python": {
-        "status": "active",
-        "cost": "$0",
-        "role": "Fetch, transform, schedule"
-      },
-      "L1_vector": {
-        "status": "planned",
-        "cost": "$0",
-        "role": "Embeddings + ChromaDB RAG"
-      },
-      "L2_triage": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3:8b classification"
-      },
-      "L3_api": {
-        "status": "active",
-        "cost": "paid",
-        "role": "Haiku/Sonnet/Opus"
-      },
-      "L4_batch": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3-32b overnight"
-      }
-    },
-    "budget": {
-      "haiku_spent": 0,
-      "haiku_limit": 1.0,
-      "sonnet_spent": 0,
-      "sonnet_limit": 0.5,
-      "total_spent": 0,
-      "total_limit": 2.0,
-      "date": "2026-03-02"
-    },
-    "models_hot": [
-      {
-        "name": "nomic-embed-text:latest",
-        "vram_gb": 0.6,
-        "params": "137M"
-      },
-      {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
-        "name": "qwen3-32b-32k:latest",
-        "vram_gb": 27.1,
-        "params": "32.8B"
-      }
-    ]
-  },
-  "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
-  },
-  "cycles": [
-    {
-      "ts": "2026-03-02T17:48:18.068802",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 2,
-      "success": 1,
-      "timeout": 0,
-      "fail": 1,
-      "feed_grew": 2
-    }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration": 31,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "success",
-      "duration": 88,
-      "grew": 2,
-      "issues": []
-    }
-  ],
-  "today": {
-    "jobs_run": 2,
-    "success": 1,
-    "timeout": 0,
-    "fail": 1,
-    "feed_growth": 2
+  "activity": {
+    "last_job": "treasury-bonds",
+    "last_job_time": "3/02 12:48PM ET",
+    "last_cycle": "3/02 12:48PM ET",
+    "jobs_today": 92,
+    "success_today": 50,
+    "timeout_today": 0,
+    "fail_today": 42,
+    "feed_growth_today": 150,
+    "state": "running",
+    "next_cycle_est": "12:55PM",
+    "cycle_count": 77,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   }
 }
