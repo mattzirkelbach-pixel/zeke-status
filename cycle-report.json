@@ -1,47 +1,50 @@
 {
-  "timestamp": "2026-03-02T02:47:13.449401",
+  "timestamp": "2026-03-02T02:47:18.186547",
   "window": "overnight",
-  "cycle": 27,
-  "feed_before": 1315,
+  "cycle": 25,
+  "feed_before": 1311,
   "feed_after": 1326,
-  "feed_growth": 11,
+  "feed_growth": 15,
   "jobs": {
     "total": 6,
-    "success": 2,
-    "fail": 1,
+    "success": 4,
+    "fail": 0,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "fail",
-      "duration_s": 4,
-      "feed_grew": 0,
-      "entry_valid": false,
+      "status": "success",
+      "duration_s": 27,
+      "feed_grew": 2,
+      "entry_valid": true,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+      "valid_entries": 2,
+      "trivial_entries": 0,
+      "broken_entries": 0
     },
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "unknown",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
+      "status": "success",
+      "duration_s": 98,
+      "feed_grew": 2,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 2,
+      "trivial_entries": 0,
+      "broken_entries": 0
     },
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
       "status": "success",
-      "duration_s": 151,
-      "feed_grew": 7,
+      "duration_s": 105,
+      "feed_grew": 3,
       "entry_valid": true,
       "issues": [],
-      "valid_entries": 7,
+      "valid_entries": 3,
       "trivial_entries": 0,
       "broken_entries": 0
     },
@@ -59,6 +62,31 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
+      "status": "success",
+      "duration_s": 226,
+      "feed_grew": 3,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 3,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "e9961e6e-4e4",
+      "name": "compound-synthesis",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
       "status": "unknown",
       "duration_s": 0,
       "feed_grew": 0,
@@ -70,52 +98,6 @@
     {
       "uuid": "e9961e6e-4e4",
       "name": "compound-synthesis",
-      "status": "success",
-      "duration_s": 92,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    }
-  ],
-  "failures": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration_s": 4,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
-    },
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "unknown",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
-    },
-    {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
-      "status": "unknown",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
-    },
-    {
-      "uuid": "9df9cf14-e1c",
-      "name": "tool-calling",
       "status": "unknown",
       "duration_s": 0,
       "feed_grew": 0,
