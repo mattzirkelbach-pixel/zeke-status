@@ -115,3 +115,18 @@
 - Chaining blocks without committing journal = guaranteed crash and orphaned state
 - The signal that context is getting long: MCP starts timing out. That is the hard stop.
 - Recovery from crash: read session-journal.jsonl + check what files exist before touching anything.
+
+## Entity Proliferation in Thesis Ledger (learned 2026-03-02)
+- **Pipeline ingested 81 raw instrument names from YouTube transcripts — most were duplicates or non-tradeables**
+- Camel says "stocks", "stock market", "SPX", "S&P", "indices" — all the same instrument
+- Fix: entity_map stored in camel-thesis-ledger.json maps raw names → 11 canonical tickers
+- **Pipeline v2 MUST be updated to use entity_map on ingest, or dedup will need re-running**
+- Non-tradeable concepts (INFLATION, LABOR MARKET, etc) → macro_context section, not tiles
+- Rule: if Camel mentions a new term, check entity_map first before creating a new instrument
+
+## Inherited Cycle State Masks Real Differences (learned 2026-03-02)
+- **SLV and GDX were inheriting XAUUSD's cycle state — scored identically despite different price action**
+- Silver has its own daily cycle (day 19 vs gold's 21), own confirmation signals from SLV ETF price
+- GDX miners have different technical posture and momentum than gold spot
+- Fix: each canonical ticker gets independent cycle state + own price data source
+- Fallback inheritance only for truly unknown instruments (ETH→BTC, NASDAQ→SPX)

@@ -18,13 +18,14 @@
     "cowork": "claude.ai central tab - Phase 4 integration pending"
   },
   "last_session": {
-    "date": "2026-03-01T15:14:55.680763+00:00",
-    "summary": "Full day: Block 1+2 complete, FDA unlocked, LaunchAgents clean, anti-patterns updated, dashboard rebuilt",
+    "date": "2026-03-02T16:00:53.673801+00:00",
+    "summary": "Camel Twin v2 overhaul: entity dedup 81\u219211, confluence scorer (6-factor CF framework), dashboard rebuild w/ portfolio status flags + discovery section",
     "key_changes": [
-      "domain scrub (5 domains)",
-      "FDA grants (0 TCC prompts)",
-      "LaunchAgent audit (22 valid)",
-      "camel-backfill fixed"
+      "entity dedup (81\u219211 canonical tickers + 15 macro_context)",
+      "ct-confluence-scorer.py (0-100 per ticker, CF PDF framework)",
+      "ct-index.html v2 (Active/Planned/Discovery sections, ring scores)",
+      "ct-server.py v2 (/api/scores + /api/prices endpoints)",
+      "SLV + GDX score independently from XAUUSD"
     ]
   },
   "active_crons": [
@@ -52,7 +53,7 @@
     "Spark lock (spark_lock.py) is advisory \u2014 processes must import and use it. Stale lock auto-clears 10min.",
     "osascript Chrome control requires 'Allow JS from Apple Events' in Chrome settings"
   ],
-  "last_updated": "2026-02-27T00:24:04.069926+00:00",
+  "last_updated": "2026-03-02T16:00:53.673801+00:00",
   "known_fragile_points": [
     "OpenClaw payload.message vs payload.prompt \u2014 only message works",
     "delivery.mode must be none for research jobs"
@@ -68,7 +69,16 @@
     "tranche_2": "PENDING \u2014 waiting DCL confirmation",
     "slv_entry": "PENDING \u2014 waiting DCL confirmation",
     "alert_engine": "v2 live, Telegram connected",
-    "fomo_rule": "No alert = no entry. Period."
+    "fomo_rule": "No alert = no entry. Period.",
+    "camel_twin": {
+      "version": "v2",
+      "canonical_tickers": 11,
+      "macro_context_tags": 15,
+      "scorer": "ct-confluence-scorer.py (6-factor, 0-100)",
+      "dashboard": "ct-index.html on port 3336",
+      "sections": "Active(4)/Planned(1)/Discovery(6)",
+      "last_scored": "2026-03-02T16:00:53.673801+00:00"
+    }
   },
   "architecture_layers": {
     "L1": "DEPLOYED",

@@ -1,6 +1,6 @@
 {
   "_description": "What depends on what. CHECK THIS BEFORE DELETING OR MODIFYING ANYTHING.",
-  "_updated": "2026-02-26T17:04:31.139227",
+  "_updated": "2026-03-02T16:00:53.673801+00:00",
   "critical_mappings": [
     {
       "source": "~/zeke-scheduler.py lines 221-228",
@@ -67,6 +67,37 @@
       "source": "MCP server (port 8100)",
       "depends_on": "~/zeke-portfolio/mcp/server.py",
       "note": "Tailscale funnel proxies 443\u21928100. Launchd auto-restarts. MCP watchdog every 5min."
+    },
+    {
+      "source": "~/zeke-portfolio/camel-twin/ct-confluence-scorer.py",
+      "depends_on": [
+        "~/.openclaw/workspace/memory/camel-thesis-ledger.json (deduped, 11 instruments + entity_map)",
+        "~/zeke-portfolio/state/latest_prices.json"
+      ],
+      "note": "Scorer reads deduped ledger + prices. Outputs ct-scores.json. TICKER_TO_LEDGER maps SLV\u2192XAGUSD. PORTFOLIO_STATUS dict defines active/planned/discovery."
+    },
+    {
+      "source": "~/zeke-portfolio/camel-twin/ct-index.html",
+      "depends_on": [
+        "/api/scores (ct-scores.json via ct-server.py)",
+        "/api/thesis (camel-thesis-ledger.json via ct-server.py)"
+      ],
+      "note": "Dashboard fetches from ct-server.py:3336. Three sections: Active/Planned/Discovery. Auto-refresh 60s."
+    },
+    {
+      "source": "~/zeke-portfolio/camel-twin/ct-server.py",
+      "depends_on": [
+        "camel-thesis-ledger.json",
+        "ct-scores.json",
+        "latest_prices.json",
+        "cf-signals.jsonl"
+      ],
+      "note": "Serves on port 3336. APIs: /api/thesis, /api/scores, /api/prices, /api/cycle/{inst}, /api/signals, /api/health"
+    },
+    {
+      "source": "camel-thesis-ledger.json (entity_map field)",
+      "depends_on": "camel-yt-pipeline-v2 must use entity_map for future ingestion",
+      "note": "Entity map collapses 81 raw names to 11 canonical. Pipeline v2 needs integration to write canonical tickers on ingest. Without this, new videos will re-create junk entries."
     }
   ],
   "file_relationships": {
@@ -74,7 +105,9 @@
     "~/.openclaw/cron/jobs.json": "All OpenClaw cron jobs. Scheduler maps job names to UUIDs. Gateway restart required after changes.",
     "~/zeke-scheduler.py": "Main orchestrator. Runs overnight/daytime/reason windows. DO NOT patch incrementally \u2014 rewrite sections completely.",
     "~/.openclaw/workspace/memory/learning-feed.jsonl": "THE critical file. 1174 entries. NEVER overwrite. Append only via exec >>.",
-    "~/zeke-status/": "Dashboard data. Pushed to GitHub every 5min. Memory system lives here too."
+    "~/zeke-status/": "Dashboard data. Pushed to GitHub every 5min. Memory system lives here too.",
+    "~/zeke-portfolio/camel-twin/": "Camel Twin dashboard+scorer. ct-server.py:3336, ct-confluence-scorer.py, ct-scores.json. Depends on deduped thesis ledger (11 tickers) + latest_prices.json.",
+    "~/.openclaw/workspace/memory/camel-thesis-ledger.json": "Thesis ledger. DEDUPED 3/2: 11 canonical instruments + macro_context + entity_map. Pipeline v2 writes here. Scorer reads here."
   },
   "openclaw_cron_jobs": {
     "payload_field": "message (NOT prompt)",
