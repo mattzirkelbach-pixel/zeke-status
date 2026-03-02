@@ -151,3 +151,12 @@
 - /course/cycle-trading-fundamentals/ → GONE. Actual: /members-hub/course/cycle-trading-guidebook/lessons
 - Always verify seed URLs against live site before first crawl run
 - A crawler that never runs is worse than no crawler — it gives false confidence
+
+## Browser Automation on Complex Web Apps Burns Context (learned 2026-03-02)
+- **TradingView via Claude in Chrome: each click = screenshot + find + click + wait + screenshot = 5-6 tool calls**
+- 18 alerts × ~10 tool calls each = 180+ tool calls. Context window exhausted before completing.
+- Playwright failed on selectors. Chrome automation failed on context budget.
+- **Rule: if a task needs >50 browser tool calls, give the human a copy-paste guide instead**
+- Build HTML reference pages with click-to-copy functionality — human does 10 min of manual work vs 3 timed-out sessions
+- Browser automation works for: simple navigation, single form fills, reading pages
+- Browser automation FAILS for: repetitive multi-step workflows across many pages (alert creation, bulk data entry)
