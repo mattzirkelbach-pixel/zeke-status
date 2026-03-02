@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-03-02 18:25:52 ET",
-  "timestamp_utc": "2026-03-02T23:25:52Z",
+  "timestamp_local": "2026-03-02 18:27:12 ET",
+  "timestamp_utc": "2026-03-02T23:27:12Z",
   "scheduler": {
     "running": true,
-    "pid": 42722,
-    "uptime_minutes": 10,
+    "pid": 42489,
+    "uptime_minutes": 12,
     "current_window": "daytime"
   },
   "feed": {
@@ -31,14 +31,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nomic-embed-text:latest",
       "qwen3:8b",
+      "nomic-embed-text:latest",
       "qwen3-32b-32k:latest"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest"
+    "detail": "healthy, loaded: qwen3:8b, nomic-embed-text:latest, qwen3-32b-32k:latest"
   },
   "gateway": {
     "running": true
@@ -47,59 +47,55 @@
     "jobs_run": 5,
     "success": 3,
     "timeout": 0,
-    "fail": 0,
-    "feed_growth": 11
+    "fail": 2,
+    "feed_growth": 10
   },
   "cycles": [
     {
-      "ts": "2026-03-02T18:25:46.167406",
+      "ts": "2026-03-02T18:22:03.533219",
       "window": "daytime",
       "cycle": 1,
       "jobs": 5,
       "success": 3,
       "timeout": 0,
-      "fail": 0,
-      "feed_grew": 11
+      "fail": 2,
+      "feed_grew": 10
     }
   ],
   "recent_jobs": [
     {
       "name": "treasury-bonds",
-      "status": "unknown",
+      "status": "fail",
       "duration": 0,
       "grew": 0,
-      "issues": [
-        "spark_locked"
-      ]
+      "issues": []
     },
     {
       "name": "longevity",
-      "status": "unknown",
+      "status": "fail",
       "duration": 0,
       "grew": 0,
-      "issues": [
-        "spark_locked"
-      ]
+      "issues": []
     },
     {
       "name": "ai-agents",
       "status": "success",
-      "duration": 81,
-      "grew": 4,
+      "duration": 128,
+      "grew": 2,
       "issues": []
     },
     {
       "name": "self-improvement",
       "status": "success",
-      "duration": 69,
-      "grew": 4,
+      "duration": 161,
+      "grew": 3,
       "issues": []
     },
     {
       "name": "compound-synthesis",
       "status": "success",
-      "duration": 138,
-      "grew": 3,
+      "duration": 37,
+      "grew": 5,
       "issues": []
     }
   ],
