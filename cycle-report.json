@@ -1,31 +1,110 @@
 {
-  "timestamp": "2026-03-02T17:51:53.370399",
+  "timestamp": "2026-03-02T17:57:16.604095",
   "window": "daytime",
   "cycle": 1,
-  "feed_before": 2061,
-  "feed_after": 2064,
-  "feed_growth": 3,
+  "feed_before": 2062,
+  "feed_after": 2072,
+  "feed_growth": 10,
   "jobs": {
-    "total": 1,
-    "success": 1,
-    "fail": 0,
+    "total": 5,
+    "success": 2,
+    "fail": 1,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
+    },
+    {
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "fail",
+      "duration_s": 37,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
       "status": "success",
-      "duration_s": 211,
+      "duration_s": 54,
       "feed_grew": 3,
       "entry_valid": true,
       "issues": [],
       "valid_entries": 3,
       "trivial_entries": 0,
       "broken_entries": 0
+    },
+    {
+      "uuid": "e9961e6e-4e4",
+      "name": "compound-synthesis",
+      "status": "success",
+      "duration_s": 153,
+      "feed_grew": 5,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 5,
+      "trivial_entries": 0,
+      "broken_entries": 0
     }
   ],
-  "failures": [],
-  "needs_repair": false,
-  "feed_stagnant": false
+  "failures": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
+    },
+    {
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "fail",
+      "duration_s": 37,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    }
+  ],
+  "needs_repair": true,
+  "feed_stagnant": false,
+  "repair_dispatched": true,
+  "repair_result": "error"
 }
