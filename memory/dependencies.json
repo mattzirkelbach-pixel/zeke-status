@@ -1,6 +1,6 @@
 {
   "_description": "What depends on what. CHECK THIS BEFORE DELETING OR MODIFYING ANYTHING.",
-  "_updated": "2026-03-02T16:00:53.673801+00:00",
+  "_updated": "2026-03-02T17:00:00+00:00",
   "critical_mappings": [
     {
       "source": "~/zeke-scheduler.py lines 221-228",
@@ -98,6 +98,40 @@
       "source": "camel-thesis-ledger.json (entity_map field)",
       "depends_on": "camel-yt-pipeline-v2 must use entity_map for future ingestion",
       "note": "Entity map collapses 81 raw names to 11 canonical. Pipeline v2 needs integration to write canonical tickers on ingest. Without this, new videos will re-create junk entries."
+    },
+    {
+      "source": "~/camel-site-crawler.py",
+      "depends_on": [
+        "pycookiecheat (Chrome cookies for auth)",
+        "Chrome logged into camelfinance.co.uk",
+        "~/camel-site-content/ (output dir)"
+      ],
+      "note": "HTTP crawler using Chrome cookies. Seed URLs updated 3/2 to match actual FluentCommunity site structure. Never fully executed - 0 pages crawled."
+    },
+    {
+      "source": "camelfinance.co.uk FluentCommunity API",
+      "depends_on": [
+        "Chrome session cookies (via pycookiecheat)",
+        "WP nonce from /members-hub/ page (X-WP-Nonce header)"
+      ],
+      "note": "REST API at /wp-json/fluent-community/v2/feeds?space={slug}. 7 spaces: indicatorupdates, productupdates, tatalk, indicatorfeedback, indicatorquestions, macroquestions, resourceroom. All accessible. Educational/framework content, not live signals."
+    },
+    {
+      "source": "~/zeke-portfolio/webhooks/tv_receiver.py (PID 3261, port 8443)",
+      "depends_on": [
+        "Tailscale Funnel (/webhook -> 8443)",
+        "~/zeke-portfolio/state/tv_signals.jsonl (signal store)",
+        "~/zeke-portfolio/state/tv_signals_latest.json (latest per instrument)"
+      ],
+      "note": "Running since 2/25. Zero real alerts in TradingView - only 1 test curl signal. 18 alert payloads pre-built in tv-alert-payloads.txt. Playwright automation failed - need Claude in Chrome to create TV alerts."
+    },
+    {
+      "source": "~/zeke-portfolio/webhooks/tv_alert_manager.py",
+      "depends_on": [
+        "playwright + chromium (installed)",
+        "~/.zeke-tv-profile/ (persistent browser profile, TV logged in)"
+      ],
+      "note": "Playwright-based alert creator. BROKEN: fails to open alert dialog on TradingView UI. Needs selector fixes or replacement with Claude in Chrome approach."
     }
   ],
   "file_relationships": {

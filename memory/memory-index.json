@@ -18,14 +18,13 @@
     "cowork": "claude.ai central tab - Phase 4 integration pending"
   },
   "last_session": {
-    "date": "2026-03-02T16:00:53.673801+00:00",
-    "summary": "Camel Twin v2 overhaul: entity dedup 81\u219211, confluence scorer (6-factor CF framework), dashboard rebuild w/ portfolio status flags + discovery section",
+    "date": "2026-03-02T17:05:27.583561+00:00",
+    "summary": "Camel data pipeline audit: member site API discovered (FluentCommunity), TV webhook audit (receiver running, zero alerts). Memory synced.",
     "key_changes": [
-      "entity dedup (81\u219211 canonical tickers + 15 macro_context)",
-      "ct-confluence-scorer.py (0-100 per ticker, CF PDF framework)",
-      "ct-index.html v2 (Active/Planned/Discovery sections, ring scores)",
-      "ct-server.py v2 (/api/scores + /api/prices endpoints)",
-      "SLV + GDX score independently from XAUUSD"
+      "FluentCommunity API mapped \u2014 7 spaces, all accessible via Chrome cookies",
+      "camel-site-crawler.py seed URLs updated to match live site",
+      "TV infrastructure audit: receiver + funnel running, 0/18 alerts created",
+      "Dependencies + anti-patterns + session journal updated"
     ]
   },
   "active_crons": [
@@ -53,7 +52,7 @@
     "Spark lock (spark_lock.py) is advisory \u2014 processes must import and use it. Stale lock auto-clears 10min.",
     "osascript Chrome control requires 'Allow JS from Apple Events' in Chrome settings"
   ],
-  "last_updated": "2026-03-02T16:00:53.673801+00:00",
+  "last_updated": "2026-03-02T17:05:27.583765+00:00",
   "known_fragile_points": [
     "OpenClaw payload.message vs payload.prompt \u2014 only message works",
     "delivery.mode must be none for research jobs"
@@ -78,6 +77,48 @@
       "dashboard": "ct-index.html on port 3336",
       "sections": "Active(4)/Planned(1)/Discovery(6)",
       "last_scored": "2026-03-02T16:00:53.673801+00:00"
+    },
+    "camel_data_pipelines": {
+      "youtube_pipeline": {
+        "script": "camel-yt-pipeline-v2.py",
+        "schedule": "every 6h",
+        "status": "RUNNING",
+        "output": "learning-feed.jsonl + camel-thesis-ledger.json",
+        "note": "Public video transcripts \u2192 qwen3-32b \u2192 structured cycle readings"
+      },
+      "member_site_api": {
+        "endpoint": "camelfinance.co.uk/wp-json/fluent-community/v2/feeds",
+        "auth": "Chrome cookies (pycookiecheat) + WP nonce",
+        "status": "DISCOVERED_NOT_DEPLOYED",
+        "spaces": [
+          "indicatorupdates",
+          "productupdates",
+          "tatalk",
+          "macroquestions",
+          "indicatorfeedback",
+          "indicatorquestions",
+          "resourceroom"
+        ],
+        "scraper": "camel-feed-scraper.py (NEEDS DEPLOYMENT)",
+        "content_type": "educational/framework, not live signals",
+        "note": "FluentCommunity REST API. All 7 spaces accessible. Need to deploy scraper script."
+      },
+      "site_crawler": {
+        "script": "camel-site-crawler.py",
+        "status": "SEEDS_UPDATED_NEVER_RAN",
+        "note": "Updated seed URLs 3/2. Site is FluentCommunity SPA \u2014 crawler gets limited static content. API approach is better for community posts."
+      },
+      "tradingview_webhooks": {
+        "receiver": "tv_receiver.py (PID 3261, port 8443)",
+        "funnel": "Tailscale /webhook \u2192 8443",
+        "alerts_created": 0,
+        "alerts_needed": 18,
+        "payloads": "tv-alert-payloads.txt (18 instruments/signals ready)",
+        "automation": "tv_alert_manager.py (Playwright, BROKEN - selector failure)",
+        "status": "RECEIVER_RUNNING_NO_ALERTS",
+        "priority": "HIGHEST \u2014 this is the live quantitative signal pipeline",
+        "next_action": "Use Claude in Chrome to create 18 alerts in TradingView"
+      }
     }
   },
   "architecture_layers": {

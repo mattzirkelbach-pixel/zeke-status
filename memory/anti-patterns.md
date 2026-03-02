@@ -130,3 +130,24 @@
 - GDX miners have different technical posture and momentum than gold spot
 - Fix: each canonical ticker gets independent cycle state + own price data source
 - Fallback inheritance only for truly unknown instruments (ETH→BTC, NASDAQ→SPX)
+
+## FluentCommunity Sites Need API, Not Crawling (learned 2026-03-02)
+- **camelfinance.co.uk uses FluentCommunity — content loads via JS, not in HTML**
+- The site-crawler.py was built for static HTML pages but the member hub is SPA
+- Correct approach: hit the WP REST API directly (`/wp-json/fluent-community/v2/feeds?space={slug}`)
+- Auth: Chrome cookies via `pycookiecheat` + WP nonce from `X-WP-Nonce` header
+- Course content requires JS enrollment — simple HTTP GET returns enrollment page, not lessons
+- Rule: before building a scraper, check if the site has an API. FluentCommunity, Discourse, Circle all do.
+
+## TV Alert Automation — Playwright UI Selectors Are Fragile (learned 2026-03-02)
+- **TradingView UI changes frequently — Playwright selectors for alert dialog broke within days**
+- tv_alert_manager.py used CSS selectors that no longer matched TV's DOM structure
+- Better approach: Claude in Chrome can visually navigate and adapt to UI changes
+- The receiver + funnel + payload infrastructure is solid — only the alert creation step failed
+- For scheduled refresh: either fix selectors periodically or manual creation every 2 months
+
+## Crawler Must Match Site Architecture (learned 2026-03-02)
+- **camel-site-crawler.py had seed URLs from a PREVIOUS version of the site structure**
+- /course/cycle-trading-fundamentals/ → GONE. Actual: /members-hub/course/cycle-trading-guidebook/lessons
+- Always verify seed URLs against live site before first crawl run
+- A crawler that never runs is worse than no crawler — it gives false confidence
