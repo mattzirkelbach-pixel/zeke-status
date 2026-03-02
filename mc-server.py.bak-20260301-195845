@@ -82,10 +82,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, fmt, *args):
         pass  # quiet
 
-class ReuseTCPServer(socketserver.TCPServer):
-    allow_reuse_address = True
-
 if __name__ == "__main__":
-    with ReuseTCPServer(("", PORT), Handler) as s:
+    with socketserver.TCPServer(("", PORT), Handler) as s:
+        s.allow_reuse_address = True
         print(f"Mission Control on :{PORT}")
         s.serve_forever()

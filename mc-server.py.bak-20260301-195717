@@ -12,7 +12,7 @@ def _read_json(p):
     try: return json.loads(Path(p).read_text())
     except: return {}
 
-def _read_jsonl_dicts(p):
+def _read_jsonl(p):
     entries = []
     try:
         for line in Path(p).read_text().splitlines():
@@ -29,21 +29,18 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         super().__init__(*a, directory=str(BASE), **kw)
 
     def do_GET(self):
-        # Serve mc-index.html as root
-        if self.path == "/" or self.path == "/index.html":
-            self.path = "/mc-index.html"
-            return super().do_GET()
-        elif self.path == "/api/diagnostic":
-            self._json(_read_json(BASE / "diagnostic.json"))
+        if self.path == "/api/diagnostic":
+            self._json(self._diagnostic())
         elif self.path == "/api/journal":
-            entries = _read_jsonl_dicts(BASE / "memory/session-journal.jsonl")
-            self._json({"entries": entries[-30:], "total": len(entries)})
+            self._json(self._journal())
         elif self.path == "/api/queue":
             self._json(self._queue())
         elif self.path == "/api/domains":
             self._json(self._domains())
         elif self.path == "/api/feed":
-            self._json(_read_json(BASE / "status.json"))
+            self._json(self._feed())
+        elif self.path == "/api/cycles":
+            self._json(self._cycles())
         elif self.path == "/api/health":
             self._json({"status": "ok", "ts": datetime.now().isoformat()})
         else:
@@ -58,6 +55,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def _diagnostic(self):
+        return _read_json(BASE / "diagnostic.json")
+
+    def _journal(self):
+        entries = _read_jsonl(BASE / "memory/session-journal.jsonl")
+        return {"entries": entries[-30:], "total": len(entries)}
+
     def _queue(self):
         q = _read_json(MEMORY / "spark-work-queue.jsonl")
         if isinstance(q, list):
@@ -67,7 +71,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     s = t.get("status", "unknown")
                     statuses[s] = statuses.get(s, 0) + 1
             pending = [t for t in q if isinstance(t, dict) and t.get("status") == "pending"]
-            return {"total": len([t for t in q if isinstance(t, dict)]), "statuses": statuses, "pending": pending[:20]}
+            return {"total": len(q), "statuses": statuses, "pending": pending[:20]}
         return {"total": 0, "statuses": {}, "pending": []}
 
     def _domains(self):
@@ -76,16 +80,22 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if dom_dir.exists():
             for f in sorted(dom_dir.iterdir()):
                 if f.suffix == ".md" and f.stem != "README":
-                    domains.append({"name": f.stem, "size": f.stat().st_size})
+                    content = f.read_text()[:500]
+                    domains.append({"name": f.stem, "size": f.stat().st_size,
+                                    "preview": content[:200]})
         return {"domains": domains, "count": len(domains)}
+
+    def _feed(self):
+        return _read_json(BASE / "status.json")
+
+    def _cycles(self):
+        return _read_jsonl(BASE / "cycle-history.jsonl")[-20:]
 
     def log_message(self, fmt, *args):
         pass  # quiet
 
-class ReuseTCPServer(socketserver.TCPServer):
-    allow_reuse_address = True
-
 if __name__ == "__main__":
-    with ReuseTCPServer(("", PORT), Handler) as s:
-        print(f"Mission Control on :{PORT}")
+    with socketserver.TCPServer(("", PORT), Handler) as s:
+        s.allow_reuse_address = True
+        print(f"Mission Control server on :{PORT}")
         s.serve_forever()
