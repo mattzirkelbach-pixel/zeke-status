@@ -11,14 +11,13 @@
   --b1:#1c2940; --b2:#263550; --b3:#334466;
   --t1:#e8ecf2; --t2:#8b99ad; --t3:#4a5568;
   --ok:#22c55e; --warn:#ef4444; --amber:#eab308; --blue:#3b82f6; --cyan:#06b6d4; --purple:#a855f7; --emerald:#10b981; --rose:#f43f5e; --orange:#f97316;
-  --ok-g:rgba(34,197,94,.08); --warn-g:rgba(239,68,68,.08); --amber-g:rgba(234,179,8,.08); --blue-g:rgba(59,130,246,.08); --cyan-g:rgba(6,182,212,.08);
+  --ok-g:rgba(34,197,94,.08); --warn-g:rgba(239,68,68,.08); --amber-g:rgba(234,179,8,.08); --blue-g:rgba(59,130,246,.08); --cyan-g:rgba(6,182,212,.08); --purple-g:rgba(168,85,247,.08);
   --m:'IBM Plex Mono',monospace; --s:'Outfit',sans-serif;
   --r:6px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--t1);font-family:var(--s);font-size:12px;line-height:1.5;overflow-x:hidden;}
 
-/* ---- TOPBAR ---- */
 .topbar{background:var(--s1);border-bottom:1px solid var(--b1);padding:8px 16px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);}
 .logo{display:flex;align-items:baseline;gap:6px;}
 .logo-z{font-family:var(--m);font-weight:700;font-size:16px;color:var(--cyan);letter-spacing:3px;}
@@ -34,115 +33,102 @@ body{background:var(--bg);color:var(--t1);font-family:var(--s);font-size:12px;li
 .rbtn{background:var(--s2);border:1px solid var(--b1);color:var(--t3);padding:3px 8px;border-radius:3px;font-size:9px;cursor:pointer;font-family:var(--m);transition:all .15s;}
 .rbtn:hover{border-color:var(--cyan);color:var(--cyan);}
 
-/* ---- LAYOUT ---- */
 .page{padding:12px 16px 40px;max-width:1400px;margin:0 auto;}
-.sec{font-family:var(--m);font-size:9px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:2px;margin:16px 0 8px;display:flex;align-items:center;gap:8px;}
+.sec{font-family:var(--m);font-size:9px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:2px;margin:18px 0 8px;display:flex;align-items:center;gap:8px;}
 .sec::after{content:'';flex:1;height:1px;background:var(--b1);}
 
-/* ---- STATS ROW ---- */
+/* Stats row */
 .stats{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:4px;}
 .st{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;position:relative;overflow:hidden;}
 .st::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.st.g::before{background:var(--ok);} .st.b::before{background:var(--blue);} .st.c::before{background:var(--cyan);} .st.p::before{background:var(--purple);} .st.a::before{background:var(--amber);} .st.r::before{background:var(--rose);}
+.st.g::before{background:var(--ok);} .st.b::before{background:var(--blue);} .st.c::before{background:var(--cyan);} .st.p::before{background:var(--purple);} .st.a::before{background:var(--amber);} .st.r::before{background:var(--rose);} .st.e::before{background:var(--emerald);}
 .st .v{font-family:var(--m);font-size:20px;font-weight:700;line-height:1;}
 .st .l{font-family:var(--m);font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;margin-top:3px;}
 .st .sub{font-family:var(--m);font-size:9px;color:var(--t3);margin-top:1px;}
+.c-ok{color:var(--ok);} .c-warn{color:var(--warn);} .c-amber{color:var(--amber);} .c-blue{color:var(--blue);} .c-cyan{color:var(--cyan);} .c-purple{color:var(--purple);} .c-dim{color:var(--t3);} .c-rose{color:var(--rose);} .c-emerald{color:var(--emerald);}
 
-/* ---- RECURSIVE LOOP ---- */
-.loop{display:flex;gap:0;align-items:stretch;margin-bottom:4px;position:relative;}
-.loop-node{flex:1;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:10px 10px 8px;position:relative;text-align:center;transition:border-color .3s;}
-.loop-node:hover{border-color:var(--cyan);}
-.loop-node .ico{font-size:18px;margin-bottom:4px;}
-.loop-node .nm{font-weight:700;font-size:11px;margin-bottom:2px;}
-.loop-node .desc{font-size:9px;color:var(--t3);line-height:1.3;}
-.loop-node .metric{font-family:var(--m);font-size:10px;color:var(--cyan);margin-top:4px;font-weight:600;}
-.loop-arrow{display:flex;align-items:center;color:var(--b3);font-size:16px;padding:0 2px;flex-shrink:0;}
-.loop-return{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-family:var(--m);font-size:8px;color:var(--t3);letter-spacing:2px;display:flex;align-items:center;gap:6px;}
-.loop-return::before,.loop-return::after{content:'';width:40px;height:1px;background:var(--b2);}
+/* Recursive loop visualization */
+.loop-wrap{display:flex;gap:4px;align-items:stretch;margin-bottom:4px;}
+.loop-node{flex:1;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;position:relative;display:flex;flex-direction:column;}
+.loop-node.active{border-color:var(--cyan);box-shadow:0 0 12px rgba(6,182,212,.08);}
+.loop-node.stalled{border-color:var(--amber);border-style:dashed;}
+.loop-node.blocked{border-color:var(--warn);border-style:dashed;opacity:.7;}
+.loop-icon{font-size:18px;margin-bottom:4px;}
+.loop-name{font-family:var(--m);font-size:10px;font-weight:600;color:var(--t1);}
+.loop-stat{font-family:var(--m);font-size:16px;font-weight:700;margin:4px 0 2px;}
+.loop-desc{font-size:10px;color:var(--t3);line-height:1.3;flex:1;}
+.loop-badge{display:inline-block;font-family:var(--m);font-size:8px;font-weight:700;padding:1px 6px;border-radius:10px;margin-top:6px;letter-spacing:.5px;text-transform:uppercase;}
+.loop-badge.live{background:var(--ok-g);color:var(--ok);}
+.loop-badge.stall{background:var(--amber-g);color:var(--amber);}
+.loop-badge.off{background:var(--warn-g);color:var(--warn);}
+.loop-arrow{display:flex;align-items:center;color:var(--b3);font-size:16px;flex-shrink:0;padding:0 2px;}
 
-/* ---- GRID LAYOUTS ---- */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:4px;}
-.g23{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:4px;}
+/* Roadmap */
+.roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:4px;}
+.phase{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:12px;position:relative;overflow:hidden;}
+.phase::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.phase.done::before{background:var(--ok);} .phase.wip::before{background:var(--amber);} .phase.plan::before{background:var(--b2);}
+.phase-hdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+.phase-label{font-family:var(--m);font-size:9px;color:var(--t3);letter-spacing:1px;}
+.phase-pct{font-family:var(--m);font-size:11px;font-weight:700;}
+.phase.done .phase-pct{color:var(--ok);} .phase.wip .phase-pct{color:var(--amber);} .phase.plan .phase-pct{color:var(--t3);}
+.phase-name{font-weight:700;font-size:13px;margin-bottom:8px;}
+.phase.done .phase-name{color:var(--ok);} .phase.wip .phase-name{color:var(--amber);} .phase.plan .phase-name{color:var(--t3);}
+.phase-bar{height:3px;background:var(--s3);border-radius:2px;overflow:hidden;margin-bottom:8px;}
+.phase-fill{height:100%;border-radius:2px;transition:width .5s;}
+.phase.done .phase-fill{background:var(--ok);} .phase.wip .phase-fill{background:var(--amber);} .phase.plan .phase-fill{background:var(--b2);}
+.phase-items{font-size:10px;line-height:1.7;}
+.pi{display:flex;gap:4px;align-items:baseline;}
+.pi-check{font-family:var(--m);font-size:9px;width:12px;flex-shrink:0;}
+.pi.ok .pi-check{color:var(--ok);} .pi.wip .pi-check{color:var(--amber);} .pi.todo .pi-check{color:var(--t3);}
+.pi.ok{color:var(--t2);} .pi.wip{color:var(--amber);} .pi.todo{color:var(--t3);}
 
-/* ---- CARDS ---- */
-.card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;}
-.card-t{font-family:var(--m);font-size:8px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+/* Grid layouts */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:4px;}
+.card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:12px;}
+.card-t{font-family:var(--m);font-size:9px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.kv{display:flex;justify-content:space-between;align-items:baseline;padding:2px 0;}
+.kv .k{font-size:11px;color:var(--t2);} .kv .val{font-family:var(--m);font-size:11px;font-weight:500;}
+.divider{height:1px;background:var(--b1);margin:6px 0;}
 
-/* ---- SCHEDULER BLOCKS ---- */
-.blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
-.blk{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:8px 10px;position:relative;transition:border-color .2s;}
-.blk:hover{border-color:var(--b3);}
-.blk-id{font-family:var(--m);font-size:9px;color:var(--t3);font-weight:600;}
-.blk-name{font-size:11px;font-weight:600;margin-top:1px;}
-.blk-desc{font-size:9px;color:var(--t3);margin-top:2px;line-height:1.3;}
-.blk-dot{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;}
-.blk-dot.on{background:var(--ok);box-shadow:0 0 6px rgba(34,197,94,.4);}
-.blk-dot.off{background:var(--t3);}
+/* Jobs */
+.job-row{display:flex;align-items:center;padding:4px 0;border-bottom:1px solid rgba(30,45,66,.3);font-size:11px;gap:6px;}
+.job-name{font-weight:500;flex:1;}
+.job-dur{font-family:var(--m);font-size:10px;color:var(--t3);width:40px;text-align:right;}
+.job-grew{font-family:var(--m);font-size:10px;width:35px;text-align:right;} .job-grew.pos{color:var(--ok);}
+.job-status{font-family:var(--m);font-size:9px;font-weight:700;width:50px;text-align:right;}
+.job-status.success{color:var(--ok);} .job-status.fail{color:var(--warn);}
 
-/* ---- SERVICES GRID ---- */
-.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;}
-.svc{display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--s2);border-radius:3px;font-size:10px;}
-.svc-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
-.svc-dot.running{background:var(--ok);box-shadow:0 0 4px rgba(34,197,94,.4);}
-.svc-dot.ok{background:var(--emerald);opacity:.5;}
-.svc-dot.error{background:var(--warn);}
-.svc-name{font-family:var(--m);font-size:9px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.svc-pid{font-family:var(--m);font-size:8px;color:var(--t3);margin-left:auto;}
-
-/* ---- JOBS ---- */
-.job{display:flex;align-items:center;padding:4px 0;border-bottom:1px solid rgba(28,41,64,.5);font-size:11px;gap:6px;}
-.job:last-child{border-bottom:none;}
-.job-n{font-weight:500;flex:1;}
-.job-d{font-family:var(--m);font-size:9px;color:var(--t3);width:36px;text-align:right;}
-.job-g{font-family:var(--m);font-size:9px;width:30px;text-align:right;}
-.job-g.pos{color:var(--ok);}
-.job-s{font-family:var(--m);font-size:8px;font-weight:700;width:48px;text-align:right;letter-spacing:.5px;}
-.job-s.success{color:var(--ok);}
-.job-s.fail,.job-s.error{color:var(--warn);}
-
-/* ---- CHART ---- */
-.chart{height:56px;display:flex;align-items:flex-end;gap:1px;overflow:hidden;}
-.bar{flex:1;min-width:2px;border-radius:1px 1px 0 0;transition:height .3s;cursor:default;}
+/* Chart */
+.chart-area{height:60px;display:flex;align-items:flex-end;gap:1px;overflow:hidden;}
+.bar{flex:1;min-width:2px;border-radius:2px 2px 0 0;cursor:default;transition:height .3s;position:relative;}
 .bar:hover{filter:brightness(1.4);}
 
-/* ---- ROADMAP ---- */
-.roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:4px;}
-.phase{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;position:relative;overflow:hidden;}
-.phase::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
-.phase.done::before{background:var(--ok);}
-.phase.wip::before{background:var(--amber);}
-.phase.plan::before{background:var(--b2);}
-.phase-l{font-family:var(--m);font-size:9px;color:var(--t3);font-weight:600;letter-spacing:1px;}
-.phase-n{font-weight:700;font-size:12px;margin:3px 0 6px;}
-.phase.done .phase-n{color:var(--ok);}
-.phase.wip .phase-n{color:var(--amber);}
-.phase.plan .phase-n{color:var(--t3);}
-.phase-bar{height:3px;background:var(--s3);border-radius:2px;overflow:hidden;margin-bottom:5px;}
-.phase-fill{height:100%;border-radius:2px;}
-.phase.done .phase-fill{background:var(--ok);}
-.phase.wip .phase-fill{background:var(--amber);}
-.phase-items{font-size:9px;line-height:1.7;color:var(--t2);}
-.phase-items .d{color:var(--ok);}
-.phase-items .w{color:var(--amber);}
-.phase-items .t{color:var(--t3);}
-.chk{font-family:var(--m);font-size:8px;margin-right:2px;}
+/* KG Viz */
+.kg-ring{display:flex;gap:12px;align-items:center;justify-content:center;padding:10px 0;}
+.kg-node{text-align:center;}
+.kg-circle{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--m);font-weight:700;font-size:16px;margin:0 auto 4px;border:2px solid;}
+.kg-circle.ent{background:rgba(6,182,212,.1);border-color:var(--cyan);color:var(--cyan);}
+.kg-circle.rel{background:rgba(59,130,246,.1);border-color:var(--blue);color:var(--blue);}
+.kg-circle.assoc{background:rgba(168,85,247,.1);border-color:var(--purple);color:var(--purple);}
+.kg-circle.rag{background:rgba(34,197,94,.1);border-color:var(--ok);color:var(--ok);}
+.kg-label{font-family:var(--m);font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;}
+.kg-connect{color:var(--b3);font-size:18px;}
 
-/* ---- QUEUE ---- */
-.q-row{display:flex;justify-content:space-between;padding:2px 0;font-size:10px;}
-.q-row .k{color:var(--t2);}
-.q-row .v{font-family:var(--m);font-weight:500;}
-.q-task{font-size:9px;color:var(--t2);padding:3px 0;border-bottom:1px solid var(--b1);}
-.q-task:last-child{border-bottom:none;}
-.q-pri{font-family:var(--m);font-size:8px;color:var(--amber);margin-right:4px;}
+/* Next steps */
+.next-item{padding:6px 0;border-bottom:1px solid var(--b1);font-size:11px;display:flex;gap:8px;align-items:baseline;}
+.next-item:last-child{border-bottom:none;}
+.next-pri{font-family:var(--m);font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;flex-shrink:0;}
+.next-pri.p1{background:var(--warn-g);color:var(--warn);} .next-pri.p2{background:var(--amber-g);color:var(--amber);} .next-pri.p3{background:rgba(6,182,212,.1);color:var(--cyan);}
 
-/* ---- MISC ---- */
-.dim{color:var(--t3);font-style:italic;font-size:10px;padding:8px 0;}
-.divider{height:1px;background:var(--b1);margin:6px 0;}
-.c-ok{color:var(--ok);} .c-warn{color:var(--warn);} .c-amb{color:var(--amber);} .c-blue{color:var(--blue);} .c-cyan{color:var(--cyan);} .c-purp{color:var(--purple);} .c-rose{color:var(--rose);} .c-dim{color:var(--t3);}
+/* Feed novelty gauge */
+.gauge-wrap{display:flex;align-items:center;gap:10px;margin:8px 0;}
+.gauge-bg{flex:1;height:8px;background:var(--s3);border-radius:4px;overflow:hidden;}
+.gauge-fill{height:100%;border-radius:4px;transition:width .5s;}
+.gauge-val{font-family:var(--m);font-size:14px;font-weight:700;min-width:45px;text-align:right;}
 
-::-webkit-scrollbar{width:5px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--b2);border-radius:3px;}
-@media(max-width:1000px){.stats{grid-template-columns:repeat(4,1fr);} .roadmap,.g3{grid-template-columns:1fr 1fr;} .g2,.g23{grid-template-columns:1fr;} .svc-grid{grid-template-columns:repeat(2,1fr);} .blocks{grid-template-columns:repeat(2,1fr);} .loop{flex-wrap:wrap;} .loop-arrow{display:none;}}
+@media(max-width:1100px){.stats{grid-template-columns:repeat(4,1fr);} .roadmap{grid-template-columns:1fr 1fr;} .g2,.g3{grid-template-columns:1fr;} .loop-wrap{flex-wrap:wrap;}}
 </style>
 </head>
 <body>
@@ -151,7 +137,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--s);font-size:12px;li
   <div class="logo"><span class="logo-z">ZEKE</span><span class="logo-mc">Mission Control</span></div>
   <span class="hbadge" id="hbadge">—</span>
   <div class="topbar-r">
-    <div class="dot"></div>
+    <div class="dot" id="dot"></div>
     <span class="ts" id="ts">loading...</span>
     <button class="rbtn" onclick="loadAll()">↻ REFRESH</button>
   </div>
@@ -160,288 +146,337 @@ body{background:var(--bg);color:var(--t1);font-family:var(--s);font-size:12px;li
 <div class="page">
   <div class="stats" id="stats"></div>
 
-  <div class="sec">The Recursive Loop</div>
-  <div style="position:relative;margin-bottom:28px;">
-    <div class="loop" id="loop"></div>
-    <div class="loop-return">← COMPOUND LEARNING CYCLE →</div>
-  </div>
+  <div class="sec">The Recursive Loop — Is the System Getting Smarter?</div>
+  <div class="loop-wrap" id="loop"></div>
 
-  <div class="g23">
+  <div class="sec">Autonomy Roadmap</div>
+  <div class="roadmap" id="roadmap"></div>
+
+  <div class="sec">What's Next — Unblocking Phase 3</div>
+  <div class="card" id="next-card"></div>
+
+  <div class="g2">
     <div>
-      <div class="sec">Scheduler Blocks</div>
-      <div class="blocks" id="blocks"></div>
+      <div class="sec">Last Cycle</div>
+      <div class="card" id="jobs-card"></div>
     </div>
     <div>
-      <div class="sec">Services</div>
-      <div class="card" style="padding:8px;">
-        <div class="svc-grid" id="services"></div>
-      </div>
+      <div class="sec">Feed Growth (24h)</div>
+      <div class="card" id="chart-card"></div>
     </div>
   </div>
 
   <div class="g3">
     <div>
-      <div class="sec">Last Cycle Jobs</div>
-      <div class="card" id="jobs"></div>
+      <div class="sec">Knowledge Graph</div>
+      <div class="card" id="kg-card"></div>
     </div>
     <div>
-      <div class="sec">Feed Growth</div>
-      <div class="card" id="chart"></div>
+      <div class="sec">Feed Intelligence</div>
+      <div class="card" id="quality-card"></div>
     </div>
     <div>
-      <div class="sec">API Cost Tracker</div>
-      <div class="card" id="costs"></div>
+      <div class="sec">Work Queue</div>
+      <div class="card" id="queue-card"></div>
     </div>
   </div>
 
-  <div class="sec">Recursive Autonomy Roadmap</div>
-  <div class="roadmap" id="roadmap"></div>
-
   <div class="g2">
     <div>
-      <div class="sec">Work Queue</div>
-      <div class="card" id="queue"></div>
+      <div class="sec">Infrastructure</div>
+      <div class="card" id="infra-card"></div>
     </div>
     <div>
-      <div class="sec">Knowledge Graph</div>
-      <div class="card" id="kg"></div>
+      <div class="sec">Scheduler Blocks</div>
+      <div class="card" id="blocks-card"></div>
     </div>
   </div>
 </div>
 
 <script>
-const A='';
 let D={};
 
-async function f(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch{return null}}
+async function f(url){try{const r=await fetch(url);return r.ok?await r.json():null}catch(e){return null}}
 
 async function loadAll(){
   document.getElementById('ts').textContent='refreshing...';
-  const[diag,journal,queue,domains,services,costs,ctx]=await Promise.all([
-    f(A+'/api/diagnostic'),f(A+'/api/journal'),f(A+'/api/queue'),
-    f(A+'/api/domains'),f(A+'/api/services'),f(A+'/api/api_costs'),
-    f(A+'/api/session_context')
-  ]);
-  D={diag,journal,queue,domains,services,costs,ctx};
+  const [diag,queue,ctx]=await Promise.all([f('/api/diagnostic'),f('/api/queue'),f('/api/session_context')]);
+  D={diag:diag||{},queue:queue||{},ctx:ctx||{}};
   render();
 }
 
 function render(){
-  renderHealth();renderStats();renderLoop();renderBlocks();
-  renderServices();renderJobs();renderChart();renderCosts();
-  renderRoadmap();renderQueue();renderKG();
+  renderHealth();renderStats();renderLoop();renderRoadmap();renderNext();
+  renderJobs();renderChart();renderKG();renderQuality();renderQueue();
+  renderInfra();renderBlocks();
   document.getElementById('ts').textContent=new Date().toLocaleTimeString();
 }
 
 function renderHealth(){
   const h=D.diag?.health?.status||'UNKNOWN';
   const el=document.getElementById('hbadge');
-  el.textContent=h;el.className='hbadge '+h;
+  el.textContent=h; el.className='hbadge '+h;
+  document.getElementById('dot').style.background=h==='HEALTHY'?'var(--ok)':h==='DEGRADED'?'var(--amber)':'var(--warn)';
 }
 
 function renderStats(){
-  const d=D.diag||{},t=d.today||{},act=d.activity||{},fd=d.feed||{},gpu=d.gpu_stats||{},sp=d.spark||{},q=D.queue||{},c=D.costs||{};
-  // Prefer activity (full day) over today (current cycle only)
-  const jobsRun=act.jobs_today||t.jobs_run||0;
-  const jobsOk=act.success_today||t.success||0;
-  const jobsFail=act.fail_today||t.fail||0;
-  const growth=act.feed_growth_today||t.feed_growth||0;
-  const sr=jobsRun?(jobsOk/jobsRun*100).toFixed(0):'-';
-  const cost_today=Object.values(c.spend||{}).reduce((a,b)=>a+b,0);
-  const calls_today=Object.values(c.calls||{}).reduce((a,b)=>a+b,0);
+  const d=D.diag, today=d.today||{}, feed=d.feed||{}, gpu=d.gpu_stats||{}, kg=d.kg_stats||{}, fq=d.feed_quality||{}, act=d.activity||{};
+  const successRate=today.jobs_run>0?Math.round((today.success/today.jobs_run)*100):0;
+  const novelty=fq.total>0?Math.round(((fq.total-fq.duplicates)/fq.total)*100):100;
   const items=[
-    {v:fd.total_lines||'—',l:'Feed Entries',sub:'knowledge base',cls:'c'},
-    {v:'+'+growth,l:'Today Growth',sub:jobsRun+' jobs run',cls:'g'},
-    {v:sr+'%',l:'Success Rate',sub:jobsOk+'✓ '+jobsFail+'✗',cls:parseInt(sr)>80?'g':'a'},
-    {v:gpu.temp_c?gpu.temp_c+'°':'—',l:'Spark GPU',sub:gpu.gpu_util_pct!=null?gpu.gpu_util_pct+'% util · '+gpu.power_w+'W':'',cls:gpu.temp_c>70?'r':'b'},
-    {v:sp.models_loaded?sp.models_loaded.length:'—',l:'Models Loaded',sub:sp.online?'online':'OFFLINE',cls:'p'},
-    {v:'$'+cost_today.toFixed(2),l:'API Cost Today',sub:calls_today+' calls',cls:cost_today>2?'a':'b'},
-    {v:q.total||0,l:'Queue Tasks',sub:(q.statuses?.pending||0)+' pending · '+(q.statuses?.ready||0)+' ready',cls:'c'}
+    {v:feed.total_lines||'—',l:'Feed Entries',sub:'+'+((today.feed_growth||0)),cls:'c-cyan',border:'c'},
+    {v:novelty+'%',l:'Feed Novelty',sub:fq.duplicates+' dupes / '+fq.total+' checked',cls:novelty>80?'c-ok':novelty>60?'c-amber':'c-warn',border:novelty>80?'g':novelty>60?'a':'r'},
+    {v:kg.entities||0,l:'KG Entities',sub:kg.relations+' relations',cls:'c-purple',border:'p'},
+    {v:'913',l:'RAG Vectors',sub:'nomic-embed',cls:'c-emerald',border:'e'},
+    {v:successRate+'%',l:'Job Success',sub:today.success+'✓ '+today.fail+'✗ / '+today.jobs_run,cls:successRate>80?'c-ok':'c-amber',border:successRate>80?'g':'a'},
+    {v:act.cycle_count||0,l:'Total Cycles',sub:'window: '+(d.scheduler?.current_window||'—'),cls:'c-blue',border:'b'},
+    {v:gpu.gpu_util_pct!=null?gpu.gpu_util_pct+'%':'—',l:'Spark GPU',sub:gpu.temp_c?gpu.temp_c+'°C · '+gpu.power_w+'W':'',cls:gpu.gpu_util_pct>20?'c-ok':'c-amber',border:gpu.gpu_util_pct>20?'g':'a'}
   ];
-  document.getElementById('stats').innerHTML=items.map(i=>
-    `<div class="st ${i.cls}"><div class="v c-${({g:'ok',a:'amb',b:'blue',c:'cyan',p:'purp',r:'rose'})[i.cls]}">${i.v}</div><div class="l">${i.l}</div>${i.sub?`<div class="sub">${i.sub}</div>`:''}</div>`
-  ).join('');
+  document.getElementById('stats').innerHTML=items.map(i=>'<div class="st '+i.border+'"><div class="v '+i.cls+'">'+i.v+'</div><div class="l">'+i.l+'</div>'+(i.sub?'<div class="sub">'+i.sub+'</div>':'')+'</div>').join('');
 }
 
 function renderLoop(){
-  const d=D.diag||{},fd=d.feed||{},t=d.today||{},q=D.queue||{};
+  const d=D.diag, feed=d.feed||{}, kg=d.kg_stats||{}, fq=d.feed_quality||{}, q=D.queue||{};
+  const novelty=fq.total>0?Math.round(((fq.total-fq.duplicates)/fq.total)*100):100;
   const nodes=[
-    {ico:'📡',nm:'Ingest',desc:'YouTube, RSS, webhooks, scrapers',metric:(fd.topic_distribution?Object.keys(fd.topic_distribution).length:'?')+' domains'},
-    {ico:'🧠',nm:'Analyze',desc:'Spark qwen3 + Haiku extraction',metric:(t.jobs_run||'?')+' jobs this cycle'},
-    {ico:'🔗',nm:'Synthesize',desc:'Cross-domain connections, thesis tracking',metric:(fd.total_lines||'?')+' entries'},
-    {ico:'📋',nm:'Extract Tasks',desc:'Block 11: synthesis → queue',metric:(q.statuses?.pending||0)+' pending'},
-    {ico:'⚡',nm:'Execute',desc:'Spark processes queue, writes findings',metric:'+'+(t.feed_growth||0)+' today'},
-    {ico:'📈',nm:'Score & Signal',desc:'Confluence scores, TV webhooks, alerts',metric:'Blocks 15-17'},
+    {icon:'🔬',name:'Research',stat:(d.today?.jobs_run||0)+' jobs',desc:'Spark + Haiku run domain research every cycle',status:'active',badge:'live'},
+    {icon:'📚',name:'Feed',stat:(feed.total_lines||0)+' entries',desc:'Findings accumulated across all domains',status:'active',badge:'live'},
+    {icon:'🧠',name:'RAG Embed',stat:'913 vectors',desc:'ChromaDB embeddings via nomic-embed-text',status:'active',badge:'live'},
+    {icon:'🕸️',name:'Knowledge Graph',stat:(kg.entities||0)+' entities',desc:kg.insights>0?kg.insights+' insights generated':'No insights queried yet — KG read-back not wired',status:kg.insights>0?'active':'stalled',badge:kg.insights>0?'live':'stall'},
+    {icon:'⚡',name:'Synthesis',stat:novelty+'% novel',desc:novelty>80?'Good novelty — findings are mostly unique':'High duplication — synthesis repeating known facts',status:novelty>80?'active':'stalled',badge:novelty>80?'live':'stall'},
+    {icon:'📋',name:'Queue',stat:(q.statuses?.pending||0)+' pending',desc:'Task extractor spawns follow-up research from synthesis',status:(q.statuses?.pending||0)>0?'active':'stalled',badge:(q.statuses?.pending||0)>0?'live':'stall'},
   ];
-  document.getElementById('loop').innerHTML=nodes.map((n,i)=>
-    `<div class="loop-node"><div class="ico">${n.ico}</div><div class="nm">${n.nm}</div><div class="desc">${n.desc}</div><div class="metric">${n.metric}</div></div>`+
-    (i<nodes.length-1?'<div class="loop-arrow">→</div>':'')
-  ).join('');
-}
-
-function renderBlocks(){
-  const jobs=D.diag?.recent_jobs||[];
-  const jobMap={};
-  jobs.forEach(j=>jobMap[j.name]=j.status);
-
-  const blocks=[
-    {id:11,name:'Task Extractor',desc:'Synthesis → queue tasks. Closes the recursive loop.',on:true},
-    {id:12,name:'Signal Watcher',desc:'Proactive trade signals + Telegram alerts.',on:true},
-    {id:14,name:'Analyst Agent',desc:'Cross-domain analysis across 9+ tickers.',on:true},
-    {id:15,name:'Confluence Scorer',desc:'Per-ticker cycle confluence → ct-scores.json.',on:true},
-    {id:16,name:'TV Signal Processor',desc:'Webhook signals → auto-update cycle_state.',on:true},
-    {id:17,name:'Price Refresh',desc:'Intraday prices for all 16 tickers.',on:true},
-  ];
-  document.getElementById('blocks').innerHTML=blocks.map(b=>
-    `<div class="blk"><div class="blk-dot ${b.on?'on':'off'}"></div><div class="blk-id">B${b.id}</div><div class="blk-name">${b.name}</div><div class="blk-desc">${b.desc}</div></div>`
-  ).join('');
-}
-
-function renderServices(){
-  const svcs=D.services?.services||[];
-  if(!svcs.length){document.getElementById('services').innerHTML='<div class="dim">No data</div>';return;}
-  // Sort: running first, then ok, then error
-  const order={running:0,ok:1,error:2};
-  svcs.sort((a,b)=>(order[a.status]||9)-(order[b.status]||9));
-  document.getElementById('services').innerHTML=svcs.map(s=>
-    `<div class="svc"><div class="svc-dot ${s.status}"></div><span class="svc-name">${s.name}</span>${s.pid?`<span class="svc-pid">${s.pid}</span>`:''}</div>`
-  ).join('');
-}
-
-function renderJobs(){
-  const jobs=D.diag?.recent_jobs||[];
-  if(!jobs.length){document.getElementById('jobs').innerHTML='<div class="dim">No job data</div>';return;}
-  document.getElementById('jobs').innerHTML=jobs.map(j=>
-    `<div class="job"><span class="job-n">${j.name}</span><span class="job-d">${j.duration||0}s</span><span class="job-g ${j.grew>0?'pos':''}">+${j.grew||0}</span><span class="job-s ${j.status}">${j.status.toUpperCase()}</span></div>`
-  ).join('');
-}
-
-function renderChart(){
-  const fh=D.diag?.feed_history||[];
-  if(!fh.length){document.getElementById('chart').innerHTML='<div class="dim">No history</div>';return;}
-  const pts=fh.slice(-60);
-  const vals=pts.map(p=>p.v||0);
-  const mn=Math.min(...vals),mx=Math.max(...vals);
-  const range=mx-mn||1;
-  // Color gradient from dim to cyan
-  const barColors=['#0e7490','#06b6d4','#22d3ee','#67e8f9'];
-  let html='<div class="card-t">Feed size over time ('+pts.length+' samples)</div><div class="chart">';
-  pts.forEach((p,i)=>{
-    const h=Math.max(3,((p.v-mn)/range)*52);
-    const c=barColors[Math.floor((i/pts.length)*barColors.length)];
-    html+=`<div class="bar" style="height:${h}px;background:${c}" title="${p.l||''}: ${p.v} entries"></div>`;
+  let html='';
+  nodes.forEach((n,i)=>{
+    const cls=n.status==='active'?'active':n.status==='stalled'?'stalled':'blocked';
+    html+='<div class="loop-node '+cls+'">';
+    html+='<div class="loop-icon">'+n.icon+'</div>';
+    html+='<div class="loop-name">'+n.name+'</div>';
+    html+='<div class="loop-stat '+((n.status==='active')?'c-cyan':'c-amber')+'">'+n.stat+'</div>';
+    html+='<div class="loop-desc">'+n.desc+'</div>';
+    html+='<span class="loop-badge '+n.badge+'">'+n.badge+'</span>';
+    html+='</div>';
+    if(i<nodes.length-1)html+='<div class="loop-arrow">→</div>';
   });
-  html+='</div>';
-  // Show range
-  html+=`<div style="display:flex;justify-content:space-between;font-family:var(--m);font-size:8px;color:var(--t3);margin-top:4px;"><span>${mn}</span><span>Δ ${mx-mn} entries</span><span>${mx}</span></div>`;
-  document.getElementById('chart').innerHTML=html;
-}
-
-function renderCosts(){
-  const c=D.costs||{};
-  const spend=c.spend||{};
-  const calls=c.calls||{};
-  const total=Object.values(spend).reduce((a,b)=>a+b,0);
-  const totalCalls=Object.values(calls).reduce((a,b)=>a+b,0);
-  const last=c.last||{};
-  let html='<div class="card-t">Anthropic API · '+( c.date||'today')+'</div>';
-  html+=`<div class="q-row"><span class="k">Total spend</span><span class="v c-cyan">$${total.toFixed(2)}</span></div>`;
-  html+=`<div class="q-row"><span class="k">Total calls</span><span class="v">${totalCalls}</span></div>`;
-  for(const[k,v] of Object.entries(spend)){
-    html+=`<div class="q-row"><span class="k" style="font-size:9px;padding-left:8px">${k}</span><span class="v" style="font-size:9px">$${v.toFixed(3)} (${calls[k]||0})</span></div>`;
-  }
-  if(last.task){
-    html+=`<div class="divider"></div>`;
-    html+=`<div style="font-size:9px;color:var(--t3)">Last: ${last.task} · $${(last.cost||0).toFixed(4)} · ${(last.t||'').slice(11,19)}</div>`;
-  }
-  document.getElementById('costs').innerHTML=html;
+  // Show the loop-back arrow
+  html+='<div class="loop-arrow" style="color:var(--amber)">↻</div>';
+  document.getElementById('loop').innerHTML=html;
 }
 
 function renderRoadmap(){
   const phases=[
-    {
-      label:'PHASE 1',name:'Work Queue Foundation',cls:'done',pct:100,
-      items:[
-        {t:'Spark work queue daemon',d:1},{t:'Domain merges (4 active)',d:1},
-        {t:'RAG embed loop (ChromaDB)',d:1},{t:'Quality scoring + weights',d:1},
-        {t:'Financial data ingestion',d:1},{t:'Camel pipeline v2 + thesis',d:1},
-        {t:'Nightly memory distillation',d:1},{t:'Feed guardian + dedup',d:1},
-      ]
-    },
-    {
-      label:'PHASE 2',name:'Self-Direction',cls:'done',pct:100,
-      items:[
-        {t:'Task extractor (syn→queue)',d:1},{t:'Signal watcher + Telegram',d:1},
-        {t:'Analyst agent (cross-domain)',d:1},{t:'Confluence scorer (12 tickers)',d:1},
-        {t:'TV webhook pipeline',d:1},{t:'Price refresh (Block 17)',d:1},
-        {t:'Camel member site scraper',d:1},{t:'Alert engine (trade triggers)',d:1},
-      ]
-    },
-    {
-      label:'PHASE 3',name:'Compounding Intelligence',cls:'wip',pct:40,
-      items:[
-        {t:'RAG feedback (embed → query → refine)',d:1},
-        {t:'Cross-source discovery',d:0,w:1},{t:'Temporal drift detection',d:0},
-        {t:'Thesis ledger auto-update',d:0},{t:'Conviction scoring pipeline',d:0},
-      ]
-    },
-    {
-      label:'PHASE 4',name:'Recursive Autonomy',cls:'plan',pct:0,
-      items:[
-        {t:'Self-specifying new research jobs',d:0},
-        {t:'Autonomous strategy adjustment',d:0},
-        {t:'Quality-weighted task generation',d:0},
-        {t:'Full closed-loop learning',d:0},
-      ]
-    }
+    {label:'PHASE 1',name:'Foundation',cls:'done',pct:100,items:[
+      {t:'Spark work queue daemon',s:'ok'},{t:'Domain knowledge merges',s:'ok'},{t:'RAG embedding pipeline',s:'ok'},
+      {t:'Feed quality scoring',s:'ok'},{t:'Financial data ingestion',s:'ok'},{t:'Camel YT pipeline v2 + thesis',s:'ok'},
+      {t:'Memory distillation (nightly)',s:'ok'},{t:'Alert engine + Telegram',s:'ok'}
+    ]},
+    {label:'PHASE 2',name:'Self-Direction',cls:'done',pct:100,items:[
+      {t:'Task extractor (synthesis → queue)',s:'ok'},{t:'Signal watcher + alerts',s:'ok'},
+      {t:'Analyst agent (cross-domain)',s:'ok'},{t:'Camel backfill pipeline',s:'ok'},
+      {t:'TV webhook receiver v2',s:'ok'},{t:'Confluence scorer (12 tickers)',s:'ok'},
+      {t:'Price refresh pipeline (Block 17)',s:'ok'}
+    ]},
+    {label:'PHASE 3',name:'Compounding Intelligence',cls:'wip',pct:30,items:[
+      {t:'RAG embeddings flowing (913 vectors)',s:'ok'},
+      {t:'TV signals → cycle state auto-update',s:'ok'},
+      {t:'RAG read-back into research prompts',s:'wip'},
+      {t:'Feed dedup intelligence (16% error rate)',s:'todo'},
+      {t:'Cross-source discovery (KG → new research)',s:'todo'},
+      {t:'Temporal drift detection (stale purge)',s:'todo'}
+    ]},
+    {label:'PHASE 4',name:'Recursive Autonomy',cls:'plan',pct:0,items:[
+      {t:'Self-specifying new research jobs',s:'todo'},
+      {t:'KG insights → compound intelligence',s:'todo'},
+      {t:'Autonomous strategy adaptation',s:'todo'},
+      {t:'Self-evaluating research quality loop',s:'todo'}
+    ]}
   ];
   document.getElementById('roadmap').innerHTML=phases.map(p=>{
-    const il=p.items.map(i=>{
-      const c=i.d?'d':(i.w?'w':'t');
-      const icon=i.d?'✓':(i.w?'◐':'○');
-      return `<div class="${c}"><span class="chk">${icon}</span>${i.t}</div>`;
+    const items=p.items.map(i=>{
+      const icon=i.s==='ok'?'✓':i.s==='wip'?'◐':'○';
+      return '<div class="pi '+i.s+'"><span class="pi-check">'+icon+'</span>'+i.t+'</div>';
     }).join('');
-    return `<div class="phase ${p.cls}"><div class="phase-l">${p.label}</div><div class="phase-n">${p.name}</div><div class="phase-bar"><div class="phase-fill" style="width:${p.pct}%"></div></div><div class="phase-items">${il}</div></div>`;
+    return '<div class="phase '+p.cls+'"><div class="phase-hdr"><span class="phase-label">'+p.label+'</span><span class="phase-pct">'+p.pct+'%</span></div>'+
+      '<div class="phase-name">'+p.name+'</div>'+
+      '<div class="phase-bar"><div class="phase-fill" style="width:'+p.pct+'%"></div></div>'+
+      '<div class="phase-items">'+items+'</div></div>';
   }).join('');
+}
+
+function renderNext(){
+  const items=[
+    {pri:1,text:'Wire RAG read-back: query ChromaDB before each research job so Spark/Haiku knows what we already know. Stops duplicate findings at the source.',tag:'Phase 3 blocker'},
+    {pri:1,text:'Feed dedup: detect and skip findings that match existing entries (exact + semantic). 16% error rate = wasted cycles.',tag:'Feed quality'},
+    {pri:2,text:'KG query integration: use entity/relation graph to discover cross-domain connections (e.g., "gold cycle + fed policy → TLT thesis").',tag:'Phase 3'},
+    {pri:2,text:'Temporal drift: flag findings older than 7 days still being regenerated. Auto-expire stale research priorities.',tag:'Phase 3'},
+    {pri:3,text:'Self-specifying jobs: let synthesis output propose new research domains and job definitions.',tag:'Phase 4 prereq'},
+  ];
+  const pending=D.ctx?.pending||[];
+  let html='<div class="card-t">Autonomy Blockers — In Priority Order</div>';
+  items.forEach(i=>{
+    const cls=i.pri===1?'p1':i.pri===2?'p2':'p3';
+    html+='<div class="next-item"><span class="next-pri '+cls+'">P'+i.pri+'</span><span style="flex:1">'+i.text+'</span><span style="font-family:var(--m);font-size:9px;color:var(--t3)">'+i.tag+'</span></div>';
+  });
+  if(pending.length){
+    html+='<div class="divider"></div><div class="card-t">Session Pending</div>';
+    pending.forEach(p=>{html+='<div class="next-item"><span class="next-pri p3">→</span><span>'+p+'</span></div>';});
+  }
+  document.getElementById('next-card').innerHTML=html;
+}
+
+function renderJobs(){
+  // Only show latest cycle's jobs (deduplicated)
+  const jobs=D.diag?.recent_jobs||[];
+  const seen=new Set();
+  const unique=[];
+  for(const j of jobs){if(!seen.has(j.name)){seen.add(j.name);unique.push(j);}}
+  if(!unique.length){document.getElementById('jobs-card').innerHTML='<div class="c-dim">No job data</div>';return;}
+  
+  const cycle=D.diag?.cycles?.[D.diag.cycles.length-1];
+  let html='';
+  if(cycle){html+='<div class="card-t">Cycle '+cycle.cycle+' · '+cycle.window+' · grew +'+cycle.feed_grew+'</div>';}
+  unique.forEach(j=>{
+    const scls=j.status==='success'?'success':'fail';
+    html+='<div class="job-row"><span class="job-name">'+j.name+'</span>'+
+      '<span class="job-dur">'+(j.duration||0)+'s</span>'+
+      '<span class="job-grew '+(j.grew>0?'pos':'')+'>+'+(j.grew||0)+'</span>'+
+      '<span class="job-status '+scls+'">'+j.status+'</span></div>';
+  });
+  document.getElementById('jobs-card').innerHTML=html;
+}
+
+function renderChart(){
+  const fh=D.diag?.feed_history||[];
+  if(!fh.length){document.getElementById('chart-card').innerHTML='<div class="c-dim">No feed history</div>';return;}
+  // Show last 60 data points
+  const pts=fh.slice(-60);
+  const minV=Math.min(...pts.map(p=>p.v));
+  const maxV=Math.max(...pts.map(p=>p.v));
+  const range=maxV-minV||1;
+  let html='<div class="card-t">Feed size over time ('+pts[0].l+' → '+pts[pts.length-1].l+')</div><div class="chart-area">';
+  pts.forEach((p,i)=>{
+    const h=Math.max(4,((p.v-minV)/range)*55);
+    const prev=i>0?pts[i-1].v:p.v;
+    const growing=p.v>=prev;
+    html+='<div class="bar" style="height:'+h+'px;background:'+(growing?'var(--cyan)':'var(--amber)')+'" title="'+p.l+': '+p.v+' entries"></div>';
+  });
+  html+='</div><div style="display:flex;justify-content:space-between;margin-top:4px;font-family:var(--m);font-size:9px;color:var(--t3)"><span>'+minV+'</span><span>'+maxV+' entries</span></div>';
+  document.getElementById('chart-card').innerHTML=html;
+}
+
+function renderKG(){
+  const kg=D.diag?.kg_stats||{};
+  let html='<div class="kg-ring">';
+  html+='<div class="kg-node"><div class="kg-circle ent">'+(kg.entities||0)+'</div><div class="kg-label">Entities</div></div>';
+  html+='<div class="kg-connect">—</div>';
+  html+='<div class="kg-node"><div class="kg-circle rel">'+(kg.relations||0)+'</div><div class="kg-label">Relations</div></div>';
+  html+='<div class="kg-connect">—</div>';
+  html+='<div class="kg-node"><div class="kg-circle assoc">'+(kg.associations||0)+'</div><div class="kg-label">Assoc</div></div>';
+  html+='<div class="kg-connect">—</div>';
+  html+='<div class="kg-node"><div class="kg-circle rag">913</div><div class="kg-label">RAG Vectors</div></div>';
+  html+='</div>';
+  
+  html+='<div class="divider"></div>';
+  const doms=D.diag?.kg_stats?.domains;
+  if(typeof doms==='string'){
+    // Parse "domain": count format
+    const matches=[...doms.matchAll(/"([^"]+)":\s*(\d+)/g)];
+    if(matches.length){
+      html+='<div class="card-t">Domains</div>';
+      matches.forEach(m=>{
+        html+='<div class="kv"><span class="k">'+m[1]+'</span><span class="val c-cyan">'+m[2]+'</span></div>';
+      });
+    }
+  }
+  
+  html+='<div class="divider"></div>';
+  html+='<div style="font-size:10px;color:var(--amber);padding:4px 0">⚠ KG has data but no read-back loop — insights field is 0. Phase 3 blocker.</div>';
+  document.getElementById('kg-card').innerHTML=html;
+}
+
+function renderQuality(){
+  const fq=D.diag?.feed_quality||{};
+  const total=fq.total||1;
+  const dupes=fq.duplicates||0;
+  const novelty=Math.round(((total-dupes)/total)*100);
+  const errorRate=fq.error_rate||0;
+  
+  let html='<div class="card-t">Feed Novelty</div>';
+  html+='<div class="gauge-wrap"><div class="gauge-bg"><div class="gauge-fill" style="width:'+novelty+'%;background:'+(novelty>80?'var(--ok)':novelty>60?'var(--amber)':'var(--warn)')+'"></div></div><div class="gauge-val '+(novelty>80?'c-ok':novelty>60?'c-amber':'c-warn')+'">'+novelty+'%</div></div>';
+  
+  html+='<div class="kv"><span class="k">Entries checked</span><span class="val">'+total+'</span></div>';
+  html+='<div class="kv"><span class="k">Duplicates found</span><span class="val c-warn">'+dupes+'</span></div>';
+  html+='<div class="kv"><span class="k">Malformed JSON</span><span class="val">'+(fq.malformed_json||0)+'</span></div>';
+  html+='<div class="kv"><span class="k">Error rate</span><span class="val '+(errorRate>10?'c-warn':'c-ok')+'">'+errorRate+'%</span></div>';
+  
+  html+='<div class="divider"></div><div class="card-t">What This Means</div>';
+  if(novelty<75){
+    html+='<div style="font-size:10px;color:var(--warn);line-height:1.4">Research is regurgitating known facts. RAG read-back needed so prompts include existing knowledge before generating new findings.</div>';
+  } else {
+    html+='<div style="font-size:10px;color:var(--ok);line-height:1.4">Feed is mostly producing unique findings. Quality is healthy.</div>';
+  }
+  document.getElementById('quality-card').innerHTML=html;
 }
 
 function renderQueue(){
   const q=D.queue||{};
   const sts=q.statuses||{};
-  const pending=q.pending||[];
   let html='<div class="card-t">Spark Work Queue</div>';
-  html+=`<div class="q-row"><span class="k">Total tasks</span><span class="v c-cyan">${q.total||0}</span></div>`;
-  for(const[s,c] of Object.entries(sts)){
-    const cls=s==='done'?'c-ok':s==='pending'?'c-amb':s==='ready'?'c-blue':'c-dim';
-    html+=`<div class="q-row"><span class="k">${s}</span><span class="v ${cls}">${c}</span></div>`;
+  html+='<div class="kv"><span class="k">Total tasks</span><span class="val c-cyan">'+(q.total||0)+'</span></div>';
+  for(const[s,c]of Object.entries(sts)){
+    const cls=s==='done'?'c-ok':s==='pending'?'c-amber':s==='ready'?'c-blue':'c-dim';
+    html+='<div class="kv"><span class="k">'+s+'</span><span class="val '+cls+'">'+c+'</span></div>';
   }
+  const pending=q.pending||[];
   if(pending.length){
-    html+=`<div class="divider"></div><div class="card-t">Next Up</div>`;
-    pending.slice(0,6).forEach(p=>{
-      const label=(p.label||p.task_label||p.id||'?').toString().slice(0,60);
-      html+=`<div class="q-task"><span class="q-pri">P${p.priority||'?'}</span>${label}</div>`;
+    html+='<div class="divider"></div><div class="card-t">Next Up</div>';
+    pending.slice(0,5).forEach(p=>{
+      html+='<div style="font-size:10px;color:var(--t2);padding:2px 0;border-bottom:1px solid var(--b1)">'+
+        '<span style="color:var(--amber);font-family:var(--m);font-size:9px">P'+(p.priority||'?')+'</span> '+
+        (p.label||p.task_label||p.id||'?').toString().slice(0,80)+'</div>';
     });
   }
-  document.getElementById('queue').innerHTML=html;
+  document.getElementById('queue-card').innerHTML=html;
 }
 
-function renderKG(){
-  const kg=D.diag?.kg_stats||{};
-  const doms=D.domains?.domains||[];
-  const fq=D.diag?.feed_quality||{};
-  let html='<div class="card-t">Knowledge Graph</div>';
-  html+=`<div class="q-row"><span class="k">Entities</span><span class="v c-cyan">${kg.entities||0}</span></div>`;
-  html+=`<div class="q-row"><span class="k">Relations</span><span class="v c-blue">${kg.relations||0}</span></div>`;
-  html+=`<div class="q-row"><span class="k">Associations</span><span class="v c-purp">${kg.associations||0}</span></div>`;
-  html+=`<div class="divider"></div><div class="card-t">Domains</div>`;
-  doms.forEach(d=>{
-    html+=`<div class="q-row"><span class="k">${d.name}</span><span class="v" style="font-size:9px">${(d.size/1024).toFixed(1)}KB</span></div>`;
+function renderInfra(){
+  const d=D.diag;
+  const sched=d.scheduler||{};
+  const spark=d.spark||{};
+  const gw=d.gateway||{};
+  
+  const svc=[
+    {name:'Scheduler',on:sched.running,detail:'PID '+(sched.pid||'?')+' · '+Math.round(sched.uptime_minutes||0)+'m uptime'},
+    {name:'Spark/Ollama',on:spark.online,detail:(spark.models_loaded||[]).length+' models loaded'},
+    {name:'Gateway',on:gw.running,detail:'OpenClaw node.js'},
+    {name:'MCP Server',on:true,detail:'Port 8100'},
+    {name:'TV Webhook',on:true,detail:'Port 8443 · Tailscale Funnel'},
+  ];
+  let html='';
+  svc.forEach(s=>{
+    html+='<div class="kv"><span class="k" style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:'+(s.on?'var(--ok)':'var(--warn)')+'"></span>'+s.name+'</span><span class="val" style="font-size:10px;color:var(--t3)">'+s.detail+'</span></div>';
   });
-  html+=`<div class="divider"></div><div class="card-t">Feed Quality (last 50)</div>`;
-  html+=`<div class="q-row"><span class="k">Clean</span><span class="v c-ok">${fq.recent_50_clean||fq.total||'?'}</span></div>`;
-  html+=`<div class="q-row"><span class="k">Duplicates</span><span class="v c-amb">${fq.duplicates||0}</span></div>`;
-  html+=`<div class="q-row"><span class="k">Error rate</span><span class="v ${(fq.error_rate||0)>20?'c-warn':'c-ok'}">${fq.error_rate||0}%</span></div>`;
-  document.getElementById('kg').innerHTML=html;
+  html+='<div class="divider"></div>';
+  html+='<div class="kv"><span class="k">Process spawns</span><span class="val">~576/day</span></div>';
+  html+='<div class="kv"><span class="k">LaunchAgents</span><span class="val">20 active</span></div>';
+  html+='<div class="kv"><span class="k">Cron jobs</span><span class="val">6</span></div>';
+  document.getElementById('infra-card').innerHTML=html;
+}
+
+function renderBlocks(){
+  const blocks=[
+    {n:11,name:'Task Extractor',desc:'synthesis → queue tasks',on:true},
+    {n:12,name:'Signal Watcher',desc:'feed scan → Telegram alerts',on:true},
+    {n:14,name:'Analyst Agent',desc:'cross-domain research',on:true},
+    {n:15,name:'Confluence Scorer',desc:'12-ticker cycle scores',on:true},
+    {n:16,name:'TV Signal Processor',desc:'webhook → cycle_state.json',on:true},
+    {n:17,name:'Price Refresh',desc:'16 tickers every cycle',on:true},
+  ];
+  let html='';
+  blocks.forEach(b=>{
+    html+='<div class="kv"><span class="k" style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:'+(b.on?'var(--ok)':'var(--warn)')+'"></span><span style="font-family:var(--m);font-size:9px;color:var(--t3);min-width:20px">B'+b.n+'</span>'+b.name+'</span><span class="val" style="font-size:10px;color:var(--t3)">'+b.desc+'</span></div>';
+  });
+  document.getElementById('blocks-card').innerHTML=html;
 }
 
 loadAll();

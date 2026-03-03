@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZEKE — Mission Control</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+:root {
+  --bg:#06080c; --s1:#0c1018; --s2:#121924; --s3:#1a2332;
+  --b1:#1c2940; --b2:#263550; --b3:#334466;
+  --t1:#e8ecf2; --t2:#8b99ad; --t3:#4a5568;
+  --ok:#22c55e; --warn:#ef4444; --amber:#eab308; --blue:#3b82f6; --cyan:#06b6d4; --purple:#a855f7; --emerald:#10b981; --rose:#f43f5e; --orange:#f97316;
+  --ok-g:rgba(34,197,94,.08); --warn-g:rgba(239,68,68,.08); --amber-g:rgba(234,179,8,.08); --blue-g:rgba(59,130,246,.08); --cyan-g:rgba(6,182,212,.08);
+  --m:'IBM Plex Mono',monospace; --s:'Outfit',sans-serif;
+  --r:6px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--t1);font-family:var(--s);font-size:12px;line-height:1.5;overflow-x:hidden;}
+
+/* ---- TOPBAR ---- */
+.topbar{background:var(--s1);border-bottom:1px solid var(--b1);padding:8px 16px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);}
+.logo{display:flex;align-items:baseline;gap:6px;}
+.logo-z{font-family:var(--m);font-weight:700;font-size:16px;color:var(--cyan);letter-spacing:3px;}
+.logo-mc{font-family:var(--m);font-weight:400;font-size:9px;color:var(--t3);letter-spacing:2px;text-transform:uppercase;}
+.hbadge{font-family:var(--m);font-size:9px;padding:2px 10px;border-radius:20px;font-weight:600;letter-spacing:1px;}
+.hbadge.HEALTHY{background:var(--ok-g);color:var(--ok);border:1px solid rgba(34,197,94,.25);}
+.hbadge.DEGRADED{background:var(--amber-g);color:var(--amber);border:1px solid rgba(234,179,8,.25);}
+.hbadge.DOWN{background:var(--warn-g);color:var(--warn);border:1px solid rgba(239,68,68,.25);}
+.topbar-r{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:blink 3s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.ts{font-family:var(--m);font-size:9px;color:var(--t3);}
+.rbtn{background:var(--s2);border:1px solid var(--b1);color:var(--t3);padding:3px 8px;border-radius:3px;font-size:9px;cursor:pointer;font-family:var(--m);transition:all .15s;}
+.rbtn:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ---- LAYOUT ---- */
+.page{padding:12px 16px 40px;max-width:1400px;margin:0 auto;}
+.sec{font-family:var(--m);font-size:9px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:2px;margin:16px 0 8px;display:flex;align-items:center;gap:8px;}
+.sec::after{content:'';flex:1;height:1px;background:var(--b1);}
+
+/* ---- STATS ROW ---- */
+.stats{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:4px;}
+.st{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;position:relative;overflow:hidden;}
+.st::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.st.g::before{background:var(--ok);} .st.b::before{background:var(--blue);} .st.c::before{background:var(--cyan);} .st.p::before{background:var(--purple);} .st.a::before{background:var(--amber);} .st.r::before{background:var(--rose);}
+.st .v{font-family:var(--m);font-size:20px;font-weight:700;line-height:1;}
+.st .l{font-family:var(--m);font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;margin-top:3px;}
+.st .sub{font-family:var(--m);font-size:9px;color:var(--t3);margin-top:1px;}
+
+/* ---- RECURSIVE LOOP ---- */
+.loop{display:flex;gap:0;align-items:stretch;margin-bottom:4px;position:relative;}
+.loop-node{flex:1;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:10px 10px 8px;position:relative;text-align:center;transition:border-color .3s;}
+.loop-node:hover{border-color:var(--cyan);}
+.loop-node .ico{font-size:18px;margin-bottom:4px;}
+.loop-node .nm{font-weight:700;font-size:11px;margin-bottom:2px;}
+.loop-node .desc{font-size:9px;color:var(--t3);line-height:1.3;}
+.loop-node .metric{font-family:var(--m);font-size:10px;color:var(--cyan);margin-top:4px;font-weight:600;}
+.loop-arrow{display:flex;align-items:center;color:var(--b3);font-size:16px;padding:0 2px;flex-shrink:0;}
+.loop-return{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-family:var(--m);font-size:8px;color:var(--t3);letter-spacing:2px;display:flex;align-items:center;gap:6px;}
+.loop-return::before,.loop-return::after{content:'';width:40px;height:1px;background:var(--b2);}
+
+/* ---- GRID LAYOUTS ---- */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:4px;}
+.g23{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:4px;}
+
+/* ---- CARDS ---- */
+.card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;}
+.card-t{font-family:var(--m);font-size:8px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+
+/* ---- SCHEDULER BLOCKS ---- */
+.blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.blk{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:8px 10px;position:relative;transition:border-color .2s;}
+.blk:hover{border-color:var(--b3);}
+.blk-id{font-family:var(--m);font-size:9px;color:var(--t3);font-weight:600;}
+.blk-name{font-size:11px;font-weight:600;margin-top:1px;}
+.blk-desc{font-size:9px;color:var(--t3);margin-top:2px;line-height:1.3;}
+.blk-dot{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;}
+.blk-dot.on{background:var(--ok);box-shadow:0 0 6px rgba(34,197,94,.4);}
+.blk-dot.off{background:var(--t3);}
+
+/* ---- SERVICES GRID ---- */
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;}
+.svc{display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--s2);border-radius:3px;font-size:10px;}
+.svc-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.svc-dot.running{background:var(--ok);box-shadow:0 0 4px rgba(34,197,94,.4);}
+.svc-dot.ok{background:var(--emerald);opacity:.5;}
+.svc-dot.error{background:var(--warn);}
+.svc-name{font-family:var(--m);font-size:9px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.svc-pid{font-family:var(--m);font-size:8px;color:var(--t3);margin-left:auto;}
+
+/* ---- JOBS ---- */
+.job{display:flex;align-items:center;padding:4px 0;border-bottom:1px solid rgba(28,41,64,.5);font-size:11px;gap:6px;}
+.job:last-child{border-bottom:none;}
+.job-n{font-weight:500;flex:1;}
+.job-d{font-family:var(--m);font-size:9px;color:var(--t3);width:36px;text-align:right;}
+.job-g{font-family:var(--m);font-size:9px;width:30px;text-align:right;}
+.job-g.pos{color:var(--ok);}
+.job-s{font-family:var(--m);font-size:8px;font-weight:700;width:48px;text-align:right;letter-spacing:.5px;}
+.job-s.success{color:var(--ok);}
+.job-s.fail,.job-s.error{color:var(--warn);}
+
+/* ---- CHART ---- */
+.chart{height:56px;display:flex;align-items:flex-end;gap:1px;overflow:hidden;}
+.bar{flex:1;min-width:2px;border-radius:1px 1px 0 0;transition:height .3s;cursor:default;}
+.bar:hover{filter:brightness(1.4);}
+
+/* ---- ROADMAP ---- */
+.roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:4px;}
+.phase{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;position:relative;overflow:hidden;}
+.phase::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.phase.done::before{background:var(--ok);}
+.phase.wip::before{background:var(--amber);}
+.phase.plan::before{background:var(--b2);}
+.phase-l{font-family:var(--m);font-size:9px;color:var(--t3);font-weight:600;letter-spacing:1px;}
+.phase-n{font-weight:700;font-size:12px;margin:3px 0 6px;}
+.phase.done .phase-n{color:var(--ok);}
+.phase.wip .phase-n{color:var(--amber);}
+.phase.plan .phase-n{color:var(--t3);}
+.phase-bar{height:3px;background:var(--s3);border-radius:2px;overflow:hidden;margin-bottom:5px;}
+.phase-fill{height:100%;border-radius:2px;}
+.phase.done .phase-fill{background:var(--ok);}
+.phase.wip .phase-fill{background:var(--amber);}
+.phase-items{font-size:9px;line-height:1.7;color:var(--t2);}
+.phase-items .d{color:var(--ok);}
+.phase-items .w{color:var(--amber);}
+.phase-items .t{color:var(--t3);}
+.chk{font-family:var(--m);font-size:8px;margin-right:2px;}
+
+/* ---- QUEUE ---- */
+.q-row{display:flex;justify-content:space-between;padding:2px 0;font-size:10px;}
+.q-row .k{color:var(--t2);}
+.q-row .v{font-family:var(--m);font-weight:500;}
+.q-task{font-size:9px;color:var(--t2);padding:3px 0;border-bottom:1px solid var(--b1);}
+.q-task:last-child{border-bottom:none;}
+.q-pri{font-family:var(--m);font-size:8px;color:var(--amber);margin-right:4px;}
+
+/* ---- MISC ---- */
+.dim{color:var(--t3);font-style:italic;font-size:10px;padding:8px 0;}
+.divider{height:1px;background:var(--b1);margin:6px 0;}
+.c-ok{color:var(--ok);} .c-warn{color:var(--warn);} .c-amb{color:var(--amber);} .c-blue{color:var(--blue);} .c-cyan{color:var(--cyan);} .c-purp{color:var(--purple);} .c-rose{color:var(--rose);} .c-dim{color:var(--t3);}
+
+::-webkit-scrollbar{width:5px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--b2);border-radius:3px;}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(4,1fr);} .roadmap,.g3{grid-template-columns:1fr 1fr;} .g2,.g23{grid-template-columns:1fr;} .svc-grid{grid-template-columns:repeat(2,1fr);} .blocks{grid-template-columns:repeat(2,1fr);} .loop{flex-wrap:wrap;} .loop-arrow{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo"><span class="logo-z">ZEKE</span><span class="logo-mc">Mission Control</span></div>
+  <span class="hbadge" id="hbadge">—</span>
+  <div class="topbar-r">
+    <div class="dot"></div>
+    <span class="ts" id="ts">loading...</span>
+    <button class="rbtn" onclick="loadAll()">↻ REFRESH</button>
+  </div>
+</div>
+
+<div class="page">
+  <div class="stats" id="stats"></div>
+
+  <div class="sec">The Recursive Loop</div>
+  <div style="position:relative;margin-bottom:28px;">
+    <div class="loop" id="loop"></div>
+    <div class="loop-return">← COMPOUND LEARNING CYCLE →</div>
+  </div>
+
+  <div class="g23">
+    <div>
+      <div class="sec">Scheduler Blocks</div>
+      <div class="blocks" id="blocks"></div>
+    </div>
+    <div>
+      <div class="sec">Services</div>
+      <div class="card" style="padding:8px;">
+        <div class="svc-grid" id="services"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div>
+      <div class="sec">Last Cycle Jobs</div>
+      <div class="card" id="jobs"></div>
+    </div>
+    <div>
+      <div class="sec">Feed Growth</div>
+      <div class="card" id="chart"></div>
+    </div>
+    <div>
+      <div class="sec">API Cost Tracker</div>
+      <div class="card" id="costs"></div>
+    </div>
+  </div>
+
+  <div class="sec">Recursive Autonomy Roadmap</div>
+  <div class="roadmap" id="roadmap"></div>
+
+  <div class="g2">
+    <div>
+      <div class="sec">Work Queue</div>
+      <div class="card" id="queue"></div>
+    </div>
+    <div>
+      <div class="sec">Knowledge Graph</div>
+      <div class="card" id="kg"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const A='';
+let D={};
+
+async function f(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch{return null}}
+
+async function loadAll(){
+  document.getElementById('ts').textContent='refreshing...';
+  const[diag,journal,queue,domains,services,costs,ctx]=await Promise.all([
+    f(A+'/api/diagnostic'),f(A+'/api/journal'),f(A+'/api/queue'),
+    f(A+'/api/domains'),f(A+'/api/services'),f(A+'/api/api_costs'),
+    f(A+'/api/session_context')
+  ]);
+  D={diag,journal,queue,domains,services,costs,ctx};
+  render();
+}
+
+function render(){
+  renderHealth();renderStats();renderLoop();renderBlocks();
+  renderServices();renderJobs();renderChart();renderCosts();
+  renderRoadmap();renderQueue();renderKG();
+  document.getElementById('ts').textContent=new Date().toLocaleTimeString();
+}
+
+function renderHealth(){
+  const h=D.diag?.health?.status||'UNKNOWN';
+  const el=document.getElementById('hbadge');
+  el.textContent=h;el.className='hbadge '+h;
+}
+
+function renderStats(){
+  const d=D.diag||{},t=d.today||{},act=d.activity||{},fd=d.feed||{},gpu=d.gpu_stats||{},sp=d.spark||{},q=D.queue||{},c=D.costs||{};
+  // Prefer activity (full day) over today (current cycle only)
+  const jobsRun=act.jobs_today||t.jobs_run||0;
+  const jobsOk=act.success_today||t.success||0;
+  const jobsFail=act.fail_today||t.fail||0;
+  const growth=act.feed_growth_today||t.feed_growth||0;
+  const sr=jobsRun?(jobsOk/jobsRun*100).toFixed(0):'-';
+  const cost_today=Object.values(c.spend||{}).reduce((a,b)=>a+b,0);
+  const calls_today=Object.values(c.calls||{}).reduce((a,b)=>a+b,0);
+  const items=[
+    {v:fd.total_lines||'—',l:'Feed Entries',sub:'knowledge base',cls:'c'},
+    {v:'+'+growth,l:'Today Growth',sub:jobsRun+' jobs run',cls:'g'},
+    {v:sr+'%',l:'Success Rate',sub:jobsOk+'✓ '+jobsFail+'✗',cls:parseInt(sr)>80?'g':'a'},
+    {v:gpu.temp_c?gpu.temp_c+'°':'—',l:'Spark GPU',sub:gpu.gpu_util_pct!=null?gpu.gpu_util_pct+'% util · '+gpu.power_w+'W':'',cls:gpu.temp_c>70?'r':'b'},
+    {v:sp.models_loaded?sp.models_loaded.length:'—',l:'Models Loaded',sub:sp.online?'online':'OFFLINE',cls:'p'},
+    {v:'$'+cost_today.toFixed(2),l:'API Cost Today',sub:calls_today+' calls',cls:cost_today>2?'a':'b'},
+    {v:q.total||0,l:'Queue Tasks',sub:(q.statuses?.pending||0)+' pending · '+(q.statuses?.ready||0)+' ready',cls:'c'}
+  ];
+  document.getElementById('stats').innerHTML=items.map(i=>
+    `<div class="st ${i.cls}"><div class="v c-${({g:'ok',a:'amb',b:'blue',c:'cyan',p:'purp',r:'rose'})[i.cls]}">${i.v}</div><div class="l">${i.l}</div>${i.sub?`<div class="sub">${i.sub}</div>`:''}</div>`
+  ).join('');
+}
+
+function renderLoop(){
+  const d=D.diag||{},fd=d.feed||{},t=d.today||{},q=D.queue||{};
+  const nodes=[
+    {ico:'📡',nm:'Ingest',desc:'YouTube, RSS, webhooks, scrapers',metric:(fd.topic_distribution?Object.keys(fd.topic_distribution).length:'?')+' domains'},
+    {ico:'🧠',nm:'Analyze',desc:'Spark qwen3 + Haiku extraction',metric:(t.jobs_run||'?')+' jobs this cycle'},
+    {ico:'🔗',nm:'Synthesize',desc:'Cross-domain connections, thesis tracking',metric:(fd.total_lines||'?')+' entries'},
+    {ico:'📋',nm:'Extract Tasks',desc:'Block 11: synthesis → queue',metric:(q.statuses?.pending||0)+' pending'},
+    {ico:'⚡',nm:'Execute',desc:'Spark processes queue, writes findings',metric:'+'+(t.feed_growth||0)+' today'},
+    {ico:'📈',nm:'Score & Signal',desc:'Confluence scores, TV webhooks, alerts',metric:'Blocks 15-17'},
+  ];
+  document.getElementById('loop').innerHTML=nodes.map((n,i)=>
+    `<div class="loop-node"><div class="ico">${n.ico}</div><div class="nm">${n.nm}</div><div class="desc">${n.desc}</div><div class="metric">${n.metric}</div></div>`+
+    (i<nodes.length-1?'<div class="loop-arrow">→</div>':'')
+  ).join('');
+}
+
+function renderBlocks(){
+  const jobs=D.diag?.recent_jobs||[];
+  const jobMap={};
+  jobs.forEach(j=>jobMap[j.name]=j.status);
+
+  const blocks=[
+    {id:11,name:'Task Extractor',desc:'Synthesis → queue tasks. Closes the recursive loop.',on:true},
+    {id:12,name:'Signal Watcher',desc:'Proactive trade signals + Telegram alerts.',on:true},
+    {id:14,name:'Analyst Agent',desc:'Cross-domain analysis across 9+ tickers.',on:true},
+    {id:15,name:'Confluence Scorer',desc:'Per-ticker cycle confluence → ct-scores.json.',on:true},
+    {id:16,name:'TV Signal Processor',desc:'Webhook signals → auto-update cycle_state.',on:true},
+    {id:17,name:'Price Refresh',desc:'Intraday prices for all 16 tickers.',on:true},
+  ];
+  document.getElementById('blocks').innerHTML=blocks.map(b=>
+    `<div class="blk"><div class="blk-dot ${b.on?'on':'off'}"></div><div class="blk-id">B${b.id}</div><div class="blk-name">${b.name}</div><div class="blk-desc">${b.desc}</div></div>`
+  ).join('');
+}
+
+function renderServices(){
+  const svcs=D.services?.services||[];
+  if(!svcs.length){document.getElementById('services').innerHTML='<div class="dim">No data</div>';return;}
+  // Sort: running first, then ok, then error
+  const order={running:0,ok:1,error:2};
+  svcs.sort((a,b)=>(order[a.status]||9)-(order[b.status]||9));
+  document.getElementById('services').innerHTML=svcs.map(s=>
+    `<div class="svc"><div class="svc-dot ${s.status}"></div><span class="svc-name">${s.name}</span>${s.pid?`<span class="svc-pid">${s.pid}</span>`:''}</div>`
+  ).join('');
+}
+
+function renderJobs(){
+  const jobs=D.diag?.recent_jobs||[];
+  if(!jobs.length){document.getElementById('jobs').innerHTML='<div class="dim">No job data</div>';return;}
+  document.getElementById('jobs').innerHTML=jobs.map(j=>
+    `<div class="job"><span class="job-n">${j.name}</span><span class="job-d">${j.duration||0}s</span><span class="job-g ${j.grew>0?'pos':''}">+${j.grew||0}</span><span class="job-s ${j.status}">${j.status.toUpperCase()}</span></div>`
+  ).join('');
+}
+
+function renderChart(){
+  const fh=D.diag?.feed_history||[];
+  if(!fh.length){document.getElementById('chart').innerHTML='<div class="dim">No history</div>';return;}
+  const pts=fh.slice(-60);
+  const vals=pts.map(p=>p.v||0);
+  const mn=Math.min(...vals),mx=Math.max(...vals);
+  const range=mx-mn||1;
+  // Color gradient from dim to cyan
+  const barColors=['#0e7490','#06b6d4','#22d3ee','#67e8f9'];
+  let html='<div class="card-t">Feed size over time ('+pts.length+' samples)</div><div class="chart">';
+  pts.forEach((p,i)=>{
+    const h=Math.max(3,((p.v-mn)/range)*52);
+    const c=barColors[Math.floor((i/pts.length)*barColors.length)];
+    html+=`<div class="bar" style="height:${h}px;background:${c}" title="${p.l||''}: ${p.v} entries"></div>`;
+  });
+  html+='</div>';
+  // Show range
+  html+=`<div style="display:flex;justify-content:space-between;font-family:var(--m);font-size:8px;color:var(--t3);margin-top:4px;"><span>${mn}</span><span>Δ ${mx-mn} entries</span><span>${mx}</span></div>`;
+  document.getElementById('chart').innerHTML=html;
+}
+
+function renderCosts(){
+  const c=D.costs||{};
+  const spend=c.spend||{};
+  const calls=c.calls||{};
+  const total=Object.values(spend).reduce((a,b)=>a+b,0);
+  const totalCalls=Object.values(calls).reduce((a,b)=>a+b,0);
+  const last=c.last||{};
+  let html='<div class="card-t">Anthropic API · '+( c.date||'today')+'</div>';
+  html+=`<div class="q-row"><span class="k">Total spend</span><span class="v c-cyan">$${total.toFixed(2)}</span></div>`;
+  html+=`<div class="q-row"><span class="k">Total calls</span><span class="v">${totalCalls}</span></div>`;
+  for(const[k,v] of Object.entries(spend)){
+    html+=`<div class="q-row"><span class="k" style="font-size:9px;padding-left:8px">${k}</span><span class="v" style="font-size:9px">$${v.toFixed(3)} (${calls[k]||0})</span></div>`;
+  }
+  if(last.task){
+    html+=`<div class="divider"></div>`;
+    html+=`<div style="font-size:9px;color:var(--t3)">Last: ${last.task} · $${(last.cost||0).toFixed(4)} · ${(last.t||'').slice(11,19)}</div>`;
+  }
+  document.getElementById('costs').innerHTML=html;
+}
+
+function renderRoadmap(){
+  const phases=[
+    {
+      label:'PHASE 1',name:'Work Queue Foundation',cls:'done',pct:100,
+      items:[
+        {t:'Spark work queue daemon',d:1},{t:'Domain merges (4 active)',d:1},
+        {t:'RAG embed loop (ChromaDB)',d:1},{t:'Quality scoring + weights',d:1},
+        {t:'Financial data ingestion',d:1},{t:'Camel pipeline v2 + thesis',d:1},
+        {t:'Nightly memory distillation',d:1},{t:'Feed guardian + dedup',d:1},
+      ]
+    },
+    {
+      label:'PHASE 2',name:'Self-Direction',cls:'done',pct:100,
+      items:[
+        {t:'Task extractor (syn→queue)',d:1},{t:'Signal watcher + Telegram',d:1},
+        {t:'Analyst agent (cross-domain)',d:1},{t:'Confluence scorer (12 tickers)',d:1},
+        {t:'TV webhook pipeline',d:1},{t:'Price refresh (Block 17)',d:1},
+        {t:'Camel member site scraper',d:1},{t:'Alert engine (trade triggers)',d:1},
+      ]
+    },
+    {
+      label:'PHASE 3',name:'Compounding Intelligence',cls:'wip',pct:40,
+      items:[
+        {t:'RAG feedback (embed → query → refine)',d:1},
+        {t:'Cross-source discovery',d:0,w:1},{t:'Temporal drift detection',d:0},
+        {t:'Thesis ledger auto-update',d:0},{t:'Conviction scoring pipeline',d:0},
+      ]
+    },
+    {
+      label:'PHASE 4',name:'Recursive Autonomy',cls:'plan',pct:0,
+      items:[
+        {t:'Self-specifying new research jobs',d:0},
+        {t:'Autonomous strategy adjustment',d:0},
+        {t:'Quality-weighted task generation',d:0},
+        {t:'Full closed-loop learning',d:0},
+      ]
+    }
+  ];
+  document.getElementById('roadmap').innerHTML=phases.map(p=>{
+    const il=p.items.map(i=>{
+      const c=i.d?'d':(i.w?'w':'t');
+      const icon=i.d?'✓':(i.w?'◐':'○');
+      return `<div class="${c}"><span class="chk">${icon}</span>${i.t}</div>`;
+    }).join('');
+    return `<div class="phase ${p.cls}"><div class="phase-l">${p.label}</div><div class="phase-n">${p.name}</div><div class="phase-bar"><div class="phase-fill" style="width:${p.pct}%"></div></div><div class="phase-items">${il}</div></div>`;
+  }).join('');
+}
+
+function renderQueue(){
+  const q=D.queue||{};
+  const sts=q.statuses||{};
+  const pending=q.pending||[];
+  let html='<div class="card-t">Spark Work Queue</div>';
+  html+=`<div class="q-row"><span class="k">Total tasks</span><span class="v c-cyan">${q.total||0}</span></div>`;
+  for(const[s,c] of Object.entries(sts)){
+    const cls=s==='done'?'c-ok':s==='pending'?'c-amb':s==='ready'?'c-blue':'c-dim';
+    html+=`<div class="q-row"><span class="k">${s}</span><span class="v ${cls}">${c}</span></div>`;
+  }
+  if(pending.length){
+    html+=`<div class="divider"></div><div class="card-t">Next Up</div>`;
+    pending.slice(0,6).forEach(p=>{
+      const label=(p.label||p.task_label||p.id||'?').toString().slice(0,60);
+      html+=`<div class="q-task"><span class="q-pri">P${p.priority||'?'}</span>${label}</div>`;
+    });
+  }
+  document.getElementById('queue').innerHTML=html;
+}
+
+function renderKG(){
+  const kg=D.diag?.kg_stats||{};
+  const doms=D.domains?.domains||[];
+  const fq=D.diag?.feed_quality||{};
+  let html='<div class="card-t">Knowledge Graph</div>';
+  html+=`<div class="q-row"><span class="k">Entities</span><span class="v c-cyan">${kg.entities||0}</span></div>`;
+  html+=`<div class="q-row"><span class="k">Relations</span><span class="v c-blue">${kg.relations||0}</span></div>`;
+  html+=`<div class="q-row"><span class="k">Associations</span><span class="v c-purp">${kg.associations||0}</span></div>`;
+  html+=`<div class="divider"></div><div class="card-t">Domains</div>`;
+  doms.forEach(d=>{
+    html+=`<div class="q-row"><span class="k">${d.name}</span><span class="v" style="font-size:9px">${(d.size/1024).toFixed(1)}KB</span></div>`;
+  });
+  html+=`<div class="divider"></div><div class="card-t">Feed Quality (last 50)</div>`;
+  html+=`<div class="q-row"><span class="k">Clean</span><span class="v c-ok">${fq.recent_50_clean||fq.total||'?'}</span></div>`;
+  html+=`<div class="q-row"><span class="k">Duplicates</span><span class="v c-amb">${fq.duplicates||0}</span></div>`;
+  html+=`<div class="q-row"><span class="k">Error rate</span><span class="v ${(fq.error_rate||0)>20?'c-warn':'c-ok'}">${fq.error_rate||0}%</span></div>`;
+  document.getElementById('kg').innerHTML=html;
+}
+
+loadAll();
+setInterval(loadAll,120000);
+</script>
+</body>
+</html>
