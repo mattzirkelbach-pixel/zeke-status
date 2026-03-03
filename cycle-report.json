@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-03-02T22:27:18.244770",
+  "timestamp": "2026-03-02T22:37:01.174168",
   "window": "overnight",
-  "cycle": 3,
-  "feed_before": 2181,
-  "feed_after": 2185,
-  "feed_growth": 4,
+  "cycle": 4,
+  "feed_before": 2185,
+  "feed_after": 2186,
+  "feed_growth": 1,
   "jobs": {
     "total": 6,
-    "success": 3,
-    "fail": 2,
+    "success": 1,
+    "fail": 5,
     "timeout": 0
   },
   "job_details": [
@@ -16,7 +16,7 @@
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
       "status": "success",
-      "duration_s": 53,
+      "duration_s": 132,
       "feed_grew": 1,
       "entry_valid": true,
       "issues": [],
@@ -28,21 +28,18 @@
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "success",
-      "duration_s": 82,
-      "feed_grew": 1,
-      "entry_valid": true,
+      "status": "fail",
+      "duration_s": 80,
+      "feed_grew": 0,
+      "entry_valid": false,
       "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
     },
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
       "status": "fail",
-      "duration_s": 79,
+      "duration_s": 30,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
@@ -51,35 +48,28 @@
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "bad_output",
-      "duration_s": 70,
-      "feed_grew": 1,
+      "status": "fail",
+      "duration_s": 30,
+      "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "valid_entries": 0,
-      "entries_cleaned": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 1
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
     },
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "success",
-      "duration_s": 112,
-      "feed_grew": 2,
-      "entry_valid": true,
+      "status": "fail",
+      "duration_s": 78,
+      "feed_grew": 0,
+      "entry_valid": false,
       "issues": [],
-      "valid_entries": 2,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
     },
     {
       "uuid": "e9961e6e-4e4",
       "name": "compound-synthesis",
       "status": "fail",
-      "duration_s": 32,
+      "duration_s": 31,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
@@ -88,10 +78,20 @@
   ],
   "failures": [
     {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "fail",
+      "duration_s": 80,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
       "status": "fail",
-      "duration_s": 79,
+      "duration_s": 30,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
@@ -100,22 +100,28 @@
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "bad_output",
-      "duration_s": 70,
-      "feed_grew": 1,
+      "status": "fail",
+      "duration_s": 30,
+      "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "valid_entries": 0,
-      "entries_cleaned": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 1
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "9df9cf14-e1c",
+      "name": "tool-calling",
+      "status": "fail",
+      "duration_s": 78,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
     },
     {
       "uuid": "e9961e6e-4e4",
       "name": "compound-synthesis",
       "status": "fail",
-      "duration_s": 32,
+      "duration_s": 31,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
@@ -123,7 +129,7 @@
     }
   ],
   "needs_repair": true,
-  "feed_stagnant": false,
+  "feed_stagnant": true,
   "repair_dispatched": true,
   "repair_result": "error"
 }
