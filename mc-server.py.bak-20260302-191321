@@ -75,17 +75,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
     def _queue(self):
-        # File may be JSON array or JSONL
-        raw = _read_json(MEMORY / "spark-work-queue.jsonl")
-        if isinstance(raw, list):
-            entries = [t for t in raw if isinstance(t, dict)]
-        else:
-            entries = _read_jsonl_dicts(MEMORY / "spark-work-queue.jsonl")
+        entries = _read_jsonl_dicts(MEMORY / "spark-work-queue.jsonl")
         statuses = {}
         for t in entries:
             s = t.get("status", "unknown")
             statuses[s] = statuses.get(s, 0) + 1
-        pending = [t for t in entries if t.get("status") in ("pending", "ready")]
+        pending = [t for t in entries if t.get("status") == "pending"]
         return {"total": len(entries), "statuses": statuses, "pending": pending[:20]}
 
     def _domains(self):

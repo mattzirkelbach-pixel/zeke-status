@@ -240,23 +240,18 @@ function renderHealth(){
 }
 
 function renderStats(){
-  const d=D.diag||{},t=d.today||{},act=d.activity||{},fd=d.feed||{},gpu=d.gpu_stats||{},sp=d.spark||{},q=D.queue||{},c=D.costs||{};
-  // Prefer activity (full day) over today (current cycle only)
-  const jobsRun=act.jobs_today||t.jobs_run||0;
-  const jobsOk=act.success_today||t.success||0;
-  const jobsFail=act.fail_today||t.fail||0;
-  const growth=act.feed_growth_today||t.feed_growth||0;
-  const sr=jobsRun?(jobsOk/jobsRun*100).toFixed(0):'-';
+  const d=D.diag||{},t=d.today||{},fd=d.feed||{},gpu=d.gpu_stats||{},sp=d.spark||{},q=D.queue||{},c=D.costs||{};
+  const sr=t.jobs_run?(t.success/t.jobs_run*100).toFixed(0):'-';
   const cost_today=Object.values(c.spend||{}).reduce((a,b)=>a+b,0);
   const calls_today=Object.values(c.calls||{}).reduce((a,b)=>a+b,0);
   const items=[
     {v:fd.total_lines||'—',l:'Feed Entries',sub:'knowledge base',cls:'c'},
-    {v:'+'+growth,l:'Today Growth',sub:jobsRun+' jobs run',cls:'g'},
-    {v:sr+'%',l:'Success Rate',sub:jobsOk+'✓ '+jobsFail+'✗',cls:parseInt(sr)>80?'g':'a'},
+    {v:'+'+(t.feed_growth||0),l:'Today Growth',sub:t.jobs_run?t.jobs_run+' jobs':'',cls:'g'},
+    {v:sr+'%',l:'Success Rate',sub:(t.success||0)+'✓ '+(t.fail||0)+'✗',cls:parseInt(sr)>80?'g':'a'},
     {v:gpu.temp_c?gpu.temp_c+'°':'—',l:'Spark GPU',sub:gpu.gpu_util_pct!=null?gpu.gpu_util_pct+'% util · '+gpu.power_w+'W':'',cls:gpu.temp_c>70?'r':'b'},
     {v:sp.models_loaded?sp.models_loaded.length:'—',l:'Models Loaded',sub:sp.online?'online':'OFFLINE',cls:'p'},
     {v:'$'+cost_today.toFixed(2),l:'API Cost Today',sub:calls_today+' calls',cls:cost_today>2?'a':'b'},
-    {v:q.total||0,l:'Queue Tasks',sub:(q.statuses?.pending||0)+' pending · '+(q.statuses?.ready||0)+' ready',cls:'c'}
+    {v:q.total||0,l:'Queue Tasks',sub:(q.statuses?.pending||0)+' pending',cls:'c'}
   ];
   document.getElementById('stats').innerHTML=items.map(i=>
     `<div class="st ${i.cls}"><div class="v c-${({g:'ok',a:'amb',b:'blue',c:'cyan',p:'purp',r:'rose'})[i.cls]}">${i.v}</div><div class="l">${i.l}</div>${i.sub?`<div class="sub">${i.sub}</div>`:''}</div>`
