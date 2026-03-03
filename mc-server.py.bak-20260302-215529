@@ -186,24 +186,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             scheduler_has_readback = "rag_readback_done" in sched or "Block 18" in sched
         except: pass
         
-        # Check for temporal drift detection in context files
-        has_drift = False
-        try:
-            for rc in rag_contexts:
-                if "STALE TOPICS" in rc.read_text():
-                    has_drift = True
-                    break
-        except: pass
-        
-        # Check for KG integration in context files
-        has_kg = False
-        try:
-            for rc in rag_contexts:
-                if "KEY ENTITIES" in rc.read_text():
-                    has_kg = True
-                    break
-        except: pass
-        
         # Build roadmap items with live status
         phase3_items = [
             {"id": "rag_embed", "label": "RAG embeddings flowing", "status": "ok" if len(rag_contexts) > 0 else "todo"},
@@ -212,8 +194,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             {"id": "vector_queries", "label": "ChromaDB vector queries working", "status": "ok" if rag_vector_hits > 5 else "todo"},
             {"id": "feed_dedup", "label": "Feed dedup at write time", "status": "ok" if scheduler_has_dedup else "todo"},
             {"id": "spark_contention", "label": "Spark lock contention resolved", "status": "ok" if tlt_disabled else "todo"},
-            {"id": "temporal_drift", "label": "Temporal drift detection", "status": "ok" if has_drift else "todo"},
-            {"id": "kg_readback", "label": "KG query integration", "status": "ok" if has_kg else "todo"},
+            {"id": "temporal_drift", "label": "Temporal drift detection", "status": "todo"},
+            {"id": "kg_readback", "label": "KG query integration", "status": "todo"},
         ]
         
         done = sum(1 for i in phase3_items if i["status"] == "ok")
