@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
 """Mission Control API server — serves dashboard + live data from local files."""
-import http.server, json, os, socketserver, subprocess
+import http.server, json, os, socketserver
 from pathlib import Path
-from datetime import datetime, timezone
+from datetime import datetime
 
 PORT = 3335
 BASE = Path(__file__).parent
-HOME = Path.home()
-MEMORY = HOME / ".openclaw/workspace/memory"
-PORTFOLIO = HOME / "zeke-portfolio"
-STATE = PORTFOLIO / "state"
+MEMORY = Path.home() / ".openclaw/workspace/memory"
 
 def _read_json(p):
     try: return json.loads(Path(p).read_text())
@@ -32,6 +29,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         super().__init__(*a, directory=str(BASE), **kw)
 
     def do_GET(self):
+        # Serve mc-index.html as root
         if self.path == "/" or self.path == "/index.html":
             self.path = "/mc-index.html"
             return super().do_GET()
@@ -48,20 +46,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._json(_read_json(BASE / "status.json"))
         elif self.path == "/api/health":
             self._json({"status": "ok", "ts": datetime.now().isoformat()})
-        elif self.path == "/api/cycle_state":
-            self._json(_read_json(STATE / "cycle_state.json"))
-        elif self.path == "/api/api_costs":
-            self._json(_read_json(HOME / ".zeke-dispatch-budget.json"))
-        elif self.path == "/api/services":
-            self._json(self._services())
-        elif self.path == "/api/tv_signals":
-            self._json(self._tv_signals())
-        elif self.path == "/api/session_context":
-            self._json(_read_json(STATE / "session-context-latest.json"))
-        elif self.path == "/api/ct_scores":
-            self._json(_read_json(PORTFOLIO / "camel-twin/ct-scores.json"))
-        elif self.path == "/api/prices":
-            self._json(_read_json(STATE / "latest_prices.json"))
         else:
             super().do_GET()
 
@@ -75,13 +59,16 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
     def _queue(self):
-        entries = _read_jsonl_dicts(MEMORY / "spark-work-queue.jsonl")
-        statuses = {}
-        for t in entries:
-            s = t.get("status", "unknown")
-            statuses[s] = statuses.get(s, 0) + 1
-        pending = [t for t in entries if t.get("status") == "pending"]
-        return {"total": len(entries), "statuses": statuses, "pending": pending[:20]}
+        q = _read_json(MEMORY / "spark-work-queue.jsonl")
+        if isinstance(q, list):
+            statuses = {}
+            for t in q:
+                if isinstance(t, dict):
+                    s = t.get("status", "unknown")
+                    statuses[s] = statuses.get(s, 0) + 1
+            pending = [t for t in q if isinstance(t, dict) and t.get("status") == "pending"]
+            return {"total": len([t for t in q if isinstance(t, dict)]), "statuses": statuses, "pending": pending[:20]}
+        return {"total": 0, "statuses": {}, "pending": []}
 
     def _domains(self):
         dom_dir = MEMORY / "domains"
@@ -92,36 +79,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     domains.append({"name": f.stem, "size": f.stat().st_size})
         return {"domains": domains, "count": len(domains)}
 
-    def _services(self):
-        services = []
-        try:
-            r = subprocess.run(["launchctl", "list"], capture_output=True, text=True, timeout=5)
-            for line in r.stdout.splitlines():
-                if "com.zeke." not in line: continue
-                parts = line.split()
-                if len(parts) < 3: continue
-                pid_str, exit_str, label = parts[0], parts[1], parts[2]
-                name = label.replace("com.zeke.", "")
-                if pid_str != "-" and pid_str.isdigit():
-                    status = "running"
-                elif exit_str == "0":
-                    status = "ok"
-                else:
-                    status = "error"
-                services.append({
-                    "name": name, "status": status,
-                    "pid": int(pid_str) if pid_str.isdigit() else None,
-                    "exit_code": int(exit_str) if exit_str.lstrip("-").isdigit() else None,
-                })
-        except: pass
-        return {"services": services, "count": len(services)}
-
-    def _tv_signals(self):
-        signals = _read_jsonl_dicts(PORTFOLIO / "webhooks/tv_signals.jsonl")
-        return {"signals": signals[-20:], "total": len(signals)}
-
     def log_message(self, fmt, *args):
-        pass
+        pass  # quiet
 
 class ReuseTCPServer(socketserver.TCPServer):
     allow_reuse_address = True
