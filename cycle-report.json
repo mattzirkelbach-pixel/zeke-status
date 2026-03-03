@@ -1,32 +1,22 @@
 {
-  "timestamp": "2026-03-03T02:35:28.935004",
+  "timestamp": "2026-03-03T02:44:29.036837",
   "window": "overnight",
-  "cycle": 28,
-  "feed_before": 2242,
-  "feed_after": 2245,
-  "feed_growth": 3,
+  "cycle": 29,
+  "feed_before": 2245,
+  "feed_after": 2247,
+  "feed_growth": 2,
   "jobs": {
     "total": 6,
     "success": 3,
-    "fail": 3,
+    "fail": 1,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "fail",
-      "duration_s": 44,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
-    },
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
       "status": "success",
-      "duration_s": 42,
+      "duration_s": 48,
       "feed_grew": 1,
       "entry_valid": true,
       "issues": [],
@@ -36,10 +26,24 @@
       "broken_entries": 0
     },
     {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration_s": 59,
+      "feed_grew": 2,
+      "entry_valid": false,
+      "issues": [],
+      "valid_entries": 0,
+      "entries_cleaned": 2,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 2
+    },
+    {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
       "status": "fail",
-      "duration_s": 212,
+      "duration_s": 112,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
@@ -49,7 +53,7 @@
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
       "status": "success",
-      "duration_s": 70,
+      "duration_s": 40,
       "feed_grew": 1,
       "entry_valid": true,
       "issues": [],
@@ -61,44 +65,51 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "fail",
-      "duration_s": 7,
-      "feed_grew": 0,
+      "status": "bad_output",
+      "duration_s": 51,
+      "feed_grew": 1,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 1
     },
     {
       "uuid": "e9961e6e-4e4",
       "name": "compound-synthesis",
       "status": "success",
-      "duration_s": 139,
-      "feed_grew": 2,
+      "duration_s": 30,
+      "feed_grew": 1,
       "entry_valid": true,
       "issues": [],
       "valid_entries": 1,
-      "entries_cleaned": 1,
-      "dedup_removed": 0,
+      "dedup_removed": 1,
       "trivial_entries": 0,
-      "broken_entries": 1
+      "broken_entries": 0
     }
   ],
   "failures": [
     {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration_s": 44,
-      "feed_grew": 0,
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration_s": 59,
+      "feed_grew": 2,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+      "valid_entries": 0,
+      "entries_cleaned": 2,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 2
     },
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
       "status": "fail",
-      "duration_s": 212,
+      "duration_s": 112,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
@@ -107,16 +118,20 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "fail",
-      "duration_s": 7,
-      "feed_grew": 0,
+      "status": "bad_output",
+      "duration_s": 51,
+      "feed_grew": 1,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 1
     }
   ],
   "needs_repair": true,
-  "feed_stagnant": false,
+  "feed_stagnant": true,
   "repair_dispatched": true,
   "repair_result": "error"
 }
