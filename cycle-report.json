@@ -1,35 +1,32 @@
 {
-  "timestamp": "2026-03-02T23:41:11.586023",
+  "timestamp": "2026-03-02T23:50:42.040965",
   "window": "overnight",
-  "cycle": 9,
-  "feed_before": 2201,
-  "feed_after": 2203,
-  "feed_growth": 2,
+  "cycle": 10,
+  "feed_before": 2203,
+  "feed_after": 2206,
+  "feed_growth": 3,
   "jobs": {
     "total": 6,
-    "success": 2,
-    "fail": 4,
+    "success": 3,
+    "fail": 2,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "success",
-      "duration_s": 62,
-      "feed_grew": 1,
-      "entry_valid": true,
+      "status": "fail",
+      "duration_s": 41,
+      "feed_grew": 0,
+      "entry_valid": false,
       "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
     },
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
       "status": "fail",
-      "duration_s": 64,
+      "duration_s": 93,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
@@ -38,18 +35,21 @@
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
-      "duration_s": 51,
-      "feed_grew": 0,
-      "entry_valid": false,
+      "status": "success",
+      "duration_s": 60,
+      "feed_grew": 1,
+      "entry_valid": true,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
     },
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
       "status": "success",
-      "duration_s": 49,
+      "duration_s": 44,
       "feed_grew": 1,
       "entry_valid": true,
       "issues": [],
@@ -61,48 +61,35 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "fail",
-      "duration_s": 41,
-      "feed_grew": 0,
-      "entry_valid": false,
+      "status": "success",
+      "duration_s": 53,
+      "feed_grew": 1,
+      "entry_valid": true,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
     },
     {
       "uuid": "e9961e6e-4e4",
       "name": "compound-synthesis",
-      "status": "fail",
-      "duration_s": 83,
-      "feed_grew": 0,
+      "status": "bad_output",
+      "duration_s": 77,
+      "feed_grew": 1,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 1
     }
   ],
   "failures": [
     {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "fail",
-      "duration_s": 64,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
-    },
-    {
-      "uuid": "3cd4b17d-448",
-      "name": "longevity",
-      "status": "fail",
-      "duration_s": 51,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
-    },
-    {
-      "uuid": "9df9cf14-e1c",
-      "name": "tool-calling",
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
       "status": "fail",
       "duration_s": 41,
       "feed_grew": 0,
@@ -111,18 +98,32 @@
       "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
     },
     {
-      "uuid": "e9961e6e-4e4",
-      "name": "compound-synthesis",
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
       "status": "fail",
-      "duration_s": 83,
+      "duration_s": 93,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
       "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "e9961e6e-4e4",
+      "name": "compound-synthesis",
+      "status": "bad_output",
+      "duration_s": 77,
+      "feed_grew": 1,
+      "entry_valid": false,
+      "issues": [],
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 1
     }
   ],
   "needs_repair": true,
-  "feed_stagnant": true,
+  "feed_stagnant": false,
   "repair_dispatched": true,
   "repair_result": "error"
 }
