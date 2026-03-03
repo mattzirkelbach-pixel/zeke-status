@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-03 08:07:42 ET",
-  "timestamp_utc": "2026-03-03T13:07:42Z",
+  "timestamp_local": "2026-03-03 08:08:54 ET",
+  "timestamp_utc": "2026-03-03T13:08:54Z",
   "scheduler": {
     "running": true,
     "pid": 69179,
-    "uptime_minutes": 110,
+    "uptime_minutes": 111,
     "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 2293,
+    "total_lines": 2296,
     "last_entries": [
-      "[2026-03-03T12:45:00] treasury-bonds",
-      "[2026-03-03T12:32:00] treasury-bonds",
-      "[2026-03-03T12:35:15] ai-agents",
       "[2026-03-03T13:00:00] cross-domain-associations",
-      "[2026-03-03T13:06:14] ai-agents"
+      "[2026-03-03T13:06:14] ai-agents",
+      "[PARSE ERROR] {\"timestamp\":\"$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")\",\"topic\":\"compound-synthesis\",\"fi",
+      "[PARSE ERROR] ",
+      "[PARSE ERROR] This mirrors the pattern from TLT bond duration risk management in the learning "
     ],
     "topic_distribution": {
       "ai-agents": 18,
@@ -45,10 +45,10 @@
     "running": true
   },
   "today": {
-    "jobs_run": 15,
+    "jobs_run": 20,
     "success": 5,
     "timeout": 0,
-    "fail": 10,
+    "fail": 15,
     "feed_growth": 7
   },
   "cycles": [
@@ -81,6 +81,16 @@
       "timeout": 0,
       "fail": 3,
       "feed_grew": 4
+    },
+    {
+      "ts": "2026-03-03T08:08:48.275239",
+      "window": "daytime",
+      "cycle": 4,
+      "jobs": 5,
+      "success": 0,
+      "timeout": 0,
+      "fail": 5,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
@@ -186,6 +196,41 @@
       "name": "compound-synthesis",
       "status": "fail",
       "duration": 59,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "compound-synthesis",
+      "status": "fail",
+      "duration": 0,
       "grew": 0,
       "issues": []
     }
