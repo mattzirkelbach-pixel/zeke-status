@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZEKE Mission Control</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+:root {
+  --bg:#090d14; --s1:#111827; --s2:#1a2234; --b1:#1e2d42; --b2:#2a3a52;
+  --t1:#e2e8f0; --t2:#94a3b8; --t3:#475569;
+  --ok:#34d399; --warn:#f87171; --amber:#fbbf24; --blue:#60a5fa; --purple:#a78bfa; --cyan:#22d3ee;
+  --ok-bg:rgba(52,211,153,.08); --warn-bg:rgba(248,113,113,.08); --amber-bg:rgba(251,191,36,.08);
+  --mono:'JetBrains Mono',monospace; --sans:'DM Sans',sans-serif;
+  --r:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:13px;line-height:1.5;}
+
+.topbar{background:var(--s1);border-bottom:1px solid var(--b1);padding:10px 20px;display:flex;align-items:center;gap:20px;}
+.brand{font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:2px;color:var(--cyan);}
+.brand span{color:var(--t3);font-weight:400;font-size:10px;letter-spacing:.5px;margin-left:8px;}
+.health-badge{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:20px;font-weight:600;}
+.health-HEALTHY{background:var(--ok-bg);color:var(--ok);border:1px solid rgba(52,211,153,.2);}
+.health-DEGRADED{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(251,191,36,.2);}
+.health-DOWN{background:var(--warn-bg);color:var(--warn);border:1px solid rgba(248,113,113,.2);}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.ts{font-family:var(--mono);font-size:10px;color:var(--t3);}
+.refresh-btn{background:var(--s2);border:1px solid var(--b1);color:var(--t2);padding:4px 10px;border-radius:4px;font-size:10px;cursor:pointer;font-family:var(--mono);}
+.refresh-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+
+.page{padding:14px 20px 32px;max-width:1360px;margin:0 auto;}
+
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:14px;}
+.stat{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:10px 14px;text-align:center;}
+.stat .v{font-family:var(--mono);font-size:1.5em;font-weight:700;line-height:1.1;}
+.stat .l{font-size:9px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.stat .sub{font-size:10px;color:var(--t3);margin-top:1px;}
+.c-ok{color:var(--ok);} .c-warn{color:var(--warn);} .c-amber{color:var(--amber);} .c-blue{color:var(--blue);} .c-cyan{color:var(--cyan);} .c-purple{color:var(--purple);} .c-dim{color:var(--t3);}
+
+.sec{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;margin:14px 0 8px;display:flex;align-items:center;gap:8px;}
+.sec::after{content:'';flex:1;height:1px;background:var(--b1);}
+
+.pipeline{display:flex;gap:6px;align-items:center;margin-bottom:14px;}
+.pipe{flex:1;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:9px 12px;position:relative;}
+.pipe-dot{position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;}
+.pipe-dot.on{background:var(--ok);box-shadow:0 0 6px rgba(52,211,153,.5);}
+.pipe-dot.off{background:var(--warn);}
+.pipe-name{font-weight:600;font-size:12px;}
+.pipe-desc{font-size:10px;color:var(--t3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pipe-arrow{color:var(--t3);font-size:14px;flex-shrink:0;}
+
+.roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.phase-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:12px 14px;position:relative;overflow:hidden;}
+.phase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.phase-card.complete::before{background:var(--ok);}
+.phase-card.partial::before{background:var(--amber);}
+.phase-card.planned::before{background:var(--b2);}
+.phase-label{font-family:var(--mono);font-size:10px;color:var(--t3);margin-bottom:4px;}
+.phase-name{font-weight:700;font-size:13px;margin-bottom:6px;}
+.phase-card.complete .phase-name{color:var(--ok);}
+.phase-card.partial .phase-name{color:var(--amber);}
+.phase-card.planned .phase-name{color:var(--t3);}
+.phase-bar-bg{height:4px;background:var(--s2);border-radius:2px;overflow:hidden;margin-bottom:4px;}
+.phase-bar{height:100%;border-radius:2px;transition:width .5s;}
+.phase-card.complete .phase-bar{background:var(--ok);}
+.phase-card.partial .phase-bar{background:var(--amber);}
+.phase-status{font-family:var(--mono);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;}
+.phase-card.complete .phase-status{color:var(--ok);}
+.phase-card.partial .phase-status{color:var(--amber);}
+.phase-card.planned .phase-status{color:var(--t3);}
+.block-list{margin-top:6px;font-size:10px;color:var(--t2);line-height:1.6;}
+.block-list .done{color:var(--ok);}
+.block-list .wip{color:var(--amber);}
+.block-list .todo{color:var(--t3);}
+.block-check{font-family:var(--mono);font-size:9px;margin-right:3px;}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+
+.card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:12px 14px;}
+.card-title{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;}
+.kv{display:flex;justify-content:space-between;align-items:baseline;padding:2px 0;}
+.kv .k{font-size:11px;color:var(--t2);}
+.kv .v{font-family:var(--mono);font-size:11px;font-weight:500;}
+.divider{height:1px;background:var(--b1);margin:6px 0;}
+
+.chart-area{height:50px;display:flex;align-items:flex-end;gap:1px;overflow:hidden;}
+.bar{flex:1;min-width:3px;border-radius:2px 2px 0 0;background:var(--cyan);cursor:default;transition:height .3s;}
+.bar:hover{filter:brightness(1.3);}
+.bar.fail{background:var(--warn);}
+
+.job-row{display:flex;align-items:center;padding:4px 0;border-bottom:1px solid rgba(30,45,66,.4);font-size:11px;gap:6px;}
+.job-name{font-weight:500;flex:1;}
+.job-dur{font-family:var(--mono);font-size:10px;color:var(--t3);width:40px;text-align:right;}
+.job-grew{font-family:var(--mono);font-size:10px;width:35px;text-align:right;}
+.job-grew.pos{color:var(--ok);}
+.job-status{font-family:var(--mono);font-size:9px;font-weight:700;width:50px;text-align:right;}
+.job-status.success{color:var(--ok);}
+.job-status.fail{color:var(--warn);}
+
+.domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:14px;}
+.dom-card{background:var(--s2);border:1px solid var(--b2);border-radius:var(--r);padding:10px 12px;}
+.dom-name{font-size:12px;font-weight:600;color:var(--cyan);margin-bottom:4px;}
+.dom-meta{font-size:10px;color:var(--t3);font-family:var(--mono);}
+
+.feed-item{padding:5px 0;border-bottom:1px solid var(--b1);font-size:11px;}
+.feed-item:last-child{border-bottom:none;}
+.feed-topic{color:var(--cyan);font-weight:500;}
+.feed-time{font-family:var(--mono);font-size:9px;color:var(--t3);margin-left:6px;}
+.feed-text{color:var(--t2);margin-top:2px;line-height:1.4;}
+
+.cl-entry{padding:5px 0;border-bottom:1px solid var(--b1);font-size:11px;}
+.cl-ts{font-family:var(--mono);font-size:9px;color:var(--t3);}
+.cl-type{display:inline-block;padding:1px 6px;border-radius:10px;font-size:8px;font-weight:700;margin:0 4px;text-transform:uppercase;letter-spacing:.4px;}
+.cl-type.SESSION_COMPLETE{background:var(--ok-bg);color:var(--ok);}
+.cl-type.SYSTEM_CLEANUP{background:rgba(96,165,250,.1);color:var(--blue);}
+.cl-type.QUALITY_WEIGHTS_RUN{background:rgba(167,139,250,.1);color:var(--purple);}
+.cl-type.MEMORY_DISTILL{background:rgba(34,211,238,.1);color:var(--cyan);}
+.cl-type.SCRUB_COMPLETE{background:var(--amber-bg);color:var(--amber);}
+.cl-type.PERMISSION_AUDIT{background:rgba(167,139,250,.1);color:var(--purple);}
+.cl-type.SCRUB_CHECKPOINT{background:rgba(99,106,130,.1);color:var(--t3);}
+.cl-summary{color:var(--t2);margin-top:1px;line-height:1.4;}
+
+::-webkit-scrollbar{width:6px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--b2);border-radius:3px;}
+
+.loading{text-align:center;padding:30px;color:var(--t3);font-family:var(--mono);}
+.spin{animation:spin 1s linear infinite;display:inline-block;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:900px){.stats{grid-template-columns:repeat(3,1fr);} .roadmap{grid-template-columns:1fr 1fr;} .g2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">ZEKE<span>MISSION CONTROL</span></div>
+  <span class="health-badge" id="health-badge">—</span>
+  <div class="topbar-right">
+    <div class="pulse"></div>
+    <span class="ts" id="ts">loading...</span>
+    <button class="refresh-btn" onclick="loadAll()">↻ REFRESH</button>
+  </div>
+</div>
+
+<div class="page">
+  <div class="stats" id="stats"><div class="loading"><span class="spin">◌</span></div></div>
+
+  <div class="sec">Infrastructure Pipeline</div>
+  <div class="pipeline" id="pipeline"></div>
+
+  <div class="sec">Recursive Autonomy Roadmap</div>
+  <div class="roadmap" id="roadmap"></div>
+
+  <div class="g2">
+    <div>
+      <div class="sec">Last Cycle Jobs</div>
+      <div class="card" id="jobs-card"><div class="loading"><span class="spin">◌</span></div></div>
+    </div>
+    <div>
+      <div class="sec">Cycle Feed Growth</div>
+      <div class="card" id="chart-card"><div class="loading"><span class="spin">◌</span></div></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div>
+      <div class="sec">Research Domains</div>
+      <div class="domain-grid" id="domains"></div>
+    </div>
+    <div>
+      <div class="sec">Queue State</div>
+      <div class="card" id="queue-card"></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div>
+      <div class="sec">Latest Research Feed</div>
+      <div class="card" id="feed-card"></div>
+    </div>
+    <div>
+      <div class="sec">Session Journal</div>
+      <div class="card" id="journal-card"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = '';
+let D = {};
+
+async function f(url) {
+  try { const r = await fetch(url); return r.ok ? await r.json() : null; }
+  catch(e) { return null; }
+}
+
+async function loadAll() {
+  document.getElementById('ts').textContent = 'refreshing...';
+  const [diag, journal, queue, domains, feed] = await Promise.all([
+    f(API+'/api/diagnostic'), f(API+'/api/journal'), f(API+'/api/queue'),
+    f(API+'/api/domains'), f(API+'/api/feed')
+  ]);
+  D = {diag, journal, queue, domains, feed};
+  render();
+}
+
+function render() {
+  renderHealth(); renderStats(); renderPipeline(); renderRoadmap();
+  renderJobs(); renderChart(); renderDomains(); renderQueue();
+  renderFeed(); renderJournal();
+  document.getElementById('ts').textContent = new Date().toLocaleTimeString();
+}
+
+function renderHealth() {
+  const h = D.diag?.health?.status || 'UNKNOWN';
+  const el = document.getElementById('health-badge');
+  el.textContent = h;
+  el.className = 'health-badge health-' + h;
+}
+
+function renderStats() {
+  const d = D.diag || {};
+  const today = d.today || {};
+  const feed = d.feed || {};
+  const gpu = d.gpu_stats || {};
+  const spark = d.spark || {};
+  const q = D.queue || {};
+  const items = [
+    {v: feed.total_lines || '—', l:'Feed Entries', cls:'c-cyan'},
+    {v: '+' + (today.feed_growth || 0), l:'Today Growth', cls:'c-ok'},
+    {v: today.jobs_run || 0, l:'Jobs Today', sub: (today.success||0)+'✓ '+(today.fail||0)+'✗', cls:'c-blue'},
+    {v: (gpu.gpu_util_pct != null ? gpu.gpu_util_pct+'%' : '—'), l:'GPU Util', sub: gpu.temp_c ? gpu.temp_c+'°C · '+gpu.power_w+'W' : '', cls: gpu.gpu_util_pct > 60 ? 'c-ok' : 'c-amber'},
+    {v: spark.models_loaded ? spark.models_loaded.length : '—', l:'Models Loaded', sub: spark.response_ms ? spark.response_ms+'ms' : '', cls:'c-purple'},
+    {v: q.total || 0, l:'Queue Tasks', sub: (q.statuses?.pending||0)+' pending', cls:'c-cyan'}
+  ];
+  document.getElementById('stats').innerHTML = items.map(i =>
+    '<div class="stat"><div class="v '+i.cls+'">'+ i.v +'</div><div class="l">'+ i.l +'</div>' +
+    (i.sub ? '<div class="sub">'+i.sub+'</div>' : '') + '</div>'
+  ).join('');
+}
+
+function renderPipeline() {
+  const d = D.diag || {};
+  const sched = d.scheduler || {};
+  const spark = d.spark || {};
+  const gw = d.gateway || {};
+  const feed = d.feed || {};
+  const nodes = [
+    {name:'Scheduler', desc: sched.running ? 'PID '+(sched.pids?.[0]||'?') : 'DOWN', on: sched.running},
+    {name:'Spark/Ollama', desc: spark.detail ? spark.detail.slice(0,45) : (spark.online?'Online':'Offline'), on: spark.online},
+    {name:'Gateway', desc: gw.running ? 'Running' : 'Down', on: gw.running},
+    {name:'Learning Feed', desc: (feed.total_lines||0)+' entries · '+(feed.last_modified_minutes_ago!=null ? Math.round(feed.last_modified_minutes_ago)+'m ago' : ''), on: feed.last_modified_minutes_ago < 30}
+  ];
+  document.getElementById('pipeline').innerHTML = nodes.map((n,i) =>
+    '<div class="pipe"><div class="pipe-dot '+(n.on?'on':'off')+'"></div>' +
+    '<div class="pipe-name">'+n.name+'</div><div class="pipe-desc">'+n.desc+'</div></div>' +
+    (i < nodes.length-1 ? '<span class="pipe-arrow">→</span>' : '')
+  ).join('');
+}
+
+function renderRoadmap() {
+  const phases = [
+    {
+      label:'PHASE 1', name:'Work Queue Foundation', status:'complete',
+      blocks: [
+        {n:1,t:'Queue daemon + priority',done:true},
+        {n:2,t:'Domain merges (5 active)',done:true},
+        {n:3,t:'RAG feedback loop',done:true},
+        {n:4,t:'Quality weights + self-opt',done:true},
+        {n:5,t:'Financial ingestion pipeline',done:true},
+        {n:6,t:'Camel pipeline v2 + thesis',done:true},
+        {n:7,t:'Pending-approval system',done:true},
+        {n:8,t:'Nightly memory distillation',done:true},
+        {n:9,t:'Camel synthesis quality fix',done:true}
+      ], pct:100
+    },
+    {
+      label:'PHASE 2', name:'Self-Direction', status:'complete',
+      blocks: [
+        {n:10,t:'Vision map + spec audit',done:true},
+        {n:11,t:'Task extractor (syn→queue)',done:true},
+        {n:12,t:'Signal watcher + Telegram',done:true},
+        {n:13,t:'Camel backfill pipeline',done:true},
+        {n:14,t:'Analyst agent (9 tickers)',done:true},
+        {n:15,t:'FF futures / FedWatch',done:true}
+      ], pct:100
+    },
+    {
+      label:'PHASE 3', name:'Compounding Intelligence', status:'partial',
+      blocks: [
+        {n:16,t:'RAG feedback (from B3)',done:true},
+        {n:17,t:'Cross-source discovery',done:false},
+        {n:18,t:'Temporal drift detection',done:false},
+        {n:19,t:'Dashboard dynamic rebuild',done:false,wip:true}
+      ], pct:33
+    },
+    {
+      label:'PHASE 4', name:'Recursive Autonomy', status:'planned',
+      blocks: [
+        {n:20,t:'Self-specifying new jobs',done:false},
+        {n:21,t:'Compound intelligence loop',done:false},
+        {n:22,t:'Autonomous strategy updates',done:false}
+      ], pct:0
+    }
+  ];
+  document.getElementById('roadmap').innerHTML = phases.map(p => {
+    const bhtml = p.blocks.map(b => {
+      const cls = b.done ? 'done' : (b.wip ? 'wip' : 'todo');
+      const icon = b.done ? '✓' : (b.wip ? '◐' : '○');
+      return '<div class="'+cls+'"><span class="block-check">'+icon+'</span>B'+b.n+': '+b.t+'</div>';
+    }).join('');
+    return '<div class="phase-card '+p.status+'"><div class="phase-label">'+p.label+'</div>' +
+      '<div class="phase-name">'+p.name+'</div>' +
+      '<div class="phase-bar-bg"><div class="phase-bar" style="width:'+p.pct+'%"></div></div>' +
+      '<div class="phase-status">'+p.pct+'% — '+p.status.toUpperCase()+'</div>' +
+      '<div class="block-list">'+bhtml+'</div></div>';
+  }).join('');
+}
+
+function renderJobs() {
+  const jobs = D.diag?.recent_jobs || [];
+  if (!jobs.length) { document.getElementById('jobs-card').innerHTML = '<div class="c-dim">No job data</div>'; return; }
+  let html = '';
+  for (const j of jobs.slice(0,10)) {
+    const scls = j.status === 'success' ? 'success' : 'fail';
+    html += '<div class="job-row"><span class="job-name">'+j.name+'</span>' +
+      '<span class="job-dur">'+(j.duration||0)+'s</span>' +
+      '<span class="job-grew '+(j.grew>0?'pos':'')+'">+'+(j.grew||0)+'</span>' +
+      '<span class="job-status '+scls+'">'+j.status+'</span></div>';
+  }
+  document.getElementById('jobs-card').innerHTML = html;
+}
+
+function renderChart() {
+  const cycles = D.diag?.cycles || [];
+  if (!cycles.length) { document.getElementById('chart-card').innerHTML = '<div class="c-dim">No cycle data</div>'; return; }
+  const maxG = Math.max(...cycles.map(c => c.feed_grew || 0), 1);
+  let html = '<div class="card-title">Feed entries per cycle</div><div class="chart-area">';
+  for (const c of cycles.slice(-20)) {
+    const h = Math.max(4, ((c.feed_grew||0)/maxG)*50);
+    html += '<div class="'+(c.fail>0?'bar fail':'bar')+'" style="height:'+h+'px" title="Cycle '+c.cycle+': +'+c.feed_grew+'"></div>';
+  }
+  html += '</div>';
+  document.getElementById('chart-card').innerHTML = html;
+}
+
+function renderDomains() {
+  const doms = D.domains?.domains || [];
+  if (!doms.length) { document.getElementById('domains').innerHTML = '<div class="c-dim">No domains</div>'; return; }
+  document.getElementById('domains').innerHTML = doms.map(d =>
+    '<div class="dom-card"><div class="dom-name">'+d.name+'</div>' +
+    '<div class="dom-meta">'+(d.size/1024).toFixed(1)+'KB</div></div>'
+  ).join('');
+}
+
+function renderQueue() {
+  const q = D.queue || {};
+  const sts = q.statuses || {};
+  const pending = q.pending || [];
+  let html = '<div class="card-title">Queue Summary</div>';
+  html += '<div class="kv"><span class="k">Total tasks</span><span class="v c-cyan">'+q.total+'</span></div>';
+  for (const [s,c] of Object.entries(sts)) {
+    const cls = s==='done'?'c-ok':s==='pending'?'c-amber':'c-dim';
+    html += '<div class="kv"><span class="k">'+s+'</span><span class="v '+cls+'">'+c+'</span></div>';
+  }
+  if (pending.length) {
+    html += '<div class="divider"></div><div class="card-title">Pending Tasks</div>';
+    for (const p of pending.slice(0,8)) {
+      html += '<div style="font-size:10px;color:var(--t2);padding:2px 0;border-bottom:1px solid var(--b1)">' +
+        '<span style="color:var(--amber);font-family:var(--mono);font-size:9px">P'+(p.priority||'?')+'</span> ' +
+        (p.label || p.task_label || p.id || '?').toString().slice(0,65) + '</div>';
+    }
+  }
+  document.getElementById('queue-card').innerHTML = html;
+}
+
+function renderFeed() {
+  const feedData = D.diag?.feed?.last_entries || [];
+  if (!feedData.length) { document.getElementById('feed-card').innerHTML = '<div class="c-dim">No feed data</div>'; return; }
+  let html = '';
+  for (const entry of feedData.slice(0,8)) {
+    const m = entry.match(/\[([^\]]+)\]\s*(\S+)\s*—\s*(.*)/);
+    if (m) {
+      html += '<div class="feed-item"><span class="feed-topic">'+m[2]+'</span>' +
+        '<span class="feed-time">'+m[1]+'</span>' +
+        '<div class="feed-text">'+m[3].slice(0,120)+'</div></div>';
+    }
+  }
+  if (!html) html = '<div class="c-dim">Feed data loading...</div>';
+  document.getElementById('feed-card').innerHTML = html;
+}
+
+function renderJournal() {
+  const entries = D.journal?.entries || [];
+  if (!entries.length) { document.getElementById('journal-card').innerHTML = '<div class="c-dim">No journal data</div>'; return; }
+  let html = '';
+  for (const e of entries.slice(-10).reverse()) {
+    const ts = (e.timestamp || '').slice(0,19).replace('T',' ');
+    const type = e.type || 'UNKNOWN';
+    html += '<div class="cl-entry"><span class="cl-ts">'+ts+'</span>' +
+      '<span class="cl-type '+type+'">'+type.replace(/_/g,' ')+'</span>' +
+      '<div class="cl-summary">'+(e.summary||'').slice(0,150)+'</div></div>';
+  }
+  document.getElementById('journal-card').innerHTML = html;
+}
+
+loadAll();
+setInterval(loadAll, 300000);
+</script>
+</body>
+</html>
