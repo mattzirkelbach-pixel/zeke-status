@@ -200,8 +200,8 @@ async function f(url){try{const r=await fetch(url);return r.ok?await r.json():nu
 
 async function loadAll(){
   document.getElementById('ts').textContent='refreshing...';
-  const [diag,queue,ctx,auto]=await Promise.all([f('/api/diagnostic'),f('/api/queue'),f('/api/session_context'),f('/api/autonomy')]);
-  D={diag:diag||{},queue:queue||{},ctx:ctx||{},auto:auto||{}};
+  const [diag,queue,ctx]=await Promise.all([f('/api/diagnostic'),f('/api/queue'),f('/api/session_context')]);
+  D={diag:diag||{},queue:queue||{},ctx:ctx||{}};
   render();
 }
 
@@ -264,37 +264,36 @@ function renderLoop(){
 }
 
 function renderRoadmap(){
-  const a=D.auto;
-  if(!a||!a.phases){document.getElementById('roadmap').innerHTML='<div class="c-dim">No autonomy data</div>';return;}
-  const static12=[
+  const phases=[
     {label:'PHASE 1',name:'Foundation',cls:'done',pct:100,items:[
       {t:'Spark work queue daemon',s:'ok'},{t:'Domain knowledge merges',s:'ok'},{t:'RAG embedding pipeline',s:'ok'},
       {t:'Feed quality scoring',s:'ok'},{t:'Financial data ingestion',s:'ok'},{t:'Camel YT pipeline v2 + thesis',s:'ok'},
       {t:'Memory distillation (nightly)',s:'ok'},{t:'Alert engine + Telegram',s:'ok'}
     ]},
     {label:'PHASE 2',name:'Self-Direction',cls:'done',pct:100,items:[
-      {t:'Task extractor (synthesis \u2192 queue)',s:'ok'},{t:'Signal watcher + alerts',s:'ok'},
+      {t:'Task extractor (synthesis → queue)',s:'ok'},{t:'Signal watcher + alerts',s:'ok'},
       {t:'Analyst agent (cross-domain)',s:'ok'},{t:'Camel backfill pipeline',s:'ok'},
       {t:'TV webhook receiver v2',s:'ok'},{t:'Confluence scorer (12 tickers)',s:'ok'},
       {t:'Price refresh pipeline (Block 17)',s:'ok'}
-    ]}
-  ];
-  const p3=a.phases.find(p=>p.phase===3)||{pct:0,items:[]};
-  const p4=a.phases.find(p=>p.phase===4)||{pct:0,status:'locked'};
-  const live34=[
-    {label:'PHASE 3',name:'Compounding Intelligence',cls:'wip',pct:p3.pct,
-     items:(p3.items||[]).map(i=>({t:i.label,s:i.status==='ok'?'ok':i.status==='partial'?'wip':'todo'}))},
-    {label:'PHASE 4',name:'Recursive Autonomy',cls:p4.status==='locked'?'plan':'wip',pct:p4.pct,items:[
+    ]},
+    {label:'PHASE 3',name:'Compounding Intelligence',cls:'wip',pct:30,items:[
+      {t:'RAG embeddings flowing (913 vectors)',s:'ok'},
+      {t:'TV signals → cycle state auto-update',s:'ok'},
+      {t:'RAG read-back into research prompts',s:'wip'},
+      {t:'Feed dedup intelligence (16% error rate)',s:'todo'},
+      {t:'Cross-source discovery (KG → new research)',s:'todo'},
+      {t:'Temporal drift detection (stale purge)',s:'todo'}
+    ]},
+    {label:'PHASE 4',name:'Recursive Autonomy',cls:'plan',pct:0,items:[
       {t:'Self-specifying new research jobs',s:'todo'},
-      {t:'KG insights \u2192 compound intelligence',s:'todo'},
+      {t:'KG insights → compound intelligence',s:'todo'},
       {t:'Autonomous strategy adaptation',s:'todo'},
       {t:'Self-evaluating research quality loop',s:'todo'}
     ]}
   ];
-  const phases=[...static12,...live34];
   document.getElementById('roadmap').innerHTML=phases.map(p=>{
     const items=p.items.map(i=>{
-      const icon=i.s==='ok'?'\u2713':i.s==='wip'?'\u25d0':'\u25cb';
+      const icon=i.s==='ok'?'✓':i.s==='wip'?'◐':'○';
       return '<div class="pi '+i.s+'"><span class="pi-check">'+icon+'</span>'+i.t+'</div>';
     }).join('');
     return '<div class="phase '+p.cls+'"><div class="phase-hdr"><span class="phase-label">'+p.label+'</span><span class="phase-pct">'+p.pct+'%</span></div>'+
@@ -305,22 +304,22 @@ function renderRoadmap(){
 }
 
 function renderNext(){
-  const a=D.auto;
-  const blockers=a?.blockers||[];
+  const items=[
+    {pri:1,text:'Wire RAG read-back: query ChromaDB before each research job so Spark/Haiku knows what we already know. Stops duplicate findings at the source.',tag:'Phase 3 blocker'},
+    {pri:1,text:'Feed dedup: detect and skip findings that match existing entries (exact + semantic). 16% error rate = wasted cycles.',tag:'Feed quality'},
+    {pri:2,text:'KG query integration: use entity/relation graph to discover cross-domain connections (e.g., "gold cycle + fed policy → TLT thesis").',tag:'Phase 3'},
+    {pri:2,text:'Temporal drift: flag findings older than 7 days still being regenerated. Auto-expire stale research priorities.',tag:'Phase 3'},
+    {pri:3,text:'Self-specifying jobs: let synthesis output propose new research domains and job definitions.',tag:'Phase 4 prereq'},
+  ];
   const pending=D.ctx?.pending||[];
-  let html='<div class="card-t">Autonomy Blockers \u2014 Live from System State</div>';
-  if(!blockers.length){
-    html+='<div style="color:var(--green);padding:8px">\u2713 All Phase 3 items complete \u2014 ready for Phase 4</div>';
-  } else {
-    blockers.forEach((b,i)=>{
-      const pri=i<2?'p1':i<4?'p2':'p3';
-      const pnum=i<2?1:i<4?2:3;
-      html+='<div class="next-item"><span class="next-pri '+pri+'">P'+pnum+'</span><span style="flex:1">'+b.label+'</span></div>';
-    });
-  }
+  let html='<div class="card-t">Autonomy Blockers — In Priority Order</div>';
+  items.forEach(i=>{
+    const cls=i.pri===1?'p1':i.pri===2?'p2':'p3';
+    html+='<div class="next-item"><span class="next-pri '+cls+'">P'+i.pri+'</span><span style="flex:1">'+i.text+'</span><span style="font-family:var(--m);font-size:9px;color:var(--t3)">'+i.tag+'</span></div>';
+  });
   if(pending.length){
     html+='<div class="divider"></div><div class="card-t">Session Pending</div>';
-    pending.forEach(p=>{html+='<div class="next-item"><span class="next-pri p3">\u2192</span><span>'+p+'</span></div>';});
+    pending.forEach(p=>{html+='<div class="next-item"><span class="next-pri p3">→</span><span>'+p+'</span></div>';});
   }
   document.getElementById('next-card').innerHTML=html;
 }
