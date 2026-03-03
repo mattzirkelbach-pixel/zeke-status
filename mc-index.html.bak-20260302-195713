@@ -339,7 +339,7 @@ function renderJobs(){
     const scls=j.status==='success'?'success':'fail';
     html+='<div class="job-row"><span class="job-name">'+j.name+'</span>'+
       '<span class="job-dur">'+(j.duration||0)+'s</span>'+
-      '<span class="job-grew '+(j.grew>0?'pos':'')+'">+'+(j.grew||0)+'</span>'+
+      '<span class="job-grew '+(j.grew>0?'pos':'')+'>+'+(j.grew||0)+'</span>'+
       '<span class="job-status '+scls+'">'+j.status+'</span></div>';
   });
   document.getElementById('jobs-card').innerHTML=html;
