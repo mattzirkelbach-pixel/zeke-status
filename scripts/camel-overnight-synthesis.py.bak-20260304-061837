@@ -171,31 +171,6 @@ def run_cluster_pass(pass_num, label, prompt, system_prompt, prior_context=""):
     return result
 
 
-def load_live_prices():
-    """Load latest prices from yfinance cache for grounding synthesis."""
-    try:
-        data = json.loads(PRICES_PATH.read_text())
-        updated = data.get("updated", "unknown")
-        tickers = data.get("tickers", {})
-        key_tickers = ["XAUUSD", "GLD", "SLV", "GDX", "SILJ", "TLT", "SPX", "BTC", "DXY", "VIX", "IBIT", "IREN"]
-        lines = [f"Prices as of: {updated}"]
-        lines.append(f"{'Ticker':<8} {'Price':>10} {'Chg%':>8} {'RSI':>6} {'SMA10':>10} {'SMA50':>10}")
-        lines.append("-" * 60)
-        for t in key_tickers:
-            if t in tickers:
-                d = tickers[t]
-                price = d.get("last_close", "?")
-                chg = d.get("daily_change_pct", 0)
-                rsi = d.get("rsi_14", "?")
-                sma10 = d.get("sma_10", "?")
-                sma50 = d.get("sma_50", "?")
-                lines.append(f"{t:<8} {price:>10.2f} {chg:>+7.2f}% {rsi:>6.1f} {sma10:>10.2f} {sma50:>10.2f}")
-        return "\n".join(lines)
-    except Exception as e:
-        print(f"[SYNTHESIS] WARNING: Could not load live prices: {e}")
-        return "LIVE PRICES UNAVAILABLE — do NOT invent price levels. State that prices could not be loaded."
-
-
 def main():
     print(f"[SYNTHESIS] Starting — {now_iso()}")
 
@@ -203,8 +178,6 @@ def main():
     ledger = json.loads(LEDGER_PATH.read_text())
     ledger_summary = build_ledger_summary(ledger)
     recent_transcripts = get_recent_transcripts(8)
-    live_prices = load_live_prices()
-    print(f"[SYNTHESIS] Live prices loaded ({len(live_prices)} chars)")
 
     conflicts = ledger.get("conflicts", [])
     conflict_summary = ""
@@ -229,17 +202,9 @@ def main():
     try:
         system_prompt = """You are Zeke, a financial intelligence system specializing in cycle theory and macro trading.
 You analyze Camel Finance's research to extract actionable intelligence for a concentrated macro portfolio.
-Be direct, specific, and quantitative where possible. No hedging language. Focus on what matters for trade timing.
+Be direct, specific, and quantitative where possible. No hedging language. Focus on what matters for trade timing."""
 
-CRITICAL GROUNDING RULE: You are provided with LIVE MARKET PRICES below. Use ONLY these prices for any
-price references, support/resistance levels, or targets. NEVER invent or hallucinate price levels.
-If a price is not in the data provided, say so explicitly. All thresholds and targets must be anchored
-to the actual current prices shown."""
-
-        shared_header = f"""## LIVE MARKET PRICES (use ONLY these — never invent prices)
-{live_prices}
-
-You have analyzed {len(list(TRANSCRIPT_DIR.glob('*.json')))} Camel Finance videos.
+        shared_header = f"""You have analyzed {len(list(TRANSCRIPT_DIR.glob('*.json')))} Camel Finance videos.
 
 ## THESIS LEDGER STATE
 {ledger_summary}
