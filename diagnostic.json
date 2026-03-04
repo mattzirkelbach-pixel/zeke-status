@@ -1,68 +1,92 @@
 {
-  "timestamp_local": "2026-03-04 5:40:36AM ET",
-  "timestamp_utc": "2026-03-04T10:40:36Z",
+  "timestamp_local": "2026-03-04 05:43:24 ET",
+  "timestamp_utc": "2026-03-04T10:43:24Z",
   "scheduler": {
     "running": true,
-    "pids": [
-      "7535",
-      "7537"
-    ],
-    "count": 2,
-    "type": "python"
-  },
-  "gateway": {
-    "running": true
-  },
-  "spark": {
-    "online": true,
-    "models_loaded": [
-      "nomic-embed-text:latest",
-      "qwen3:8b",
-      "qwen3-32b-32k:latest"
-    ],
-    "model_stuck": false,
-    "inference_active": true,
-    "detail": "nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 15ms",
-    "response_ms": 15,
-    "vram_estimate_gb": 27.1,
-    "model_params": "32.8B",
-    "model_quant": "Q4_K_M"
+    "pid": 7537,
+    "uptime_minutes": 20,
+    "current_window": "queue/reason"
   },
   "feed": {
     "total_lines": 2303,
-    "last_modified_minutes_ago": 28.4,
     "last_entries": [
-      "[3/04 4:55AM ET] treasury-bonds \u2014 10-year Treasury yield rises to 4.06% amid U.S.-Iran conflict driven oil spike t",
-      "[3/04 4:58AM ET] ai-agents \u2014 Webshop benchmark simulates e-commerce store with 1.18 million products and 12k ",
-      "[3/04 5:00AM ET] ai-agents \u2014 ToolComp-Enterprise benchmark shows 485 prompts for multi-tool composition, 287 ",
-      "[3/04 5:00AM ET] ai-agents \u2014 ToolComp benchmark 485 prompts use dependent tool calls",
-      "[3/04 5:12AM ET] camel-synthesis-overnight \u2014 ## CLUSTER 1: Gold / Silver / Miners\n\n<|im_start|><|im_start|><|im_start|>\n<|im_"
+      "[2026-03-04T09:55:36] treasury-bonds",
+      "[2026-03-04T09:58:10] ai-agents",
+      "[2026-03-04T10:00:00] ai-agents",
+      "[2026-03-04T10:00:06] ai-agents",
+      "[2026-03-04T10:12:11] camel-synthesis-overnight"
     ],
-    "recent_50_clean": 50,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 0,
     "topic_distribution": {
       "ai-agents": 21,
       "treasury-bonds": 13,
       "self-improvement": 10,
       "longevity": 5,
       "camel-synthesis-overnight": 1
-    }
+    },
+    "recent_50_clean": 50,
+    "recent_50_trivial": 0,
+    "recent_50_broken": 0,
+    "last_modified_minutes_ago": 28.4
   },
-  "activity": {
-    "last_job": null,
-    "last_job_time": null,
-    "last_cycle": "3/04 12:23AM ET",
-    "jobs_today": 0,
-    "success_today": 0,
-    "timeout_today": 0,
-    "fail_today": 0,
-    "feed_growth_today": 0,
-    "state": "idle (heartbeat)",
-    "next_cycle_est": "12:53AM",
-    "cycle_count": 129,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "spark": {
+    "online": true,
+    "models_loaded": [
+      "qwen3:8b",
+      "nomic-embed-text:latest",
+      "qwen3-32b-32k:latest"
+    ],
+    "model_stuck": false,
+    "stuck_model": null,
+    "inference_active": true,
+    "detail": "healthy, loaded: qwen3:8b, nomic-embed-text:latest, qwen3-32b-32k:latest"
+  },
+  "gateway": {
+    "running": true
+  },
+  "today": {
+    "jobs_run": 0,
+    "success": 0,
+    "timeout": 0,
+    "fail": 0,
+    "feed_growth": 0
+  },
+  "cycles": [],
+  "recent_jobs": [],
+  "health": {
+    "status": "HEALTHY",
+    "issues": []
+  },
+  "kg_stats": {
+    "entities": 389,
+    "relations": 401,
+    "associations": 144,
+    "insights": 0
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 0.0,
+    "temp_c": 37.0,
+    "power_w": 10.7,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 2,
+    "literal_timestamps": 0,
+    "duplicates": 83,
+    "total": 587,
+    "error_rate": 14.5
+  },
+  "automation": {
+    "layer1": "L1 Execution \u2014 DEPLOYED",
+    "layer2": "L2 Oversight \u2014 DEPLOYED",
+    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
+    "layer4": "L4 Recursive Learning \u2014 PLANNED"
+  },
+  "cost": {
+    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": false
   },
   "feed_history": [
     {
@@ -1506,106 +1530,19 @@
       "l": "5:40AM"
     }
   ],
-  "kg_stats": {
-    "entities": 389,
-    "relations": 401,
-    "associations": 144,
-    "insights": 0
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 37.0,
-    "power_w": 10.7,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 2,
-    "literal_timestamps": 0,
-    "duplicates": 83,
-    "total": 587,
-    "error_rate": 14.5
-  },
-  "cost": {
-    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": false
-  },
-  "automation": {
-    "layer1": "L1 Execution \u2014 DEPLOYED",
-    "layer2": "L2 Oversight \u2014 DEPLOYED",
-    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
-    "layer4": "L4 Recursive Learning \u2014 PLANNED"
-  },
-  "compute_tiers": {
-    "architecture": "tiered_dispatch",
-    "layers": {
-      "L0_python": {
-        "status": "active",
-        "cost": "$0",
-        "role": "Fetch, transform, schedule"
-      },
-      "L1_vector": {
-        "status": "planned",
-        "cost": "$0",
-        "role": "Embeddings + ChromaDB RAG"
-      },
-      "L2_triage": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3:8b classification"
-      },
-      "L3_api": {
-        "status": "active",
-        "cost": "paid",
-        "role": "Haiku/Sonnet/Opus"
-      },
-      "L4_batch": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3-32b overnight"
-      }
-    },
-    "budget": {
-      "haiku_spent": 0,
-      "haiku_limit": 1.0,
-      "sonnet_spent": 0,
-      "sonnet_limit": 0.5,
-      "total_spent": 0,
-      "total_limit": 2.0,
-      "date": "2026-03-04"
-    },
-    "models_hot": [
-      {
-        "name": "nomic-embed-text:latest",
-        "vram_gb": 0.6,
-        "params": "137M"
-      },
-      {
-        "name": "qwen3:8b",
-        "vram_gb": 5.6,
-        "params": "8.2B"
-      },
-      {
-        "name": "qwen3-32b-32k:latest",
-        "vram_gb": 27.1,
-        "params": "32.8B"
-      }
-    ]
-  },
-  "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
-  },
-  "cycles": [],
-  "recent_jobs": [],
-  "today": {
-    "jobs_run": 0,
-    "success": 0,
-    "timeout": 0,
-    "fail": 0,
-    "feed_growth": 0
+  "activity": {
+    "last_job": null,
+    "last_job_time": null,
+    "last_cycle": "3/04 12:23AM ET",
+    "jobs_today": 0,
+    "success_today": 0,
+    "timeout_today": 0,
+    "fail_today": 0,
+    "feed_growth_today": 0,
+    "state": "idle (heartbeat)",
+    "next_cycle_est": "12:53AM",
+    "cycle_count": 129,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   }
 }
