@@ -1,38 +1,108 @@
 {
-  "timestamp": "2026-03-04T06:22:00.559355+00:00",
-  "feed_total": 2215,
-  "feed_previous": 2207,
-  "feed_growth": 8,
-  "feed_stagnant": false,
-  "spark": {
-    "online": true,
-    "model_loaded": true,
-    "models": [
-      "nomic-embed-text:latest",
-      "qwen3:8b",
-      "qwen3-32b-32k:latest"
-    ]
+  "timestamp": "2026-03-04T01:27:36.243059",
+  "window": "overnight",
+  "cycle": 30,
+  "feed_before": 2215,
+  "feed_after": 2217,
+  "feed_growth": 2,
+  "jobs": {
+    "total": 5,
+    "success": 2,
+    "fail": 3,
+    "timeout": 0
   },
-  "scheduler": {
-    "running": true,
-    "pids": [
-      "86229",
-      "98707"
-    ]
-  },
-  "gateway": {
-    "running": true,
-    "pids": [
-      "86139",
-      "98707",
-      "98758",
-      "98759"
-    ]
-  },
-  "jobs_today": 0,
-  "success_today": 0,
-  "fails_today": 0,
-  "timeouts_today": 0,
-  "needs_repair": false,
-  "repair_reasons": []
+  "job_details": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration_s": 140,
+      "feed_grew": 1,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "fail",
+      "duration_s": 90,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "fail",
+      "duration_s": 12,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "success",
+      "duration_s": 92,
+      "feed_grew": 1,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "9df9cf14-e1c",
+      "name": "tool-calling",
+      "status": "fail",
+      "duration_s": 88,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "fail",
+      "duration_s": 90,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "fail",
+      "duration_s": 12,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    },
+    {
+      "uuid": "9df9cf14-e1c",
+      "name": "tool-calling",
+      "status": "fail",
+      "duration_s": 88,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": true\n}\n"
+    }
+  ],
+  "needs_repair": true,
+  "feed_stagnant": true,
+  "repair_dispatched": true,
+  "repair_result": "error"
 }
