@@ -64,3 +64,4 @@
 {"timestamp": "2026-03-04T00:18:30.237956", "job": "treasury-bonds", "success": true, "result": "FIXED: treasury-bonds job_fail was a scheduler classification bug \u2014 grew=0 with clean exit (ok:true, ran:true) was incorrectly logged as \"fail\" instead of \"empty\"; added elif branch in zeke-scheduler.", "duration_seconds": 0}
 {"timestamp": "2026-03-04T01:23:30.945874", "job": "self-improvement", "success": false, "result": "TIMEOUT after 300s"}
 {"timestamp": "2026-03-04T01:58:31.095832", "job": "longevity", "success": false, "result": "TIMEOUT after 300s"}
+{"time": "2026-03-04T05:22:09.017943", "reasons": ["scheduler_down"], "success": true, "output_tail": "Done.\n\n**Root cause:** `StructuredLog` has no `warning` method \u2014 only `warn`. Two calls at lines 276/278 used the wrong name, causing an immediate crash on every startup.\n\n**Fix:** Renamed `log.warnin", "returncode": 0}
