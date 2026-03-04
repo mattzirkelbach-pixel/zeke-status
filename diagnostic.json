@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-04 06:21:08 ET",
-  "timestamp_utc": "2026-03-04T11:21:08Z",
+  "timestamp_local": "2026-03-04 06:25:03 ET",
+  "timestamp_utc": "2026-03-04T11:25:03Z",
   "scheduler": {
     "running": true,
-    "pid": 7537,
-    "uptime_minutes": 58,
+    "pid": 9571,
+    "uptime_minutes": 3,
     "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 2313,
+    "total_lines": 2314,
     "last_entries": [
-      "[2026-03-04T11:15:02] macroalf-commentary",
       "[2026-03-04T11:15:02] macroalf-commentary",
       "[2026-03-04T11:15:03] options-flow-gld",
       "[2026-03-04T11:15:03] options-flow-slv",
-      "[2026-03-04T11:15:03] treasury-auction-calendar"
+      "[2026-03-04T11:15:03] treasury-auction-calendar",
+      "[2026-03-02T11:24:45] ai-agents"
     ],
     "topic_distribution": {
       "ai-agents": 20,
@@ -31,64 +31,58 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nomic-embed-text:latest",
       "qwen3:8b",
+      "nomic-embed-text:latest",
       "qwen3-32b-32k:latest"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest"
+    "detail": "healthy, loaded: qwen3:8b, nomic-embed-text:latest, qwen3-32b-32k:latest"
   },
   "gateway": {
     "running": true
   },
   "today": {
     "jobs_run": 3,
-    "success": 0,
+    "success": 1,
     "timeout": 0,
     "fail": 0,
-    "feed_growth": 0
+    "feed_growth": 1
   },
   "cycles": [
     {
-      "ts": "2026-03-04T06:05:22.817392",
+      "ts": "2026-03-04T06:24:57.016815",
       "window": "daytime",
       "cycle": 1,
       "jobs": 3,
-      "success": 0,
+      "success": 1,
       "timeout": 0,
       "fail": 0,
-      "feed_grew": 0
+      "feed_grew": 1
     }
   ],
   "recent_jobs": [
     {
       "name": "treasury-bonds",
-      "status": "unknown",
-      "duration": 0,
+      "status": "empty",
+      "duration": 36,
       "grew": 0,
-      "issues": [
-        "spark_locked"
-      ]
+      "issues": []
     },
     {
       "name": "ai-agents",
-      "status": "unknown",
-      "duration": 0,
-      "grew": 0,
-      "issues": [
-        "spark_locked"
-      ]
+      "status": "success",
+      "duration": 83,
+      "grew": 1,
+      "issues": []
     },
     {
       "name": "self-improvement",
-      "status": "unknown",
-      "duration": 0,
+      "status": "empty",
+      "duration": 63,
       "grew": 0,
-      "issues": [
-        "spark_locked"
-      ]
+      "issues": []
     }
   ],
   "health": {
