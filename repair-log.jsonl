@@ -66,3 +66,4 @@
 {"timestamp": "2026-03-04T01:58:31.095832", "job": "longevity", "success": false, "result": "TIMEOUT after 300s"}
 {"time": "2026-03-04T05:22:09.017943", "reasons": ["scheduler_down"], "success": true, "output_tail": "Done.\n\n**Root cause:** `StructuredLog` has no `warning` method \u2014 only `warn`. Two calls at lines 276/278 used the wrong name, causing an immediate crash on every startup.\n\n**Fix:** Renamed `log.warnin", "returncode": 0}
 {"timestamp": "2026-03-05T02:15:37.371675", "job": "self-improvement", "success": false, "result": "TIMEOUT after 300s"}
+{"timestamp": "2026-03-05T04:18:39.037103", "job": "treasury-bonds", "success": true, "result": "FIXED: treasury-bonds job_fail was misclassified \u2014 added elif to treat already-running (ran=false) as skipped instead of fail in zeke-scheduler.py:645", "duration_seconds": 0}
