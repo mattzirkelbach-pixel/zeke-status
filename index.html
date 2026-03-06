@@ -235,6 +235,34 @@ body{
   font-size:11px;color:var(--text3);
 }
 .footer a{color:var(--accent);text-decoration:none;}
+
+/* ── Mobile responsive ── */
+@media(max-width:1100px){
+  .statbar{grid-template-columns:repeat(3,1fr);}
+  .layers{grid-template-columns:repeat(2,1fr);}
+  .grid2,.grid3{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  body{font-size:12px;}
+  .topbar{padding:8px 10px;gap:8px;flex-wrap:wrap;}
+  .topbar-right{gap:6px;}
+  .page{padding:10px 8px 40px;}
+  .statbar{grid-template-columns:1fr 1fr;gap:6px;}
+  .layers{grid-template-columns:1fr;gap:6px;}
+  .pipeline{flex-wrap:wrap;gap:4px;}
+  .pipe-step{min-width:unset;width:100%;}
+  .grid2,.grid3{grid-template-columns:1fr;gap:8px;}
+  .kv .k{font-size:10px;} .kv .v{font-size:10px;}
+  .topic-name{min-width:80px;font-size:10px;}
+  table{font-size:10px;display:block;overflow-x:auto;white-space:nowrap;}
+  td,th{padding:3px 6px;}
+  .chart-area{height:40px;}
+  .footer{padding:8px 10px;gap:8px;font-size:10px;flex-wrap:wrap;}
+  h2{font-size:13px;}
+  .card{padding:10px;}
+  .j-status{font-size:10px;min-width:45px;}
+  .section-title,.sec-title{font-size:11px;}
+}
 </style>
 </head>
 <body>
