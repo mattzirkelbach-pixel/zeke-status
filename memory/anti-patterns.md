@@ -138,3 +138,8 @@
 **The loop must be**: Identify issue → Fix it NOW if <2hrs OR Queue for Cowork with a concrete prompt → Verify completion
 **Never**: Identify issue → List as "future work" → Move on → Forget
 **Test**: After ANY analysis that surfaces issues, ask: "Did I just create work items, or did I create a TODO list that nobody will read?" If the latter, stop and queue them.
+
+## WALLPAPER TILES (3/6)
+**Pattern**: Dashboard tiles that show static, completed, or generic information that doesn't inform any decision. Examples: Autonomy Roadmap (all phases at 100%), "What's Next" showing "all complete," KG showing stale "Phase 3 blocker" after the fix shipped, Services showing PIDs instead of what each service does.
+**Rule**: Every tile must pass: "Would Matt change a decision based on this?" If no, it's wallpaper. Kill it or make it dynamic.
+**Also**: Don't create 7 tabs when the user has 3 questions: "What do I own?", "Where's the edge?", "Is the system working?" Consolidate around use cases, not internal system structure.
