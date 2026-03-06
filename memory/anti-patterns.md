@@ -128,3 +128,13 @@
 ## TOKEN-LIMIT-TRUNCATION (3/6)
 **Pattern**: Spark qwen3:8b with `num_predict: 300` silently truncates structured JSON output. No error — just incomplete JSON that fails to parse.
 **Fix**: Use 800+ tokens for structured JSON. Add truncation repair logic (detect incomplete JSON, try to close it). Better: prompt for compact single-line JSON.
+
+## IDENTIFY-BUT-DONT-CLOSE (recurring, flagged 3x on 3/6)
+**Pattern**: I identify problems, list them as "still needs work" or "future session," then move on without queuing them for Cowork or building them. Matt has to ask "did you actually queue those?" The answer is always no.
+**This happened THREE TIMES in ONE SESSION**:
+1. KG readback "stalled" → I kept saying "spec it for later" instead of building the 200-line script
+2. Feed quality crisis → I listed 5 fix items, didn't queue any for Cowork
+3. Dashboard issues → Same pattern again, Matt called it out again
+**The loop must be**: Identify issue → Fix it NOW if <2hrs OR Queue for Cowork with a concrete prompt → Verify completion
+**Never**: Identify issue → List as "future work" → Move on → Forget
+**Test**: After ANY analysis that surfaces issues, ask: "Did I just create work items, or did I create a TODO list that nobody will read?" If the latter, stop and queue them.
