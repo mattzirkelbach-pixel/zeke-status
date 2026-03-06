@@ -143,3 +143,9 @@
 **Pattern**: Dashboard tiles that show static, completed, or generic information that doesn't inform any decision. Examples: Autonomy Roadmap (all phases at 100%), "What's Next" showing "all complete," KG showing stale "Phase 3 blocker" after the fix shipped, Services showing PIDs instead of what each service does.
 **Rule**: Every tile must pass: "Would Matt change a decision based on this?" If no, it's wallpaper. Kill it or make it dynamic.
 **Also**: Don't create 7 tabs when the user has 3 questions: "What do I own?", "Where's the edge?", "Is the system working?" Consolidate around use cases, not internal system structure.
+
+## STATUS-WITHOUT-ACTION TELEGRAMS (3/6)
+**Pattern**: Telegram messages report what happened (indicator changed, price moved, signal fired) without telling Matt what to DO about it or why he should care. Three messages in one afternoon, none earned the interruption.
+**Rule**: Every Telegram = 3 lines. (1) What happened. (2) What it means for YOUR positions (read positions.json, reference actual holdings by strike/qty/basis). (3) What to do — explicit action or "No action — [reason]." If line 3 is "nothing" AND line 2 is "no change to thesis" → DON'T SEND.
+**Test**: "If Matt reads this in 3 seconds while doing something else, does he know what to do?" If no → rewrite or suppress.
+**Spec**: ~/zeke-portfolio/specs/telegram-philosophy.md
