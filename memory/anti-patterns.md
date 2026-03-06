@@ -115,3 +115,16 @@
 - Chaining blocks without committing journal = guaranteed crash and orphaned state
 - The signal that context is getting long: MCP starts timing out. That is the hard stop.
 - Recovery from crash: read session-journal.jsonl + check what files exist before touching anything.
+
+## ACKNOWLEDGE-DONT-ACT (recurring, flagged 3/6)
+**Pattern**: Dashboard shows KG "stalled" for weeks. I see it every session via get_system_health. I keep saying "we should build the readback job" or "this is a future work item" instead of building the 200-line script that closes the loop. Same pattern as Cowork — Matt raises capability, I acknowledge, then don't act.
+**Fix**: If something shows as "stalled" or "blocked" and the fix is <2hrs of scoped work, just build it in the current session. Don't spec it for later. The test: "Is there a reason this can't be done right now?" If no → do it.
+**Also**: Morning briefing was silently broken for 3 days (HTTP 400) and I never noticed despite checking system health. The logs showed FAILED every 10 minutes. Need to surface persistent failures in system health endpoint, not just process status.
+
+## HTML-IN-TELEGRAM (3/6)
+**Pattern**: Unescaped `<` and `>` in Telegram HTML parse mode → HTTP 400 silently. `SPX (bear <6800 | bull >7000)` is parsed as a broken HTML tag.
+**Fix**: Always HTML-entity-escape user-facing data in Telegram messages: `&lt;` and `&gt;`. Test messages against Telegram's HTML parser before deploying.
+
+## TOKEN-LIMIT-TRUNCATION (3/6)
+**Pattern**: Spark qwen3:8b with `num_predict: 300` silently truncates structured JSON output. No error — just incomplete JSON that fails to parse.
+**Fix**: Use 800+ tokens for structured JSON. Add truncation repair logic (detect incomplete JSON, try to close it). Better: prompt for compact single-line JSON.
