@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-07T14:19:32.371326+00:00",
+  "timestamp": "2026-03-07T14:22:10.198125+00:00",
   "feed_lines": 3700,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-07T12:08:34.836252Z\", \"topic\": \"queue-research-general\", \"finding\": \"FINDING: The SPX closed at 6,980 on March 1, 2026, remaining above the 6,500 level.  \\nIMPLICATION: The bear market threshold has not been triggered, so the GLD Dec26 $470C/$500C and SILJ $30C positions remain defensible for now.  \\nCONFIDENCE: Medium \\u2014 the SPX is near the critical 7,000 level, which is a key threshold for trend confirmation.  \\nNEXT_TASK: Monitor SPX for a rejection below 6,500 by April 15 to confirm bear market entry.\", \"source\": \"spark-queue/synthesis_20260306T100725_0\", \"instrument\": \"GENERAL\", \"task_label\": \"Monitor BTC below 68,515.75 for bearish confirmation\", \"priority_was\": 9}",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 96.0,
-    "temp_c": 75.0,
-    "power_w": 58.55,
+    "temp_c": 72.0,
+    "power_w": 43.81,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,19 +75,19 @@
   "gateway_process": {
     "pid": "1599",
     "memory_pct": "3.0",
-    "uptime": "02-10:38:39",
+    "uptime": "02-10:41:17",
     "status": "RUNNING"
   },
   "spark_status": {
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nomic-embed-text:latest",
-        "size_gb": 0.6
-      },
-      {
         "name": "qwen3:8b",
         "size_gb": 6.0
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "size_gb": 0.6
       },
       {
         "name": "qwen3-32b-32k:latest",
@@ -113,39 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 306,
-      "grew": 2,
-      "issues": [],
-      "valid_entries": 2,
-      "broken_entries": 0,
-      "cycle_time": "6:46 AM",
-      "cycle_num": 2
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 274,
-      "grew": 1,
-      "issues": [],
-      "valid_entries": 1,
-      "broken_entries": 0,
-      "cycle_time": "6:46 AM",
-      "cycle_num": 2
-    },
-    {
-      "name": "self-improvement",
-      "status": "success",
-      "duration": 255,
-      "grew": 1,
-      "issues": [],
-      "valid_entries": 1,
-      "broken_entries": 0,
-      "cycle_time": "6:46 AM",
-      "cycle_num": 2
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -244,51 +211,44 @@
       "broken_entries": 0,
       "cycle_time": "8:43 AM",
       "cycle_num": 5
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "bad_output",
+      "duration": 182,
+      "grew": 1,
+      "issues": [
+        "too short"
+      ],
+      "valid_entries": 0,
+      "broken_entries": 1,
+      "cycle_time": "9:22 AM",
+      "cycle_num": 6
+    },
+    {
+      "name": "ai-agents",
+      "status": "empty",
+      "duration": 147,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "9:22 AM",
+      "cycle_num": 6
+    },
+    {
+      "name": "self-improvement",
+      "status": "empty",
+      "duration": 137,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "9:22 AM",
+      "cycle_num": 6
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 2,
-      "window": "daytime",
-      "timestamp": "2026-03-07T06:46:42.686634",
-      "time_display": "6:46 AM",
-      "feed_growth": 4,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 306,
-          "grew": 2,
-          "issues": [],
-          "valid_entries": 2,
-          "broken_entries": 0,
-          "cycle_time": "6:46 AM",
-          "cycle_num": 2
-        },
-        {
-          "name": "ai-agents",
-          "status": "success",
-          "duration": 274,
-          "grew": 1,
-          "issues": [],
-          "valid_entries": 1,
-          "broken_entries": 0,
-          "cycle_time": "6:46 AM",
-          "cycle_num": 2
-        },
-        {
-          "name": "self-improvement",
-          "status": "success",
-          "duration": 255,
-          "grew": 1,
-          "issues": [],
-          "valid_entries": 1,
-          "broken_entries": 0,
-          "cycle_time": "6:46 AM",
-          "cycle_num": 2
-        }
-      ]
-    },
     {
       "cycle": 3,
       "window": "daytime",
@@ -412,6 +372,50 @@
           "broken_entries": 0,
           "cycle_time": "8:43 AM",
           "cycle_num": 5
+        }
+      ]
+    },
+    {
+      "cycle": 6,
+      "window": "daytime",
+      "timestamp": "2026-03-07T09:22:10.140107",
+      "time_display": "9:22 AM",
+      "feed_growth": -1,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "bad_output",
+          "duration": 182,
+          "grew": 1,
+          "issues": [
+            "too short"
+          ],
+          "valid_entries": 0,
+          "broken_entries": 1,
+          "cycle_time": "9:22 AM",
+          "cycle_num": 6
+        },
+        {
+          "name": "ai-agents",
+          "status": "empty",
+          "duration": 147,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "9:22 AM",
+          "cycle_num": 6
+        },
+        {
+          "name": "self-improvement",
+          "status": "empty",
+          "duration": 137,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "9:22 AM",
+          "cycle_num": 6
         }
       ]
     }
