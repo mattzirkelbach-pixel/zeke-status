@@ -1,34 +1,67 @@
 {
-  "timestamp": "2026-03-07T20:42:52.016421+00:00",
-  "feed_total": 3732,
-  "feed_previous": 3727,
-  "feed_growth": 5,
-  "feed_stagnant": false,
-  "spark": {
-    "online": true,
-    "model_loaded": true,
-    "models": [
-      "nomic-embed-text:latest",
-      "qwen3:8b",
-      "qwen3-32b-32k:latest"
-    ]
+  "timestamp": "2026-03-07T16:08:02.303364",
+  "window": "daytime",
+  "cycle": 16,
+  "feed_before": 3732,
+  "feed_after": 3733,
+  "feed_growth": 1,
+  "jobs": {
+    "total": 3,
+    "success": 2,
+    "fail": 0,
+    "timeout": 0
   },
-  "scheduler": {
-    "running": true,
-    "pids": [
-      "1610"
-    ]
-  },
-  "gateway": {
-    "running": true,
-    "pids": [
-      "1599"
-    ]
-  },
-  "jobs_today": 0,
-  "success_today": 0,
-  "fails_today": 0,
-  "timeouts_today": 0,
-  "needs_repair": false,
-  "repair_reasons": []
+  "job_details": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration_s": 235,
+      "feed_grew": 1,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "empty",
+      "duration_s": 218,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "success",
+      "duration_s": 247,
+      "feed_grew": 6,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 3,
+      "entries_cleaned": 3,
+      "dedup_removed": 3,
+      "trivial_entries": 0,
+      "broken_entries": 3
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "empty",
+      "duration_s": 218,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    }
+  ],
+  "needs_repair": true,
+  "feed_stagnant": true,
+  "repair_dispatched": true,
+  "repair_result": "error"
 }
