@@ -149,3 +149,20 @@
 **Rule**: Every Telegram = 3 lines. (1) What happened. (2) What it means for YOUR positions (read positions.json, reference actual holdings by strike/qty/basis). (3) What to do — explicit action or "No action — [reason]." If line 3 is "nothing" AND line 2 is "no change to thesis" → DON'T SEND.
 **Test**: "If Matt reads this in 3 seconds while doing something else, does he know what to do?" If no → rewrite or suppress.
 **Spec**: ~/zeke-portfolio/specs/telegram-philosophy.md
+
+## NARRATE-INSTEAD-OF-FIX (learned 2026-03-08)
+**Pattern**: When diagnosing a system issue, Claude outputs every intermediate finding — endpoint checks, log snippets, process lists — before executing the fix. Matt sees 20 tool calls of diagnostic narration instead of a single outcome message.
+**The correct behavior**: Detect → Fix → Verify → one message: "Fixed. Here's what it was."
+**Rule**: If the fix is clear from diagnostics, execute it silently. Only surface to Matt when: (A) the fix requires a strategic decision, (B) the fix is irreversible/destructive, or (C) it's done.
+**Test**: "Would Matt's behavior change based on seeing this intermediate step?" If no → don't show it.
+
+## ANNOUNCE-THEN-SKIP (learned 2026-03-08)
+**Pattern**: After fixing something, Claude announces a follow-up action ("I'll add JS validation to QC") then ends the session without doing it. Same as IDENTIFY-BUT-DONT-CLOSE but specific to post-fix promises.
+**Rule**: If you say you're going to do something in the same session, do it before closing. If it can't be done now, queue it for Cowork immediately — not as a verbal note.
+
+## COWORK-DASHBOARD-EDIT-BUG-PATTERN (learned 2026-03-08)
+**Pattern**: Cowork dashboard edits have twice introduced JS bugs that freeze the entire Command Center: (1) Phase 4 hardcoding, (2) duplicate `const rb` declaration. The dashboard looks alive (HTML renders) but all fetch calls silently never fire.
+**Symptom**: Dashboard appears frozen/stale. All API endpoints return 200. No JS errors visible without DevTools.
+**Root cause**: Single `<script>` block — any SyntaxError kills the entire JS runtime.
+**Fix protocol**: After ANY Cowork edit to app/dist/index.html, run: `python3 /tmp/check_dupes.py` (duplicate const checker) before considering it done.
+**Prevention**: QC agent should run JS dupe scan post-deploy automatically.
