@@ -1,34 +1,75 @@
 {
-  "timestamp": "2026-03-08T22:43:50.748196+00:00",
-  "feed_total": 4041,
-  "feed_previous": 4019,
-  "feed_growth": 22,
-  "feed_stagnant": false,
-  "spark": {
-    "online": true,
-    "model_loaded": true,
-    "models": [
-      "nomic-embed-text:latest",
-      "qwen3:8b",
-      "qwen3-32b-32k:latest"
-    ]
+  "timestamp": "2026-03-08T19:01:55.488372",
+  "window": "daytime",
+  "cycle": 22,
+  "feed_before": 4041,
+  "feed_after": 4042,
+  "feed_growth": 1,
+  "jobs": {
+    "total": 3,
+    "success": 1,
+    "fail": 0,
+    "timeout": 0
   },
-  "scheduler": {
-    "running": true,
-    "pids": [
-      "1610"
-    ]
-  },
-  "gateway": {
-    "running": true,
-    "pids": [
-      "65253"
-    ]
-  },
-  "jobs_today": 0,
-  "success_today": 0,
-  "fails_today": 0,
-  "timeouts_today": 0,
-  "needs_repair": false,
-  "repair_reasons": []
+  "job_details": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "empty",
+      "duration_s": 22,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "success",
+      "duration_s": 56,
+      "feed_grew": 1,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "empty",
+      "duration_s": 22,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
+    }
+  ],
+  "needs_repair": true,
+  "feed_stagnant": true,
+  "repair_dispatched": true,
+  "repair_result": "error"
 }
