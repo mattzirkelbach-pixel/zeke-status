@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-09T06:03:26.795903+00:00",
+  "timestamp": "2026-03-09T06:06:30.627608+00:00",
   "feed_lines": 4302,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-09T05:42:03.450309Z\", \"topic\": \"queue-research-general\", \"finding\": \"FINDING: On March 1, 2026, GLD closed at $48.23, which is 1.2% below its 200-day simple moving average of $48.90.  \\nIMPLICATION: The failure to close above the 200-day SMA, combined with a 12.3% decline in open interest for the $500C strike over the past 7 days, suggests a breakout failure and increased likelihood of a short-term pullback.  \\nCONFIDENCE: Medium \\u2014 the technical divergence between price and open interest indicates weakening conviction in the bullish case.  \\nNEXT_TASK: Monitor March 8, 2026, for a potential rejection candle at the $48.90 level to confirm breakdown.\", \"source\": \"spark-queue/followup_followup_refill_20260309T053001_1\", \"instrument\": \"GENERAL\", \"task_label\": \"Follow-up: Monitor GLD\\u2019s close relative to the 200-day SMA and open int\", \"priority_was\": 4}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 66.0,
-    "power_w": 42.95,
+    "gpu_util_pct": 94.0,
+    "temp_c": 67.0,
+    "power_w": 43.46,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -74,8 +74,8 @@
   },
   "gateway_process": {
     "pid": "65253",
-    "memory_pct": "2.4",
-    "uptime": "16:01:58",
+    "memory_pct": "2.5",
+    "uptime": "16:05:02",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -113,63 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 43,
-      "grew": 1,
-      "issues": [],
-      "valid_entries": 1,
-      "broken_entries": 0,
-      "cycle_time": "1:41 AM",
-      "cycle_num": 31
-    },
-    {
-      "name": "self-improvement",
-      "status": "success",
-      "duration": 232,
-      "grew": 2,
-      "issues": [
-        "too short"
-      ],
-      "valid_entries": 1,
-      "broken_entries": 1,
-      "cycle_time": "1:41 AM",
-      "cycle_num": 31
-    },
-    {
-      "name": "longevity",
-      "status": "success",
-      "duration": 46,
-      "grew": 2,
-      "issues": [],
-      "valid_entries": 2,
-      "broken_entries": 0,
-      "cycle_time": "1:41 AM",
-      "cycle_num": 31
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 84,
-      "grew": 4,
-      "issues": [],
-      "valid_entries": 4,
-      "broken_entries": 0,
-      "cycle_time": "1:41 AM",
-      "cycle_num": 31
-    },
-    {
-      "name": "tool-calling",
-      "status": "success",
-      "duration": 57,
-      "grew": 3,
-      "issues": [],
-      "valid_entries": 3,
-      "broken_entries": 0,
-      "cycle_time": "1:41 AM",
-      "cycle_num": 31
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -338,75 +281,64 @@
       "broken_entries": null,
       "cycle_time": "2:03 AM",
       "cycle_num": 34
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "2:06 AM",
+      "cycle_num": 35
+    },
+    {
+      "name": "self-improvement",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "2:06 AM",
+      "cycle_num": 35
+    },
+    {
+      "name": "longevity",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "2:06 AM",
+      "cycle_num": 35
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "2:06 AM",
+      "cycle_num": 35
+    },
+    {
+      "name": "tool-calling",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "2:06 AM",
+      "cycle_num": 35
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 31,
-      "window": "overnight",
-      "timestamp": "2026-03-09T01:41:49.362509",
-      "time_display": "1:41 AM",
-      "feed_growth": 10,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 43,
-          "grew": 1,
-          "issues": [],
-          "valid_entries": 1,
-          "broken_entries": 0,
-          "cycle_time": "1:41 AM",
-          "cycle_num": 31
-        },
-        {
-          "name": "self-improvement",
-          "status": "success",
-          "duration": 232,
-          "grew": 2,
-          "issues": [
-            "too short"
-          ],
-          "valid_entries": 1,
-          "broken_entries": 1,
-          "cycle_time": "1:41 AM",
-          "cycle_num": 31
-        },
-        {
-          "name": "longevity",
-          "status": "success",
-          "duration": 46,
-          "grew": 2,
-          "issues": [],
-          "valid_entries": 2,
-          "broken_entries": 0,
-          "cycle_time": "1:41 AM",
-          "cycle_num": 31
-        },
-        {
-          "name": "ai-agents",
-          "status": "success",
-          "duration": 84,
-          "grew": 4,
-          "issues": [],
-          "valid_entries": 4,
-          "broken_entries": 0,
-          "cycle_time": "1:41 AM",
-          "cycle_num": 31
-        },
-        {
-          "name": "tool-calling",
-          "status": "success",
-          "duration": 57,
-          "grew": 3,
-          "issues": [],
-          "valid_entries": 3,
-          "broken_entries": 0,
-          "cycle_time": "1:41 AM",
-          "cycle_num": 31
-        }
-      ]
-    },
     {
       "cycle": 32,
       "window": "overnight",
@@ -600,6 +532,70 @@
           "broken_entries": null,
           "cycle_time": "2:03 AM",
           "cycle_num": 34
+        }
+      ]
+    },
+    {
+      "cycle": 35,
+      "window": "overnight",
+      "timestamp": "2026-03-09T02:06:30.564801",
+      "time_display": "2:06 AM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "fail",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "2:06 AM",
+          "cycle_num": 35
+        },
+        {
+          "name": "self-improvement",
+          "status": "fail",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "2:06 AM",
+          "cycle_num": 35
+        },
+        {
+          "name": "longevity",
+          "status": "fail",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "2:06 AM",
+          "cycle_num": 35
+        },
+        {
+          "name": "ai-agents",
+          "status": "fail",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "2:06 AM",
+          "cycle_num": 35
+        },
+        {
+          "name": "tool-calling",
+          "status": "fail",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "2:06 AM",
+          "cycle_num": 35
         }
       ]
     }
