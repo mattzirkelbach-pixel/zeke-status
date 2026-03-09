@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-09 06:31:31 ET",
-  "timestamp_utc": "2026-03-09T10:31:31Z",
+  "timestamp_local": "2026-03-09 06:36:53 ET",
+  "timestamp_utc": "2026-03-09T10:36:53Z",
   "scheduler": {
     "running": true,
     "pid": 1610,
-    "uptime_minutes": 6230,
+    "uptime_minutes": 6235,
     "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 4406,
+    "total_lines": 4405,
     "last_entries": [
+      "[2026-03-09T10:16:51] queue-research-macro",
       "[2026-03-09T10:17:20] queue-research-macro",
       "[2026-03-09T10:18:11] queue-research-macro",
       "[2026-03-09T10:18:36] queue-research-macro",
-      "[2026-03-09T10:19:06] queue-research-macro",
-      "[2026-03-09T10:31:31] queue-research-general"
+      "[2026-03-09T10:19:06] queue-research-macro"
     ],
     "topic_distribution": {
       "queue-research-general": 31,
@@ -32,14 +32,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3:8b",
       "nomic-embed-text:latest",
+      "qwen3:8b",
       "qwen3-32b-32k:latest"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: qwen3:8b, nomic-embed-text:latest, qwen3-32b-32k:latest"
+    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest"
   },
   "gateway": {
     "running": true
@@ -48,20 +48,10 @@
     "jobs_run": 100,
     "success": 50,
     "timeout": 0,
-    "fail": 26,
-    "feed_growth": 46
+    "fail": 24,
+    "feed_growth": 47
   },
   "cycles": [
-    {
-      "ts": "2026-03-09T03:43:56.741243",
-      "window": "overnight",
-      "cycle": 45,
-      "jobs": 5,
-      "success": 4,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 9
-    },
     {
       "ts": "2026-03-09T03:56:43.403198",
       "window": "overnight",
@@ -151,30 +141,19 @@
       "timeout": 0,
       "fail": 3,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-09T06:36:46.242517",
+      "window": "daytime",
+      "cycle": 2,
+      "jobs": 3,
+      "success": 0,
+      "timeout": 0,
+      "fail": 1,
+      "feed_grew": 1
     }
   ],
   "recent_jobs": [
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 62,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "tool-calling",
-      "status": "success",
-      "duration": 45,
-      "grew": 2,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 38,
-      "grew": 1,
-      "issues": []
-    },
     {
       "name": "self-improvement",
       "status": "success",
@@ -299,6 +278,29 @@
       "name": "self-improvement",
       "status": "fail",
       "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "bad_output",
+      "duration": 91,
+      "grew": 1,
+      "issues": [
+        "too short"
+      ]
+    },
+    {
+      "name": "ai-agents",
+      "status": "empty",
+      "duration": 142,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "empty",
+      "duration": 26,
       "grew": 0,
       "issues": []
     }
