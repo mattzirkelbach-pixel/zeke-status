@@ -1,11 +1,11 @@
 {
-  "timestamp_local": "2026-03-09 05:56:54 ET",
-  "timestamp_utc": "2026-03-09T09:56:54Z",
+  "timestamp_local": "2026-03-09 06:01:15 ET",
+  "timestamp_utc": "2026-03-09T10:01:15Z",
   "scheduler": {
     "running": true,
     "pid": 1610,
-    "uptime_minutes": 6195,
-    "current_window": "queue/reason"
+    "uptime_minutes": 6200,
+    "current_window": "daytime"
   },
   "feed": {
     "total_lines": 4388,
@@ -32,14 +32,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nomic-embed-text:latest",
       "qwen3:8b",
+      "nomic-embed-text:latest",
       "qwen3-32b-32k:latest"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, qwen3-32b-32k:latest"
+    "detail": "healthy, loaded: qwen3:8b, nomic-embed-text:latest, qwen3-32b-32k:latest"
   },
   "gateway": {
     "running": true
@@ -52,16 +52,6 @@
     "feed_growth": 46
   },
   "cycles": [
-    {
-      "ts": "2026-03-09T03:32:28.022032",
-      "window": "overnight",
-      "cycle": 44,
-      "jobs": 5,
-      "success": 3,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 6
-    },
     {
       "ts": "2026-03-09T03:43:56.741243",
       "window": "overnight",
@@ -151,32 +141,19 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 5
+    },
+    {
+      "ts": "2026-03-09T06:01:07.694723",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 3,
+      "success": 0,
+      "timeout": 0,
+      "fail": 3,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "empty",
-      "duration": 55,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "bad_output",
-      "duration": 93,
-      "grew": 1,
-      "issues": [
-        "too short"
-      ]
-    },
-    {
-      "name": "longevity",
-      "status": "success",
-      "duration": 98,
-      "grew": 1,
-      "issues": []
-    },
     {
       "name": "ai-agents",
       "status": "success",
@@ -303,6 +280,27 @@
       "issues": [
         "spark_locked"
       ]
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
     }
   ],
   "health": {
