@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-09T09:56:54.997920+00:00",
+  "timestamp": "2026-03-09T10:01:07.776058+00:00",
   "feed_lines": 4388,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-09T09:20:59.516002Z\", \"topic\": \"queue-research-general\", \"finding\": \"FINDING: TLT closed at $89.62 on 2026-02-28, remaining below the $90.15 threshold.  \\nIMPLICATION: The TLT LEAPS position should remain on hold until a confirmed close above $90.15 on 2026-03-13 is observed.  \\nCONFIDENCE: High \\u2014 the latest close shows no sign of a breakout above the key resistance level.  \\nNEXT_TASK: Monitor TLT for a close above $90.15 on 2026-03-13 for confirmation.\", \"source\": \"spark-queue/followup_followup_followup_synthesis_20260309T090941_2\", \"instrument\": \"GENERAL\", \"task_label\": \"Follow-up: Monitor TLT for a close above $90.15 on 2026-03-13 for confi\", \"priority_was\": 4}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 37.0,
-    "power_w": 10.69,
+    "gpu_util_pct": 96.0,
+    "temp_c": 63.0,
+    "power_w": 76.08,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,19 +75,19 @@
   "gateway_process": {
     "pid": "65253",
     "memory_pct": "2.5",
-    "uptime": "19:55:26",
+    "uptime": "19:59:39",
     "status": "RUNNING"
   },
   "spark_status": {
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nomic-embed-text:latest",
-        "size_gb": 0.6
-      },
-      {
         "name": "qwen3:8b",
         "size_gb": 6.0
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "size_gb": 0.6
       },
       {
         "name": "qwen3-32b-32k:latest",
@@ -113,63 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "empty",
-      "duration": 55,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "4:32 AM",
-      "cycle_num": 50
-    },
-    {
-      "name": "self-improvement",
-      "status": "bad_output",
-      "duration": 93,
-      "grew": 1,
-      "issues": [
-        "too short"
-      ],
-      "valid_entries": 0,
-      "broken_entries": 1,
-      "cycle_time": "4:32 AM",
-      "cycle_num": 50
-    },
-    {
-      "name": "longevity",
-      "status": "success",
-      "duration": 98,
-      "grew": 1,
-      "issues": [],
-      "valid_entries": 1,
-      "broken_entries": 0,
-      "cycle_time": "4:32 AM",
-      "cycle_num": 50
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 62,
-      "grew": 1,
-      "issues": [],
-      "valid_entries": 1,
-      "broken_entries": 0,
-      "cycle_time": "4:32 AM",
-      "cycle_num": 50
-    },
-    {
-      "name": "tool-calling",
-      "status": "success",
-      "duration": 45,
-      "grew": 2,
-      "issues": [],
-      "valid_entries": 1,
-      "broken_entries": 1,
-      "cycle_time": "4:32 AM",
-      "cycle_num": 50
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -342,75 +285,42 @@
       "broken_entries": null,
       "cycle_time": "5:06 AM",
       "cycle_num": 53
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "6:01 AM",
+      "cycle_num": 1
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "6:01 AM",
+      "cycle_num": 1
+    },
+    {
+      "name": "self-improvement",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "6:01 AM",
+      "cycle_num": 1
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 50,
-      "window": "overnight",
-      "timestamp": "2026-03-09T04:32:32.118878",
-      "time_display": "4:32 AM",
-      "feed_growth": 2,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "empty",
-          "duration": 55,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "4:32 AM",
-          "cycle_num": 50
-        },
-        {
-          "name": "self-improvement",
-          "status": "bad_output",
-          "duration": 93,
-          "grew": 1,
-          "issues": [
-            "too short"
-          ],
-          "valid_entries": 0,
-          "broken_entries": 1,
-          "cycle_time": "4:32 AM",
-          "cycle_num": 50
-        },
-        {
-          "name": "longevity",
-          "status": "success",
-          "duration": 98,
-          "grew": 1,
-          "issues": [],
-          "valid_entries": 1,
-          "broken_entries": 0,
-          "cycle_time": "4:32 AM",
-          "cycle_num": 50
-        },
-        {
-          "name": "ai-agents",
-          "status": "success",
-          "duration": 62,
-          "grew": 1,
-          "issues": [],
-          "valid_entries": 1,
-          "broken_entries": 0,
-          "cycle_time": "4:32 AM",
-          "cycle_num": 50
-        },
-        {
-          "name": "tool-calling",
-          "status": "success",
-          "duration": 45,
-          "grew": 2,
-          "issues": [],
-          "valid_entries": 1,
-          "broken_entries": 1,
-          "cycle_time": "4:32 AM",
-          "cycle_num": 50
-        }
-      ]
-    },
     {
       "cycle": 51,
       "window": "overnight",
@@ -608,6 +518,48 @@
           "broken_entries": null,
           "cycle_time": "5:06 AM",
           "cycle_num": 53
+        }
+      ]
+    },
+    {
+      "cycle": 1,
+      "window": "daytime",
+      "timestamp": "2026-03-09T06:01:07.715503",
+      "time_display": "6:01 AM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "fail",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "6:01 AM",
+          "cycle_num": 1
+        },
+        {
+          "name": "ai-agents",
+          "status": "fail",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "6:01 AM",
+          "cycle_num": 1
+        },
+        {
+          "name": "self-improvement",
+          "status": "fail",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "6:01 AM",
+          "cycle_num": 1
         }
       ]
     }
