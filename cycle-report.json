@@ -1,39 +1,43 @@
 {
-  "timestamp": "2026-03-10T02:04:56.740892",
+  "timestamp": "2026-03-10T02:10:16.754249",
   "window": "overnight",
-  "cycle": 29,
-  "feed_before": 4995,
-  "feed_after": 4996,
+  "cycle": 30,
+  "feed_before": 4997,
+  "feed_after": 4998,
   "feed_growth": 1,
   "jobs": {
     "total": 5,
-    "success": 2,
-    "fail": 3,
+    "success": 1,
+    "fail": 2,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "success",
+      "status": "unknown",
       "duration_s": 0,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 1,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
     },
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "fail",
+      "status": "bad_output",
       "duration_s": 0,
-      "feed_grew": 0,
+      "feed_grew": 1,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": [
+        "too short"
+      ],
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 1
     },
     {
       "uuid": "3cd4b17d-448",
@@ -71,14 +75,31 @@
   ],
   "failures": [
     {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "fail",
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "unknown",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": [
+        "spark_locked"
+      ]
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration_s": 0,
+      "feed_grew": 1,
+      "entry_valid": false,
+      "issues": [
+        "too short"
+      ],
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 1
     },
     {
       "uuid": "3cd4b17d-448",
