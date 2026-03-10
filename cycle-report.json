@@ -1,68 +1,34 @@
 {
-  "timestamp": "2026-03-10T06:01:45.269211",
-  "window": "daytime",
-  "cycle": 1,
-  "feed_before": 5107,
-  "feed_after": 5108,
-  "feed_growth": 1,
-  "jobs": {
-    "total": 3,
-    "success": 2,
-    "fail": 1,
-    "timeout": 0
+  "timestamp": "2026-03-10T10:15:09.634141+00:00",
+  "feed_total": 5127,
+  "feed_previous": 5083,
+  "feed_growth": 44,
+  "feed_stagnant": false,
+  "spark": {
+    "online": true,
+    "model_loaded": true,
+    "models": [
+      "nomic-embed-text:latest",
+      "qwen3-32b-32k:latest",
+      "qwen3:8b"
+    ]
   },
-  "job_details": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
-    },
-    {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
-      "status": "success",
-      "duration_s": 0,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "success",
-      "duration_s": 0,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 1,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    }
-  ],
-  "failures": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
-    }
-  ],
-  "needs_repair": true,
-  "feed_stagnant": true,
-  "repair_dispatched": true,
-  "repair_result": "error"
+  "scheduler": {
+    "running": true,
+    "pids": [
+      "1610"
+    ]
+  },
+  "gateway": {
+    "running": true,
+    "pids": [
+      "65253"
+    ]
+  },
+  "jobs_today": 0,
+  "success_today": 0,
+  "fails_today": 0,
+  "timeouts_today": 0,
+  "needs_repair": false,
+  "repair_reasons": []
 }
