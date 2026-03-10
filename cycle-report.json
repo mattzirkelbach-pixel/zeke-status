@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-03-10T04:02:10.146870",
+  "timestamp": "2026-03-10T04:06:22.753858",
   "window": "overnight",
-  "cycle": 42,
-  "feed_before": 4986,
-  "feed_after": 4989,
-  "feed_growth": 3,
+  "cycle": 43,
+  "feed_before": 4989,
+  "feed_after": 4991,
+  "feed_growth": 2,
   "jobs": {
     "total": 5,
-    "success": 3,
-    "fail": 2,
+    "success": 2,
+    "fail": 3,
     "timeout": 0
   },
   "job_details": [
@@ -61,15 +61,12 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "success",
+      "status": "fail",
       "duration_s": 0,
-      "feed_grew": 1,
-      "entry_valid": true,
+      "feed_grew": 0,
+      "entry_valid": false,
       "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "failures": [
@@ -92,10 +89,20 @@
       "entry_valid": false,
       "issues": [],
       "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+    },
+    {
+      "uuid": "9df9cf14-e1c",
+      "name": "tool-calling",
+      "status": "fail",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "needs_repair": true,
-  "feed_stagnant": false,
+  "feed_stagnant": true,
   "repair_dispatched": true,
   "repair_result": "error"
 }
