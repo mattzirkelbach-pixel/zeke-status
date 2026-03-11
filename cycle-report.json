@@ -1,66 +1,34 @@
 {
-  "timestamp": "2026-03-10T20:31:44.401838",
-  "window": "daytime",
-  "cycle": 26,
-  "feed_before": 5290,
-  "feed_after": 5292,
-  "feed_growth": 2,
-  "jobs": {
-    "total": 3,
-    "success": 2,
-    "fail": 0,
-    "timeout": 0
+  "timestamp": "2026-03-11T00:45:42.458462+00:00",
+  "feed_total": 5293,
+  "feed_previous": 5290,
+  "feed_growth": 3,
+  "feed_stagnant": false,
+  "spark": {
+    "online": true,
+    "model_loaded": true,
+    "models": [
+      "nomic-embed-text:latest",
+      "qwen3:8b",
+      "qwen3-32b-32k:latest"
+    ]
   },
-  "job_details": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration_s": 92,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
-      "status": "empty",
-      "duration_s": 12,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": []
-    },
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "success",
-      "duration_s": 103,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    }
-  ],
-  "failures": [
-    {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
-      "status": "empty",
-      "duration_s": 12,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": []
-    }
-  ],
-  "needs_repair": true,
-  "feed_stagnant": true,
-  "repair_dispatched": true,
-  "repair_result": "error"
+  "scheduler": {
+    "running": true,
+    "pids": [
+      "1610"
+    ]
+  },
+  "gateway": {
+    "running": true,
+    "pids": [
+      "65253"
+    ]
+  },
+  "jobs_today": 0,
+  "success_today": 0,
+  "fails_today": 0,
+  "timeouts_today": 0,
+  "needs_repair": false,
+  "repair_reasons": []
 }
