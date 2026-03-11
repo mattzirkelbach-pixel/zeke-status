@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-03-11T00:26:44.030473",
+  "timestamp": "2026-03-11T00:38:01.782653",
   "window": "overnight",
-  "cycle": 25,
-  "feed_before": 5356,
-  "feed_after": 5358,
-  "feed_growth": 2,
+  "cycle": 26,
+  "feed_before": 5358,
+  "feed_after": 5361,
+  "feed_growth": 3,
   "jobs": {
     "total": 5,
-    "success": 2,
+    "success": 4,
     "fail": 0,
     "timeout": 0
   },
@@ -15,52 +15,8 @@
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "bad_output",
-      "duration_s": 110,
-      "feed_grew": 1,
-      "entry_valid": false,
-      "issues": [],
-      "valid_entries": 0,
-      "entries_cleaned": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 1
-    },
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "bad_output",
-      "duration_s": 272,
-      "feed_grew": 5,
-      "entry_valid": false,
-      "issues": [],
-      "valid_entries": 0,
-      "entries_cleaned": 5,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 5
-    },
-    {
-      "uuid": "3cd4b17d-448",
-      "name": "longevity",
-      "status": "bad_output",
-      "duration_s": 143,
-      "feed_grew": 1,
-      "entry_valid": false,
-      "issues": [
-        "literal $(date) in timestamp"
-      ],
-      "valid_entries": 0,
-      "entries_cleaned": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 1
-    },
-    {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
       "status": "success",
-      "duration_s": 83,
+      "duration_s": 77,
       "feed_grew": 1,
       "entry_valid": true,
       "issues": [],
@@ -70,67 +26,67 @@
       "broken_entries": 0
     },
     {
-      "uuid": "9df9cf14-e1c",
-      "name": "tool-calling",
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
       "status": "success",
-      "duration_s": 58,
+      "duration_s": 110,
       "feed_grew": 1,
       "entry_valid": true,
       "issues": [],
       "valid_entries": 1,
       "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "success",
+      "duration_s": 165,
+      "feed_grew": 1,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 1,
+      "dedup_removed": 1,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "empty",
+      "duration_s": 34,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    },
+    {
+      "uuid": "9df9cf14-e1c",
+      "name": "tool-calling",
+      "status": "success",
+      "duration_s": 59,
+      "feed_grew": 2,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 2,
+      "dedup_removed": 1,
       "trivial_entries": 0,
       "broken_entries": 0
     }
   ],
   "failures": [
     {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "bad_output",
-      "duration_s": 110,
-      "feed_grew": 1,
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "empty",
+      "duration_s": 34,
+      "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "valid_entries": 0,
-      "entries_cleaned": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 1
-    },
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "bad_output",
-      "duration_s": 272,
-      "feed_grew": 5,
-      "entry_valid": false,
-      "issues": [],
-      "valid_entries": 0,
-      "entries_cleaned": 5,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 5
-    },
-    {
-      "uuid": "3cd4b17d-448",
-      "name": "longevity",
-      "status": "bad_output",
-      "duration_s": 143,
-      "feed_grew": 1,
-      "entry_valid": false,
-      "issues": [
-        "literal $(date) in timestamp"
-      ],
-      "valid_entries": 0,
-      "entries_cleaned": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 1
+      "issues": []
     }
   ],
   "needs_repair": true,
-  "feed_stagnant": true,
+  "feed_stagnant": false,
   "repair_dispatched": true,
   "repair_result": "error"
 }
