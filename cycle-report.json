@@ -1,34 +1,96 @@
 {
-  "timestamp": "2026-03-12T20:47:22.741064+00:00",
-  "feed_total": 5724,
-  "feed_previous": 5718,
-  "feed_growth": 6,
-  "feed_stagnant": false,
-  "spark": {
-    "online": true,
-    "model_loaded": true,
-    "models": [
-      "nomic-embed-text:latest",
-      "qwen3:8b",
-      "qwen3-32b-32k:latest"
-    ]
+  "timestamp": "2026-03-12T17:13:17.952008",
+  "window": "daytime",
+  "cycle": 20,
+  "feed_before": 5724,
+  "feed_after": 5722,
+  "feed_growth": -2,
+  "jobs": {
+    "total": 3,
+    "success": 0,
+    "fail": 0,
+    "timeout": 0
   },
-  "scheduler": {
-    "running": true,
-    "pids": [
-      "80574"
-    ]
-  },
-  "gateway": {
-    "running": true,
-    "pids": [
-      "65253"
-    ]
-  },
-  "jobs_today": 0,
-  "success_today": 0,
-  "fails_today": 0,
-  "timeouts_today": 0,
-  "needs_repair": false,
-  "repair_reasons": []
+  "job_details": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "bad_output",
+      "duration_s": 75,
+      "feed_grew": 1,
+      "entry_valid": false,
+      "issues": [],
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "dedup_removed": 1,
+      "trivial_entries": 0,
+      "broken_entries": 1
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "empty",
+      "duration_s": 30,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration_s": 77,
+      "feed_grew": 6,
+      "entry_valid": false,
+      "issues": [],
+      "valid_entries": 0,
+      "entries_cleaned": 6,
+      "dedup_removed": 1,
+      "trivial_entries": 0,
+      "broken_entries": 6
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "bad_output",
+      "duration_s": 75,
+      "feed_grew": 1,
+      "entry_valid": false,
+      "issues": [],
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "dedup_removed": 1,
+      "trivial_entries": 0,
+      "broken_entries": 1
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "empty",
+      "duration_s": 30,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration_s": 77,
+      "feed_grew": 6,
+      "entry_valid": false,
+      "issues": [],
+      "valid_entries": 0,
+      "entries_cleaned": 6,
+      "dedup_removed": 1,
+      "trivial_entries": 0,
+      "broken_entries": 6
+    }
+  ],
+  "needs_repair": true,
+  "feed_stagnant": true,
+  "repair_dispatched": true,
+  "repair_result": "error"
 }
