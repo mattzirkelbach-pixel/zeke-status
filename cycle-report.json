@@ -1,80 +1,34 @@
 {
-  "timestamp": "2026-03-12T09:30:10.357119",
-  "window": "daytime",
-  "cycle": 7,
-  "feed_before": 5666,
-  "feed_after": 5668,
+  "timestamp": "2026-03-12T13:47:05.729950+00:00",
+  "feed_total": 5668,
+  "feed_previous": 5666,
   "feed_growth": 2,
-  "jobs": {
-    "total": 3,
-    "success": 2,
-    "fail": 0,
-    "timeout": 0
+  "feed_stagnant": false,
+  "spark": {
+    "online": true,
+    "model_loaded": true,
+    "models": [
+      "nomic-embed-text:latest",
+      "qwen3-32b-32k:latest",
+      "qwen3:8b"
+    ]
   },
-  "job_details": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "bad_output",
-      "duration_s": 115,
-      "feed_grew": 1,
-      "entry_valid": false,
-      "issues": [
-        "too short"
-      ],
-      "valid_entries": 0,
-      "entries_cleaned": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 1
-    },
-    {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
-      "status": "success",
-      "duration_s": 147,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "success",
-      "duration_s": 39,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    }
-  ],
-  "failures": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "bad_output",
-      "duration_s": 115,
-      "feed_grew": 1,
-      "entry_valid": false,
-      "issues": [
-        "too short"
-      ],
-      "valid_entries": 0,
-      "entries_cleaned": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 1
-    }
-  ],
-  "needs_repair": true,
-  "feed_stagnant": true,
-  "repair_dispatched": true,
-  "repair_result": "error"
+  "scheduler": {
+    "running": true,
+    "pids": [
+      "80574"
+    ]
+  },
+  "gateway": {
+    "running": true,
+    "pids": [
+      "65253"
+    ]
+  },
+  "jobs_today": 0,
+  "success_today": 0,
+  "fails_today": 0,
+  "timeouts_today": 0,
+  "needs_repair": false,
+  "repair_reasons": []
 }
