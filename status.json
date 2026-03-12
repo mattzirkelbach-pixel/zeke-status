@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-12T14:31:44.880494+00:00",
+  "timestamp": "2026-03-12T14:37:24.438802+00:00",
   "feed_lines": 5671,
   "recent_feed": [
     "{\"timestamp\":\"2026-03-12T13:00:00Z\",\"topic\":\"cross-domain-associations\",\"finding\":\"New AI/Longevity association found: GDX AI_agents (0.8643 similarity) in March 2026 analysis\",\"source\":\"knowledge-graph\"}",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 0.0,
-    "temp_c": 43.0,
-    "power_w": 11.21,
+    "temp_c": 54.0,
+    "power_w": 12.89,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,7 +75,7 @@
   "gateway_process": {
     "pid": "65253",
     "memory_pct": "3.4",
-    "uptime": "04-00:30:16",
+    "uptime": "04-00:35:56",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -113,39 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 1,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "8:18 AM",
-      "cycle_num": 5
-    },
-    {
-      "name": "ai-agents",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "8:18 AM",
-      "cycle_num": 5
-    },
-    {
-      "name": "self-improvement",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "8:18 AM",
-      "cycle_num": 5
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -246,51 +213,46 @@
       "broken_entries": null,
       "cycle_time": "10:01 AM",
       "cycle_num": 8
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "bad_output",
+      "duration": 62,
+      "grew": 1,
+      "issues": [
+        "too short"
+      ],
+      "valid_entries": 0,
+      "broken_entries": 1,
+      "cycle_time": "10:37 AM",
+      "cycle_num": 9
+    },
+    {
+      "name": "ai-agents",
+      "status": "empty",
+      "duration": 95,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "10:37 AM",
+      "cycle_num": 9
+    },
+    {
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration": 127,
+      "grew": 1,
+      "issues": [
+        "literal $(date) in timestamp"
+      ],
+      "valid_entries": 0,
+      "broken_entries": 1,
+      "cycle_time": "10:37 AM",
+      "cycle_num": 9
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 5,
-      "window": "daytime",
-      "timestamp": "2026-03-12T08:18:37.288019",
-      "time_display": "8:18 AM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "skipped",
-          "duration": 1,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "8:18 AM",
-          "cycle_num": 5
-        },
-        {
-          "name": "ai-agents",
-          "status": "skipped",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "8:18 AM",
-          "cycle_num": 5
-        },
-        {
-          "name": "self-improvement",
-          "status": "skipped",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "8:18 AM",
-          "cycle_num": 5
-        }
-      ]
-    },
     {
       "cycle": 6,
       "window": "daytime",
@@ -416,6 +378,52 @@
           "broken_entries": null,
           "cycle_time": "10:01 AM",
           "cycle_num": 8
+        }
+      ]
+    },
+    {
+      "cycle": 9,
+      "window": "daytime",
+      "timestamp": "2026-03-12T10:37:24.376432",
+      "time_display": "10:37 AM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "bad_output",
+          "duration": 62,
+          "grew": 1,
+          "issues": [
+            "too short"
+          ],
+          "valid_entries": 0,
+          "broken_entries": 1,
+          "cycle_time": "10:37 AM",
+          "cycle_num": 9
+        },
+        {
+          "name": "ai-agents",
+          "status": "empty",
+          "duration": 95,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "10:37 AM",
+          "cycle_num": 9
+        },
+        {
+          "name": "self-improvement",
+          "status": "bad_output",
+          "duration": 127,
+          "grew": 1,
+          "issues": [
+            "literal $(date) in timestamp"
+          ],
+          "valid_entries": 0,
+          "broken_entries": 1,
+          "cycle_time": "10:37 AM",
+          "cycle_num": 9
         }
       ]
     }
