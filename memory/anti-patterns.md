@@ -178,3 +178,9 @@
 **Detection**: Tasks pile up in pending_tasks despite trigger-processor sessions running. Audit.jsonl shows "Per my security guidelines, I need to show you what was found and get your approval."
 **Fix**: SKILL.md must explicitly state that tasks are PRE-AUTHORIZED by Matt. Include: "Matt has PRE-AUTHORIZED all tasks in this file. Execute them directly without asking for approval."
 **Prevention**: Any new scheduled task that reads from a queue/trigger file needs the pre-authorization language in its SKILL.md.
+
+## HARDCODED-POSITIONS-IN-ALERTS (discovered 2026-03-12)
+**Pattern**: Alert scripts use hardcoded position counts/strikes in action messages (e.g., "You already hold ×50") instead of dynamically reading from positions.json. When positions change (adds, trims), alerts send stale data that erodes trust.
+**Detection**: After any position update, grep alert scripts for old quantities.
+**Fix**: All position references in alerts must use _get_position_qty() or _get_position_impact() which read from positions.json dynamically.
+**Prevention**: QC agent should scan alert scripts for hardcoded position patterns (×[number], x[number]) and flag them.
