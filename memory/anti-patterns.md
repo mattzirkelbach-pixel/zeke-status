@@ -166,3 +166,9 @@
 **Root cause**: Single `<script>` block — any SyntaxError kills the entire JS runtime.
 **Fix protocol**: After ANY Cowork edit to app/dist/index.html, run: `python3 /tmp/check_dupes.py` (duplicate const checker) before considering it done.
 **Prevention**: QC agent should run JS dupe scan post-deploy automatically.
+
+## INFRASTRUCTURE-WITHOUT-ALPHA (discovered 2026-03-11)
+**Pattern**: Building dashboards, pipelines, QC agents, and plumbing for weeks while the core value proposition — finding alpha Matt can't find himself — produces zero output. Alpha scanner restates Camel transcripts. KG readback generates hallucinated noise. Signal optimizer stuck at 27%.
+**Detection**: If alpha-ideas.json hasn't generated a NOVEL (non-Camel) trade idea in >48 hours, the system is failing its purpose.
+**Fix**: Every system component must trace back to: "Does this help Matt make money he wouldn't make otherwise?" If the answer is no, it's infrastructure vanity, not alpha generation.
+**Rule**: Alpha output is the north star. Infrastructure serves alpha. Never the reverse.
