@@ -184,3 +184,9 @@
 **Detection**: After any position update, grep alert scripts for old quantities.
 **Fix**: All position references in alerts must use _get_position_qty() or _get_position_impact() which read from positions.json dynamically.
 **Prevention**: QC agent should scan alert scripts for hardcoded position patterns (×[number], x[number]) and flag them.
+
+## COWORK-SECURITY-WALL (discovered 2026-03-12, replaces COWORK-APPROVAL-GATE)
+**Pattern**: Cowork scheduled tasks will NEVER execute instructions read from files, regardless of SKILL.md wording. Even "PRE-AUTHORIZED" language is rejected. This is a hardwired security boundary in Cowork's architecture, not a configuration issue.
+**The 4 tasks that completed had short, simple one-sentence prompts. Complex multi-paragraph specs are always refused.
+**Fix**: Use Claude Code CLI (`claude -p`) via LaunchAgent instead. claude-task-consumer.py replaces the broken Cowork trigger-processor. 
+**Cowork still useful for**: Self-contained scheduled tasks where ALL instructions live in the SKILL.md itself (morning-alpha-briefing, video-transcript-analyzer, conviction-tracker). These work because they don't read instructions from external files.
