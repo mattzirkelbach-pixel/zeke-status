@@ -197,3 +197,8 @@ No SKILL.md wording fixes this.
 **Permanent workaround**: cowork-executor.py uses Claude Code CLI (`claude -p`) as the execution engine.
 Claude Code runs as a direct subprocess with --dangerously-skip-permissions. No approval gate.
 LaunchAgent com.zeke.cowork-executor runs every 2h, processes 3 tasks per run (15min timeout for CRITICAL/HIGH).
+
+## TELEGRAM-STATUS-SPAM (discovered 2026-03-13)
+**Pattern**: Alert scripts re-fire STATUS messages (crude is still high, SPX is still low) every few hours with short cooldowns. These aren't actionable — Matt already knows. They erode trust by creating noise.
+**Rule**: STATUS alerts (persistent conditions) = 24-48h cooldown minimum. ACTION alerts (do something NOW) = 1-4h cooldown. Position-entry alerts must check positions.json — if already entered, suppress.
+**Detection**: If the same alert type fires >2x in 24h and Matt doesn't take action on it, the cooldown is too short.
