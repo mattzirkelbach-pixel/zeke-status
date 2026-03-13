@@ -207,3 +207,15 @@ LaunchAgent com.zeke.cowork-executor runs every 2h, processes 3 tasks per run (1
 **Pattern**: Deployed cowork-executor to replace cowork-trigger-processor, but left both running for 24h. Double spend.
 **Rule**: When replacing a consumer, disable the old one IN THE SAME DEPLOYMENT. Not "later." Not "next session."
 **Cost**: ~$8-10 wasted in duplicate Sonnet 4.6 sessions.
+
+## SPARK-TRANSCRIPT-FAILURE (confirmed 2/27, re-confirmed 3/13)
+Routing transcript analysis to Spark = guaranteed failure. 0/10 on 2/27. Timed out 3/13.
+RULE: Haiku for transcripts ($0.03/run). Spark for embeddings + short reasoning only.
+
+
+## COWORK-API-BLEED (discovered 3/13)
+Cowork scheduled tasks look like subscription features but bill API key via anthropic_key_helper.sh.
+6 daily tasks = $5/day = $150/mo on API when Max subscription covers Claude Code CLI for free.
+RULE: Daily analysis tasks → local scripts + Haiku ($0.03/run). Weekly tasks OK on Cowork (infrequent).
+Executor (Claude Code CLI) = subscription = FREE. Always prefer executor for development work.
+
