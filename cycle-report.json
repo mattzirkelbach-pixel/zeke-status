@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-03-13T01:22:08.502861",
+  "timestamp": "2026-03-13T01:44:32.967526",
   "window": "overnight",
-  "cycle": 28,
-  "feed_before": 5873,
-  "feed_after": 5876,
+  "cycle": 29,
+  "feed_before": 5877,
+  "feed_after": 5880,
   "feed_growth": 3,
   "jobs": {
     "total": 5,
@@ -16,7 +16,7 @@
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
       "status": "success",
-      "duration_s": 76,
+      "duration_s": 698,
       "feed_grew": 1,
       "entry_valid": true,
       "issues": [],
@@ -28,21 +28,17 @@
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "success",
-      "duration_s": 168,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "status": "empty",
+      "duration_s": 61,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
     },
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
       "status": "empty",
-      "duration_s": 105,
+      "duration_s": 36,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": []
@@ -50,17 +46,24 @@
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "empty",
-      "duration_s": 49,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": []
+      "status": "success",
+      "duration_s": 168,
+      "feed_grew": 2,
+      "entry_valid": true,
+      "issues": [
+        "bad timestamp format: $DATE"
+      ],
+      "valid_entries": 1,
+      "entries_cleaned": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 1
     },
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
       "status": "success",
-      "duration_s": 46,
+      "duration_s": 149,
       "feed_grew": 1,
       "entry_valid": true,
       "issues": [],
@@ -72,19 +75,19 @@
   ],
   "failures": [
     {
-      "uuid": "3cd4b17d-448",
-      "name": "longevity",
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
       "status": "empty",
-      "duration_s": 105,
+      "duration_s": 61,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": []
     },
     {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
       "status": "empty",
-      "duration_s": 49,
+      "duration_s": 36,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": []
