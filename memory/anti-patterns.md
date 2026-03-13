@@ -202,3 +202,8 @@ LaunchAgent com.zeke.cowork-executor runs every 2h, processes 3 tasks per run (1
 **Pattern**: Alert scripts re-fire STATUS messages (crude is still high, SPX is still low) every few hours with short cooldowns. These aren't actionable — Matt already knows. They erode trust by creating noise.
 **Rule**: STATUS alerts (persistent conditions) = 24-48h cooldown minimum. ACTION alerts (do something NOW) = 1-4h cooldown. Position-entry alerts must check positions.json — if already entered, suppress.
 **Detection**: If the same alert type fires >2x in 24h and Matt doesn't take action on it, the cooldown is too short.
+
+## REPLACE-WITHOUT-KILLING-OLD (discovered 2026-03-13)
+**Pattern**: Deployed cowork-executor to replace cowork-trigger-processor, but left both running for 24h. Double spend.
+**Rule**: When replacing a consumer, disable the old one IN THE SAME DEPLOYMENT. Not "later." Not "next session."
+**Cost**: ~$8-10 wasted in duplicate Sonnet 4.6 sessions.
