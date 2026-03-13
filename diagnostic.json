@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-13 03:26:49 ET",
-  "timestamp_utc": "2026-03-13T07:26:49Z",
+  "timestamp_local": "2026-03-13 03:39:23 ET",
+  "timestamp_utc": "2026-03-13T07:39:23Z",
   "scheduler": {
     "running": true,
     "pid": 80574,
-    "uptime_minutes": 2700,
+    "uptime_minutes": 2712,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 5877,
+    "total_lines": 5879,
     "last_entries": [
-      "[2026-03-13T07:21:39] ai-agents",
-      "[2026-03-13T07:33:52] longevity",
       "[2026-03-13T08:32:00] self-improvement",
       "[2026-03-13T07:00:54] self-improvement",
-      "[2026-03-13T07:23:52] longevity"
+      "[2026-03-13T07:23:52] longevity",
+      "[2026-03-13T07:32:37] queue-research-general",
+      "[2026-03-13T07:31:00] ai-agents"
     ],
     "topic_distribution": {
       "camel-indicatorquestions": 37,
@@ -48,20 +48,10 @@
     "jobs_run": 100,
     "success": 56,
     "timeout": 0,
-    "fail": 5,
-    "feed_growth": 40
+    "fail": 8,
+    "feed_growth": 44
   },
   "cycles": [
-    {
-      "ts": "2026-03-13T01:44:32.941082",
-      "window": "overnight",
-      "cycle": 29,
-      "jobs": 5,
-      "success": 3,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 4
-    },
     {
       "ts": "2026-03-13T01:53:52.758186",
       "window": "overnight",
@@ -151,44 +141,19 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 4
+    },
+    {
+      "ts": "2026-03-13T03:39:15.413484",
+      "window": "overnight",
+      "cycle": 39,
+      "jobs": 5,
+      "success": 2,
+      "timeout": 0,
+      "fail": 3,
+      "feed_grew": 6
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 48,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "success",
-      "duration": 64,
-      "grew": 2,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "success",
-      "duration": 96,
-      "grew": 4,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "empty",
-      "duration": 80,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "tool-calling",
-      "status": "empty",
-      "duration": 40,
-      "grew": 0,
-      "issues": []
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -292,6 +257,43 @@
       "status": "empty",
       "duration": 40,
       "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "bad_output",
+      "duration": 54,
+      "grew": 1,
+      "issues": [
+        "literal $(date) in timestamp"
+      ]
+    },
+    {
+      "name": "self-improvement",
+      "status": "bad_output",
+      "duration": 126,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "success",
+      "duration": 59,
+      "grew": 2,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "success",
+      "duration": 66,
+      "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "tool-calling",
+      "status": "bad_output",
+      "duration": 201,
+      "grew": 1,
       "issues": []
     }
   ],
