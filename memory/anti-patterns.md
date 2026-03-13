@@ -219,3 +219,11 @@ Cowork scheduled tasks look like subscription features but bill API key via anth
 RULE: Daily analysis tasks → local scripts + Haiku ($0.03/run). Weekly tasks OK on Cowork (infrequent).
 Executor (Claude Code CLI) = subscription = FREE. Always prefer executor for development work.
 
+
+## INACCURATE-PORTFOLIO-TELEGRAM (discovered 3/13)
+zeke-portfolio-push.py sent P&L reports that EXCLUDED $700K+ in assets (all cash, TLT shares, futures).
+Showed "$1.4M total" when reality was $2.2M. Confluence score was stale. Created panic on red days.
+RULE: Never send portfolio P&L reports via Telegram. P&L is a dashboard metric, not an alert.
+Alerts are for ACTIONS (stop breach, DCL confirmed, conviction shift). Status reports go to dashboard only.
+DISABLED: com.zeke.portfolio-push
+
