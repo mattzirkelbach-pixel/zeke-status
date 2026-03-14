@@ -234,3 +234,24 @@ Actual futures settlement is 5:00 PM ET. Conviction engine read $5,061 when gold
 Mental stop at $5,023 was hit but system never alerted. After-hours moves = invisible.
 RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session close.
 
+
+## SED-REPLACE-DESTRUCTION (systemic, 3/13-3/14)
+**Pattern**: Using `sed -i` to modify Python files without verifying syntax after.
+**Damage**: Broke 5 scripts in one session (model-release-monitor, spark-model-manager, cowork-queue-watchdog, cowork-rate-limit-monitor, claude-task-consumer). Each broken script triggered QC → executor → "fix" → break again loop. 12 wasted executor cycles.
+**Root cause**: Treating Python files like text files. `sed` doesn't understand function definitions, indentation, or Python syntax. Replacing `send_telegram(msg)` catches both the call AND the function definition.
+**Rule**: NEVER use sed to modify Python files. Use python -c with proper string replacement, or the str_replace tool. ALWAYS run `py_compile.compile(file, doraise=True)` immediately after ANY modification. If syntax fails, revert immediately — don't move on.
+**Detection**: If any script has "SILENCED" inside a `def` line, it's this bug.
+
+## CLAIM-WITHOUT-VERIFY (systemic, 3/12-3/14)
+**Pattern**: Saying "fixed" or "queued" without confirming the fix took effect or the queue was processed.
+**Examples**: 
+  - Said "Telegram silenced" → 10 scripts still sending
+  - Said "queued for executor" → tasks fell out of trigger file
+  - Said "pipeline will pick it up" → pipeline was dead
+  - Said "conviction engine will catch it" → engine reading stale prices
+  - Said "morning briefing won't fire weekends" → fired on Saturday
+**Rule**: After every change: (1) verify the file was modified, (2) syntax check, (3) test the actual behavior, (4) check logs 15 min later. "I changed the code" is not the same as "it works." No change is done until verified.
+
+## FIX-CREATES-NEW-BREAK (systemic, 3/13-3/14)
+**Pattern**: Fixing one problem creates a new one. Killing Telegram spam → broke function definitions. Killing obsolete agents → QC enters infinite fix loop. Correcting prices → didn't verify conviction engine saw the correction.
+**Rule**: Before ANY fix, list what could break. After ANY fix, check the blast radius — not just the thing you changed, but everything that reads from or depends on it.
