@@ -227,3 +227,10 @@ RULE: Never send portfolio P&L reports via Telegram. P&L is a dashboard metric, 
 Alerts are for ACTIONS (stop breach, DCL confirmed, conviction shift). Status reports go to dashboard only.
 DISABLED: com.zeke.portfolio-push
 
+
+## YFINANCE-REGULAR-SESSION (discovered 3/14)
+fetch_prices.py uses yfinance history() which returns CME regular session close (1:30 PM ET).
+Actual futures settlement is 5:00 PM ET. Conviction engine read $5,061 when gold settled at $5,023.
+Mental stop at $5,023 was hit but system never alerted. After-hours moves = invisible.
+RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session close.
+
