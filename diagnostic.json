@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-16 04:30:37 ET",
-  "timestamp_utc": "2026-03-16T08:30:37Z",
+  "timestamp_local": "2026-03-16 04:34:16 ET",
+  "timestamp_utc": "2026-03-16T08:34:16Z",
   "scheduler": {
     "running": true,
     "pid": 80574,
-    "uptime_minutes": 7083,
+    "uptime_minutes": 7087,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 6679,
+    "total_lines": 6681,
     "last_entries": [
-      "[2026-03-16T08:19:52] self-improvement",
-      "[2026-03-16T09:19:52] self-improvement",
       "[2026-03-16T08:21:00] longevity",
       "[2026-03-16T08:22:39] longevity",
-      "[2026-03-16T08:24:42] ai-agents"
+      "[2026-03-16T08:24:42] ai-agents",
+      "[PARSE ERROR] {\"timestamp\":\"2026-03-16T08:31:00Z\",\"topic\":\"ai-agents\",\"finding\":\"Truesight\u0000s d",
+      "[2026-03-16T08:33:25] ai-agents"
     ],
     "topic_distribution": {
       "self-improvement": 15,
@@ -45,22 +45,12 @@
   },
   "today": {
     "jobs_run": 100,
-    "success": 1,
+    "success": 2,
     "timeout": 0,
-    "fail": 69,
-    "feed_growth": 1
+    "fail": 70,
+    "feed_growth": 2
   },
   "cycles": [
-    {
-      "ts": "2026-03-16T04:01:33.448638",
-      "window": "overnight",
-      "cycle": 126,
-      "jobs": 5,
-      "success": 0,
-      "timeout": 0,
-      "fail": 4,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-03-16T04:04:46.928049",
       "window": "overnight",
@@ -150,6 +140,16 @@
       "timeout": 0,
       "fail": 4,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-16T04:34:08.470838",
+      "window": "overnight",
+      "cycle": 136,
+      "jobs": 5,
+      "success": 1,
+      "timeout": 0,
+      "fail": 4,
+      "feed_grew": 1
     }
   ],
   "recent_jobs": [
@@ -162,41 +162,6 @@
     },
     {
       "name": "self-improvement",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "tool-calling",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
       "status": "fail",
       "duration": 0,
       "grew": 0,
@@ -291,6 +256,41 @@
       "status": "fail",
       "duration": 0,
       "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "tool-calling",
+      "status": "success",
+      "duration": 0,
+      "grew": 1,
       "issues": []
     }
   ],
