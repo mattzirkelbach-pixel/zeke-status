@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-15 22:09:47 ET",
-  "timestamp_utc": "2026-03-16T02:09:47Z",
+  "timestamp_local": "2026-03-15 22:13:00 ET",
+  "timestamp_utc": "2026-03-16T02:13:00Z",
   "scheduler": {
     "running": true,
     "pid": 80574,
-    "uptime_minutes": 6703,
+    "uptime_minutes": 6706,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 6567,
+    "total_lines": 6569,
     "last_entries": [
-      "[2026-03-16T01:55:31] queue-research-general",
-      "[2026-03-16T01:57:55] treasury-bonds",
       "[2026-03-16T02:01:08] queue-research-general",
       "[2026-03-16T02:00:50] treasury-bonds",
-      "[2026-03-16T02:00:00] treasury-bonds"
+      "[2026-03-16T02:00:00] treasury-bonds",
+      "[2026-03-16T02:11:40] longevity",
+      "[PARSE ERROR] {\"timestamp\":\"2026-03-16T02:12:30Z\",\"topic\":\"longevity\",\"finding\":\"FDA Phase 1 t"
     ],
     "topic_distribution": {
       "queue-research-general": 16,
@@ -48,20 +48,10 @@
     "jobs_run": 100,
     "success": 3,
     "timeout": 0,
-    "fail": 80,
+    "fail": 75,
     "feed_growth": 3
   },
   "cycles": [
-    {
-      "ts": "2026-03-15T21:40:43.312963",
-      "window": "overnight",
-      "cycle": 13,
-      "jobs": 5,
-      "success": 0,
-      "timeout": 0,
-      "fail": 4,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-03-15T21:43:56.198974",
       "window": "overnight",
@@ -151,6 +141,16 @@
       "timeout": 0,
       "fail": 3,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-15T22:12:51.915855",
+      "window": "overnight",
+      "cycle": 23,
+      "jobs": 5,
+      "success": 0,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
@@ -170,41 +170,6 @@
     },
     {
       "name": "longevity",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "tool-calling",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "longevity",
       "status": "skipped",
       "duration": 0,
       "grew": 0,
@@ -290,6 +255,41 @@
     {
       "name": "tool-calling",
       "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "tool-calling",
+      "status": "skipped",
       "duration": 0,
       "grew": 0,
       "issues": []
