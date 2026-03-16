@@ -1,20 +1,33 @@
 {
-  "timestamp": "2026-03-16T00:00:09.320214",
+  "timestamp": "2026-03-16T00:05:00.732328",
   "window": "overnight",
-  "cycle": 55,
-  "feed_before": 6614,
-  "feed_after": 6616,
-  "feed_growth": 2,
+  "cycle": 56,
+  "feed_before": 6616,
+  "feed_after": 6619,
+  "feed_growth": 3,
   "jobs": {
     "total": 5,
-    "success": 0,
-    "fail": 4,
+    "success": 2,
+    "fail": 1,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
+      "status": "success",
+      "duration_s": 0,
+      "feed_grew": 1,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
       "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
@@ -22,24 +35,13 @@
       "issues": []
     },
     {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
-    },
-    {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
@@ -54,18 +56,21 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "fail",
+      "status": "success",
       "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
+      "feed_grew": 2,
+      "entry_valid": true,
       "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
+      "valid_entries": 2,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
     }
   ],
   "failures": [
     {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
       "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
@@ -73,38 +78,17 @@
       "issues": []
     },
     {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
-    },
-    {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
-    },
-    {
-      "uuid": "9df9cf14-e1c",
-      "name": "tool-calling",
       "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
@@ -114,7 +98,7 @@
     }
   ],
   "needs_repair": true,
-  "feed_stagnant": true,
+  "feed_stagnant": false,
   "repair_dispatched": true,
   "repair_result": "error"
 }
