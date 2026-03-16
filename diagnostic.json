@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-16 05:55:50 ET",
-  "timestamp_utc": "2026-03-16T09:55:50Z",
+  "timestamp_local": "2026-03-16 06:01:11 ET",
+  "timestamp_utc": "2026-03-16T10:01:11Z",
   "scheduler": {
     "running": true,
     "pid": 80574,
-    "uptime_minutes": 7169,
-    "current_window": "queue/reason"
+    "uptime_minutes": 7174,
+    "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 6712,
+    "total_lines": 6713,
     "last_entries": [
-      "[PARSE ERROR] {\"timestamp\":\"$(date -u \"+%Y-%m-%dT%H:%M:%SZ\")\",\"topic\":\"ai-agents\",\"finding\":\"E",
       "[2026-03-16T09:49:45] treasury-bonds",
       "[2026-03-16T09:51:16] longevity",
       "[2026-03-16T09:52:16] ai-agents",
-      "[2026-03-16T09:54:28] ai-agents"
+      "[2026-03-16T09:54:28] ai-agents",
+      "[2026-03-16T10:00:00] treasury-bonds"
     ],
     "topic_distribution": {
       "longevity": 11,
@@ -52,16 +52,6 @@
     "feed_growth": 2
   },
   "cycles": [
-    {
-      "ts": "2026-03-16T04:30:29.787075",
-      "window": "overnight",
-      "cycle": 135,
-      "jobs": 5,
-      "success": 0,
-      "timeout": 0,
-      "fail": 4,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-03-16T04:34:08.470838",
       "window": "overnight",
@@ -151,30 +141,19 @@
       "timeout": 0,
       "fail": 4,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-16T06:01:03.423144",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 3,
+      "success": 0,
+      "timeout": 0,
+      "fail": 2,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
     {
       "name": "ai-agents",
       "status": "fail",
@@ -290,6 +269,27 @@
     {
       "name": "tool-calling",
       "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "fail",
       "duration": 0,
       "grew": 0,
       "issues": []
