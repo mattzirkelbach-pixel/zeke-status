@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-03-15T21:30:30.629272",
+  "timestamp": "2026-03-15T21:34:14.589849",
   "window": "overnight",
-  "cycle": 10,
-  "feed_before": 6554,
-  "feed_after": 6554,
+  "cycle": 11,
+  "feed_before": 6555,
+  "feed_after": 6555,
   "feed_growth": 0,
   "jobs": {
     "total": 5,
-    "success": 1,
-    "fail": 4,
+    "success": 2,
+    "fail": 1,
     "timeout": 0
   },
   "job_details": [
@@ -38,32 +38,33 @@
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
+      "issues": []
     },
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "fail",
+      "status": "success",
       "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
+      "feed_grew": 1,
+      "entry_valid": true,
       "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
+      "valid_entries": 1,
+      "dedup_removed": 1,
+      "trivial_entries": 0,
+      "broken_entries": 0
     }
   ],
   "failures": [
@@ -80,32 +81,20 @@
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
-    },
-    {
-      "uuid": "9df9cf14-e1c",
-      "name": "tool-calling",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "ent version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\nConfig was last written by a newer OpenClaw (2026.3.11); current version is 2026.2.15.\n"
+      "issues": []
     }
   ],
   "needs_repair": true,
