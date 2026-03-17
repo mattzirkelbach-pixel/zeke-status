@@ -1,25 +1,30 @@
 {
-  "timestamp": "2026-03-17T03:11:21.093958",
+  "timestamp": "2026-03-17T03:14:36.440078",
   "window": "overnight",
-  "cycle": 111,
-  "feed_before": 7031,
-  "feed_after": 7032,
-  "feed_growth": 1,
+  "cycle": 112,
+  "feed_before": 7033,
+  "feed_after": 7033,
+  "feed_growth": 0,
   "jobs": {
     "total": 5,
     "success": 0,
-    "fail": 4,
+    "fail": 3,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "skipped",
+      "status": "bad_output",
       "duration_s": 0,
-      "feed_grew": 0,
+      "feed_grew": 1,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 1
     },
     {
       "uuid": "54202a7d-617",
@@ -29,7 +34,7 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773731438036:982\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773731633828:987\"\n}\n"
     },
     {
       "uuid": "3cd4b17d-448",
@@ -39,7 +44,7 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773731448894:983\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773731644656:988\"\n}\n"
     },
     {
       "uuid": "a03747c8-f17",
@@ -49,28 +54,32 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:a03747c8-f178-494f-ad29-f214b6843781:1773731459962:984\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:a03747c8-f178-494f-ad29-f214b6843781:1773731655424:989\"\n}\n"
     },
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:9df9cf14-e1c1-4bc4-a843-1dd1d6708055:1773731470895:985\"\n}\n"
+      "issues": []
     }
   ],
   "failures": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "skipped",
+      "status": "bad_output",
       "duration_s": 0,
-      "feed_grew": 0,
+      "feed_grew": 1,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "valid_entries": 0,
+      "entries_cleaned": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 1
     },
     {
       "uuid": "54202a7d-617",
@@ -80,7 +89,7 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773731438036:982\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773731633828:987\"\n}\n"
     },
     {
       "uuid": "3cd4b17d-448",
@@ -90,7 +99,7 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773731448894:983\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773731644656:988\"\n}\n"
     },
     {
       "uuid": "a03747c8-f17",
@@ -100,17 +109,16 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:a03747c8-f178-494f-ad29-f214b6843781:1773731459962:984\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:a03747c8-f178-494f-ad29-f214b6843781:1773731655424:989\"\n}\n"
     },
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:9df9cf14-e1c1-4bc4-a843-1dd1d6708055:1773731470895:985\"\n}\n"
+      "issues": []
     }
   ],
   "needs_repair": true,
