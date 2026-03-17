@@ -1,47 +1,45 @@
 {
-  "timestamp": "2026-03-17T00:08:32.290206",
+  "timestamp": "2026-03-17T00:11:46.241311",
   "window": "overnight",
-  "cycle": 56,
-  "feed_before": 7098,
-  "feed_after": 7099,
-  "feed_growth": 1,
+  "cycle": 57,
+  "feed_before": 7102,
+  "feed_after": 7102,
+  "feed_growth": 0,
   "jobs": {
     "total": 5,
-    "success": 1,
-    "fail": 0,
+    "success": 0,
+    "fail": 2,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "success",
+      "status": "skipped",
       "duration_s": 0,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
     },
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773720663408:788\"\n}\n"
     },
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773720674209:789\"\n}\n"
     },
     {
       "uuid": "a03747c8-f17",
@@ -64,8 +62,8 @@
   ],
   "failures": [
     {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
       "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
@@ -73,13 +71,24 @@
       "issues": []
     },
     {
-      "uuid": "3cd4b17d-448",
-      "name": "longevity",
-      "status": "skipped",
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773720663408:788\"\n}\n"
+    },
+    {
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "fail",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773720674209:789\"\n}\n"
     },
     {
       "uuid": "a03747c8-f17",
