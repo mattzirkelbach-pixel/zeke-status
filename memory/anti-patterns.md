@@ -263,3 +263,20 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 **Root cause**: openclaw doctor --fix adds keys the current version doesn't recognize. Config validator then rejects all jobs.
 **Rule**: NEVER run openclaw doctor --fix from automated agents. Config changes must be validated manually. Add openclaw.json backup before any config modification.
 **Detection**: If scheduler shows 100% fail rate, check openclaw.json for unrecognized keys first.
+
+## OPENCLAW-UPGRADE-SANDBOX (3/17, extends OPENCLAW-DOCTOR-UNATTENDED)
+**Pattern**: Openclaw upgrade (2026.3.11 on 3/15) introduced Docker sandbox mode as default. Mac Mini has no Docker. Every cron job failed with "Sandbox mode requires Docker" — 1,427 consecutive failures over 39 hours.
+**Damage**: Entire research pipeline dead for 39 hours. Zero feed growth. Feed corruption (7158→70, auto-restored by Feed Guardian).
+**Root cause**: openclaw upgrade changed sandbox default to "non-main" which requires Docker. Combined with openclaw doctor --fix injecting bad config keys, created two overlapping failures that masked each other.
+**Fix**: Set agents.defaults.sandbox.mode = "off" in openclaw.json. Removed bad config keys (commands.ownerDisplay, channels.telegram.streaming).
+**Rule**: After ANY openclaw upgrade: (1) check openclaw cron list for error status, (2) check openclaw cron runs --id <any_job> for actual error messages, (3) verify feed growth within 30 minutes. NEVER say "upgrade worked" without checking actual job completion.
+**Detection**: openclaw cron list showing all jobs in "error" status. Scheduler showing success=0, grew=0 persistently.
+
+## THREE-SCHEDULING-LAYERS (3/15-3/16)
+**Pattern**: Three independent scheduling systems (LaunchAgents, Cowork scheduled tasks, crontab) all run scripts that can send Telegram. Auditing only one or two layers leaves the third sending noise.
+**Damage**: 8+ hours of whack-a-mole killing Telegram senders, missing new ones each time.
+**Rule**: When auditing ANY system behavior (alerts, scripts, pipelines), check ALL THREE layers: (1) launchctl list | grep zeke, (2) ls ~/Documents/Claude/Scheduled/, (3) crontab -l. A fix isn't complete until verified across all three.
+
+## CLAIM-PIPELINE-FIXED-WITHOUT-JOB-COMPLETION (3/17)
+**Pattern**: Said "pipeline is recovering" based on config fix + zero failures. But zero failures just means jobs aren't being rejected — they still weren't completing. Said "good news" three times before actually checking openclaw cron runs for the real error.
+**Rule**: Pipeline is only "fixed" when openclaw cron runs --id <job> shows status: "ok" AND feed count increases. Anything less is "config error resolved, awaiting job completion verification."
