@@ -1,25 +1,26 @@
 {
-  "timestamp": "2026-03-17T00:28:12.614248",
+  "timestamp": "2026-03-17T00:32:10.996320",
   "window": "overnight",
-  "cycle": 62,
-  "feed_before": 7110,
-  "feed_after": 7110,
-  "feed_growth": 0,
+  "cycle": 63,
+  "feed_before": 7112,
+  "feed_after": 7113,
+  "feed_growth": 1,
   "jobs": {
     "total": 5,
-    "success": 0,
-    "fail": 4,
+    "success": 1,
+    "fail": 3,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:fd3685b9-d6c0-4e2e-9bbc-18f8bbdfc1e0:1773721831914:801\"\n}\n"
     },
     {
       "uuid": "54202a7d-617",
@@ -29,27 +30,29 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773721650067:797\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773721842700:802\"\n}\n"
     },
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773721660809:798\"\n}\n"
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "fail",
+      "status": "success",
       "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
+      "feed_grew": 1,
+      "entry_valid": true,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:a03747c8-f178-494f-ad29-f214b6843781:1773721671660:799\"\n}\n"
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
     },
     {
       "uuid": "9df9cf14-e1c",
@@ -59,18 +62,19 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:9df9cf14-e1c1-4bc4-a843-1dd1d6708055:1773721682468:800\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:9df9cf14-e1c1-4bc4-a843-1dd1d6708055:1773721920938:804\"\n}\n"
     }
   ],
   "failures": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:fd3685b9-d6c0-4e2e-9bbc-18f8bbdfc1e0:1773721831914:801\"\n}\n"
     },
     {
       "uuid": "54202a7d-617",
@@ -80,27 +84,16 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773721650067:797\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773721842700:802\"\n}\n"
     },
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773721660809:798\"\n}\n"
-    },
-    {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:a03747c8-f178-494f-ad29-f214b6843781:1773721671660:799\"\n}\n"
+      "issues": []
     },
     {
       "uuid": "9df9cf14-e1c",
@@ -110,7 +103,7 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:9df9cf14-e1c1-4bc4-a843-1dd1d6708055:1773721682468:800\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:9df9cf14-e1c1-4bc4-a843-1dd1d6708055:1773721920938:804\"\n}\n"
     }
   ],
   "needs_repair": true,
