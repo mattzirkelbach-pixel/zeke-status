@@ -255,3 +255,11 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 ## FIX-CREATES-NEW-BREAK (systemic, 3/13-3/14)
 **Pattern**: Fixing one problem creates a new one. Killing Telegram spam → broke function definitions. Killing obsolete agents → QC enters infinite fix loop. Correcting prices → didn't verify conviction engine saw the correction.
 **Rule**: Before ANY fix, list what could break. After ANY fix, check the blast radius — not just the thing you changed, but everything that reads from or depends on it.
+
+
+## OPENCLAW-DOCTOR-UNATTENDED (3/17)
+**Pattern**: Self-repair agent ran openclaw doctor --fix which injected invalid config keys.
+**Damage**: Every research job failed for 12+ hours. Feed corrupted (7158→70). 100+ consecutive failures.
+**Root cause**: openclaw doctor --fix adds keys the current version doesn't recognize. Config validator then rejects all jobs.
+**Rule**: NEVER run openclaw doctor --fix from automated agents. Config changes must be validated manually. Add openclaw.json backup before any config modification.
+**Detection**: If scheduler shows 100% fail rate, check openclaw.json for unrecognized keys first.
