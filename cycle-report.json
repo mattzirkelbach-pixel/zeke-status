@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-03-16T23:01:43.747328",
+  "timestamp": "2026-03-16T23:06:48.304926",
   "window": "overnight",
-  "cycle": 37,
-  "feed_before": 7062,
-  "feed_after": 7063,
+  "cycle": 38,
+  "feed_before": 7065,
+  "feed_after": 7066,
   "feed_growth": 1,
   "jobs": {
     "total": 5,
-    "success": 0,
+    "success": 1,
     "fail": 3,
     "timeout": 0
   },
@@ -15,21 +15,26 @@
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "skipped",
+      "status": "unknown",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [
+        "spark_locked"
+      ]
     },
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "fail",
+      "status": "success",
       "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
+      "feed_grew": 1,
+      "entry_valid": true,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773716369745:714\"\n}\n"
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
     },
     {
       "uuid": "3cd4b17d-448",
@@ -39,7 +44,7 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773716380584:715\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773716776533:717\"\n}\n"
     },
     {
       "uuid": "a03747c8-f17",
@@ -49,39 +54,30 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:a03747c8-f178-494f-ad29-f214b6843781:1773716391348:716\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:a03747c8-f178-494f-ad29-f214b6843781:1773716787342:718\"\n}\n"
     },
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "unknown",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:9df9cf14-e1c1-4bc4-a843-1dd1d6708055:1773716798110:719\"\n}\n"
     }
   ],
   "failures": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "skipped",
+      "status": "unknown",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
-    },
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773716369745:714\"\n}\n"
+      "issues": [
+        "spark_locked"
+      ]
     },
     {
       "uuid": "3cd4b17d-448",
@@ -91,7 +87,7 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773716380584:715\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:3cd4b17d-448f-48da-9d4d-72196e48956b:1773716776533:717\"\n}\n"
     },
     {
       "uuid": "a03747c8-f17",
@@ -101,18 +97,17 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:a03747c8-f178-494f-ad29-f214b6843781:1773716391348:716\"\n}\n"
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:a03747c8-f178-494f-ad29-f214b6843781:1773716787342:718\"\n}\n"
     },
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "unknown",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:9df9cf14-e1c1-4bc4-a843-1dd1d6708055:1773716798110:719\"\n}\n"
     }
   ],
   "needs_repair": true,
