@@ -1,83 +1,42 @@
 {
-  "timestamp": "2026-03-17T00:04:48.917947",
+  "timestamp": "2026-03-17T00:08:32.290206",
   "window": "overnight",
-  "cycle": 55,
-  "feed_before": 7093,
-  "feed_after": 7096,
-  "feed_growth": 3,
+  "cycle": 56,
+  "feed_before": 7098,
+  "feed_after": 7099,
+  "feed_growth": 1,
   "jobs": {
     "total": 5,
-    "success": 3,
-    "fail": 1,
+    "success": 1,
+    "fail": 0,
     "timeout": 0
   },
   "job_details": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
+      "status": "success",
+      "duration_s": 0,
+      "feed_grew": 1,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
+    },
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
       "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": []
-    },
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773720123828:784\"\n}\n"
     },
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "success",
-      "duration_s": 0,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    },
-    {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
-      "status": "success",
-      "duration_s": 0,
-      "feed_grew": 2,
-      "entry_valid": true,
-      "issues": [
-        "literal $(date) in timestamp"
-      ],
-      "valid_entries": 1,
-      "entries_cleaned": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 1
-    },
-    {
-      "uuid": "9df9cf14-e1c",
-      "name": "tool-calling",
-      "status": "success",
-      "duration_s": 0,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    }
-  ],
-  "failures": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
       "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
@@ -85,18 +44,64 @@
       "issues": []
     },
     {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "fail",
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"enqueued\": true,\n  \"runId\": \"manual:54202a7d-6176-4015-858c-ba91870a78ba:1773720123828:784\"\n}\n"
+      "issues": []
+    },
+    {
+      "uuid": "9df9cf14-e1c",
+      "name": "tool-calling",
+      "status": "skipped",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "skipped",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    },
+    {
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "skipped",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "skipped",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    },
+    {
+      "uuid": "9df9cf14-e1c",
+      "name": "tool-calling",
+      "status": "skipped",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
     }
   ],
   "needs_repair": true,
-  "feed_stagnant": false,
+  "feed_stagnant": true,
   "repair_dispatched": true,
   "repair_result": "error"
 }
