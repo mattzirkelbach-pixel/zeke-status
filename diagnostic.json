@@ -1,21 +1,45 @@
 {
-  "timestamp_local": "2026-03-17 18:43:19 ET",
-  "timestamp_utc": "2026-03-17T22:43:19Z",
+  "timestamp_local": "2026-03-17 6:44:01PM ET",
+  "timestamp_utc": "2026-03-17T22:44:01Z",
   "scheduler": {
     "running": true,
-    "pid": 98649,
-    "uptime_minutes": 12,
-    "current_window": "daytime"
+    "pids": [
+      "98649"
+    ],
+    "count": 1,
+    "type": "python"
+  },
+  "gateway": {
+    "running": true
+  },
+  "spark": {
+    "online": true,
+    "models_loaded": [
+      "nemotron-3-nano:30b",
+      "nomic-embed-text:latest",
+      "qwen3-32b-32k:latest"
+    ],
+    "model_stuck": false,
+    "inference_active": true,
+    "detail": "nemotron-3-nano:30b, nomic-embed-text:latest, qwen3-32b-32k:latest \u2022 27.1GB VRAM \u2022 32.8B \u2022 Q4_K_M \u2022 18ms",
+    "response_ms": 18,
+    "vram_estimate_gb": 27.1,
+    "model_params": "32.8B",
+    "model_quant": "Q4_K_M"
   },
   "feed": {
     "total_lines": 7117,
+    "last_modified_minutes_ago": 21.9,
     "last_entries": [
-      "[2026-03-17T22:00:14] camel-finance-x-posts",
-      "[2026-03-17T22:01:51] longevity",
-      "[2026-03-17T22:17:33] treasury-bonds",
-      "[PARSE ERROR] {\"timestamp\":\"$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")\",\"topic\":\"self-improvement\",\"find",
-      "[PARSE ERROR] {\"timestamp\":\"2026-03-17T22:21:52Z\",\"topic\":\"ai-agents\",\"finding\":\"BFCLv4 shows "
+      "[3/17 5:00PM ET] camel-finance-x-posts \u2014  \u26a0",
+      "[3/17 5:01PM ET] longevity \u2014 FDA approved human trials of epigenetic reprogramming for cellular age reversal ",
+      "[3/17 5:17PM ET] treasury-bonds \u2014 10Y yield dropped to 4.226% midweek as Iran tension eases and oil prices fall",
+      "{\"timestamp\":\"$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")\",\"topic\":\"self-improvement\",\"find",
+      "{\"timestamp\":\"2026-03-17T22:21:52Z\",\"topic\":\"ai-agents\",\"finding\":\"BFCLv4 shows "
     ],
+    "recent_50_clean": 44,
+    "recent_50_trivial": 2,
+    "recent_50_broken": 4,
     "topic_distribution": {
       "treasury-bonds": 18,
       "self-improvement": 9,
@@ -23,111 +47,24 @@
       "queue-research-general": 6,
       "longevity": 3,
       "cross-domain-associations": 2
-    },
-    "recent_50_clean": 44,
-    "recent_50_trivial": 2,
-    "recent_50_broken": 4,
-    "last_modified_minutes_ago": 6.9
-  },
-  "spark": {
-    "online": true,
-    "models_loaded": [
-      "qwen3-32b-32k:latest",
-      "nemotron-3-nano:30b",
-      "nomic-embed-text:latest"
-    ],
-    "model_stuck": false,
-    "stuck_model": null,
-    "inference_active": true,
-    "detail": "healthy, loaded: qwen3-32b-32k:latest, nemotron-3-nano:30b, nomic-embed-text:latest"
-  },
-  "gateway": {
-    "running": true
-  },
-  "today": {
-    "jobs_run": 3,
-    "success": 0,
-    "timeout": 0,
-    "fail": 1,
-    "feed_growth": 0
-  },
-  "cycles": [
-    {
-      "ts": "2026-03-17T18:33:06.057778",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 3,
-      "success": 0,
-      "timeout": 0,
-      "fail": 1,
-      "feed_grew": 0
     }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    }
-  ],
-  "health": {
-    "status": "HEALTHY",
-    "issues": []
   },
-  "kg_stats": {
-    "entities": 578,
-    "relations": 661,
-    "associations": 280,
-    "insights": 62
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 54.0,
-    "power_w": 34.95,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 8,
-    "literal_timestamps": 8,
-    "duplicates": 831,
-    "total": 7117,
-    "error_rate": 11.9
-  },
-  "automation": {
-    "layer1": "L1 Execution \u2014 DEPLOYED",
-    "layer2": "L2 Oversight \u2014 DEPLOYED",
-    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
-    "layer4": "L4 Recursive Learning \u2014 PLANNED"
-  },
-  "cost": {
-    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": false
+  "activity": {
+    "last_job": "self-improvement",
+    "last_job_time": "3/17 1:32PM ET",
+    "last_cycle": "3/17 1:30PM ET",
+    "jobs_today": 10,
+    "success_today": 1,
+    "timeout_today": 0,
+    "fail_today": 9,
+    "feed_growth_today": 1,
+    "state": "idle (heartbeat)",
+    "next_cycle_est": "2:03PM",
+    "cycle_count": 30,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1773527539581,
-      "v": 6300,
-      "l": "6:32PM"
-    },
     {
       "t": 1773528441628,
       "v": 6300,
@@ -1562,21 +1499,146 @@
       "t": 1773786538879,
       "v": 7117,
       "l": "6:28PM"
+    },
+    {
+      "t": 1773787441122,
+      "v": 7117,
+      "l": "6:44PM"
     }
   ],
-  "activity": {
-    "last_job": "self-improvement",
-    "last_job_time": "3/17 1:16PM ET",
-    "last_cycle": "3/17 1:16PM ET",
-    "jobs_today": 9,
-    "success_today": 1,
-    "timeout_today": 0,
-    "fail_today": 8,
-    "feed_growth_today": 1,
-    "state": "idle (heartbeat)",
-    "next_cycle_est": "1:47PM",
-    "cycle_count": 29,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "kg_stats": {
+    "entities": 578,
+    "relations": 661,
+    "associations": 280,
+    "insights": 62
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 0.0,
+    "temp_c": 38.0,
+    "power_w": 10.83,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 8,
+    "literal_timestamps": 8,
+    "duplicates": 831,
+    "total": 7117,
+    "error_rate": 11.9
+  },
+  "cost": {
+    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": false
+  },
+  "automation": {
+    "layer1": "L1 Execution \u2014 DEPLOYED",
+    "layer2": "L2 Oversight \u2014 DEPLOYED",
+    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
+    "layer4": "L4 Recursive Learning \u2014 PLANNED"
+  },
+  "compute_tiers": {
+    "architecture": "tiered_dispatch",
+    "layers": {
+      "L0_python": {
+        "status": "active",
+        "cost": "$0",
+        "role": "Fetch, transform, schedule"
+      },
+      "L1_vector": {
+        "status": "planned",
+        "cost": "$0",
+        "role": "Embeddings + ChromaDB RAG"
+      },
+      "L2_triage": {
+        "status": "active",
+        "cost": "$0",
+        "role": "qwen3:8b classification"
+      },
+      "L3_api": {
+        "status": "active",
+        "cost": "paid",
+        "role": "Haiku/Sonnet/Opus"
+      },
+      "L4_batch": {
+        "status": "active",
+        "cost": "$0",
+        "role": "qwen3-32b overnight"
+      }
+    },
+    "budget": {
+      "haiku_spent": 0,
+      "haiku_limit": 1.0,
+      "sonnet_spent": 0,
+      "sonnet_limit": 0.5,
+      "total_spent": 0,
+      "total_limit": 2.0,
+      "date": "2026-03-17"
+    },
+    "models_hot": [
+      {
+        "name": "nemotron-3-nano:30b",
+        "vram_gb": 23.1,
+        "params": "31.6B"
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "vram_gb": 0.6,
+        "params": "137M"
+      },
+      {
+        "name": "qwen3-32b-32k:latest",
+        "vram_gb": 27.1,
+        "params": "32.8B"
+      }
+    ]
+  },
+  "health": {
+    "status": "HEALTHY",
+    "issues": [],
+    "issue_count": 0
+  },
+  "cycles": [
+    {
+      "ts": "2026-03-17T18:33:06.057778",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 3,
+      "success": 0,
+      "timeout": 0,
+      "fail": 1,
+      "feed_grew": 0
+    }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    }
+  ],
+  "today": {
+    "jobs_run": 3,
+    "success": 0,
+    "timeout": 0,
+    "fail": 1,
+    "feed_growth": 0
   }
 }
