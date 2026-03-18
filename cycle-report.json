@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-03-18T03:48:18.873085",
+  "timestamp": "2026-03-18T03:51:30.840196",
   "window": "overnight",
-  "cycle": 101,
+  "cycle": 102,
   "feed_before": 7120,
   "feed_after": 7120,
   "feed_growth": 0,
   "jobs": {
     "total": 5,
     "success": 0,
-    "fail": 0,
+    "fail": 1,
     "timeout": 0
   },
   "job_details": [
@@ -51,11 +51,12 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "failures": [
@@ -98,11 +99,12 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "needs_repair": true,
