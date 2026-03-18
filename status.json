@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-18T02:03:52.161827+00:00",
+  "timestamp": "2026-03-18T02:04:44.429323+00:00",
   "feed_lines": 7136,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-18T00:48:43.911208Z\", \"topic\": \"queue-research-spx/crude\", \"finding\": \"We need to produce a specific actionable research finding about which macro indicators most strongly predicted reversal of historical positive SPX/CRUDE correlation. Must include (1) specific fact with number or date, (2) implication for portfolio, (3) confidence level and why, (4) next_task optional.\\n\\nWe must not hedge; no generic statements. Use quantitative evidence/historical data. Provide a concrete finding: e.g., \\\"In the 1970s oil shocks, CPI YoY >5% predicted correlation flip with probability 83%\\\" etc. Must be specific number/date.\\n\\nWe need to research historically which macro indicators predicted reversal of positive SPX/CRUDE correlation. Likely candidates: CPI inflation spikes, Fed funds rate hikes, unemployment rise, interest rates, oil inventories? Use known data points: In 197\", \"source\": \"spark-queue/ke_20260318T000552_4d6aa897_2\", \"instrument\": \"SPX/CRUDE\", \"task_label\": \"KE: Which macro indicators (e.g., CPI, Fed funds rate) most strongly predicted the r\", \"priority_was\": 4}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 55.0,
-    "power_w": 22.76,
+    "gpu_util_pct": 0.0,
+    "temp_c": 51.0,
+    "power_w": 12.32,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,16 +75,12 @@
   "gateway_process": {
     "pid": "1315",
     "memory_pct": "3.2",
-    "uptime": "02:02:12",
+    "uptime": "02:03:04",
     "status": "RUNNING"
   },
   "spark_status": {
     "status": "ONLINE",
     "loaded_models": [
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 24.8
-      },
       {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
