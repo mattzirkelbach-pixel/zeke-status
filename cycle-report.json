@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-03-17T23:19:27.500901",
+  "timestamp": "2026-03-17T23:26:14.263715",
   "window": "overnight",
-  "cycle": 23,
+  "cycle": 24,
   "feed_before": 7140,
   "feed_after": 7140,
   "feed_growth": 0,
   "jobs": {
     "total": 5,
-    "success": 1,
-    "fail": 1,
+    "success": 0,
+    "fail": 0,
     "timeout": 0
   },
   "job_details": [
@@ -24,25 +24,22 @@
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "success",
+      "status": "unknown",
       "duration_s": 0,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 1,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
     },
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
@@ -74,14 +71,24 @@
       "issues": []
     },
     {
-      "uuid": "3cd4b17d-448",
-      "name": "longevity",
-      "status": "fail",
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "unknown",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": [
+        "spark_locked"
+      ]
+    },
+    {
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "skipped",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
