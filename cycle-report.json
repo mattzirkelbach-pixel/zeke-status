@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-03-18T07:36:08.239823",
+  "timestamp": "2026-03-18T08:07:00.782582",
   "window": "daytime",
-  "cycle": 4,
-  "feed_before": 7128,
-  "feed_after": 7128,
+  "cycle": 5,
+  "feed_before": 7129,
+  "feed_after": 7129,
   "feed_growth": 0,
   "jobs": {
     "total": 3,
     "success": 0,
-    "fail": 0,
+    "fail": 1,
     "timeout": 0
   },
   "job_details": [
@@ -16,7 +16,7 @@
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
       "status": "skipped",
-      "duration_s": 0,
+      "duration_s": 2,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": []
@@ -33,11 +33,12 @@
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "failures": [
@@ -45,7 +46,7 @@
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
       "status": "skipped",
-      "duration_s": 0,
+      "duration_s": 2,
       "feed_grew": 0,
       "entry_valid": false,
       "issues": []
@@ -62,11 +63,12 @@
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "needs_repair": true,
