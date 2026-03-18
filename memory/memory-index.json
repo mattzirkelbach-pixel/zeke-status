@@ -1,154 +1,57 @@
 {
-  "_description": "Quick-read memory state. Fetched at conversation start via web_fetch or MCP.",
-  "_updated": "2026-03-01T15:14:55.680758+00:00",
-  "_access": {
-    "github": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/memory-index.json",
-    "dependencies": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/dependencies.json",
-    "anti_patterns": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/anti-patterns.md",
-    "session_journal": "https://raw.githubusercontent.com/mattzirkelbach-pixel/zeke-status/main/memory/session-journal.jsonl"
-  },
+  "_description": "Quick-read memory state. Fetched at conversation start.",
+  "_updated": "2026-03-18T01:53:44.380474+00:00",
   "system_state": {
-    "feed_entries": 431,
+    "feed_entries": 7135,
     "domains_active": 5,
-    "launchagents": 22,
-    "launchagents_all_valid": true,
+    "launchagents": 25,
+    "spark_primary_model": "nemotron-3-nano:30b",
+    "spark_models_total_gb": 50,
+    "model_router": "spark-models.json + spark_models.py (all scripts wired)",
     "tcc_prompts": 0,
-    "fda_fully_granted": true,
-    "block_3_rag": "NEXT",
-    "cowork": "claude.ai central tab - Phase 4 integration pending"
+    "fda_fully_granted": true
   },
   "last_session": {
-    "date": "2026-03-02T17:05:27.583561+00:00",
-    "summary": "Camel data pipeline audit: member site API discovered (FluentCommunity), TV webhook audit (receiver running, zero alerts). Memory synced.",
+    "date": "2026-03-18T01:53:44.380697+00:00",
+    "summary": "Massive session: pipeline recovery (39hr outage), Nemotron swap (8x faster), model router ecosystem, feedback loop wiring, L1B fixes, queue processor fixes, 137.5GB cleaned.",
     "key_changes": [
-      "FluentCommunity API mapped \u2014 7 spaces, all accessible via Chrome cookies",
-      "camel-site-crawler.py seed URLs updated to match live site",
-      "TV infrastructure audit: receiver + funnel running, 0/18 alerts created",
-      "Dependencies + anti-patterns + session journal updated"
+      "Nemotron-3-Nano-30b primary (76 tok/s vs 9.6 Qwen3)",
+      "Model router: config/spark-models.json, all scripts use get_model()",
+      "137.5GB freed (7 unused models removed from Spark)",
+      "Feedback loop wired: scanner reads accuracy weights from feedback",
+      "L1B knowledge evolver: question prompt + queue reader fixed",
+      "Queue processor: isinstance guards, processing at 74.9 tok/s",
+      "Pipeline recovered from 39hr Docker sandbox outage",
+      "Signal optimizer widened: mutations 10%->25%, 5->8 per run",
+      "Corollary framework: 10-component eval, 4 macro scenarios, PPLT scored"
     ]
   },
-  "active_crons": [
-    "guardian (1min) \u2014 scheduler keepalive",
-    "watchdog (10min) \u2014 system health + auto-repair",
-    "mcp-watchdog (5min) \u2014 MCP server health",
-    "status-push (5min) \u2014 dashboard + memory to GitHub",
-    "snapshots (15min) \u2014 feed history",
-    "feed-guardian (15min) \u2014 feed integrity",
-    "quality-scorer (3h@:45) \u2014 score feed entries",
-    "self-repair (30min) \u2014 detect failures, dispatch claude -p",
-    "camel-pipeline-v2 (6h) \u2014 YouTube transcript analysis w/ chunking + thesis ledger",
-    "dedup (3am) \u2014 feed deduplication",
-    "session-purge (4am) \u2014 prevent gateway bloat",
-    "nightly-synthesis (5am) \u2014 cross-domain insights via claude -p",
-    "price-fetch (6am) \u2014 market data update",
-    "trade-alerts v2 (10min weekdays) \u2014 DCL triggers, Telegram alerts"
-  ],
-  "known_fragile": [
-    "MCP connector drops silently \u2014 server stays up, fix: remove/re-add in Settings",
-    "Scheduler maps job names by string match \u2014 don't rename or delete without checking lines 221-240",
-    "Gateway needs restart after config changes \u2014 also purge sessions",
-    "Local models break above 6 tools \u2014 byProvider restriction is load-bearing",
-    "MCP transport = Streamable HTTP (LIVE since Feb 2026, server.py:1022). SSE/ping fully replaced. Drops = Spark inference starvation, self-recovers ~60s. NEVER re-recommend SSE migration.",
-    "Spark lock (spark_lock.py) is advisory \u2014 processes must import and use it. Stale lock auto-clears 10min.",
-    "osascript Chrome control requires 'Allow JS from Apple Events' in Chrome settings"
-  ],
-  "last_updated": "2026-03-02T17:05:27.583765+00:00",
-  "known_fragile_points": [
-    "OpenClaw payload.message vs payload.prompt \u2014 only message works",
-    "delivery.mode must be none for research jobs"
-  ],
   "trading_state": {
-    "phase": "Phase 1 \u2014 ride weekly cycle",
-    "cycle_day": 20,
-    "cycle_day_range": "22-28",
-    "weekly_week": 8,
-    "weekly_range": "22-26",
-    "last_dcl": "2026-01-30",
-    "tranche_1": "FILLED 2/24 (GLD Dec26 470C x2, 500C x1)",
-    "tranche_2": "PENDING \u2014 waiting DCL confirmation",
-    "slv_entry": "PENDING \u2014 waiting DCL confirmation",
-    "alert_engine": "v2 live, Telegram connected",
-    "fomo_rule": "No alert = no entry. Period.",
-    "camel_twin": {
-      "version": "v2",
-      "canonical_tickers": 11,
-      "macro_context_tags": 15,
-      "scorer": "ct-confluence-scorer.py (6-factor, 0-100)",
-      "dashboard": "ct-index.html on port 3336",
-      "sections": "Active(4)/Planned(1)/Discovery(6)",
-      "last_scored": "2026-03-02T16:00:53.673801+00:00"
-    },
-    "camel_data_pipelines": {
-      "youtube_pipeline": {
-        "script": "camel-yt-pipeline-v2.py",
-        "schedule": "every 6h",
-        "status": "RUNNING",
-        "output": "learning-feed.jsonl + camel-thesis-ledger.json",
-        "note": "Public video transcripts \u2192 qwen3-32b \u2192 structured cycle readings"
-      },
-      "member_site_api": {
-        "endpoint": "camelfinance.co.uk/wp-json/fluent-community/v2/feeds",
-        "auth": "Chrome cookies (pycookiecheat) + WP nonce",
-        "status": "DISCOVERED_NOT_DEPLOYED",
-        "spaces": [
-          "indicatorupdates",
-          "productupdates",
-          "tatalk",
-          "macroquestions",
-          "indicatorfeedback",
-          "indicatorquestions",
-          "resourceroom"
-        ],
-        "scraper": "camel-feed-scraper.py (NEEDS DEPLOYMENT)",
-        "content_type": "educational/framework, not live signals",
-        "note": "FluentCommunity REST API. All 7 spaces accessible. Need to deploy scraper script."
-      },
-      "site_crawler": {
-        "script": "camel-site-crawler.py",
-        "status": "SEEDS_UPDATED_NEVER_RAN",
-        "note": "Updated seed URLs 3/2. Site is FluentCommunity SPA \u2014 crawler gets limited static content. API approach is better for community posts."
-      },
-      "tradingview_webhooks": {
-        "receiver": "tv_receiver.py (PID 3261, port 8443)",
-        "funnel": "Tailscale /webhook \u2192 8443",
-        "alerts_created": 0,
-        "alerts_needed": 18,
-        "payloads": "tv-alert-payloads.txt (18 instruments/signals ready)",
-        "automation": "tv_alert_manager.py (Playwright, BROKEN - selector failure)",
-        "status": "RECEIVER_RUNNING_NO_ALERTS",
-        "priority": "HIGHEST \u2014 this is the live quantitative signal pipeline",
-        "next_action": "Use Claude in Chrome to create 18 alerts in TradingView"
-      }
-    },
-    "cf_finetuned_assets": {
-      "source": "CF Cycle Trading Indicator V-2 settings dropdown",
-      "extracted": "2026-03-02",
-      "assets": [
-        "BTC",
-        "ETH",
-        "SPX",
-        "NDQ",
-        "DJI",
-        "DXY",
-        "XAU/USD",
-        "XAG/USD",
-        "GDX",
-        "GDXJ",
-        "SILJ",
-        "USOIL",
-        "COIN",
-        "MSTR",
-        "MARA",
-        "RIOT"
-      ],
-      "note": "These have manually curated DCL/WCL counts. All other assets use default/less accurate counts."
-    }
+    "phase": "Phase 1 - ride weekly cycle + FOMC catalyst",
+    "gold_cycle_day": 26,
+    "gold_dcl_window": "22-28 (IN WINDOW)",
+    "spx_cycle_day": 46,
+    "btc_cycle_day": 28,
+    "fomc": "2026-03-18 (TOMORROW)",
+    "deploy_cash": "$533K 401k - DO NOT deploy before DCL+FOMC confirmation",
+    "exit_plan": "Before 8yr half-cycle top. Miners first. May-June 2026.",
+    "stops": "/MGC $4,450 GTC, /SIL $70 GTC"
   },
-  "architecture_layers": {
-    "L1": "DEPLOYED",
-    "L2": "DEPLOYED",
-    "L3": "IN PROGRESS",
-    "L4": "PLANNED"
+  "autoresearch_status": {
+    "L1A_signal_optimizer": "RUNNING nightly 2AM, v5 39%, PLATEAUED, widened 3/17",
+    "L1B_knowledge_evolver": "FIXED 3/17, needs one cycle to verify scored findings",
+    "alpha_scanner": "20 ideas, feedback loop WIRED 3/17, conviction differentiating",
+    "alpha_feedback": "RUNNING 9PM, source_type parsing fixed",
+    "L2_cross_domain": "NOT BUILT",
+    "L3_meta_optimizer": "NOT BUILT",
+    "corollary_framework": "LIVE: 10-component eval, 4 scenarios, PPLT scored",
+    "model_router": "LIVE: self-evaluating pipeline for new models"
   },
-  "dashboard_rule": "MANDATORY: every major session must rebuild index.html before push"
+  "known_fragile": [
+    "MCP drops during heavy Spark inference (GPU>90%). Self-recovers ~60s.",
+    "openclaw.json: NEVER run openclaw doctor --fix unattended. Sandbox must be OFF.",
+    "Three scheduling layers: LaunchAgents + Cowork + crontab. Audit ALL three.",
+    "Queue file format: JSON array, not JSONL. Readers must handle both.",
+    "Spark lock contention: queue daemon vs scheduler. Lock system works correctly."
+  ]
 }

@@ -1,6 +1,6 @@
 {
   "_description": "What depends on what. CHECK THIS BEFORE DELETING OR MODIFYING ANYTHING.",
-  "_updated": "2026-03-02T17:00:00+00:00",
+  "_updated": "2026-03-18T01:54:08.564178+00:00",
   "critical_mappings": [
     {
       "source": "~/zeke-scheduler.py lines 221-228",
@@ -132,6 +132,53 @@
         "~/.zeke-tv-profile/ (persistent browser profile, TV logged in)"
       ],
       "note": "Playwright-based alert creator. BROKEN: fails to open alert dialog on TradingView UI. Needs selector fixes or replacement with Claude in Chrome approach."
+    },
+    {
+      "source": "ALL scripts (7 files)",
+      "depends_on": "~/zeke-portfolio/config/spark-models.json + ~/zeke-portfolio/spark_models.py",
+      "note": "Central model routing. Scripts call get_model(task_type). Change model in config ONLY. Zero hardcoded model names.",
+      "files": [
+        "zeke-scheduler.py",
+        "zeke-local-repair.py",
+        "zeke-overnight-deep.py",
+        "zeke-watchdog.py",
+        "zeke-content-reactor.py",
+        "kg-readback.py",
+        "spark-work-queue.py"
+      ]
+    },
+    {
+      "source": "alpha-scanner.py",
+      "depends_on": "state/alpha-feedback.json (weight_adjustment per source_type)",
+      "note": "Feedback loop WIRED 3/17. Scanner reads accuracy weights and adjusts conviction. If feedback file missing, all weights = 1.0."
+    },
+    {
+      "source": "knowledge-evolver.py (L1B)",
+      "depends_on": [
+        "state/alpha-ideas.json",
+        "spark-work-queue.jsonl (JSON array format, NOT JSONL)"
+      ],
+      "note": "Generates research questions from high-conviction ideas. Dispatches to queue. Reads completed tasks on next run. Queue format = JSON array."
+    },
+    {
+      "source": "spark-work-queue.py",
+      "depends_on": "spark-work-queue.jsonl + spark-queue-inbox.jsonl",
+      "note": "Queue file is JSON ARRAY format. isinstance(t, dict) guards required. 11 guards added 3/17."
+    },
+    {
+      "source": "openclaw.json",
+      "depends_on": "agents.defaults.sandbox.mode MUST be 'off' (no Docker on Mac Mini)",
+      "note": "NEVER run openclaw doctor --fix unattended. Sandbox mode killed 1,427 jobs on 3/15."
+    },
+    {
+      "source": "morning_briefing.py (CANONICAL)",
+      "depends_on": [
+        "positions.json",
+        "cycle_state.json",
+        "latest_prices.json",
+        "alpha-ideas.json"
+      ],
+      "note": "Single morning briefing source. trade_alerts.py briefing DISABLED. Shows /MGC, /SIL with correct stops."
     }
   ],
   "file_relationships": {
