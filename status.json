@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-18T08:43:05.417112+00:00",
+  "timestamp": "2026-03-18T08:46:10.168636+00:00",
   "feed_lines": 7120,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-18T01:00:46.043208Z\", \"topic\": \"queue-research-xauusd\", \"finding\": \"We need to produce a specific actionable research finding about gold price structure daily cycle position. Must include (1) specific fact with number or date, (2) implication for portfolio, (3) confidence level with reason, and optional NEXT_TASK.\\n\\nWe have current positions listed: GLD Dec26 $470C/$500C etc. But we need to analyze gold price structure using latest prices. We don't have actual data but can infer maybe from context? The prior context mentions precious metals advancing on weekly timeframe despite equity weakness, and that XAUUSD long on Daily cycle low buy setup unknown. Today's date is 2026-03-01.\\n\\nWe need to produce a finding with specific fact: e.g., \\\"Gold's daily cycle has formed a swing low at $2,345.67 on March 1, 2026\\\" or something. Must be specific number/date.\\n\\nSince\", \"source\": \"spark-queue/bg_20260317_0\", \"instrument\": \"XAUUSD\", \"task_label\": \"Gold daily cycle structure analysis\", \"priority_was\": 3}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 93.0,
-    "temp_c": 63.0,
-    "power_w": 38.72,
+    "gpu_util_pct": 96.0,
+    "temp_c": 67.0,
+    "power_w": 65.47,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,7 +75,7 @@
   "gateway_process": {
     "pid": "1315",
     "memory_pct": "4.1",
-    "uptime": "08:41:23",
+    "uptime": "08:44:28",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -121,61 +121,6 @@
       "issues": [],
       "valid_entries": null,
       "broken_entries": null,
-      "cycle_time": "4:33 AM",
-      "cycle_num": 115
-    },
-    {
-      "name": "self-improvement",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "4:33 AM",
-      "cycle_num": 115
-    },
-    {
-      "name": "longevity",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "4:33 AM",
-      "cycle_num": 115
-    },
-    {
-      "name": "ai-agents",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "4:33 AM",
-      "cycle_num": 115
-    },
-    {
-      "name": "tool-calling",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "4:33 AM",
-      "cycle_num": 115
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
       "cycle_time": "4:36 AM",
       "cycle_num": 116
     },
@@ -332,73 +277,64 @@
       "broken_entries": null,
       "cycle_time": "4:42 AM",
       "cycle_num": 118
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "4:46 AM",
+      "cycle_num": 119
+    },
+    {
+      "name": "self-improvement",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "4:46 AM",
+      "cycle_num": 119
+    },
+    {
+      "name": "longevity",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "4:46 AM",
+      "cycle_num": 119
+    },
+    {
+      "name": "ai-agents",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "4:46 AM",
+      "cycle_num": 119
+    },
+    {
+      "name": "tool-calling",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "4:46 AM",
+      "cycle_num": 119
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 115,
-      "window": "overnight",
-      "timestamp": "2026-03-18T04:33:20.686590",
-      "time_display": "4:33 AM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "skipped",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "4:33 AM",
-          "cycle_num": 115
-        },
-        {
-          "name": "self-improvement",
-          "status": "skipped",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "4:33 AM",
-          "cycle_num": 115
-        },
-        {
-          "name": "longevity",
-          "status": "skipped",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "4:33 AM",
-          "cycle_num": 115
-        },
-        {
-          "name": "ai-agents",
-          "status": "fail",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "4:33 AM",
-          "cycle_num": 115
-        },
-        {
-          "name": "tool-calling",
-          "status": "skipped",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "4:33 AM",
-          "cycle_num": 115
-        }
-      ]
-    },
     {
       "cycle": 116,
       "window": "overnight",
@@ -590,6 +526,70 @@
           "cycle_num": 118
         }
       ]
+    },
+    {
+      "cycle": 119,
+      "window": "overnight",
+      "timestamp": "2026-03-18T04:46:10.108996",
+      "time_display": "4:46 AM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "fail",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "4:46 AM",
+          "cycle_num": 119
+        },
+        {
+          "name": "self-improvement",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "4:46 AM",
+          "cycle_num": 119
+        },
+        {
+          "name": "longevity",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "4:46 AM",
+          "cycle_num": 119
+        },
+        {
+          "name": "ai-agents",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "4:46 AM",
+          "cycle_num": 119
+        },
+        {
+          "name": "tool-calling",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "4:46 AM",
+          "cycle_num": 119
+        }
+      ]
     }
   ],
   "evaluation_count": 30,
@@ -610,5 +610,5 @@
   "zeke-queue_tail": [],
   "zeke-reason-error_tail": [],
   "cron_job_count": 12,
-  "strategic_context": "# Zeke Strategic Context\nLast distilled: 2026-03-17\n\n## System Architecture\n\n**Hardware & Inference**\n- DGX Spark GPU: 10.0.0.143:11434 (qwen3-32b-32k primary routing, 10 local models available)\n- Zero variable inference costs (all processing via local models, no Claude API fallthrough)\n- Device tagging system: ~/.zeke-device-id identifies mac-mini vs HP-mini, prevents cross-device false alarms\n\n**Execution Layer**\n- OpenClaw: 6 daily files + 56 journal entries (session-journal.jsonl canonical log)\n- Cowork-monitor.py: human-in-the-loop approval queue (device-filtered to prevent stale cross-machine alerts)\n- MCP watchdog: 23 tools responding, health-check passing\n- Spark work queue: cleaned 32,137 corrupt/empty entries (KeyError 'id' now handled via .get())\n\n**Learning & Synthesis**\n- Learning engine: 47+ sessions/night with memory_search-first protocol\n- Memory index: 34/38 files, 113 chunks, fresh daily\n- Camel YouTube pipeline (v2): 6h intervals, yt-dlp v2026.03.13, subtitle extraction fixed, Members inbox fallback active\n- Feed system: 6,976 entries, TLT + AI architecture + longevity cross-connects showing good synthesis\n\n**Dashboard & Control**\n- PWA in ~/zeke-dashboard/: manifest.json + service-worker.js + command input bar\n- Pending: TLT position card UI, GPU hardware endpoint (/api/spark-hardware), command POST to improvement-queue.md\n- Service worker registration + touch-optimized layout for iPhone home screen\n\n## Active Positions\n\n**Portfolio Tracking**\n- Accounts: etrade_brokerage + robinhood_401k\n- Cost basis + phase info available via get_portfolio_state(account='all')\n- Prices updated on last manual cycle (Phase 1: live Greeks/P&L pending)\n\n**TLT Focus**\n- Section 1256 tax optimization rules mapped (taxable vs 401k routing)\n- 7 learning insights generated Feb 17 (currently showing \"no new developments\" \u2014 topic rotation needed soon)\n- Treasury bond macro surveillance active\n\n**Camel Finance Signals**\n- Instruments: XAUUSD, SPX, BTC\n- Cycle theory parameters available: timing windows, translation rules, confirmation methods\n- YouTube transcript analysis feeding cycle readings + bias signals\n- Members inbox: 1 CRITICAL priority video (2MEofOq7zao) blocked on Matt's Chrome login\n\n## Trading Rules\n\n**Entry Signals**\n- TRANCHE_2 (Phase 1 spec-only): trigger conditions mapped\n- TRANCHE_3 (Phase 1 spec-only): trigger conditions mapped\n- Phase 2+: live evaluation against current market state\n\n**Exit Signals**\n- SCALE_OUT: partial position closing rules\n- HARD_STOP: drawdown exit triggers\n- Phase 1: rules from spec only\n- Phase 2+: live evaluation\n\n**Phase Structure**\n- Phase 1: Cycle ride with tranche stacking\n- Phase 2: Post-drawdown reload conditions (specify entry rules)\n- Drawdown detection: monitor against portfolio positions via get_portfolio_state()\n\n## Autonomous Schedule\n\n**Cost-Optimized Learning (Zero Variable Spend)**\n- Daily-learning-9pm: qwen3-32b-32k (fixed 2026-03-18 after model path error)\n- Overnight: 47+ sessions/night, TL"
+  "strategic_context": "# Zeke Strategic Context\nLast distilled: 2026-03-18\n\n## System Architecture\n\n**Compute Foundation**: DGX Spark cluster at 10.0.0.143:11434. Primary GPU model is Nemotron 3 Nano (NVIDIA MoE, 30B total / 3B active params, 76 tok/s). Legacy qwen3-32b-32k (9.6 tok/s) retained as fallback. Post-cleanup: 50GB active models, 187.5GB freed. Model router (`config/spark-models.json` + `spark_models.py:get_model()`) is single source of truth. All 7 scripts and 8 cron jobs routed through `get_model(task_type)` with no hardcoded model names. Embeddings via nomic-embed-text (local).\n\n**Pipeline Layer**: OpenClaw 2026.3.11+ (critical: `sandbox.mode = \"off\"` on Mac Mini, removed Docker-dependent config keys). 8 active cron jobs with local model cost efficiency. LaunchAgent controls all scheduling (verified healthy 3/14). Memory system functional with 34/38 index files, 113 chunks, no dirty state.\n\n**Data Infrastructure**: Learning feed 7105 entries. Session journal in `session-journal.jsonl`. Canonical memory via `claude-strategic-context.md` (mandatory sync point). Cost tracking via `cost-log.md`. Optimization backlog catalogued and prioritized. Zero variable costs (all local Spark routing).\n\n**Integration Points**: YouTube pipeline (`camel-yt-pipeline-v2.py`) ingests Members inbox transcripts. Feedback loop (`alpha-feedback.py`) now parses source_type dynamically instead of flat \"unknown\". Conviction adjustment wired in `alpha-scanner.py` with accuracy weights. L1B knowledge evolver uses Nemotron thinking mode with robust JSON extraction. Dashboard PWA under development (manifest.json + service-worker.js initialized, command bar POST `/api/command` pending).\n\n## Active Positions\n\n**TLT (Treasury Long-Term)**: Primary surveillance target. Research topics generated via learning-engine but showing \"No new developments\" signals \u2014 rotation needed soon. Daily monitoring via cron, integrated with compound memory synthesis.\n\n**Sleep Research** (secondary): 2025-2026 study synthesis completed. Biomarker updates, mental health integration, adolescent tracking prioritized. Cross-connects to longevity research.\n\n**No Active Trading Positions**: System in recovery/stabilization phase. Queue pending: 0. Approvals pending: 0.\n\n## Trading Rules\n\n**Alpha Feedback Loop**: Source-type now dynamically parsed (was all \"unknown\"). First run post-fix: ideas differentiated from flat 5/8 conviction to 5/6/7 distribution. Conviction driven by accuracy weights in `alpha-scanner.py`.\n\n**Scoring Protocol**: Nemotron extraction mode used for fast candidate evaluation. Fallback to qwen3 for complex reasoning. Extraction/scoring/synthesis tasks routed by task_type. Embedding-based memory search for contextual decision-making.\n\n**Knowledge Evolution**: L1B question generation rewritten for Nemotron thinking mode. Robust JSON extraction via `re.finditer()`. Self-correction enabled. Compound synthesis of TLT, system optimization, longevity research threads.\n\n## Autonomous Schedule\n\n**Cron Infra"
 }
