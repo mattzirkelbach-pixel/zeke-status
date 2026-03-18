@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-03-17T23:46:23.120813",
+  "timestamp": "2026-03-17T23:50:27.667381",
   "window": "overnight",
-  "cycle": 28,
+  "cycle": 29,
   "feed_before": 7140,
-  "feed_after": 7140,
-  "feed_growth": 0,
+  "feed_after": 7141,
+  "feed_growth": 1,
   "jobs": {
     "total": 5,
     "success": 1,
@@ -15,12 +15,15 @@
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
+      "status": "success",
+      "duration_s": 1,
+      "feed_grew": 1,
+      "entry_valid": true,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
     },
     {
       "uuid": "54202a7d-617",
@@ -34,15 +37,12 @@
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "success",
+      "status": "fail",
       "duration_s": 0,
-      "feed_grew": 1,
-      "entry_valid": true,
+      "feed_grew": 0,
+      "entry_valid": false,
       "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 1,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     },
     {
       "uuid": "a03747c8-f17",
@@ -65,16 +65,6 @@
   ],
   "failures": [
     {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
-    },
-    {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
       "status": "skipped",
@@ -82,6 +72,16 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": []
+    },
+    {
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "fail",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     },
     {
       "uuid": "a03747c8-f17",
