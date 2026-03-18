@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-03-17T23:50:27.667381",
+  "timestamp": "2026-03-17T23:56:00.407419",
   "window": "overnight",
-  "cycle": 29,
-  "feed_before": 7140,
+  "cycle": 30,
+  "feed_before": 7141,
   "feed_after": 7141,
-  "feed_growth": 1,
+  "feed_growth": 0,
   "jobs": {
     "total": 5,
-    "success": 1,
+    "success": 0,
     "fail": 1,
     "timeout": 0
   },
@@ -15,15 +15,11 @@
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "success",
-      "duration_s": 1,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "status": "skipped",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
     },
     {
       "uuid": "54202a7d-617",
@@ -37,12 +33,11 @@
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
@@ -56,15 +51,25 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "failures": [
     {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    },
+    {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
       "status": "skipped",
@@ -76,12 +81,11 @@
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
@@ -95,11 +99,12 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "needs_repair": true,
