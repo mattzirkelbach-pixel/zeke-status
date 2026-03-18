@@ -1,11 +1,11 @@
 {
-  "timestamp_local": "2026-03-18 04:59:11 ET",
-  "timestamp_utc": "2026-03-18T08:59:11Z",
+  "timestamp_local": "2026-03-18 05:00:20 ET",
+  "timestamp_utc": "2026-03-18T09:00:20Z",
   "scheduler": {
     "running": true,
     "pid": 1458,
-    "uptime_minutes": 537,
-    "current_window": "overnight"
+    "uptime_minutes": 538,
+    "current_window": "queue/reason"
   },
   "feed": {
     "total_lines": 7120,
@@ -32,14 +32,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nomic-embed-text:latest",
       "nemotron-3-nano:30b",
+      "nomic-embed-text:latest",
       "qwen3:8b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, nemotron-3-nano:30b, qwen3:8b"
+    "detail": "healthy, loaded: nemotron-3-nano:30b, nomic-embed-text:latest, qwen3:8b"
   },
   "gateway": {
     "running": true
@@ -296,8 +296,10 @@
     }
   ],
   "health": {
-    "status": "HEALTHY",
-    "issues": []
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "WARNING: Feed not updated in 120m"
+    ]
   },
   "kg_stats": {
     "entities": 578,
