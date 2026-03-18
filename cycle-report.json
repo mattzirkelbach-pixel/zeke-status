@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-03-17T21:27:47.052206",
+  "timestamp": "2026-03-17T21:34:27.520099",
   "window": "overnight",
-  "cycle": 5,
+  "cycle": 6,
   "feed_before": 7133,
-  "feed_after": 7133,
-  "feed_growth": 0,
+  "feed_after": 7134,
+  "feed_growth": 1,
   "jobs": {
     "total": 5,
     "success": 0,
@@ -15,21 +15,22 @@
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "skipped",
+      "status": "unknown",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [
+        "spark_locked"
+      ]
     },
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "fail",
-      "duration_s": 0,
+      "status": "skipped",
+      "duration_s": 1,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": []
     },
     {
       "uuid": "3cd4b17d-448",
@@ -52,32 +53,34 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "failures": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "skipped",
+      "status": "unknown",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [
+        "spark_locked"
+      ]
     },
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "fail",
-      "duration_s": 0,
+      "status": "skipped",
+      "duration_s": 1,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": []
     },
     {
       "uuid": "3cd4b17d-448",
@@ -100,11 +103,12 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "needs_repair": true,
