@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-18T01:17:32.184039+00:00",
+  "timestamp": "2026-03-18T01:20:46.770213+00:00",
   "feed_lines": 7133,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-18T00:41:24.305501Z\", \"topic\": \"queue-research-general\", \"finding\": \"We need to produce a specific actionable research finding. Must include (1) specific fact with number or date; (2) implication for portfolio; (3) confidence level; (4) next_task optional.\\n\\nWe have current positions: GLD Dec26 $470C/$500C, IBIT $48C Jun26, IREN $50C May26, TLT LEAPS Jan27, SILJ $30C, GDX $95C.\\n\\nWe need to produce a finding based on context. The prior context indicates SPX closed at 7,042 on 2026-02-29, failing to retest 7,050 support, consolidation range 7,000\\u20137,060. Implication: monitor for break below 7,000 to trigger closing GLD spread and short SILJ.\\n\\nNow today is March 1, 2026. We need a specific fact with number or date. Could be something like \\\"SPX closed at 7,045 on March 1, still above 7,000 but below 7,050 resistance\\\". Or we could note that \\\"GLD Dec26 $470C/$500C \", \"source\": \"spark-queue/refill_20260318T003000_1\", \"instrument\": \"GENERAL\", \"task_label\": \"coverage: XAGUSD thin data (0 entries in 7d)\", \"priority_was\": 5}",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 93.0,
-    "temp_c": 64.0,
-    "power_w": 38.86,
+    "temp_c": 60.0,
+    "power_w": 37.55,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,7 +75,7 @@
   "gateway_process": {
     "pid": "1315",
     "memory_pct": "3.1",
-    "uptime": "01:15:53",
+    "uptime": "01:19:11",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -113,39 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 1,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "8:33 PM",
-      "cycle_num": 2
-    },
-    {
-      "name": "ai-agents",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "8:33 PM",
-      "cycle_num": 2
-    },
-    {
-      "name": "self-improvement",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "8:33 PM",
-      "cycle_num": 2
-    },
     {
       "name": "treasury-bonds",
       "status": "skipped",
@@ -312,51 +279,64 @@
       "broken_entries": null,
       "cycle_time": "9:14 PM",
       "cycle_num": 3
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "9:20 PM",
+      "cycle_num": 4
+    },
+    {
+      "name": "self-improvement",
+      "status": "fail",
+      "duration": 1,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "9:20 PM",
+      "cycle_num": 4
+    },
+    {
+      "name": "longevity",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "9:20 PM",
+      "cycle_num": 4
+    },
+    {
+      "name": "ai-agents",
+      "status": "fail",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "9:20 PM",
+      "cycle_num": 4
+    },
+    {
+      "name": "tool-calling",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "9:20 PM",
+      "cycle_num": 4
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 2,
-      "window": "daytime",
-      "timestamp": "2026-03-17T20:33:45.112244",
-      "time_display": "8:33 PM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "skipped",
-          "duration": 1,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "8:33 PM",
-          "cycle_num": 2
-        },
-        {
-          "name": "ai-agents",
-          "status": "skipped",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "8:33 PM",
-          "cycle_num": 2
-        },
-        {
-          "name": "self-improvement",
-          "status": "skipped",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "8:33 PM",
-          "cycle_num": 2
-        }
-      ]
-    },
     {
       "cycle": 1,
       "window": "overnight",
@@ -548,6 +528,70 @@
           "broken_entries": null,
           "cycle_time": "9:14 PM",
           "cycle_num": 3
+        }
+      ]
+    },
+    {
+      "cycle": 4,
+      "window": "overnight",
+      "timestamp": "2026-03-17T21:20:46.715694",
+      "time_display": "9:20 PM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "fail",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "9:20 PM",
+          "cycle_num": 4
+        },
+        {
+          "name": "self-improvement",
+          "status": "fail",
+          "duration": 1,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "9:20 PM",
+          "cycle_num": 4
+        },
+        {
+          "name": "longevity",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "9:20 PM",
+          "cycle_num": 4
+        },
+        {
+          "name": "ai-agents",
+          "status": "fail",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "9:20 PM",
+          "cycle_num": 4
+        },
+        {
+          "name": "tool-calling",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "9:20 PM",
+          "cycle_num": 4
         }
       ]
     }
