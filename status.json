@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-19T03:56:04.252146+00:00",
+  "timestamp": "2026-03-19T03:56:13.126860+00:00",
   "feed_lines": 7146,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-19T02:05:35.622677Z\", \"topic\": \"queue-research-spx/crude\", \"finding\": \"We need to produce a specific output. Must include FINDING: one specific sentence with number or date. IMPLICATION: one sentence about what should change, monitor, decision. CONFIDENCE: high/medium/low with one-sentence reason. NEXT_TASK optional.\\n\\nContext: We have prior context includes some research findings about TLT vs GLD negative correlation etc., but current web context says today is 2026-03-01 and positions include various options. The question: \\\"How many historical episodes over the past 30 years exhibited a similar negative SPX\\u2011crude correlation and cost\\u2011push inflation spike, and what were their subsequent equity performance trajectories and duration of the stagflation regime?\\\" We need to produce a specific finding with numbers/dates.\\n\\nWe must use historical data. Need to find nu\", \"source\": \"spark-queue/ke_20260319T020017_4090a8f4_1\", \"instrument\": \"SPX/CRUDE\", \"task_label\": \"KE: How many historical episodes over the past 30\\u202fyears exhibited a similar negative\", \"priority_was\": 4}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 53.0,
-    "power_w": 47.59,
+    "gpu_util_pct": 0.0,
+    "temp_c": 49.0,
+    "power_w": 12.02,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,7 +75,7 @@
   "gateway_process": {
     "pid": "1315",
     "memory_pct": "3.1",
-    "uptime": "01-03:54:22",
+    "uptime": "01-03:54:31",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -88,10 +88,6 @@
       {
         "name": "qwen3:8b",
         "size_gb": 6.0
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 24.8
       }
     ]
   },
