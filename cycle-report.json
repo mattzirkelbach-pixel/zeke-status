@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-03-18T22:30:01.438332",
+  "timestamp": "2026-03-18T22:36:10.126380",
   "window": "overnight",
-  "cycle": 25,
-  "feed_before": 7140,
-  "feed_after": 7140,
+  "cycle": 26,
+  "feed_before": 7141,
+  "feed_after": 7141,
   "feed_growth": 0,
   "jobs": {
     "total": 5,
-    "success": 0,
-    "fail": 3,
+    "success": 1,
+    "fail": 2,
     "timeout": 0
   },
   "job_details": [
@@ -25,22 +25,24 @@
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "fail",
+      "status": "success",
       "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
+      "feed_grew": 1,
+      "entry_valid": true,
       "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "valid_entries": 1,
+      "dedup_removed": 1,
+      "trivial_entries": 0,
+      "broken_entries": 0
     },
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
@@ -54,11 +56,12 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "failures": [
@@ -73,24 +76,13 @@
       "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     },
     {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
-      "status": "fail",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
-    },
-    {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
@@ -104,11 +96,12 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "skipped",
+      "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [],
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     }
   ],
   "needs_repair": true,
