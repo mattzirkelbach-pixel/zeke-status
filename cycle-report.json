@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-03-18T22:04:57.729170",
+  "timestamp": "2026-03-18T22:09:47.459765",
   "window": "overnight",
-  "cycle": 20,
-  "feed_before": 7130,
-  "feed_after": 7131,
-  "feed_growth": 1,
+  "cycle": 21,
+  "feed_before": 7133,
+  "feed_after": 7135,
+  "feed_growth": 2,
   "jobs": {
     "total": 5,
-    "success": 3,
-    "fail": 2,
+    "success": 1,
+    "fail": 1,
     "timeout": 0
   },
   "job_details": [
@@ -28,54 +28,47 @@
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "success",
+      "status": "fail",
       "duration_s": 0,
-      "feed_grew": 1,
-      "entry_valid": true,
+      "feed_grew": 0,
+      "entry_valid": false,
       "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 1,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     },
     {
       "uuid": "3cd4b17d-448",
       "name": "longevity",
-      "status": "success",
+      "status": "skipped",
       "duration_s": 0,
-      "feed_grew": 1,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 1,
-      "dedup_removed": 1,
-      "trivial_entries": 0,
-      "broken_entries": 0
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
     },
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "fail",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": []
     },
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "fail",
+      "status": "unknown",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": [
+        "spark_locked"
+      ]
     }
   ],
   "failures": [
     {
-      "uuid": "a03747c8-f17",
-      "name": "ai-agents",
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
       "status": "fail",
       "duration_s": 0,
       "feed_grew": 0,
@@ -84,14 +77,33 @@
       "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
     },
     {
-      "uuid": "9df9cf14-e1c",
-      "name": "tool-calling",
-      "status": "fail",
+      "uuid": "3cd4b17d-448",
+      "name": "longevity",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [],
-      "output_tail": "{\n  \"ok\": true,\n  \"ran\": false,\n  \"reason\": \"already-running\"\n}\n"
+      "issues": []
+    },
+    {
+      "uuid": "a03747c8-f17",
+      "name": "ai-agents",
+      "status": "skipped",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
+    },
+    {
+      "uuid": "9df9cf14-e1c",
+      "name": "tool-calling",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
     }
   ],
   "needs_repair": true,
