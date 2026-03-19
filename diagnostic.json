@@ -1,11 +1,11 @@
 {
-  "timestamp_local": "2026-03-19 05:56:00 ET",
-  "timestamp_utc": "2026-03-19T09:56:00Z",
+  "timestamp_local": "2026-03-19 06:00:52 ET",
+  "timestamp_utc": "2026-03-19T10:00:52Z",
   "scheduler": {
     "running": true,
     "pid": 1458,
-    "uptime_minutes": 2034,
-    "current_window": "queue/reason"
+    "uptime_minutes": 2038,
+    "current_window": "daytime"
   },
   "feed": {
     "total_lines": 7136,
@@ -33,13 +33,13 @@
     "online": true,
     "models_loaded": [
       "nemotron-3-nano:30b",
-      "nomic-embed-text:latest",
-      "qwen3:8b"
+      "qwen3:8b",
+      "nomic-embed-text:latest"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b, nomic-embed-text:latest, qwen3:8b"
+    "detail": "healthy, loaded: nemotron-3-nano:30b, qwen3:8b, nomic-embed-text:latest"
   },
   "gateway": {
     "running": true
@@ -48,20 +48,10 @@
     "jobs_run": 100,
     "success": 0,
     "timeout": 0,
-    "fail": 22,
+    "fail": 21,
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-03-19T04:28:56.835993",
-      "window": "overnight",
-      "cycle": 125,
-      "jobs": 5,
-      "success": 0,
-      "timeout": 0,
-      "fail": 1,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-03-19T04:32:11.354108",
       "window": "overnight",
@@ -151,31 +141,20 @@
       "timeout": 0,
       "fail": 1,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-19T06:00:43.900005",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 3,
+      "success": 0,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
     {
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
       "name": "ai-agents",
       "status": "skipped",
       "duration": 0,
@@ -289,6 +268,27 @@
     },
     {
       "name": "tool-calling",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 1,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
       "status": "skipped",
       "duration": 0,
       "grew": 0,
@@ -298,7 +298,7 @@
   "health": {
     "status": "ISSUES_FOUND",
     "issues": [
-      "WARNING: Feed not updated in 176m"
+      "WARNING: Feed not updated in 180m"
     ]
   },
   "kg_stats": {
