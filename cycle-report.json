@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-03-21T00:28:26.754734",
+  "timestamp": "2026-03-21T00:35:35.374740",
   "window": "overnight",
-  "cycle": 42,
-  "feed_before": 7537,
-  "feed_after": 7542,
-  "feed_growth": 5,
+  "cycle": 43,
+  "feed_before": 7543,
+  "feed_after": 7547,
+  "feed_growth": 4,
   "jobs": {
     "total": 5,
-    "success": 2,
+    "success": 1,
     "fail": 0,
     "timeout": 0
   },
@@ -17,10 +17,10 @@
       "name": "treasury-bonds",
       "status": "success",
       "duration_s": 0,
-      "feed_grew": 2,
+      "feed_grew": 1,
       "entry_valid": true,
       "issues": [],
-      "valid_entries": 2,
+      "valid_entries": 1,
       "dedup_removed": 0,
       "trivial_entries": 0,
       "broken_entries": 0
@@ -28,13 +28,11 @@
     {
       "uuid": "54202a7d-617",
       "name": "self-improvement",
-      "status": "unknown",
+      "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": [
-        "spark_locked"
-      ]
+      "issues": []
     },
     {
       "uuid": "3cd4b17d-448",
@@ -57,21 +55,6 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "success",
-      "duration_s": 0,
-      "feed_grew": 2,
-      "entry_valid": true,
-      "issues": [],
-      "valid_entries": 2,
-      "dedup_removed": 0,
-      "trivial_entries": 0,
-      "broken_entries": 0
-    }
-  ],
-  "failures": [
-    {
-      "uuid": "54202a7d-617",
-      "name": "self-improvement",
       "status": "unknown",
       "duration_s": 0,
       "feed_grew": 0,
@@ -79,6 +62,17 @@
       "issues": [
         "spark_locked"
       ]
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "54202a7d-617",
+      "name": "self-improvement",
+      "status": "skipped",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": []
     },
     {
       "uuid": "3cd4b17d-448",
@@ -97,6 +91,17 @@
       "feed_grew": 0,
       "entry_valid": false,
       "issues": []
+    },
+    {
+      "uuid": "9df9cf14-e1c",
+      "name": "tool-calling",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
     }
   ],
   "needs_repair": true,

@@ -1,12 +1,7 @@
 {
-  "timestamp": "2026-03-21T04:28:35.479475+00:00",
-  "feed_lines": 7542,
+  "timestamp": "2026-03-21T04:35:35.428881+00:00",
+  "feed_lines": 7547,
   "recent_feed": [
-    "{\"timestamp\": \"2026-03-21T04:13:01.982705Z\", \"topic\": \"queue-research-spx\", \"finding\": \"We need to produce a research finding about S&P 500 market breadth: advance/decline, new highs vs lows, percent above 200-day SMA. Check for divergences between internals and price.\\n\\nWe need a specific fact with number or date. Must be actionable. Provide implication for portfolio. Confidence level with reason. Possibly next_task.\\n\\nWe need to browse? No actual browsing tool provided, but we can simulate knowledge. As of 2026-03-01, we need S&P 500 market breadth data. We need to produce a specific fact. Since we don't have real data, we must say we cannot find specific data if not available. But we can assume we have data? The instruction: \\\"If you cannot find specific data, say so directly.\\\" So we need to decide: do we have data? We don't have actual browsing. We could say we cannot find s\", \"source\": \"spark-queue/bg_20260321_4\", \"instrument\": \"SPX\", \"task_label\": \"Market breadth vs SPX price level\", \"priority_was\": 3}",
-    "{\"timestamp\":\"2026-03-21T04:09:00Z\",\"topic\":\"ai-agents\",\"finding\":\"BFCL V4 benchmark version 4 provides a standardized measure of function calling accuracy; track its updates to align tool-calling efforts\",\"source\":\"https://gorilla.cs.berkeley.edu/leaderboard.html\"}",
-    "{\"timestamp\": \"2026-03-21T04:15:10.590655Z\", \"topic\": \"queue-research-gld\", \"finding\": \"We need to produce a specific fact with number/date about GLD options open interest for nearest monthly and Dec 2026 expiry. Provide large OI strikes, put/call ratio, dealer gamma positioning.\\n\\nWe have prior context showing OI surge for March 7, 2026 $480C options up 41% as of Feb 28, 2026. Today is 2026-03-01. Need to research nearest monthly expiry (likely March 2026? Actually nearest monthly expiry from today March 1, 2026 would be March 2026 weekly? Options typically expire third Friday of month. March 2026 monthly expiry is March 20, 2026 (third Friday). Also Dec 2026 expiry is Dec 18, 2026 (third Friday). Need OI for those expiries.\\n\\nWe don't have actual data; we must say if cannot find specific data. But we have prior context giving OI for March 7, 2026 $480C (that's a weekly expiry\", \"source\": \"spark-queue/bg_20260321_5\", \"instrument\": \"GLD\", \"task_label\": \"GLD options flow and key OI strikes\", \"priority_was\": 3}",
-    "{\"timestamp\": \"2026-03-21T04:16:43.427712Z\", \"topic\": \"queue-research-xauusd\", \"finding\": \"We need to retrieve latest XAUUSD OHLC data to calculate 20-day SMA and identify any swing low formation. We don't have actual data; we must say if cannot find specific data. According to instruction: If you cannot find specific data, say so directly. So we need to state that we don't have the data. Provide a finding: \\\"Unable to retrieve latest XAUUSD OHLC data as of 2026-03-01.\\\" Then implication: need to monitor data source. Confidence: low because no data. Next_task: retrieve data from reliable source.\\n\\nWe must follow format exactly: FINDING: [one specific sentence with a number or date] IMPLICATION: [one sentence] CONFIDENCE: [high/medium/low \\u2014 with one-sentence reason] NEXT_TASK: [optional \\u2014 if this finding warrants immediate follow-up, describe it in one sentence]\\n\\nWe need a number or\", \"source\": \"spark-queue/followup_followup_followup_bg_20260320_0\", \"instrument\": \"XAUUSD\", \"task_label\": \"Follow-up: Retrieve the latest XAUUSD OHLC data to calculate the 20\\u2011day\", \"priority_was\": 3}",
-    "{\"timestamp\": \"2026-03-21T04:18:23.038631Z\", \"topic\": \"queue-research-xagusd\", \"finding\": \"We need to produce a specific, actionable research finding: retrieve latest COT report for silver and compute its daily cycle phase relative to gold's daily cycle.\\n\\nWe have prior context: As of March 1, 2026, COT report for silver shows speculative net longs at 12,450 contracts, a 15% increase from prior week, highest since early Jan 2026. Also silver is Week 18 of its 20-24 week cycle as of 2026-03-01, bullish left translation forming ahead of expected cycle high in Weeks 22-24 (March 24-April 14, 2026). Also we have daily cycle pattern: bullish daily cycle pattern (Day 3-5 of a 5-7 day bullish reversal). Need to compute daily cycle phase relative to gold's daily cycle. We don't have explicit gold daily cycle data in context. We may need to infer or say cannot find specific data. The inst\", \"source\": \"spark-queue/followup_bg_20260321_3\", \"instrument\": \"XAGUSD\", \"task_label\": \"Follow-up: Retrieve the latest COT report for silver and compute its da\", \"priority_was\": 3}",
     "{\"timestamp\":\"2026-03-21T04:20:00Z\",\"topic\":\"longevity\",\"finding\":\"Junevity expanded seed round to $20 million in December 2025 investors should monitor biotech funding cycles Q4 2025\",\"source\":\"https://www.labiotech.eu/best-biotech/anti-aging-biotech-companies/\"}",
     "{\"timestamp\": \"2026-03-21T04:19:43.601218Z\", \"topic\": \"queue-research-spx\", \"finding\": \"We need to produce a specific fact with number or date for S&P 500 advance/decline, new highs/lows, % above 200-day SMA for 2026-03-01. We don't have actual data; we must say if cannot find specific data. According to instruction: If you cannot find specific data, say so directly. We have no web context data provided. So we must state we cannot retrieve. Provide finding: \\\"Unable to retrieve specific S&P 500 advance/decline, new highs/lows, and % above 200\\u2011day SMA for 2026-03-01 from reliable sources.\\\" Then implication: maybe monitor data source. Confidence low because no data. Next_task optional: suggest to check Bloomberg/FactSet.\\n\\nWe must follow exact format: FINDING: [one specific sentence with a number or date] but if we say unable, that sentence doesn't have a number or date. The inst\", \"source\": \"spark-queue/followup_bg_20260321_4\", \"instrument\": \"SPX\", \"task_label\": \"Follow-up: Retrieve the latest S&P 500 advance/decline, new highs/lows,\", \"priority_was\": 3}",
     "{\"timestamp\":\"2026-03-21T04:16:00Z\",\"topic\":\"treasury-bonds\",\"finding\":\"10Y yield rose to 4.39% on March 20 2026 signals TLT long thesis still intact but watch for breach of 4.40% threshold\",\"source\":\"https://tradingeconomics.com/united-states/government-bond-yield\"}",
@@ -16,7 +11,12 @@
     "{\"timestamp\": \"2026-03-21T04:24:43.326241Z\", \"topic\": \"queue-research-btc\", \"finding\": \"We need to produce a specific, actionable research finding about BTC current cycle position per Camel theory, checking Fed pivot signals, ETF flow data, and correlation with risk assets.\\n\\nWe have prior context: multiple feeds with Camel analysis. The most recent feed: \\\"BEARISH\\\" BTC, CL, CRUDE, DXY, NASDAQ, SLV, SPX, VIX, XAGUSD, XAUUSD: The Oil Situation is Almost Over | CRUDE macro cycle \\u2014 approaching_low. Key level: 120 spike, currently ~90 | BTC weekly cycle \\u2014 late (left translated). Key level: 80K weekly cycle low | SPX weekly cycle \\u2014 late (left translated). Key level: Recent wick from weekly cycle failure point | Trade: LONG XAUUSD \\u2014 entry: Based o\\n\\nSecond feed: \\\"BULLISH\\\" BITO, BTC, BTCGOLD, Bitcoin, Bonds (Type 4), CJ (Copper Miners), DXY, Dixie (USD Index), Gold, MAGS 7 ETF, NASDAQ,\", \"source\": \"spark-queue/bg_20260321_6\", \"instrument\": \"BTC\", \"task_label\": \"Bitcoin cycle position and macro catalysts\", \"priority_was\": 3}",
     "{\"timestamp\": \"2026-03-21T04:26:23.834147Z\", \"topic\": \"queue-research-dxy\", \"finding\": \"We need to produce a specific, actionable research finding about DXY cycle position, implications for gold (inverse correlation) and treasury bonds, key support/resistance levels.\\n\\nWe have prior context: DXY current level 100.24, bullish cycle, RSI 68.5 overbought, DXY in 22-26 week bullish cycle. Key level: 100.00 (current level). Break below 98.00 triggers risk-on rotation and TLT rally. Break above 102.00 would trigger... (cut off). We need to produce a finding with a specific fact (number or date). Then implication for portfolio (what to change, monitor, decision). Then confidence level with one-sentence reason. Next_task optional.\\n\\nWe need to ensure no hedging, no generic statements. Provide specific fact: e.g., \\\"As of 2026-03-01, DXY is at 100.24, within its 22-26 week bullish cycle,\", \"source\": \"spark-queue/bg_20260321_7\", \"instrument\": \"DXY\", \"task_label\": \"Dollar cycle and implications for gold and bonds\", \"priority_was\": 3}",
     "{\"timestamp\":\"2026-03-21T04:30:00Z\",\"topic\":\"ai-agents\",\"finding\":\"BFCL V4 scales to thousands of functions Implication watch AI infrastructure ETF ARKK for reallocation if function volume surpasses 5000\",\"source\":\"https://gorilla.cs.berkeley.edu/leaderboard.html\"}",
-    "{\"timestamp\": \"2026-03-21T04:28:13.475334Z\", \"topic\": \"queue-research-gld\", \"finding\": \"We need to retrieve latest open interest and volume for GLD Dec26 $500C and $470C options from CBOE API or exchange reports for 2026-02-28. The user asks for data as of 2026-02-28. Today is 2026-03-01. We need to produce a finding with a specific fact (number or date). We need to have data. We don't have actual data; we must say if cannot find specific data. According to instruction: If you cannot find specific data, say so directly. So we must check if we have data. We have no actual API access. So we must say we cannot retrieve the data. Then produce a finding that states we cannot find specific data. But the format requires a finding with a number or date. If we cannot find data, we must say so directly, maybe like: \\\"FINDING: No specific open interest or volume data for GLD Dec26 $500C \", \"source\": \"spark-queue/followup_followup_bg_20260321_5\", \"instrument\": \"GLD\", \"task_label\": \"Follow-up: Retrieve the latest open interest and volume for GLD Dec26 $\", \"priority_was\": 3}"
+    "{\"timestamp\": \"2026-03-21T04:28:13.475334Z\", \"topic\": \"queue-research-gld\", \"finding\": \"We need to retrieve latest open interest and volume for GLD Dec26 $500C and $470C options from CBOE API or exchange reports for 2026-02-28. The user asks for data as of 2026-02-28. Today is 2026-03-01. We need to produce a finding with a specific fact (number or date). We need to have data. We don't have actual data; we must say if cannot find specific data. According to instruction: If you cannot find specific data, say so directly. So we must check if we have data. We have no actual API access. So we must say we cannot retrieve the data. Then produce a finding that states we cannot find specific data. But the format requires a finding with a number or date. If we cannot find data, we must say so directly, maybe like: \\\"FINDING: No specific open interest or volume data for GLD Dec26 $500C \", \"source\": \"spark-queue/followup_followup_bg_20260321_5\", \"instrument\": \"GLD\", \"task_label\": \"Follow-up: Retrieve the latest open interest and volume for GLD Dec26 $\", \"priority_was\": 3}",
+    "{\"timestamp\":\"2026-03-21T04:30:00Z\",\"topic\":\"ai-agents\",\"finding\":\"Truesight starts at $19 per month, set price alert if cost rises above $20\",\"source\":\"https://www.randalolson.com/2026/03/06/top-tools-to-evaluate-and-benchmark-ai-agent-performance-2026/\"}",
+    "{\"timestamp\": \"2026-03-21T04:30:56.155635Z\", \"topic\": \"queue-research-btc\", \"finding\": \"We need to produce a specific actionable research finding. Must include a specific fact with number or date, implication for portfolio, confidence level. No hedging, no generic statements. If cannot find specific data, say so directly.\\n\\nWe need to look for latest Fed minutes and Bitcoin ETF flow reports to confirm pivot signals. The prior context includes a finding about March 15, 2026 Fed meeting minutes release on March 20, 2026. Today is 2026-03-01. So we need to maybe check if those minutes have been released? The date is March 20, 2026, which is in the future relative to today (March 1). So not yet released. We could say that as of today, the minutes are not yet released; we need to monitor. But we need a specific fact with number or date. Could be: \\\"The Federal Reserve's March 15, 20\", \"source\": \"spark-queue/followup_bg_20260321_6\", \"instrument\": \"BTC\", \"task_label\": \"Follow-up: optional. Could be: Look for latest Fed minutes and Bitcoin \", \"priority_was\": 3}",
+    "{\"timestamp\":\"2026-03-21T04:30:00Z\",\"topic\":\"ai-agents\",\"finding\":\"Temperature 0.7 suggests limited randomness for function calls; monitor precision and consider increasing to 0.9 for complex tool use\",\"source\":\"https://gorilla.cs.berkeley.edu/leaderboard.html\"}",
+    "{\"timestamp\": \"2026-03-21T04:33:08.369591Z\", \"topic\": \"queue-research-dxy\", \"finding\": \"We need to produce a finding about DXY close below 98.00 on a daily chart to trigger tactical increase in TLT LEAPS (Jan27) and reduction in GLD Dec26 calls.\\n\\nWe need to check if DXY closed below 98.00 today (2026-03-01). The portfolio context says current level: 100.24. So not below 98.00. We need to see if any data indicates a close below 98.00. The web context is empty. We have no specific data. So we must say we cannot find specific data. According to instruction: If you cannot find specific data, say so directly.\\n\\nThus output: FINDING: No specific data indicating DXY closed below 98.00 on 2026-03-01 (or any recent date). IMPLICATION: Continue monitoring DXY daily close; if it falls below 98.00, increase TLT LEAPS Jan27 and reduce GLD Dec26 calls. CONFIDENCE: low \\u2014 because no data avai\", \"source\": \"spark-queue/followup_bg_20260321_7\", \"instrument\": \"DXY\", \"task_label\": \"Follow-up: Watch for a DXY close below 98.00 on a daily chart to trigge\", \"priority_was\": 3}",
+    "{\"timestamp\":\"2026-03-21T04:35:00Z\",\"topic\":\"treasury-bonds\",\"finding\":\"US 10-year Treasury yield climbed to 4.37% on March 20 2026 the highest level since July 2025 requiring vigilant Fed policy watching\",\"source\":\"https://tradingeconomics.com/united-states/government-bond-yield\"}"
   ],
   "kg_stats": "Entities: 612\nRelationships: 694\nAssociations: 309\nInsights: 62\nDomains: {\n  \"ai-agents\": 145,\n  \"longevity\": 116,\n  \"treasury-bonds\": 105,\n  \"self-improvement\": 97,\n  \"tool-calling\": 52,\n  \"cross-domain\": 27,\n  \"finance-cycles\": 7,\n  \"compound-synthesis\": 6,\n  \"local model inference\": 6,\n  \"self_improvement\": 6,\n  \"financial-cycles\": 5,\n  \"senolytics\": 4,\n  \"ai-agents,longevity\": 3,\n  \"circadian biology\": 3,\n  \"10-year_Treasury_yield\": 2,\n  \"10-year_Treasury_yield_adjustment_intervals\": 2,\n  \"AI development\": 2,\n  \"LONGEVITY\": 2,\n  \"Longevity\": 2,\n  \"clinical-diagnosis\": 2,\n  \"cross-domain-associations\": 2,\n  \"financial_instruments\": 2,\n  \"financials-trade\": 2,\n  \"spaced_repetition_intervals\": 2,\n  \"tool-calling-improvements\": 2,\n  \"treasure-bonds\": 2,\n  \"treasury\": 2,\n  \"treasury-bounds\": 2,\n  \"xauusd\": 2\n}",
   "last_synthesis": "daily-synthesis-2026-02-21.md",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 96.0,
-    "temp_c": 67.0,
-    "power_w": 37.83,
+    "temp_c": 66.0,
+    "power_w": 35.16,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -74,8 +74,8 @@
   },
   "gateway_process": {
     "pid": "24373",
-    "memory_pct": "3.9",
-    "uptime": "05:31:06",
+    "memory_pct": "3.8",
+    "uptime": "05:38:07",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -86,8 +86,8 @@
         "size_gb": 28.0
       },
       {
-        "name": "qwen3:8b",
-        "size_gb": 11.5
+        "name": "nemotron-3-super:120b",
+        "size_gb": 91.8
       }
     ]
   },
@@ -96,7 +96,7 @@
     "literal_timestamps": 6,
     "duplicates": 22,
     "no_new_dev": 0,
-    "total": 7542,
+    "total": 7547,
     "error_rate": 0.4
   },
   "crontab_status": {
@@ -117,65 +117,6 @@
       "issues": [],
       "valid_entries": 1,
       "broken_entries": 0,
-      "cycle_time": "12:09 AM",
-      "cycle_num": 39
-    },
-    {
-      "name": "self-improvement",
-      "status": "success",
-      "duration": 0,
-      "grew": 2,
-      "issues": [
-        "too short"
-      ],
-      "valid_entries": 1,
-      "broken_entries": 1,
-      "cycle_time": "12:09 AM",
-      "cycle_num": 39
-    },
-    {
-      "name": "longevity",
-      "status": "unknown",
-      "duration": 0,
-      "grew": 0,
-      "issues": [
-        "spark_locked"
-      ],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "12:09 AM",
-      "cycle_num": 39
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 0,
-      "grew": 1,
-      "issues": [],
-      "valid_entries": 1,
-      "broken_entries": 0,
-      "cycle_time": "12:09 AM",
-      "cycle_num": 39
-    },
-    {
-      "name": "tool-calling",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "12:09 AM",
-      "cycle_num": 39
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 1,
-      "issues": [],
-      "valid_entries": 1,
-      "broken_entries": 0,
       "cycle_time": "12:15 AM",
       "cycle_num": 40
     },
@@ -336,77 +277,66 @@
       "broken_entries": 0,
       "cycle_time": "12:28 AM",
       "cycle_num": 42
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 1,
+      "issues": [],
+      "valid_entries": 1,
+      "broken_entries": 0,
+      "cycle_time": "12:35 AM",
+      "cycle_num": 43
+    },
+    {
+      "name": "self-improvement",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "12:35 AM",
+      "cycle_num": 43
+    },
+    {
+      "name": "longevity",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "12:35 AM",
+      "cycle_num": 43
+    },
+    {
+      "name": "ai-agents",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "12:35 AM",
+      "cycle_num": 43
+    },
+    {
+      "name": "tool-calling",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "12:35 AM",
+      "cycle_num": 43
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 39,
-      "window": "overnight",
-      "timestamp": "2026-03-21T00:09:30.608570",
-      "time_display": "12:09 AM",
-      "feed_growth": 4,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 0,
-          "grew": 1,
-          "issues": [],
-          "valid_entries": 1,
-          "broken_entries": 0,
-          "cycle_time": "12:09 AM",
-          "cycle_num": 39
-        },
-        {
-          "name": "self-improvement",
-          "status": "success",
-          "duration": 0,
-          "grew": 2,
-          "issues": [
-            "too short"
-          ],
-          "valid_entries": 1,
-          "broken_entries": 1,
-          "cycle_time": "12:09 AM",
-          "cycle_num": 39
-        },
-        {
-          "name": "longevity",
-          "status": "unknown",
-          "duration": 0,
-          "grew": 0,
-          "issues": [
-            "spark_locked"
-          ],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "12:09 AM",
-          "cycle_num": 39
-        },
-        {
-          "name": "ai-agents",
-          "status": "success",
-          "duration": 0,
-          "grew": 1,
-          "issues": [],
-          "valid_entries": 1,
-          "broken_entries": 0,
-          "cycle_time": "12:09 AM",
-          "cycle_num": 39
-        },
-        {
-          "name": "tool-calling",
-          "status": "skipped",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "12:09 AM",
-          "cycle_num": 39
-        }
-      ]
-    },
     {
       "cycle": 40,
       "window": "overnight",
@@ -600,6 +530,72 @@
           "broken_entries": 0,
           "cycle_time": "12:28 AM",
           "cycle_num": 42
+        }
+      ]
+    },
+    {
+      "cycle": 43,
+      "window": "overnight",
+      "timestamp": "2026-03-21T00:35:35.374740",
+      "time_display": "12:35 AM",
+      "feed_growth": 4,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "success",
+          "duration": 0,
+          "grew": 1,
+          "issues": [],
+          "valid_entries": 1,
+          "broken_entries": 0,
+          "cycle_time": "12:35 AM",
+          "cycle_num": 43
+        },
+        {
+          "name": "self-improvement",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "12:35 AM",
+          "cycle_num": 43
+        },
+        {
+          "name": "longevity",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "12:35 AM",
+          "cycle_num": 43
+        },
+        {
+          "name": "ai-agents",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "12:35 AM",
+          "cycle_num": 43
+        },
+        {
+          "name": "tool-calling",
+          "status": "unknown",
+          "duration": 0,
+          "grew": 0,
+          "issues": [
+            "spark_locked"
+          ],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "12:35 AM",
+          "cycle_num": 43
         }
       ]
     }
