@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-21 04:15:12 ET",
-  "timestamp_utc": "2026-03-21T08:15:12Z",
+  "timestamp_local": "2026-03-21 04:18:26 ET",
+  "timestamp_utc": "2026-03-21T08:18:26Z",
   "scheduler": {
     "running": true,
     "pid": 2138,
-    "uptime_minutes": 1345,
+    "uptime_minutes": 1348,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 7708,
+    "total_lines": 7710,
     "last_entries": [
-      "[PARSE ERROR] {\\\"timestamp\\\":\\\"2026-03-21T08:05:00Z\\\",\\\"topic\\\":\\\"cross-domain-associations\\\",",
-      "[2026-03-21T08:05:00] longevity",
       "[2026-03-21T08:07:00] ai-agents",
       "[2026-03-21T08:10:00] self-improvement",
-      "[2026-03-21T08:15:00] ai-agents"
+      "[2026-03-21T08:15:00] ai-agents",
+      "[2026-03-21T08:13:00] treasury-bonds",
+      "[2026-03-21T08:15:00] self-improvement"
     ],
     "topic_distribution": {
       "ai-agents": 18,
@@ -46,20 +46,10 @@
     "jobs_run": 100,
     "success": 1,
     "timeout": 0,
-    "fail": 0,
-    "feed_growth": 1
+    "fail": 1,
+    "feed_growth": 2
   },
   "cycles": [
-    {
-      "ts": "2026-03-21T03:46:10.158383",
-      "window": "overnight",
-      "cycle": 102,
-      "jobs": 5,
-      "success": 0,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-03-21T03:49:24.190484",
       "window": "overnight",
@@ -149,6 +139,16 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-21T04:18:17.786283",
+      "window": "overnight",
+      "cycle": 112,
+      "jobs": 5,
+      "success": 0,
+      "timeout": 0,
+      "fail": 1,
+      "feed_grew": 1
     }
   ],
   "recent_jobs": [
@@ -273,10 +273,12 @@
     },
     {
       "name": "longevity",
-      "status": "skipped",
+      "status": "bad_output",
       "duration": 0,
-      "grew": 0,
-      "issues": []
+      "grew": 1,
+      "issues": [
+        "too short"
+      ]
     },
     {
       "name": "ai-agents",
