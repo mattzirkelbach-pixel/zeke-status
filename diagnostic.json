@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-21 22:35:00 ET",
-  "timestamp_utc": "2026-03-22T02:35:00Z",
+  "timestamp_local": "2026-03-21 22:39:16 ET",
+  "timestamp_utc": "2026-03-22T02:39:16Z",
   "scheduler": {
     "running": true,
     "pid": 2138,
-    "uptime_minutes": 2444,
+    "uptime_minutes": 2449,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 8067,
+    "total_lines": 8069,
     "last_entries": [
-      "[2026-03-22T02:24:34] ai-agents",
-      "[2026-03-22T02:26:11] queue-research-xauusd",
       "[2026-03-22T02:26:00] ai-agents",
       "[2026-03-22T02:30:00] treasury-bonds",
-      "[2026-03-22T02:33:57] queue-research-tlt"
+      "[2026-03-22T02:33:57] queue-research-tlt",
+      "[2026-03-22T02:34:00] self-improvement",
+      "[2026-03-22T02:37:00] longevity"
     ],
     "topic_distribution": {
       "ai-agents": 14,
@@ -32,13 +32,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
+      "nemotron-3-nano:30b",
       "nomic-embed-text:latest",
       "qwen3:8b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b"
+    "detail": "healthy, loaded: nemotron-3-nano:30b, nomic-embed-text:latest, qwen3:8b"
   },
   "gateway": {
     "running": true
@@ -51,16 +52,6 @@
     "feed_growth": 10
   },
   "cycles": [
-    {
-      "ts": "2026-03-21T21:49:58.749987",
-      "window": "overnight",
-      "cycle": 16,
-      "jobs": 5,
-      "success": 0,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-03-21T21:53:13.204624",
       "window": "overnight",
@@ -150,46 +141,21 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 1
+    },
+    {
+      "ts": "2026-03-21T22:39:08.515251",
+      "window": "overnight",
+      "cycle": 26,
+      "jobs": 5,
+      "success": 0,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
     {
       "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "self-improvement",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "longevity",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "ai-agents",
-      "status": "success",
-      "duration": 0,
-      "grew": 1,
-      "issues": []
-    },
-    {
-      "name": "tool-calling",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
       "status": "success",
       "duration": 0,
       "grew": 1,
@@ -284,6 +250,41 @@
       "status": "success",
       "duration": 0,
       "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "tool-calling",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "self-improvement",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "longevity",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "ai-agents",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
       "issues": []
     },
     {
