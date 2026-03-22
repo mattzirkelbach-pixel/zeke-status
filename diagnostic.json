@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-03-22 13:30:17 ET",
-  "timestamp_utc": "2026-03-22T17:30:17Z",
+  "timestamp_local": "2026-03-22 13:30:44 ET",
+  "timestamp_utc": "2026-03-22T17:30:44Z",
   "scheduler": {
     "running": true,
     "pid": 12031,
@@ -32,19 +32,20 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nemotron-3-super:120b",
-      "nemotron-3-nano:30b"
+      "qwen3:8b",
+      "nemotron-3-nano:30b",
+      "nomic-embed-text:latest"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-super:120b, nemotron-3-nano:30b"
+    "detail": "healthy, loaded: qwen3:8b, nemotron-3-nano:30b, nomic-embed-text:latest"
   },
   "gateway": {
     "running": true
   },
   "today": {
-    "jobs_run": 8,
+    "jobs_run": 9,
     "success": 0,
     "timeout": 0,
     "fail": 0,
@@ -130,6 +131,16 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-22T13:30:33.713993",
+      "window": "daytime",
+      "cycle": 9,
+      "jobs": 1,
+      "success": 0,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
@@ -186,6 +197,13 @@
       "name": "treasury-bonds",
       "status": "skipped",
       "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 2,
       "grew": 0,
       "issues": []
     }
