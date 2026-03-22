@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-21 22:45:00 ET",
-  "timestamp_utc": "2026-03-22T02:45:00Z",
+  "timestamp_local": "2026-03-21 22:49:35 ET",
+  "timestamp_utc": "2026-03-22T02:49:35Z",
   "scheduler": {
     "running": true,
     "pid": 2138,
-    "uptime_minutes": 2454,
+    "uptime_minutes": 2459,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 8070,
+    "total_lines": 8072,
     "last_entries": [
-      "[2026-03-22T02:30:00] treasury-bonds",
-      "[2026-03-22T02:33:57] queue-research-tlt",
       "[2026-03-22T02:34:00] self-improvement",
       "[2026-03-22T02:37:00] longevity",
-      "[2026-03-22T02:40:00] ai-agents"
+      "[2026-03-22T02:40:00] ai-agents",
+      "[2026-03-22T02:44:00] ai-agents",
+      "[2026-03-22T02:46:00] treasury-bonds"
     ],
     "topic_distribution": {
       "ai-agents": 14,
@@ -33,35 +33,25 @@
     "online": true,
     "models_loaded": [
       "nomic-embed-text:latest",
-      "qwen3:8b",
-      "nemotron-3-nano:30b"
+      "nemotron-3-nano:30b",
+      "qwen3:8b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, nemotron-3-nano:30b"
+    "detail": "healthy, loaded: nomic-embed-text:latest, nemotron-3-nano:30b, qwen3:8b"
   },
   "gateway": {
     "running": true
   },
   "today": {
     "jobs_run": 100,
-    "success": 11,
+    "success": 12,
     "timeout": 0,
     "fail": 0,
-    "feed_growth": 12
+    "feed_growth": 13
   },
   "cycles": [
-    {
-      "ts": "2026-03-21T21:56:51.736695",
-      "window": "overnight",
-      "cycle": 18,
-      "jobs": 5,
-      "success": 0,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-03-21T22:00:05.767567",
       "window": "overnight",
@@ -151,6 +141,16 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 2
+    },
+    {
+      "ts": "2026-03-21T22:49:27.895753",
+      "window": "overnight",
+      "cycle": 28,
+      "jobs": 5,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 1
     }
   ],
   "recent_jobs": [
@@ -212,9 +212,9 @@
     },
     {
       "name": "ai-agents",
-      "status": "success",
+      "status": "skipped",
       "duration": 0,
-      "grew": 1,
+      "grew": 0,
       "issues": []
     },
     {
@@ -240,16 +240,16 @@
     },
     {
       "name": "longevity",
-      "status": "skipped",
+      "status": "success",
       "duration": 0,
-      "grew": 0,
+      "grew": 1,
       "issues": []
     },
     {
       "name": "ai-agents",
-      "status": "skipped",
+      "status": "success",
       "duration": 0,
-      "grew": 0,
+      "grew": 1,
       "issues": []
     },
     {
@@ -275,9 +275,9 @@
     },
     {
       "name": "longevity",
-      "status": "success",
+      "status": "skipped",
       "duration": 0,
-      "grew": 1,
+      "grew": 0,
       "issues": []
     },
     {
