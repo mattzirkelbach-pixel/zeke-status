@@ -1,136 +1,69 @@
 {
-  "timestamp_local": "2026-03-22 18:29:57 ET",
-  "timestamp_utc": "2026-03-22T22:29:57Z",
+  "timestamp_local": "2026-03-22 6:33:08PM ET",
+  "timestamp_utc": "2026-03-22T22:33:08Z",
   "scheduler": {
     "running": true,
-    "pid": 54730,
-    "uptime_minutes": 51,
-    "current_window": "daytime"
-  },
-  "feed": {
-    "total_lines": 8437,
-    "last_entries": [
-      "[2026-03-22T21:41:00] system-repair",
-      "[2026-03-22T21:44:30] treasury-bonds",
-      "[2026-03-22T22:02:00] treasury-bonds",
-      "[2026-03-22T22:05:00] gold-cycle",
-      "[2026-03-22T22:09:00] treasury-bonds"
+    "pids": [
+      "54730"
     ],
-    "topic_distribution": {
-      "infra-scout": 20,
-      "treasury-bonds": 17,
-      "knowledge-evolver/general": 4,
-      "gold-cycle": 3,
-      "btc-spx-macro": 2,
-      "oil-tlt": 2
-    },
-    "recent_50_clean": 50,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 0,
-    "last_modified_minutes_ago": 6.6
-  },
-  "spark": {
-    "online": true,
-    "models_loaded": [
-      "qwen3:8b",
-      "nemotron-3-nano:30b",
-      "nomic-embed-text:latest"
-    ],
-    "model_stuck": false,
-    "stuck_model": null,
-    "inference_active": true,
-    "detail": "healthy, loaded: qwen3:8b, nemotron-3-nano:30b, nomic-embed-text:latest"
+    "count": 1,
+    "type": "python"
   },
   "gateway": {
     "running": true
   },
-  "today": {
-    "jobs_run": 2,
-    "success": 0,
-    "timeout": 0,
-    "fail": 0,
-    "feed_growth": 0
+  "spark": {
+    "online": true,
+    "models_loaded": [
+      "nemotron-3-nano:30b",
+      "nemotron-3-super:120b"
+    ],
+    "model_stuck": false,
+    "inference_active": true,
+    "detail": "nemotron-3-nano:30b, nemotron-3-super:120b \u2022 87.7GB VRAM \u2022 123.6B \u2022 Q4_K_M \u2022 17ms",
+    "response_ms": 17,
+    "vram_estimate_gb": 87.7,
+    "model_params": "123.6B",
+    "model_quant": "Q4_K_M"
   },
-  "cycles": [
-    {
-      "ts": "2026-03-22T17:38:57.116098",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 1,
-      "success": 0,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
-    {
-      "ts": "2026-03-22T18:09:38.235551",
-      "window": "daytime",
-      "cycle": 2,
-      "jobs": 1,
-      "success": 0,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
+  "feed": {
+    "total_lines": 8438,
+    "last_modified_minutes_ago": 2.1,
+    "last_entries": [
+      "[3/22 4:44PM ET] treasury-bonds \u2014 US10Y expected to trade at 4.38% by quarter end indicating further upside that c",
+      "[3/22 5:02PM ET] treasury-bonds \u2014 US 10 Year Treasury Yield rose to 4.39% on March 20 2026 Watch 4.40 level as nex",
+      "[3/22 5:05PM ET] gold-cycle \u2014 Forecast: $5,000/oz gold by Dec 2026; increase GLD Dec26 position",
+      "[3/22 5:09PM ET] treasury-bonds \u2014 US10Y yield rose about 10bps to 4.37% on Friday indicating possible Fed hawkish ",
+      "[3/22 5:30PM ET] oil-tlt \u2014 Brent crude oil price surged to $126 per barrel on 8 March 2026, a level not see"
+    ],
+    "recent_50_clean": 50,
+    "recent_50_trivial": 0,
+    "recent_50_broken": 0,
+    "topic_distribution": {
+      "infra-scout": 20,
+      "treasury-bonds": 17,
+      "knowledge-evolver/general": 4,
+      "oil-tlt": 3,
+      "btc-spx-macro": 2,
+      "gold-cycle": 2
     }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    }
-  ],
-  "health": {
-    "status": "HEALTHY",
-    "issues": []
   },
-  "kg_stats": {
-    "entities": 663,
-    "relations": 754,
-    "associations": 322,
-    "insights": 62
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 66.0,
-    "power_w": 37.81,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 5,
-    "literal_timestamps": 6,
-    "duplicates": 947,
-    "total": 8437,
-    "error_rate": 11.4
-  },
-  "automation": {
-    "layer1": "L1 Execution \u2014 DEPLOYED",
-    "layer2": "L2 Oversight \u2014 DEPLOYED",
-    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
-    "layer4": "L4 Recursive Learning \u2014 PLANNED"
-  },
-  "cost": {
-    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": false
+  "activity": {
+    "last_job": "treasury-bonds",
+    "last_job_time": "3/22 1:09PM ET",
+    "last_cycle": "3/22 1:09PM ET",
+    "jobs_today": 0,
+    "success_today": 0,
+    "timeout_today": 0,
+    "fail_today": 0,
+    "feed_growth_today": 0,
+    "state": "idle (heartbeat)",
+    "next_cycle_est": "1:39PM",
+    "cycle_count": 21,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1773938400487,
-      "v": 7147,
-      "l": "12:40PM"
-    },
     {
       "t": 1773939302985,
       "v": 7147,
@@ -1565,21 +1498,144 @@
       "t": 1774217885514,
       "v": 8437,
       "l": "6:18PM"
+    },
+    {
+      "t": 1774218788056,
+      "v": 8438,
+      "l": "6:33PM"
     }
   ],
-  "activity": {
-    "last_job": "treasury-bonds",
-    "last_job_time": "3/22 1:09PM ET",
-    "last_cycle": "3/22 1:09PM ET",
-    "jobs_today": 0,
-    "success_today": 0,
-    "timeout_today": 0,
-    "fail_today": 0,
-    "feed_growth_today": 0,
-    "state": "idle (heartbeat)",
-    "next_cycle_est": "1:39PM",
-    "cycle_count": 21,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "kg_stats": {
+    "entities": 663,
+    "relations": 754,
+    "associations": 322,
+    "insights": 62
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 0.0,
+    "temp_c": 44.0,
+    "power_w": 11.69,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 5,
+    "literal_timestamps": 6,
+    "duplicates": 947,
+    "total": 8438,
+    "error_rate": 11.4
+  },
+  "cost": {
+    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": false
+  },
+  "automation": {
+    "layer1": "L1 Execution \u2014 DEPLOYED",
+    "layer2": "L2 Oversight \u2014 DEPLOYED",
+    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
+    "layer4": "L4 Recursive Learning \u2014 PLANNED"
+  },
+  "compute_tiers": {
+    "architecture": "tiered_dispatch",
+    "layers": {
+      "L0_python": {
+        "status": "active",
+        "cost": "$0",
+        "role": "Fetch, transform, schedule"
+      },
+      "L1_vector": {
+        "status": "planned",
+        "cost": "$0",
+        "role": "Embeddings + ChromaDB RAG"
+      },
+      "L2_triage": {
+        "status": "active",
+        "cost": "$0",
+        "role": "qwen3:8b classification"
+      },
+      "L3_api": {
+        "status": "active",
+        "cost": "paid",
+        "role": "Haiku/Sonnet/Opus"
+      },
+      "L4_batch": {
+        "status": "active",
+        "cost": "$0",
+        "role": "qwen3-32b overnight"
+      }
+    },
+    "budget": {
+      "haiku_spent": 0,
+      "haiku_limit": 1.0,
+      "sonnet_spent": 0,
+      "sonnet_limit": 0.5,
+      "total_spent": 0,
+      "total_limit": 2.0,
+      "date": "2026-03-21"
+    },
+    "models_hot": [
+      {
+        "name": "nemotron-3-nano:30b",
+        "vram_gb": 26.1,
+        "params": "31.6B"
+      },
+      {
+        "name": "nemotron-3-super:120b",
+        "vram_gb": 87.7,
+        "params": "123.6B"
+      }
+    ]
+  },
+  "health": {
+    "status": "HEALTHY",
+    "issues": [],
+    "issue_count": 0
+  },
+  "cycles": [
+    {
+      "ts": "2026-03-22T17:38:57.116098",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 1,
+      "success": 0,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-22T18:09:38.235551",
+      "window": "daytime",
+      "cycle": 2,
+      "jobs": 1,
+      "success": 0,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    }
+  ],
+  "today": {
+    "jobs_run": 2,
+    "success": 0,
+    "timeout": 0,
+    "fail": 0,
+    "feed_growth": 0
   }
 }
