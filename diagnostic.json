@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-21 22:00:13 ET",
-  "timestamp_utc": "2026-03-22T02:00:13Z",
+  "timestamp_local": "2026-03-21 22:09:04 ET",
+  "timestamp_utc": "2026-03-22T02:09:04Z",
   "scheduler": {
     "running": true,
     "pid": 2138,
-    "uptime_minutes": 2410,
+    "uptime_minutes": 2418,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 8046,
+    "total_lines": 8053,
     "last_entries": [
-      "[2026-03-22T01:53:00] longevity",
-      "[2026-03-22T01:58:00] ai-agents",
-      "[2026-03-22T01:57:46] ai-agents",
-      "[2026-03-22T01:58:00] treasury-bonds",
-      "[2026-03-22T01:59:45] self-improvement"
+      "[2026-03-22T02:03:09] queue-research-tlt/vix regime",
+      "[2026-03-22T02:02:00] treasury-bonds",
+      "[2026-03-22T02:02:00] ai-agents",
+      "[2026-03-22T02:07:02] queue-research-tlt/vix regime",
+      "[2026-03-22T02:08:43] queue-research-xau/xag ratio"
     ],
     "topic_distribution": {
       "ai-agents": 20,
@@ -45,22 +45,12 @@
   },
   "today": {
     "jobs_run": 100,
-    "success": 1,
+    "success": 3,
     "timeout": 0,
     "fail": 0,
-    "feed_growth": 1
+    "feed_growth": 4
   },
   "cycles": [
-    {
-      "ts": "2026-03-21T21:30:29.066970",
-      "window": "overnight",
-      "cycle": 10,
-      "jobs": 5,
-      "success": 0,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-03-21T21:33:44.796770",
       "window": "overnight",
@@ -150,6 +140,16 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-21T22:08:55.876415",
+      "window": "overnight",
+      "cycle": 20,
+      "jobs": 5,
+      "success": 2,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 3
     }
   ],
   "recent_jobs": [
@@ -260,38 +260,44 @@
     },
     {
       "name": "treasury-bonds",
-      "status": "skipped",
+      "status": "success",
       "duration": 0,
-      "grew": 0,
+      "grew": 2,
       "issues": []
     },
     {
       "name": "self-improvement",
-      "status": "skipped",
+      "status": "unknown",
       "duration": 0,
       "grew": 0,
-      "issues": []
+      "issues": [
+        "spark_locked"
+      ]
     },
     {
       "name": "longevity",
-      "status": "skipped",
+      "status": "unknown",
       "duration": 0,
       "grew": 0,
-      "issues": []
+      "issues": [
+        "spark_locked"
+      ]
     },
     {
       "name": "ai-agents",
-      "status": "skipped",
+      "status": "success",
       "duration": 0,
-      "grew": 0,
+      "grew": 1,
       "issues": []
     },
     {
       "name": "tool-calling",
-      "status": "skipped",
+      "status": "unknown",
       "duration": 0,
       "grew": 0,
-      "issues": []
+      "issues": [
+        "spark_locked"
+      ]
     }
   ],
   "health": {
