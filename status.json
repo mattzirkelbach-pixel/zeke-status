@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-22T15:58:12.495645+00:00",
+  "timestamp": "2026-03-22T15:58:27.277140+00:00",
   "feed_lines": 8385,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-22T14:55:41.461852+00:00\", \"topic\": \"knowledge-evolver/general\", \"domain\": \"alpha-research\", \"finding\": \"We need to produce a specific, actionable research finding based on historical data and quantitative evidence regarding primary risks that could invalidate the hedge: sudden flight-to-quality rally in bonds, sharp reversal in inflation expectations, geopolitical events driving oil prices independently of stagflation dynamics.\\n\\nWe have context: TLT fell 3 of last 10 days while VIX rising; today TLT -1.90%, VIX +11.31%; 5-day corr -0.86. Normal risk-off: VIX up + TLT up (flight to safety). Current: VIX up + TLT down = bonds not being bought in fear. This is stagflation signal \\u2014 inflation concerns overriding safety bid.\\n\\nWe need to provide a finding: one specific sentence with a number or date. Implication: one sentence. Confidence: high/medium/low with one-sentence reason. Next_task optional.\\n\\nWe need to base on historical data and quantitative evidence. We can reference known historical episodes: e.g., March 2020 flight-to-quality, 2018 inflation spike, 2022 oil shock due to Russia-Ukra\", \"source\": \"knowledge-evolver\", \"instrument\": \"GENERAL\", \"task_label\": \"\", \"parent_idea_id\": \"alpha-v2-ee081e45\", \"quality_score\": 7.5, \"research_question\": \"What are the primary risks that could invalidate this hedge, such as a sudden flight\\u2011to\\u2011quality rally in bonds, a sharp reversal in inflation expectations, or geopolitical events that drive oil prices\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 40.0,
-    "power_w": 10.96,
+    "gpu_util_pct": 96.0,
+    "temp_c": 54.0,
+    "power_w": 59.98,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,12 +75,16 @@
   "gateway_process": {
     "pid": "19007",
     "memory_pct": "2.9",
-    "uptime": "31:34",
+    "uptime": "31:48",
     "status": "RUNNING"
   },
   "spark_status": {
     "status": "ONLINE",
     "loaded_models": [
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
+      },
       {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
@@ -88,10 +92,6 @@
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 25.9
       }
     ]
   },
@@ -113,17 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 2,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "9:55 AM",
-      "cycle_num": 2
-    },
     {
       "name": "treasury-bonds",
       "status": "skipped",
@@ -156,29 +145,20 @@
       "broken_entries": null,
       "cycle_time": "11:27 AM",
       "cycle_num": 5
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "11:58 AM",
+      "cycle_num": 6
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 2,
-      "window": "daytime",
-      "timestamp": "2026-03-22T09:55:42.622832",
-      "time_display": "9:55 AM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "skipped",
-          "duration": 2,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "9:55 AM",
-          "cycle_num": 2
-        }
-      ]
-    },
     {
       "cycle": 3,
       "window": "daytime",
@@ -236,6 +216,26 @@
           "broken_entries": null,
           "cycle_time": "11:27 AM",
           "cycle_num": 5
+        }
+      ]
+    },
+    {
+      "cycle": 6,
+      "window": "daytime",
+      "timestamp": "2026-03-22T11:58:27.224675",
+      "time_display": "11:58 AM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "11:58 AM",
+          "cycle_num": 6
         }
       ]
     }
