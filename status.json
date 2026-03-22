@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-22T16:59:51.677435+00:00",
+  "timestamp": "2026-03-22T17:00:00.913369+00:00",
   "feed_lines": 8391,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-22T14:56:05.336269+00:00\", \"topic\": \"knowledge-evolver/general\", \"domain\": \"alpha-research\", \"finding\": \"We need to produce a specific research finding based on historical data and quantitative evidence about VIX and crude oil price thresholds that signal optimal entry for short crude position in supply-shock regime, and exit criteria that maximize risk-adjusted returns.\\n\\nWe must include a specific fact with a number or date, an implication, confidence level, and optional next task.\\n\\nWe need to avoid hedging, no generic statements. Must be specific.\\n\\nWe need to rely on historical data; we may not have actual data but we can infer from known patterns. However we must say if we cannot find specific data, say so directly. But we can try to provide a plausible finding based on known history: e.g., during 2022 Russia-Ukraine war, VIX spiked >30% over 5 days while Brent rose >10% over same period, and shorting crude after VIX >20% change and crude >5% change over 3 days yielded certain returns.\\n\\nWe need to be careful: The instruction says if cannot find specific data, say so directly. We don't \", \"source\": \"knowledge-evolver\", \"instrument\": \"GENERAL\", \"task_label\": \"\", \"parent_idea_id\": \"alpha-v2-5ae09449\", \"quality_score\": 7.5, \"research_question\": \"What specific VIX and crude oil price thresholds (e.g., VIX > X% change and crude > Y% change over Z days) have historically signaled the optimal entry point for a short crude position in a supply\\u2011sho\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 93.0,
-    "temp_c": 53.0,
-    "power_w": 34.22,
+    "gpu_util_pct": 95.0,
+    "temp_c": 60.0,
+    "power_w": 60.06,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,12 +75,16 @@
   "gateway_process": {
     "pid": "19007",
     "memory_pct": "2.9",
-    "uptime": "01:33:13",
+    "uptime": "01:33:22",
     "status": "RUNNING"
   },
   "spark_status": {
     "status": "ONLINE",
     "loaded_models": [
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
+      },
       {
         "name": "nemotron-3-super:120b",
         "size_gb": 94.2
@@ -88,10 +92,6 @@
       {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
       }
     ]
   },
