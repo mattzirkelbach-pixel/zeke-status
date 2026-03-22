@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-03-21T22:58:50.160571",
+  "timestamp": "2026-03-21T23:05:33.891619",
   "window": "overnight",
-  "cycle": 30,
-  "feed_before": 8076,
-  "feed_after": 8076,
-  "feed_growth": 0,
+  "cycle": 31,
+  "feed_before": 8078,
+  "feed_after": 8080,
+  "feed_growth": 2,
   "jobs": {
     "total": 5,
-    "success": 1,
+    "success": 2,
     "fail": 0,
     "timeout": 0
   },
@@ -15,18 +15,13 @@
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "bad_output",
+      "status": "unknown",
       "duration_s": 0,
-      "feed_grew": 1,
+      "feed_grew": 0,
       "entry_valid": false,
       "issues": [
-        "too short"
-      ],
-      "valid_entries": 0,
-      "entries_cleaned": 1,
-      "dedup_removed": 1,
-      "trivial_entries": 0,
-      "broken_entries": 1
+        "spark_locked"
+      ]
     },
     {
       "uuid": "54202a7d-617",
@@ -37,7 +32,7 @@
       "entry_valid": true,
       "issues": [],
       "valid_entries": 1,
-      "dedup_removed": 0,
+      "dedup_removed": 1,
       "trivial_entries": 0,
       "broken_entries": 0
     },
@@ -62,29 +57,28 @@
     {
       "uuid": "9df9cf14-e1c",
       "name": "tool-calling",
-      "status": "skipped",
+      "status": "success",
       "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": []
+      "feed_grew": 1,
+      "entry_valid": true,
+      "issues": [],
+      "valid_entries": 1,
+      "dedup_removed": 0,
+      "trivial_entries": 0,
+      "broken_entries": 0
     }
   ],
   "failures": [
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "bad_output",
+      "status": "unknown",
       "duration_s": 0,
-      "feed_grew": 1,
+      "feed_grew": 0,
       "entry_valid": false,
       "issues": [
-        "too short"
-      ],
-      "valid_entries": 0,
-      "entries_cleaned": 1,
-      "dedup_removed": 1,
-      "trivial_entries": 0,
-      "broken_entries": 1
+        "spark_locked"
+      ]
     },
     {
       "uuid": "3cd4b17d-448",
@@ -98,15 +92,6 @@
     {
       "uuid": "a03747c8-f17",
       "name": "ai-agents",
-      "status": "skipped",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": []
-    },
-    {
-      "uuid": "9df9cf14-e1c",
-      "name": "tool-calling",
       "status": "skipped",
       "duration_s": 0,
       "feed_grew": 0,
