@@ -280,3 +280,17 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 ## CLAIM-PIPELINE-FIXED-WITHOUT-JOB-COMPLETION (3/17)
 **Pattern**: Said "pipeline is recovering" based on config fix + zero failures. But zero failures just means jobs aren't being rejected — they still weren't completing. Said "good news" three times before actually checking openclaw cron runs for the real error.
 **Rule**: Pipeline is only "fixed" when openclaw cron runs --id <job> shows status: "ok" AND feed count increases. Anything less is "config error resolved, awaiting job completion verification."
+
+## INLINE-HEAVY-WORK (discovered 3/22)
+**Pattern**: Running long operations (video extraction, backtests with yfinance downloads, Playwright CDP) inline via MCP exec_command instead of dispatching to background scripts. Causes MCP timeouts, session stalls, and Matt watching me fail 5 times before succeeding.
+**Fix**: ANY operation expected to take >30s MUST be: (1) written to disk as a standalone script, (2) launched with nohup, (3) checked via log file on next tool call. NEVER attempt long operations inline.
+**Also**: Large data fetches (Camel feed, portfolio state) should use small `last_n` values or pipe to temp files. Don't load 200K of transcript text into context when you need a 500-char summary.
+
+## CONTEXT-BLOAT-FROM-TOOL-RESULTS (discovered 3/22)
+**Pattern**: Calling tools that return massive payloads (get_camel_feed with full transcripts, get_session_context with 50+ anti-patterns) fills context window, leaving no room for actual work. Session degrades after ~60% context used.
+**Fix**: (1) Use last_n=3 not last_n=10 for feed calls. (2) Pipe large results to temp files, grep for what's needed. (3) Front-load diagnostic calls, minimize mid-session data pulls. (4) Plan the full session scope BEFORE making tool calls — don't explore interactively.
+
+## RETRY-LOOP-INSTEAD-OF-DISPATCH (discovered 3/22)
+**Pattern**: Trying 5 different inline approaches to extract a members-only video transcript (yt-dlp, youtube_transcript_api, cookies, OpenClaw CLI, Playwright inline) when the FIRST failure should have triggered: write script to disk → nohup → check later. Matt watched me fail for 20 minutes.
+**Fix**: First attempt fails → immediately write a standalone script, dispatch background, move on. Don't iterate inline.
+
