@@ -107,3 +107,18 @@
 [01:53:47]   new_cron_topics: {"status": "OK", "active_topics": {"btc-spx-macro": 1, "gold-cycle": 1, "oil-tlt": 2}, "missing_topics": [], "detail": "Active: ['btc-spx-macro', 'gold-cycle', 'oil-tlt'], Missing 24h: []"}
 [01:53:47] Learning log updated: /Users/zekezirk/zeke-status/memory/learning-log.jsonl
 [01:53:47] === Done ===
+[03:53:47] === Bi-Hourly Self-Assessment ===
+[03:53:47] Grade: C. OK: prewarm, l1b, l2, queue, feed_quality, cowork_executor, price_watcher, new_cron_topics. Failed: noise.
+[03:53:47]   prewarm: {"status": "OK", "detail": "[2026-03-22T21:55:29Z] Super loaded: 3 tokens in 25.6s"}
+[03:53:47]   l1b: {"dispatched": 0, "ingested": 14, "status": "OK", "quality": "GOOD"}
+[03:53:47]   l2: {"status": "OK", "count": 2, "narrating": true, "preview": "We need to output only structured recommendations, no extra text. Must reference a specific position"}
+[03:53:47]   queue: {"done": 231, "failed": 0, "pending": 3, "echo_rate": 0.0, "status": "OK"}
+[03:53:47]   feed_quality: {"avg_score": 3.3, "junk_pct": 56, "actionable_pct": 33, "total": 99, "status": "OK"}
+[03:53:47]   noise: {"noise_entries_6h": 1, "breakdown": {"ai-agents": 1}, "status": "NOISE_LEAK"}
+[03:53:47]   cowork_executor: {"status": "IDLE", "detail": "No pending tasks at last run", "completed_runs": 2}
+[03:53:47]   price_watcher: {"status": "OK", "detail": "No log (outside market hours \u2014 expected)"}
+[03:53:47]   new_cron_topics: {"status": "OK", "active_topics": {"btc-spx-macro": 1, "gold-cycle": 2, "oil-tlt": 2}, "missing_topics": [], "detail": "Active: ['btc-spx-macro', 'gold-cycle', 'oil-tlt'], Missing 24h: []"}
+[03:53:47]   ✗ REGRESSION: A→C (new failures: ['noise'])
+[03:53:47] Pushed 1 fix tasks to cowork
+[03:53:47] Learning log updated: /Users/zekezirk/zeke-status/memory/learning-log.jsonl
+[03:53:47] === Done ===
