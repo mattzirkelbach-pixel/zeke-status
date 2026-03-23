@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-23T18:13:21.396424+00:00",
+  "timestamp": "2026-03-23T18:13:36.011249+00:00",
   "feed_lines": 8683,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-23T18:01:10.726990Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\nGLD is currently trading at $472.30 (as of 2026-03-23), having reached a cycle high of $475.80 on 2026-03-18, which aligns with the projected cycle top window of weeks 22\\u201324 (March 24\\u2013April 14, 2026). This confirms the left-translated bearish momentum phase, with price now approaching the upper boundary of the expected reversal zone.  \\n\\n**IMPLICATION:**  \\nThe proximity to the cycle top ($475.80) and the structural weakness in the left-translated phase suggest a sharp correction is imminent into the next cycle low (weeks 22\\u201324). Reducing exposure to long GLD options \\u2014 specifically the Dec26 $470C and $500C positions \\u2014 is critical to avoid significant drawdown. Exiting or rolling these positions before 2026-03-24 would mitigate risk, as historical patterns in precious metals p\", \"source\": \"spark-queue/refill_20260323T180000_12\", \"instrument\": \"GENERAL\", \"task_label\": \"stale: SPX cycle state 447h old\", \"priority_was\": 6}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 53.0,
-    "power_w": 12.76,
+    "gpu_util_pct": 95.0,
+    "temp_c": 65.0,
+    "power_w": 63.84,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,12 +75,16 @@
   "gateway_process": {
     "pid": "55894",
     "memory_pct": "3.5",
-    "uptime": "20:29:31",
+    "uptime": "20:29:46",
     "status": "RUNNING"
   },
   "spark_status": {
     "status": "ONLINE",
     "loaded_models": [
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
+      },
       {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
@@ -88,10 +92,6 @@
       {
         "name": "qwen3.5:9b",
         "size_gb": 8.6
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 25.9
       }
     ]
   },
@@ -113,17 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "12:10 PM",
-      "cycle_num": 13
-    },
     {
       "name": "treasury-bonds",
       "status": "skipped",
@@ -156,29 +145,20 @@
       "broken_entries": null,
       "cycle_time": "1:42 PM",
       "cycle_num": 16
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "2:13 PM",
+      "cycle_num": 17
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 13,
-      "window": "daytime",
-      "timestamp": "2026-03-23T12:10:19.858689",
-      "time_display": "12:10 PM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "skipped",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "12:10 PM",
-          "cycle_num": 13
-        }
-      ]
-    },
     {
       "cycle": 14,
       "window": "daytime",
@@ -236,6 +216,26 @@
           "broken_entries": null,
           "cycle_time": "1:42 PM",
           "cycle_num": 16
+        }
+      ]
+    },
+    {
+      "cycle": 17,
+      "window": "daytime",
+      "timestamp": "2026-03-23T14:13:35.959959",
+      "time_display": "2:13 PM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "2:13 PM",
+          "cycle_num": 17
         }
       ]
     }
