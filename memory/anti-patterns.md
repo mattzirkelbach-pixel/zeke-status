@@ -300,3 +300,13 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 **Fix**: `openclaw cron edit <job_id>` to add `bestEffort: true` and `to: 6984324216` to all research jobs.
 **Rule**: Any new openclaw cron job MUST include both fields. After ANY openclaw job creation, verify the config shows these fields before declaring done.
 
+## LAUNCHAGENT-KEEPALIVE-MISSING (discovered 3/23)
+**Pattern**: Daemon LaunchAgents without `KeepAlive: true` freeze silently when the process exits (SIGTERM, error, or false-positive duplicate-PID check from `pgrep`). Nothing restarts it. Downstream work (queue processing, feed writes) halts for hours with no alert.
+**Damage (3/23)**: spark-queue-daemon SIGTERM'd, pgrep saw stale PID → duplicate check blocked restart, LaunchAgent had no KeepAlive → daemon frozen 4.5 hours, 12 inbox tasks sat pending.
+**Fix**: Add `<key>KeepAlive</key><true/>` to ALL daemon plists. Also fix pgrep duplicate check to match on script name, not just process existence.
+**Rule**: Any LaunchAgent running a long-lived daemon MUST have KeepAlive=true. After ANY LaunchAgent reload, verify `launchctl list | grep <label>` shows PID (not just loaded).
+
+## SAME-SYMPTOM-MULTIPLE-ROOTS (discovered 3/23)
+**Pattern**: `fix_feed_stale` fired 4 times today (13:12, 14:21, 17:30, 19:33) — each with a DIFFERENT root cause. Fixing one root cause doesn't prevent the next trigger. The symptom ("feed 999m stale") masked: (1) openclaw --inline syntax error, (2) bestEffort gap, (3) daemon KeepAlive missing, (4) health endpoint reading wrong source.
+**Rule**: When the same fix action fires >2x in one day, assume there are multiple independent root causes. After each fix, explicitly ask: "What OTHER mechanisms could produce this same symptom?" Don't declare victory until the symptom hasn't re-triggered for 24h.
+
