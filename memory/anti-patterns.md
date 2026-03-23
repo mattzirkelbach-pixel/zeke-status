@@ -294,3 +294,9 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 **Pattern**: Trying 5 different inline approaches to extract a members-only video transcript (yt-dlp, youtube_transcript_api, cookies, OpenClaw CLI, Playwright inline) when the FIRST failure should have triggered: write script to disk → nohup → check later. Matt watched me fail for 20 minutes.
 **Fix**: First attempt fails → immediately write a standalone script, dispatch background, move on. Don't iterate inline.
 
+## OPENCLAW-BESTEFFORT-GAP (discovered 3/23)
+**Pattern**: Openclaw cron jobs without `bestEffort: true` + explicit `to: <chat_id>` silently fail on delivery — the research task runs but the result never posts. This triggered `fix_feed_stale` 3x in one day (13:12, 14:21, 16:12 UTC) as the stale detector fired on legitimate gaps.
+**Detection**: `fix_feed_stale` firing more than once per day = likely a job missing these fields. Check with `openclaw cron list` and look for jobs without bestEffort.
+**Fix**: `openclaw cron edit <job_id>` to add `bestEffort: true` and `to: 6984324216` to all research jobs.
+**Rule**: Any new openclaw cron job MUST include both fields. After ANY openclaw job creation, verify the config shows these fields before declaring done.
+
