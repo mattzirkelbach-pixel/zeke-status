@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-24T23:19:39.150136+00:00",
+  "timestamp": "2026-03-24T23:19:48.504682+00:00",
   "feed_lines": 11393,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-24T23:08:35.777107Z\", \"topic\": \"queue-research-xauusd\", \"finding\": \"**FINDING:**  \\n- **Gold price (XAUUSD) daily cycle low window:**\\u202fApproaching\\u202f$2,300\\u202fper ounce\\u202fas of\\u202f2026\\u201103\\u201124\\u202f(spot\\u202f$2,298\\u202f\\u00b1\\u202f$5).  \\n- **SMA reclaim:**\\u202fThe 50\\u2011day Simple Moving Average has been reclaimed at\\u202f$2,265; price is now\\u202f~1.4\\u202f% above the SMA, confirming a short\\u2011term bullish bounce.  \\n- **DCL (Daily Cycle Low) confirmation signal:**\\u202fA bullish divergence on the 4\\u2011hour RSI (\\u2265\\u202f55) and a breakout above the prior 2\\u2011day high at\\u202f$2,310\\u202ftriggered a DCL confirmation on\\u202f2026\\u201103\\u201122, indicating the cycle low is likely in place.\\n\\n**IMPLICATION:**  \\n- The combination of a confirmed DCL, SMA reclaim, and price hovering near the $2,300 low suggests the daily cycle has turned bullish.  \\n- This supports a **long positioning** in gold\\u2011related instruments (e.g., GLD Dec26 calls, GDX Jan27 calls, SILJ Ja\", \"source\": \"spark-queue/bg_202603241907_0\", \"instrument\": \"XAUUSD\", \"task_label\": \"Gold daily cycle structure analysis\", \"priority_was\": 3}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 57.0,
-    "power_w": 60.65,
+    "gpu_util_pct": 7.0,
+    "temp_c": 52.0,
+    "power_w": 28.87,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,7 +75,7 @@
   "gateway_process": {
     "pid": "29431",
     "memory_pct": "2.6",
-    "uptime": "01-02:58:33",
+    "uptime": "01-02:58:42",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -86,12 +86,12 @@
         "size_gb": 0.6
       },
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
-      {
         "name": "qwen3:8b",
         "size_gb": 11.5
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
       }
     ]
   },
