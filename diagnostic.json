@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-03-24 11:08:56 ET",
-  "timestamp_utc": "2026-03-24T15:08:56Z",
+  "timestamp_local": "2026-03-24 11:09:22 ET",
+  "timestamp_utc": "2026-03-24T15:09:22Z",
   "scheduler": {
     "running": true,
     "pid": 54730,
@@ -33,12 +33,13 @@
     "online": true,
     "models_loaded": [
       "nomic-embed-text:latest",
+      "qwen3:8b",
       "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, nemotron-3-nano:30b"
+    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
@@ -51,16 +52,6 @@
     "feed_growth": 50
   },
   "cycles": [
-    {
-      "ts": "2026-03-24T06:00:47.003588",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 1
-    },
     {
       "ts": "2026-03-24T06:31:34.545376",
       "window": "daytime",
@@ -150,16 +141,19 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-24T11:09:12.327876",
+      "window": "daytime",
+      "cycle": 11,
+      "jobs": 1,
+      "success": 0,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -284,6 +278,13 @@
       "status": "success",
       "duration": 1,
       "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 1,
+      "grew": 0,
       "issues": []
     },
     {
