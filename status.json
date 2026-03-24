@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-24T03:00:01.341528+00:00",
+  "timestamp": "2026-03-24T03:00:10.680688+00:00",
   "feed_lines": 9544,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-24T02:52:19.933642Z\", \"topic\": \"queue-research-xauusd\", \"finding\": \"**FINDING:**  \\nThe VIX front-month futures price (CBOE VIX Futures Index) was **21.35** on **2026-03-23**, while the **VIX futures roll yield** (measured as the difference between the March 2026 contract and the April 2026 contract) was **-1.85 points**, or **-8.66%**, indicating a steep contango structure. This roll yield has persisted for **14 consecutive trading days** as of 2026-03-23, with the April 2026 contract trading at **23.20**, significantly above the March 2026 contract\\u2019s close of **21.35**.  \\n\\n**IMPLICATION:**  \\nThe steep contango and negative roll yield signal that VIX futures are pricing in a *delayed volatility spike*, with market participants expecting a sharp decline in VIX levels post-April 2026 expiry. This aligns with the **quadruple witching date of 2026-03-29**, whe\", \"source\": \"spark-queue/followup_followup_followup_followup_followup_bg_202603232236_1\", \"instrument\": \"XAUUSD\", \"task_label\": \"Follow-up: Monitor VIX futures roll yield and SPX options gamma exposur\", \"priority_was\": 3}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 68.0,
-    "power_w": 64.9,
+    "gpu_util_pct": 14.0,
+    "temp_c": 60.0,
+    "power_w": 15.53,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,7 +75,7 @@
   "gateway_process": {
     "pid": "29431",
     "memory_pct": "3.3",
-    "uptime": "06:38:56",
+    "uptime": "06:39:12",
     "status": "RUNNING"
   },
   "spark_status": {
@@ -84,14 +84,6 @@
       {
         "name": "nemotron-3-nano:30b",
         "size_gb": 28.0
-      },
-      {
-        "name": "nomic-embed-text:latest",
-        "size_gb": 0.6
-      },
-      {
-        "name": "qwen3:8b",
-        "size_gb": 11.5
       }
     ]
   },
