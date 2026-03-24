@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-24T00:56:24.361971+00:00",
+  "timestamp": "2026-03-24T00:56:50.048548+00:00",
   "feed_lines": 9368,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-24T00:48:40.026359Z\", \"topic\": \"queue-research-xauusd\", \"finding\": \"FINDING: As of March 23, 2026, SLV (iShares Silver Trust) open interest for the January 27, 2027, $80 call options has increased by 18% over the past 48 hours, rising from 14,200 to 16,756 contracts, with volume surging to 8,920 contracts on March 22, 2026 \\u2014 the highest single-day volume in 18 months.  \\nIMPLICATION: The sharp rise in open interest and volume in SLV $80C suggests aggressive speculative positioning ahead of potential silver price momentum, likely driven by industrial demand recovery and safe-haven flows. This confirms early-stage weakness in precious metals is not yet peaking, and may extend into April as speculative longs build ahead of cycle top. Positioning in SLV options should be monitored for further upside in volatility or price breakout above $24.50 (current spot: $2\", \"source\": \"spark-queue/followup_followup_bg_202603232043_1\", \"instrument\": \"XAUUSD\", \"task_label\": \"Follow-up: Monitor SLV and GDX open interest trends in the next 48 hour\", \"priority_was\": 3}",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 96.0,
-    "temp_c": 57.0,
-    "power_w": 34.66,
+    "temp_c": 64.0,
+    "power_w": 63.55,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -75,12 +75,16 @@
   "gateway_process": {
     "pid": "29431",
     "memory_pct": "3.2",
-    "uptime": "04:35:19",
+    "uptime": "04:35:44",
     "status": "RUNNING"
   },
   "spark_status": {
     "status": "ONLINE",
     "loaded_models": [
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
+      },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
@@ -88,10 +92,6 @@
       {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 25.9
       }
     ]
   },
@@ -113,17 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 1,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "6:52 PM",
-      "cycle_num": 26
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -156,29 +145,20 @@
       "broken_entries": 0,
       "cycle_time": "8:25 PM",
       "cycle_num": 29
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 1,
+      "issues": [],
+      "valid_entries": 1,
+      "broken_entries": 0,
+      "cycle_time": "8:56 PM",
+      "cycle_num": 30
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 26,
-      "window": "daytime",
-      "timestamp": "2026-03-23T18:52:18.541448",
-      "time_display": "6:52 PM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "skipped",
-          "duration": 1,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "6:52 PM",
-          "cycle_num": 26
-        }
-      ]
-    },
     {
       "cycle": 27,
       "window": "daytime",
@@ -236,6 +216,26 @@
           "broken_entries": 0,
           "cycle_time": "8:25 PM",
           "cycle_num": 29
+        }
+      ]
+    },
+    {
+      "cycle": 30,
+      "window": "daytime",
+      "timestamp": "2026-03-23T20:56:49.997156",
+      "time_display": "8:56 PM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "success",
+          "duration": 0,
+          "grew": 1,
+          "issues": [],
+          "valid_entries": 1,
+          "broken_entries": 0,
+          "cycle_time": "8:56 PM",
+          "cycle_num": 30
         }
       ]
     }
