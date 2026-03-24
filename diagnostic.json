@@ -1,203 +1,69 @@
 {
-  "timestamp_local": "2026-03-24 18:11:11 ET",
-  "timestamp_utc": "2026-03-24T22:11:11Z",
+  "timestamp_local": "2026-03-24 6:11:19PM ET",
+  "timestamp_utc": "2026-03-24T22:11:19Z",
   "scheduler": {
     "running": true,
-    "pid": 99594,
-    "uptime_minutes": 179,
-    "current_window": "daytime"
-  },
-  "feed": {
-    "total_lines": 11292,
-    "last_entries": [
-      "[2026-03-24T22:06:38] queue-research-xagusd",
-      "[2026-03-24T22:08:06] queue-research-xauusd",
-      "[2026-03-24T22:08:41] queue-research-xauusd",
-      "[2026-03-24T22:10:17] queue-research-tlt",
-      "[2026-03-24T22:10:42] queue-research-xauusd"
+    "pids": [
+      "99594"
     ],
-    "topic_distribution": {
-      "queue-research-xauusd": 39,
-      "queue-research-tlt": 5,
-      "queue-research-general": 3,
-      "knowledge-evolver/general": 2,
-      "treasury-bonds": 1
-    },
-    "recent_50_clean": 50,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 0,
-    "last_modified_minutes_ago": 0.6
-  },
-  "spark": {
-    "online": true,
-    "models_loaded": [
-      "nomic-embed-text:latest",
-      "nemotron-3-super:120b",
-      "nemotron-3-nano:30b"
-    ],
-    "model_stuck": false,
-    "stuck_model": null,
-    "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, nemotron-3-super:120b, nemotron-3-nano:30b"
+    "count": 1,
+    "type": "python"
   },
   "gateway": {
     "running": true
   },
-  "today": {
-    "jobs_run": 6,
-    "success": 6,
-    "timeout": 0,
-    "fail": 0,
-    "feed_growth": 1
+  "spark": {
+    "online": true,
+    "models_loaded": [
+      "nemotron-3-nano:30b",
+      "nomic-embed-text:latest",
+      "qwen3:8b"
+    ],
+    "model_stuck": false,
+    "inference_active": true,
+    "detail": "nemotron-3-nano:30b, nomic-embed-text:latest, qwen3:8b \u2022 10.7GB VRAM \u2022 8.2B \u2022 Q4_K_M \u2022 17ms",
+    "response_ms": 17,
+    "vram_estimate_gb": 10.7,
+    "model_params": "8.2B",
+    "model_quant": "Q4_K_M"
   },
-  "cycles": [
-    {
-      "ts": "2026-03-24T15:12:06.247796",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
-    {
-      "ts": "2026-03-24T15:42:48.286916",
-      "window": "daytime",
-      "cycle": 2,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
-    {
-      "ts": "2026-03-24T16:13:30.680027",
-      "window": "daytime",
-      "cycle": 3,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
-    {
-      "ts": "2026-03-24T16:44:13.173867",
-      "window": "daytime",
-      "cycle": 4,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
-    {
-      "ts": "2026-03-24T17:14:54.868679",
-      "window": "daytime",
-      "cycle": 5,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
-    {
-      "ts": "2026-03-24T17:45:44.550662",
-      "window": "daytime",
-      "cycle": 6,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 1
+  "feed": {
+    "total_lines": 11292,
+    "last_modified_minutes_ago": 0.6,
+    "last_entries": [
+      "[3/24 5:06PM ET] queue-research-xagusd \u2014 FINDING: SILJ closed at $33.85 on 2026-03-23, down 4.2% from $35.35 on 2026-03-2",
+      "[3/24 5:08PM ET] queue-research-xauusd \u2014 FINDING: GLD closed at $473.25 on March 23, 2026, failing to close above $475 fo",
+      "[3/24 5:08PM ET] queue-research-xauusd \u2014 **FINDING:**  \n- **Gold (XAU/USD) Cycle Low Window:** The most recent daily cycl",
+      "[3/24 5:10PM ET] queue-research-tlt \u2014 **FINDING:**  \n- **10\u2011Year Treasury yield** closed at **4.392\u202f%** on **2026\u201103\u20112",
+      "[3/24 5:10PM ET] queue-research-xauusd \u2014 FINDING: As of 2026-03-24, GLD is trading at $468.50, with the Dec26 $500 call o"
+    ],
+    "recent_50_clean": 49,
+    "recent_50_trivial": 1,
+    "recent_50_broken": 0,
+    "topic_distribution": {
+      "queue-research-xauusd": 36,
+      "queue-research-tlt": 7,
+      "queue-research-xagusd": 4,
+      "treasury-bonds": 2,
+      "queue-research-general": 1
     }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 1,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 1,
-      "grew": 1,
-      "issues": []
-    }
-  ],
-  "health": {
-    "status": "HEALTHY",
-    "issues": []
   },
-  "kg_stats": {
-    "entities": 713,
-    "relations": 820,
-    "associations": 391,
-    "insights": 62
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 51.0,
-    "power_w": 34.37,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 2,
-    "literal_timestamps": 6,
-    "duplicates": 1797,
-    "total": 11271,
-    "error_rate": 16.0
-  },
-  "automation": {
-    "layer1": "L1 Execution \u2014 DEPLOYED",
-    "layer2": "L2 Oversight \u2014 DEPLOYED",
-    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
-    "layer4": "L4 Recursive Learning \u2014 PLANNED"
-  },
-  "cost": {
-    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": false
+  "activity": {
+    "last_job": "treasury-bonds",
+    "last_job_time": "3/24 12:45PM ET",
+    "last_cycle": "3/24 12:45PM ET",
+    "jobs_today": 1,
+    "success_today": 1,
+    "timeout_today": 0,
+    "fail_today": 0,
+    "feed_growth_today": 1,
+    "state": "idle (heartbeat)",
+    "next_cycle_est": "1:15PM",
+    "cycle_count": 6,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   },
   "feed_history": [
-    {
-      "t": 1774130338599,
-      "v": 7969,
-      "l": "5:58PM"
-    },
     {
       "t": 1774131241051,
       "v": 7972,
@@ -1632,21 +1498,217 @@
       "t": 1774389377002,
       "v": 11271,
       "l": "5:56PM"
+    },
+    {
+      "t": 1774390279491,
+      "v": 11292,
+      "l": "6:11PM"
     }
   ],
-  "activity": {
-    "last_job": "treasury-bonds",
-    "last_job_time": "3/24 12:45PM ET",
-    "last_cycle": "3/24 12:45PM ET",
-    "jobs_today": 1,
-    "success_today": 1,
-    "timeout_today": 0,
-    "fail_today": 0,
-    "feed_growth_today": 1,
-    "state": "idle (heartbeat)",
-    "next_cycle_est": "1:15PM",
-    "cycle_count": 6,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "kg_stats": {
+    "entities": 715,
+    "relations": 823,
+    "associations": 391,
+    "insights": 62
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 95.0,
+    "temp_c": 70.0,
+    "power_w": 65.03,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 2,
+    "literal_timestamps": 6,
+    "duplicates": 1811,
+    "total": 11292,
+    "error_rate": 16.1
+  },
+  "cost": {
+    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": false
+  },
+  "automation": {
+    "layer1": "L1 Execution \u2014 DEPLOYED",
+    "layer2": "L2 Oversight \u2014 DEPLOYED",
+    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
+    "layer4": "L4 Recursive Learning \u2014 PLANNED"
+  },
+  "compute_tiers": {
+    "architecture": "tiered_dispatch",
+    "layers": {
+      "L0_python": {
+        "status": "active",
+        "cost": "$0",
+        "role": "Fetch, transform, schedule"
+      },
+      "L1_vector": {
+        "status": "planned",
+        "cost": "$0",
+        "role": "Embeddings + ChromaDB RAG"
+      },
+      "L2_triage": {
+        "status": "active",
+        "cost": "$0",
+        "role": "qwen3:8b classification"
+      },
+      "L3_api": {
+        "status": "active",
+        "cost": "paid",
+        "role": "Haiku/Sonnet/Opus"
+      },
+      "L4_batch": {
+        "status": "active",
+        "cost": "$0",
+        "role": "qwen3-32b overnight"
+      }
+    },
+    "budget": {
+      "haiku_spent": 0,
+      "haiku_limit": 1.0,
+      "sonnet_spent": 0,
+      "sonnet_limit": 0.5,
+      "total_spent": 0,
+      "total_limit": 2.0,
+      "date": "2026-03-24"
+    },
+    "models_hot": [
+      {
+        "name": "nemotron-3-nano:30b",
+        "vram_gb": 26.1,
+        "params": "31.6B"
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "vram_gb": 0.6,
+        "params": "137M"
+      },
+      {
+        "name": "qwen3:8b",
+        "vram_gb": 10.7,
+        "params": "8.2B"
+      }
+    ]
+  },
+  "health": {
+    "status": "HEALTHY",
+    "issues": [],
+    "issue_count": 0
+  },
+  "cycles": [
+    {
+      "ts": "2026-03-24T15:12:06.247796",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-24T15:42:48.286916",
+      "window": "daytime",
+      "cycle": 2,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-24T16:13:30.680027",
+      "window": "daytime",
+      "cycle": 3,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-24T16:44:13.173867",
+      "window": "daytime",
+      "cycle": 4,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-24T17:14:54.868679",
+      "window": "daytime",
+      "cycle": 5,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-24T17:45:44.550662",
+      "window": "daytime",
+      "cycle": 6,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 1
+    }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 1,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 1,
+      "grew": 1,
+      "issues": []
+    }
+  ],
+  "today": {
+    "jobs_run": 6,
+    "success": 6,
+    "timeout": 0,
+    "fail": 0,
+    "feed_growth": 1
   }
 }
