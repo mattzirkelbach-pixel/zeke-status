@@ -310,3 +310,9 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 **Pattern**: `fix_feed_stale` fired 4 times today (13:12, 14:21, 17:30, 19:33) — each with a DIFFERENT root cause. Fixing one root cause doesn't prevent the next trigger. The symptom ("feed 999m stale") masked: (1) openclaw --inline syntax error, (2) bestEffort gap, (3) daemon KeepAlive missing, (4) health endpoint reading wrong source.
 **Rule**: When the same fix action fires >2x in one day, assume there are multiple independent root causes. After each fix, explicitly ask: "What OTHER mechanisms could produce this same symptom?" Don't declare victory until the symptom hasn't re-triggered for 24h.
 
+## WINDOW-SIZING-WITHOUT-THROUGHPUT-CHECK (discovered 3/23)
+**Pattern**: `fix_assessment_new_cron_topics` fired twice in one day. First fix changed scan window `[-200:]→[-500:]`. Second fix needed `[-500:]→[-2000:]` because feed throughput during market hours (~785 entries/6h ≈ 2.2/min) outgrew the 500-line window within hours.
+**Root cause**: Choosing a scan window size based on intuition or current state, not measured peak throughput.
+**Rule**: Before hardcoding ANY scan/slice window, compute: `peak_rate_per_hour × hours_between_runs × 2` for safety margin. For learning-feed.jsonl: ~785/6h × safety = 2000+ lines minimum during market hours.
+**Fix**: After ANY window-size change, verify with: `wc -l feed.jsonl` before and after the interval — confirm the window covers the actual delta.
+
