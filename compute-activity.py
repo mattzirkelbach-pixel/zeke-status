@@ -6,7 +6,14 @@ from datetime import datetime, timezone, timedelta
 
 HOME = Path.home()
 LOG_DIR = HOME / "logs"
-SCHED_LOG = LOG_DIR / f"scheduler-{datetime.now().strftime('%Y-%m-%d')}.log"
+_today_log = LOG_DIR / f"scheduler-{datetime.now().strftime('%Y-%m-%d')}.log"
+if _today_log.exists():
+    SCHED_LOG = _today_log
+else:
+    # Scheduler may have started on a prior day; find the most recent log file
+    import glob as _glob
+    _candidates = sorted(_glob.glob(str(LOG_DIR / "scheduler-*.log")))
+    SCHED_LOG = Path(_candidates[-1]) if _candidates else _today_log
 DIAG = HOME / "zeke-status/diagnostic.json"
 LOG_DIR = HOME / "zeke-status/logs"
 
