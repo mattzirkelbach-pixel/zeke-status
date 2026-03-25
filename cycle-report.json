@@ -1,40 +1,42 @@
 {
-  "timestamp": "2026-03-25T02:14:14.062183",
-  "window": "overnight",
-  "cycle": 121,
-  "feed_before": 12012,
-  "feed_after": 12012,
-  "feed_growth": 0,
-  "jobs": {
-    "total": 1,
-    "success": 0,
-    "fail": 0,
-    "timeout": 0
+  "timestamp": "2026-03-25T06:16:14.900895+00:00",
+  "feed_total": 12015,
+  "feed_previous": 11980,
+  "feed_growth": 35,
+  "feed_stagnant": false,
+  "spark": {
+    "online": true,
+    "model_loaded": true,
+    "models": [
+      "nemotron-3-nano:30b",
+      "nomic-embed-text:latest",
+      "qwen3:8b"
+    ]
   },
-  "job_details": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration_s": 1,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": []
-    }
-  ],
-  "failures": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration_s": 1,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": []
-    }
-  ],
-  "needs_repair": true,
-  "feed_stagnant": true,
-  "repair_dispatched": true,
-  "repair_result": "error"
+  "scheduler": {
+    "running": true,
+    "pids": [
+      "99594"
+    ]
+  },
+  "gateway": {
+    "running": true,
+    "pids": [
+      "17945",
+      "17954",
+      "17955",
+      "17956",
+      "17957",
+      "17961",
+      "17962",
+      "19331",
+      "29431"
+    ]
+  },
+  "jobs_today": 0,
+  "success_today": 0,
+  "fails_today": 0,
+  "timeouts_today": 0,
+  "needs_repair": false,
+  "repair_reasons": []
 }
