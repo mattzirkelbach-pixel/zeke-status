@@ -316,3 +316,10 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 **Rule**: Before hardcoding ANY scan/slice window, compute: `peak_rate_per_hour × hours_between_runs × 2` for safety margin. For learning-feed.jsonl: ~785/6h × safety = 2000+ lines minimum during market hours.
 **Fix**: After ANY window-size change, verify with: `wc -l feed.jsonl` before and after the interval — confirm the window covers the actual delta.
 
+
+
+## UPTIME-WITHOUT-VALUE (discovered 2026-03-25)
+**Pattern**: System grades itself A because all processes run, queue has zero failures, feed grows. But zero outputs changed a trading decision. L2 recommended trimming GLD before a 5% rip. Alpha scanner found 2 real signals and buried them in JSON. Camel entered silver and the system had no idea -- Matt told it. Assessment checks: is the scheduler running? Is the queue processing? Is the feed growing? It never checks: did any output help Matt make money?
+**Root cause**: Assessment criteria measure UPTIME (processes alive, tasks completing, feed growing) not VALUE (recommendations accurate, signals surfaced, Camel actions detected). A system that processes 5,832 tasks producing zero actionable output gets the same A as one that catches a cycle low entry 2 hours before Matt checks.
+**Fix**: Assessment must include VALUE checks: (1) Did L2 produce recommendations that would have been profitable? Backtest last 5 recs against actual price action. (2) Did alpha scanner surface conviction >=8 ideas via Telegram? (3) Did Camel pipeline detect a new trade action in last 48h? (4) Is cycle_state.json less than 24h old? If any VALUE check fails, grade cannot be A regardless of uptime.
+**Rule**: Uptime is necessary but not sufficient. Grade A requires: all processes running AND at least one output that would change a decision in the last 24h. Otherwise grade C max.
