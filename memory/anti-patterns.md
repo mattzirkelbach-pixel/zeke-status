@@ -318,6 +318,12 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 
 
 
+## SELF-REVIEW-REPETITION (discovered 2026-03-26)
+**Pattern**: self_review cycles 400-750 (6 consecutive runs over ~32h) each produced identical output: "WINDOW-SIZING-WITHOUT-THROUGHPUT-CHECK and SAME-SYMPTOM-MULTIPLE-ROOTS confirmed stable — no new incidents, no new patterns." After the first 2 confirmations, subsequent cycles added zero information and consumed executor cycles for nothing.
+**Rule**: When a self_review finds a pattern "confirmed stable" for 2 consecutive cycles, stop summarizing that specific pattern in future cycles. Only re-surface it if a NEW incident related to it occurs. The default stance for known-stable patterns is silence.
+**Detection**: If 3+ consecutive self_review entries reference the same pattern as "confirmed" with no new incident, that pattern should be filtered from the review scope.
+**Fix**: self_review prompt should track "last flagged" per anti-pattern. If a pattern has been "confirmed stable" in the prior self_review AND no new incident, skip it entirely — do not re-confirm.
+
 ## UPTIME-WITHOUT-VALUE (discovered 2026-03-25)
 **Pattern**: System grades itself A because all processes run, queue has zero failures, feed grows. But zero outputs changed a trading decision. L2 recommended trimming GLD before a 5% rip. Alpha scanner found 2 real signals and buried them in JSON. Camel entered silver and the system had no idea -- Matt told it. Assessment checks: is the scheduler running? Is the queue processing? Is the feed growing? It never checks: did any output help Matt make money?
 **Root cause**: Assessment criteria measure UPTIME (processes alive, tasks completing, feed growing) not VALUE (recommendations accurate, signals surfaced, Camel actions detected). A system that processes 5,832 tasks producing zero actionable output gets the same A as one that catches a cycle low entry 2 hours before Matt checks.
