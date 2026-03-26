@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-26T02:21:49.961204+00:00",
+  "timestamp": "2026-03-26T02:22:00.498190+00:00",
   "feed_lines": 13410,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-26T02:13:06.814724Z\", \"topic\": \"queue-research-ibit\", \"finding\": \"**FINDING:**  \\n- **Implied volatility (IV) spike:** On 2026\\u201103\\u201125 the 30\\u2011day ATM IV of IBIT was **\\u2248\\u202f48\\u202f%**, up **+12\\u202fpp** from the 30\\u2011day average of **\\u2248\\u202f36\\u202f%** observed over the prior 90\\u202fdays (Jan\\u201125\\u202f\\u2013\\u202fMar\\u201125).  \\n- **Underlying price move:** BTC fell **4.3\\u202f%** on 2026\\u201103\\u201124 to **$70,200**, well below the **$85K** strike\\u2011through level needed for the $48\\u202fC Jun\\u201126 call to become deep\\u2011in\\u2011the\\u2011money.  \\n- **Theta decay acceleration:** The option\\u2019s **theta** (per\\u2011day time\\u2011value decay) rose from **\\u20110.018\\u202f$** on 2026\\u201102\\u201128 to **\\u20110.032\\u202f$** on 2026\\u201103\\u201125, a **+78\\u202f%** increase in absolute decay rate.  \\n- **Break\\u2011even shift:** With IV now at 48\\u202f% the model\\u2011derived break\\u2011even price for the $48\\u202fC Jun\\u201126 contract moved **\\u2248\\u202f$1.15** higher (from $52.67 to **\\u2248\\u202f$53.82**), implying a **~2.7\\u202f%** rise in required\", \"source\": \"spark-queue/ke_20260326T020138_9216ae6a_2\", \"instrument\": \"IBIT\", \"task_label\": \"KE: What are the primary risk factors that could invalidate the theta\\u2011cliff assumpti\", \"priority_was\": 4}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 62.0,
-    "power_w": 24.52,
+    "gpu_util_pct": 94.0,
+    "temp_c": 65.0,
+    "power_w": 37.9,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
-      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 25.9
       }
     ]
   },
