@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-26T05:10:30.224198+00:00",
+  "timestamp": "2026-03-26T05:10:41.729981+00:00",
   "feed_lines": 13634,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-26T05:01:01.685383Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- **10\\u2011Year U.S. Treasury yield** (as of **2026\\u201103\\u201126**) is **4.38\\u202f%**, up **0.35\\u202fpercentage points** from the March\\u202f20\\u202f2026 level of **4.39\\u202f%** and roughly **0.55\\u202fpercentage points** above the 30\\u2011day low of **4.33\\u202f%**.  \\n- **Momentum:** The yield has risen **0.35\\u202fpp in the last 10 days** (\\u2248\\u202f+0.8\\u202f% weekly) and **0.55\\u202fpp above the 30\\u2011day low**, indicating a **short\\u2011term upward bias** with the next key resistance at **4.40\\u202f%**.  \\n- **Fed\\u2011meeting probability:** According to the CME FedWatch Tool (data through 2026\\u201103\\u201126), the implied probability of a **25\\u2011bp rate cut at the June\\u202f2026 FOMC meeting** is **\\u2248\\u202f38\\u202f%**, while the probability of **no change** is **\\u2248\\u202f62\\u202f%**.  \\n\\n**IMPLICATION:**  \\n- The **approach toward the 4.40\\u202f% threshold** keeps the bear\\u2011case for TLT alive; a break a\", \"source\": \"spark-queue/te-treasury-20260326-1999a212\", \"instrument\": \"GENERAL\", \"task_label\": \"Monitor yield for threshold cross\", \"priority_was\": 5}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 65.0,
-    "power_w": 64.42,
+    "gpu_util_pct": 1.0,
+    "temp_c": 57.0,
+    "power_w": 15.08,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -81,10 +81,6 @@
   "spark_status": {
     "status": "ONLINE",
     "loaded_models": [
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
       {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
