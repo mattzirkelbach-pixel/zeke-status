@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-26T06:25:44.472610+00:00",
+  "timestamp": "2026-03-26T06:25:57.048201+00:00",
   "feed_lines": 13747,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-26T06:16:26.774240Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- **10\\u2011Year Treasury Yield:** 4.39\\u202f% (as of 2026\\u201103\\u201126) \\u2013 up 0.35\\u202fpercentage points over the past month and 0.02\\u202fpp from the March\\u202f20,\\u202f2026 level of 4.39\\u202f%.  \\n- **Momentum:** The yield has been trending upward for the last 30\\u202fdays, with a modest daily increase of ~0.005\\u202fpp per session; the current level sits just below the psychologically important **4.40\\u202f%** threshold.  \\n- **Implied Fed Meeting Probability:** Based on the CME FedWatch Tool, the probability of a **25\\u2011basis\\u2011point rate cut at the June\\u202f2026 FOMC meeting** is **\\u2248\\u202f38\\u202f%**, while the chance of **no change** is **\\u2248\\u202f62\\u202f%**.  \\n\\n**IMPLICATION:**  \\n- The yield is **approaching the 4.40\\u202f% level** that historically triggers a bearish reaction in TLT and related LEAPS positions. If the yield breaches 4.40\\u202f%, TLT\\u2019s price pr\", \"source\": \"spark-queue/te-treasury-20260326-0174f08b\", \"instrument\": \"GENERAL\", \"task_label\": \"Monitor yield for threshold cross\", \"priority_was\": 5}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 68.0,
-    "power_w": 65.37,
+    "gpu_util_pct": 93.0,
+    "temp_c": 64.0,
+    "power_w": 37.45,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
-      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
       }
     ]
   },
