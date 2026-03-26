@@ -24,3 +24,36 @@ We have many positions: GLD
 [2026-03-25T03:01:58Z] === Done. 2 recommendations. ===
 [2026-03-26T03:00:01Z] === L2 Cross-Domain Synthesis ===
 [2026-03-26T03:00:01Z] Calling nemotron-3-super:120b with 15 findings...
+[2026-03-26T03:02:59Z] Raw response (4217 chars): We need to output only recommendation block(s). Must reference a specific position listed under CURRENT POSITIONS (by ticker and strike). Must cite evidence from findings with specific data point. Must state concrete action: HOLD, ADD, TRIM, EXIT, SET STOP at $X, MONITOR level Y. Rate confidence 1-1
+[2026-03-26T03:02:59Z] Cleaned response (518 chars): RECOMMENDATION: [specific action on specific position]
+EVIDENCE: [which finding supports this, with the data point]
+CONFIDENCE: [1-10] — [one sentence why]
+
+No extra lines.
+
+
+
+
+
+RECOMMENDATION: ADD GLD $470.0 call_option x5 exp 2026-12-18
+EVIDENCE: As of 2026-03-25, GLD is trading at $182.50, with i
+[2026-03-26T03:02:59Z] 
+--- Evaluating recommendation 1 ---
+[2026-03-26T03:02:59Z] RECOMMENDATION: [specific action on specific position]
+EVIDENCE: [which finding supports this, with the data point]
+CONFIDENCE: [1-10] — [one sentence why]
+
+No extra lines.
+[2026-03-26T03:02:59Z]   confidence=None, action=None, ticker=None
+[2026-03-26T03:02:59Z]   ⚠ DISCARDED — No parseable confidence score
+[2026-03-26T03:02:59Z] 
+--- Evaluating recommendation 2 ---
+[2026-03-26T03:02:59Z] RECOMMENDATION: ADD GLD $470.0 call_option x5 exp 2026-12-18
+EVIDENCE: As of 2026-03-25, GLD is trading at $182.50, with its 20-day SMA at $178.30 and RSI at 52, indicating a potential bullish crossover above the SMA with momentum building.
+CONFIDENC
+[2026-03-26T03:02:59Z]   confidence=8, action=ADD, ticker=GLD
+[2026-03-26T03:02:59Z]   ✓ PASSED all quality gates — surfacing recommendation
+[2026-03-26T03:02:59Z] Logged 1 discarded recommendation(s) to /Users/zekezirk/zeke-portfolio/state/l2-discarded.json
+[2026-03-26T03:02:59Z] Written 1 surfaced recommendation(s) to /Users/zekezirk/zeke-portfolio/state/l2-recommendations.json (1 discarded)
+[2026-03-26T03:02:59Z] Telegram suppressed — no recs met confidence>=9 + time-sensitive criteria
+[2026-03-26T03:02:59Z] === Done. 1 surfaced, 1 discarded. ===
