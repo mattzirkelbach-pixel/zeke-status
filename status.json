@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-28T02:43:55.066408+00:00",
+  "timestamp": "2026-03-28T02:44:06.855365+00:00",
   "feed_lines": 16756,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-28T02:35:31.506861Z\", \"topic\": \"queue-research-general\", \"finding\": \"FINDING: As of March 27, 2026, GDX $100C Jan27 options are trading at $3.10 with an implied volatility (IV) of 28.3%, while SILJ $34C Jan27 options are at $1.85 with an IV of 31.7%. In contrast, GLD Dec26 $470C options (current expiry) show an IV of 24.5%, and SILJ\\u2019s underlying mining index has underperformed GLD by 14% over the past 30 days despite similar volatility trends.  \\nIMPLICATION: The divergence in price action \\u2014 GDX and SILJ options exhibiting higher IV than GLD despite weaker underlying performance \\u2014 suggests structural differences in mining ETF volatility dynamics, where mining exposure amplifies option premiums due to leverage and sector-specific risk, even as GLD remains relatively stable. This misalignment may present arbitrage or hedging opportunities, particularly as GDX\\u2019\", \"source\": \"spark-queue/followup_followup_refill_20260328T023000_11\", \"instrument\": \"GENERAL\", \"task_label\": \"Follow-up: Validate whether GDX or SILJ options exhibit correlated vola\", \"priority_was\": 4}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 70.0,
-    "power_w": 67.37,
+    "gpu_util_pct": 0.0,
+    "temp_c": 60.0,
+    "power_w": 13.8,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -88,10 +88,6 @@
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
       }
     ]
   },
