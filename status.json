@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-28T06:44:47.796813+00:00",
+  "timestamp": "2026-03-28T06:45:00.146242+00:00",
   "feed_lines": 17096,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-28T06:31:49.825381Z\", \"topic\": \"queue-research-xauusd\", \"finding\": \"FINDING:  \\nAs of 2026-03-28, GLD is trading at $192.45, with the April 2026 $195 call option bid at $4.80 (implied volatility: 18.2%). The April 2026 $200 call is bid at $2.10, indicating a steepening skew in near-term options. Meanwhile, GDX (Gold Miners ETF) is at $102.30, with January 2027 $100 calls bid at $6.50, reflecting sustained bullish positioning in mining equities despite broader market weakness.  \\n\\nIMPLICATION:  \\nThe steepening options skew in GLD and GDX suggests market participants are positioning for a near-term breakout above $195\\u2013$200 in gold, potentially driven by a cycle low formation in SPX (currently at 5,850, with cycle low window targeting 5,780\\u20135,750). A failure to reclaim SPX\\u2019s 200-day SMA (5,875) could trigger a sharp rally in gold as equities decline, aligning w\", \"source\": \"spark-queue/bg_202603280231_0\", \"instrument\": \"XAUUSD\", \"task_label\": \"Gold daily cycle structure analysis\", \"priority_was\": 3}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 73.0,
-    "power_w": 70.05,
+    "gpu_util_pct": 94.0,
+    "temp_c": 66.0,
+    "power_w": 37.9,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -91,7 +91,7 @@
       },
       {
         "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
+        "size_gb": 25.9
       }
     ]
   },
