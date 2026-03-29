@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-29T03:02:09.293486+00:00",
+  "timestamp": "2026-03-29T03:02:21.781474+00:00",
   "feed_lines": 18375,
   "recent_feed": [
     "{\"timestamp\": \"2026-03-29T02:52:34.615570Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- **10\\u2011Year Treasury Yield:** 4.352% (as of 28\\u202fMar\\u202f2025, Bloomberg\\u202f10Y\\u202fUST\\u202fYield).  \\n- **Momentum:** +0.12\\u202f% over the last 5 trading days (up from 4.23% on 23\\u202fMar).  \\n- **Fed\\u2011Meeting Implication:** CME FedWatch shows a 68% probability of a 25\\u202fbp rate hike at the **20\\u202fMar\\u202f2025** FOMC meeting (the next scheduled meeting after today).\\n\\n**IMPLICATION:**  \\n- The upward move in the 10\\u2011yr yield pushes it closer to the **4.40% psychological resistance** highlighted in prior Camel research. Crossing above 4.40% would likely trigger a short\\u2011term bearish repricing of TLT and related LEAPS, while also reinforcing expectations of tighter monetary policy (higher\\u2011for\\u2011longer rates). This supports a **bearish bias on TLT** and suggests **reducing long\\u2011duration exposure** or hedging with inve\", \"source\": \"spark-queue/te-treasury-20260329-45bbb40b\", \"instrument\": \"GENERAL\", \"task_label\": \"Monitor yield for threshold cross\", \"priority_was\": 5}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 62.0,
-    "power_w": 62.7,
+    "gpu_util_pct": 0.0,
+    "temp_c": 53.0,
+    "power_w": 12.56,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -88,10 +88,6 @@
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
       }
     ]
   },
