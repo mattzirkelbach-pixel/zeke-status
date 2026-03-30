@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-03-29 21:03:24 ET",
-  "timestamp_utc": "2026-03-30T01:03:24Z",
+  "timestamp_local": "2026-03-29 21:06:03 ET",
+  "timestamp_utc": "2026-03-30T01:06:03Z",
   "scheduler": {
     "running": true,
     "pid": 99594,
-    "uptime_minutes": 7551,
+    "uptime_minutes": 7554,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 19719,
+    "total_lines": 19722,
     "last_entries": [
-      "[PARSE ERROR] {\\\"timestamp\\\":\\\"2026-03-30T00:56:00Z\\\",\\\"topic\\\":\\\"treasury-bonds\\\",\\\"finding\\\"",
-      "[2026-03-30T00:59:49] queue-research-xauusd",
-      "[2026-03-30T01:00:28] queue-research-xauusd",
       "[2026-03-30T01:05:00] treasury-bonds",
-      "[2026-03-30T01:02:51] queue-research-xauusd"
+      "[2026-03-30T01:02:51] queue-research-xauusd",
+      "[2026-03-30T01:03:43] queue-research-xauusd",
+      "[2026-03-30T01:05:05] queue-research-tlt",
+      "[2026-03-30T01:05:34] queue-research-xauusd"
     ],
     "topic_distribution": {
       "queue-research-xauusd": 31,
@@ -52,16 +52,6 @@
     "feed_growth": 36
   },
   "cycles": [
-    {
-      "ts": "2026-03-29T17:20:49.462944",
-      "window": "daytime",
-      "cycle": 23,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-03-29T17:51:36.657498",
       "window": "daytime",
@@ -151,20 +141,21 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-03-29T21:05:50.691878",
+      "window": "overnight",
+      "cycle": 3,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 1
     }
   ],
   "recent_jobs": [
     {
       "name": "treasury-bonds",
-      "status": "unknown",
-      "duration": 0,
-      "grew": 0,
-      "issues": [
-        "spark_locked"
-      ]
-    },
-    {
-      "name": "treasury-bonds",
       "status": "success",
       "duration": 0,
       "grew": 0,
@@ -294,6 +285,13 @@
       "status": "success",
       "duration": 0,
       "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 1,
       "issues": []
     }
   ],
