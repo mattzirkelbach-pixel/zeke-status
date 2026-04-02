@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-02T08:48:55.059868+00:00",
+  "timestamp": "2026-04-02T08:49:10.047177+00:00",
   "feed_lines": 24747,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-02T08:39:20.695609Z\", \"topic\": \"queue-research-xauusd\", \"finding\": \"**FINDING:**  \\nOn 2026-04-02, GDX closed at **$39.21**, up **+1.8%** on volume **1.7\\u00d7** its 20-day average (volume = 1.42M vs. 20-day avg = 835K), with open interest in the Jan27 $100C contract rising to **22,100 contracts** \\u2014 the highest level since 2025-11-15. This marks the third consecutive day of volume expansion above 1.5\\u00d7 threshold and the first time in 18 weeks that GDX has sustained closes above $39.00.\\n\\n**IMPLICATION:**  \\nThe sustained volume spike and rising open interest in GDX\\u2019s $100C call options signal growing institutional and speculative positioning ahead of the April 3 CPI release. With GDX now trading above $39.00 \\u2014 a level not seen since January 2026 \\u2014 and volume consistently above 1.5\\u00d7 average, the momentum aligns with the prior cycle transition confirmed in March. Thi\", \"source\": \"spark-queue/followup_bg_202604020436_0\", \"instrument\": \"XAUUSD\", \"task_label\": \"Follow-up: Monitor volume patterns during the next 3\\u20135 trading days to \", \"priority_was\": 3}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 65.0,
-    "power_w": 60.92,
+    "gpu_util_pct": 93.0,
+    "temp_c": 61.0,
+    "power_w": 37.91,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
-      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 25.9
       }
     ]
   },
