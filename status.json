@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-03T03:09:00.924633+00:00",
+  "timestamp": "2026-04-03T03:09:17.218554+00:00",
   "feed_lines": 26548,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-03T02:58:31.665645Z\", \"topic\": \"queue-research-xauusd\", \"finding\": \"**FINDING:**  \\nAs of 2026-04-02, TLT\\u2019s 1-week implied volatility (IV) skew shows a **14.2% premium for puts** relative to calls at the same 25-delta OTM level (e.g., 25-delta put IV = 22.8% vs. call IV = 19.9%). This skew is driven by a **$1.25 basis point widening** in TLT\\u2019s 10Y Treasury futures spread to the ICE U.S. Treasury 10-Year Index (ICE BUG) over the past 5 days, signaling heightened near-term rate volatility. The 1-week TLT put skew (IV put / IV call) has risen from 1.08 to 1.14 in the last 3 trading sessions, with put open interest increasing 23% week-over-week to 18,500 contracts (CBOE data, 2026-04-02).  \\n\\n**IMPLICATION:**  \\nThe elevated TLT put skew (14.2% premium) confirms asymmetric demand for downside protection in long-duration Treasuries, reflecting market expectations \", \"source\": \"spark-queue/followup_followup_followup_bg_202604022254_1\", \"instrument\": \"XAUUSD\", \"task_label\": \"Follow-up: Monitor TLT\\u2019s 1-week implied volatility skew against 10Y Tre\", \"priority_was\": 3}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 62.0,
-    "power_w": 62.31,
+    "gpu_util_pct": 94.0,
+    "temp_c": 59.0,
+    "power_w": 35.43,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
-      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
       }
     ]
   },
