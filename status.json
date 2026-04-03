@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-03T05:41:28.569574+00:00",
+  "timestamp": "2026-04-03T05:41:44.077017+00:00",
   "feed_lines": 26770,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-03T05:30:59.875613Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- SILJ (iShares Silver Trust) closed on **2026\\u201104\\u201103** at **$31.02**, a **0.7\\u202f% decline** from the prior close.  \\n- The open\\u2011interest (OI) on the **$30\\u2011strike put** of SILJ has risen from **\\u22481,200 contracts** on **2026\\u201104\\u201101** to **\\u22482,300 contracts** on **2026\\u201104\\u201103**, an **\\u224891\\u202f% increase** in just two days.  \\n- The **CME FedWatch** model now assigns a **\\u224868\\u202f% probability** that the Federal Reserve will **hold rates steady** at its **June\\u202f2026** meeting, while the chance of a **rate cut** has slipped to **\\u224815\\u202f%** and a **rate hike** to **\\u224817\\u202f%**.  \\n\\n**IMPLICATION:**  \\n- The combination of a **price breach below the $31.00 threshold** and a **>15\\u202f% OI jump** in the $30\\u2011strike put satisfies the trigger outlined in the prior Zeke directive to \\u201cinitiate put spread hedge (e.g., $\", \"source\": \"spark-queue/followup_followup_refill_20260403T053000_11\", \"instrument\": \"GENERAL\", \"task_label\": \"Follow-up: Monitor SILJ price action and OI changes through April 10; i\", \"priority_was\": 4}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 62.0,
-    "power_w": 62.57,
+    "gpu_util_pct": 94.0,
+    "temp_c": 58.0,
+    "power_w": 38.58,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -73,7 +73,7 @@
     }
   },
   "gateway_process": {
-    "pid": "6482\n13525\n23046\n23049\n23050\n23052\n23053\n23054\n23055\n23056\n23057\n23058\n59860\n59868\n60957\n60963\n60964\n60965\n83810\n86085\n86087\n97937\n97939",
+    "pid": "13525\n16587\n23046\n23049\n23050\n23052\n23053\n23054\n23055\n23056\n23057\n23058\n59860\n59868\n60957\n60963\n60964\n60965\n83810\n86085\n86087\n97937\n97939",
     "memory_pct": "",
     "uptime": "",
     "status": "RUNNING"
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
-      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 25.9
       }
     ]
   },
