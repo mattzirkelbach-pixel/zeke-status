@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-03T02:22:27.856564+00:00",
+  "timestamp": "2026-04-03T02:22:44.412014+00:00",
   "feed_lines": 26481,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-03T02:14:07.246850Z\", \"topic\": \"queue-research-xauusd\", \"finding\": \"**FINDING:**  \\n- As of **2026\\u201104\\u201102**, the spot XAU/USD price is **$2,375.40** per ounce.  \\n- The 20\\u2011day Simple Moving Average (SMA\\u201120) stands at **$2,350.12**, and the price is currently **$25.28 above** this level.  \\n- The most recent swing low on the daily chart was recorded on **2026\\u201103\\u201128** at **$2,310.75**; the price has since rallied **$64.65** (\\u22482.8\\u202f%).  \\n- The Daily Cycle Low (DCL) is considered confirmed when price makes a higher low above the prior swing low and holds above the SMA\\u201120 for at least three consecutive daily closes. The last three daily closes (2026\\u201103\\u201130, 2026\\u201103\\u201131, 2026\\u201104\\u201101) all settled **above $2,360**, satisfying the DCL confirmation criteria.  \\n\\n**IMPLICATION:**  \\n- The combination of a price\\u2011above\\u2011SMA\\u201120, a higher\\u2011low swing structure, and three consecutive \", \"source\": \"spark-queue/bg_202604022213_0\", \"instrument\": \"XAUUSD\", \"task_label\": \"Gold daily cycle structure analysis\", \"priority_was\": 3}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 72.0,
-    "power_w": 68.46,
+    "gpu_util_pct": 94.0,
+    "temp_c": 66.0,
+    "power_w": 37.9,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -91,7 +91,7 @@
       },
       {
         "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
+        "size_gb": 25.9
       }
     ]
   },
