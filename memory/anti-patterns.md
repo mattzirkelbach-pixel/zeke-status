@@ -331,3 +331,14 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 **Root cause**: Assessment criteria measure UPTIME (processes alive, tasks completing, feed growing) not VALUE (recommendations accurate, signals surfaced, Camel actions detected). A system that processes 5,832 tasks producing zero actionable output gets the same A as one that catches a cycle low entry 2 hours before Matt checks.
 **Fix**: Assessment must include VALUE checks: (1) Did L2 produce recommendations that would have been profitable? Backtest last 5 recs against actual price action. (2) Did alpha scanner surface conviction >=8 ideas via Telegram? (3) Did Camel pipeline detect a new trade action in last 48h? (4) Is cycle_state.json less than 24h old? If any VALUE check fails, grade cannot be A regardless of uptime.
 **Rule**: Uptime is necessary but not sufficient. Grade A requires: all processes running AND at least one output that would change a decision in the last 24h. Otherwise grade C max.
+
+## CLAUDE-CODE-BARE-FLAG (discovered 2026-04-06)
+**Pattern**: Claude Code CLI `--bare` flag breaks auth in v2.1.92 — returns "Not logged in" with exit 1. Was silently failing every executor task for days.
+**Fix**: Removed `--bare` from executor. Added dynamic flag detection (`_detect_cli_flags()`) that tests CLI capabilities at startup and auto-adapts. Executor now runs pre-flight auth check before processing any tasks.
+**Rule**: Never hardcode optional CLI flags. Test them dynamically. If a flag fails, fall back gracefully.
+
+## SPARK-THINKING-LEAKAGE (discovered 2026-04-06, RESOLVED)
+**Pattern**: Nemotron models on Ollama leak `<think>` reasoning into output when called via `/api/generate`. Previous fix was regex stripping — fragile and incomplete.
+**Fix**: Switch from `/api/generate` to `/api/chat` with `"think": false`. This is NVIDIA's native thinking control. Zero leakage, no regex needed.
+**Rule**: For ANY Ollama model that supports thinking tokens, ALWAYS use `/api/chat` with `think: false` for production output. Never use `/api/generate` for synthesis tasks.
+**Applied to**: wiki-compiler.py, cross-domain-synth.py (L2)
