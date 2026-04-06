@@ -2786,3 +2786,20 @@
 [03:56:35] Pushed 1 fix tasks to cowork
 [03:56:35] Learning log updated: /Users/zekezirk/zeke-status/memory/learning-log.jsonl
 [03:56:35] === Done ===
+[05:56:35] === Bi-Hourly Self-Assessment ===
+[05:56:36] Grade: C. OK: prewarm, l1b, l2, queue, feed_quality, noise, price_watcher, new_cron_topics. Failed: cowork_executor, capabilities.
+[05:56:36]   prewarm: {"status": "OK", "detail": "[2026-03-26T21:56:14Z] Super loaded: 3 tokens in 69.7s"}
+[05:56:36]   l1b: {"dispatched": 15, "ingested": 12, "status": "OK", "quality": "GOOD"}
+[05:56:36]   l2: {"status": "OK", "count": 2, "narrating": false, "preview": ""}
+[05:56:36]   queue: {"done": 28452, "failed": 0, "pending": 73, "echo_rate": 0.0, "status": "OK"}
+[05:56:36]   feed_quality: {"avg_score": 7.4, "junk_pct": 2, "actionable_pct": 79, "total": 99, "status": "OK"}
+[05:56:36]   noise: {"noise_entries_6h": 0, "breakdown": {}, "status": "OK"}
+[05:56:36]   cowork_executor: {"status": "DEGRADED", "completed_runs": 5, "successes": 0, "failures": 12, "detail": "Ran but 0 successes"}
+[05:56:36]   price_watcher: {"status": "OK", "detail": "Last entry: [2026-04-06 05:55 ET] Outside market hours. Exiting.", "is_market_hours": false, "log_path": "/Users/zekezirk/zeke-status/logs/price-watcher.log"}
+[05:56:36]   new_cron_topics: {"status": "OK", "active_topics": {"oil-tlt": 7, "gold-cycle": 6, "btc-spx-macro": 5}, "missing_topics": [], "detail": "Active: ['oil-tlt', 'gold-cycle', 'btc-spx-macro'], Missing 24h: []"}
+[05:56:36]   capabilities: {"status": "FAILED", "failures": ["claude-code v2.1.85 is 7 versions behind latest v2.1.92", "conviction-backtest.json is 156.4h old (stale)"], "warnings": ["Orphaned pre_fetched transcripts (not in processed_ids): ['AmmCHacJaGg', 'BgUGDmRBX4M', 'j92VqUja0Zs', 'aMVFidX_1vs', 'o_IDu7m3SNk']", "capability-scanner-state.json: last_run 238.9h ago (>26h)"], "claude_code": {"status": "FAILED", "current": "2.1.85", "latest": "2.1.92", "behind": 7}, "conviction_backtest": {"status": "FAILED", "age_hours": 156.4, "positions": 20, "missing_scores": []}, "camel_yt_orphans": {"status": "WARN", "pre_fetched_count": 6, "orphaned": ["AmmCHacJaGg", "BgUGDmRBX4M", "j92VqUja0Zs", "aMVFidX_1vs", "o_IDu7m3SNk"]}, "infra_scout": {"status": "OK", "age_hours": 23.9, "last_run": "2026-04-05T10:00:13.587096+00:00"}, "capability_scanner": {"status": "WARN", "age_hours": 238.9, "last_run": "2026-03-27T11:00:06.088801+00:00"}, "members_transcripts": {"status": "OK", "file_count": 24, "pre_fetched_count": 6}}
+[05:56:36]   ✓ IMPROVEMENT: F→C
+[05:56:36]   CHRONIC: cowork_executor has failed 3 consecutive assessments
+[05:56:36]   CHRONIC: capabilities has failed 3 consecutive assessments
+[05:56:36] Learning log updated: /Users/zekezirk/zeke-status/memory/learning-log.jsonl
+[05:56:36] === Done ===
