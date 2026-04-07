@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-04-07 14:15:56 ET",
-  "timestamp_utc": "2026-04-07T18:15:56Z",
+  "timestamp_local": "2026-04-07 14:17:20 ET",
+  "timestamp_utc": "2026-04-07T18:17:20Z",
   "scheduler": {
     "running": true,
     "pid": 99594,
-    "uptime_minutes": 20104,
+    "uptime_minutes": 20105,
     "current_window": "daytime"
   },
   "feed": {
@@ -32,13 +32,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
+      "nomic-embed-text:latest",
       "qwen3:8b",
       "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: qwen3:8b, nemotron-3-nano:30b"
+    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
@@ -48,19 +49,9 @@
     "success": 83,
     "timeout": 0,
     "fail": 0,
-    "feed_growth": 38
+    "feed_growth": 37
   },
   "cycles": [
-    {
-      "ts": "2026-04-07T09:05:56.045190",
-      "window": "daytime",
-      "cycle": 7,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 1
-    },
     {
       "ts": "2026-04-07T09:36:50.535562",
       "window": "daytime",
@@ -150,18 +141,21 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 1
+    },
+    {
+      "ts": "2026-04-07T14:17:02.454741",
+      "window": "daytime",
+      "cycle": 17,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
     {
       "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
       "status": "success",
       "duration": 0,
       "grew": 1,
@@ -291,6 +285,13 @@
       "status": "success",
       "duration": 0,
       "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
       "issues": []
     }
   ],
