@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-08T01:02:34.352832+00:00",
+  "timestamp": "2026-04-08T01:04:48.891455+00:00",
   "feed_lines": 29770,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-08T00:30:37.899695Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- **GLD Dec\\u202f26 $470\\u202fC / $500\\u202fC** \\u2013 The Dec\\u202f26 $470 call is trading at **$2.35** (mid\\u2011point of the bid/ask spread) while the $500 call is at **$0.48**.  \\n- **SLV Jan\\u202f27 $80\\u202fC** \\u2013 Implied volatility (IV) has risen to **31\\u202f%**, up from 24\\u202f% a month ago; the contract is now **$3.12** (mid\\u2011point).  \\n- **TLT Jan\\u202f27 LEAPS** \\u2013 The $90, $95, and $101 strike LEAPS have IVs of **18\\u202f%**, **19\\u202f%**, and **20\\u202f%** respectively, with the $95 strike priced at **$7.85** (mid\\u2011point).  \\n- **GDX Jan\\u202f27 $100\\u202fC** \\u2013 Open interest has spiked to **12,400 contracts**, a 68\\u202f% increase over the prior week.  \\n- **SILJ Jan\\u202f27 $34\\u202fC** \\u2013 The $34 call\\u2019s IV is **27\\u202f%**, and it is currently **$1.97** (mid\\u2011point).  \\n- **IBIT Jun\\u202f26 $48\\u202fC** \\u2013 The $48 call\\u2019s IV is **22\\u202f%**, with a mid\\u2011point price of **$2.61**.  \\n\\n\", \"source\": \"spark-queue/unknown\", \"instrument\": \"GENERAL\", \"task_label\": \"deep: XAUUSD/DXY correlation BREAKING\", \"priority_was\": 7}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 62.0,
-    "power_w": 39.46,
+    "gpu_util_pct": 94.0,
+    "temp_c": 66.0,
+    "power_w": 43.72,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,8 +82,8 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nemotron-3-super:120b",
-        "size_gb": 94.2
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
       }
     ]
   },
@@ -105,17 +105,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "7:57 PM",
-      "cycle_num": 28
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -148,29 +137,20 @@
       "broken_entries": null,
       "cycle_time": "9:02 PM",
       "cycle_num": 1
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "9:04 PM",
+      "cycle_num": 2
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 28,
-      "window": "daytime",
-      "timestamp": "2026-04-07T19:57:57.925035",
-      "time_display": "7:57 PM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "7:57 PM",
-          "cycle_num": 28
-        }
-      ]
-    },
     {
       "cycle": 29,
       "window": "daytime",
@@ -228,6 +208,26 @@
           "broken_entries": null,
           "cycle_time": "9:02 PM",
           "cycle_num": 1
+        }
+      ]
+    },
+    {
+      "cycle": 2,
+      "window": "overnight",
+      "timestamp": "2026-04-07T21:04:48.834421",
+      "time_display": "9:04 PM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "9:04 PM",
+          "cycle_num": 2
         }
       ]
     }
