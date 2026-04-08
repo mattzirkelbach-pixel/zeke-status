@@ -342,3 +342,14 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 **Fix**: Switch from `/api/generate` to `/api/chat` with `"think": false`. This is NVIDIA's native thinking control. Zero leakage, no regex needed.
 **Rule**: For ANY Ollama model that supports thinking tokens, ALWAYS use `/api/chat` with `think: false` for production output. Never use `/api/generate` for synthesis tasks.
 **Applied to**: wiki-compiler.py, cross-domain-synth.py (L2)
+
+## SYNTHETIC-NOISE-AS-KNOWLEDGE (discovered 2026-04-08)
+**Pattern**: Spark queue-research-general entries were treated as real knowledge. Spark generated plausible-sounding financial text (GDX OI "surged 185%", Brent at "$126") from training data — none verified against reality. 28K feed entries mostly Spark talking to itself. Wiki compiled this noise and L2 read it as fact.
+**Detection**: If a finding contains specific numbers (prices, OI, percentages) without a verifiable external source (Camel video, TradingView, news site), it's likely hallucinated.
+**Fix**: (1) wiki-compiler filters out `queue-research-general` source entries. (2) Wiki seeded from REAL Camel transcript data (848 cycle readings, 584 trade calls from 78 videos). (3) X monitor scrapes 12 reputable trading accounts via Playwright for real external signal.
+**Rule**: Real sources only in the knowledge base. Camel transcripts, YT posts, TV signals, X scrapes from verified accounts, price data. Never Spark-generated "research."
+
+## BACKTESTING-NOT-BUILT (discovered 2026-04-08, RESOLVED)
+**Pattern**: System ran for 3 months without ever measuring whether Camel's calls actually worked. Blind faith in signal source with no accuracy data. Matt asked for backtesting on 3/18 — wasn't built until 4/8.
+**Fix**: camel-call-backtester.py evaluates 584 trade calls against price history. Results: SPX shorts 63.2% hit rate (edge), BTC longs 35.8% (net negative). Weekly LaunchAgent + auto-updates wiki.
+**Rule**: Any signal source must have measured accuracy before the system acts on it. Unmeasured signals = gambling, not trading.
