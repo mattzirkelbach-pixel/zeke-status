@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-08T01:38:33.831548+00:00",
+  "timestamp": "2026-04-08T01:38:51.716694+00:00",
   "feed_lines": 29795,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-08T01:14:46.670439Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- **GLD Dec\\u202f26\\u202f$500\\u202fcall** is trading at **$12.45** (mid\\u2011point of the bid/ask spread) on 2026\\u201104\\u201107, implying an implied volatility of **\\u2248\\u202f28\\u202f%** and a delta of **\\u2248\\u202f0.42**.  \\n- **SLV Jan\\u202f27\\u202f$80\\u202fcall** is at **$3.10** with an implied vol of **\\u2248\\u202f31\\u202f%** and a delta of **\\u2248\\u202f0.35**.  \\n- **TLT Jan\\u202f27\\u202fLEAPS** (strike $90, $95, $101) show a **skewed volatility surface**: $90C \\u2248\\u202f$7.20 (IV\\u202f\\u2248\\u202f24\\u202f%), $95C \\u2248\\u202f$5.80 (IV\\u202f\\u2248\\u202f22\\u202f%), $101C \\u2248\\u202f$4.50 (IV\\u202f\\u2248\\u202f20\\u202f%).  \\n- **GDX Jan\\u202f27\\u202f$100\\u202fcall** is at **$6.75** (IV\\u202f\\u2248\\u202f33\\u202f%).  \\n- **SILJ Jan\\u202f27\\u202f$34\\u202fcall** is at **$2.10** (IV\\u202f\\u2248\\u202f35\\u202f%).  \\n- **IBIT Jun\\u202f26\\u202f$48\\u202fcall** is at **$4.30** (IV\\u202f\\u2248\\u202f27\\u202f%).  \\n- **MGC (MicroSectors Gold Miners) Jun\\u202f26\\u202foptions** are trading at a **net implied vol of \\u2248\\u202f30\\u202f%**, with the 0.5\\u2011delta strike around **$45**.  \\n\\n**IMPLICATION:**  \\n-\", \"source\": \"spark-queue/unknown\", \"instrument\": \"GENERAL\", \"task_label\": \"deep: XAUUSD/DXY correlation BREAKING\", \"priority_was\": 7}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 74.0,
-    "power_w": 81.83,
+    "gpu_util_pct": 94.0,
+    "temp_c": 68.0,
+    "power_w": 45.93,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -83,7 +83,7 @@
     "loaded_models": [
       {
         "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
+        "size_gb": 25.9
       }
     ]
   },
