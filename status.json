@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-08T01:35:20.903918+00:00",
+  "timestamp": "2026-04-08T01:35:37.834296+00:00",
   "feed_lines": 29793,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-08T01:13:46.432567Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- **GLD Dec\\u202f26 $470\\u202fC / $500\\u202fC** \\u2013 Implied volatility (IV) on the $470 strike is **\\u2248\\u202f28\\u202f%** (mid\\u2011point of the bid\\u2011ask spread), while the $500 strike shows **\\u2248\\u202f22\\u202f%** IV.  \\n- **SLV Jan\\u202f27 $80\\u202fC** \\u2013 IV \\u2248 **31\\u202f%** (high relative to its 30\\u2011day historical IV of 24\\u202f%).  \\n- **MGC (MicroSectors Gold Miners) Jun\\u202f26** \\u2013 Current price **$38.20**; open\\u2011interest on the Jun\\u202f26 $40 call is **1,845 contracts**, the highest OI level in the last 6\\u202fmonths.  \\n- **TLT Jan\\u202f27 LEAPS ($90\\u202fC / $95\\u202fC / $101\\u202fC \\u00d7\\u202f3150)** \\u2013 The $95\\u202fC strike has a **delta of 0.48** and **theta of \\u20130.012** per day, indicating a slow decay (\\u2248\\u202f1.2\\u202f% of premium per day).  \\n- **GDX Jan\\u202f27 $100\\u202fC** \\u2013 IV \\u2248 **26\\u202f%**, with a **gamma of 0.018**; a $5 move in GDX would raise the option\\u2019s delta by ~0.09.  \\n- **SILJ Jan\\u202f27 $34\\u202fC** \\u2013 \", \"source\": \"spark-queue/unknown\", \"instrument\": \"GENERAL\", \"task_label\": \"deep: XAUUSD/DXY correlation BREAKING\", \"priority_was\": 7}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 75.0,
-    "power_w": 81.96,
+    "gpu_util_pct": 0.0,
+    "temp_c": 63.0,
+    "power_w": 15.95,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -80,12 +80,7 @@
   },
   "spark_status": {
     "status": "ONLINE",
-    "loaded_models": [
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      }
-    ]
+    "loaded_models": []
   },
   "feed_quality": {
     "malformed_json": 1,
