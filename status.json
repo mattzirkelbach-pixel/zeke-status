@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-10T20:25:09.397024+00:00",
+  "timestamp": "2026-04-10T20:27:02.022585+00:00",
   "feed_lines": 33162,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-10T19:47:25.918662Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\nOn 2026-04-10, GLD Dec26 $470C/$500C options are trading with an implied volatility (IV) of 18.2%, up from 15.6% on 2026-03-28. Concurrently, the 20-day correlation between GLD and SPX has risen to **0.78** (as of 2026-04-09), breaching the 0.75 threshold.  \\n\\n**IMPLICATION:**  \\nThe spike in IV and elevated correlation signal heightened market-wide stress, likely driven by macroeconomic uncertainty (e.g., sticky inflation data and geopolitical tensions). This validates the prior finding that a correlation above 0.75 would trigger broad-market-driven moves in GLD. Portfolio positioning should prioritize hedging against systemic risk:  \\n- Maintain long GLD Dec26 $500C as a hedge for tail risks, but trim near-term exposure if SPX volatility escalates further.  \\n- Monitor TLT-GLD\", \"source\": \"spark-queue/unknown\", \"instrument\": \"GENERAL\", \"task_label\": \"deep: XAUUSD/DXY correlation BREAKING\", \"priority_was\": 7}",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 0.0,
-    "temp_c": 42.0,
-    "power_w": 5.5,
+    "temp_c": 43.0,
+    "power_w": 9.24,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -88,6 +88,10 @@
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
       }
     ]
   },
@@ -109,19 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "unknown",
-      "duration": 0,
-      "grew": 0,
-      "issues": [
-        "spark_locked"
-      ],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "2:21 PM",
-      "cycle_num": 17
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -154,31 +145,22 @@
       "broken_entries": 0,
       "cycle_time": "3:54 PM",
       "cycle_num": 20
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "4:27 PM",
+      "cycle_num": 21
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 17,
-      "window": "daytime",
-      "timestamp": "2026-04-10T14:21:03.263472",
-      "time_display": "2:21 PM",
-      "feed_growth": 1,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "unknown",
-          "duration": 0,
-          "grew": 0,
-          "issues": [
-            "spark_locked"
-          ],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "2:21 PM",
-          "cycle_num": 17
-        }
-      ]
-    },
     {
       "cycle": 18,
       "window": "daytime",
@@ -236,6 +218,28 @@
           "broken_entries": 0,
           "cycle_time": "3:54 PM",
           "cycle_num": 20
+        }
+      ]
+    },
+    {
+      "cycle": 21,
+      "window": "daytime",
+      "timestamp": "2026-04-10T16:27:01.966961",
+      "time_display": "4:27 PM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "unknown",
+          "duration": 0,
+          "grew": 0,
+          "issues": [
+            "spark_locked"
+          ],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "4:27 PM",
+          "cycle_num": 21
         }
       ]
     }
