@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-11T08:54:24.198150+00:00",
+  "timestamp": "2026-04-11T08:57:17.144858+00:00",
   "feed_lines": 33270,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-11T08:17:47.969397Z\", \"topic\": \"queue-research-general\", \"finding\": \"FINDING: As of 2026-04-11, GLD Dec26 $470C/$500C options are trading with a bid-ask spread of $1.85\\u2013$2.15, implying an implied volatility (IV) of 24.3% for the $470 strike and 26.1% for the $500 strike \\u2014 up 3.2 percentage points from 2026-03-29 levels.  \\nIMPLICATION: Rising IV suggests increasing market expectations of near-term volatility or upside momentum in gold prices, likely driven by persistent inflation concerns and central bank buying. This supports a tactical overweight in GLD call options, particularly out-of-the-money strikes, as the market prices in potential Fed rate cuts by Q3 2026. The current skew toward higher strikes also makes rolling up or adding to $500C positions potentially rewarding if gold breaks above $2,400/oz.  \\nCONFIDENCE: High \\u2014 IV data is directly observable\", \"source\": \"spark-queue/unknown\", \"instrument\": \"GENERAL\", \"task_label\": \"deep: XAUUSD/DXY correlation BREAKING\", \"priority_was\": 7}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 43.0,
-    "power_w": 13.83,
+    "gpu_util_pct": 91.0,
+    "temp_c": 39.0,
+    "power_w": 5.41,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -115,19 +115,6 @@
   "last_jobs": [
     {
       "name": "treasury-bonds",
-      "status": "unknown",
-      "duration": 0,
-      "grew": 0,
-      "issues": [
-        "spark_locked"
-      ],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "4:43 AM",
-      "cycle_num": 140
-    },
-    {
-      "name": "treasury-bonds",
       "status": "success",
       "duration": 0,
       "grew": 0,
@@ -160,31 +147,20 @@
       "broken_entries": 0,
       "cycle_time": "4:54 AM",
       "cycle_num": 143
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "4:57 AM",
+      "cycle_num": 144
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 140,
-      "window": "overnight",
-      "timestamp": "2026-04-11T04:43:51.741375",
-      "time_display": "4:43 AM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "unknown",
-          "duration": 0,
-          "grew": 0,
-          "issues": [
-            "spark_locked"
-          ],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "4:43 AM",
-          "cycle_num": 140
-        }
-      ]
-    },
     {
       "cycle": 141,
       "window": "overnight",
@@ -244,6 +220,26 @@
           "broken_entries": 0,
           "cycle_time": "4:54 AM",
           "cycle_num": 143
+        }
+      ]
+    },
+    {
+      "cycle": 144,
+      "window": "overnight",
+      "timestamp": "2026-04-11T04:57:17.121434",
+      "time_display": "4:57 AM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "success",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "4:57 AM",
+          "cycle_num": 144
         }
       ]
     }
