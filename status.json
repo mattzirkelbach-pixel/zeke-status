@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-11T17:50:06.519762+00:00",
+  "timestamp": "2026-04-11T17:50:25.105595+00:00",
   "feed_lines": 33671,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-11T17:38:55.370254Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- As of 2026-04-11, GLD Dec26 $470C is trading at $482.30 (midpoint of bid-ask $481.80\\u2013$482.80), implying a 2.6% move above strike.  \\n- SLV Jan27 $80C is at $82.10 (up 2.6% from prior close), with open interest rising 18% over the past 3 days.  \\n- TLT LEAPS Jan27 ($90C/$95C/$101C) show skewed skew: 3150 contracts at $90C vs. 420 at $101C, with implied volatility (IV) at 24.7% for $90C vs. 28.1% for $101C.  \\n- GDX $100C Jan27 is at $103.40 (up 3.4%), while SILJ $34C Jan27 is at $35.90 (up 5.6%), indicating stronger momentum in silver miners.  \\n- GDXJ (Junior Gold Miners ETF) is down 1.2% today, breaking its 5-day up trend, with volume 2.3x average.  \\n\\n**IMPLICATION:**  \\n- GLD\\u2019s Dec26 $470C is in profit, but the 2.6% move is modest; the broader gold market shows resilience (GL\", \"source\": \"spark-queue/unknown\", \"instrument\": \"GENERAL\", \"task_label\": \"deep: XAUUSD/DXY correlation BREAKING\", \"priority_was\": 7}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 89.0,
-    "temp_c": 37.0,
-    "power_w": 5.81,
+    "gpu_util_pct": 96.0,
+    "temp_c": 40.0,
+    "power_w": 13.87,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
-      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
       }
     ]
   },
