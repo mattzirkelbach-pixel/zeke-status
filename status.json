@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-11T07:55:46.622312+00:00",
+  "timestamp": "2026-04-11T07:58:04.416931+00:00",
   "feed_lines": 33247,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-11T07:27:42.861488Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\nGLD\\u2019s 20-day correlation with the S&P 500 (SPX) has risen to **0.79 as of 2026-04-10**, surpassing the critical threshold of 0.75. This marks the highest correlation level since 2025-Q4 and reflects increasing co-movement between gold and equities amid heightened macroeconomic uncertainty.\\n\\n**IMPLICATION:**  \\nThe elevated correlation suggests that broad market stress \\u2014 rather than gold-specific fundamentals \\u2014 is now driving GLD\\u2019s price action. This supports a strategic shift toward reducing exposure to GLD Dec26 $470C/$500C calls and reallocating capital toward assets that are decoupled from equity market volatility. Specifically:  \\n- Trim or hedge GLD options positions ahead of potential mean reversion in gold if macro conditions stabilize.  \\n- Consider increasing exposure \", \"source\": \"spark-queue/unknown\", \"instrument\": \"GENERAL\", \"task_label\": \"deep: XAUUSD/DXY correlation BREAKING\", \"priority_was\": 7}",
@@ -27,7 +27,7 @@
     "status": "OK",
     "gpu_util_pct": 96.0,
     "temp_c": 43.0,
-    "power_w": 13.95,
+    "power_w": 14.04,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
+      },
+      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
       }
     ]
   },
@@ -113,17 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 1,
-      "issues": [],
-      "valid_entries": 1,
-      "broken_entries": 0,
-      "cycle_time": "3:46 AM",
-      "cycle_num": 122
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -156,29 +145,20 @@
       "broken_entries": 0,
       "cycle_time": "3:55 AM",
       "cycle_num": 125
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "3:58 AM",
+      "cycle_num": 126
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 122,
-      "window": "overnight",
-      "timestamp": "2026-04-11T03:46:38.534070",
-      "time_display": "3:46 AM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 0,
-          "grew": 1,
-          "issues": [],
-          "valid_entries": 1,
-          "broken_entries": 0,
-          "cycle_time": "3:46 AM",
-          "cycle_num": 122
-        }
-      ]
-    },
     {
       "cycle": 123,
       "window": "overnight",
@@ -236,6 +216,26 @@
           "broken_entries": 0,
           "cycle_time": "3:55 AM",
           "cycle_num": 125
+        }
+      ]
+    },
+    {
+      "cycle": 126,
+      "window": "overnight",
+      "timestamp": "2026-04-11T03:58:04.359253",
+      "time_display": "3:58 AM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "3:58 AM",
+          "cycle_num": 126
         }
       ]
     }
