@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-04-11 00:31:57 ET",
-  "timestamp_utc": "2026-04-11T04:31:57Z",
+  "timestamp_local": "2026-04-11 00:35:24 ET",
+  "timestamp_utc": "2026-04-11T04:35:24Z",
   "scheduler": {
     "running": true,
     "pid": 99594,
-    "uptime_minutes": 25040,
+    "uptime_minutes": 25043,
     "current_window": "overnight"
   },
   "feed": {
@@ -32,14 +32,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nemotron-3-nano:30b",
       "nomic-embed-text:latest",
-      "qwen3:8b"
+      "qwen3:8b",
+      "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b, nomic-embed-text:latest, qwen3:8b"
+    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
@@ -52,16 +52,6 @@
     "feed_growth": 32
   },
   "cycles": [
-    {
-      "ts": "2026-04-10T23:59:42.282328",
-      "window": "overnight",
-      "cycle": 54,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 1
-    },
     {
       "ts": "2026-04-11T00:02:19.872046",
       "window": "overnight",
@@ -151,18 +141,19 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-04-11T00:35:05.875755",
+      "window": "overnight",
+      "cycle": 64,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 1
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "unknown",
-      "duration": 0,
-      "grew": 0,
-      "issues": [
-        "spark_locked"
-      ]
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -302,6 +293,13 @@
       "status": "success",
       "duration": 0,
       "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 1,
       "issues": []
     }
   ],
