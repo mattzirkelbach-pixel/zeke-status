@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-04-12 02:19:22 ET",
-  "timestamp_utc": "2026-04-12T06:19:22Z",
+  "timestamp_local": "2026-04-12 02:23:29 ET",
+  "timestamp_utc": "2026-04-12T06:23:29Z",
   "scheduler": {
     "running": true,
     "pid": 99594,
-    "uptime_minutes": 26587,
+    "uptime_minutes": 26591,
     "current_window": "overnight"
   },
   "feed": {
@@ -33,34 +33,25 @@
     "online": true,
     "models_loaded": [
       "nomic-embed-text:latest",
-      "qwen3:8b"
+      "qwen3:8b",
+      "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b"
+    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
   },
   "today": {
     "jobs_run": 100,
-    "success": 55,
+    "success": 54,
     "timeout": 0,
     "fail": 0,
     "feed_growth": 42
   },
   "cycles": [
-    {
-      "ts": "2026-04-12T01:50:43.073592",
-      "window": "overnight",
-      "cycle": 91,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-04-12T01:53:18.946208",
       "window": "overnight",
@@ -150,16 +141,19 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-04-12T02:23:11.677063",
+      "window": "overnight",
+      "cycle": 101,
+      "jobs": 1,
+      "success": 0,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -287,6 +281,15 @@
       "duration": 0,
       "grew": 0,
       "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ]
     },
     {
       "name": "treasury-bonds",
