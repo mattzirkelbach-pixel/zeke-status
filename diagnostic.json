@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-04-11 22:58:49 ET",
-  "timestamp_utc": "2026-04-12T02:58:49Z",
+  "timestamp_local": "2026-04-11 23:02:15 ET",
+  "timestamp_utc": "2026-04-12T03:02:15Z",
   "scheduler": {
     "running": true,
     "pid": 99594,
-    "uptime_minutes": 26386,
+    "uptime_minutes": 26390,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 34034,
+    "total_lines": 34036,
     "last_entries": [
-      "[2026-04-12T02:48:10] queue-research-general",
-      "[2026-04-12T02:48:55] queue-research-general",
       "[2026-04-12T02:49:30] queue-research-general",
       "[2026-04-12T02:50:49] queue-research-general",
-      "[2026-04-12T02:49:00] treasury-bonds"
+      "[2026-04-12T02:49:00] treasury-bonds",
+      "[2026-04-12T03:01:42] queue-research-general",
+      "[2026-04-12T03:02:14] l2-synthesis"
     ],
     "topic_distribution": {
       "queue-research-xauusd": 31,
@@ -51,16 +51,6 @@
     "feed_growth": 41
   },
   "cycles": [
-    {
-      "ts": "2026-04-11T22:28:32.424222",
-      "window": "overnight",
-      "cycle": 29,
-      "jobs": 1,
-      "success": 0,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-04-11T22:32:17.411054",
       "window": "overnight",
@@ -150,16 +140,19 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-04-11T23:01:55.787128",
+      "window": "overnight",
+      "cycle": 39,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 1
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -300,6 +293,13 @@
       "issues": [
         "spark_locked"
       ]
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 1,
+      "issues": []
     }
   ],
   "health": {
