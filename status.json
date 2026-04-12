@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-12T08:37:10.848430+00:00",
+  "timestamp": "2026-04-12T08:37:30.452639+00:00",
   "feed_lines": 33981,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-12T07:51:32.169133Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- **GLD Dec\\u202f26\\u202f$470\\u202fC / $500\\u202fC** \\u2013 Implied volatility (IV) has risen from **23\\u202f% (Mar\\u202f2026)** to **31\\u202f% (Apr\\u202f12\\u202f2026)**, a **+8\\u202fpp** increase, while the underlying spot price of gold is **$2,340/oz** (up **+2.5\\u202f%** YTD).  \\n- **SLV Jan\\u202f27\\u202f$80\\u202fC** \\u2013 Open interest (OI) has climbed from **1,200 contracts (Mar\\u202f2026)** to **2,850 contracts (Apr\\u202f12\\u202f2026)**, indicating a **+138\\u202f%** surge in speculative positioning.  \\n- **TLT Jan\\u202f27\\u202fLEAPS ($90\\u202fC/$95\\u202fC/$101\\u202fC\\u202f\\u00d7\\u202f3,150)** \\u2013 The **$95\\u202fC** strike now trades at **$4.85** (mid\\u2011price), up **+19\\u202f%** from **$4.07** on Mar\\u202f2026, reflecting a **+12\\u202f%** rise in TLT price (from $92.3 to $103.6).  \\n- **GDX $100\\u202fC Jan\\u202f27** \\u2013 Implied volatility has jumped from **38\\u202f% to 49\\u202f%**, a **+11\\u202fpp** rise, while GDX spot is **$38.7** (down **\\u20114\\u202f%** YTD).  \\n- *\", \"source\": \"spark-queue/unknown\", \"instrument\": \"GENERAL\", \"task_label\": \"deep: XAUUSD/DXY correlation BREAKING\", \"priority_was\": 7}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 41.0,
-    "power_w": 5.51,
+    "gpu_util_pct": 96.0,
+    "temp_c": 43.0,
+    "power_w": 13.43,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
-      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
       }
     ]
   },
