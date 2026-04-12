@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-12T06:56:18.472548+00:00",
+  "timestamp": "2026-04-12T06:58:36.149310+00:00",
   "feed_lines": 34135,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-12T06:09:42.826031Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- As of 2026-04-12, GLD Dec26 $500C is trading at $512.30 (midpoint of bid-ask $511.80\\u2013$512.80), implying a 9.5% intrinsic value gain from the $470 strike and a 1.2% implied volatility (IV) premium over the $470 strike.  \\n- The 20-day correlation between GLD and SPX has declined to **0.58** (as of 2026-04-10), below the 0.60 threshold indicating gold-specific dominance.  \\n- TLT Jan27 LEAPS ($90C/$95C/$101C) are trading at $12.40/$14.10/$16.30 respectively, reflecting a 14.2% decline in TLT price from $14.60 (2026-03-04 close) to $12.50 (2026-04-12 close), confirming persistent negative correlation with GLD (current correlation: **-0.79**).  \\n\\n**IMPLICATION:**  \\n- The drop in GLD-SPX correlation to 0.58 confirms gold is decoupling from broad market stress, validating the prio\", \"source\": \"spark-queue/unknown\", \"instrument\": \"GENERAL\", \"task_label\": \"deep: XAUUSD/DXY correlation BREAKING\", \"priority_was\": 7}",
@@ -27,7 +27,7 @@
     "status": "OK",
     "gpu_util_pct": 96.0,
     "temp_c": 43.0,
-    "power_w": 13.73,
+    "power_w": 14.17,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
+      },
+      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
       }
     ]
   },
@@ -113,17 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "2:45 AM",
-      "cycle_num": 108
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -156,29 +145,20 @@
       "broken_entries": 0,
       "cycle_time": "2:55 AM",
       "cycle_num": 111
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "2:58 AM",
+      "cycle_num": 112
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 108,
-      "window": "overnight",
-      "timestamp": "2026-04-12T02:45:57.500053",
-      "time_display": "2:45 AM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "skipped",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "2:45 AM",
-          "cycle_num": 108
-        }
-      ]
-    },
     {
       "cycle": 109,
       "window": "overnight",
@@ -236,6 +216,26 @@
           "broken_entries": 0,
           "cycle_time": "2:55 AM",
           "cycle_num": 111
+        }
+      ]
+    },
+    {
+      "cycle": 112,
+      "window": "overnight",
+      "timestamp": "2026-04-12T02:58:36.093607",
+      "time_display": "2:58 AM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "2:58 AM",
+          "cycle_num": 112
         }
       ]
     }
