@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-04-12 21:08:20 ET",
-  "timestamp_utc": "2026-04-13T01:08:20Z",
+  "timestamp_local": "2026-04-12 21:12:27 ET",
+  "timestamp_utc": "2026-04-13T01:12:27Z",
   "scheduler": {
     "running": true,
     "pid": 99594,
-    "uptime_minutes": 27716,
+    "uptime_minutes": 27720,
     "current_window": "overnight"
   },
   "feed": {
@@ -32,36 +32,25 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3:8b",
       "nomic-embed-text:latest",
-      "nemotron-3-nano:30b"
+      "qwen3:8b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: qwen3:8b, nomic-embed-text:latest, nemotron-3-nano:30b"
+    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b"
   },
   "gateway": {
     "running": true
   },
   "today": {
     "jobs_run": 100,
-    "success": 63,
+    "success": 62,
     "timeout": 0,
     "fail": 0,
-    "feed_growth": 34
+    "feed_growth": 32
   },
   "cycles": [
-    {
-      "ts": "2026-04-12T17:32:40.811551",
-      "window": "daytime",
-      "cycle": 23,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-04-12T18:04:28.567414",
       "window": "daytime",
@@ -151,16 +140,19 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-04-12T21:12:08.607409",
+      "window": "overnight",
+      "cycle": 4,
+      "jobs": 1,
+      "success": 0,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
     {
       "name": "treasury-bonds",
       "status": "unknown",
@@ -288,6 +280,15 @@
       "duration": 0,
       "grew": 0,
       "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "unknown",
+      "duration": 0,
+      "grew": 0,
+      "issues": [
+        "spark_locked"
+      ]
     },
     {
       "name": "treasury-bonds",
