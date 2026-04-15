@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-15T03:08:33.161402+00:00",
+  "timestamp": "2026-04-15T03:08:51.859432+00:00",
   "feed_lines": 35372,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-15T02:54:14.276772Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- The U.S. CPI for March\\u202f2026 was released on **April\\u202f11\\u202f2026** at **3.3\\u202f% YoY**, **0.2\\u202fpercentage points above** the consensus forecast of **3.1\\u202f%**.  \\n- Core CPI for the same month rose to **3.6\\u202f% YoY**, up **0.2\\u202fpp** from February\\u2019s 3.4\\u202f% and **0.5\\u202fpp** above the median analyst estimate of **3.1\\u202f%**.  \\n- As of **April\\u202f14\\u202f2026**, the 10\\u2011Year Treasury yield sits at **4.44\\u202f%**, up **0.05\\u202fpp** from the prior session and roughly **0.05\\u202fpp** above the level implied by the March CPI surprise.  \\n- The TLT Jan\\u202f27\\u202f2027 LEAPS implied volatility term structure shows a **~12\\u202f% increase in implied vol** for the $90\\u2011$95\\u2011$101 strike ladder relative to the pre\\u2011CPI level, indicating market anticipation of a near\\u2011term rise in long\\u2011term rates.\\n\\n**IMPLICATION:**  \\n- The higher\\u2011than\\u2011expected C\", \"source\": \"spark-queue/followup_reactor_20260412T170041_0\", \"instrument\": \"GENERAL\", \"task_label\": \"Follow-up: Monitor U.S. CPI release on **2026-04-16** for directional c\", \"priority_was\": 6}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 95.0,
-    "temp_c": 71.0,
-    "power_w": 81.69,
+    "gpu_util_pct": 92.0,
+    "temp_c": 62.0,
+    "power_w": 37.13,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -91,7 +91,7 @@
       },
       {
         "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
+        "size_gb": 25.9
       }
     ]
   },
