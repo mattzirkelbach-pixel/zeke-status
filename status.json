@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-15T07:18:10.239663+00:00",
+  "timestamp": "2026-04-15T07:20:26.864119+00:00",
   "feed_lines": 35371,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-15T06:44:54.268739+00:00\", \"topic\": \"knowledge-evolver/general\", \"domain\": \"alpha-research\", \"finding\": \"**FINDING:**  \\n- **Silver price trend:**\u202fSLV closed at **$63.84 on 2026\u201104\u201114**, up **+3.77\u202f%** intraday. Over the past 12\u202fmonths (April\u202f2025\u202f\u2192\u202fApril\u202f2026) the price has risen **\u2248\u202f19\u202f%** (from $53.6 to $63.84).  \\n- **RSI (14\u2011day):**\u202fCurrent RSI = **37.5**, indicating the market is approaching oversold territory but still has room to rally before a meaningful pull\u2011back.  \\n- **U.S. Dollar Index (DXY):**\u202fDXY has fallen **0.48\u202f%** over the last 5 trading days, hovering around **101.2** (April\u202f9\u201113,\u202f2026). A weaker dollar historically lifts precious\u2011metal prices.  \\n- **Inflation expectations:**\u202fThe 5\u2011year breakeven inflation rate slipped to **2.4\u202f%** in February\u202f2026 (down from 2.8\u202f% in August\u202f2025). Lower expected inflation reduces the opportunity cost of holding non\u2011yielding assets like silver.  \\n- **Interest\u2011rate outlook:**\u202fCME FedWatch shows **\u2248\u202f55\u202f% probability** of a **25\u2011basis\u2011point rate cut** by the Fed by the end of 2026, with the market pricing a **\u20110.75\u202f% real\u2011rate environment** \", \"source\": \"knowledge-evolver\", \"instrument\": \"GENERAL\", \"task_label\": \"\", \"parent_idea_id\": \"alpha-v2-cf5083b5\", \"quality_score\": 7.5, \"research_question\": \"What technical or macroeconomic indicators (e.g., silver price trends, interest rate outlook, inflation expectations) would signal an optimal entry point for the SLV $80.0C Jan27 call, and what exit c\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 56.0,
-    "power_w": 13.31,
+    "gpu_util_pct": 95.0,
+    "temp_c": 64.0,
+    "power_w": 79.02,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
+      },
+      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 25.9
       }
     ]
   },
@@ -113,17 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "3:09 AM",
-      "cycle_num": 135
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -156,29 +145,20 @@
       "broken_entries": null,
       "cycle_time": "3:17 AM",
       "cycle_num": 138
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "3:20 AM",
+      "cycle_num": 139
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 135,
-      "window": "overnight",
-      "timestamp": "2026-04-15T03:09:58.016636",
-      "time_display": "3:09 AM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "3:09 AM",
-          "cycle_num": 135
-        }
-      ]
-    },
     {
       "cycle": 136,
       "window": "overnight",
@@ -236,6 +216,26 @@
           "broken_entries": null,
           "cycle_time": "3:17 AM",
           "cycle_num": 138
+        }
+      ]
+    },
+    {
+      "cycle": 139,
+      "window": "overnight",
+      "timestamp": "2026-04-15T03:20:26.831447",
+      "time_display": "3:20 AM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "success",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "3:20 AM",
+          "cycle_num": 139
         }
       ]
     }
