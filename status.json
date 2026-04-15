@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-15T03:03:31.185755+00:00",
+  "timestamp": "2026-04-15T03:05:57.764847+00:00",
   "feed_lines": 35370,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-15T02:52:47.529715Z\", \"topic\": \"queue-research-dxy\", \"finding\": \"**FINDING:**  \\n- **DXY (USD Index) closed at 100.24 on 2026\\u201104\\u201114**, a **1.04\\u202f% intraday decline** that pushed the index to **$98.61** earlier in the session.  \\n- **RSI(14) = 43.1**, indicating the index is moving out of overbought territory (RSI\\u202f>\\u202f70) and entering a neutral\\u2011to\\u2011slightly\\u2011bearish zone.  \\n- **Cycle context:** The DXY remains within its **22\\u201126\\u2011week bullish cycle**, but the recent drop marks the first meaningful pull\\u2011back toward the **key support at 98.00** since the cycle\\u2019s inception.\\n\\n**IMPLICATION:**  \\n- **Gold (GLD / XAUUSD):** A weaker DXY reduces the USD\\u2019s strength, which is **bullish for gold**. However, the index is still above the 98.00 threshold; as long as DXY stays **above 98.00**, gold\\u2019s upside is capped, and any further depreciation could trigger a **risk\\u2011on rota\", \"source\": \"spark-queue/pw_20260408T132857_1e876baf\", \"instrument\": \"DXY\", \"task_label\": \"DXY down 1.0% \\u2014 price-watcher\", \"priority_was\": 6}",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 95.0,
-    "temp_c": 69.0,
-    "power_w": 48.93,
+    "temp_c": 72.0,
+    "power_w": 81.26,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
+      },
+      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
-      },
-      {
-        "name": "nemotron-3-super:120b",
-        "size_gb": 91.6
       }
     ]
   },
@@ -113,17 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 1,
-      "issues": [],
-      "valid_entries": 1,
-      "broken_entries": 0,
-      "cycle_time": "10:53 PM",
-      "cycle_num": 41
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -158,29 +147,20 @@
       "broken_entries": null,
       "cycle_time": "11:03 PM",
       "cycle_num": 44
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "11:05 PM",
+      "cycle_num": 45
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 41,
-      "window": "overnight",
-      "timestamp": "2026-04-14T22:53:50.298447",
-      "time_display": "10:53 PM",
-      "feed_growth": 1,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 0,
-          "grew": 1,
-          "issues": [],
-          "valid_entries": 1,
-          "broken_entries": 0,
-          "cycle_time": "10:53 PM",
-          "cycle_num": 41
-        }
-      ]
-    },
     {
       "cycle": 42,
       "window": "overnight",
@@ -240,6 +220,26 @@
           "broken_entries": null,
           "cycle_time": "11:03 PM",
           "cycle_num": 44
+        }
+      ]
+    },
+    {
+      "cycle": 45,
+      "window": "overnight",
+      "timestamp": "2026-04-14T23:05:57.741251",
+      "time_display": "11:05 PM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "success",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "11:05 PM",
+          "cycle_num": 45
         }
       ]
     }
