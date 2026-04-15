@@ -1,28 +1,35 @@
 {
-  "timestamp": "2026-04-13T14:56:59.884701",
-  "window": "daytime",
-  "cycle": 18,
-  "feed_before": 35130,
-  "feed_after": 35130,
-  "feed_growth": 0,
-  "jobs": {
-    "total": 1,
-    "success": 1,
-    "fail": 0,
-    "timeout": 0
+  "timestamp": "2026-04-15T00:14:18.321893+00:00",
+  "feed_total": 35138,
+  "feed_previous": 35124,
+  "feed_growth": 14,
+  "feed_stagnant": true,
+  "spark": {
+    "online": true,
+    "model_loaded": true,
+    "models": [
+      "nemotron-3-nano:30b"
+    ]
   },
-  "job_details": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration_s": 0,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": []
-    }
-  ],
-  "failures": [],
-  "needs_repair": false,
-  "feed_stagnant": true
+  "scheduler": {
+    "running": true,
+    "pids": [
+      "1732"
+    ]
+  },
+  "gateway": {
+    "running": true,
+    "pids": [
+      "1719",
+      "1739"
+    ]
+  },
+  "jobs_today": 0,
+  "success_today": 0,
+  "fails_today": 0,
+  "timeouts_today": 0,
+  "needs_repair": true,
+  "repair_reasons": [
+    "feed_stagnant"
+  ]
 }
