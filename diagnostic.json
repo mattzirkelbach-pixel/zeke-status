@@ -1,6 +1,6 @@
 {
-  "timestamp_local": "2026-04-15 13:17:26 ET",
-  "timestamp_utc": "2026-04-15T17:17:26Z",
+  "timestamp_local": "2026-04-15 13:18:06 ET",
+  "timestamp_utc": "2026-04-15T17:18:06Z",
   "scheduler": {
     "running": true,
     "pid": 1732,
@@ -8,13 +8,13 @@
     "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 36119,
+    "total_lines": 36120,
     "last_entries": [
-      "[2026-04-15T17:13:57] queue-research-general",
       "[2026-04-15T17:14:15] queue-research-general",
       "[2026-04-15T17:15:00] queue-research-general",
       "[2026-04-15T17:15:36] queue-research-general",
-      "[2026-04-15T17:16:58] queue-research-general"
+      "[2026-04-15T17:16:58] queue-research-general",
+      "[2026-04-15T17:18:00] queue-research-general"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -31,13 +31,13 @@
     "online": true,
     "models_loaded": [
       "nomic-embed-text:latest",
-      "nemotron-3-super:120b",
+      "qwen3:8b",
       "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, nemotron-3-super:120b, nemotron-3-nano:30b"
+    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
@@ -50,16 +50,6 @@
     "feed_growth": 11
   },
   "cycles": [
-    {
-      "ts": "2026-04-15T08:04:37.343934",
-      "window": "daytime",
-      "cycle": 5,
-      "jobs": 1,
-      "success": 0,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-04-15T08:35:48.217476",
       "window": "daytime",
@@ -149,6 +139,16 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 1
+    },
+    {
+      "ts": "2026-04-15T13:17:42.909327",
+      "window": "daytime",
+      "cycle": 15,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
@@ -168,13 +168,6 @@
     },
     {
       "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
       "status": "skipped",
       "duration": 0,
       "grew": 0,
@@ -290,6 +283,13 @@
       "status": "success",
       "duration": 0,
       "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
       "issues": []
     }
   ],
