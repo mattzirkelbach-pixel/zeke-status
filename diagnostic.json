@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-04-15 09:06:33 ET",
-  "timestamp_utc": "2026-04-15T13:06:33Z",
+  "timestamp_local": "2026-04-15 09:09:03 ET",
+  "timestamp_utc": "2026-04-15T13:09:03Z",
   "scheduler": {
     "running": true,
     "pid": 1732,
-    "uptime_minutes": 772,
+    "uptime_minutes": 774,
     "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 35758,
+    "total_lines": 35762,
     "last_entries": [
-      "[2026-04-15T13:03:00] queue-research-general",
-      "[2026-04-15T13:04:03] queue-research-general",
-      "[2026-04-15T13:04:41] queue-research-general",
-      "[2026-04-15T13:05:14] queue-research-general",
-      "[2026-04-15T13:05:00] gold-cycle"
+      "[2026-04-15T13:05:00] gold-cycle",
+      "[2026-04-15T13:06:36] queue-research-general",
+      "[2026-04-15T13:07:24] queue-research-general",
+      "[2026-04-15T13:06:00] treasury-bonds",
+      "[2026-04-15T13:08:23] queue-research-general"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -31,13 +31,13 @@
     "online": true,
     "models_loaded": [
       "nomic-embed-text:latest",
-      "nemotron-3-super:120b",
+      "qwen3:8b",
       "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, nemotron-3-super:120b, nemotron-3-nano:30b"
+    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
@@ -47,19 +47,9 @@
     "success": 81,
     "timeout": 0,
     "fail": 0,
-    "feed_growth": 11
+    "feed_growth": 10
   },
   "cycles": [
-    {
-      "ts": "2026-04-15T04:51:39.832369",
-      "window": "overnight",
-      "cycle": 173,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-04-15T04:54:26.034896",
       "window": "overnight",
@@ -149,6 +139,16 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 1
+    },
+    {
+      "ts": "2026-04-15T09:06:49.486048",
+      "window": "daytime",
+      "cycle": 7,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
@@ -170,13 +170,6 @@
       "name": "treasury-bonds",
       "status": "success",
       "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
       "grew": 1,
       "issues": []
     },
@@ -290,6 +283,13 @@
       "status": "success",
       "duration": 0,
       "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
       "issues": []
     }
   ],
