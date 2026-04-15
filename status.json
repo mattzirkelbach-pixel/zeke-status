@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-15T07:09:58.039698+00:00",
+  "timestamp": "2026-04-15T07:10:16.488777+00:00",
   "feed_lines": 35367,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-15T06:43:07.811589+00:00\", \"topic\": \"knowledge-evolver/general\", \"domain\": \"alpha-research\", \"finding\": \"FINDING:  \\n- **Implied volatility (IV) of TMF Jan27 $50C** is currently **28.5%** (as of 2026-04-14), down from 34.1% on 2026-03-01.  \\n- Historical volatility (HV) over the past 30 days is **22.3%**, indicating IV is **28% above HV** (a 1.28x IV/HV ratio).  \\n- The **IV rank** (percentage of time IV was higher in the past year) is **68%**, meaning current IV is elevated but not extreme.  \\n- **Time decay (theta)**: At current IV, the position loses **$0.18/day** in value (per contract) as expiration approaches, accelerating to **$0.35/day** in the final 30 days.  \\n- **Break-even probability**: BSM model shows a **14.2% probability** of hitting $52.10 break-even by Jan 2027 expiry (up from 11% at $2.10 cost basis), driven by IV contraction.  \\n- **Current price**: TMF is trading at **$36.13** (as of 2026-04-14), with the $50C strike requiring a **38.5% price increase** to break even.  \\n\\nIMPLICATION:  \\n- The elevated IV (28.5% vs. 22.3% HV) suggests the market is pricing in significant near\", \"source\": \"knowledge-evolver\", \"instrument\": \"GENERAL\", \"task_label\": \"\", \"parent_idea_id\": \"alpha-v2-51d11e29\", \"quality_score\": 7.5, \"research_question\": \"What technical or macroeconomic indicators suggest an optimal entry window for the TMF $50.0C Jan27 call, and what exit criteria (e.g., target price, volatility threshold, time decay) would maximize t\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 76.0,
-    "power_w": 82.57,
+    "gpu_util_pct": 0.0,
+    "temp_c": 62.0,
+    "power_w": 14.63,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -88,10 +88,6 @@
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
       }
     ]
   },
