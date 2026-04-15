@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-15T04:44:49.159016+00:00",
+  "timestamp": "2026-04-15T04:47:05.446532+00:00",
   "feed_lines": 35417,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-15T04:26:50.434415+00:00\", \"topic\": \"knowledge-evolver/general\", \"domain\": \"alpha-research\", \"finding\": \"**FINDING**  \\n- Over the past decade (2016\\u20112025) GLD has experienced **four distinct two\\u2011year windows** in which its price rose **>30\\u202f%** (the longest stretch being **Oct\\u202f2018\\u202f\\u2192\\u202fOct\\u202f2020**, a 30.9\\u202f% gain from $147.3 to $192.6).  \\n- Of those four windows, **three** coincided with a **real\\u2011interest\\u2011rate decline of \\u2265\\u202f0.5\\u202fpercentage points** and a **U.S. Dollar Index (DXY) weakening by \\u2265\\u202f8\\u202f%** over the same period.  \\n- The only episode that produced a **\\u2265\\u202f20\\u202f% price increase within a ~2\\u2011year horizon that would have made a $470 strike call profitable** was the **Oct\\u202f2018\\u202f\\u2192\\u202fOct\\u202f2020** rally. During that rally:  \\n  - GLD rose from **$147.30 (Oct\\u202f2018)** to **$192.60 (Oct\\u202f2020)** \\u2192 **+30.8\\u202f%** (well above the 20\\u202f% threshold).  \\n  - The rally was accompanied by a **Fed funds rate cut of 0.75\\u202fpp (from 2.25\\u202f% to 1.50\\u202f%)** and a **DXY drop of 10\\u202f% (from 96.5 to 86.9)**.  \\n  - Implied volatility (GLD\\u202fVIX\\u2011style) fell from **\\u2248\\u202f18\\u202f% to 12\\u202f%**, keeping option premiums relatively cheap.  \\n  - A $470\\u2011str\", \"source\": \"knowledge-evolver\", \"instrument\": \"GENERAL\", \"task_label\": \"\", \"parent_idea_id\": \"alpha-v2-57d9aaac\", \"quality_score\": 6.5, \"research_question\": \"In the past decade, how often has GLD experienced a \\u226520% price increase over a ~2\\u2011year horizon that would make a $470 strike call profitable, and what were the prevailing market conditions (interest r\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 58.0,
-    "power_w": 13.55,
+    "gpu_util_pct": 96.0,
+    "temp_c": 63.0,
+    "power_w": 78.44,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -91,7 +91,7 @@
       },
       {
         "name": "nemotron-3-nano:30b",
-        "size_gb": 25.9
+        "size_gb": 28.0
       }
     ]
   },
@@ -113,17 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "12:36 AM",
-      "cycle_num": 78
-    },
     {
       "name": "treasury-bonds",
       "status": "skipped",
@@ -156,29 +145,20 @@
       "broken_entries": null,
       "cycle_time": "12:44 AM",
       "cycle_num": 81
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "12:47 AM",
+      "cycle_num": 82
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 78,
-      "window": "overnight",
-      "timestamp": "2026-04-15T00:36:42.678430",
-      "time_display": "12:36 AM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "12:36 AM",
-          "cycle_num": 78
-        }
-      ]
-    },
     {
       "cycle": 79,
       "window": "overnight",
@@ -236,6 +216,26 @@
           "broken_entries": null,
           "cycle_time": "12:44 AM",
           "cycle_num": 81
+        }
+      ]
+    },
+    {
+      "cycle": 82,
+      "window": "overnight",
+      "timestamp": "2026-04-15T00:47:05.422443",
+      "time_display": "12:47 AM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "success",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "12:47 AM",
+          "cycle_num": 82
         }
       ]
     }
