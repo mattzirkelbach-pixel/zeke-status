@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-04-14 21:08:58 ET",
-  "timestamp_utc": "2026-04-15T01:08:58Z",
+  "timestamp_local": "2026-04-14 21:11:33 ET",
+  "timestamp_utc": "2026-04-15T01:11:33Z",
   "scheduler": {
     "running": true,
     "pid": 1732,
-    "uptime_minutes": 54,
+    "uptime_minutes": 57,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 35209,
+    "total_lines": 35212,
     "last_entries": [
-      "[2026-04-15T01:05:51] queue-research-general",
-      "[2026-04-15T01:04:00] gold-cycle",
-      "[2026-04-15T01:07:15] queue-research-general",
       "[2026-04-15T01:07:46] queue-research-general",
-      "[2026-04-15T01:08:16] queue-research-general"
+      "[2026-04-15T01:08:16] queue-research-general",
+      "[2026-04-15T01:09:03] queue-research-general",
+      "[2026-04-15T01:05:00] treasury-bonds",
+      "[2026-04-15T01:10:41] queue-research-general"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -30,20 +30,20 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nemotron-3-nano:30b",
-      "nomic-embed-text:latest"
+      "nomic-embed-text:latest",
+      "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b, nomic-embed-text:latest"
+    "detail": "healthy, loaded: nomic-embed-text:latest, nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
   },
   "today": {
-    "jobs_run": 6,
-    "success": 5,
+    "jobs_run": 7,
+    "success": 6,
     "timeout": 0,
     "fail": 0,
     "feed_growth": 2
@@ -108,6 +108,16 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-04-14T21:11:14.662126",
+      "window": "overnight",
+      "cycle": 5,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
@@ -149,6 +159,13 @@
     {
       "name": "treasury-bonds",
       "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
       "duration": 0,
       "grew": 0,
       "issues": []
