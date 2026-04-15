@@ -1,65 +1,106 @@
 {
-  "timestamp_local": "2026-04-14 8:29:05PM ET",
-  "timestamp_utc": "2026-04-15T00:29:05Z",
+  "timestamp_local": "2026-04-14 20:30:19 ET",
+  "timestamp_utc": "2026-04-15T00:30:19Z",
   "scheduler": {
     "running": true,
-    "pids": [
-      "1732"
-    ],
-    "count": 1,
-    "type": "python"
-  },
-  "gateway": {
-    "running": true
-  },
-  "spark": {
-    "online": true,
-    "models_loaded": [
-      "nomic-embed-text:latest",
-      "nemotron-3-nano:30b"
-    ],
-    "model_stuck": false,
-    "inference_active": true,
-    "detail": "nomic-embed-text:latest, nemotron-3-nano:30b \u2022 26.1GB VRAM \u2022 31.6B \u2022 Q4_K_M \u2022 16ms",
-    "response_ms": 16,
-    "vram_estimate_gb": 26.1,
-    "model_params": "31.6B",
-    "model_quant": "Q4_K_M"
+    "pid": 1732,
+    "uptime_minutes": 16,
+    "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 35150,
-    "last_modified_minutes_ago": 1.7,
+    "total_lines": 35152,
     "last_entries": [
-      "[4/14 7:23PM ET] queue-research-general \u2014 **FINDING:**  \nGLD closed at $472.30 on 2026-04-14, up 1.5% on the day, while th",
-      "[4/14 7:25PM ET] queue-research-general \u2014 FINDING: As of 2026-04-14, GLD Dec26 $470C/$500C options are trading with an imp",
-      "[4/14 7:25PM ET] queue-research-general \u2014 **FINDING:**  \nGLD Dec26 $470C/$500C options are trading at $12.40 and $4.80 res",
-      "[4/14 7:26PM ET] queue-research-general \u2014 FINDING: As of 2026-04-14, GLD Dec26 $470C/$500C options are trading with an imp",
-      "[4/14 7:27PM ET] queue-research-general \u2014 **FINDING:**  \n- As of **2026-04-14**, GLD Dec26 $470C/$500C options are trading"
+      "[2026-04-15T00:25:54] queue-research-general",
+      "[2026-04-15T00:26:47] queue-research-general",
+      "[2026-04-15T00:27:20] queue-research-general",
+      "[2026-04-15T00:29:25] queue-research-general",
+      "[2026-04-15T00:30:16] queue-research-general"
     ],
-    "recent_50_clean": 50,
-    "recent_50_trivial": 0,
-    "recent_50_broken": 0,
     "topic_distribution": {
       "queue-research-general": 46,
       "treasury-bonds": 2,
       "gold-cycle": 1,
       "oil-tlt": 1
-    }
+    },
+    "recent_50_clean": 50,
+    "recent_50_trivial": 0,
+    "recent_50_broken": 0,
+    "last_modified_minutes_ago": 1.7
   },
-  "activity": {
-    "last_job": "treasury-bonds",
-    "last_job_time": "4/14 3:14PM ET",
-    "last_cycle": "4/14 3:14PM ET",
-    "jobs_today": 1,
-    "success_today": 1,
-    "timeout_today": 0,
-    "fail_today": 0,
-    "feed_growth_today": 1,
-    "state": "idle (heartbeat)",
-    "next_cycle_est": "3:45PM",
-    "cycle_count": 1,
-    "sonnet_calls": 0,
-    "estimated_cost": 0.0
+  "spark": {
+    "online": true,
+    "models_loaded": [],
+    "model_stuck": false,
+    "stuck_model": null,
+    "inference_active": false,
+    "detail": "healthy, loaded: none"
+  },
+  "gateway": {
+    "running": true
+  },
+  "today": {
+    "jobs_run": 1,
+    "success": 1,
+    "timeout": 0,
+    "fail": 0,
+    "feed_growth": 1
+  },
+  "cycles": [
+    {
+      "ts": "2026-04-14T20:14:49.224920",
+      "window": "daytime",
+      "cycle": 1,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 1
+    }
+  ],
+  "recent_jobs": [
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 1,
+      "issues": []
+    }
+  ],
+  "health": {
+    "status": "HEALTHY",
+    "issues": []
+  },
+  "kg_stats": {
+    "entities": 1021,
+    "relations": 1438,
+    "associations": 840,
+    "insights": 62
+  },
+  "gpu_stats": {
+    "status": "OK",
+    "gpu_util_pct": 94.0,
+    "temp_c": 66.0,
+    "power_w": 43.06,
+    "gpu_name": "NVIDIA GB10"
+  },
+  "feed_quality": {
+    "malformed_json": 0,
+    "literal_timestamps": 7,
+    "duplicates": 12706,
+    "total": 35150,
+    "error_rate": 36.2
+  },
+  "automation": {
+    "layer1": "L1 Execution \u2014 DEPLOYED",
+    "layer2": "L2 Oversight \u2014 DEPLOYED",
+    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
+    "layer4": "L4 Recursive Learning \u2014 PLANNED"
+  },
+  "cost": {
+    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
+    "sonnet_calls_today": 0,
+    "estimated_cost_today": 0.0,
+    "is_zero_cost": false
   },
   "feed_history": [
     {
@@ -1503,120 +1544,19 @@
       "l": "8:29PM"
     }
   ],
-  "kg_stats": {
-    "entities": 1021,
-    "relations": 1438,
-    "associations": 840,
-    "insights": 62
-  },
-  "gpu_stats": {
-    "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 66.0,
-    "power_w": 43.06,
-    "gpu_name": "NVIDIA GB10"
-  },
-  "feed_quality": {
-    "malformed_json": 0,
-    "literal_timestamps": 7,
-    "duplicates": 12706,
-    "total": 35150,
-    "error_rate": 36.2
-  },
-  "cost": {
-    "model": "tiered dispatch (Spark + Haiku + Sonnet)",
-    "sonnet_calls_today": 0,
-    "estimated_cost_today": 0.0,
-    "is_zero_cost": false
-  },
-  "automation": {
-    "layer1": "L1 Execution \u2014 DEPLOYED",
-    "layer2": "L2 Oversight \u2014 DEPLOYED",
-    "layer3": "L3 Intelligence \u2014 IN PROGRESS",
-    "layer4": "L4 Recursive Learning \u2014 PLANNED"
-  },
-  "compute_tiers": {
-    "architecture": "tiered_dispatch",
-    "layers": {
-      "L0_python": {
-        "status": "active",
-        "cost": "$0",
-        "role": "Fetch, transform, schedule"
-      },
-      "L1_vector": {
-        "status": "planned",
-        "cost": "$0",
-        "role": "Embeddings + ChromaDB RAG"
-      },
-      "L2_triage": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3:8b classification"
-      },
-      "L3_api": {
-        "status": "active",
-        "cost": "paid",
-        "role": "Haiku/Sonnet/Opus"
-      },
-      "L4_batch": {
-        "status": "active",
-        "cost": "$0",
-        "role": "qwen3-32b overnight"
-      }
-    },
-    "budget": {
-      "haiku_spent": 0,
-      "haiku_limit": 1.0,
-      "sonnet_spent": 0,
-      "sonnet_limit": 0.5,
-      "total_spent": 0,
-      "total_limit": 2.0,
-      "date": "2026-04-13"
-    },
-    "models_hot": [
-      {
-        "name": "nomic-embed-text:latest",
-        "vram_gb": 0.6,
-        "params": "137M"
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "vram_gb": 26.1,
-        "params": "31.6B"
-      }
-    ]
-  },
-  "health": {
-    "status": "HEALTHY",
-    "issues": [],
-    "issue_count": 0
-  },
-  "cycles": [
-    {
-      "ts": "2026-04-14T20:14:49.224920",
-      "window": "daytime",
-      "cycle": 1,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 1
-    }
-  ],
-  "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 1,
-      "issues": []
-    }
-  ],
-  "today": {
-    "jobs_run": 1,
-    "success": 1,
-    "timeout": 0,
-    "fail": 0,
-    "feed_growth": 1
+  "activity": {
+    "last_job": "treasury-bonds",
+    "last_job_time": "4/14 3:14PM ET",
+    "last_cycle": "4/14 3:14PM ET",
+    "jobs_today": 1,
+    "success_today": 1,
+    "timeout_today": 0,
+    "fail_today": 0,
+    "feed_growth_today": 1,
+    "state": "idle (heartbeat)",
+    "next_cycle_est": "3:45PM",
+    "cycle_count": 1,
+    "sonnet_calls": 0,
+    "estimated_cost": 0.0
   }
 }
