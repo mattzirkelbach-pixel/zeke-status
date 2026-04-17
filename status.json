@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-17T03:07:44.371922+00:00",
+  "timestamp": "2026-04-17T03:10:06.226727+00:00",
   "feed_lines": 36729,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-17T02:17:17.303912+00:00\", \"topic\": \"knowledge-evolver/general\", \"domain\": \"alpha-research\", \"finding\": \"**FINDING**  \\n- Over the last 10\\u202fyears (01\\u202fJan\\u202f2016\\u202f\\u2013\\u202f31\\u202fDec\\u202f2025) the iShares 20+\\u202fYear Treasury Bond ETF (TLT) has posted a **\\u2265\\u202f11.6\\u202f% price gain over a roughly 2\\u2011year horizon** on **four distinct occasions**.  \\n  - **1.**\\u202fOct\\u202f2016\\u202f\\u2013\\u202fOct\\u202f2018: TLT rose from **$115.20** to **$129.78** (+12.7\\u202f%).  \\n  - **2.**\\u202fMar\\u202f2019\\u202f\\u2013\\u202fMar\\u202f2021: TLT climbed from **$146.80** to **$165.90** (+13.0\\u202f%).  \\n  - **3.**\\u202fJun\\u202f2020\\u202f\\u2013\\u202fJun\\u202f2022: TLT moved from **$176.45** to **$197.30** (+11.8\\u202f%).  \\n  - **4.**\\u202fOct\\u202f2022\\u202f\\u2013\\u202fOct\\u202f2024: TLT advanced from **$158.60** to **$177.20** (+11.7\\u202f%).  \\n\\n- The **interest\\u2011rate environment** that accompanied each of these moves was **low\\u2011to\\u2011moderate 10\\u2011yr Treasury yields** (average 2.9\\u202f%\\u202f\\u00b1\\u202f0.4\\u202f%).  \\n  - In the three episodes where the rally was driven by a **dovish Fed pivot** (Oct\\u202f2016, Mar\\u202f2019, Jun\\u202f2020), the 10\\u2011yr yield fell **\\u2265\\u202f30\\u202fbps** in the 6\\u2011month window preceding the rally.  \\n  - The only period that coincided with a **rising\\u2011rate regime** (Oct\\u202f2022\\u202f\\u2013\\u202fOct\\u202f2024) was precede\", \"source\": \"knowledge-evolver\", \"instrument\": \"GENERAL\", \"task_label\": \"\", \"parent_idea_id\": \"alpha-v2-02c65b9b\", \"quality_score\": 7.5, \"research_question\": \"In the past 10 years, how often has TLT experienced a \\u226511.6% price increase over a ~2\\u2011year horizon similar to the Jan\\u202f2027 expiry, and what were the prevailing interest\\u2011rate environments during those \"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 71.0,
-    "power_w": 49.73,
+    "gpu_util_pct": 96.0,
+    "temp_c": 69.0,
+    "power_w": 77.37,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
-      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "nemotron-3-super:120b",
         "size_gb": 91.6
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
       }
     ]
   },
@@ -113,17 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "10:56 PM",
-      "cycle_num": 41
-    },
     {
       "name": "treasury-bonds",
       "status": "skipped",
@@ -158,29 +147,20 @@
       "broken_entries": null,
       "cycle_time": "11:07 PM",
       "cycle_num": 44
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "11:10 PM",
+      "cycle_num": 45
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 41,
-      "window": "overnight",
-      "timestamp": "2026-04-16T22:56:43.611944",
-      "time_display": "10:56 PM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "10:56 PM",
-          "cycle_num": 41
-        }
-      ]
-    },
     {
       "cycle": 42,
       "window": "overnight",
@@ -240,6 +220,26 @@
           "broken_entries": null,
           "cycle_time": "11:07 PM",
           "cycle_num": 44
+        }
+      ]
+    },
+    {
+      "cycle": 45,
+      "window": "overnight",
+      "timestamp": "2026-04-16T23:10:06.190499",
+      "time_display": "11:10 PM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "success",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "11:10 PM",
+          "cycle_num": 45
         }
       ]
     }
