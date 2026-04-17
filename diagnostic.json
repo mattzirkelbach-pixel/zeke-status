@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-04-17 00:18:28 ET",
-  "timestamp_utc": "2026-04-17T04:18:28Z",
+  "timestamp_local": "2026-04-17 00:21:42 ET",
+  "timestamp_utc": "2026-04-17T04:21:42Z",
   "scheduler": {
     "running": true,
     "pid": 1732,
-    "uptime_minutes": 3124,
+    "uptime_minutes": 3127,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 36765,
+    "total_lines": 36768,
     "last_entries": [
-      "[2026-04-17T04:12:10] queue-research-gld",
-      "[2026-04-17T04:15:00] treasury-bonds",
-      "[2026-04-17T04:13:43] queue-research-slv",
       "[2026-04-17T04:15:47] queue-research-slv",
-      "[2026-04-17T04:17:59] queue-research-slv"
+      "[2026-04-17T04:17:59] queue-research-slv",
+      "[2026-04-17T04:19:25] queue-research-tlt",
+      "[2026-04-17T04:13:00] treasury-bonds",
+      "[2026-04-17T04:21:09] queue-research-tlt"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -47,19 +47,9 @@
     "success": 78,
     "timeout": 0,
     "fail": 0,
-    "feed_growth": 19
+    "feed_growth": 21
   },
   "cycles": [
-    {
-      "ts": "2026-04-16T23:48:18.058295",
-      "window": "overnight",
-      "cycle": 58,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 1
-    },
     {
       "ts": "2026-04-16T23:50:55.063795",
       "window": "overnight",
@@ -149,16 +139,19 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-04-17T00:21:22.070921",
+      "window": "overnight",
+      "cycle": 68,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 2
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "skipped",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -293,6 +286,13 @@
       "issues": [
         "spark_locked"
       ]
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 2,
+      "issues": []
     }
   ],
   "health": {
