@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-17T07:36:21.515768+00:00",
+  "timestamp": "2026-04-17T07:36:42.823985+00:00",
   "feed_lines": 37012,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-17T07:26:45.572165Z\", \"topic\": \"queue-research-tlt\", \"finding\": \"**FINDING:**  \\n- **U.S. Non\\u2011Farm Payrolls (March\\u202f2026) released on\\u202fApril\\u202f5\\u202f2026:** 215\\u202fk jobs added, unemployment rate steady at **3.8\\u202f%**, and average hourly earnings up **0.3\\u202f% MoM** (\\u22483.1\\u202f% YoY).  \\n- **10\\u2011Year Treasury yield (10Y) on\\u202fApril\\u202f17\\u202f2026:** 4.38\\u202f% (down 0.01\\u202f% from the March\\u202f20 close of 4.39\\u202f%).  \\n- **CPI (YoY) for March\\u202f2026:** 2.7\\u202f% (down from February\\u2019s 2.9\\u202f%).  \\n- **PCE price index (YoY) for March\\u202f2026:** 2.4\\u202f% (core PCE 2.6\\u202f%).  \\n\\n**IMPLICATION:**  \\n- The **NFP beat expectations** (215\\u202fk vs. consensus ~210\\u202fk) but wage growth remains modest, keeping **inflation pressures easing**.  \\n- The **10Y yield slipping to 4.38\\u202f%** stays **below the 4.40\\u202f% resistance** that would have signaled a bearish breakout for TLT, preserving the **bullish TLT thesis** that relies on a dovish F\", \"source\": \"spark-queue/bg_202604170325_2\", \"instrument\": \"TLT\", \"task_label\": \"Fed speakers and yield catalysts this week\", \"priority_was\": 3}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 70.0,
-    "power_w": 79.1,
+    "gpu_util_pct": 6.0,
+    "temp_c": 61.0,
+    "power_w": 29.68,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -88,10 +88,6 @@
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
-      },
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
       }
     ]
   },
@@ -100,7 +96,7 @@
     "literal_timestamps": 7,
     "duplicates": 0,
     "no_new_dev": 0,
-    "total": 37012,
+    "total": 37013,
     "error_rate": 0.0
   },
   "crontab_status": {
