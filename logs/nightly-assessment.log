@@ -4404,3 +4404,19 @@
 [20:14:34]   capabilities: {"status": "WARN", "failures": [], "warnings": ["claude-code v2.1.104 is 8 version(s) behind latest v2.1.112", "capability-scanner-state.json: last_run 85.2h ago (>26h)"], "claude_code": {"status": "WARN", "current": "2.1.104", "latest": "2.1.112", "behind": 8}, "conviction_backtest": {"status": "OK", "age_hours": 87.2, "positions": 22, "missing_scores": []}, "camel_yt_orphans": {"status": "OK", "pre_fetched_count": 6, "orphaned": []}, "infra_scout": {"status": "OK", "age_hours": 14.2, "last_run": "2026-04-16T10:00:09.031748+00:00"}, "capability_scanner": {"status": "WARN", "age_hours": 85.2, "last_run": "2026-04-13T11:00:06.502634+00:00"}, "members_transcripts": {"status": "OK", "file_count": 46, "pre_fetched_count": 6}}
 [20:14:34] Learning log updated: /Users/zekezirk/zeke-status/memory/learning-log.jsonl
 [20:14:34] === Done ===
+[22:14:34] === Bi-Hourly Self-Assessment ===
+[22:14:36] Grade: C. OK: prewarm, l2, queue, feed_quality, noise, cowork_executor, price_watcher, new_cron_topics. Failed: l1b.
+[22:14:36]   prewarm: {"status": "OK", "detail": "[2026-04-16T21:55:25Z] Super loaded: 3 tokens in 21.6s"}
+[22:14:36]   l1b: {"dispatched": 0, "ingested": 0, "status": "FAILED", "quality": "NO_INGESTION"}
+[22:14:36]   l2: {"status": "OK", "count": 0, "discarded": 1, "narrating": false, "preview": "RECOMMENDATION: HOLD GLD $470.0 call_option x5 exp 2026-12-18\nEVIDENCE: On 2026-04-15, GLD closed at"}
+[22:14:36]   queue: {"done": 31928, "failed": 0, "pending": 154, "echo_rate": 0.0, "status": "OK"}
+[22:14:36]   feed_quality: {"avg_score": 7.5, "junk_pct": 0, "actionable_pct": 73, "total": 99, "status": "OK"}
+[22:14:36]   noise: {"noise_entries_6h": 0, "breakdown": {}, "status": "OK"}
+[22:14:36]   cowork_executor: {"status": "IDLE", "detail": "No pending tasks at last run", "completed_runs": 0}
+[22:14:36]   price_watcher: {"status": "OK", "detail": "Last entry: [2026-04-16 22:11 ET] Outside market hours. Exiting.", "is_market_hours": false, "log_path": "/Users/zekezirk/zeke-status/logs/price-watcher.log"}
+[22:14:36]   new_cron_topics: {"status": "OK", "active_topics": {"btc-spx-macro": 7, "gold-cycle": 9, "oil-tlt": 10}, "missing_topics": [], "detail": "Active: ['btc-spx-macro', 'gold-cycle', 'oil-tlt'], Missing 24h: []"}
+[22:14:36]   capabilities: {"status": "WARN", "failures": [], "warnings": ["claude-code v2.1.104 is 8 version(s) behind latest v2.1.112", "capability-scanner-state.json: last_run 87.2h ago (>26h)"], "claude_code": {"status": "WARN", "current": "2.1.104", "latest": "2.1.112", "behind": 8}, "conviction_backtest": {"status": "OK", "age_hours": 89.2, "positions": 22, "missing_scores": []}, "camel_yt_orphans": {"status": "OK", "pre_fetched_count": 6, "orphaned": []}, "infra_scout": {"status": "OK", "age_hours": 16.2, "last_run": "2026-04-16T10:00:09.031748+00:00"}, "capability_scanner": {"status": "WARN", "age_hours": 87.2, "last_run": "2026-04-13T11:00:06.502634+00:00"}, "members_transcripts": {"status": "OK", "file_count": 46, "pre_fetched_count": 6}}
+[22:14:36]   ✗ REGRESSION: A→C (new failures: ['l1b'])
+[22:14:36] Pushed 1 fix tasks to cowork
+[22:14:36] Learning log updated: /Users/zekezirk/zeke-status/memory/learning-log.jsonl
+[22:14:36] === Done ===
