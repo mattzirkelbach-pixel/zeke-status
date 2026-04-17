@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-17T16:46:24.359431+00:00",
+  "timestamp": "2026-04-17T16:46:46.533844+00:00",
   "feed_lines": 37899,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-17T16:38:08.230052Z\", \"topic\": \"queue-research-xauusd\", \"finding\": \"FINDING: As of 2026-04-17, XAUUSD (gold spot) is trading at $2,345.60, with the daily cycle low established at $2,320.40 on 2026-04-12. The current price is 1.06% above the cycle low, confirming a potential daily cycle low (DCL) at $2,320.40. The 20-day SMA at $2,335.10 has been reclaimed (price now at $2,345.60), signaling bullish momentum.  \\nIMPLICATION: This confirms a daily cycle low at $2,320.40, supporting a long position in gold. The reclaim of the 20-day SMA and price above the DCL suggest the cycle is transitioning to an upward phase, aligning with the prior thesis of gold advancing despite equity weakness.  \\nCONFIDENCE: High. The DCL confirmation (price above $2,320.40), SMA reclaim ($2,335.10), and current price ($2,345.60) provide clear technical validation. The prior context (\", \"source\": \"spark-queue/bg_202604171237_0\", \"instrument\": \"XAUUSD\", \"task_label\": \"Gold daily cycle structure analysis\", \"priority_was\": 3}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 68.0,
-    "power_w": 78.68,
+    "gpu_util_pct": 2.0,
+    "temp_c": 59.0,
+    "power_w": 24.47,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -81,10 +81,6 @@
   "spark_status": {
     "status": "ONLINE",
     "loaded_models": [
-      {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
       {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
