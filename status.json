@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-17T03:12:45.540386+00:00",
+  "timestamp": "2026-04-17T03:13:07.944335+00:00",
   "feed_lines": 36730,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-17T02:17:22.103751+00:00\", \"topic\": \"knowledge-evolver/general\", \"domain\": \"alpha-research\", \"finding\": \"**FINDING**  \\n- **Current TLT price (2026\\u201104\\u201115)**: $86.83 per share.  \\n- **Break\\u2011even price for the Jan\\u202f2027 $95\\u202fC**: $96.87 (\\u2248\\u202f+11.6\\u202f% above today).  \\n- **Implied probability of profit at expiry (BSM)**: 23\\u202f% (theoretical).  \\n- **Historical volatility (\\u03c3) used in the BSM model**: 12\\u202f% annualized (the figure quoted in the original thesis).  \\n- **Time to expiry**: 10\\u202fmonths (\\u2248\\u202f0.83\\u202fyr).  \\n- **Risk\\u2011free rate (annualized, 10\\u2011yr Treasury yield)**: 4.2\\u202f% (current market level).  \\n- **Dividend yield on TLT**: 0.10\\u202f% (annual).  \\n\\n**IMPLICATION**  \\n| Scenario | Mechanism | Effect on TLT price | Impact on profit probability |\\n|----------|-----------|---------------------|------------------------------|\\n| **Sudden rise in real yields** (e.g., 10\\u2011yr TIPS yield jumps from 2.0\\u202f% to 3.5\\u202f%) | Higher real yields depress long\\u2011duration bond prices; a 1\\u202f% rise in real yields typically cuts TLT by ~8\\u201110\\u202f% (\\u2248\\u202f$8\\u2011$9 lower). | From $86.83 \\u2192 $77\\u2011$79. | Probability of profit would fall from 23\\u202f% to **\\u2248\\u202f12\\u202f%**\", \"source\": \"knowledge-evolver\", \"instrument\": \"GENERAL\", \"task_label\": \"\", \"parent_idea_id\": \"alpha-v2-02c65b9b\", \"quality_score\": 6.0, \"research_question\": \"What are the primary risks that could prevent TLT from reaching the break\\u2011even level, such as a sudden rise in real yields, inflation spikes, or a shift to a more hawkish Fed stance, and how would eac\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 79.0,
-    "power_w": 84.27,
+    "gpu_util_pct": 0.0,
+    "temp_c": 60.0,
+    "power_w": 14.01,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -86,12 +86,12 @@
         "size_gb": 0.6
       },
       {
-        "name": "nemotron-3-super:120b",
-        "size_gb": 91.6
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 25.9
       },
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
+        "name": "nemotron-3-super:120b",
+        "size_gb": 91.6
       }
     ]
   },
