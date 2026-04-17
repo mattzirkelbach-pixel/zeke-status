@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-17T04:49:39.649270+00:00",
+  "timestamp": "2026-04-17T04:50:00.675389+00:00",
   "feed_lines": 36808,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-17T04:38:11.147098Z\", \"topic\": \"queue-research-vix\", \"finding\": \"**FINDING:**  \\n- **VIX (CBOE Volatility Index) \\u2013 2026\\u201104\\u201117:**\\u202f17.96, down **2.18\\u202f%** intraday; **RSI(14)\\u202f=\\u202f38.0** (still above the 30\\u2011oversold threshold).  \\n- **Gold (XAU/USD) \\u2013 2026\\u201104\\u201117:**\\u202f$2,315.60, **\\u20111.84\\u202f%** intraday; **RSI(14)\\u202f=\\u202f38.6** (oversold but no bearish confirmation).  \\n- **Natural Gas (NG) \\u2013 2026\\u201104\\u201117:**\\u202f$2.78 per MMBtu, **\\u20112.88\\u202f%** intraday; **RSI(14)\\u202f\\u2248\\u202f40** and price is testing the lower bound of the 4\\u2011week cycle\\u2011low window ($2.78\\u2011$2.82).  \\n\\n**IMPLICATION:**  \\n- The VIX decline to 17.96 signals a modest easing of market fear, but the index remains in a neutral\\u2011to\\u2011low\\u2011volatility regime; no fresh systemic risk is emerging.  \\n- Gold\\u2019s price is hovering just above the $2,378 breach level that previously triggered a GLD position adjustment; the lack of a close below that thr\", \"source\": \"spark-queue/pw_20260415T153315_012d6ac4\", \"instrument\": \"VIX\", \"task_label\": \"VIX down 2.2% \\u2014 price-watcher\", \"priority_was\": 6}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 96.0,
-    "temp_c": 77.0,
-    "power_w": 81.32,
+    "gpu_util_pct": 94.0,
+    "temp_c": 70.0,
+    "power_w": 46.14,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -91,7 +91,7 @@
       },
       {
         "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
+        "size_gb": 25.9
       }
     ]
   },
