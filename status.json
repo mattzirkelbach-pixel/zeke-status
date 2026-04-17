@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-17T02:51:47.637399+00:00",
+  "timestamp": "2026-04-17T02:54:05.648120+00:00",
   "feed_lines": 36725,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-17T02:16:14.338678+00:00\", \"topic\": \"knowledge-evolver/general\", \"domain\": \"alpha-research\", \"finding\": \"**FINDING:**  \\n- Silver (XAG/USD) price on **2026\\u201104\\u201115** is **$28.45/oz**, having fallen **~6.2\\u202f%** from $30.40 on **2026\\u201103\\u201124** \\u2013 the low\\u2011timing window identified by the SILJ options structure.  \\n- The 20\\u2011day **real\\u2011interest\\u2011rate** (10\\u2011yr Treasury yield\\u202f\\u2013\\u202fCPI\\u2011U inflation) on **2026\\u201104\\u201115** is **+0.45\\u202f%**, the highest positive reading in the past 12\\u202fmonths and well above the +0.20\\u202f% threshold historically associated with silver\\u2019s strongest momentum rallies.  \\n- **Implied volatility (IV) of SLV Jan\\u202f2027 $80 calls** has risen to **38\\u202f%**, a 12\\u2011month high, while the **IV rank** sits at **71\\u202f%**, indicating that the market is pricing in a significant move but still leaves ample premium for sellers.\\n\\n**IMPLICATION:**  \\n- The price\\u2011momentum divergence and the low\\u2011timing window suggest that entering a long position now would capture upside as silver rebounds from its recent trough.  \\n- A positive real\\u2011interest\\u2011rate environment historically reduces the opportunity cost of holding non\\u2011yieldin\", \"source\": \"knowledge-evolver\", \"instrument\": \"GENERAL\", \"task_label\": \"\", \"parent_idea_id\": \"alpha-v2-afb19b7a\", \"quality_score\": 7.5, \"research_question\": \"What technical or macroeconomic indicators (e.g., silver price momentum, real interest rates, inflation expectations) would signal an optimal entry point for the SLV $80 Jan\\u202f2027 call, and what exit c\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 66.0,
-    "power_w": 44.81,
+    "gpu_util_pct": 93.0,
+    "temp_c": 73.0,
+    "power_w": 47.23,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -86,12 +86,12 @@
         "size_gb": 0.6
       },
       {
-        "name": "nemotron-3-super:120b",
-        "size_gb": 94.2
+        "name": "qwen3:8b",
+        "size_gb": 11.5
       },
       {
         "name": "nemotron-3-nano:30b",
-        "size_gb": 25.9
+        "size_gb": 28.0
       }
     ]
   },
@@ -113,17 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "10:42 PM",
-      "cycle_num": 36
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -156,29 +145,20 @@
       "broken_entries": null,
       "cycle_time": "10:51 PM",
       "cycle_num": 39
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "10:54 PM",
+      "cycle_num": 40
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 36,
-      "window": "overnight",
-      "timestamp": "2026-04-16T22:42:12.567679",
-      "time_display": "10:42 PM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "10:42 PM",
-          "cycle_num": 36
-        }
-      ]
-    },
     {
       "cycle": 37,
       "window": "overnight",
@@ -236,6 +216,26 @@
           "broken_entries": null,
           "cycle_time": "10:51 PM",
           "cycle_num": 39
+        }
+      ]
+    },
+    {
+      "cycle": 40,
+      "window": "overnight",
+      "timestamp": "2026-04-16T22:54:05.569899",
+      "time_display": "10:54 PM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "skipped",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "10:54 PM",
+          "cycle_num": 40
         }
       ]
     }
