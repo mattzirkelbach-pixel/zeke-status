@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-18T06:54:08.088489+00:00",
+  "timestamp": "2026-04-18T06:54:30.955721+00:00",
   "feed_lines": 39191,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-18T06:44:46.404174Z\", \"topic\": \"queue-research-general\", \"finding\": \"**FINDING:**  \\n- The **U.S. PCE price index (core YoY)** is scheduled for release on **May\\u202f31\\u202f2026** at **8:30\\u202fAM\\u202fET**.  \\n- Consensus forecasts from Bloomberg and the Federal Reserve\\u2019s own median projection (as of 2026\\u201104\\u201115) expect **core PCE to rise 2.8\\u202f% YoY**, with the **month\\u2011over\\u2011month core PCE price index expected to be 0.21\\u202f%** (annualized \\u2248\\u202f2.5\\u202f%).  \\n- The **10\\u2011Year Treasury yield** currently stands at **4.38\\u202f%** (down 3\\u202fbps from 2026\\u201104\\u201117), reflecting a modest easing bias in real rates.  \\n- **TLT (iShares 20+ Year Treasury Bond ETF)** is trading at **$92.34** per share, with its Jan\\u202f2027 LEAPS options (strike $90, $95, $101) showing implied volatilities of **22\\u202f%**, **24\\u202f%**, and **26\\u202f%**, respectively.  \\n\\n**IMPLICATION:**  \\n- A core PCE reading of 2.8\\u202f% YoY would confirm the **\", \"source\": \"spark-queue/followup_te-treasury-20260418-1f398be3\", \"instrument\": \"GENERAL\", \"task_label\": \"Follow-up: Monitor upcoming PCE data due on May 31, 2026, for confirmat\", \"priority_was\": 4}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 71.0,
-    "power_w": 44.32,
+    "gpu_util_pct": 93.0,
+    "temp_c": 64.0,
+    "power_w": 44.61,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
-      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
       {
         "name": "qwen3:8b",
         "size_gb": 11.5
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 25.9
       }
     ]
   },
