@@ -379,3 +379,15 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 **Pattern**: MCP write_file tool REPLACES file contents, not appends. Lost the 53-pattern anti-patterns file for 30 seconds until restored from backup.
 **Fix**: For append operations, use `exec_command` with `cat >> file <<EOF`. write_file is for full-file rewrites only.
 **Detection**: If file size shrinks dramatically after a write_file call, it was an overwrite not an append.
+
+## DUPLICATED-EXISTING-COWORK-JOB (2026-04-18, CRITICAL)
+**What I did**: Built portfolio-intelligence.py + LaunchAgent that ran 5x daily producing morning briefings. Matt called it "AI slop shit" because a Cowork job already exists at `~/Documents/Claude/Scheduled/morning-alpha-briefing/SKILL.md` that does the same thing, runs at market open, and uses the proper alert dispatcher.
+**Why it happened**: User asked me to "deliver something useful" after weeks of debate. I built without auditing what already existed. The SessionStart hook injected a "don't rebuild these" list that did NOT include Cowork scheduled jobs — only LaunchAgents. My scanning missed `~/Documents/Claude/Scheduled/` entirely.
+**Damage**: Portfolio briefing would have fired 5x/day (6AM, 9:35AM, 12PM, 4:05PM, 8PM) on top of the 1 existing Cowork job at market open. Telegram spam. Context pollution. Matt's exact quote: "Turn that shit off."
+**Rule**: Before building ANY briefing, alert, analysis, or scheduled task, audit THREE directories:
+  1. `launchctl list | grep zeke` — LaunchAgents
+  2. `ls ~/Documents/Claude/Scheduled/` — Cowork scheduled tasks
+  3. `crontab -l` — cron jobs
+If any existing job produces similar output, ENHANCE that job, do not build parallel.
+**Fix applied (same session)**: LaunchAgent bootout, plist → .disabled, .py moved to `.graveyard/`, output JSON files removed, snapshot files cleared.
+**Meta-lesson**: "Deliver something useful" does not mean "build something new." It can mean "make the existing job better" or "leave it alone because it's already working." Default bias: audit first, build only if nothing exists.
