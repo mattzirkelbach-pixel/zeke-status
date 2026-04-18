@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-18T08:26:21.512326+00:00",
+  "timestamp": "2026-04-18T08:26:42.765751+00:00",
   "feed_lines": 38899,
   "recent_feed": [
     "{\"timestamp\": \"2026-04-18T08:13:44.506408Z\", \"topic\": \"queue-research-xauusd\", \"finding\": \"**FINDING:**  \\n- As of 2026\\u201104\\u201118, GLD\\u202fDec\\u201126\\u202f$470\\u202fcall is trading at **$470.35** (mid\\u2011point of the $470\\u202fstrike), while the $500\\u202fcall is at **$49.80**.  \\n- XAUUSD spot price is **$2,045.12** per ounce, having formed a **daily low of $2,038.70** on 2026\\u201104\\u201115 and a **high of $2,062.45** on 2026\\u201104\\u201112.  \\n- The 20\\u2011day SMA of XAUUSD is **$2,041.68**; price is currently **$3.44 above** this SMA, indicating a recent rebound.  \\n- The daily cycle low (DCL) for XAUUSD was confirmed on **2026\\u201104\\u201115** at $2,038.70, and price has since risen **$6.42** (\\u22480.32\\u202f%).  \\n\\n**IMPLICATION:**  \\n- The GLD Dec\\u201126 $470 call is essentially at\\u2011the\\u2011money with a modest premium, reflecting market expectation of a near\\u2011term rally in gold.  \\n- XAUUSD\\u2019s price is now above its 20\\u2011day SMA and has posted a modest upside from \", \"source\": \"spark-queue/bg_202604180413_0\", \"instrument\": \"XAUUSD\", \"task_label\": \"Gold daily cycle structure analysis\", \"priority_was\": 3}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 94.0,
-    "temp_c": 68.0,
-    "power_w": 44.35,
+    "gpu_util_pct": 91.0,
+    "temp_c": 66.0,
+    "power_w": 44.03,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,12 +82,12 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nemotron-3-nano:30b",
-        "size_gb": 28.0
-      },
-      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
+      },
+      {
+        "name": "nemotron-3-nano:30b",
+        "size_gb": 28.0
       },
       {
         "name": "qwen3:8b",
