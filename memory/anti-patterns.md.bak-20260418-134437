@@ -353,29 +353,3 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 **Pattern**: System ran for 3 months without ever measuring whether Camel's calls actually worked. Blind faith in signal source with no accuracy data. Matt asked for backtesting on 3/18 — wasn't built until 4/8.
 **Fix**: camel-call-backtester.py evaluates 584 trade calls against price history. Results: SPX shorts 63.2% hit rate (edge), BTC longs 35.8% (net negative). Weekly LaunchAgent + auto-updates wiki.
 **Rule**: Any signal source must have measured accuracy before the system acts on it. Unmeasured signals = gambling, not trading.
-
-
-## HOOKS-ENFORCEMENT-ACTIVE (deployed 2026-04-18)
-**What**: Claude Code hooks installed at ~/.claude/hooks/ enforce anti-patterns deterministically. No longer relying on Claude reading memory files and choosing to follow them.
-**Blocks (PreToolUse exit 2)**:
-1. `tailscale funnel --https=443 off` — clears all funnel paths
-2. `tailscale funnel --bg 443|3340|8443` — wrong ports. Must be `funnel --bg 8100`.
-3. `sed` on `.py` files — corrupts syntax
-4. `openclaw doctor --fix` — injects invalid config
-5. `rm -rf` on `.openclaw`, `zeke-portfolio`, `zeke-status`, `Library/LaunchAgents`
-6. Recreating a LaunchAgent whose Label is already loaded
-7. Overwriting an existing `.py` in `zeke-portfolio/` via `cat >`
-**Injects (SessionStart)**: anti-patterns list, "don't rebuild these" daemon list, Tailscale config
-**Audit log**: `~/.claude/hook-audit.log` — records every blocked and allowed Bash command
-**Rule**: If a legitimate command gets blocked, update `~/.claude/hooks/pre-tool-use.sh` with a more specific pattern. Don't work around the hook.
-
-## NEMOCLAW-DEFERRED (2026-04-18)
-**What**: NemoClaw CLI v0.0.20 installed. Colima + Docker runtime up. Onboarding NOT completed.
-**Why deferred**: Port 18789 owned by running OpenClaw gateway (PID 1719) which handles all Camel/X scraping + CDP browser actions. Taking port = breaking production.
-**Safe to leave as-is**: CLI dormant without Docker. Stop Colima to free RAM: `/opt/homebrew/bin/colima stop`
-**Migration path (future)**: Planned infrastructure swap — retire native OpenClaw cleanly, re-enable pipelines inside NemoClaw sandbox.
-
-## WRITE-FILE-OVERWRITES (learned 2026-04-18)
-**Pattern**: MCP write_file tool REPLACES file contents, not appends. Lost the 53-pattern anti-patterns file for 30 seconds until restored from backup.
-**Fix**: For append operations, use `exec_command` with `cat >> file <<EOF`. write_file is for full-file rewrites only.
-**Detection**: If file size shrinks dramatically after a write_file call, it was an overwrite not an append.
