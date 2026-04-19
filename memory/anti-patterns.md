@@ -391,3 +391,39 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 If any existing job produces similar output, ENHANCE that job, do not build parallel.
 **Fix applied (same session)**: LaunchAgent bootout, plist → .disabled, .py moved to `.graveyard/`, output JSON files removed, snapshot files cleared.
 **Meta-lesson**: "Deliver something useful" does not mean "build something new." It can mean "make the existing job better" or "leave it alone because it's already working." Default bias: audit first, build only if nothing exists.
+
+
+## SYNTHETIC-RESEARCH-LOOP-WAS-SYSTEMIC (learned 2026-04-18, MAJOR)
+**Pattern**: The entire L1A/L1B/L2/alpha-scanner synthesis stack was producing
+hallucinated output for 4 months. Spark Nemotron generates plausible-sounding
+financial prose from training data when asked cycle/price questions. It has no
+real-time grounding. Its fabrications are internally fluent, so they look like
+research until you check them against reality.
+**Evidence on 2026-04-18 audit**: 50 feed entries in 3 hours all sourced from
+Spark self-seeded queue. Three contradictory gold weekly-cycle counts (24, 23, 25)
+12 minutes apart. CPI readings of 3.2% AND 2.7% for same release same hour.
+L2 ran 15 findings in, 0 recommendations out. Alpha scanner's 11 "ideas" were
+all portfolio math on positions already held. 1 novel alert in 30 days.
+**Resolution**: Killed 13 LaunchAgents that did Spark synthesis on market
+questions. Replaced with correlation_scanner.py + options_analytics.py —
+deterministic math on verified price data.
+**Rule**: If a Spark output doesn't cite a URL/price-series/user-document,
+it's fiction. Never run recursive self-seeding LLM synthesis on market data
+that the LLM cannot verify against ground truth.
+**Full post-mortem**: ~/zeke-status/memory/anti-patterns-2026-04-18-fiction-engine-shutdown.md
+
+## UPTIME-VS-VALUE-GRADER-STILL-WRONG (learned 2026-04-18)
+**Pattern**: Self-assessment graded A 24 runs in a row while system produced
+1 novel idea in 30 days. UPTIME-WITHOUT-VALUE (3/25) was documented but never
+enforced — grader kept checking "is process running."
+**Fix**: Grader must include value check: "did any output change a decision
+in last 24h?" If no, grade capped at C regardless of uptime. NOT YET BUILT —
+next Claude should implement in zeke-self-assess.py before trusting grades again.
+
+## FICTION-ENGINE-SHUTDOWN-PRESERVED-VALUE-PATHS (learned 2026-04-18)
+**Pattern**: When killing the synthesis stack, audit to keep every component
+that operates on verified inputs. Camel transcripts, TV webhooks, price
+feeds, X account scrapes, portfolio math — these are real. The test:
+"does this component's output depend on Spark generating plausible prose?"
+If yes → kill. If the inputs are CSV/API/URL-sourced and outputs are
+deterministic math → keep.
