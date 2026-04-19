@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-04-18 22:26:16 ET",
-  "timestamp_utc": "2026-04-19T02:26:16Z",
+  "timestamp_local": "2026-04-18 22:28:52 ET",
+  "timestamp_utc": "2026-04-19T02:28:52Z",
   "scheduler": {
     "running": true,
     "pid": 1777,
-    "uptime_minutes": 344,
+    "uptime_minutes": 346,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 40391,
+    "total_lines": 40392,
     "last_entries": [
-      "[2026-04-19T02:10:00] treasury-bonds",
       "[2026-04-19T02:12:00] treasury-bonds",
       "[2026-04-19T02:15:00] treasury-bonds",
       "[2026-04-19T02:17:00] treasury-bonds",
-      "[2026-04-19T02:23:00] treasury-bonds"
+      "[2026-04-19T02:23:00] treasury-bonds",
+      "[PARSE ERROR] {\\\"timestamp\\\":\\\"2026-04-19T02:25:00Z\\\",\\\"topic\\\":\\\"treasury-bonds\\\",\\\"finding\\\""
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -43,23 +43,13 @@
     "running": true
   },
   "today": {
-    "jobs_run": 42,
-    "success": 38,
+    "jobs_run": 43,
+    "success": 39,
     "timeout": 0,
     "fail": 0,
     "feed_growth": 11
   },
   "cycles": [
-    {
-      "ts": "2026-04-18T22:02:23.758944",
-      "window": "overnight",
-      "cycle": 24,
-      "jobs": 1,
-      "success": 0,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-04-18T22:05:01.401981",
       "window": "overnight",
@@ -149,16 +139,19 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-04-18T22:28:31.438288",
+      "window": "overnight",
+      "cycle": 34,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 1,
-      "issues": []
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -225,6 +218,13 @@
     {
       "name": "treasury-bonds",
       "status": "skipped",
+      "duration": 0,
+      "grew": 0,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
       "duration": 0,
       "grew": 0,
       "issues": []
