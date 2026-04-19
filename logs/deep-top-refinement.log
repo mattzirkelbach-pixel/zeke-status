@@ -1,0 +1,33 @@
+2026-04-19T04:48:48.958533Z [calibrate-and-tune] === deep-top refinement: calibrate + macro + sweep ===
+2026-04-19T04:48:48.958721Z [calibrate-and-tune] Step 2 — parsing TV signals and calibrating per-ticker lookbacks
+2026-04-19T04:48:48.958891Z [calibrate-and-tune]   15 usable TV signals (DCL/WCL confirmed)
+2026-04-19T04:48:49.563400Z [calibrate-and-tune]   wrote cf-calibrated-lookbacks.json (5 tickers)
+2026-04-19T04:48:49.563452Z [calibrate-and-tune]     XAUUSD: lb=4 hits_3bar=57.1% n=7 median_offset=3
+2026-04-19T04:48:49.563488Z [calibrate-and-tune]     XAGUSD: lb=4 hits_3bar=0.0% n=2 median_offset=5.5
+2026-04-19T04:48:49.563523Z [calibrate-and-tune]     TLT: lb=4 hits_3bar=100.0% n=2 median_offset=1.0
+2026-04-19T04:48:49.563553Z [calibrate-and-tune]     SILJ: lb=4 hits_3bar=50.0% n=2 median_offset=7.0
+2026-04-19T04:48:49.563583Z [calibrate-and-tune]     GDX: lb=4 hits_3bar=50.0% n=2 median_offset=7.0
+2026-04-19T04:48:49.563632Z [calibrate-and-tune] Step 3 — before/after with baseline lb=8 vs calibrated
+2026-04-19T04:48:49.631864Z [calibrate-and-tune] Step 4 — building macro score per ticker
+2026-04-19T04:48:49.636770Z [calibrate-and-tune]     GOLD: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.636821Z [calibrate-and-tune]     GLD: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.636854Z [calibrate-and-tune]     SPX: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.636887Z [calibrate-and-tune]     NASDAQ: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.636917Z [calibrate-and-tune]     BTC: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.636946Z [calibrate-and-tune]     TLT: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.636974Z [calibrate-and-tune]     SLV: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.637001Z [calibrate-and-tune]     XAGUSD: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.637029Z [calibrate-and-tune]     DJI: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.637055Z [calibrate-and-tune]     GDX: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.637085Z [calibrate-and-tune]     SILJ: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.637112Z [calibrate-and-tune]     XAUUSD: macro=0.0 ({'thesis': 0, 'x_sentiment': 0, 'macro': 0.0})
+2026-04-19T04:48:49.637139Z [calibrate-and-tune] Step 5 — parameter sweep (OOS bootstrap p05)
+2026-04-19T04:48:49.637167Z [calibrate-and-tune]   sweeping GOLD (macro s6=-0.000)
+2026-04-19T04:49:04.932622Z [calibrate-and-tune]     GOLD: p05=0.9622 fire_rate=0.935 weights=(0.3, 0.4, 0.5, 0.4, 1.4) thr=3.5 lb=6
+2026-04-19T04:49:04.932717Z [calibrate-and-tune]   sweeping GLD (macro s6=-0.000)
+2026-04-19T04:49:18.008585Z [calibrate-and-tune]     GLD: p05=0.9634 fire_rate=0.917 weights=(0.3, 0.4, 0.5, 0.4, 1.4) thr=3.5 lb=6
+2026-04-19T04:49:18.008682Z [calibrate-and-tune]   sweeping SPX (macro s6=-0.000)
+2026-04-19T04:49:33.658105Z [calibrate-and-tune]     SPX: p05=0.9712 fire_rate=0.803 weights=(1.4, 0.4, 0.5, 0.4, 1.4) thr=4.0 lb=6
+2026-04-19T04:49:33.658217Z [calibrate-and-tune]   sweeping NASDAQ (macro s6=-0.000)
+2026-04-19T04:49:49.262479Z [calibrate-and-tune]     NASDAQ: p05=0.9596 fire_rate=0.792 weights=(1.8, 0.4, 0.5, 0.4, 1.4) thr=4.0 lb=6
+2026-04-19T04:49:49.262594Z [calibrate-and-tune]   sweeping TLT (macro s6=-0.000)
