@@ -5191,3 +5191,23 @@ Queue: done=36338, failed=0
 Feed: 45% actionable
 Cow
 [14:42:22] === Done ===
+[16:42:22] === Bi-Hourly Self-Assessment ===
+[16:42:24] Grade: C. OK: prewarm, l1b, queue, feed_quality, noise, cowork_executor, price_watcher, capabilities. Failed: new_cron_topics.
+[16:42:24]   prewarm: {"status": "OK", "detail": "[2026-04-17T21:55:59Z] Super loaded: 3 tokens in 55.6s"}
+[16:42:24]   l1b: {"dispatched": 15, "ingested": 22, "status": "OK", "quality": "GOOD"}
+[16:42:24]   queue: {"done": 36338, "failed": 0, "pending": 62, "echo_rate": 0.0, "status": "OK"}
+[16:42:24]   feed_quality: {"avg_score": 5.6, "junk_pct": 24, "actionable_pct": 44, "total": 98, "status": "OK"}
+[16:42:24]   noise: {"noise_entries_6h": 0, "breakdown": {}, "status": "OK"}
+[16:42:24]   cowork_executor: {"status": "OK", "completed_runs": 6, "successes": 8, "failures": 0}
+[16:42:24]   price_watcher: {"status": "OK", "detail": "Last entry: [2026-04-20 16:41 ET] Outside market hours. Exiting.", "is_market_hours": false, "log_path": "/Users/zekezirk/zeke-status/logs/price-watcher.log"}
+[16:42:24]   new_cron_topics: {"status": "DEGRADED", "active_topics": {"btc-spx-macro": 1, "oil-tlt": 1}, "missing_topics": ["gold-cycle"], "detail": "Active: ['btc-spx-macro', 'oil-tlt'], Missing 24h: ['gold-cycle']"}
+[16:42:24]   capabilities: {"status": "OK", "failures": [], "warnings": [], "claude_code": {"status": "OK", "current": "2.1.114", "latest": "2.1.114", "behind": 0}, "conviction_backtest": {"status": "OK", "age_hours": 7.2, "positions": 23, "missing_scores": []}, "camel_yt_orphans": {"status": "OK", "pre_fetched_count": 6, "orphaned": []}, "infra_scout": {"status": "OK", "age_hours": 7.2, "last_run": "2026-04-20T13:29:45.834465+00:00"}, "capability_scanner": {"status": "OK", "age_hours": 7.2, "last_run": "2026-04-20T13:28:52.547763+00:00"}, "members_transcripts": {"status": "OK", "file_count": 54, "pre_fetched_count": 6}}
+[16:42:24]   ✗ REGRESSION: A→C (new failures: ['new_cron_topics'])
+[16:42:24] Learning log updated: /Users/zekezirk/zeke-status/memory/learning-log.jsonl
+[2026-04-20T20:42:24Z] LOCKDOWN-DROP [SYSTEM] key='tg_send_16845': ⚠️ <b>Assessment REGRESSION: A→C</b>
+Newly broken: ['new_cron_topics']
+All failures: ['new_cron_topics']
+[2026-04-20T20:42:24Z] LOCKDOWN-DROP [SYSTEM] key='tg_send_59193': ⚠️ <b>Assessment: C</b> (REGRESSION: A→C (new failures: ['new_cron_topics']))
+Pre-warm: OK
+L1B: dispatched=15, ingested=
+[16:42:24] === Done ===
