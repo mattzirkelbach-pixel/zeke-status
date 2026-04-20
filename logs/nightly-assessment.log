@@ -5112,3 +5112,25 @@ L1B: dispatched=15, ingested=22
 Queue: done=36338, failed=0
 Feed: 6
 [06:42:17] === Done ===
+[08:42:17] === Bi-Hourly Self-Assessment ===
+[08:42:18] Grade: C. OK: prewarm, l1b, queue, feed_quality, noise, cowork_executor, price_watcher, new_cron_topics. Failed: capabilities.
+[08:42:18]   prewarm: {"status": "OK", "detail": "[2026-04-17T21:55:59Z] Super loaded: 3 tokens in 55.6s"}
+[08:42:18]   l1b: {"dispatched": 15, "ingested": 22, "status": "OK", "quality": "GOOD"}
+[08:42:18]   queue: {"done": 36338, "failed": 0, "pending": 5, "echo_rate": 0.0, "status": "OK"}
+[08:42:18]   feed_quality: {"avg_score": 7.1, "junk_pct": 2, "actionable_pct": 61, "total": 99, "status": "OK"}
+[08:42:18]   noise: {"noise_entries_6h": 0, "breakdown": {}, "status": "OK"}
+[08:42:18]   cowork_executor: {"status": "OK", "completed_runs": 6, "successes": 8, "failures": 0}
+[08:42:18]   price_watcher: {"status": "OK", "detail": "Last entry: [2026-04-20 08:37 ET] Outside market hours. Exiting.", "is_market_hours": false, "log_path": "/Users/zekezirk/zeke-status/logs/price-watcher.log"}
+[08:42:18]   new_cron_topics: {"status": "OK", "active_topics": {"btc-spx-macro": 3, "gold-cycle": 2, "oil-tlt": 3}, "missing_topics": [], "detail": "Active: ['btc-spx-macro', 'gold-cycle', 'oil-tlt'], Missing 24h: []"}
+[08:42:18]   capabilities: {"status": "FAILED", "failures": ["conviction-backtest.json is 171.7h old (>168h)"], "warnings": ["infra-scout-state.json: last_run 39.6h ago (>26h)", "capability-scanner-state.json: last_run 169.7h ago (>26h)"], "claude_code": {"status": "OK", "current": "2.1.114", "latest": "2.1.114", "behind": 0}, "conviction_backtest": {"status": "FAILED", "age_hours": 171.7, "positions": 22, "missing_scores": []}, "camel_yt_orphans": {"status": "OK", "pre_fetched_count": 6, "orphaned": []}, "infra_scout": {"status": "WARN", "age_hours": 39.6, "last_run": "2026-04-18T21:06:11.565838+00:00"}, "capability_scanner": {"status": "WARN", "age_hours": 169.7, "last_run": "2026-04-13T11:00:06.502634+00:00"}, "members_transcripts": {"status": "OK", "file_count": 52, "pre_fetched_count": 6}}
+[08:42:18]   ⚠ SAME: still C (persistent failures: ['capabilities'])
+[08:42:18]   CHRONIC: capabilities has failed 3 consecutive assessments
+[08:42:18] Learning log updated: /Users/zekezirk/zeke-status/memory/learning-log.jsonl
+[2026-04-20T12:42:18Z] SYSTEM [SYSTEM]: 🔴 <b>CHRONIC FAILURE: capabilities</b>
+Failed 3 consecutive assessments. Fix task queued.
+[2026-04-20T12:42:18Z] SYSTEM [SYSTEM]: ⚠️ <b>Assessment: C</b> (SAME: still C (persistent failures: ['capabilities']))
+Pre-warm: OK
+L1B: dispatched=15, ingested=22
+Queue: done=36338, failed=0
+Feed: 6
+[08:42:18] === Done ===
