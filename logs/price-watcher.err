@@ -82,3 +82,23 @@ Traceback (most recent call last):
 subprocess.TimeoutExpired: Command '['/opt/homebrew/bin/python3', '/Users/zekezirk/zeke-portfolio/data/fetch_prices.py']' timed out after 90 seconds
 [fetch] fetch_prices.py failed:
 
+Traceback (most recent call last):
+  File "/Users/zekezirk/zeke-portfolio/price-watcher.py", line 201, in <module>
+    main()
+    ~~~~^^
+  File "/Users/zekezirk/zeke-portfolio/price-watcher.py", line 88, in main
+    result = subprocess.run([PYTHON, str(FETCH)], capture_output=True, text=True, timeout=90)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 556, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1220, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 2153, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1267, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['/opt/homebrew/bin/python3', '/Users/zekezirk/zeke-portfolio/data/fetch_prices.py']' timed out after 90 seconds
