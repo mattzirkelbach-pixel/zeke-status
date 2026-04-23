@@ -5706,3 +5706,22 @@ Failed 3 consecutive assessments. Fix task queued.
 Pre-warm: OK
 L1B: dispatched=15, inge
 [20:43:24] === Done ===
+[22:43:24] === Bi-Hourly Self-Assessment ===
+[22:43:25] Grade: A. OK: prewarm, l1b, queue, feed_quality, noise, cowork_executor, price_watcher, new_cron_topics, capabilities. Failed: none.
+[22:43:25]   prewarm: {"status": "OK", "detail": "[2026-04-17T21:55:59Z] Super loaded: 3 tokens in 55.6s"}
+[22:43:25]   l1b: {"dispatched": 15, "ingested": 22, "status": "OK", "quality": "GOOD"}
+[22:43:25]   queue: {"done": 36338, "failed": 0, "pending": 147, "echo_rate": 0.0, "status": "OK"}
+[22:43:25]   feed_quality: {"avg_score": 4.8, "junk_pct": 40, "actionable_pct": 37, "total": 100, "status": "OK"}
+[22:43:25]   noise: {"noise_entries_6h": 0, "breakdown": {}, "status": "OK"}
+[22:43:25]   cowork_executor: {"status": "OK", "completed_runs": 3, "successes": 9, "failures": 0}
+[22:43:25]   price_watcher: {"status": "OK", "detail": "Last entry: [2026-04-22 22:42 ET] Outside market hours. Exiting.", "is_market_hours": false, "log_path": "/Users/zekezirk/zeke-status/logs/price-watcher.log"}
+[22:43:25]   new_cron_topics: {"status": "OK", "active_topics": {}, "missing_topics": [], "skipped_topics": ["gold-cycle", "oil-tlt", "btc-spx-macro"], "detail": "All cron topic producers disabled in openclaw cron: ['gold-cycle', 'oil-tlt', 'btc-spx-macro']"}
+[22:43:25]   capabilities: {"status": "OK", "failures": [], "warnings": [], "claude_code": {"status": "OK", "current": "2.1.117", "latest": "2.1.118", "behind": 1}, "conviction_backtest": {"status": "OK", "age_hours": 61.3, "positions": 23, "missing_scores": []}, "camel_yt_orphans": {"status": "OK", "pre_fetched_count": 6, "orphaned": []}, "infra_scout": {"status": "OK", "age_hours": 0.8, "last_run": "2026-04-23T01:54:04.155544+00:00"}, "capability_scanner": {"status": "OK", "age_hours": 15.7, "last_run": "2026-04-22T11:00:03.067019+00:00"}, "members_transcripts": {"status": "OK", "file_count": 58, "pre_fetched_count": 6}}
+[22:43:25] Learning log updated: /Users/zekezirk/zeke-status/memory/learning-log.jsonl
+[2026-04-23T02:43:25Z] LOCKDOWN-DROP [SYSTEM] key='tg_send_86168': ✅ <b>Assessment: A</b>
+Pre-warm: OK
+L1B: dispatched=15, ingested=22
+Queue: done=36338, failed=0
+Feed: 37% actionable
+Cow
+[22:43:25] === Done ===
