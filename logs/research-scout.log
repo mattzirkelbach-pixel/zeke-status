@@ -1,0 +1,25 @@
+[2026-04-24T12:00:04.309956+00:00] [INFO] === Research Scout starting ===
+[2026-04-24T12:00:04.313007+00:00] [INFO] context gathered: positions=24, prices=20, decisions=10, backtests=19
+[2026-04-24T12:01:07.843426+00:00] [WARN] q2 field 'question' contains digits — REJECTED: How often does IBIT cross above its 50-day SMA during periods when VIX is above 20?
+[2026-04-24T12:01:07.845634+00:00] [WARN] q2 rejected: digit in text
+[2026-04-24T12:01:07.845992+00:00] [INFO] proposed 5 questions, 4 passed validation
+[2026-04-24T12:01:07.846395+00:00] [INFO] [1/4] Q: Does GLD show stronger mean return during DCL periods compared to non-DCL periods over the last two 
+[2026-04-24T12:01:08.661120+00:00] [INFO]   result: {"mean_return_pct": 0.1276, "regime": "dcl_period", "n_days": 729, "ticker": "GLD", "runtime_s": 0.81}
+[2026-04-24T12:01:14.540212+00:00] [INFO]   wrote 20260424-00-does-gld-show-stronger-mean-return-during-dcl-periods-compar.json
+[2026-04-24T12:01:14.540705+00:00] [INFO] [2/4] Q: What is the lag days for TLT to predict TMF movements during weekly cycle low regimes?
+[2026-04-24T12:01:15.582235+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.9939, "ticker_a": "TLT", "ticker_b": "TMF", "direction": "same", "n_days": 729, "runtime_s": 1.04}
+[2026-04-24T12:01:21.972745+00:00] [WARN] synthesis has unverified numbers ['0.95'] — retrying
+[2026-04-24T12:01:28.535890+00:00] [INFO]   wrote 20260424-01-what-is-the-lag-days-for-tlt-to-predict-tmf-movements-during.json
+[2026-04-24T12:01:28.536435+00:00] [INFO] [3/4] Q: Does SLV show higher hit rate for RSI oversold signals during silver DCL periods compared to non-DCL
+[2026-04-24T12:01:28.797059+00:00] [INFO]   result: {"hit_rate_pct": 80.3, "n_events": 61, "mean_return_pct": 4.51, "signal": "rsi_oversold", "ticker": "SLV", "runtime_s": 0.26}
+[2026-04-24T12:01:35.321786+00:00] [INFO]   wrote 20260424-02-does-slv-show-higher-hit-rate-for-rsi-oversold-signals-durin.json
+[2026-04-24T12:01:35.322145+00:00] [INFO] [4/4] Q: What is the drawdown of GLD during SPX down months over the last two years?
+[2026-04-24T12:01:35.760866+00:00] [INFO]   result: {"max_drawdown_pct": -19.21, "regime": "spx_down_month", "n_days": 730, "ticker": "GLD", "runtime_s": 0.44}
+[2026-04-24T12:01:41.949300+00:00] [WARN] synthesis has unverified numbers ['19.21'] — retrying
+[2026-04-24T12:01:49.935231+00:00] [ERROR] retry still has unverified numbers ['19.21'] — dropping
+[2026-04-24T12:01:49.936839+00:00] [INFO]   wrote 20260424-03-what-is-the-drawdown-of-gld-during-spx-down-months-over-the-.json
+[2026-04-24T12:01:49.938587+00:00] [INFO] wrote synthesis to scout-synthesis-20260424.md
+[2026-04-24T12:01:49.939368+00:00] [INFO] wrote scout-synthesis-latest.md
+[2026-04-24T12:01:49.939602+00:00] [INFO] === Research Scout done — 4 findings ===
+[2026-04-24T12:03:25.415139+00:00] [INFO] === Research Scout starting ===
+[2026-04-24T12:03:25.418596+00:00] [INFO] context gathered: positions=24, prices=20, decisions=10, backtests=19
