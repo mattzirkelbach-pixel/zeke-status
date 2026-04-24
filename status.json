@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-24T03:03:15.769374+00:00",
+  "timestamp": "2026-04-24T03:05:31.962470+00:00",
   "feed_lines": 41261,
   "recent_feed": [
     "{\"timestamp\":\"2026-04-24T02:30:00Z\",\"topic\":\"treasury-bonds\",\"finding\":\"The Treasury quarterly refunding press conference is scheduled for May 6, 2026 which will outline the next auction calendar and could test 10Y yield resistance near 4.30%\",\"source\":\"https://www.treasurydirect.gov/auctions/announcements-data-results/\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 57.0,
-    "power_w": 13.24,
+    "gpu_util_pct": 94.0,
+    "temp_c": 56.0,
+    "power_w": 31.81,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,12 +82,12 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nomic-embed-text:latest",
-        "size_gb": 0.6
-      },
-      {
         "name": "nemotron-3-nano:30b",
         "size_gb": 28.0
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "size_gb": 0.6
       },
       {
         "name": "nemotron-3-super:120b",
@@ -113,17 +113,6 @@
     "has_status_push": false
   },
   "last_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": [],
-      "valid_entries": null,
-      "broken_entries": null,
-      "cycle_time": "10:53 PM",
-      "cycle_num": 44
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -158,29 +147,20 @@
       "broken_entries": null,
       "cycle_time": "11:02 PM",
       "cycle_num": 47
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
+      "issues": [],
+      "valid_entries": null,
+      "broken_entries": null,
+      "cycle_time": "11:05 PM",
+      "cycle_num": 48
     }
   ],
   "recent_cycles": [
-    {
-      "cycle": 44,
-      "window": "overnight",
-      "timestamp": "2026-04-23T22:53:30.740616",
-      "time_display": "10:53 PM",
-      "feed_growth": 0,
-      "jobs": [
-        {
-          "name": "treasury-bonds",
-          "status": "success",
-          "duration": 0,
-          "grew": 0,
-          "issues": [],
-          "valid_entries": null,
-          "broken_entries": null,
-          "cycle_time": "10:53 PM",
-          "cycle_num": 44
-        }
-      ]
-    },
     {
       "cycle": 45,
       "window": "overnight",
@@ -240,6 +220,26 @@
           "broken_entries": null,
           "cycle_time": "11:02 PM",
           "cycle_num": 47
+        }
+      ]
+    },
+    {
+      "cycle": 48,
+      "window": "overnight",
+      "timestamp": "2026-04-23T23:05:31.939067",
+      "time_display": "11:05 PM",
+      "feed_growth": 0,
+      "jobs": [
+        {
+          "name": "treasury-bonds",
+          "status": "success",
+          "duration": 0,
+          "grew": 0,
+          "issues": [],
+          "valid_entries": null,
+          "broken_entries": null,
+          "cycle_time": "11:05 PM",
+          "cycle_num": 48
         }
       ]
     }
