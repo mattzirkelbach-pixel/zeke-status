@@ -427,3 +427,29 @@ feeds, X account scrapes, portfolio math — these are real. The test:
 "does this component's output depend on Spark generating plausible prose?"
 If yes → kill. If the inputs are CSV/API/URL-sourced and outputs are
 deterministic math → keep.
+
+
+## RESEARCH-SCOUT-IS-THE-AUTONOMY-ENGINE (built 2026-04-24)
+**What**: research_scout.py at ~/zeke-portfolio/research/ — novel hypothesis generator. Runs daily 23:00 UTC via com.zeke.research-scout LaunchAgent. This is the post-fiction-engine safe replacement for knowledge-evolver.py (which was killed 4/18).
+
+**Safety architecture (NEVER violate — regresses to fiction engine)**:
+1. LLM generates ONLY question text + dataset spec + metric enum. NO numbers allowed in any text field — regex-rejected at validation.
+2. Deterministic Python runs the metric on yfinance/local cache data.
+3. LLM synthesis can ONLY quote numbers that appear in the computed result dict — any unverified number triggers 1 retry, then drop.
+4. Dataset allowlist: TICKERS_ALLOWED set or specific state files. Metric allowlist: correlation, beta, hit_rate, lag_days, drawdown, mean_return, threshold_cross_count.
+
+**Outputs**:
+- ~/zeke-portfolio/state/scout-findings/YYYYMMDD-NN-<slug>.json (one per hypothesis)
+- ~/zeke-portfolio/state/scout-synthesis-{date}.md + scout-synthesis-latest.md
+
+**Morning briefing hook**: SKILL.md section 5c reads scout-synthesis-latest.md if <36h old and surfaces 1-2 findings relevant to currently-held positions.
+
+**Verified first-run results (4/24/2026)**:
+- GLD mean return during DCL proxy regime: +0.1276%/day over 729 days
+- SLV/GLD correlation: 0.7733 over 729 days (weakens rotation thesis)
+- TLT drawdown during weekly cycle low regimes: -20.11% (risk sizing)
+- DXY→GLD optimal lag: 0 days, peak inverse correlation 0.3886 (DXY is coincident not leading)
+
+**Rule**: If Spark synthesis model is unavailable, falls back to nemotron-3-nano:30b automatically. Never use /api/generate (SPARK-THINKING-LEAKAGE); always /api/chat with think=false. Uses spark_url from config/spark-models.json canonical (http://10.0.0.143:11434). Never hardcode the URL elsewhere.
+
+**DO NOT rebuild. DO NOT remove the digit-filter safety gates. DO NOT replace with a simpler LLM call.**
