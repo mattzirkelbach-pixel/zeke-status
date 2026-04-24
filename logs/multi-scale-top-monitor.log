@@ -118,3 +118,35 @@ XAGUSD           FIRE:1.2       ALERT:0.92              wcl    WATCH
 ALERT DISPATCHED for 2 urgent items
 
 Wrote /Users/zekezirk/zeke-portfolio/state/multi-scale-top-monitor.json
+
+=== MULTI-SCALE TOP MONITOR (2026-04-24T20:15:01.742994Z) ===
+config source: tuned(2026-04-19) | tuned tickers: ['BTC', 'DJI', 'GLD', 'GOLD', 'NASDAQ', 'SLV', 'SPX', 'TLT', 'XAGUSD']
+
+TKR                 DAILY           WEEKLY           CF_IND   ACTION
+--------------------------------------------------------------------------------
+BTC            ALERT:0.99        hold:0.56                -    WATCH
+GLD             FIRE:1.37        FIRE:1.11              dcl     EXIT
+GOLD            FIRE:1.34        WARN:0.73              dcl     EXIT
+NASDAQ          FIRE:1.01         WARN:0.8                -     EXIT
+SLV             FIRE:1.62       ALERT:0.95              dcl    WATCH
+SPX             FIRE:1.81       ALERT:0.95                -     EXIT
+TLT             WARN:0.83        FIRE:1.13              wcl     HOLD
+XAGUSD          FIRE:1.48        FIRE:1.08              wcl    WATCH
+
+2 action items across held positions
+
+=== ACTION ITEMS (HELD POSITIONS ONLY) ===
+  GLD: EXIT — daily=FIRE(POST_TOP_STALE) | weekly=FIRE(POST_TOP_FRESH)
+    position: GLD 470.0 x5
+    position: GLD 500.0 x1
+    position: GLD 430.0 x3
+  SPX: EXIT — daily=FIRE(AT_TOP) | weekly=ALERT(AT_TOP)
+    position: ALM 12.5 x20
+[2026-04-24T20:15:02Z] LOCKDOWN-DROP [ACTION][multi_scale_top_fire] key='top_monitor:GLD,SPX': ⚠️ <b>TOP SIGNAL — EXIT/REDUCE</b> (multi-scale confluence + CF indicator)
+
+<b>GLD</b>: EXIT
+  why: daily=FIRE(POST_TOP_
+
+ALERT DISPATCHED for 2 urgent items
+
+Wrote /Users/zekezirk/zeke-portfolio/state/multi-scale-top-monitor.json
