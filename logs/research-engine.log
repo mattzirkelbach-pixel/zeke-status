@@ -1410,3 +1410,42 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T21:12:58.505796+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.383, "ticker_a": "GLD", "ticker_b": "DXY", "direction": "inverse", "n_days": 493, "runtime_s": 1.1}
 [2026-04-25T21:13:04.963240+00:00] [INFO]   score=0.73, synth=ok
 [2026-04-25T21:13:04.966752+00:00] [INFO]   wrote 20260425-241-does-the-zero-day-lag-between-dxy-strength-and-gld-weakness-.json
+[2026-04-25T21:13:25.146057+00:00] [INFO] [241] track=signal_discovery depth=3 Q: How does the zero-day correlation between GLD and DXY change when comparing peri
+[2026-04-25T21:13:25.899853+00:00] [INFO]   result: {"correlation": -0.383, "n_days": 493, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.75}
+[2026-04-25T21:13:31.851122+00:00] [INFO]   score=0.73, synth=ok
+[2026-04-25T21:13:31.853114+00:00] [INFO]   wrote 20260425-242-how-does-the-zero-day-correlation-between-gld-and-dxy-change.json
+[2026-04-25T21:13:52.026699+00:00] [INFO] [242] track=signal_discovery depth=3 Q: Is the zero-day correlation between GLD and DXY more stable during extended low 
+[2026-04-25T21:13:52.696655+00:00] [INFO]   result: {"correlation": -0.383, "n_days": 493, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.67}
+[2026-04-25T21:13:59.606440+00:00] [INFO]   score=0.73, synth=ok
+[2026-04-25T21:13:59.609112+00:00] [INFO]   wrote 20260425-243-is-the-zero-day-correlation-between-gld-and-dxy-more-stable-.json
+[2026-04-25T21:14:19.814694+00:00] [INFO] [243] track=signal_discovery depth=3 Q: Does adding volume confirmation to the SLV fifty day moving average reclaim sign
+[2026-04-25T21:14:20.210268+00:00] [INFO]   result: {"error": "no sma_reclaim_with_volume events in window", "runtime_s": 0.4}
+[2026-04-25T21:14:20.211021+00:00] [INFO]   score=0.00, synth=ok
+[2026-04-25T21:14:20.213732+00:00] [INFO]   wrote 20260425-244-does-adding-volume-confirmation-to-the-slv-fifty-day-moving-.json
+[2026-04-25T21:14:40.477271+00:00] [INFO] [244] track=signal_discovery depth=3 Q: Does the hit rate of GDX outperformance following SLV's fifty day moving average
+[2026-04-25T21:14:41.052881+00:00] [INFO]   result: {"hit_rate_pct": 54.6, "n_events": 995, "mean_return_pct": 1.34, "signal": "sma_reclaim", "ticker": "SLV", "runtime_s": 0.58}
+[2026-04-25T21:14:48.326045+00:00] [INFO]   score=0.65, synth=ok
+[2026-04-25T21:14:48.329259+00:00] [INFO]   wrote 20260425-245-does-the-hit-rate-of-gdx-outperformance-following-slvs-fifty.json
+[2026-04-25T21:15:08.538982+00:00] [INFO] queue low (4), proposing batch for track=position_driven
+[2026-04-25T21:15:55.308869+00:00] [INFO] track position_driven: proposed 5, valid 1
+[2026-04-25T21:15:55.311837+00:00] [INFO]   queued 1 new questions (0 duplicates)
+[2026-04-25T21:15:55.312446+00:00] [INFO] [245] track=signal_discovery depth=3 Q: Is the mean return of GDX following SLV's fifty day moving average reclaim highe
+[2026-04-25T21:15:55.812938+00:00] [INFO]   result: {"mean_return_pct": 0.1115, "regime": "all", "n_days": 1798, "ticker": "SLV", "runtime_s": 0.5}
+[2026-04-25T21:16:03.211724+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-25T21:16:03.214337+00:00] [INFO]   wrote 20260425-246-is-the-mean-return-of-gdx-following-slvs-fifty-day-moving-av.json
+[2026-04-25T21:16:23.303794+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-25T21:17:08.305173+00:00] [INFO] track signal_discovery: proposed 5, valid 5
+[2026-04-25T21:17:08.306554+00:00] [INFO]   queued 4 new questions (1 duplicates)
+[2026-04-25T21:17:08.307131+00:00] [INFO] [246] track=signal_discovery depth=3 Q: Does the mean GDX outperformance after SLV's fifty day moving average reclaim di
+[2026-04-25T21:17:08.736648+00:00] [INFO]   result: {"mean_return_pct": 0.1111, "regime": "real_yield_trend", "n_days": 1822, "ticker": "SLV", "runtime_s": 0.43}
+[2026-04-25T21:17:15.149525+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-25T21:17:15.152954+00:00] [INFO]   wrote 20260425-247-does-the-mean-gdx-outperformance-after-slvs-fifty-day-moving.json
+[2026-04-25T21:17:35.367635+00:00] [INFO] [247] track=regime_exploration depth=3 Q: Is the beta of TLT to DXY significantly more negative during SPX down months com
+[2026-04-25T21:17:36.261252+00:00] [INFO]   result: {"beta": -0.566, "regime": "spx_down", "n_days": 1242, "ticker": "TLT", "benchmark": "DXY", "runtime_s": 0.89}
+[2026-04-25T21:17:42.816916+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-25T21:17:42.819850+00:00] [INFO]   wrote 20260425-248-is-the-beta-of-tlt-to-dxy-significantly-more-negative-during.json
+[2026-04-25T21:18:03.020599+00:00] [INFO] heartbeat — queue=6 seen=256 tests=247 findings=247 followups=170
+[2026-04-25T21:18:03.033674+00:00] [INFO] [248] track=regime_exploration depth=3 Q: Does the beta of TLT to DXY become more negative during periods of rising inflat
+[2026-04-25T21:18:04.109218+00:00] [INFO]   result: {"beta": -0.4593, "regime": "inflation_rising_real_yields_falling", "n_days": 1506, "ticker": "TLT", "benchmark": "DXY", "runtime_s": 1.08}
+[2026-04-25T21:18:10.647987+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-25T21:18:10.652070+00:00] [INFO]   wrote 20260425-249-does-the-beta-of-tlt-to-dxy-become-more-negative-during-peri.json
