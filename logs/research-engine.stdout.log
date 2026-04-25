@@ -1026,3 +1026,41 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T18:05:58.142442+00:00] [INFO]   score=1.00, synth=ok
 [2026-04-25T18:05:58.144483+00:00] [INFO]   wrote 20260425-159-is-the-correlation-between-slv-and-gdx-weaker-during-rising-.json
 [2026-04-25T18:06:18.315323+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-25T18:07:07.674411+00:00] [INFO] track regime_exploration: proposed 5, valid 1
+[2026-04-25T18:07:07.675913+00:00] [INFO]   queued 1 new questions (0 duplicates)
+[2026-04-25T18:07:07.676291+00:00] [INFO] [159] track=position_driven depth=3 Q: Does the GLD-DXY correlation during SPX down months show a significant differenc
+[2026-04-25T18:07:08.611800+00:00] [INFO]   result: {"correlation": -0.4245, "n_days": 1242, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.94}
+[2026-04-25T18:07:15.470759+00:00] [WARN] synthesis has unverified numbers ['242'] — retrying
+[2026-04-25T18:07:23.236890+00:00] [ERROR] retry still has unverified numbers ['242'] — dropping
+[2026-04-25T18:07:23.238542+00:00] [INFO]   score=0.85, synth=dropped
+[2026-04-25T18:07:23.240327+00:00] [INFO]   wrote 20260425-160-does-the-gld-dxy-correlation-during-spx-down-months-show-a-s.json
+[2026-04-25T18:07:43.437234+00:00] [INFO] heartbeat — queue=4 seen=166 tests=159 findings=159 followups=95
+[2026-04-25T18:07:43.451564+00:00] [INFO] queue low (4), proposing batch for track=position_driven
+[2026-04-25T18:08:27.709218+00:00] [INFO] track position_driven: proposed 5, valid 3
+[2026-04-25T18:08:27.712400+00:00] [INFO]   queued 3 new questions (0 duplicates)
+[2026-04-25T18:08:27.712742+00:00] [INFO] [160] track=signal_discovery depth=0 Q: What is the lead lag relationship between DXY daily returns and GLD daily return
+[2026-04-25T18:08:28.614888+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.3887, "ticker_a": "DXY", "ticker_b": "GLD", "direction": "inverse", "n_days": 600, "runtime_s": 0.9}
+[2026-04-25T18:08:35.842502+00:00] [INFO]   score=0.83, synth=ok
+[2026-04-25T18:08:35.845451+00:00] [INFO]   wrote 20260425-161-what-is-the-lead-lag-relationship-between-dxy-daily-returns-.json
+[2026-04-25T18:08:54.227000+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-25T18:09:14.296843+00:00] [INFO] [161] track=signal_discovery depth=0 Q: Does IBIT hitting a new fifty two week high predict next day BTC returns
+[2026-04-25T18:09:14.751437+00:00] [INFO]   result: {"error": "no new_52w_high events in window", "runtime_s": 0.45}
+[2026-04-25T18:09:14.752012+00:00] [INFO]   score=0.00, synth=ok
+[2026-04-25T18:09:14.753961+00:00] [INFO]   wrote 20260425-162-does-ibit-hitting-a-new-fifty-two-week-high-predict-next-day.json
+[2026-04-25T18:09:34.994798+00:00] [INFO] [162] track=signal_discovery depth=0 Q: What is the mean return of SPX the day after VIX closes below its fifty day movi
+[2026-04-25T18:09:35.367504+00:00] [INFO]   result: {"mean_return_pct": 0.3615, "regime": "post_sma_cross_down", "n_days": 701, "ticker": "VIX", "runtime_s": 0.37}
+[2026-04-25T18:09:41.473902+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-25T18:09:41.476829+00:00] [INFO]   wrote 20260425-163-what-is-the-mean-return-of-spx-the-day-after-vix-closes-belo.json
+[2026-04-25T18:10:02.980198+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-25T18:10:23.190894+00:00] [INFO] [163] track=regime_exploration depth=0 Q: Does the hit rate of buying GLD on RSI oversold signals improve when VIX is in t
+[2026-04-25T18:10:23.621280+00:00] [INFO]   result: {"hit_rate_pct": 100.0, "n_events": 32, "mean_return_pct": 4.04, "signal": "rsi_oversold", "ticker": "GLD", "runtime_s": 0.43}
+[2026-04-25T18:10:30.581348+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-25T18:10:30.584543+00:00] [INFO]   wrote 20260425-164-does-the-hit-rate-of-buying-gld-on-rsi-oversold-signals-impr.json
+[2026-04-25T18:10:50.201994+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-25T18:11:10.399015+00:00] [INFO] [164] track=position_driven depth=0 Q: What is the lag days for SLV to predict GLD returns when SLV is in a confirmed D
+[2026-04-25T18:11:11.243091+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.7735, "ticker_a": "SLV", "ticker_b": "GLD", "direction": "same", "n_days": 729, "runtime_s": 0.84}
+[2026-04-25T18:11:17.627788+00:00] [WARN] synthesis has unverified numbers ['0.7'] — retrying
+[2026-04-25T18:11:24.386253+00:00] [ERROR] retry still has unverified numbers ['0.7'] — dropping
+[2026-04-25T18:11:24.388006+00:00] [INFO]   score=1.00, synth=dropped
+[2026-04-25T18:11:24.389757+00:00] [INFO]   wrote 20260425-165-what-is-the-lag-days-for-slv-to-predict-gld-returns-when-slv.json
+[2026-04-25T18:11:44.579714+00:00] [INFO] rate cap hit (30/hr), sleeping 5min
