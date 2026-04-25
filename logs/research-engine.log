@@ -161,3 +161,27 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T13:42:48.388078+00:00] [INFO]   result: {"mean_return_pct": 0.1826, "regime": "spx_down_month", "n_days": 729, "ticker": "GDX", "runtime_s": 0.52}
 [2026-04-25T13:42:54.089130+00:00] [INFO]   score=0.60, synth=ok
 [2026-04-25T13:42:54.092310+00:00] [INFO]   wrote 20260425-026-what-is-the-mean-return-of-gdx-during-spx-drawdowns-exceedin.json
+[2026-04-25T13:43:29.430229+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-25T13:44:14.639888+00:00] [INFO] track signal_discovery: proposed 5, valid 5
+[2026-04-25T13:44:14.643023+00:00] [INFO]   queued 3 new questions (2 duplicates)
+[2026-04-25T13:44:14.644654+00:00] [INFO] [27] track=signal_discovery depth=0 Q: Does DXY crossing below its fifty day moving average predict GLD strength over t
+[2026-04-25T13:44:14.978458+00:00] [INFO]   result: {"error": "no sma_break events in window", "runtime_s": 0.33}
+[2026-04-25T13:44:14.979054+00:00] [INFO]   score=0.00, synth=ok
+[2026-04-25T13:44:14.980363+00:00] [INFO]   wrote 20260425-027-does-dxy-crossing-below-its-fifty-day-moving-average-predict.json
+[2026-04-25T13:44:35.034891+00:00] [INFO] heartbeat — queue=6 seen=34 tests=27 findings=27 followups=0
+[2026-04-25T13:44:35.049812+00:00] [INFO] [28] track=regime_exploration depth=0 Q: What is the beta of TLT to SPX during periods when DXY is in an uptrend versus a
+[2026-04-25T13:44:35.610468+00:00] [INFO]   result: {"beta": 0.1273, "regime": "dxy_uptrend", "n_days": 729, "ticker": "TLT", "benchmark": "SPX", "runtime_s": 0.56}
+[2026-04-25T13:44:41.978201+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-25T13:44:41.979933+00:00] [INFO]   wrote 20260425-028-what-is-the-beta-of-tlt-to-spx-during-periods-when-dxy-is-in.json
+[2026-04-25T13:45:10.998689+00:00] [INFO] [29] track=regime_exploration depth=0 Q: How many days does GLD typically lag SLV in turning points during silver DCL eve
+[2026-04-25T13:45:11.676049+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.7735, "ticker_a": "GLD", "ticker_b": "SLV", "direction": "same", "n_days": 729, "runtime_s": 0.68}
+[2026-04-25T13:45:16.628211+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T13:45:16.630175+00:00] [INFO]   wrote 20260425-029-how-many-days-does-gld-typically-lag-slv-in-turning-points-d.json
+[2026-04-25T13:45:54.215251+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-25T13:46:40.761996+00:00] [INFO] track regime_exploration: proposed 5, valid 4
+[2026-04-25T13:46:40.764147+00:00] [INFO]   queued 4 new questions (0 duplicates)
+[2026-04-25T13:46:40.764596+00:00] [INFO] [30] track=position_driven depth=0 Q: What is the drawdown of IBIT during SPX down month regimes over the past two yea
+[2026-04-25T13:46:41.199540+00:00] [INFO]   result: {"max_drawdown_pct": -49.36, "regime": "spx_down_month", "n_days": 573, "ticker": "IBIT", "runtime_s": 0.43}
+[2026-04-25T13:46:47.726673+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T13:46:47.728459+00:00] [INFO]   wrote 20260425-030-what-is-the-drawdown-of-ibit-during-spx-down-month-regimes-o.json
+[2026-04-25T13:47:24.002222+00:00] [INFO] rate cap hit (30/hr), sleeping 5min
