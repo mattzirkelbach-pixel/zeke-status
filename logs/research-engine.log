@@ -1097,3 +1097,43 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T19:03:35.107311+00:00] [INFO]   wrote 20260425-182-is-the-spx-mean-return-the-day-after-vix-closes-below-its-fi.json
 [2026-04-25T19:03:55.303812+00:00] [INFO] heartbeat — queue=12 seen=196 tests=181 findings=181 followups=122
 [2026-04-25T19:03:55.317194+00:00] [INFO] [182] track=regime_exploration depth=2 Q: Does the hit rate of buying GLD on RSI oversold signals improve when VIX is in t
+[2026-04-25T19:03:55.776705+00:00] [INFO]   result: {"hit_rate_pct": 75.4, "n_events": 130, "mean_return_pct": 1.67, "signal": "rsi_oversold", "ticker": "GLD", "runtime_s": 0.46}
+[2026-04-25T19:04:02.449825+00:00] [INFO]   score=0.65, synth=ok
+[2026-04-25T19:04:02.452743+00:00] [INFO]   wrote 20260425-183-does-the-hit-rate-of-buying-gld-on-rsi-oversold-signals-impr.json
+[2026-04-25T19:04:23.746401+00:00] [INFO]   spawned 2 follow-ups (depth 3)
+[2026-04-25T19:04:43.937029+00:00] [INFO] [183] track=regime_exploration depth=2 Q: Is the mean return from buying GLD on RSI oversold signals higher during periods
+[2026-04-25T19:04:44.383324+00:00] [INFO]   result: {"mean_return_pct": 0.0757, "regime": "vix_top_quintile", "n_days": 1824, "ticker": "GLD", "runtime_s": 0.45}
+[2026-04-25T19:04:58.496406+00:00] [INFO]   score=0.60, synth=dropped
+[2026-04-25T19:04:58.497970+00:00] [INFO]   wrote 20260425-184-is-the-mean-return-from-buying-gld-on-rsi-oversold-signals-h.json
+[2026-04-25T19:05:18.699268+00:00] [INFO] [184] track=position_driven depth=2 Q: Is the average drawdown depth during VIX low regimes for TLT significantly shall
+[2026-04-25T19:05:19.193295+00:00] [INFO]   result: {"max_drawdown_pct": -20.11, "regime": "vix_low", "n_days": 730, "ticker": "TLT", "runtime_s": 0.49}
+[2026-04-25T19:05:26.071610+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T19:05:26.074544+00:00] [INFO]   wrote 20260425-185-is-the-average-drawdown-depth-during-vix-low-regimes-for-tlt.json
+[2026-04-25T19:05:35.929207+00:00] [INFO]   spawned 1 follow-ups (depth 3)
+[2026-04-25T19:05:56.149953+00:00] [INFO] [185] track=position_driven depth=2 Q: Does the DXY-GLD correlation become less negative during periods of high volatil
+[2026-04-25T19:05:57.061804+00:00] [INFO]   result: {"correlation": -0.4301, "n_days": 1506, "ticker_a": "DXY", "ticker_b": "GLD", "runtime_s": 0.91}
+[2026-04-25T19:06:03.857113+00:00] [INFO]   score=0.86, synth=ok
+[2026-04-25T19:06:03.860031+00:00] [INFO]   wrote 20260425-186-does-the-dxy-gld-correlation-become-less-negative-during-per.json
+[2026-04-25T19:06:21.884534+00:00] [INFO]   spawned 2 follow-ups (depth 3)
+[2026-04-25T19:06:42.094989+00:00] [INFO] [186] track=position_driven depth=2 Q: Is the DXY-GLD correlation more stable during high volatility episodes when real
+[2026-04-25T19:06:43.261344+00:00] [INFO]   result: {"correlation": -0.4301, "n_days": 1506, "ticker_a": "DXY", "ticker_b": "GLD", "runtime_s": 1.17}
+[2026-04-25T19:06:49.656860+00:00] [INFO]   score=0.86, synth=ok
+[2026-04-25T19:06:49.659801+00:00] [INFO]   wrote 20260425-187-is-the-dxy-gld-correlation-more-stable-during-high-volatilit.json
+[2026-04-25T19:06:59.796071+00:00] [INFO]   spawned 1 follow-ups (depth 3)
+[2026-04-25T19:07:20.005865+00:00] [INFO] [187] track=position_driven depth=2 Q: How does the DXY-GLD correlation differ between low inflation and high inflation
+[2026-04-25T19:07:20.919960+00:00] [INFO]   result: {"correlation": -0.4301, "n_days": 1506, "ticker_a": "DXY", "ticker_b": "GLD", "runtime_s": 0.91}
+[2026-04-25T19:07:26.915281+00:00] [INFO]   score=0.86, synth=ok
+[2026-04-25T19:07:26.918709+00:00] [INFO]   wrote 20260425-188-how-does-the-dxy-gld-correlation-differ-between-low-inflatio.json
+[2026-04-25T19:07:36.558852+00:00] [INFO]   spawned 1 follow-ups (depth 3)
+[2026-04-25T19:07:56.748999+00:00] [INFO] [188] track=signal_discovery depth=3 Q: Does the zero-lag correlation between DXY and GLD returns weaken during periods 
+[2026-04-25T19:07:57.625397+00:00] [INFO]   result: {"correlation": -0.383, "n_days": 493, "ticker_a": "DXY", "ticker_b": "GLD", "runtime_s": 0.88}
+[2026-04-25T19:08:04.261641+00:00] [INFO]   score=0.73, synth=ok
+[2026-04-25T19:08:04.264590+00:00] [INFO]   wrote 20260425-189-does-the-zero-lag-correlation-between-dxy-and-gld-returns-we.json
+[2026-04-25T19:08:24.496916+00:00] [INFO] [189] track=signal_discovery depth=3 Q: Does the correlation between GLD and DXY returns weaken during periods when gold
+[2026-04-25T19:08:25.160554+00:00] [INFO]   result: {"correlation": -0.383, "n_days": 493, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.66}
+[2026-04-25T19:08:31.340973+00:00] [INFO]   score=0.73, synth=ok
+[2026-04-25T19:08:31.343929+00:00] [INFO]   wrote 20260425-190-does-the-correlation-between-gld-and-dxy-returns-weaken-duri.json
+[2026-04-25T19:08:51.557652+00:00] [INFO] [190] track=signal_discovery depth=3 Q: Is the correlation between GLD and DXY returns more negative during periods of h
+[2026-04-25T19:08:52.430393+00:00] [INFO]   result: {"correlation": -0.383, "n_days": 493, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.87}
+[2026-04-25T19:08:58.678665+00:00] [INFO]   score=0.73, synth=ok
+[2026-04-25T19:08:58.680760+00:00] [INFO]   wrote 20260425-191-is-the-correlation-between-gld-and-dxy-returns-more-negative.json
