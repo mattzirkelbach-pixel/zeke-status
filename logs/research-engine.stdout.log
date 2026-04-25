@@ -825,3 +825,36 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T16:59:19.009703+00:00] [INFO]   result: {"hit_rate_pct": 71.1, "n_events": 166, "mean_return_pct": 2.9, "signal": "rsi_oversold", "ticker": "XAGUSD", "runtime_s": 0.48}
 [2026-04-25T16:59:26.379146+00:00] [INFO]   score=0.61, synth=ok
 [2026-04-25T16:59:26.381943+00:00] [INFO]   wrote 20260425-124-does-the-hit-rate-of-xagusd-predicting-same-direction-slv-mo.json
+[2026-04-25T16:59:46.404645+00:00] [INFO] [124] track=signal_discovery depth=0 Q: What is the correlation between DXY daily returns and GLD daily returns during S
+[2026-04-25T16:59:47.330819+00:00] [INFO]   result: {"correlation": -0.3887, "n_days": 600, "ticker_a": "DXY", "ticker_b": "GLD", "runtime_s": 0.93}
+[2026-04-25T16:59:54.803872+00:00] [INFO]   score=0.83, synth=ok
+[2026-04-25T16:59:54.806432+00:00] [INFO]   wrote 20260425-125-what-is-the-correlation-between-dxy-daily-returns-and-gld-da.json
+[2026-04-25T17:00:37.234904+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-25T17:00:57.446753+00:00] [INFO] [125] track=regime_exploration depth=0 Q: What is the lag days relationship between DXY movements and SLV returns when DXY
+[2026-04-25T17:00:58.215105+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.2867, "ticker_a": "SLV", "ticker_b": "DXY", "direction": "inverse", "n_days": 600, "runtime_s": 0.76}
+[2026-04-25T17:01:04.644587+00:00] [INFO]   score=0.77, synth=ok
+[2026-04-25T17:01:04.647165+00:00] [INFO]   wrote 20260425-126-what-is-the-lag-days-relationship-between-dxy-movements-and-.json
+[2026-04-25T17:01:22.458696+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-25T17:01:42.566804+00:00] [INFO] [126] track=regime_exploration depth=0 Q: What is the drawdown profile of IBIT during VIX high regimes over the past year
+[2026-04-25T17:01:43.226327+00:00] [INFO]   result: {"max_drawdown_pct": -39.12, "regime": "vix_high", "n_days": 35, "ticker": "IBIT", "runtime_s": 0.66}
+[2026-04-25T17:01:49.013751+00:00] [INFO]   score=0.80, synth=ok
+[2026-04-25T17:01:49.016303+00:00] [INFO]   wrote 20260425-127-what-is-the-drawdown-profile-of-ibit-during-vix-high-regimes.json
+[2026-04-25T17:02:07.653736+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-25T17:02:27.776498+00:00] [INFO] [127] track=position_driven depth=0 Q: What is the lag days for SLV to predict GDX movements during silver DCL confirme
+[2026-04-25T17:02:28.927025+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.7493, "ticker_a": "SLV", "ticker_b": "GDX", "direction": "same", "n_days": 729, "runtime_s": 1.15}
+[2026-04-25T17:02:35.476326+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T17:02:35.478876+00:00] [INFO]   wrote 20260425-128-what-is-the-lag-days-for-slv-to-predict-gdx-movements-during.json
+[2026-04-25T17:02:52.924085+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-25T17:03:13.131011+00:00] [INFO] [128] track=position_driven depth=0 Q: Does TLT show lower drawdown during VIX high regimes compared to TMF over the la
+[2026-04-25T17:03:14.015667+00:00] [INFO]   result: {"max_drawdown_pct": -13.32, "regime": "vix_high", "n_days": 38, "ticker": "TLT", "runtime_s": 0.88}
+[2026-04-25T17:03:20.458054+00:00] [INFO]   score=0.67, synth=ok
+[2026-04-25T17:03:20.461033+00:00] [INFO]   wrote 20260425-129-does-tlt-show-lower-drawdown-during-vix-high-regimes-compare.json
+[2026-04-25T17:03:30.598445+00:00] [INFO]   spawned 1 follow-ups (depth 1)
+[2026-04-25T17:03:50.771386+00:00] [INFO] heartbeat — queue=10 seen=141 tests=128 findings=128 followups=74
+[2026-04-25T17:03:50.793043+00:00] [INFO] [129] track=position_driven depth=0 Q: How does GLD correlation to DXY change during SPX down month regimes compared to
+[2026-04-25T17:03:51.629537+00:00] [INFO]   result: {"correlation": -0.3887, "n_days": 600, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.84}
+[2026-04-25T17:03:58.962444+00:00] [INFO]   score=0.83, synth=ok
+[2026-04-25T17:03:58.964354+00:00] [INFO]   wrote 20260425-130-how-does-gld-correlation-to-dxy-change-during-spx-down-month.json
+[2026-04-25T17:04:18.520329+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-25T17:04:38.738484+00:00] [INFO] [130] track=signal_discovery depth=1 Q: Does the DXY-GLD correlation during SPX drawdowns differ between periods of risi
+[2026-04-25T17:04:39.556628+00:00] [INFO]   result: {"correlation": -0.4377, "n_days": 1486, "ticker_a": "DXY", "ticker_b": "GLD", "runtime_s": 0.82}
