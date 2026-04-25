@@ -87,3 +87,27 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T13:27:09.207441+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.7493, "ticker_a": "SLV", "ticker_b": "GDX", "direction": "same", "n_days": 729, "runtime_s": 0.73}
 [2026-04-25T13:27:15.754921+00:00] [INFO]   score=1.00, synth=ok
 [2026-04-25T13:27:15.759678+00:00] [INFO]   wrote 20260425-011-does-slv-crossing-above-its-twenty-day-moving-average-predic.json
+[2026-04-25T13:28:05.176627+00:00] [INFO] [12] track=regime_exploration depth=0 Q: How does the correlation between GLD and SLV change during VIX high regimes comp
+[2026-04-25T13:28:05.858162+00:00] [INFO]   result: {"correlation": 0.7735, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SLV", "runtime_s": 0.68}
+[2026-04-25T13:28:12.789637+00:00] [WARN] synthesis has unverified numbers ['0.5'] — retrying
+[2026-04-25T13:28:18.933145+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T13:28:18.935550+00:00] [INFO]   wrote 20260425-012-how-does-the-correlation-between-gld-and-slv-change-during-v.json
+[2026-04-25T13:29:00.417333+00:00] [INFO] [13] track=regime_exploration depth=0 Q: What is the beta of TLT to DXY during SPX down month regimes versus all other re
+[2026-04-25T13:29:01.081290+00:00] [INFO]   result: {"beta": -0.6219, "regime": "all", "n_days": 600, "ticker": "TLT", "benchmark": "DXY", "runtime_s": 0.66}
+[2026-04-25T13:29:06.864104+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-25T13:29:06.865102+00:00] [INFO]   wrote 20260425-013-what-is-the-beta-of-tlt-to-dxy-during-spx-down-month-regimes.json
+[2026-04-25T13:29:38.216500+00:00] [INFO] [14] track=regime_exploration depth=0 Q: What is the optimal lag days for DXY to predict GLD returns during VIX high regi
+[2026-04-25T13:29:38.968989+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.3887, "ticker_a": "GLD", "ticker_b": "DXY", "direction": "inverse", "n_days": 600, "runtime_s": 0.75}
+[2026-04-25T13:29:45.257283+00:00] [INFO]   score=0.83, synth=ok
+[2026-04-25T13:29:45.259011+00:00] [INFO]   wrote 20260425-014-what-is-the-optimal-lag-days-for-dxy-to-predict-gld-returns-.json
+[2026-04-25T13:30:32.173293+00:00] [INFO] [15] track=signal_discovery depth=0 Q: Does GLD crossing above its fifty day moving average predict SLV outperformance 
+[2026-04-25T13:30:32.587041+00:00] [INFO]   result: {"hit_rate_pct": 63.9, "n_events": 529, "mean_return_pct": 1.29, "signal": "sma_reclaim", "ticker": "GLD", "runtime_s": 0.41}
+[2026-04-25T13:30:39.288856+00:00] [INFO]   score=0.74, synth=ok
+[2026-04-25T13:30:39.289904+00:00] [INFO]   wrote 20260425-015-does-gld-crossing-above-its-fifty-day-moving-average-predict.json
+[2026-04-25T13:31:19.579562+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-25T13:32:02.782544+00:00] [INFO] track regime_exploration: proposed 5, valid 3
+[2026-04-25T13:32:02.784198+00:00] [INFO]   queued 1 new questions (2 duplicates)
+[2026-04-25T13:32:02.784594+00:00] [INFO] [16] track=signal_discovery depth=0 Q: How many times did TLT close below its two hundred day moving average during VIX
+[2026-04-25T13:32:03.162354+00:00] [INFO]   result: {"cross_count": 26, "level": "sma_200", "ticker": "TLT", "n_days": 730, "runtime_s": 0.38}
+[2026-04-25T13:32:09.993934+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-25T13:32:09.996968+00:00] [INFO]   wrote 20260425-016-how-many-times-did-tlt-close-below-its-two-hundred-day-movin.json
