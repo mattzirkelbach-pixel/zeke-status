@@ -149,3 +149,27 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T13:37:53.388105+00:00] [INFO]   result: {"max_drawdown_pct": -39.12, "regime": "vix_high", "n_days": 38, "ticker": "IBIT", "runtime_s": 0.67}
 [2026-04-25T13:38:04.772113+00:00] [INFO]   score=0.80, synth=ok
 [2026-04-25T13:38:04.775886+00:00] [INFO]   wrote 20260425-022-does-ibit-show-lower-drawdown-during-vix-high-regimes-compar.json
+[2026-04-25T13:38:42.389935+00:00] [INFO] heartbeat — queue=5 seen=28 tests=22 findings=22 followups=0
+[2026-04-25T13:38:42.406520+00:00] [INFO] [23] track=position_driven depth=0 Q: Does GLD have stronger correlation to SLV during SPX down month regimes versus o
+[2026-04-25T13:38:43.167789+00:00] [INFO]   result: {"correlation": 0.7735, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SLV", "runtime_s": 0.76}
+[2026-04-25T13:38:55.424508+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T13:38:55.426123+00:00] [INFO]   wrote 20260425-023-does-gld-have-stronger-correlation-to-slv-during-spx-down-mo.json
+[2026-04-25T13:39:49.385447+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-25T13:40:34.476027+00:00] [INFO] track regime_exploration: proposed 5, valid 2
+[2026-04-25T13:40:34.478391+00:00] [INFO]   queued 2 new questions (0 duplicates)
+[2026-04-25T13:40:34.478992+00:00] [INFO] [24] track=signal_discovery depth=0 Q: How many times did TLT close below its two hundred day moving average during VIX
+[2026-04-25T13:40:34.888512+00:00] [INFO]   result: {"cross_count": 26, "level": "sma_200", "ticker": "TLT", "n_days": 730, "runtime_s": 0.41}
+[2026-04-25T13:40:40.721195+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-25T13:40:40.724146+00:00] [INFO]   wrote 20260425-024-how-many-times-did-tlt-close-below-its-two-hundred-day-movin.json
+[2026-04-25T13:41:13.117352+00:00] [INFO] [25] track=signal_discovery depth=0 Q: Does IBIT crossing above its fifty day moving average predict BTC weakness over 
+[2026-04-25T13:41:13.854773+00:00] [INFO]   result: {"optimal_lag_days": 10, "peak_correlation": 0.0939, "ticker_a": "IBIT", "ticker_b": "BTC", "direction": "inverse", "n_days": 499, "runtime_s": 0.74}
+[2026-04-25T13:41:20.352951+00:00] [WARN] synthesis has unverified numbers ['22'] — retrying
+[2026-04-25T13:41:26.188322+00:00] [INFO]   score=0.56, synth=ok
+[2026-04-25T13:41:26.189954+00:00] [INFO]   wrote 20260425-025-does-ibit-crossing-above-its-fifty-day-moving-average-predic.json
+[2026-04-25T13:42:01.457388+00:00] [INFO] queue low (4), proposing batch for track=position_driven
+[2026-04-25T13:42:47.868358+00:00] [INFO] track position_driven: proposed 5, valid 1
+[2026-04-25T13:42:47.870761+00:00] [INFO]   queued 1 new questions (0 duplicates)
+[2026-04-25T13:42:47.871186+00:00] [INFO] [26] track=signal_discovery depth=0 Q: What is the mean return of GDX during SPX drawdowns exceeding five percent
+[2026-04-25T13:42:48.388078+00:00] [INFO]   result: {"mean_return_pct": 0.1826, "regime": "spx_down_month", "n_days": 729, "ticker": "GDX", "runtime_s": 0.52}
+[2026-04-25T13:42:54.089130+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-25T13:42:54.092310+00:00] [INFO]   wrote 20260425-026-what-is-the-mean-return-of-gdx-during-spx-drawdowns-exceedin.json
