@@ -256,3 +256,109 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T14:28:49.239363+00:00] [INFO]   wrote 20260425-041-does-gld-show-stronger-mean-return-during-vix-high-regimes-c.json
 [2026-04-25T14:29:19.401037+00:00] [INFO] [42] track=regime_exploration depth=0 Q: Is the correlation between TLT and DXY stronger during SPX down months than duri
 [2026-04-25T14:29:20.296812+00:00] [INFO]   result: {"correlation": -0.3168, "n_days": 600, "ticker_a": "TLT", "ticker_b": "DXY", "runtime_s": 0.89}
+[2026-04-25T14:29:26.300352+00:00] [INFO]   score=0.79, synth=ok
+[2026-04-25T14:29:26.303135+00:00] [INFO]   wrote 20260425-042-is-the-correlation-between-tlt-and-dxy-stronger-during-spx-d.json
+[2026-04-25T14:30:09.581071+00:00] [INFO] [43] track=regime_exploration depth=0 Q: Does SLV exhibit a consistent lag in responding to DXY moves compared to GLD ove
+[2026-04-25T14:30:10.603652+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.2867, "ticker_a": "SLV", "ticker_b": "DXY", "direction": "inverse", "n_days": 600, "runtime_s": 1.02}
+[2026-04-25T14:30:15.381606+00:00] [INFO]   score=0.77, synth=ok
+[2026-04-25T14:30:15.383774+00:00] [INFO]   wrote 20260425-043-does-slv-exhibit-a-consistent-lag-in-responding-to-dxy-moves.json
+[2026-04-25T14:30:23.716638+00:00] [INFO] === Research Engine starting — pid 32910 ===
+[2026-04-25T14:30:23.717741+00:00] [INFO]   rate cap: 30/hr, min sleep: 20s
+[2026-04-25T14:30:23.718022+00:00] [INFO]   followup threshold: 0.55, max depth: 3
+[2026-04-25T14:30:23.719024+00:00] [INFO]   loaded 49 seen hashes, 5 queued questions
+[2026-04-25T14:30:23.785235+00:00] [INFO] [43] track=position_driven depth=0 Q: Does GLD show stronger mean return during DCL periods compared to non-DCL period
+[2026-04-25T14:30:28.032004+00:00] [INFO] === Research Engine starting — pid 32918 ===
+[2026-04-25T14:30:28.033253+00:00] [INFO]   rate cap: 30/hr, min sleep: 20s
+[2026-04-25T14:30:28.033584+00:00] [INFO]   followup threshold: 0.55, max depth: 3
+[2026-04-25T14:30:28.034380+00:00] [INFO]   loaded 49 seen hashes, 4 queued questions
+[2026-04-25T14:30:28.082758+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-25T14:31:15.049581+00:00] [INFO] track signal_discovery: proposed 5, valid 2
+[2026-04-25T14:31:15.054016+00:00] [INFO]   queued 2 new questions (0 duplicates)
+[2026-04-25T14:31:15.055648+00:00] [INFO] [43] track=position_driven depth=0 Q: What is the hit rate of buying SLV on RSI oversold signals during confirmed DCL 
+[2026-04-25T14:31:17.363030+00:00] [INFO]   result: {"hit_rate_pct": 80.3, "n_events": 61, "mean_return_pct": 4.51, "signal": "rsi_oversold", "ticker": "SLV", "runtime_s": 2.31}
+[2026-04-25T14:31:24.866078+00:00] [INFO]   score=0.70, synth=ok
+[2026-04-25T14:31:24.870259+00:00] [INFO]   wrote 20260425-044-what-is-the-hit-rate-of-buying-slv-on-rsi-oversold-signals-d.json
+[2026-04-25T14:31:24.870652+00:00] [INFO] [DEBUG] followup ask_spark for parent depth=0
+[2026-04-25T14:31:43.208254+00:00] [INFO] [DEBUG] followup raw output (1419 chars): [
+  {
+    "question": "What is the hit rate of buying SLV on RSI oversold signals during confirmed DCL events in silver over the last six months?",
+    "dataset": "silver",
+    "metric": "hit_rate",
+    "metric_params": {"signal": "rsi_oversold", "ticker": "SLV"},
+    "null_hypothesis": "The hit rate of buying SLV on RSI oversold signals during confirmed DCL events in silver over the last six months is less than or equal to 50%.",
+    "matt_relevance": "Tests whether the high hit rate observed over two years persists in the most recent half-year, assessing signal robustness amid potential regime shifts in volatility or liquidity."
+  },
+  {
+    "question": "What is the mean return of buying SLV on RSI oversold signals during confirmed DCL events in silver over the last two years when volatility is above the 75th percentile?",
+    "dataset": "silver",
+    "metric": "mean_return",
+    "metric_params": {"signal": "rsi_oversold", "ticker": "SLV", "volatility_regime": "high"},
+    "null_hypothesis": "The mean return of buying SLV on RSI oversold signals during confirmed DCL events in silver is not significantly higher during high volatility periods compared to all periods.",
+    "matt_relevance": "Evaluates whether the signal’s profitability depends on market volatility, testing if the edge persists or deteriorates during turbulent conditions, which is critical for risk-adjusted position sizing."
+  }
+]
+[2026-04-25T14:31:43.209292+00:00] [INFO] [DEBUG] followup: parsed 2 candidates
+[2026-04-25T14:31:43.211435+00:00] [INFO] [DEBUG] followup[0] reject: digits in fields ['null_hypothesis']: null_hypothesis=The hit rate of buying SLV on RSI oversold signals during confirmed DCL events in silver over the last six months is les
+[2026-04-25T14:31:43.211611+00:00] [INFO] [DEBUG] followup[1] reject: digits in fields ['question']: question=What is the mean return of buying SLV on RSI oversold signals during confirmed DCL events in silver over the last two ye
+[2026-04-25T14:31:43.211744+00:00] [INFO] [DEBUG] followup: 0/2 valid before dedup
+[2026-04-25T14:32:03.416201+00:00] [INFO] [44] track=position_driven depth=0 Q: Does TLT exhibit a consistent lagged relationship with DXY where DXY moves predi
+[2026-04-25T14:32:04.284010+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.3168, "ticker_a": "TLT", "ticker_b": "DXY", "direction": "inverse", "n_days": 600, "runtime_s": 0.87}
+[2026-04-25T14:32:10.618551+00:00] [INFO]   score=0.79, synth=ok
+[2026-04-25T14:32:10.621446+00:00] [INFO]   wrote 20260425-045-does-tlt-exhibit-a-consistent-lagged-relationship-with-dxy-w.json
+[2026-04-25T14:32:10.621804+00:00] [INFO] [DEBUG] followup ask_spark for parent depth=0
+[2026-04-25T14:32:34.105030+00:00] [INFO] [DEBUG] followup raw output (1751 chars): [
+  {
+    "question": "Does the inverse relationship between DXY and TLT returns strengthen during periods of high volatility in the dollar index over the last two years?",
+    "dataset": {
+      "start": "2022-07-01",
+      "end": "2024-07-01",
+      "interval": "1d",
+      "tickers": ["TLT", "DXY"]
+    },
+    "metric": "correlation",
+    "metric_params": {
+      "benchmark": "DXY",
+      "direction": "inverse",
+      "regime_filter": "high_volatility"
+    },
+    "null_hypothesis": "The inverse correlation between DXY and TLT returns is not significantly higher during high volatility periods in DXY compared to the full period.",
+    "matt_relevance": "This tests whether the weak inverse relationship observed overall masks a stronger, actionable signal during volatile dollar moves, which could improve timing for TLT entries."
+  },
+  {
+    "question": "Is the lack of lagged predictive power between DXY and TLT returns consistent across different bond market regimes, such as periods of rising versus falling interest rates over the last two years?",
+    "dataset": {
+      "start": "2022-07-01",
+      "end": "2024-07-01",
+      "interval": "1d",
+      "tickers": ["TLT", "DXY"]
+    },
+    "metric": "lag_days",
+    "metric_params": {
+      "benchmark": "DXY",
+      "direction": "inverse",
+      "regime_filter": "interest_rate_trend"
+    },
+    "null_hypothesis": "The optimal lag between DXY moves and TLT returns is zero days across both rising and falling interest rate regimes.",
+ 
+[2026-04-25T14:32:34.106798+00:00] [INFO] [DEBUG] followup: parsed 2 candidates
+[2026-04-25T14:32:34.107184+00:00] [INFO] [DEBUG] followup[0] reject: unknown dataset.type None
+[2026-04-25T14:32:34.107473+00:00] [INFO] [DEBUG] followup[1] reject: unknown dataset.type None
+[2026-04-25T14:32:34.107878+00:00] [INFO] [DEBUG] followup: 0/2 valid before dedup
+[2026-04-25T14:32:54.337431+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-25T14:33:08.996721+00:00] [INFO] === Research Engine starting — pid 33147 ===
+[2026-04-25T14:33:08.998444+00:00] [INFO]   rate cap: 30/hr, min sleep: 20s
+[2026-04-25T14:33:08.998848+00:00] [INFO]   followup threshold: 0.55, max depth: 3
+[2026-04-25T14:33:08.999811+00:00] [INFO]   loaded 51 seen hashes, 4 queued questions
+[2026-04-25T14:33:09.051579+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-25T14:33:13.261500+00:00] [INFO] === Research Engine starting — pid 33158 ===
+[2026-04-25T14:33:13.262626+00:00] [INFO]   rate cap: 30/hr, min sleep: 20s
+[2026-04-25T14:33:13.262909+00:00] [INFO]   followup threshold: 0.55, max depth: 3
+[2026-04-25T14:33:13.263668+00:00] [INFO]   loaded 51 seen hashes, 4 queued questions
+[2026-04-25T14:33:13.323487+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-25T14:34:02.742574+00:00] [INFO] track regime_exploration: proposed 5, valid 2
+[2026-04-25T14:34:02.745720+00:00] [INFO]   queued 1 new questions (1 duplicates)
+[2026-04-25T14:34:02.746316+00:00] [INFO] [45] track=position_driven depth=0 Q: What is the drawdown of IBIT during VIX high regimes over the last two years, an
+[2026-04-25T14:34:05.023347+00:00] [INFO]   result: {"max_drawdown_pct": -39.12, "regime": "vix_high", "n_days": 38, "ticker": "IBIT", "runtime_s": 2.28}
+[2026-04-25T14:34:10.051231+00:00] [INFO]   score=0.80, synth=ok
+[2026-04-25T14:34:10.054350+00:00] [INFO]   wrote 20260425-046-what-is-the-drawdown-of-ibit-during-vix-high-regimes-over-th.json
+[2026-04-25T14:34:20.379720+00:00] [INFO]   spawned 1 follow-ups (depth 1)
