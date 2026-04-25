@@ -1,0 +1,36 @@
+[2026-04-25T13:12:44.740025+00:00] [INFO] === Research Engine starting — pid 27112 ===
+[2026-04-25T13:12:44.742546+00:00] [INFO]   rate cap: 30/hr, min sleep: 20s
+[2026-04-25T13:12:44.742905+00:00] [INFO]   followup threshold: 0.55, max depth: 3
+[2026-04-25T13:12:44.743854+00:00] [INFO]   loaded 0 seen hashes, 0 queued questions
+[2026-04-25T13:12:44.802400+00:00] [INFO] queue low (0), proposing batch for track=position_driven
+[2026-04-25T13:13:47.987491+00:00] [INFO] track position_driven: proposed 5, valid 3
+[2026-04-25T13:13:47.991885+00:00] [INFO]   queued 3 new questions (0 duplicates)
+[2026-04-25T13:13:47.992648+00:00] [INFO] [1] track=position_driven depth=0 Q: What is the correlation between GLD and SLV daily returns during the current met
+[2026-04-25T13:13:50.119761+00:00] [INFO]   result: {"correlation": 0.7735, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SLV", "runtime_s": 2.13}
+[2026-04-25T13:14:03.485825+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T13:14:03.488858+00:00] [INFO]   wrote 20260425-000-what-is-the-correlation-between-gld-and-slv-daily-returns-du.json
+[2026-04-25T13:14:21.848021+00:00] [ERROR] loop error: 'str' object has no attribute 'get'
+Traceback (most recent call last):
+  File "/Users/zekezirk/zeke-portfolio/research/research_engine.py", line 486, in main_loop
+    followups = generate_followups(q, result, synth, depth)
+  File "/Users/zekezirk/zeke-portfolio/research/research_engine.py", line 289, in generate_followups
+    if ds.get("type") == "ticker_days":
+       ^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+[2026-04-25T13:14:51.868771+00:00] [INFO] queue low (2), proposing batch for track=signal_discovery
+[2026-04-25T13:15:20.640906+00:00] [INFO] === Research Engine starting — pid 27255 ===
+[2026-04-25T13:15:20.646415+00:00] [INFO]   rate cap: 30/hr, min sleep: 20s
+[2026-04-25T13:15:20.646792+00:00] [INFO]   followup threshold: 0.55, max depth: 3
+[2026-04-25T13:15:20.647544+00:00] [INFO]   loaded 3 seen hashes, 2 queued questions
+[2026-04-25T13:15:20.697508+00:00] [INFO] queue low (2), proposing batch for track=position_driven
+[2026-04-25T13:16:01.959583+00:00] [INFO] track position_driven: proposed 5, valid 4
+[2026-04-25T13:16:01.962539+00:00] [INFO]   queued 4 new questions (0 duplicates)
+[2026-04-25T13:16:01.963227+00:00] [INFO] [1] track=position_driven depth=0 Q: What is the beta of TLT to TMF during the post weekly cycle low regime
+[2026-04-25T13:16:04.344919+00:00] [INFO]   result: {"beta": 0.3377, "regime": "post_wcl_10d", "n_days": 729, "ticker": "TLT", "benchmark": "TMF", "runtime_s": 2.38}
+[2026-04-25T13:16:10.388965+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-25T13:16:10.391223+00:00] [INFO]   wrote 20260425-001-what-is-the-beta-of-tlt-to-tmf-during-the-post-weekly-cycle-.json
+[2026-04-25T13:16:48.698033+00:00] [INFO] [2] track=position_driven depth=0 Q: What is the threshold cross count for SLV price relative to its fifty day moving
+[2026-04-25T13:16:49.031707+00:00] [INFO]   result: {"cross_count": 60, "level": "sma_50", "ticker": "SLV", "n_days": 730, "runtime_s": 0.33}
+[2026-04-25T13:16:55.306618+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-25T13:16:55.307997+00:00] [INFO]   wrote 20260425-002-what-is-the-threshold-cross-count-for-slv-price-relative-to-.json
