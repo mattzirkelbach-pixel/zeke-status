@@ -35,3 +35,28 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T13:16:49.031707+00:00] [INFO]   result: {"cross_count": 60, "level": "sma_50", "ticker": "SLV", "n_days": 730, "runtime_s": 0.33}
 [2026-04-25T13:16:55.306618+00:00] [INFO]   score=0.60, synth=ok
 [2026-04-25T13:16:55.307997+00:00] [INFO]   wrote 20260425-002-what-is-the-threshold-cross-count-for-slv-price-relative-to-.json
+[2026-04-25T13:17:31.421217+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-25T13:18:24.501019+00:00] [INFO] track signal_discovery: proposed 5, valid 5
+[2026-04-25T13:18:24.503653+00:00] [INFO]   queued 5 new questions (0 duplicates)
+[2026-04-25T13:18:24.504145+00:00] [INFO] [3] track=position_driven depth=0 Q: What is the correlation between GLD and SLV daily returns during the current DCL
+[2026-04-25T13:18:25.169668+00:00] [INFO]   result: {"correlation": 0.7735, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SLV", "runtime_s": 0.67}
+[2026-04-25T13:18:32.179745+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T13:18:32.182026+00:00] [INFO]   wrote 20260425-003-what-is-the-correlation-between-gld-and-slv-daily-returns-du.json
+[2026-04-25T13:19:08.864393+00:00] [INFO] [4] track=position_driven depth=0 Q: What is the beta of TLT to TMF during weekly cycle low regimes
+[2026-04-25T13:19:09.918432+00:00] [INFO]   result: {"beta": 0.3377, "regime": "weekly_cycle_low", "n_days": 729, "ticker": "TLT", "benchmark": "TMF", "runtime_s": 1.05}
+[2026-04-25T13:19:16.371165+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-25T13:19:16.372628+00:00] [INFO]   wrote 20260425-004-what-is-the-beta-of-tlt-to-tmf-during-weekly-cycle-low-regim.json
+[2026-04-25T13:19:55.268267+00:00] [INFO] [5] track=position_driven depth=0 Q: What is the mean return of GLD in the five days following a confirmed silver DCL
+[2026-04-25T13:19:55.682755+00:00] [INFO]   result: {"mean_return_pct": 0.1278, "regime": "post_silver_dcl_5d", "n_days": 729, "ticker": "GLD", "runtime_s": 0.41}
+[2026-04-25T13:20:00.845541+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-25T13:20:00.847117+00:00] [INFO]   wrote 20260425-005-what-is-the-mean-return-of-gld-in-the-five-days-following-a-.json
+[2026-04-25T13:20:35.904592+00:00] [INFO] heartbeat — queue=6 seen=12 tests=5 findings=5 followups=0
+[2026-04-25T13:20:35.923562+00:00] [INFO] [6] track=position_driven depth=0 Q: What is the drawdown of SILJ during SPX down month regimes
+[2026-04-25T13:20:36.625850+00:00] [INFO]   result: {"max_drawdown_pct": -34.95, "regime": "spx_down_month", "n_days": 730, "ticker": "SILJ", "runtime_s": 0.7}
+[2026-04-25T13:20:42.125037+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T13:20:42.126378+00:00] [INFO]   wrote 20260425-006-what-is-the-drawdown-of-silj-during-spx-down-month-regimes.json
+[2026-04-25T13:21:18.996796+00:00] [INFO] [7] track=signal_discovery depth=0 Q: Does GLD crossing above its fifty day moving average predict positive returns in
+[2026-04-25T13:21:19.308708+00:00] [INFO]   result: {"mean_return_pct": 0.1278, "regime": "vix_low", "n_days": 729, "ticker": "GLD", "runtime_s": 0.31}
+[2026-04-25T13:21:26.055675+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-25T13:21:26.059436+00:00] [INFO]   wrote 20260425-007-does-gld-crossing-above-its-fifty-day-moving-average-predict.json
+[2026-04-25T13:22:04.744310+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
