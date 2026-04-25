@@ -749,3 +749,37 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T16:54:13.781584+00:00] [INFO]   result: {"hit_rate_pct": 37.6, "n_events": 85, "mean_return_pct": -0.67, "signal": "rsi_oversold", "ticker": "TLT", "runtime_s": 0.39}
 [2026-04-25T16:54:19.681039+00:00] [INFO]   score=0.52, synth=ok
 [2026-04-25T16:54:19.683069+00:00] [INFO]   wrote 20260425-118-is-the-hit-rate-of-tlt-moving-opposite-to-spx-during-weekly-.json
+[2026-04-25T16:54:39.778495+00:00] [INFO] [118] track=position_driven depth=3 Q: How does the TLT-SPX beta during weekly cycle high regimes compare to the beta d
+[2026-04-25T16:54:40.435523+00:00] [INFO]   result: {"beta": 0.1273, "regime": "weekly_cycle_high", "n_days": 729, "ticker": "TLT", "benchmark": "SPX", "runtime_s": 0.66}
+[2026-04-25T16:54:46.818530+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-25T16:54:46.820765+00:00] [INFO]   wrote 20260425-119-how-does-the-tlt-spx-beta-during-weekly-cycle-high-regimes-c.json
+[2026-04-25T16:55:06.899912+00:00] [INFO] [119] track=position_driven depth=3 Q: Is the TLT-SPX beta during high VIX regimes significantly more negative than the
+[2026-04-25T16:55:08.024883+00:00] [INFO]   result: {"beta": 0.1273, "regime": "vix_high", "n_days": 729, "ticker": "TLT", "benchmark": "SPX", "runtime_s": 1.12}
+[2026-04-25T16:55:19.182390+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-25T16:55:19.185001+00:00] [INFO]   wrote 20260425-120-is-the-tlt-spx-beta-during-high-vix-regimes-significantly-mo.json
+[2026-04-25T16:55:39.327616+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-25T16:56:25.433801+00:00] [INFO] track signal_discovery: proposed 5, valid 5
+[2026-04-25T16:56:25.436744+00:00] [INFO]   queued 1 new questions (4 duplicates)
+[2026-04-25T16:56:25.437211+00:00] [INFO] [120] track=position_driven depth=3 Q: Is the maximum drawdown of IBIT lower during VIX high regimes when DXY is rising
+[2026-04-25T16:56:25.777644+00:00] [INFO]   result: {"max_drawdown_pct": -49.36, "regime": "vix_high_dxy_rising", "n_days": 573, "ticker": "IBIT", "runtime_s": 0.34}
+[2026-04-25T16:56:32.084353+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T16:56:32.086905+00:00] [INFO]   wrote 20260425-121-is-the-maximum-drawdown-of-ibit-lower-during-vix-high-regime.json
+[2026-04-25T16:56:52.299853+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-25T16:57:38.516460+00:00] [INFO] track regime_exploration: proposed 5, valid 4
+[2026-04-25T16:57:38.519264+00:00] [INFO]   queued 2 new questions (2 duplicates)
+[2026-04-25T16:57:38.519915+00:00] [INFO] [121] track=position_driven depth=3 Q: Is the maximum drawdown of IBIT lower during VIX high and DXY falling regimes co
+[2026-04-25T16:57:38.950599+00:00] [INFO]   result: {"max_drawdown_pct": -49.36, "regime": "vix_high_dxy_falling", "n_days": 573, "ticker": "IBIT", "runtime_s": 0.43}
+[2026-04-25T16:57:45.737866+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T16:57:45.740449+00:00] [INFO]   wrote 20260425-122-is-the-maximum-drawdown-of-ibit-lower-during-vix-high-and-dx.json
+[2026-04-25T16:58:05.922624+00:00] [INFO] [122] track=position_driven depth=3 Q: Does the XAGUSD-SLV correlation weaken during half-cycle top windows when VIX is
+[2026-04-25T16:58:06.381553+00:00] [INFO]   result: {"correlation": 0.912, "n_days": 493, "ticker_a": "XAGUSD", "ticker_b": "SLV", "runtime_s": 0.46}
+[2026-04-25T16:58:13.562246+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T16:58:13.564264+00:00] [INFO]   wrote 20260425-123-does-the-xagusd-slv-correlation-weaken-during-half-cycle-top.json
+[2026-04-25T16:58:33.763924+00:00] [INFO] heartbeat — queue=4 seen=129 tests=122 findings=122 followups=65
+[2026-04-25T16:58:33.779123+00:00] [INFO] queue low (4), proposing batch for track=position_driven
+[2026-04-25T16:59:18.526588+00:00] [INFO] track position_driven: proposed 5, valid 4
+[2026-04-25T16:59:18.530238+00:00] [INFO]   queued 3 new questions (1 duplicates)
+[2026-04-25T16:59:18.531087+00:00] [INFO] [123] track=position_driven depth=3 Q: Does the hit rate of XAGUSD predicting same-direction SLV moves differ between h
+[2026-04-25T16:59:19.009703+00:00] [INFO]   result: {"hit_rate_pct": 71.1, "n_events": 166, "mean_return_pct": 2.9, "signal": "rsi_oversold", "ticker": "XAGUSD", "runtime_s": 0.48}
+[2026-04-25T16:59:26.379146+00:00] [INFO]   score=0.61, synth=ok
+[2026-04-25T16:59:26.381943+00:00] [INFO]   wrote 20260425-124-does-the-hit-rate-of-xagusd-predicting-same-direction-slv-mo.json
