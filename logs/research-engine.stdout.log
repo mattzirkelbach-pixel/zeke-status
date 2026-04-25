@@ -1704,3 +1704,37 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T22:20:11.800142+00:00] [INFO]   result: {"correlation": 0.1353, "n_days": 729, "ticker_a": "SPX", "ticker_b": "GLD", "runtime_s": 0.68}
 [2026-04-25T22:20:17.839149+00:00] [INFO]   score=0.68, synth=ok
 [2026-04-25T22:20:17.842318+00:00] [INFO]   wrote 20260425-279-is-the-spx-gld-correlation-during-spx-down-months-significan.json
+[2026-04-25T22:20:37.978096+00:00] [INFO] heartbeat — queue=4 seen=285 tests=278 findings=278 followups=196
+[2026-04-25T22:20:37.998788+00:00] [INFO] queue low (4), proposing batch for track=position_driven
+[2026-04-25T22:21:30.750131+00:00] [INFO] track position_driven: proposed 5, valid 2
+[2026-04-25T22:21:30.754000+00:00] [INFO]   queued 2 new questions (0 duplicates)
+[2026-04-25T22:21:30.754900+00:00] [INFO] [279] track=regime_exploration depth=3 Q: Is the correlation between SPX and GLD significantly more negative during SPX dr
+[2026-04-25T22:21:31.684904+00:00] [INFO]   result: {"correlation": 0.1353, "n_days": 729, "ticker_a": "SPX", "ticker_b": "GLD", "runtime_s": 0.93}
+[2026-04-25T22:21:39.963495+00:00] [WARN] synthesis has unverified numbers ['0.3'] — retrying
+[2026-04-25T22:21:45.805904+00:00] [INFO]   score=0.68, synth=ok
+[2026-04-25T22:21:45.809557+00:00] [INFO]   wrote 20260425-280-is-the-correlation-between-spx-and-gld-significantly-more-ne.json
+[2026-04-25T22:22:05.959682+00:00] [INFO] [280] track=regime_exploration depth=3 Q: Does the correlation between SPX and GLD become significantly more positive duri
+[2026-04-25T22:22:06.574119+00:00] [INFO]   result: {"correlation": 0.1353, "n_days": 729, "ticker_a": "SPX", "ticker_b": "GLD", "runtime_s": 0.61}
+[2026-04-25T22:22:13.244659+00:00] [WARN] synthesis has unverified numbers ['0.3'] — retrying
+[2026-04-25T22:22:19.285796+00:00] [INFO]   score=0.68, synth=ok
+[2026-04-25T22:22:19.289428+00:00] [INFO]   wrote 20260425-281-does-the-correlation-between-spx-and-gld-become-significantl.json
+[2026-04-25T22:22:39.508959+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-25T22:23:30.050577+00:00] [INFO] track signal_discovery: proposed 5, valid 1
+[2026-04-25T22:23:30.054436+00:00] [INFO]   queued 1 new questions (0 duplicates)
+[2026-04-25T22:23:30.055168+00:00] [INFO] [281] track=regime_exploration depth=3 Q: How does the SPX-GLD correlation during SPX drawdowns compare to its correlation
+[2026-04-25T22:23:30.873762+00:00] [INFO]   result: {"correlation": 0.1153, "n_days": 1824, "ticker_a": "SPX", "ticker_b": "GLD", "runtime_s": 0.82}
+[2026-04-25T22:23:37.475290+00:00] [WARN] synthesis has unverified numbers ['824'] — retrying
+[2026-04-25T22:23:43.448905+00:00] [ERROR] retry still has unverified numbers ['824'] — dropping
+[2026-04-25T22:23:43.449734+00:00] [INFO]   score=0.67, synth=dropped
+[2026-04-25T22:23:43.452761+00:00] [INFO]   wrote 20260425-282-how-does-the-spx-gld-correlation-during-spx-drawdowns-compar.json
+[2026-04-25T22:24:03.658865+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-25T22:24:57.702660+00:00] [INFO] track regime_exploration: proposed 5, valid 2
+[2026-04-25T22:24:57.706598+00:00] [INFO]   queued 2 new questions (0 duplicates)
+[2026-04-25T22:24:57.707356+00:00] [INFO] [282] track=regime_exploration depth=3 Q: Is the SPX-GLD correlation during SPX drawdowns more negative when volatility is
+[2026-04-25T22:24:58.976798+00:00] [INFO]   result: {"correlation": 0.1153, "n_days": 1824, "ticker_a": "SPX", "ticker_b": "GLD", "runtime_s": 1.27}
+[2026-04-25T22:25:05.480848+00:00] [INFO]   score=0.67, synth=ok
+[2026-04-25T22:25:05.484340+00:00] [INFO]   wrote 20260425-283-is-the-spx-gld-correlation-during-spx-drawdowns-more-negativ.json
+[2026-04-25T22:25:25.606699+00:00] [INFO] [283] track=position_driven depth=0 Q: What is the drawdown of IBIT during SPX down months over the last two years, and
+[2026-04-25T22:25:25.817492+00:00] [INFO]   result: {"max_drawdown_pct": -49.36, "regime": "spx_down_month", "n_days": 573, "ticker": "IBIT", "runtime_s": 0.21}
+[2026-04-25T22:25:32.924482+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T22:25:32.927347+00:00] [INFO]   wrote 20260425-284-what-is-the-drawdown-of-ibit-during-spx-down-months-over-the.json
