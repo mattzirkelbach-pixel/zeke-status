@@ -111,3 +111,37 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-25T13:32:03.162354+00:00] [INFO]   result: {"cross_count": 26, "level": "sma_200", "ticker": "TLT", "n_days": 730, "runtime_s": 0.38}
 [2026-04-25T13:32:09.993934+00:00] [INFO]   score=0.60, synth=ok
 [2026-04-25T13:32:09.996968+00:00] [INFO]   wrote 20260425-016-how-many-times-did-tlt-close-below-its-two-hundred-day-movin.json
+[2026-04-25T13:32:55.253229+00:00] [INFO] heartbeat — queue=4 seen=21 tests=16 findings=16 followups=0
+[2026-04-25T13:32:55.272426+00:00] [INFO] queue low (4), proposing batch for track=position_driven
+[2026-04-25T13:33:40.818158+00:00] [INFO] track position_driven: proposed 5, valid 3
+[2026-04-25T13:33:40.822766+00:00] [INFO]   queued 3 new questions (0 duplicates)
+[2026-04-25T13:33:40.823898+00:00] [INFO] [17] track=signal_discovery depth=0 Q: Does IBIT showing relative strength versus SPX during DXY pullbacks precede thre
+[2026-04-25T13:33:41.538822+00:00] [INFO]   result: {"correlation": 0.4129, "n_days": 572, "ticker_a": "IBIT", "ticker_b": "SPX", "runtime_s": 0.71}
+[2026-04-25T13:33:49.072786+00:00] [WARN] synthesis has unverified numbers ['0.2'] — retrying
+[2026-04-25T13:33:57.335414+00:00] [ERROR] retry still has unverified numbers ['0.2'] — dropping
+[2026-04-25T13:33:57.335986+00:00] [INFO]   score=0.85, synth=dropped
+[2026-04-25T13:33:57.337915+00:00] [INFO]   wrote 20260425-017-does-ibit-showing-relative-strength-versus-spx-during-dxy-pu.json
+[2026-04-25T13:34:17.404216+00:00] [INFO] [18] track=signal_discovery depth=0 Q: What is the average return for GLD five days after SLV makes a new fifty two wee
+[2026-04-25T13:34:17.712740+00:00] [INFO]   result: {"mean_return_pct": 0.1946, "regime": "post_new_52w_high", "n_days": 729, "ticker": "SLV", "runtime_s": 0.31}
+[2026-04-25T13:34:23.743454+00:00] [WARN] synthesis has unverified numbers ['52'] — retrying
+[2026-04-25T13:34:29.841609+00:00] [ERROR] retry still has unverified numbers ['52'] — dropping
+[2026-04-25T13:34:29.842106+00:00] [INFO]   score=0.60, synth=dropped
+[2026-04-25T13:34:29.843309+00:00] [INFO]   wrote 20260425-018-what-is-the-average-return-for-gld-five-days-after-slv-makes.json
+[2026-04-25T13:34:49.874878+00:00] [INFO] [19] track=signal_discovery depth=0 Q: Does VIX closing below fifteen predict negative SPX returns over the following e
+[2026-04-25T13:34:50.208863+00:00] [INFO]   result: {"hit_rate_pct": 43.1, "n_events": 58, "mean_return_pct": 1.0, "signal": "rsi_oversold", "ticker": "VIX", "runtime_s": 0.33}
+[2026-04-25T13:34:57.334294+00:00] [WARN] synthesis has unverified numbers ['15', '15', '55'] — retrying
+[2026-04-25T13:35:03.518657+00:00] [ERROR] retry still has unverified numbers ['15'] — dropping
+[2026-04-25T13:35:03.519389+00:00] [INFO]   score=0.47, synth=dropped
+[2026-04-25T13:35:03.520657+00:00] [INFO]   wrote 20260425-019-does-vix-closing-below-fifteen-predict-negative-spx-returns-.json
+[2026-04-25T13:35:23.600931+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-25T13:36:08.958553+00:00] [INFO] track signal_discovery: proposed 5, valid 5
+[2026-04-25T13:36:08.962025+00:00] [INFO]   queued 4 new questions (1 duplicates)
+[2026-04-25T13:36:08.963298+00:00] [INFO] [20] track=regime_exploration depth=0 Q: How does the lag days between VIX and GLD returns change during DXY rally regime
+[2026-04-25T13:36:09.644997+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.074, "ticker_a": "VIX", "ticker_b": "GLD", "direction": "inverse", "n_days": 701, "runtime_s": 0.68}
+[2026-04-25T13:36:16.019704+00:00] [INFO]   score=0.64, synth=ok
+[2026-04-25T13:36:16.021636+00:00] [INFO]   wrote 20260425-020-how-does-the-lag-days-between-vix-and-gld-returns-change-dur.json
+[2026-04-25T13:36:58.784030+00:00] [INFO] [21] track=position_driven depth=0 Q: What is the optimal lag days for TLT to predict TMF movements during weekly cycl
+[2026-04-25T13:37:00.425659+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.9939, "ticker_a": "TLT", "ticker_b": "TMF", "direction": "same", "n_days": 729, "runtime_s": 1.64}
+[2026-04-25T13:37:06.836286+00:00] [WARN] synthesis has unverified numbers ['0.95'] — retrying
+[2026-04-25T13:37:13.156685+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-25T13:37:13.158880+00:00] [INFO]   wrote 20260425-021-what-is-the-optimal-lag-days-for-tlt-to-predict-tmf-movement.json
