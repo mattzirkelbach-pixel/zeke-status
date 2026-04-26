@@ -2460,3 +2460,19 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-26T03:13:00.114859+00:00] [INFO]   result: {"beta": 0.1273, "regime": "all", "n_days": 729, "ticker": "TLT", "benchmark": "SPX", "runtime_s": 0.82}
 [2026-04-26T03:13:11.473415+00:00] [INFO]   score=0.90, synth=ok
 [2026-04-26T03:13:11.478068+00:00] [INFO]   wrote 20260425-407-what-is-the-beta-of-tlt-to-spx-during-spx-down-month-regimes.json
+[2026-04-26T03:13:31.688603+00:00] [INFO]   spawned 1 follow-ups (depth 1)
+[2026-04-26T03:13:51.846615+00:00] [INFO] [407] track=regime_exploration depth=0 Q: What is the lag in days for SPX to predict IBIT returns during VIX high regimes
+[2026-04-26T03:13:52.833034+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.4129, "ticker_a": "SPX", "ticker_b": "IBIT", "direction": "same", "n_days": 572, "runtime_s": 0.99}
+[2026-04-26T03:13:59.745478+00:00] [WARN] synthesis has unverified numbers ['0.3'] — retrying
+[2026-04-26T03:14:06.051665+00:00] [ERROR] retry still has unverified numbers ['0.3'] — dropping
+[2026-04-26T03:14:06.052165+00:00] [INFO]   score=0.85, synth=dropped
+[2026-04-26T03:14:06.055614+00:00] [INFO]   wrote 20260425-408-what-is-the-lag-in-days-for-spx-to-predict-ibit-returns-duri.json
+[2026-04-26T03:14:26.212906+00:00] [INFO] [408] track=position_driven depth=0 Q: What is the lag days for DXY to predict XAUUSD with inverse direction over the p
+[2026-04-26T03:14:27.946503+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.3508, "ticker_a": "XAUUSD", "ticker_b": "DXY", "direction": "inverse", "n_days": 601, "runtime_s": 1.73}
+[2026-04-26T03:14:34.219672+00:00] [INFO]   score=0.81, synth=ok
+[2026-04-26T03:14:34.223152+00:00] [INFO]   wrote 20260425-409-what-is-the-lag-days-for-dxy-to-predict-xauusd-with-inverse-.json
+[2026-04-26T03:14:52.568403+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-26T03:15:12.751241+00:00] [INFO] [409] track=signal_discovery depth=0 Q: Does IBIT crossing above its fifty day moving average lead to mean reversion wit
+[2026-04-26T03:15:13.128805+00:00] [INFO]   result: {"mean_return_pct": 0.139, "regime": "post_sma_50_cross", "n_days": 572, "ticker": "IBIT", "runtime_s": 0.38}
+[2026-04-26T03:15:18.853627+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-26T03:15:18.859386+00:00] [INFO]   wrote 20260425-410-does-ibit-crossing-above-its-fifty-day-moving-average-lead-t.json
