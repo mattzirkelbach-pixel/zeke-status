@@ -1944,3 +1944,28 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-26T00:30:12.765530+00:00] [INFO]   result: {"mean_return_pct": 0.1108, "regime": "spx_down_month", "n_days": 1823, "ticker": "SLV", "runtime_s": 0.44}
 [2026-04-26T00:30:22.866508+00:00] [INFO]   score=0.60, synth=ok
 [2026-04-26T00:30:22.869216+00:00] [INFO]   wrote 20260425-341-does-slv-trading-below-its-fifty-day-moving-average-during-s.json
+[2026-04-26T00:30:43.080112+00:00] [INFO] [341] track=signal_discovery depth=3 Q: Does the hit rate of positive returns for SLV below its fifty day moving average
+[2026-04-26T00:30:43.431413+00:00] [INFO]   result: {"hit_rate_pct": 68.2, "n_events": 201, "mean_return_pct": 2.7, "signal": "rsi_oversold", "ticker": "SLV", "runtime_s": 0.35}
+[2026-04-26T00:30:56.979880+00:00] [INFO]   score=0.68, synth=ok
+[2026-04-26T00:30:56.983086+00:00] [INFO]   wrote 20260425-342-does-the-hit-rate-of-positive-returns-for-slv-below-its-fift.json
+[2026-04-26T00:31:17.176264+00:00] [INFO] heartbeat — queue=4 seen=348 tests=341 findings=341 followups=245
+[2026-04-26T00:31:17.187964+00:00] [INFO] queue low (4), proposing batch for track=position_driven
+[2026-04-26T00:32:07.751067+00:00] [INFO] track position_driven: proposed 5, valid 1
+[2026-04-26T00:32:07.754248+00:00] [INFO]   queued 1 new questions (0 duplicates)
+[2026-04-26T00:32:07.754822+00:00] [INFO] [342] track=signal_discovery depth=3 Q: Is the hit rate of positive returns for SLV below its fifty day moving average d
+[2026-04-26T00:32:08.198904+00:00] [INFO]   result: {"hit_rate_pct": 68.2, "n_events": 201, "mean_return_pct": 2.7, "signal": "rsi_oversold", "ticker": "SLV", "runtime_s": 0.44}
+[2026-04-26T00:32:15.342581+00:00] [INFO]   score=0.68, synth=ok
+[2026-04-26T00:32:15.345540+00:00] [INFO]   wrote 20260425-343-is-the-hit-rate-of-positive-returns-for-slv-below-its-fifty-.json
+[2026-04-26T00:32:35.580398+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-26T00:33:20.947012+00:00] [INFO] track signal_discovery: proposed 5, valid 5
+[2026-04-26T00:33:20.949793+00:00] [INFO]   queued 3 new questions (2 duplicates)
+[2026-04-26T00:33:20.950549+00:00] [INFO] [343] track=regime_exploration depth=0 Q: Does GLD show stronger correlation to SLV during VIX high regimes compared to VI
+[2026-04-26T00:33:21.896165+00:00] [INFO]   result: {"correlation": 0.7735, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SLV", "runtime_s": 0.95}
+[2026-04-26T00:33:35.219317+00:00] [INFO]   score=1.00, synth=dropped
+[2026-04-26T00:33:35.222415+00:00] [INFO]   wrote 20260425-344-does-gld-show-stronger-correlation-to-slv-during-vix-high-re.json
+[2026-04-26T00:33:55.257329+00:00] [INFO] [344] track=regime_exploration depth=0 Q: Does SPX show reduced drawdown during VIX low regimes compared to VIX high regim
+[2026-04-26T00:33:55.695798+00:00] [INFO]   result: {"max_drawdown_pct": -18.9, "regime": "vix_low", "n_days": 730, "ticker": "SPX", "runtime_s": 0.44}
+[2026-04-26T00:34:00.799663+00:00] [INFO]   score=0.98, synth=ok
+[2026-04-26T00:34:00.803376+00:00] [INFO]   wrote 20260425-345-does-spx-show-reduced-drawdown-during-vix-low-regimes-compar.json
+[2026-04-26T00:34:10.471952+00:00] [INFO]   spawned 1 follow-ups (depth 1)
+[2026-04-26T00:34:30.681924+00:00] [INFO] rate cap hit (30/hr), sleeping 5min
