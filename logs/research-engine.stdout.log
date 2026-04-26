@@ -4679,3 +4679,25 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-26T16:56:25.442395+00:00] [INFO]   result: {"cross_count": 42, "level": "sma_50", "ticker": "GLD", "n_days": 730, "runtime_s": 0.45}
 [2026-04-26T16:56:30.937058+00:00] [INFO]   score=0.60, synth=ok
 [2026-04-26T16:56:30.949389+00:00] [INFO]   wrote 20260426-367-does-the-frequency-of-gld-crossing-its-fifty-day-moving-aver.json
+[2026-04-26T16:57:02.429725+00:00] [INFO] [803] track=regime_exploration depth=1 Q: How does the count of GLD crossing its fifty day moving average change when usin
+[2026-04-26T16:57:02.871905+00:00] [INFO]   result: {"error": "level not supported: sma_20", "runtime_s": 0.44}
+[2026-04-26T16:57:02.872759+00:00] [INFO]   score=0.00, synth=ok
+[2026-04-26T16:57:02.877108+00:00] [INFO]   wrote 20260426-368-how-does-the-count-of-gld-crossing-its-fifty-day-moving-aver.json
+[2026-04-26T16:57:23.096595+00:00] [INFO] [804] track=regime_exploration depth=1 Q: Does the mean return of SLV over the ten days following a weekly cycle low in TL
+[2026-04-26T16:57:23.425801+00:00] [INFO]   result: {"mean_return_pct": 0.1109, "regime": "post_wcl_10d", "n_days": 1824, "ticker": "SLV", "runtime_s": 0.33}
+[2026-04-26T16:57:28.995263+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-26T16:57:29.001819+00:00] [INFO]   wrote 20260426-369-does-the-mean-return-of-slv-over-the-ten-days-following-a-we.json
+[2026-04-26T16:57:39.538473+00:00] [INFO]   spawned 1 follow-ups (depth 2)
+[2026-04-26T16:57:59.741989+00:00] [INFO] [805] track=regime_exploration depth=1 Q: Is the mean return of SLV over the ten days following a weekly cycle low in TLT 
+[2026-04-26T16:58:00.264234+00:00] [INFO]   result: {"hit_rate_pct": 68.2, "n_events": 201, "mean_return_pct": 2.7, "signal": "rsi_oversold", "ticker": "SLV", "runtime_s": 0.52}
+[2026-04-26T16:58:06.940651+00:00] [WARN] synthesis has unverified numbers ['55'] — retrying
+[2026-04-26T16:58:12.790283+00:00] [ERROR] retry still has unverified numbers ['55'] — dropping
+[2026-04-26T16:58:12.791203+00:00] [INFO]   score=0.68, synth=dropped
+[2026-04-26T16:58:12.795989+00:00] [INFO]   wrote 20260426-370-is-the-mean-return-of-slv-over-the-ten-days-following-a-week.json
+[2026-04-26T16:58:32.921735+00:00] [INFO] [806] track=signal_discovery depth=2 Q: Does IBIT's mean return after crossing below its fifty day moving average become
+[2026-04-26T16:58:33.295821+00:00] [INFO]   result: {"mean_return_pct": 0.139, "regime": "post_sma_50_cross_down", "n_days": 572, "ticker": "IBIT", "runtime_s": 0.37}
+[2026-04-26T16:58:39.011265+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-26T16:58:39.016826+00:00] [INFO]   wrote 20260426-371-does-ibits-mean-return-after-crossing-below-its-fifty-day-mo.json
+[2026-04-26T16:59:00.724296+00:00] [INFO]   spawned 2 follow-ups (depth 3)
+[2026-04-26T16:59:20.955660+00:00] [INFO] [807] track=signal_discovery depth=2 Q: Is the hit rate of positive five day returns after IBIT crosses below its fifty 
+[2026-04-26T16:59:21.441570+00:00] [INFO]   result: {"hit_rate_pct": 52.9, "n_events": 34, "mean_return_pct": -0.29, "signal": "rsi_oversold", "ticker": "IBIT", "runtime_s": 0.49}
