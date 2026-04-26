@@ -4577,3 +4577,39 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-26T16:23:09.044395+00:00] [INFO] track position_driven: proposed 5, valid 1
 [2026-04-26T16:23:09.049611+00:00] [INFO]   queued 0 new questions (1 duplicates)
 [2026-04-26T16:24:09.084683+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-26T16:24:53.945011+00:00] [INFO] track signal_discovery: proposed 5, valid 5
+[2026-04-26T16:24:53.948355+00:00] [INFO]   queued 3 new questions (2 duplicates)
+[2026-04-26T16:24:53.949118+00:00] [INFO] [785] track=signal_discovery depth=3 Q: Is the inverse correlation between DXY and GLD stronger during high volatility p
+[2026-04-26T16:24:54.624088+00:00] [INFO]   result: {"correlation": -0.4377, "n_days": 1485, "ticker_a": "DXY", "ticker_b": "GLD", "runtime_s": 0.67}
+[2026-04-26T16:25:00.906364+00:00] [WARN] synthesis has unverified numbers ['485'] — retrying
+[2026-04-26T16:25:07.232759+00:00] [ERROR] retry still has unverified numbers ['485'] — dropping
+[2026-04-26T16:25:07.233654+00:00] [INFO]   score=0.86, synth=dropped
+[2026-04-26T16:25:07.245745+00:00] [INFO]   wrote 20260426-350-is-the-inverse-correlation-between-dxy-and-gld-stronger-duri.json
+[2026-04-26T16:25:27.458951+00:00] [INFO] [786] track=signal_discovery depth=3 Q: Does the DXY-GLD inverse correlation weaken during low volatility periods compar
+[2026-04-26T16:25:28.189443+00:00] [INFO]   result: {"correlation": -0.4377, "n_days": 1485, "ticker_a": "DXY", "ticker_b": "GLD", "runtime_s": 0.73}
+[2026-04-26T16:25:33.881536+00:00] [WARN] synthesis has unverified numbers ['485'] — retrying
+[2026-04-26T16:25:40.183015+00:00] [ERROR] retry still has unverified numbers ['485'] — dropping
+[2026-04-26T16:25:40.184175+00:00] [INFO]   score=0.86, synth=dropped
+[2026-04-26T16:25:40.188512+00:00] [INFO]   wrote 20260426-351-does-the-dxy-gld-inverse-correlation-weaken-during-low-volat.json
+[2026-04-26T16:26:00.553665+00:00] [INFO] [787] track=regime_exploration depth=3 Q: Does the GLD-SLV ratio exhibit stronger mean reversion during periods of rising 
+[2026-04-26T16:26:01.375331+00:00] [INFO]   result: {"optimal_lag_days": 6, "peak_correlation": 0.0679, "ticker_a": "GLD", "ticker_b": "SLV", "direction": "inverse", "n_days": 729, "runtime_s": 0.82}
+[2026-04-26T16:26:08.106283+00:00] [INFO]   score=0.64, synth=ok
+[2026-04-26T16:26:08.112424+00:00] [INFO]   wrote 20260426-352-does-the-gld-slv-ratio-exhibit-stronger-mean-reversion-durin.json
+[2026-04-26T16:26:28.298092+00:00] [INFO] heartbeat — queue=4 seen=794 tests=787 findings=787 followups=620
+[2026-04-26T16:26:28.315214+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-26T16:27:12.602324+00:00] [INFO] track regime_exploration: proposed 5, valid 5
+[2026-04-26T16:27:12.609499+00:00] [INFO]   queued 5 new questions (0 duplicates)
+[2026-04-26T16:27:12.610400+00:00] [INFO] [788] track=regime_exploration depth=3 Q: Is the half-life of deviation from the long-term average shorter for the GLD-SLV
+[2026-04-26T16:27:13.533333+00:00] [INFO]   result: {"optimal_lag_days": 6, "peak_correlation": 0.0679, "ticker_a": "GLD", "ticker_b": "SLV", "direction": "inverse", "n_days": 729, "runtime_s": 0.92}
+[2026-04-26T16:27:21.302015+00:00] [INFO]   score=0.64, synth=ok
+[2026-04-26T16:27:21.313757+00:00] [INFO]   wrote 20260426-353-is-the-half-life-of-deviation-from-the-long-term-average-sho.json
+[2026-04-26T16:27:41.530128+00:00] [INFO] [789] track=signal_discovery depth=0 Q: Does IBIT crossing above its fifty day moving average lead to mean reversion wit
+[2026-04-26T16:27:41.869555+00:00] [INFO]   result: {"mean_return_pct": 0.139, "regime": "post_sma_50_cross", "n_days": 572, "ticker": "IBIT", "runtime_s": 0.34}
+[2026-04-26T16:27:47.729713+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-26T16:27:47.734961+00:00] [INFO]   wrote 20260426-354-does-ibit-crossing-above-its-fifty-day-moving-average-lead-t.json
+[2026-04-26T16:28:04.872982+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-26T16:28:25.094929+00:00] [INFO] [790] track=signal_discovery depth=0 Q: What is the correlation between DXY strength and GLD drawdowns during SPX monthl
+[2026-04-26T16:28:25.922049+00:00] [INFO]   result: {"correlation": -0.3882, "n_days": 599, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.83}
+[2026-04-26T16:28:34.358235+00:00] [INFO]   score=0.83, synth=ok
+[2026-04-26T16:28:34.364341+00:00] [INFO]   wrote 20260426-355-what-is-the-correlation-between-dxy-strength-and-gld-drawdow.json
+[2026-04-26T16:28:55.202295+00:00] [INFO]   spawned 2 follow-ups (depth 1)
