@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-04-26 02:36:41 ET",
-  "timestamp_utc": "2026-04-26T06:36:41Z",
+  "timestamp_local": "2026-04-26 02:39:19 ET",
+  "timestamp_utc": "2026-04-26T06:39:19Z",
   "scheduler": {
     "running": true,
     "pid": 1777,
-    "uptime_minutes": 10674,
+    "uptime_minutes": 10677,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 41874,
+    "total_lines": 41875,
     "last_entries": [
-      "[2026-04-26T06:11:00] treasury-bonds",
       "[2026-04-26T06:22:00] treasury-bonds",
       "[2026-04-26T06:35:00] treasury-bonds",
       "[2026-04-26T06:28:00] treasury-bonds",
-      "[2026-04-26T06:33:00] treasury-bonds"
+      "[2026-04-26T06:33:00] treasury-bonds",
+      "[PARSE ERROR] {\\\"timestamp\\\":\\\"2026-04-26T06:36:00Z\\\",\\\"topic\\\":\\\"treasury-bonds\\\",\\\"finding\\\""
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -30,14 +30,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
+      "nemotron-3-super:120b",
       "nemotron-3-nano:30b",
-      "nomic-embed-text:latest",
-      "nemotron-3-super:120b"
+      "nomic-embed-text:latest"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b, nomic-embed-text:latest, nemotron-3-super:120b"
+    "detail": "healthy, loaded: nemotron-3-super:120b, nemotron-3-nano:30b, nomic-embed-text:latest"
   },
   "gateway": {
     "running": true
@@ -50,16 +50,6 @@
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-04-26T02:12:30.857379",
-      "window": "overnight",
-      "cycle": 119,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-04-26T02:15:09.985687",
       "window": "overnight",
@@ -144,6 +134,16 @@
       "ts": "2026-04-26T02:36:20.906926",
       "window": "overnight",
       "cycle": 128,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-04-26T02:38:58.347484",
+      "window": "overnight",
+      "cycle": 129,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
