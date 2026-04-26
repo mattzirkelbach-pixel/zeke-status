@@ -3451,3 +3451,45 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-26T09:24:17.692639+00:00] [INFO] rate cap hit (30/hr), sleeping 5min
 [2026-04-26T09:29:17.837697+00:00] [INFO] heartbeat — queue=4 seen=592 tests=585 findings=585 followups=451
 [2026-04-26T09:29:17.858768+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-26T09:30:04.592496+00:00] [INFO] track regime_exploration: proposed 5, valid 5
+[2026-04-26T09:30:04.597001+00:00] [INFO]   queued 5 new questions (0 duplicates)
+[2026-04-26T09:30:04.597719+00:00] [INFO] [586] track=signal_discovery depth=3 Q: Does the correlation between SLV crossing below its fifty day moving average and
+[2026-04-26T09:30:05.777540+00:00] [INFO]   result: {"correlation": 0.7493, "n_days": 729, "ticker_a": "SLV", "ticker_b": "GDX", "runtime_s": 1.18}
+[2026-04-26T09:30:12.413049+00:00] [WARN] synthesis has unverified numbers ['0.5'] — retrying
+[2026-04-26T09:30:18.914945+00:00] [ERROR] retry still has unverified numbers ['0.5'] — dropping
+[2026-04-26T09:30:18.915583+00:00] [INFO]   score=1.00, synth=dropped
+[2026-04-26T09:30:18.917904+00:00] [INFO]   wrote 20260426-151-does-the-correlation-between-slv-crossing-below-its-fifty-da.json
+[2026-04-26T09:30:39.098005+00:00] [INFO] [587] track=signal_discovery depth=3 Q: Does increasing the volume filter threshold to extreme levels improve the hit ra
+[2026-04-26T09:30:39.572743+00:00] [INFO]   result: {"hit_rate_pct": 68.2, "n_events": 201, "mean_return_pct": 2.7, "signal": "rsi_oversold", "ticker": "SLV", "runtime_s": 0.47}
+[2026-04-26T09:30:45.897520+00:00] [INFO]   score=0.68, synth=ok
+[2026-04-26T09:30:45.902053+00:00] [INFO]   wrote 20260426-152-does-increasing-the-volume-filter-threshold-to-extreme-level.json
+[2026-04-26T09:31:06.115548+00:00] [INFO] [588] track=signal_discovery depth=3 Q: Does extending the lookback period for parameter optimization to the full availa
+[2026-04-26T09:31:06.535177+00:00] [INFO]   result: {"hit_rate_pct": 58.5, "n_events": 513, "mean_return_pct": 1.2, "signal": "rsi_oversold", "ticker": "SLV", "runtime_s": 0.42}
+[2026-04-26T09:31:14.077511+00:00] [WARN] synthesis has unverified numbers ['52'] — retrying
+[2026-04-26T09:31:20.612058+00:00] [INFO]   score=0.69, synth=ok
+[2026-04-26T09:31:20.615871+00:00] [INFO]   wrote 20260426-153-does-extending-the-lookback-period-for-parameter-optimizatio.json
+[2026-04-26T09:31:40.823409+00:00] [INFO] [589] track=signal_discovery depth=3 Q: Is the mean GDX return following volume-filtered SLV fifty day moving average cr
+[2026-04-26T09:31:41.218948+00:00] [INFO]   result: {"mean_return_pct": 0.1108, "regime": "all", "n_days": 1823, "ticker": "SLV", "runtime_s": 0.39}
+[2026-04-26T09:31:48.362037+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-26T09:31:48.365622+00:00] [INFO]   wrote 20260426-154-is-the-mean-gdx-return-following-volume-filtered-slv-fifty-d.json
+[2026-04-26T09:32:08.580081+00:00] [INFO] [590] track=regime_exploration depth=0 Q: Does GLD exhibit stronger positive correlation with SLV during VIX high regimes 
+[2026-04-26T09:32:09.325397+00:00] [INFO]   result: {"correlation": 0.7735, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SLV", "runtime_s": 0.74}
+[2026-04-26T09:32:15.859133+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-26T09:32:15.863022+00:00] [INFO]   wrote 20260426-155-does-gld-exhibit-stronger-positive-correlation-with-slv-duri.json
+[2026-04-26T09:32:33.134700+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-26T09:32:53.348507+00:00] [INFO] [591] track=regime_exploration depth=0 Q: Does TLT show higher mean return during SPX down month regimes compared to all o
+[2026-04-26T09:32:53.697649+00:00] [INFO]   result: {"mean_return_pct": -0.0171, "regime": "spx_down_month", "n_days": 729, "ticker": "TLT", "runtime_s": 0.35}
+[2026-04-26T09:32:59.494927+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-26T09:32:59.498254+00:00] [INFO]   wrote 20260426-156-does-tlt-show-higher-mean-return-during-spx-down-month-regim.json
+[2026-04-26T09:33:15.932059+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-26T09:33:36.030791+00:00] [INFO] [592] track=regime_exploration depth=0 Q: Does DXY demonstrate inverse correlation with GLD during VIX high regimes over t
+[2026-04-26T09:33:36.901551+00:00] [INFO]   result: {"correlation": -0.3882, "n_days": 599, "ticker_a": "DXY", "ticker_b": "GLD", "runtime_s": 0.87}
+[2026-04-26T09:33:42.641415+00:00] [INFO]   score=0.83, synth=ok
+[2026-04-26T09:33:42.645129+00:00] [INFO]   wrote 20260426-157-does-dxy-demonstrate-inverse-correlation-with-gld-during-vix.json
+[2026-04-26T09:33:59.848198+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-26T09:34:20.003716+00:00] [INFO] heartbeat — queue=8 seen=603 tests=592 findings=592 followups=457
+[2026-04-26T09:34:20.024438+00:00] [INFO] [593] track=regime_exploration depth=0 Q: Does SLV achieve a higher hit rate on RSI oversold signals during DXY rising reg
+[2026-04-26T09:34:20.481564+00:00] [INFO]   result: {"hit_rate_pct": 80.3, "n_events": 61, "mean_return_pct": 4.51, "signal": "rsi_oversold", "ticker": "SLV", "runtime_s": 0.46}
+[2026-04-26T09:34:27.289525+00:00] [INFO]   score=0.70, synth=ok
+[2026-04-26T09:34:27.293613+00:00] [INFO]   wrote 20260426-158-does-slv-achieve-a-higher-hit-rate-on-rsi-oversold-signals-d.json
+[2026-04-26T09:34:46.125083+00:00] [INFO]   spawned 2 follow-ups (depth 1)
