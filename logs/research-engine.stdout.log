@@ -4902,3 +4902,25 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-26T18:37:54.014069+00:00] [INFO]   result: {"hit_rate_pct": 75.2, "n_events": 129, "mean_return_pct": 1.66, "signal": "rsi_oversold", "ticker": "GLD", "runtime_s": 0.59}
 [2026-04-26T18:38:19.598634+00:00] [INFO]   score=0.65, synth=ok
 [2026-04-26T18:38:19.604283+00:00] [INFO]   wrote 20260426-407-does-the-hit-rate-of-dxy-strength-predicting-same-day-gld-we.json
+[2026-04-26T18:39:16.242821+00:00] [INFO]   spawned 2 follow-ups (depth 3)
+[2026-04-26T18:39:36.473774+00:00] [INFO] [843] track=regime_exploration depth=2 Q: Does the beta of TLT to SPX become significantly more negative during SPX down m
+[2026-04-26T18:39:37.569163+00:00] [INFO]   result: {"beta": 0.1273, "regime": "spx_down_month", "n_days": 729, "ticker": "TLT", "benchmark": "SPX", "runtime_s": 1.09}
+[2026-04-26T18:40:02.684494+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-26T18:40:02.691220+00:00] [INFO]   wrote 20260426-408-does-the-beta-of-tlt-to-spx-become-significantly-more-negati.json
+[2026-04-26T18:40:52.891933+00:00] [INFO]   spawned 1 follow-ups (depth 3)
+[2026-04-26T18:41:13.060593+00:00] [INFO] heartbeat — queue=10 seen=856 tests=843 findings=843 followups=672
+[2026-04-26T18:41:13.079966+00:00] [INFO] [844] track=regime_exploration depth=2 Q: Is the beta of TLT to SPX during SPX down month regimes more negative in the rec
+[2026-04-26T18:41:13.832054+00:00] [INFO]   result: {"beta": 0.1273, "regime": "spx_down_month", "n_days": 729, "ticker": "TLT", "benchmark": "SPX", "runtime_s": 0.75}
+[2026-04-26T18:41:39.831293+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-26T18:41:39.838157+00:00] [INFO]   wrote 20260426-409-is-the-beta-of-tlt-to-spx-during-spx-down-month-regimes-more.json
+[2026-04-26T18:42:28.704912+00:00] [INFO]   spawned 1 follow-ups (depth 3)
+[2026-04-26T18:42:48.919334+00:00] [INFO] [845] track=regime_exploration depth=2 Q: Does the VIX-GLD inverse correlation strengthen during SPX down months when vola
+[2026-04-26T18:42:49.663365+00:00] [INFO]   result: {"correlation": -0.074, "n_days": 701, "ticker_a": "GLD", "ticker_b": "VIX", "runtime_s": 0.74}
+[2026-04-26T18:42:56.592444+00:00] [WARN] synthesis has unverified numbers ['0.3'] — retrying
+[2026-04-26T18:43:04.462646+00:00] [ERROR] retry still has unverified numbers ['0.3'] — dropping
+[2026-04-26T18:43:04.464086+00:00] [INFO]   score=0.64, synth=dropped
+[2026-04-26T18:43:04.479133+00:00] [INFO]   wrote 20260426-410-does-the-vix-gld-inverse-correlation-strengthen-during-spx-d.json
+[2026-04-26T18:43:24.612608+00:00] [INFO] [846] track=regime_exploration depth=2 Q: Is the zero-lag VIX-GLD inverse correlation more persistent in the recent half o
+[2026-04-26T18:43:25.626053+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.074, "ticker_a": "GLD", "ticker_b": "VIX", "direction": "inverse", "n_days": 701, "runtime_s": 1.01}
+[2026-04-26T18:43:31.791884+00:00] [INFO]   score=0.64, synth=ok
+[2026-04-26T18:43:31.796568+00:00] [INFO]   wrote 20260426-411-is-the-zero-lag-vix-gld-inverse-correlation-more-persistent-.json
