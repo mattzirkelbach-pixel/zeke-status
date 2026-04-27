@@ -8099,3 +8099,38 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-27T14:10:12.805799+00:00] [INFO]   queued 2 new questions (0 duplicates)
 [2026-04-27T14:10:12.806408+00:00] [INFO] [1402] track=position_driven depth=3 Q: How does TLT drawdown depth during VIX low regimes compare to its drawdown durin
 [2026-04-27T14:10:13.424660+00:00] [INFO]   result: {"max_drawdown_pct": -20.11, "regime": "vix_low", "n_days": 730, "ticker": "TLT", "runtime_s": 0.62}
+[2026-04-27T14:10:24.546909+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-27T14:10:24.554309+00:00] [INFO]   wrote 20260427-291-how-does-tlt-drawdown-depth-during-vix-low-regimes-compare-t.json
+[2026-04-27T14:10:44.731449+00:00] [INFO] [1403] track=position_driven depth=3 Q: Is the GDX-SLV correlation stronger during silver DCL periods than during gold D
+[2026-04-27T14:10:45.621914+00:00] [INFO]   result: {"correlation": 0.6851, "n_days": 1824, "ticker_a": "GDX", "ticker_b": "SLV", "runtime_s": 0.89}
+[2026-04-27T14:10:59.901883+00:00] [WARN] synthesis has unverified numbers ['824'] — retrying
+[2026-04-27T14:11:13.271973+00:00] [ERROR] retry still has unverified numbers ['824'] — dropping
+[2026-04-27T14:11:13.273551+00:00] [INFO]   score=1.00, synth=dropped
+[2026-04-27T14:11:13.280102+00:00] [INFO]   wrote 20260427-292-is-the-gdx-slv-correlation-stronger-during-silver-dcl-period.json
+[2026-04-27T14:11:33.471628+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-27T14:12:31.435468+00:00] [INFO] track signal_discovery: proposed 5, valid 5
+[2026-04-27T14:12:31.440862+00:00] [INFO]   queued 2 new questions (3 duplicates)
+[2026-04-27T14:12:31.441287+00:00] [INFO] [1404] track=regime_exploration depth=0 Q: How does the lag days for SLV to predict GLD change during VIX high versus VIX l
+[2026-04-27T14:12:32.293694+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.7738, "ticker_a": "SLV", "ticker_b": "GLD", "direction": "same", "n_days": 729, "runtime_s": 0.85}
+[2026-04-27T14:12:40.643282+00:00] [WARN] synthesis has unverified numbers ['0.7'] — retrying
+[2026-04-27T14:12:47.816408+00:00] [ERROR] retry still has unverified numbers ['0.7'] — dropping
+[2026-04-27T14:12:47.817253+00:00] [INFO]   score=1.00, synth=dropped
+[2026-04-27T14:12:47.823096+00:00] [INFO]   wrote 20260427-293-how-does-the-lag-days-for-slv-to-predict-gld-change-during-v.json
+[2026-04-27T14:13:07.959940+00:00] [INFO] heartbeat — queue=5 seen=1412 tests=1404 findings=1404 followups=1133
+[2026-04-27T14:13:07.974675+00:00] [INFO] [1405] track=signal_discovery depth=3 Q: Is the average gold return after DXY breaks above its two hundred day moving ave
+[2026-04-27T14:13:08.383824+00:00] [INFO]   result: {"mean_return_pct": 0.0756, "regime": "all", "n_days": 1823, "ticker": "GLD", "runtime_s": 0.41}
+[2026-04-27T14:13:14.251525+00:00] [WARN] synthesis has unverified numbers ['823'] — retrying
+[2026-04-27T14:13:19.694817+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-27T14:13:19.702284+00:00] [INFO]   wrote 20260427-294-is-the-average-gold-return-after-dxy-breaks-above-its-two-hu.json
+[2026-04-27T14:13:39.871099+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-27T14:14:27.344375+00:00] [INFO] track regime_exploration: proposed 5, valid 2
+[2026-04-27T14:14:27.350824+00:00] [INFO]   queued 2 new questions (0 duplicates)
+[2026-04-27T14:14:27.351649+00:00] [INFO] [1406] track=position_driven depth=0 Q: Does TLT show lower drawdown during VIX high regimes compared to VIX low regimes
+[2026-04-27T14:14:28.482039+00:00] [INFO]   result: {"max_drawdown_pct": -13.32, "regime": "vix_high", "n_days": 38, "ticker": "TLT", "runtime_s": 1.13}
+[2026-04-27T14:14:34.528974+00:00] [INFO]   score=0.67, synth=ok
+[2026-04-27T14:14:34.536602+00:00] [INFO]   wrote 20260427-295-does-tlt-show-lower-drawdown-during-vix-high-regimes-compare.json
+[2026-04-27T14:14:51.927121+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-27T14:15:12.116725+00:00] [INFO] [1407] track=position_driven depth=0 Q: Does GLD beta to SLV change during SPX down month regimes compared to all regime
+[2026-04-27T14:15:12.937489+00:00] [INFO]   result: {"beta": 0.3799, "regime": "spx_down_month", "n_days": 729, "ticker": "GLD", "benchmark": "SLV", "runtime_s": 0.82}
+[2026-04-27T14:15:19.260117+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-27T14:15:19.267037+00:00] [INFO]   wrote 20260427-296-does-gld-beta-to-slv-change-during-spx-down-month-regimes-co.json
