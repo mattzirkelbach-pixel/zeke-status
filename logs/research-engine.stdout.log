@@ -6260,3 +6260,18 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-27T02:59:51.006145+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.074, "ticker_a": "GLD", "ticker_b": "VIX", "direction": "inverse", "n_days": 701, "runtime_s": 0.69}
 [2026-04-27T02:59:57.612057+00:00] [INFO]   score=0.64, synth=ok
 [2026-04-27T02:59:57.620489+00:00] [INFO]   wrote 20260426-648-what-is-the-optimal-lag-days-for-vix-to-predict-gld-returns-.json
+[2026-04-27T03:00:39.137357+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-27T03:00:59.348077+00:00] [INFO] [1084] track=regime_exploration depth=0 Q: How does SLV drawdown magnitude during VIX high regimes compare to its drawdown 
+[2026-04-27T03:01:00.199471+00:00] [INFO]   result: {"max_drawdown_pct": -22.35, "regime": "vix_high", "n_days": 38, "ticker": "SLV", "runtime_s": 0.85}
+[2026-04-27T03:01:11.769098+00:00] [INFO]   score=0.80, synth=ok
+[2026-04-27T03:01:11.778445+00:00] [INFO]   wrote 20260426-649-how-does-slv-drawdown-magnitude-during-vix-high-regimes-comp.json
+[2026-04-27T03:01:29.737900+00:00] [INFO]   spawned 1 follow-ups (depth 1)
+[2026-04-27T03:01:49.931206+00:00] [INFO] heartbeat — queue=6 seen=1093 tests=1084 findings=1084 followups=868
+[2026-04-27T03:01:49.949958+00:00] [INFO] [1085] track=position_driven depth=0 Q: Does GLD show stronger mean return during silver DCL periods compared to non-DCL
+[2026-04-27T03:01:50.234579+00:00] [INFO]   result: {"mean_return_pct": 0.1278, "regime": "silver_dcl", "n_days": 729, "ticker": "GLD", "runtime_s": 0.28}
+[2026-04-27T03:02:00.102180+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-27T03:02:00.110234+00:00] [INFO]   wrote 20260426-650-does-gld-show-stronger-mean-return-during-silver-dcl-periods.json
+[2026-04-27T03:02:09.936360+00:00] [INFO]   spawned 1 follow-ups (depth 1)
+[2026-04-27T03:02:30.183561+00:00] [INFO] [1086] track=position_driven depth=0 Q: What is the lag days for SLV to predict GLD returns when silver is in a confirme
+[2026-04-27T03:02:31.252555+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.7735, "ticker_a": "SLV", "ticker_b": "GLD", "direction": "same", "n_days": 729, "runtime_s": 1.07}
+[2026-04-27T03:02:38.748129+00:00] [WARN] synthesis has unverified numbers ['0.7'] — retrying
