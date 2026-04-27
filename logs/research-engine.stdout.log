@@ -5818,3 +5818,45 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-27T00:09:32.348842+00:00] [INFO]   score=1.00, synth=dropped
 [2026-04-27T00:09:32.366837+00:00] [INFO]   wrote 20260426-570-what-is-the-lag-days-for-xauusd-to-predict-xagusd-during-vix.json
 [2026-04-27T00:09:52.546562+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-27T00:10:38.438881+00:00] [INFO] track signal_discovery: proposed 5, valid 2
+[2026-04-27T00:10:38.444003+00:00] [INFO]   queued 1 new questions (1 duplicates)
+[2026-04-27T00:10:38.444736+00:00] [INFO] [1006] track=regime_exploration depth=0 Q: How does GLD drawdown during VIX high regimes compare to its drawdown during VIX
+[2026-04-27T00:10:39.241365+00:00] [INFO]   result: {"max_drawdown_pct": -15.39, "regime": "vix_high", "n_days": 38, "ticker": "GLD", "runtime_s": 0.8}
+[2026-04-27T00:10:45.562780+00:00] [INFO]   score=0.71, synth=ok
+[2026-04-27T00:10:45.569203+00:00] [INFO]   wrote 20260426-571-how-does-gld-drawdown-during-vix-high-regimes-compare-to-its.json
+[2026-04-27T00:10:55.182998+00:00] [INFO]   spawned 1 follow-ups (depth 1)
+[2026-04-27T00:11:15.332964+00:00] [INFO] heartbeat — queue=5 seen=1014 tests=1006 findings=1006 followups=801
+[2026-04-27T00:11:15.352433+00:00] [INFO] [1007] track=regime_exploration depth=1 Q: Does the GLD-SLV correlation weaken during VIX low regimes compared to VIX high 
+[2026-04-27T00:11:16.176854+00:00] [INFO]   result: {"correlation": 0.7735, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SLV", "runtime_s": 0.82}
+[2026-04-27T00:11:21.897725+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-27T00:11:21.905601+00:00] [INFO]   wrote 20260426-572-does-the-gld-slv-correlation-weaken-during-vix-low-regimes-c.json
+[2026-04-27T00:11:31.344177+00:00] [INFO]   spawned 1 follow-ups (depth 2)
+[2026-04-27T00:11:51.546132+00:00] [INFO] [1008] track=regime_exploration depth=1 Q: How does TLT beta to DXY behave during SPX down month regimes compared to all ot
+[2026-04-27T00:11:52.230923+00:00] [INFO]   result: {"beta": -0.619, "regime": "spx_down_month", "n_days": 599, "ticker": "TLT", "benchmark": "DXY", "runtime_s": 0.68}
+[2026-04-27T00:11:59.577775+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-27T00:11:59.585712+00:00] [INFO]   wrote 20260426-573-how-does-tlt-beta-to-dxy-behave-during-spx-down-month-regime.json
+[2026-04-27T00:12:17.091600+00:00] [INFO]   spawned 2 follow-ups (depth 2)
+[2026-04-27T00:12:37.292502+00:00] [INFO] [1009] track=position_driven depth=0 Q: What is the optimal lag in days for SLV to predict GLD price movements based on 
+[2026-04-27T00:12:37.994321+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.7735, "ticker_a": "SLV", "ticker_b": "GLD", "direction": "same", "n_days": 729, "runtime_s": 0.7}
+[2026-04-27T00:12:43.705109+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-27T00:12:43.719836+00:00] [INFO]   wrote 20260426-574-what-is-the-optimal-lag-in-days-for-slv-to-predict-gld-price.json
+[2026-04-27T00:13:01.334270+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-27T00:13:21.481099+00:00] [INFO] [1010] track=signal_discovery depth=0 Q: What is the correlation between DXY daily returns and GLD daily returns during s
+[2026-04-27T00:13:22.384962+00:00] [INFO]   result: {"correlation": -0.3882, "n_days": 599, "ticker_a": "DXY", "ticker_b": "GLD", "runtime_s": 0.9}
+[2026-04-27T00:13:29.210604+00:00] [INFO]   score=0.83, synth=ok
+[2026-04-27T00:13:29.218511+00:00] [INFO]   wrote 20260426-575-what-is-the-correlation-between-dxy-daily-returns-and-gld-da.json
+[2026-04-27T00:13:46.852887+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-27T00:14:07.065303+00:00] [INFO] [1011] track=regime_exploration depth=1 Q: How does the maximum drawdown of GLD during VIX low regimes compare to its drawd
+[2026-04-27T00:14:07.665497+00:00] [INFO]   result: {"max_drawdown_pct": -19.21, "regime": "vix_low", "n_days": 730, "ticker": "GLD", "runtime_s": 0.6}
+[2026-04-27T00:14:13.255576+00:00] [INFO]   score=0.98, synth=ok
+[2026-04-27T00:14:13.263329+00:00] [INFO]   wrote 20260426-576-how-does-the-maximum-drawdown-of-gld-during-vix-low-regimes-.json
+[2026-04-27T00:14:22.880591+00:00] [INFO]   spawned 1 follow-ups (depth 2)
+[2026-04-27T00:14:42.924344+00:00] [INFO] [1012] track=regime_exploration depth=2 Q: Is the GLD-SLV correlation significantly weaker during VIX low regimes compared 
+[2026-04-27T00:14:43.674967+00:00] [INFO]   result: {"correlation": 0.7735, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SLV", "runtime_s": 0.75}
+[2026-04-27T00:14:50.663222+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-27T00:14:50.670545+00:00] [INFO]   wrote 20260426-577-is-the-gld-slv-correlation-significantly-weaker-during-vix-l.json
+[2026-04-27T00:15:00.478986+00:00] [INFO]   spawned 1 follow-ups (depth 3)
+[2026-04-27T00:15:20.704421+00:00] [INFO] [1013] track=regime_exploration depth=2 Q: Does TLT beta to DXY become less negative during SPX up month regimes compared t
+[2026-04-27T00:15:21.826200+00:00] [INFO]   result: {"beta": -0.4593, "regime": "spx_up_month", "n_days": 1506, "ticker": "TLT", "benchmark": "DXY", "runtime_s": 1.12}
+[2026-04-27T00:15:28.466752+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-27T00:15:28.474095+00:00] [INFO]   wrote 20260426-578-does-tlt-beta-to-dxy-become-less-negative-during-spx-up-mont.json
