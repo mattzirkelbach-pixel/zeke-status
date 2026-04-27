@@ -8131,3 +8131,31 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-27T17:11:23.756553+00:00] [INFO]   result: {"beta": 1.2403, "regime": "pullback_only", "n_days": 246, "ticker": "IBIT", "benchmark": "SPX", "runtime_s": 0.8}
 [2026-04-27T17:11:37.048724+00:00] [INFO]   score=0.50, synth=ok
 [2026-04-27T17:11:37.058073+00:00] [INFO]   wrote 20260427-373-does-ibit-showing-relative-strength-versus-spx-during-pullba.json
+[2026-04-27T17:11:57.272608+00:00] [INFO] [1485] track=signal_discovery depth=0 Q: How often does a rising DXY coincide with silver making new lows on the same day
+[2026-04-27T17:11:57.716429+00:00] [INFO]   result: {"cross_count": 48, "level": "sma_50", "ticker": "DXY", "n_days": 602, "runtime_s": 0.44}
+[2026-04-27T17:12:03.604357+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-27T17:12:03.613026+00:00] [INFO]   wrote 20260427-374-how-often-does-a-rising-dxy-coincide-with-silver-making-new-.json
+[2026-04-27T17:12:14.031600+00:00] [INFO]   spawned 1 follow-ups (depth 1)
+[2026-04-27T17:12:34.256814+00:00] [INFO] [1486] track=signal_discovery depth=0 Q: Does GLD outperforming GDX during the first five days after a DCL signal predict
+[2026-04-27T17:12:34.932638+00:00] [INFO]   result: {"mean_return_pct": 2.06, "n_events": 32, "regime": "post_rsi_oversold_5d_proxy", "ticker": "GLD", "runtime_s": 0.67}
+[2026-04-27T17:12:41.035163+00:00] [INFO]   score=0.40, synth=ok
+[2026-04-27T17:12:41.044326+00:00] [INFO]   wrote 20260427-375-does-gld-outperforming-gdx-during-the-first-five-days-after-.json
+[2026-04-27T17:13:01.261415+00:00] [INFO] queue low (4), proposing batch for track=position_driven
+[2026-04-27T17:13:45.438429+00:00] [INFO] track position_driven: proposed 5, valid 2
+[2026-04-27T17:13:45.446905+00:00] [INFO]   queued 2 new questions (0 duplicates)
+[2026-04-27T17:13:45.448140+00:00] [INFO] [1487] track=regime_exploration depth=0 Q: How does the correlation between TLT and DXY shift during SPX down month regimes
+[2026-04-27T17:13:46.457908+00:00] [INFO]   result: {"correlation": -0.3155, "n_days": 599, "ticker_a": "TLT", "ticker_b": "DXY", "runtime_s": 1.01}
+[2026-04-27T17:13:54.025240+00:00] [INFO]   score=0.79, synth=ok
+[2026-04-27T17:13:54.049901+00:00] [INFO]   wrote 20260427-376-how-does-the-correlation-between-tlt-and-dxy-shift-during-sp.json
+[2026-04-27T17:14:04.558256+00:00] [INFO]   spawned 1 follow-ups (depth 1)
+[2026-04-27T17:14:24.781372+00:00] [INFO] [1488] track=regime_exploration depth=0 Q: Does SLV exhibit higher hit rate for RSI oversold signals during DXY rising regi
+[2026-04-27T17:14:25.223433+00:00] [INFO]   result: {"hit_rate_pct": 80.3, "n_events": 61, "mean_return_pct": 4.51, "signal": "rsi_oversold", "ticker": "SLV", "runtime_s": 0.44}
+[2026-04-27T17:14:32.219570+00:00] [INFO]   score=0.70, synth=ok
+[2026-04-27T17:14:32.227584+00:00] [INFO]   wrote 20260427-377-does-slv-exhibit-higher-hit-rate-for-rsi-oversold-signals-du.json
+[2026-04-27T17:14:50.341417+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-27T17:15:10.357296+00:00] [INFO] heartbeat — queue=7 seen=1498 tests=1488 findings=1488 followups=1202
+[2026-04-27T17:15:10.379674+00:00] [INFO] [1489] track=regime_exploration depth=0 Q: What is the optimal lag days for XAUUSD to predict GDX returns during VIX high r
+[2026-04-27T17:15:11.415626+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.7563, "ticker_a": "XAUUSD", "ticker_b": "GDX", "direction": "same", "n_days": 599, "runtime_s": 1.04}
+[2026-04-27T17:15:26.799225+00:00] [INFO]   score=1.00, synth=dropped
+[2026-04-27T17:15:26.808875+00:00] [INFO]   wrote 20260427-378-what-is-the-optimal-lag-days-for-xauusd-to-predict-gdx-retur.json
+[2026-04-27T17:15:47.018469+00:00] [INFO] rate cap hit (30/hr), sleeping 5min
