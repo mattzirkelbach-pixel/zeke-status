@@ -6246,3 +6246,17 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-27T02:51:46.132853+00:00] [INFO] rate cap hit (30/hr), sleeping 5min
 [2026-04-27T02:56:46.308024+00:00] [INFO] heartbeat — queue=4 seen=1087 tests=1080 findings=1080 followups=865
 [2026-04-27T02:56:46.334871+00:00] [INFO] queue low (4), proposing batch for track=position_driven
+[2026-04-27T02:58:40.672702+00:00] [INFO] track position_driven: proposed 5, valid 4
+[2026-04-27T02:58:40.678376+00:00] [INFO]   queued 3 new questions (1 duplicates)
+[2026-04-27T02:58:40.679263+00:00] [INFO] [1081] track=position_driven depth=3 Q: Is the inverse relationship between DXY and GLD more stable over time than that 
+[2026-04-27T02:58:41.531799+00:00] [INFO]   result: {"correlation": -0.3882, "n_days": 599, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.85}
+[2026-04-27T02:58:53.453405+00:00] [INFO]   score=0.83, synth=ok
+[2026-04-27T02:58:53.476184+00:00] [INFO]   wrote 20260426-646-is-the-inverse-relationship-between-dxy-and-gld-more-stable-.json
+[2026-04-27T02:59:13.985208+00:00] [INFO] [1082] track=regime_exploration depth=0 Q: Does IBIT show higher hit rate on RSI oversold signals during DXY rising regimes
+[2026-04-27T02:59:14.525746+00:00] [INFO]   result: {"hit_rate_pct": 52.9, "n_events": 34, "mean_return_pct": -0.29, "signal": "rsi_oversold", "ticker": "IBIT", "runtime_s": 0.54}
+[2026-04-27T02:59:30.277652+00:00] [INFO]   score=0.43, synth=ok
+[2026-04-27T02:59:30.285417+00:00] [INFO]   wrote 20260426-647-does-ibit-show-higher-hit-rate-on-rsi-oversold-signals-durin.json
+[2026-04-27T02:59:50.317853+00:00] [INFO] [1083] track=regime_exploration depth=0 Q: What is the optimal lag days for VIX to predict GLD returns during metals DCL co
+[2026-04-27T02:59:51.006145+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.074, "ticker_a": "GLD", "ticker_b": "VIX", "direction": "inverse", "n_days": 701, "runtime_s": 0.69}
+[2026-04-27T02:59:57.612057+00:00] [INFO]   score=0.64, synth=ok
+[2026-04-27T02:59:57.620489+00:00] [INFO]   wrote 20260426-648-what-is-the-optimal-lag-days-for-vix-to-predict-gld-returns-.json
