@@ -11291,3 +11291,27 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-28T09:40:19.601962+00:00] [INFO]   result: {"correlation": 0.7371, "n_days": 728, "ticker_a": "GLD", "ticker_b": "SILJ", "runtime_s": 0.93}
 [2026-04-28T09:40:31.092222+00:00] [INFO]   score=1.00, synth=ok
 [2026-04-28T09:40:31.130558+00:00] [INFO]   wrote 20260428-161-does-the-zero-lag-correlation-between-gld-and-silj-differ-du.json
+[2026-04-28T09:40:51.169702+00:00] [INFO] queue low (4), proposing batch for track=position_driven
+[2026-04-28T09:43:07.362740+00:00] [INFO] track position_driven: proposed 5, valid 2
+[2026-04-28T09:43:07.372808+00:00] [INFO]   queued 2 new questions (0 duplicates)
+[2026-04-28T09:43:07.373706+00:00] [INFO] [1953] track=regime_exploration depth=0 Q: What is the optimal lag in days for DXY to predict reversals in SLV during VIX c
+[2026-04-28T09:43:08.178754+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.2851, "ticker_a": "SLV", "ticker_b": "DXY", "direction": "inverse", "n_days": 599, "runtime_s": 0.8}
+[2026-04-28T09:43:14.464091+00:00] [INFO]   score=0.77, synth=ok
+[2026-04-28T09:43:14.493266+00:00] [INFO]   wrote 20260428-162-what-is-the-optimal-lag-in-days-for-dxy-to-predict-reversals.json
+[2026-04-28T09:43:32.202088+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-28T09:43:52.400344+00:00] [INFO] heartbeat — queue=7 seen=1963 tests=1953 findings=1953 followups=1589
+[2026-04-28T09:43:52.420234+00:00] [INFO] [1954] track=regime_exploration depth=0 Q: How does TLT beta to DXY change during SPX down month regimes versus all regimes
+[2026-04-28T09:43:53.196344+00:00] [INFO]   result: {"beta": -0.6183, "regime": "spx_down_month", "n_days": 599, "ticker": "TLT", "benchmark": "DXY", "runtime_s": 0.78}
+[2026-04-28T09:43:59.243266+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-28T09:43:59.252587+00:00] [INFO]   wrote 20260428-163-how-does-tlt-beta-to-dxy-change-during-spx-down-month-regime.json
+[2026-04-28T09:44:19.491981+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-28T09:44:39.787829+00:00] [INFO] [1955] track=regime_exploration depth=0 Q: Does SLV hit rate improve when using RSI oversold signals during DXY rising regi
+[2026-04-28T09:44:40.231109+00:00] [INFO]   result: {"hit_rate_pct": 80.3, "n_events": 61, "mean_return_pct": 4.51, "signal": "rsi_oversold", "ticker": "SLV", "runtime_s": 0.44}
+[2026-04-28T09:44:46.416441+00:00] [INFO]   score=0.70, synth=ok
+[2026-04-28T09:44:46.425900+00:00] [INFO]   wrote 20260428-164-does-slv-hit-rate-improve-when-using-rsi-oversold-signals-du.json
+[2026-04-28T09:45:06.266408+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-28T09:45:26.496482+00:00] [INFO] [1956] track=regime_exploration depth=0 Q: What is the optimal lag days for XAUUSD to predict GLD returns during VIX high r
+[2026-04-28T09:45:27.073029+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.9313, "ticker_a": "XAUUSD", "ticker_b": "GLD", "direction": "same", "n_days": 599, "runtime_s": 0.58}
+[2026-04-28T09:45:33.676308+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-28T09:45:33.684648+00:00] [INFO]   wrote 20260428-165-what-is-the-optimal-lag-days-for-xauusd-to-predict-gld-retur.json
+[2026-04-28T09:45:53.142789+00:00] [INFO]   spawned 2 follow-ups (depth 1)
