@@ -307,3 +307,7 @@ were healthy. Fix in `research/zeke-supervisor.py::check_local_minimum`: gate on
 
 **Rule:** any "stuck" detector that watches a single counter must also check overall value score
 before escalating, or it'll false-positive once that subsystem converges.
+
+
+## SUPERVISOR-CONVERGENCE-FALSE-POSITIVE
+Symptom: zeke-supervisor escalates `coarse_restart_failure_escalation` to cowork even though research-loop is producing breakthroughs/new instruments/falsifications. Cause: the `improvements` counter only counts PARAM-JITTER persistence above PERSIST_THRESHOLD=0.001 vs baseline. Once tuned signals reach bootstrap p05 ~0.95+, no jitter can clear the bar — convergence, not staleness. Fix: the CONVERGED_AVG_PER_HYP=1.0 + CONVERGED_MIN_BREAKTHROUGHS=5 gate in research/zeke-supervisor.py:check_local_minimum() short-circuits this. If escalation still fires, check that the rolling 50-cycle window has ≥5 breakthroughs AND avg_per_hypothesis ≥1.0 — if yes, gate is buggy; if no, raise the gate or extend the window. Resolved 2026-04-28.
