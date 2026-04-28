@@ -10959,3 +10959,17 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-28T11:27:18.937450+00:00] [INFO]   result: {"mean_return_pct": -0.0072, "regime": "dxy_above_sma200", "n_days": 602, "ticker": "DXY", "runtime_s": 0.46}
 [2026-04-28T11:27:45.043310+00:00] [INFO]   score=0.60, synth=dropped
 [2026-04-28T11:27:45.071600+00:00] [INFO]   wrote 20260428-206-does-dxy-breaking-above-its-two-hundred-day-moving-average-c.json
+[2026-04-28T11:28:05.257768+00:00] [INFO] [1998] track=signal_discovery depth=0 Q: How many times has SLV crossed its fifty day moving average from below while GLD
+[2026-04-28T11:28:05.511933+00:00] [INFO]   result: {"cross_count": 60, "level": "sma_50", "ticker": "SLV", "n_days": 730, "runtime_s": 0.25}
+[2026-04-28T11:28:15.661647+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-28T11:28:15.671681+00:00] [INFO]   wrote 20260428-207-how-many-times-has-slv-crossed-its-fifty-day-moving-average-.json
+[2026-04-28T11:28:54.083625+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-28T11:29:14.296249+00:00] [INFO] [1999] track=signal_discovery depth=0 Q: Does GLD outperforming SPX over five days predict TMF mean reversion over the su
+[2026-04-28T11:29:15.144588+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.1353, "ticker_a": "GLD", "ticker_b": "SPX", "direction": "same", "n_days": 729, "runtime_s": 0.85}
+[2026-04-28T11:29:26.194695+00:00] [INFO]   score=0.68, synth=ok
+[2026-04-28T11:29:26.205910+00:00] [INFO]   wrote 20260428-208-does-gld-outperforming-spx-over-five-days-predict-tmf-mean-r.json
+[2026-04-28T11:30:00.116204+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-28T11:30:20.288836+00:00] [INFO] [2000] track=regime_exploration depth=1 Q: How does the optimal lag for DXY to predict SLV returns change when VIX is falli
+[2026-04-28T11:30:21.395024+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.2851, "ticker_a": "SLV", "ticker_b": "DXY", "direction": "inverse", "n_days": 599, "runtime_s": 1.1}
+[2026-04-28T11:30:37.058368+00:00] [INFO]   score=0.77, synth=ok
+[2026-04-28T11:30:37.070779+00:00] [INFO]   wrote 20260428-209-how-does-the-optimal-lag-for-dxy-to-predict-slv-returns-chan.json
