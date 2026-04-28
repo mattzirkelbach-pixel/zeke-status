@@ -277,3 +277,16 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 - Named active rules (ALL-CAPS-HYPHENATED, <1500 chars) live here.
 - Dated post-mortems and verbose historical fixes go to `anti-patterns-archive.md`.
 - Grep both, read neither end-to-end.
+
+## 2026-04-28: Mass-disable without audit
+
+**Lesson:** When disabling looping LaunchAgents, audit each one BEFORE renaming to .disabled.
+Yesterday I disabled com.zeke.cowork-preflight-watchdog and com.zeke.session-report-card for crash-looping,
+but I also disabled com.zeke.morning-briefing in the same sweep. Briefing is legitimate scheduled work
+(Matt's daily Telegram digest) and was silently dead for ~24 hours.
+
+**Rule going forward:** Before disabling any LaunchAgent, run:
+1. grep -A2 ProgramArguments <plist> to see what script it runs
+2. Check the script for purpose comments / docstring
+3. ONLY disable if it is genuinely crash-looping AND has no legitimate purpose
+4. Add a comment in incidents/auto-disabled.jsonl explaining why
