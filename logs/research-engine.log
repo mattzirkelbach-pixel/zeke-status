@@ -12621,3 +12621,30 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-28T23:37:05.086129+00:00] [INFO] heartbeat — queue=15 seen=2330 tests=2312 findings=2312 followups=1903
 [2026-04-28T23:37:05.116026+00:00] [INFO] [2313] track=position_driven depth=2 Q: Does the optimal lag for DXY to predict SLV returns in the same direction shorte
 [2026-04-28T23:37:05.832194+00:00] [INFO]   result: {"optimal_lag_days": 6, "peak_correlation": 0.119, "ticker_a": "SLV", "ticker_b": "DXY", "direction": "same", "n_days": 492, "runtime_s": 0.72}
+[2026-04-28T23:37:48.411532+00:00] [INFO]   score=0.57, synth=ok
+[2026-04-28T23:37:48.447219+00:00] [INFO]   wrote 20260428-522-does-the-optimal-lag-for-dxy-to-predict-slv-returns-in-the-s.json
+[2026-04-28T23:38:08.976814+00:00] [INFO]   spawned 1 follow-ups (depth 3)
+[2026-04-28T23:38:29.210047+00:00] [INFO] [2314] track=position_driven depth=2 Q: Is the peak correlation between DXY and SLV returns in the same direction weaker
+[2026-04-28T23:38:30.076077+00:00] [INFO]   result: {"correlation": -0.2686, "n_days": 492, "ticker_a": "SLV", "ticker_b": "DXY", "runtime_s": 0.87}
+[2026-04-28T23:38:41.041278+00:00] [INFO]   score=0.66, synth=ok
+[2026-04-28T23:38:41.053314+00:00] [INFO]   wrote 20260428-523-is-the-peak-correlation-between-dxy-and-slv-returns-in-the-s.json
+[2026-04-28T23:39:01.428808+00:00] [INFO]   spawned 1 follow-ups (depth 3)
+[2026-04-28T23:39:21.629947+00:00] [INFO] [2315] track=position_driven depth=2 Q: Is the peak correlation between DXY and SLV returns at the optimal lag stronger 
+[2026-04-28T23:39:22.510497+00:00] [INFO]   result: {"optimal_lag_days": 6, "peak_correlation": 0.119, "ticker_a": "SLV", "ticker_b": "DXY", "direction": "same", "n_days": 492, "runtime_s": 0.88}
+[2026-04-28T23:39:33.394176+00:00] [INFO]   score=0.57, synth=ok
+[2026-04-28T23:39:33.406151+00:00] [INFO]   wrote 20260428-524-is-the-peak-correlation-between-dxy-and-slv-returns-at-the-o.json
+[2026-04-28T23:39:52.561624+00:00] [INFO]   spawned 1 follow-ups (depth 3)
+[2026-04-28T23:40:12.779078+00:00] [INFO] [2316] track=signal_discovery depth=2 Q: Does the DXY-GLD correlation become significantly more negative during periods o
+[2026-04-28T23:40:13.578391+00:00] [INFO]   result: {"correlation": -0.4376, "n_days": 1485, "ticker_a": "DXY", "ticker_b": "GLD", "runtime_s": 0.8}
+[2026-04-28T23:40:34.285679+00:00] [INFO]   score=0.86, synth=dropped
+[2026-04-28T23:40:34.297710+00:00] [INFO]   wrote 20260428-525-does-the-dxy-gld-correlation-become-significantly-more-negat.json
+[2026-04-28T23:40:54.516200+00:00] [INFO] [2317] track=signal_discovery depth=2 Q: Is the DXY-GLD correlation a better predictor of TLT returns when volatility is 
+[2026-04-28T23:40:55.317925+00:00] [INFO]   result: {"beta": -0.4735, "regime": "vix_change", "n_days": 1485, "ticker": "TLT", "benchmark": "DXY", "runtime_s": 0.8}
+[2026-04-28T23:41:09.978154+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-28T23:41:09.990810+00:00] [INFO]   wrote 20260428-526-is-the-dxy-gld-correlation-a-better-predictor-of-tlt-returns.json
+[2026-04-28T23:41:29.610562+00:00] [INFO]   spawned 1 follow-ups (depth 3)
+[2026-04-28T23:41:49.825947+00:00] [INFO] [2318] track=regime_exploration depth=2 Q: Does TLT exhibit different beta to SPX during DXY up regimes versus DXY down reg
+[2026-04-28T23:41:50.710626+00:00] [INFO]   result: {"beta": 0.1282, "regime": "all", "n_days": 728, "ticker": "TLT", "benchmark": "SPX", "runtime_s": 0.88}
+[2026-04-28T23:42:01.674950+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-28T23:42:01.688323+00:00] [INFO]   wrote 20260428-527-does-tlt-exhibit-different-beta-to-spx-during-dxy-up-regimes.json
+[2026-04-28T23:42:20.084982+00:00] [INFO]   spawned 1 follow-ups (depth 3)
