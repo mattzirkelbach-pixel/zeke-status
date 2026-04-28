@@ -290,3 +290,20 @@ but I also disabled com.zeke.morning-briefing in the same sweep. Briefing is leg
 2. Check the script for purpose comments / docstring
 3. ONLY disable if it is genuinely crash-looping AND has no legitimate purpose
 4. Add a comment in incidents/auto-disabled.jsonl explaining why
+
+
+## DO-NOT-REBUILD-LOCAL-MINIMUM-DETECTION
+
+**The bug pattern (don't reintroduce):** Treating `improvements==0 for N cycles` as "stuck" without
+checking value score. The research loop has 4 hypothesis kinds; `improvements` is only set by
+param_jitter / signal_ablation when delta_p05 >= PERSIST_THRESHOLD (0.001). Once configs converge
+near the bootstrap p05 ceiling (0.95+), random jitter rarely beats existing best — but the loop
+is still producing value via new_instrument validations and regime_conditional findings.
+
+**What that triggered (2026-04-28):** supervisor escalated `coarse_restart_failure_escalation`
+HIGH-priority cowork tasks every cycle even though avg per_hypothesis was 1.6 and breakthroughs
+were healthy. Fix in `research/zeke-supervisor.py::check_local_minimum`: gate on
+`avg_per_hypothesis >= CONVERGED_AVG_PER_HYP and breakthroughs >= CONVERGED_MIN_BREAKTHROUGHS`.
+
+**Rule:** any "stuck" detector that watches a single counter must also check overall value score
+before escalating, or it'll false-positive once that subsystem converges.
