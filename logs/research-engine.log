@@ -12585,3 +12585,27 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-28T23:21:23.030383+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.0676, "ticker_a": "GLD", "ticker_b": "VIX", "direction": "inverse", "n_days": 672, "runtime_s": 0.6}
 [2026-04-28T23:21:34.492301+00:00] [INFO]   score=0.64, synth=ok
 [2026-04-28T23:21:34.504104+00:00] [INFO]   wrote 20260428-515-does-the-lag-between-vix-peaks-and-gld-troughs-become-non-ze.json
+[2026-04-28T23:21:56.039680+00:00] [INFO]   spawned 1 follow-ups (depth 2)
+[2026-04-28T23:22:16.259291+00:00] [INFO] [2307] track=regime_exploration depth=1 Q: Is the inverse relationship between VIX and GLD stronger during SPX drawdown mon
+[2026-04-28T23:22:16.984453+00:00] [INFO]   result: {"correlation": -0.0676, "n_days": 672, "ticker_a": "GLD", "ticker_b": "VIX", "runtime_s": 0.72}
+[2026-04-28T23:22:40.553212+00:00] [INFO]   score=0.64, synth=ok
+[2026-04-28T23:22:40.565148+00:00] [INFO]   wrote 20260428-516-is-the-inverse-relationship-between-vix-and-gld-stronger-dur.json
+[2026-04-28T23:23:20.071106+00:00] [INFO]   spawned 2 follow-ups (depth 2)
+[2026-04-28T23:23:40.279798+00:00] [INFO] [2308] track=position_driven depth=1 Q: Does the same-day correlation between SLV and GLD returns weaken during extreme 
+[2026-04-28T23:23:41.179712+00:00] [INFO]   result: {"correlation": 0.7744, "n_days": 729, "ticker_a": "SLV", "ticker_b": "GLD", "runtime_s": 0.9}
+[2026-04-28T23:23:52.411627+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-28T23:23:52.424397+00:00] [INFO]   wrote 20260428-517-does-the-same-day-correlation-between-slv-and-gld-returns-we.json
+[2026-04-28T23:24:28.223588+00:00] [INFO]   spawned 2 follow-ups (depth 2)
+[2026-04-28T23:24:48.675373+00:00] [INFO] [2309] track=position_driven depth=1 Q: Is the zero-lag predictive relationship between SLV and GLD returns stronger dur
+[2026-04-28T23:24:49.443156+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.7744, "ticker_a": "SLV", "ticker_b": "GLD", "direction": "same", "n_days": 729, "runtime_s": 0.77}
+[2026-04-28T23:24:59.588533+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-28T23:24:59.600387+00:00] [INFO]   wrote 20260428-518-is-the-zero-lag-predictive-relationship-between-slv-and-gld-.json
+[2026-04-28T23:25:19.558170+00:00] [INFO]   spawned 1 follow-ups (depth 2)
+[2026-04-28T23:25:39.752645+00:00] [INFO] heartbeat — queue=15 seen=2327 tests=2309 findings=2309 followups=1900
+[2026-04-28T23:25:39.838428+00:00] [INFO] [2310] track=position_driven depth=1 Q: Does TMF exhibit a lower drawdown than TLT during VIX high regimes over the same
+[2026-04-28T23:25:40.875401+00:00] [INFO]   result: {"max_drawdown_pct": -42.29, "regime": "vix_high", "n_days": 38, "ticker": "TMF", "runtime_s": 1.04}
+[2026-04-28T23:25:54.473977+00:00] [INFO]   score=0.80, synth=ok
+[2026-04-28T23:25:54.486343+00:00] [INFO]   wrote 20260428-519-does-tmf-exhibit-a-lower-drawdown-than-tlt-during-vix-high-r.json
+[2026-04-28T23:26:14.190706+00:00] [INFO]   spawned 1 follow-ups (depth 2)
+[2026-04-28T23:26:34.397702+00:00] [INFO] [2311] track=position_driven depth=1 Q: Does ALM maintain a positive mean return during SPX down month regimes when VIX 
+[2026-04-28T23:26:35.031079+00:00] [INFO]   result: {"mean_return_pct": 0.5548, "regime": "spx_down_month", "n_days": 729, "ticker": "ALM", "runtime_s": 0.63}
