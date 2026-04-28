@@ -10000,3 +10000,22 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-28T01:46:09.362715+00:00] [INFO] heartbeat — queue=9 seen=1739 tests=1727 findings=1727 followups=1402
 [2026-04-28T01:46:09.391671+00:00] [INFO] [1728] track=regime_exploration depth=0 Q: How does the lag between DXY moves and GLD returns change when VIX is in the top
 [2026-04-28T01:46:09.884515+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.3868, "ticker_a": "GLD", "ticker_b": "DXY", "direction": "inverse", "n_days": 599, "runtime_s": 0.49}
+[2026-04-28T01:46:23.790445+00:00] [WARN] synthesis has unverified numbers ['0.30'] — retrying
+[2026-04-28T01:46:36.803717+00:00] [ERROR] retry still has unverified numbers ['0.38'] — dropping
+[2026-04-28T01:46:36.804753+00:00] [INFO]   score=0.83, synth=dropped
+[2026-04-28T01:46:36.816653+00:00] [INFO]   wrote 20260427-617-how-does-the-lag-between-dxy-moves-and-gld-returns-change-wh.json
+[2026-04-28T01:46:57.145576+00:00] [INFO] [1729] track=position_driven depth=0 Q: Does GLD show stronger mean return during silver DCL periods compared to non-DCL
+[2026-04-28T01:46:57.607691+00:00] [INFO]   result: {"mean_return_pct": 0.1259, "regime": "silver_dcl", "n_days": 729, "ticker": "GLD", "runtime_s": 0.46}
+[2026-04-28T01:47:03.748970+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-28T01:47:03.759472+00:00] [INFO]   wrote 20260427-618-does-gld-show-stronger-mean-return-during-silver-dcl-periods.json
+[2026-04-28T01:47:21.501055+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-28T01:47:41.697690+00:00] [INFO] [1730] track=position_driven depth=0 Q: What is the lag days for TLT to predict TMF movements during weekly cycle low re
+[2026-04-28T01:47:42.633096+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.9938, "ticker_a": "TLT", "ticker_b": "TMF", "direction": "same", "n_days": 729, "runtime_s": 0.93}
+[2026-04-28T01:47:49.931778+00:00] [WARN] synthesis has unverified numbers ['0.95'] — retrying
+[2026-04-28T01:47:56.280756+00:00] [ERROR] retry still has unverified numbers ['0.95'] — dropping
+[2026-04-28T01:47:56.281768+00:00] [INFO]   score=1.00, synth=dropped
+[2026-04-28T01:47:56.292267+00:00] [INFO]   wrote 20260427-619-what-is-the-lag-days-for-tlt-to-predict-tmf-movements-during.json
+[2026-04-28T01:48:16.404677+00:00] [INFO] [1731] track=position_driven depth=0 Q: What is the drawdown of SLV during periods when gold is in DCL and silver is not
+[2026-04-28T01:48:16.853617+00:00] [INFO]   result: {"max_drawdown_pct": -42.45, "regime": "gold_dcl_only", "n_days": 730, "ticker": "SLV", "runtime_s": 0.45}
+[2026-04-28T01:48:22.780801+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-28T01:48:22.792620+00:00] [INFO]   wrote 20260427-620-what-is-the-drawdown-of-slv-during-periods-when-gold-is-in-d.json
