@@ -11574,3 +11574,16 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-28T11:30:21.395024+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.2851, "ticker_a": "SLV", "ticker_b": "DXY", "direction": "inverse", "n_days": 599, "runtime_s": 1.1}
 [2026-04-28T11:30:37.058368+00:00] [INFO]   score=0.77, synth=ok
 [2026-04-28T11:30:37.070779+00:00] [INFO]   wrote 20260428-209-how-does-the-optimal-lag-for-dxy-to-predict-slv-returns-chan.json
+[2026-04-28T11:31:11.995056+00:00] [INFO]   spawned 2 follow-ups (depth 2)
+[2026-04-28T11:31:32.131155+00:00] [INFO] heartbeat — queue=13 seen=2016 tests=2000 findings=2000 followups=1635
+[2026-04-28T11:31:32.160392+00:00] [INFO] [2001] track=regime_exploration depth=1 Q: Does the peak correlation between DXY and SLV returns at zero lag hold during pe
+[2026-04-28T11:31:33.232853+00:00] [INFO]   result: {"correlation": -0.2851, "n_days": 599, "ticker_a": "SLV", "ticker_b": "DXY", "runtime_s": 1.07}
+[2026-04-28T11:31:45.324540+00:00] [WARN] synthesis has unverified numbers ['0.5'] — retrying
+[2026-04-28T11:31:59.610704+00:00] [ERROR] retry still has unverified numbers ['0.5'] — dropping
+[2026-04-28T11:31:59.613006+00:00] [INFO]   score=0.77, synth=dropped
+[2026-04-28T11:31:59.642780+00:00] [INFO]   wrote 20260428-210-does-the-peak-correlation-between-dxy-and-slv-returns-at-zer.json
+[2026-04-28T11:32:19.845285+00:00] [INFO] [2002] track=position_driven depth=1 Q: Does the hit rate of buying SLV on RSI oversold signals improve when silver pric
+[2026-04-28T11:32:20.365625+00:00] [INFO]   result: {"hit_rate_pct": 68.2, "n_events": 201, "mean_return_pct": 2.7, "signal": "rsi_oversold", "ticker": "SLV", "runtime_s": 0.52}
+[2026-04-28T11:32:32.218308+00:00] [INFO]   score=0.68, synth=ok
+[2026-04-28T11:32:32.226046+00:00] [INFO]   wrote 20260428-211-does-the-hit-rate-of-buying-slv-on-rsi-oversold-signals-impr.json
+[2026-04-28T11:32:54.089760+00:00] [WARN] followup: all 1 candidates rejected by validator
