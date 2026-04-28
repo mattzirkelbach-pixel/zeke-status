@@ -12099,3 +12099,30 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-28T14:48:02.748244+00:00] [INFO]   score=0.60, synth=ok
 [2026-04-28T14:48:02.778731+00:00] [INFO]   wrote 20260428-301-does-the-frequency-of-tlt-drawdown-threshold-crossings-incre.json
 [2026-04-28T14:48:22.947684+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-28T14:49:50.274840+00:00] [INFO] track regime_exploration: proposed 5, valid 4
+[2026-04-28T14:49:50.283495+00:00] [INFO]   queued 2 new questions (2 duplicates)
+[2026-04-28T14:49:50.284587+00:00] [INFO] [2093] track=position_driven depth=3 Q: Is the correlation between SLV and GLD significantly lower during declining vola
+[2026-04-28T14:49:50.964033+00:00] [INFO]   result: {"correlation": 0.778, "n_days": 1823, "ticker_a": "SLV", "ticker_b": "GLD", "runtime_s": 0.68}
+[2026-04-28T14:50:05.629201+00:00] [WARN] synthesis has unverified numbers ['823'] — retrying
+[2026-04-28T14:50:17.644688+00:00] [ERROR] retry still has unverified numbers ['823'] — dropping
+[2026-04-28T14:50:17.646340+00:00] [INFO]   score=1.00, synth=dropped
+[2026-04-28T14:50:17.676710+00:00] [INFO]   wrote 20260428-302-is-the-correlation-between-slv-and-gld-significantly-lower-d.json
+[2026-04-28T14:50:37.920900+00:00] [INFO] [2094] track=signal_discovery depth=0 Q: Does IBIT crossing above its fifty day moving average predict BTC strength over 
+[2026-04-28T14:50:38.704401+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.8165, "ticker_a": "IBIT", "ticker_b": "BTC", "direction": "same", "n_days": 500, "runtime_s": 0.78}
+[2026-04-28T14:50:52.421738+00:00] [WARN] synthesis has unverified numbers ['22'] — retrying
+[2026-04-28T14:51:06.039916+00:00] [ERROR] retry still has unverified numbers ['22'] — dropping
+[2026-04-28T14:51:06.041255+00:00] [INFO]   score=0.99, synth=dropped
+[2026-04-28T14:51:06.051936+00:00] [INFO]   wrote 20260428-303-does-ibit-crossing-above-its-fifty-day-moving-average-predic.json
+[2026-04-28T14:51:26.195907+00:00] [INFO] queue low (4), proposing batch for track=position_driven
+[2026-04-28T14:52:57.538501+00:00] [INFO] track position_driven: proposed 5, valid 3
+[2026-04-28T14:52:57.547469+00:00] [INFO]   queued 3 new questions (0 duplicates)
+[2026-04-28T14:52:57.548576+00:00] [INFO] [2095] track=signal_discovery depth=0 Q: What is the correlation between DXY strength and GLD drawdowns during SPX down m
+[2026-04-28T14:52:58.453219+00:00] [INFO]   result: {"correlation": -0.3874, "n_days": 600, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.9}
+[2026-04-28T14:53:12.400682+00:00] [INFO]   score=0.83, synth=ok
+[2026-04-28T14:53:12.432640+00:00] [INFO]   wrote 20260428-304-what-is-the-correlation-between-dxy-strength-and-gld-drawdow.json
+[2026-04-28T14:53:49.878548+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-28T14:54:09.906751+00:00] [INFO] heartbeat — queue=8 seen=2106 tests=2095 findings=2095 followups=1711
+[2026-04-28T14:54:09.934875+00:00] [INFO] [2096] track=signal_discovery depth=0 Q: How often does SLV crossing above its fifty day moving average precede GDX outpe
+[2026-04-28T14:54:10.716029+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.7502, "ticker_a": "SLV", "ticker_b": "GDX", "direction": "same", "n_days": 729, "runtime_s": 0.78}
+[2026-04-28T14:54:24.283386+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-28T14:54:24.315360+00:00] [INFO]   wrote 20260428-305-how-often-does-slv-crossing-above-its-fifty-day-moving-avera.json
