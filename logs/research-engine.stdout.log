@@ -14477,3 +14477,34 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-29T11:35:06.479178+00:00] [INFO]   wrote 20260429-113-how-does-the-drawdown-of-tmf-compare-to-tlt-during-periods-o.json
 [2026-04-29T11:35:26.563275+00:00] [INFO] [2491] track=regime_exploration depth=0 Q: How does the correlation between TLT and DXY change during SPX down month regime
 [2026-04-29T11:35:27.661100+00:00] [INFO]   result: {"correlation": -0.3219, "n_days": 599, "ticker_a": "TLT", "ticker_b": "DXY", "runtime_s": 1.1}
+[2026-04-29T11:35:42.684571+00:00] [INFO]   score=0.79, synth=ok
+[2026-04-29T11:35:42.697311+00:00] [INFO]   wrote 20260429-114-how-does-the-correlation-between-tlt-and-dxy-change-during-s.json
+[2026-04-29T11:36:04.164899+00:00] [INFO]   spawned 1 follow-ups (depth 1)
+[2026-04-29T11:36:24.395391+00:00] [INFO] [2492] track=regime_exploration depth=0 Q: Does SLV exhibit a consistent lag in response to DXY moves during VIX high regim
+[2026-04-29T11:36:25.075060+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.2847, "ticker_a": "SLV", "ticker_b": "DXY", "direction": "inverse", "n_days": 599, "runtime_s": 0.68}
+[2026-04-29T11:36:37.600380+00:00] [INFO]   score=0.77, synth=ok
+[2026-04-29T11:36:37.613212+00:00] [INFO]   wrote 20260429-115-does-slv-exhibit-a-consistent-lag-in-response-to-dxy-moves-d.json
+[2026-04-29T11:37:15.819296+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-29T11:37:35.981133+00:00] [INFO] [2493] track=signal_discovery depth=0 Q: How many times has TLT crossed below its two hundred day moving average while DX
+[2026-04-29T11:37:36.373519+00:00] [INFO]   result: {"cross_count": 26, "level": "sma_200", "ticker": "TLT", "n_days": 730, "runtime_s": 0.39}
+[2026-04-29T11:37:47.612903+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-29T11:37:47.625288+00:00] [INFO]   wrote 20260429-116-how-many-times-has-tlt-crossed-below-its-two-hundred-day-mov.json
+[2026-04-29T11:38:24.074989+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-29T11:38:44.272026+00:00] [INFO] heartbeat — queue=8 seen=2504 tests=2493 findings=2493 followups=2039
+[2026-04-29T11:38:44.296951+00:00] [INFO] [2494] track=signal_discovery depth=0 Q: Does IBIT crossing above its fifty day moving average predict BTC outperformance
+[2026-04-29T11:38:44.996529+00:00] [INFO]   result: {"hit_rate_pct": 51.6, "n_events": 256, "mean_return_pct": 0.88, "signal": "sma_reclaim", "ticker": "IBIT", "runtime_s": 0.7}
+[2026-04-29T11:38:56.425210+00:00] [WARN] synthesis has unverified numbers ['22'] — retrying
+[2026-04-29T11:39:07.835911+00:00] [INFO]   score=0.52, synth=ok
+[2026-04-29T11:39:07.849550+00:00] [INFO]   wrote 20260429-117-does-ibit-crossing-above-its-fifty-day-moving-average-predic.json
+[2026-04-29T11:39:28.038963+00:00] [INFO] [2495] track=signal_discovery depth=0 Q: What is the correlation between GLD and SILJ returns during periods when SPX is 
+[2026-04-29T11:39:28.729136+00:00] [INFO]   result: {"correlation": 0.7381, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SILJ", "runtime_s": 0.69}
+[2026-04-29T11:39:42.406376+00:00] [WARN] synthesis has unverified numbers ['0.6'] — retrying
+[2026-04-29T11:39:53.870828+00:00] [ERROR] retry still has unverified numbers ['0.6'] — dropping
+[2026-04-29T11:39:53.871834+00:00] [INFO]   score=1.00, synth=dropped
+[2026-04-29T11:39:53.883451+00:00] [INFO]   wrote 20260429-118-what-is-the-correlation-between-gld-and-silj-returns-during-.json
+[2026-04-29T11:40:14.061100+00:00] [INFO] [2496] track=signal_discovery depth=0 Q: Does SLV crossing below its twenty day moving average predict GDX underperforman
+[2026-04-29T11:40:14.561129+00:00] [INFO]   result: {"error": "no sma_breakdown events in window", "runtime_s": 0.5}
+[2026-04-29T11:40:14.562016+00:00] [INFO]   score=0.00, synth=ok
+[2026-04-29T11:40:14.577498+00:00] [INFO]   wrote 20260429-119-does-slv-crossing-below-its-twenty-day-moving-average-predic.json
+[2026-04-29T11:40:34.781194+00:00] [INFO] [2497] track=regime_exploration depth=1 Q: Does the TLT-DXY correlation become significantly weaker during SPX down month r
+[2026-04-29T11:40:35.521037+00:00] [INFO]   result: {"correlation": -0.3219, "n_days": 599, "ticker_a": "TLT", "ticker_b": "DXY", "runtime_s": 0.74}
