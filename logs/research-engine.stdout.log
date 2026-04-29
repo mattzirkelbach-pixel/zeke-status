@@ -15138,3 +15138,29 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-29T15:42:17.227255+00:00] [INFO] rate cap hit (30/hr), sleeping 5min
 [2026-04-29T15:47:17.416605+00:00] [INFO] heartbeat — queue=7 seen=2618 tests=2608 findings=2608 followups=2136
 [2026-04-29T15:47:17.499539+00:00] [INFO] rate cap hit (30/hr), sleeping 5min
+[2026-04-29T15:52:17.697783+00:00] [INFO] heartbeat — queue=7 seen=2618 tests=2608 findings=2608 followups=2136
+[2026-04-29T15:52:17.772975+00:00] [INFO] [2609] track=position_driven depth=0 Q: Does SLV show lower drawdown during SPX down month regimes when paired with TLT
+[2026-04-29T15:52:18.564988+00:00] [INFO]   result: {"max_drawdown_pct": -42.45, "regime": "spx_down_month", "n_days": 730, "ticker": "SLV", "runtime_s": 0.79}
+[2026-04-29T15:52:27.289646+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-29T15:52:27.328097+00:00] [INFO]   wrote 20260429-232-does-slv-show-lower-drawdown-during-spx-down-month-regimes-w.json
+[2026-04-29T15:52:59.163308+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-29T15:53:19.380983+00:00] [INFO] [2610] track=signal_discovery depth=0 Q: Does DXY closing above its two hundred day moving average correlate with IBIT me
+[2026-04-29T15:53:19.842681+00:00] [INFO]   result: {"mean_return_pct": -0.0078, "regime": "dxy_above_sma200", "n_days": 602, "ticker": "DXY", "runtime_s": 0.46}
+[2026-04-29T15:53:32.399245+00:00] [WARN] synthesis has unverified numbers ['22'] — retrying
+[2026-04-29T15:53:46.530003+00:00] [ERROR] retry still has unverified numbers ['22'] — dropping
+[2026-04-29T15:53:46.531035+00:00] [INFO]   score=0.60, synth=dropped
+[2026-04-29T15:53:46.542543+00:00] [INFO]   wrote 20260429-233-does-dxy-closing-above-its-two-hundred-day-moving-average-co.json
+[2026-04-29T15:54:06.941081+00:00] [INFO] [2611] track=signal_discovery depth=0 Q: How many times has SLV crossed its fifty day moving average from below during si
+[2026-04-29T15:54:07.467895+00:00] [INFO]   result: {"cross_count": 60, "level": "sma_50", "ticker": "SLV", "n_days": 730, "runtime_s": 0.53}
+[2026-04-29T15:54:17.076231+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-29T15:54:17.090722+00:00] [INFO]   wrote 20260429-234-how-many-times-has-slv-crossed-its-fifty-day-moving-average-.json
+[2026-04-29T15:54:58.321172+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-29T15:55:18.528010+00:00] [INFO] [2612] track=signal_discovery depth=0 Q: Does GLD underperforming GDX over five days predict a silver rally over the next
+[2026-04-29T15:55:19.433206+00:00] [INFO]   result: {"optimal_lag_days": 7, "peak_correlation": 0.075, "ticker_a": "GLD", "ticker_b": "GDX", "direction": "inverse", "n_days": 729, "runtime_s": 0.9}
+[2026-04-29T15:55:32.106055+00:00] [INFO]   score=0.65, synth=ok
+[2026-04-29T15:55:32.119338+00:00] [INFO]   wrote 20260429-235-does-gld-underperforming-gdx-over-five-days-predict-a-silver.json
+[2026-04-29T15:56:07.559274+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-29T15:56:27.743097+00:00] [INFO] [2613] track=position_driven depth=1 Q: Does the IBIT-BTC correlation weaken during VIX high regimes compared to VIX low
+[2026-04-29T15:56:28.623241+00:00] [INFO]   result: {"correlation": 0.7893, "n_days": 341, "ticker_a": "IBIT", "ticker_b": "BTC", "runtime_s": 0.88}
+[2026-04-29T15:56:39.087540+00:00] [INFO]   score=0.97, synth=ok
+[2026-04-29T15:56:39.100865+00:00] [INFO]   wrote 20260429-236-does-the-ibit-btc-correlation-weaken-during-vix-high-regimes.json
