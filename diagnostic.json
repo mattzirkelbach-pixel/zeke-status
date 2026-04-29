@@ -1,11 +1,11 @@
 {
-  "timestamp_local": "2026-04-29 05:58:35 ET",
-  "timestamp_utc": "2026-04-29T09:58:35Z",
+  "timestamp_local": "2026-04-29 06:01:23 ET",
+  "timestamp_utc": "2026-04-29T10:01:23Z",
   "scheduler": {
     "running": true,
     "pid": 1777,
-    "uptime_minutes": 15196,
-    "current_window": "queue/reason"
+    "uptime_minutes": 15199,
+    "current_window": "daytime"
   },
   "feed": {
     "total_lines": 42587,
@@ -30,12 +30,12 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nemotron-3-nano:30b"
+      "nemotron-3-super:120b"
     ],
     "model_stuck": false,
     "stuck_model": null,
-    "inference_active": false,
-    "detail": "healthy, loaded: nemotron-3-nano:30b"
+    "inference_active": true,
+    "detail": "healthy, loaded: nemotron-3-super:120b"
   },
   "gateway": {
     "running": true
@@ -48,16 +48,6 @@
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-04-29T04:30:22.240962",
-      "window": "overnight",
-      "cycle": 142,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-04-29T04:33:36.768544",
       "window": "overnight",
@@ -142,6 +132,16 @@
       "ts": "2026-04-29T04:59:18.015530",
       "window": "overnight",
       "cycle": 151,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-04-29T06:00:54.372020",
+      "window": "daytime",
+      "cycle": 1,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
@@ -244,14 +244,14 @@
     {
       "name": "treasury-bonds",
       "status": "success",
-      "duration": 0,
+      "duration": 1,
       "grew": 0,
       "issues": []
     },
     {
       "name": "treasury-bonds",
       "status": "success",
-      "duration": 1,
+      "duration": 0,
       "grew": 0,
       "issues": []
     },
