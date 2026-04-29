@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-04-28T22:58:48.213643",
+  "timestamp": "2026-04-28T23:03:31.917763",
   "window": "overnight",
-  "cycle": 38,
+  "cycle": 39,
   "feed_before": 42561,
   "feed_after": 42561,
   "feed_growth": 0,
   "jobs": {
     "total": 1,
-    "success": 1,
+    "success": 0,
     "fail": 0,
     "timeout": 0
   },
@@ -15,14 +15,30 @@
     {
       "uuid": "fd3685b9-d6c",
       "name": "treasury-bonds",
-      "status": "success",
+      "status": "unknown",
       "duration_s": 0,
       "feed_grew": 0,
       "entry_valid": false,
-      "issues": []
+      "issues": [
+        "spark_locked"
+      ]
     }
   ],
-  "failures": [],
-  "needs_repair": false,
-  "feed_stagnant": true
+  "failures": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "unknown",
+      "duration_s": 0,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [
+        "spark_locked"
+      ]
+    }
+  ],
+  "needs_repair": true,
+  "feed_stagnant": true,
+  "repair_dispatched": true,
+  "repair_result": "error"
 }
