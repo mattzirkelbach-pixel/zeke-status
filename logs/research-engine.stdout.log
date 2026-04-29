@@ -16367,3 +16367,22 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-29T23:14:47.560610+00:00] [INFO] queue low (4), proposing batch for track=position_driven
 [2026-04-29T23:16:27.196852+00:00] [WARN] track position_driven bad JSON: Expecting property name enclosed in double quotes: line 11 column 5 (char 564)
 [2026-04-29T23:16:27.204801+00:00] [INFO]   queued 0 new questions (0 duplicates)
+[2026-04-29T23:17:27.374330+00:00] [INFO] heartbeat — queue=4 seen=2828 tests=2821 findings=2821 followups=2315
+[2026-04-29T23:17:27.391310+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-29T23:18:59.472855+00:00] [INFO] track signal_discovery: proposed 5, valid 1
+[2026-04-29T23:18:59.480418+00:00] [INFO]   queued 1 new questions (0 duplicates)
+[2026-04-29T23:18:59.481458+00:00] [INFO] [2822] track=position_driven depth=3 Q: Does the GLD-XAUUSD correlation show greater stability during high VIX regimes t
+[2026-04-29T23:19:00.344433+00:00] [INFO]   result: {"correlation": 0.9315, "n_days": 600, "ticker_a": "GLD", "ticker_b": "XAUUSD", "runtime_s": 0.86}
+[2026-04-29T23:19:14.866577+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-29T23:19:14.914088+00:00] [INFO]   wrote 20260429-445-does-the-gld-xauusd-correlation-show-greater-stability-durin.json
+[2026-04-29T23:19:35.132669+00:00] [INFO] queue low (4), proposing batch for track=regime_exploration
+[2026-04-29T23:21:00.334057+00:00] [INFO] track regime_exploration: proposed 5, valid 5
+[2026-04-29T23:21:00.341346+00:00] [INFO]   queued 4 new questions (1 duplicates)
+[2026-04-29T23:21:00.342691+00:00] [INFO] [2823] track=signal_discovery depth=3 Q: Is the correlation between the GLD-SLV ratio and GDX returns significantly stron
+[2026-04-29T23:21:01.298926+00:00] [INFO]   result: {"correlation": 0.7746, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SLV", "runtime_s": 0.96}
+[2026-04-29T23:21:16.312708+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-29T23:21:16.331438+00:00] [INFO]   wrote 20260429-446-is-the-correlation-between-the-gld-slv-ratio-and-gdx-returns.json
+[2026-04-29T23:21:36.546913+00:00] [INFO] [2824] track=regime_exploration depth=0 Q: What is the optimal lag for DXY to predict SLV returns during VIX high regimes o
+[2026-04-29T23:21:37.445846+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.2856, "ticker_a": "SLV", "ticker_b": "DXY", "direction": "inverse", "n_days": 600, "runtime_s": 0.9}
+[2026-04-29T23:21:49.279902+00:00] [INFO]   score=0.77, synth=ok
+[2026-04-29T23:21:49.293998+00:00] [INFO]   wrote 20260429-447-what-is-the-optimal-lag-for-dxy-to-predict-slv-returns-durin.json
