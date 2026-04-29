@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-04-29 03:55:56 ET",
-  "timestamp_utc": "2026-04-29T07:55:56Z",
+  "timestamp_local": "2026-04-29 03:58:58 ET",
+  "timestamp_utc": "2026-04-29T07:58:58Z",
   "scheduler": {
     "running": true,
     "pid": 1777,
-    "uptime_minutes": 15073,
+    "uptime_minutes": 15076,
     "current_window": "overnight"
   },
   "feed": {
@@ -28,14 +28,12 @@
     "last_modified_minutes_ago": 1.7
   },
   "spark": {
-    "online": true,
-    "models_loaded": [
-      "nemotron-3-nano:30b"
-    ],
+    "online": false,
+    "models_loaded": [],
     "model_stuck": false,
     "stuck_model": null,
-    "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b"
+    "inference_active": false,
+    "detail": "unreachable"
   },
   "gateway": {
     "running": true
@@ -48,16 +46,6 @@
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-04-29T03:26:48.501332",
-      "window": "overnight",
-      "cycle": 122,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-04-29T03:30:00.752759",
       "window": "overnight",
@@ -142,6 +130,16 @@
       "ts": "2026-04-29T03:55:31.024485",
       "window": "overnight",
       "cycle": 131,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-04-29T03:58:24.825422",
+      "window": "overnight",
+      "cycle": 132,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
@@ -292,8 +290,10 @@
     }
   ],
   "health": {
-    "status": "HEALTHY",
-    "issues": []
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "CRITICAL: Spark offline"
+    ]
   },
   "kg_stats": {
     "entities": 1021,
