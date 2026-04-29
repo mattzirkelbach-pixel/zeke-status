@@ -14407,3 +14407,41 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-29T11:19:06.356583+00:00] [INFO]   result: {"max_drawdown_pct": -57.13, "regime": "all", "n_days": 730, "ticker": "TMF", "runtime_s": 0.47}
 [2026-04-29T11:19:18.207174+00:00] [INFO]   score=1.00, synth=ok
 [2026-04-29T11:19:18.226097+00:00] [INFO]   wrote 20260429-101-how-does-the-return-distribution-of-tmf-compare-to-tlt-durin.json
+[2026-04-29T11:19:38.134515+00:00] [INFO]   spawned 1 follow-ups (depth 3)
+[2026-04-29T11:19:58.350311+00:00] [INFO] [2479] track=regime_exploration depth=3 Q: Is the mean return of GDX during SPX down month regimes statistically different 
+[2026-04-29T11:19:58.911102+00:00] [INFO]   result: {"mean_return_pct": 0.1085, "regime": "spx_down_month", "n_days": 1822, "ticker": "GDX", "runtime_s": 0.56}
+[2026-04-29T11:20:08.986358+00:00] [WARN] synthesis has unverified numbers ['822'] — retrying
+[2026-04-29T11:20:21.480465+00:00] [ERROR] retry still has unverified numbers ['822'] — dropping
+[2026-04-29T11:20:21.484065+00:00] [INFO]   score=0.60, synth=dropped
+[2026-04-29T11:20:21.519033+00:00] [INFO]   wrote 20260429-102-is-the-mean-return-of-gdx-during-spx-down-month-regimes-stat.json
+[2026-04-29T11:20:41.576620+00:00] [INFO] [2480] track=regime_exploration depth=3 Q: Does the hit rate of the SMA reclaim strategy for SILJ improve when TLT weekly c
+[2026-04-29T11:20:42.615787+00:00] [INFO]   result: {"hit_rate_pct": 53.8, "n_events": 984, "mean_return_pct": 0.98, "signal": "sma_reclaim", "ticker": "SILJ", "runtime_s": 1.04}
+[2026-04-29T11:20:52.725435+00:00] [INFO]   score=0.64, synth=ok
+[2026-04-29T11:20:52.734845+00:00] [INFO]   wrote 20260429-103-does-the-hit-rate-of-the-sma-reclaim-strategy-for-silj-impro.json
+[2026-04-29T11:21:12.935135+00:00] [INFO] [2481] track=regime_exploration depth=3 Q: Is the mean return of the SMA reclaim strategy for SILJ higher during TLT weekly
+[2026-04-29T11:21:13.403921+00:00] [INFO]   result: {"mean_return_pct": 0.1174, "regime": "tlt_weekly_low_and_inflation_down", "n_days": 1824, "ticker": "SILJ", "runtime_s": 0.47}
+[2026-04-29T11:21:22.763018+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-29T11:21:22.779692+00:00] [INFO]   wrote 20260429-104-is-the-mean-return-of-the-sma-reclaim-strategy-for-silj-high.json
+[2026-04-29T11:21:42.921680+00:00] [INFO] heartbeat — queue=9 seen=2493 tests=2481 findings=2481 followups=2034
+[2026-04-29T11:21:42.944394+00:00] [INFO] [2482] track=regime_exploration depth=3 Q: Does the mean return of the SILJ SMA reclaim strategy differ when TLT weekly cyc
+[2026-04-29T11:21:43.365054+00:00] [INFO]   result: {"mean_return_pct": 0.1149, "regime": "tlt_weekly_low", "n_days": 1822, "ticker": "SILJ", "runtime_s": 0.42}
+[2026-04-29T11:21:55.084625+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-29T11:21:55.096385+00:00] [INFO]   wrote 20260429-105-does-the-mean-return-of-the-silj-sma-reclaim-strategy-differ.json
+[2026-04-29T11:22:15.269474+00:00] [INFO] [2483] track=position_driven depth=3 Q: How does GLD's mean return during TLT weekly cycle high periods compare to its m
+[2026-04-29T11:22:15.724311+00:00] [INFO]   result: {"mean_return_pct": 0.1231, "regime": "tlt_weekly_cycle_high", "n_days": 729, "ticker": "GLD", "runtime_s": 0.45}
+[2026-04-29T11:22:24.025443+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-29T11:22:24.034791+00:00] [INFO]   wrote 20260429-106-how-does-glds-mean-return-during-tlt-weekly-cycle-high-perio.json
+[2026-04-29T11:22:44.247101+00:00] [INFO] [2484] track=position_driven depth=3 Q: Does GLD's mean return during TLT weekly cycle low periods become negative when 
+[2026-04-29T11:22:44.705605+00:00] [INFO]   result: {"mean_return_pct": 0.0745, "regime": "tlt_weekly_cycle_low", "n_days": 1824, "ticker": "GLD", "runtime_s": 0.46}
+[2026-04-29T11:22:55.926629+00:00] [WARN] synthesis has unverified numbers ['2008', '2020'] — retrying
+[2026-04-29T11:23:09.215459+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-29T11:23:09.226695+00:00] [INFO]   wrote 20260429-107-does-glds-mean-return-during-tlt-weekly-cycle-low-periods-be.json
+[2026-04-29T11:23:29.435260+00:00] [INFO] [2485] track=position_driven depth=3 Q: Does the hit rate for SILJ call options improve when the SPX half-cycle top wind
+[2026-04-29T11:23:30.195281+00:00] [INFO]   result: {"hit_rate_pct": 53.8, "n_events": 984, "mean_return_pct": 0.98, "signal": "sma_reclaim", "ticker": "SILJ", "runtime_s": 0.76}
+[2026-04-29T11:23:41.836796+00:00] [INFO]   score=0.64, synth=ok
+[2026-04-29T11:23:41.848787+00:00] [INFO]   wrote 20260429-108-does-the-hit-rate-for-silj-call-options-improve-when-the-spx.json
+[2026-04-29T11:24:02.012808+00:00] [INFO] [2486] track=position_driven depth=3 Q: Is the mean return for SILJ call options during SPX half-cycle top windows with 
+[2026-04-29T11:24:02.553204+00:00] [INFO]   result: {"mean_return_pct": 0.1174, "regime": "spx_half_cycle_top", "n_days": 1824, "ticker": "SILJ", "runtime_s": 0.54}
+[2026-04-29T11:24:14.370900+00:00] [WARN] synthesis has unverified numbers ['824'] — retrying
+[2026-04-29T11:24:27.434519+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-29T11:24:27.445965+00:00] [INFO]   wrote 20260429-109-is-the-mean-return-for-silj-call-options-during-spx-half-cyc.json
