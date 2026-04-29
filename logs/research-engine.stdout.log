@@ -14240,3 +14240,31 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-29T10:16:38.421384+00:00] [INFO]   result: {"correlation": -0.3866, "n_days": 599, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.64}
 [2026-04-29T10:16:49.654532+00:00] [INFO]   score=0.83, synth=ok
 [2026-04-29T10:16:49.666433+00:00] [INFO]   wrote 20260429-073-how-does-gld-correlation-to-dxy-change-during-metals-dcl-con.json
+[2026-04-29T10:17:27.009328+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-29T10:17:47.194047+00:00] [INFO] heartbeat — queue=12 seen=2465 tests=2450 findings=2450 followups=2006
+[2026-04-29T10:17:47.211232+00:00] [INFO] [2451] track=position_driven depth=0 Q: What is the lag days for TLT to predict TMF during weekly cycle low periods
+[2026-04-29T10:17:48.224630+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.9938, "ticker_a": "TLT", "ticker_b": "TMF", "direction": "same", "n_days": 729, "runtime_s": 1.01}
+[2026-04-29T10:18:00.705096+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-29T10:18:00.717499+00:00] [INFO]   wrote 20260429-074-what-is-the-lag-days-for-tlt-to-predict-tmf-during-weekly-cy.json
+[2026-04-29T10:18:36.347540+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-29T10:18:56.436833+00:00] [INFO] [2452] track=regime_exploration depth=1 Q: How does the mean_return of GDX during SPX down_month regimes compare to its mea
+[2026-04-29T10:18:56.827585+00:00] [INFO]   result: {"mean_return_pct": 0.1109, "regime": "spx_down_month", "n_days": 1824, "ticker": "GDX", "runtime_s": 0.39}
+[2026-04-29T10:19:07.677765+00:00] [WARN] synthesis has unverified numbers ['824'] — retrying
+[2026-04-29T10:19:19.153719+00:00] [ERROR] retry still has unverified numbers ['824'] — dropping
+[2026-04-29T10:19:19.154965+00:00] [INFO]   score=0.60, synth=dropped
+[2026-04-29T10:19:19.192166+00:00] [INFO]   wrote 20260429-075-how-does-the-mean_return-of-gdx-during-spx-down_month-regime.json
+[2026-04-29T10:19:39.409784+00:00] [INFO] [2453] track=regime_exploration depth=1 Q: Is the mean_return of GDX during SPX down_month regimes statistically different 
+[2026-04-29T10:19:39.861588+00:00] [INFO]   result: {"mean_return_pct": 0.1109, "regime": "spx_down_month", "n_days": 1824, "ticker": "GDX", "runtime_s": 0.45}
+[2026-04-29T10:19:52.033479+00:00] [WARN] synthesis has unverified numbers ['824'] — retrying
+[2026-04-29T10:20:04.347344+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-29T10:20:04.358841+00:00] [INFO]   wrote 20260429-076-is-the-mean_return-of-gdx-during-spx-down_month-regimes-stat.json
+[2026-04-29T10:20:23.856605+00:00] [INFO]   spawned 1 follow-ups (depth 2)
+[2026-04-29T10:20:44.014323+00:00] [INFO] [2454] track=regime_exploration depth=1 Q: Does the hit rate of the SMA reclaim strategy for SILJ improve when TLT weekly c
+[2026-04-29T10:20:44.760756+00:00] [INFO]   result: {"hit_rate_pct": 53.8, "n_events": 984, "mean_return_pct": 0.98, "signal": "sma_reclaim", "ticker": "SILJ", "runtime_s": 0.75}
+[2026-04-29T10:20:56.834526+00:00] [INFO]   score=0.64, synth=ok
+[2026-04-29T10:20:56.845943+00:00] [INFO]   wrote 20260429-077-does-the-hit-rate-of-the-sma-reclaim-strategy-for-silj-impro.json
+[2026-04-29T10:21:19.675338+00:00] [INFO]   spawned 1 follow-ups (depth 2)
+[2026-04-29T10:21:39.844891+00:00] [INFO] [2455] track=regime_exploration depth=1 Q: How does the mean return of the SMA reclaim strategy for SILJ change when TLT we
+[2026-04-29T10:21:40.286020+00:00] [INFO]   result: {"mean_return_pct": 0.1174, "regime": "tlt_weekly_low", "n_days": 1824, "ticker": "SILJ", "runtime_s": 0.44}
+[2026-04-29T10:21:54.281999+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-29T10:21:54.294106+00:00] [INFO]   wrote 20260429-078-how-does-the-mean-return-of-the-sma-reclaim-strategy-for-sil.json
