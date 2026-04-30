@@ -16723,3 +16723,17 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-30T01:27:16.286654+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.4297, "ticker_a": "IBIT", "ticker_b": "NASDAQ", "direction": "same", "n_days": 575, "runtime_s": 0.96}
 [2026-04-30T01:27:30.823523+00:00] [INFO]   score=0.86, synth=ok
 [2026-04-30T01:27:30.836546+00:00] [INFO]   wrote 20260429-506-does-ibit-exhibit-lagged-correlation-to-nasdaq-during-dxy-ri.json
+[2026-04-30T01:27:50.863078+00:00] [INFO]   spawned 1 follow-ups (depth 1)
+[2026-04-30T01:28:10.915392+00:00] [INFO] [2884] track=regime_exploration depth=0 Q: How does SLV drawdown during VIX high regimes compare to its drawdown during VIX
+[2026-04-30T01:28:11.449846+00:00] [INFO]   result: {"max_drawdown_pct": -22.35, "regime": "vix_high", "n_days": 38, "ticker": "SLV", "runtime_s": 0.53}
+[2026-04-30T01:28:22.585298+00:00] [INFO]   score=0.80, synth=ok
+[2026-04-30T01:28:22.600736+00:00] [INFO]   wrote 20260429-507-how-does-slv-drawdown-during-vix-high-regimes-compare-to-its.json
+[2026-04-30T01:28:42.021591+00:00] [INFO]   spawned 1 follow-ups (depth 1)
+[2026-04-30T01:29:02.234224+00:00] [INFO] heartbeat — queue=5 seen=2892 tests=2884 findings=2884 followups=2367
+[2026-04-30T01:29:02.251256+00:00] [INFO] [2885] track=position_driven depth=0 Q: What is the lag days for SLV to predict GLD returns during equity half-cycle top
+[2026-04-30T01:29:03.219431+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.7746, "ticker_a": "SLV", "ticker_b": "GLD", "direction": "same", "n_days": 729, "runtime_s": 0.97}
+[2026-04-30T01:29:14.300143+00:00] [WARN] synthesis has unverified numbers ['0.7'] — retrying
+[2026-04-30T01:29:27.023913+00:00] [ERROR] retry still has unverified numbers ['0.7'] — dropping
+[2026-04-30T01:29:27.025378+00:00] [INFO]   score=1.00, synth=dropped
+[2026-04-30T01:29:27.039700+00:00] [INFO]   wrote 20260429-508-what-is-the-lag-days-for-slv-to-predict-gld-returns-during-e.json
+[2026-04-30T01:29:47.261590+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
