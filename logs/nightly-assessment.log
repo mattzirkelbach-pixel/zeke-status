@@ -7476,3 +7476,25 @@ L1B: dispatched=15, ingested=22
 Pre-warm: OK
 L1B: dispatched=15, ingeste
 [10:36:59] === Done ===
+[12:36:59] === Bi-Hourly Self-Assessment ===
+[12:37:00] Grade: C. OK: prewarm, l1b, queue, noise, cowork_executor, price_watcher, new_cron_topics, research_engine. Failed: feed_quality.
+[12:37:00]   prewarm: {"status": "OK", "detail": "[2026-04-17T21:55:59Z] Super loaded: 3 tokens in 55.6s"}
+[12:37:00]   l1b: {"dispatched": 15, "ingested": 22, "status": "OK", "quality": "GOOD"}
+[12:37:00]   queue: {"done": 36338, "failed": 0, "pending": 452, "echo_rate": 0.0, "status": "OK"}
+[12:37:00]   feed_quality: {"avg_score": 1.9, "junk_pct": 80, "actionable_pct": 3, "total": 100, "status": "DEGRADED"}
+[12:37:00]   noise: {"noise_entries_6h": 0, "breakdown": {}, "status": "OK"}
+[12:37:00]   cowork_executor: {"status": "IDLE", "detail": "No pending tasks at last run", "completed_runs": 0}
+[12:37:00]   price_watcher: {"status": "OK", "detail": "Last entry: [done]  0 alert(s) sent, 0 research task(s) seeded.", "is_market_hours": true, "log_path": "/Users/zekezirk/zeke-status/logs/price-watcher.log"}
+[12:37:00]   new_cron_topics: {"status": "OK", "active_topics": {}, "missing_topics": [], "skipped_topics": ["gold-cycle", "oil-tlt", "btc-spx-macro"], "detail": "All cron topic producers disabled in openclaw cron: ['gold-cycle', 'oil-tlt', 'btc-spx-macro']"}
+[12:37:00]   capabilities: {"status": "WARN", "failures": [], "warnings": ["claude-code v2.1.119 is 4 version(s) behind latest v2.1.123"], "claude_code": {"status": "WARN", "current": "2.1.119", "latest": "2.1.123", "behind": 4}, "conviction_backtest": {"status": "OK", "age_hours": 7.6, "positions": 23, "missing_scores": []}, "camel_yt_orphans": {"status": "OK", "pre_fetched_count": 6, "orphaned": []}, "infra_scout": {"status": "OK", "age_hours": 2.0, "last_run": "2026-04-30T14:39:20.985749+00:00"}, "capability_scanner": {"status": "OK", "age_hours": 5.6, "last_run": "2026-04-30T11:00:03.110564+00:00"}, "members_transcripts": {"status": "OK", "file_count": 68, "pre_fetched_count": 6}}
+[12:37:00]   research_engine: {"status": "OK", "process_up": true, "tests_run": 3310, "findings_written": 3310, "followups_spawned": 2718, "log_age_min": 0.0, "findings_last_hour": 26}
+[12:37:00]   ⚠ SAME: still C (persistent failures: ['feed_quality'])
+[12:37:00]   CHRONIC: feed_quality has failed 3 consecutive assessments
+[12:37:00] Pushed 1 fix tasks to cowork
+[12:37:00] Learning log updated: /Users/zekezirk/zeke-status/memory/learning-log.jsonl
+[2026-04-30T16:37:00Z] LOCKDOWN-DROP [SYSTEM] key='tg_send_310': 🔴 <b>CHRONIC FAILURE: feed_quality</b>
+Failed 3 consecutive assessments. Fix task queued.
+[2026-04-30T16:37:00Z] LOCKDOWN-DROP [SYSTEM] key='tg_send_11072': ⚠️ <b>Assessment: C</b> (SAME: still C (persistent failures: ['feed_quality']))
+Pre-warm: OK
+L1B: dispatched=15, ingeste
+[12:37:00] === Done ===
