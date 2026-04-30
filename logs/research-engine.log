@@ -17291,3 +17291,28 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-30T11:22:23.012786+00:00] [INFO]   score=0.40, synth=ok
 [2026-04-30T11:22:23.027314+00:00] [INFO]   wrote 20260430-211-does-gld-exhibit-higher-mean-return-after-dcl-completion-whe.json
 [2026-04-30T11:22:43.069885+00:00] [INFO] queue low (4), proposing batch for track=signal_discovery
+[2026-04-30T11:24:13.605187+00:00] [INFO] track signal_discovery: proposed 5, valid 5
+[2026-04-30T11:24:13.617003+00:00] [INFO]   queued 4 new questions (1 duplicates)
+[2026-04-30T11:24:13.618077+00:00] [INFO] [3166] track=regime_exploration depth=0 Q: What is the optimal lag for DXY to predict GLD returns during SPX rally regimes
+[2026-04-30T11:24:14.408475+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.3873, "ticker_a": "GLD", "ticker_b": "DXY", "direction": "inverse", "n_days": 599, "runtime_s": 0.79}
+[2026-04-30T11:24:26.693043+00:00] [INFO]   score=0.83, synth=ok
+[2026-04-30T11:24:26.705717+00:00] [INFO]   wrote 20260430-212-what-is-the-optimal-lag-for-dxy-to-predict-gld-returns-durin.json
+[2026-04-30T11:25:04.728601+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-30T11:25:24.805926+00:00] [INFO] [3167] track=position_driven depth=0 Q: How does GLD's correlation with SLV change during metals DCL windows compared to
+[2026-04-30T11:25:25.738959+00:00] [INFO]   result: {"correlation": 0.7746, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SLV", "runtime_s": 0.93}
+[2026-04-30T11:25:50.795946+00:00] [INFO]   score=1.00, synth=dropped
+[2026-04-30T11:25:50.806805+00:00] [INFO]   wrote 20260430-213-how-does-glds-correlation-with-slv-change-during-metals-dcl-.json
+[2026-04-30T11:26:10.840021+00:00] [INFO] [3168] track=position_driven depth=0 Q: What is SLV's mean return during the five days following a gold DCL confirmation
+[2026-04-30T11:26:11.241454+00:00] [INFO]   result: {"mean_return_pct": 0.183, "regime": "post_gold_dcl_5d", "n_days": 729, "ticker": "SLV", "runtime_s": 0.4}
+[2026-04-30T11:26:20.596826+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-30T11:26:20.609542+00:00] [INFO]   wrote 20260430-214-what-is-slvs-mean-return-during-the-five-days-following-a-go.json
+[2026-04-30T11:26:58.692878+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-30T11:27:18.885567+00:00] [INFO] heartbeat — queue=9 seen=3180 tests=3168 findings=3168 followups=2599
+[2026-04-30T11:27:18.901457+00:00] [INFO] [3169] track=position_driven depth=0 Q: Does GLD's beta to SPX increase during VIX contraction periods
+[2026-04-30T11:27:19.980339+00:00] [INFO]   result: {"beta": 0.1813, "regime": "vix_low", "n_days": 729, "ticker": "GLD", "benchmark": "SPX", "runtime_s": 1.08}
+[2026-04-30T11:27:42.295808+00:00] [INFO]   score=0.90, synth=dropped
+[2026-04-30T11:27:42.306911+00:00] [INFO]   wrote 20260430-215-does-glds-beta-to-spx-increase-during-vix-contraction-period.json
+[2026-04-30T11:28:02.516130+00:00] [INFO] [3170] track=signal_discovery depth=0 Q: How often does VIX dropping below twenty precede a three day rally in TLT
+[2026-04-30T11:28:02.773324+00:00] [INFO]   result: {"error": "no threshold_cross events in window", "runtime_s": 0.26}
+[2026-04-30T11:28:02.773810+00:00] [INFO]   score=0.00, synth=ok
+[2026-04-30T11:28:02.782643+00:00] [INFO]   wrote 20260430-216-how-often-does-vix-dropping-below-twenty-precede-a-three-day.json
