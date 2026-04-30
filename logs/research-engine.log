@@ -17094,3 +17094,27 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-30T10:10:31.584964+00:00] [INFO]   result: {"optimal_lag_days": 0, "peak_correlation": 0.3873, "ticker_a": "GLD", "ticker_b": "DXY", "direction": "inverse", "n_days": 599, "runtime_s": 1.15}
 [2026-04-30T10:10:42.406215+00:00] [INFO]   score=0.83, synth=ok
 [2026-04-30T10:10:42.417543+00:00] [INFO]   wrote 20260430-175-what-is-the-lag-in-days-that-maximizes-the-correlation-betwe.json
+[2026-04-30T10:11:18.801342+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-30T10:11:39.019460+00:00] [INFO] heartbeat — queue=7 seen=3139 tests=3129 findings=3129 followups=2568
+[2026-04-30T10:11:39.039530+00:00] [INFO] [3130] track=position_driven depth=0 Q: Does GLD tend to outperform SLV during the first five days after a confirmed dai
+[2026-04-30T10:11:39.462833+00:00] [INFO]   result: {"mean_return_pct": 2.06, "n_events": 32, "regime": "post_rsi_oversold_5d_proxy", "ticker": "GLD", "runtime_s": 0.42}
+[2026-04-30T10:11:49.888800+00:00] [INFO]   score=0.40, synth=ok
+[2026-04-30T10:11:49.899187+00:00] [INFO]   wrote 20260430-176-does-gld-tend-to-outperform-slv-during-the-first-five-days-a.json
+[2026-04-30T10:12:10.085940+00:00] [INFO] [3131] track=position_driven depth=0 Q: How does GLD volatility change during periods when the VIX is rising and the DXY
+[2026-04-30T10:12:10.293560+00:00] [INFO]   result: {"max_drawdown_pct": -19.21, "regime": "vix_up_dxy_down", "n_days": 730, "ticker": "GLD", "runtime_s": 0.21}
+[2026-04-30T10:12:22.868377+00:00] [INFO]   score=0.98, synth=ok
+[2026-04-30T10:12:22.879301+00:00] [INFO]   wrote 20260430-177-how-does-gld-volatility-change-during-periods-when-the-vix-i.json
+[2026-04-30T10:13:01.771092+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-30T10:13:21.987153+00:00] [INFO] [3132] track=position_driven depth=0 Q: Does SLV show stronger mean reversion to its twenty-day moving average when the 
+[2026-04-30T10:13:22.813200+00:00] [INFO]   result: {"optimal_lag_days": -6, "peak_correlation": 0.1037, "ticker_a": "SLV", "ticker_b": "XAUUSD", "direction": "inverse", "n_days": 599, "runtime_s": 0.83}
+[2026-04-30T10:13:37.350802+00:00] [INFO]   score=0.66, synth=ok
+[2026-04-30T10:13:37.361569+00:00] [INFO]   wrote 20260430-178-does-slv-show-stronger-mean-reversion-to-its-twenty-day-movi.json
+[2026-04-30T10:14:13.042772+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-30T10:14:33.264879+00:00] [INFO] [3133] track=regime_exploration depth=0 Q: Does GLD exhibit stronger correlation to SLV during VIX high regimes compared to
+[2026-04-30T10:14:34.345552+00:00] [INFO]   result: {"correlation": 0.7746, "n_days": 729, "ticker_a": "GLD", "ticker_b": "SLV", "runtime_s": 1.08}
+[2026-04-30T10:14:46.828055+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-30T10:14:46.839665+00:00] [INFO]   wrote 20260430-179-does-gld-exhibit-stronger-correlation-to-slv-during-vix-high.json
+[2026-04-30T10:15:40.440154+00:00] [INFO] [3134] track=regime_exploration depth=0 Q: How does TLT's beta to DXY shift during SPX down months versus all other periods
+[2026-04-30T10:15:41.133503+00:00] [INFO]   result: {"beta": -0.6305, "regime": "spx_down_month", "n_days": 599, "ticker": "TLT", "benchmark": "DXY", "runtime_s": 0.69}
+[2026-04-30T10:15:54.519394+00:00] [INFO]   score=0.90, synth=ok
+[2026-04-30T10:15:54.558329+00:00] [INFO]   wrote 20260430-180-how-does-tlts-beta-to-dxy-shift-during-spx-down-months-versu.json
