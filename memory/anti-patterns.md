@@ -326,3 +326,10 @@ osascript notification under the same condition. Non-ephemeral agents
 check. If you add a new short-lived/cron-style agent that beats() to
 `heartbeats.jsonl`, mark it ephemeral in expected.json; do not invent a new
 health-check path.
+
+## DO-NOT-REBUILD-feed-quality-infra-contamination
+**Date**: 2026-04-30
+**Symptom**: nightly-assessment `feed_quality` failing (DEGRADED) for 3+ cycles. avg_score ~1.9, actionable_pct ~3%.
+**Root cause**: `research/infra-scout.py` was appending GitHub/Reddit/HuggingFace discoveries to `~/.openclaw/workspace/memory/learning-feed.jsonl` — the same file `feed_relevance_scorer.py` scores against PORTFOLIO relevance (held tickers, thesis keywords, actions). 84% of last-100 entries were `topic=infra-scout` and correctly scored 1-3 because they're not portfolio-relevant by construction.
+**Fix**: split feeds. `infra-scout.py` and `infra-scout-ranker.py` now read/write `~/.openclaw/workspace/memory/infra-feed.jsonl`. Existing infra entries migrated; backup at `learning-feed.jsonl.bak-feedquality-fix`.
+**Rule**: never route non-portfolio findings into `learning-feed.jsonl`. Per-domain feed file per scout. Portfolio-relevance scoring assumes the file is portfolio-domain.
