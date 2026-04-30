@@ -18185,3 +18185,33 @@ AttributeError: 'str' object has no attribute 'get'
 [2026-04-30T10:15:41.133503+00:00] [INFO]   result: {"beta": -0.6305, "regime": "spx_down_month", "n_days": 599, "ticker": "TLT", "benchmark": "DXY", "runtime_s": 0.69}
 [2026-04-30T10:15:54.519394+00:00] [INFO]   score=0.90, synth=ok
 [2026-04-30T10:15:54.558329+00:00] [INFO]   wrote 20260430-180-how-does-tlts-beta-to-dxy-shift-during-spx-down-months-versu.json
+[2026-04-30T10:16:32.514882+00:00] [INFO]   spawned 2 follow-ups (depth 1)
+[2026-04-30T10:16:52.564506+00:00] [INFO] heartbeat — queue=8 seen=3145 tests=3134 findings=3134 followups=2574
+[2026-04-30T10:16:52.594613+00:00] [INFO] [3135] track=regime_exploration depth=1 Q: Does the zero-lag inverse correlation between GLD and DXY strengthen during peri
+[2026-04-30T10:16:53.261420+00:00] [INFO]   result: {"correlation": -0.3873, "n_days": 599, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.67}
+[2026-04-30T10:17:06.266257+00:00] [INFO]   score=0.83, synth=ok
+[2026-04-30T10:17:06.276572+00:00] [INFO]   wrote 20260430-181-does-the-zero-lag-inverse-correlation-between-gld-and-dxy-st.json
+[2026-04-30T10:17:25.965514+00:00] [INFO]   spawned 1 follow-ups (depth 2)
+[2026-04-30T10:17:46.072251+00:00] [INFO] [3136] track=regime_exploration depth=1 Q: Is the zero-lag inverse correlation between GLD and DXY more reliable when real 
+[2026-04-30T10:17:46.697544+00:00] [INFO]   result: {"correlation": -0.4322, "n_days": 1505, "ticker_a": "GLD", "ticker_b": "DXY", "runtime_s": 0.62}
+[2026-04-30T10:17:58.726684+00:00] [INFO]   score=0.86, synth=ok
+[2026-04-30T10:17:58.738991+00:00] [INFO]   wrote 20260430-182-is-the-zero-lag-inverse-correlation-between-gld-and-dxy-more.json
+[2026-04-30T10:18:19.377190+00:00] [INFO]   spawned 1 follow-ups (depth 2)
+[2026-04-30T10:18:39.498458+00:00] [INFO] [3137] track=position_driven depth=1 Q: How does the frequency of GLD drawdowns exceeding ten percent compare between pe
+[2026-04-30T10:18:39.822821+00:00] [INFO]   result: {"cross_count": 42, "level": "sma_50", "ticker": "GLD", "n_days": 730, "runtime_s": 0.32}
+[2026-04-30T10:18:52.421221+00:00] [INFO]   score=0.60, synth=ok
+[2026-04-30T10:18:52.431044+00:00] [INFO]   wrote 20260430-183-how-does-the-frequency-of-gld-drawdowns-exceeding-ten-percen.json
+[2026-04-30T10:19:33.502503+00:00] [INFO]   spawned 2 follow-ups (depth 2)
+[2026-04-30T10:19:53.626394+00:00] [INFO] [3138] track=position_driven depth=1 Q: Does GLD exhibit faster recovery from drawdowns during VIX-up/DXY-down periods c
+[2026-04-30T10:19:53.936640+00:00] [INFO]   result: {"error": "benchmark not allowed: None", "runtime_s": 0.31}
+[2026-04-30T10:19:53.937182+00:00] [INFO]   score=0.00, synth=ok
+[2026-04-30T10:19:53.946612+00:00] [INFO]   wrote 20260430-184-does-gld-exhibit-faster-recovery-from-drawdowns-during-vix-u.json
+[2026-04-30T10:20:14.035374+00:00] [INFO] [3139] track=position_driven depth=1 Q: Does the inverse correlation between SLV and the silver-gold ratio strengthen du
+[2026-04-30T10:20:14.591435+00:00] [INFO]   result: {"correlation": 0.7159, "n_days": 599, "ticker_a": "SLV", "ticker_b": "XAUUSD", "runtime_s": 0.56}
+[2026-04-30T10:20:25.876479+00:00] [INFO]   score=1.00, synth=ok
+[2026-04-30T10:20:25.888118+00:00] [INFO]   wrote 20260430-185-does-the-inverse-correlation-between-slv-and-the-silver-gold.json
+[2026-04-30T10:20:47.691745+00:00] [INFO]   spawned 1 follow-ups (depth 2)
+[2026-04-30T10:21:07.795724+00:00] [INFO] [3140] track=position_driven depth=1 Q: Is the lagged inverse relationship between SLV and the silver-gold ratio more pr
+[2026-04-30T10:21:08.555622+00:00] [INFO]   result: {"optimal_lag_days": -6, "peak_correlation": 0.1037, "ticker_a": "SLV", "ticker_b": "XAUUSD", "direction": "inverse", "n_days": 599, "runtime_s": 0.76}
+[2026-04-30T10:21:20.087557+00:00] [INFO]   score=0.66, synth=ok
+[2026-04-30T10:21:20.099061+00:00] [INFO]   wrote 20260430-186-is-the-lagged-inverse-relationship-between-slv-and-the-silve.json
