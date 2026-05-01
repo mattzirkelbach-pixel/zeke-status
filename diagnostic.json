@@ -1,11 +1,11 @@
 {
-  "timestamp_local": "2026-05-01 04:57:36 ET",
-  "timestamp_utc": "2026-05-01T08:57:36Z",
+  "timestamp_local": "2026-05-01 05:00:19 ET",
+  "timestamp_utc": "2026-05-01T09:00:19Z",
   "scheduler": {
     "running": true,
     "pid": 1777,
-    "uptime_minutes": 18015,
-    "current_window": "overnight"
+    "uptime_minutes": 18018,
+    "current_window": "queue/reason"
   },
   "feed": {
     "total_lines": 41630,
@@ -48,16 +48,6 @@
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-05-01T04:32:41.080404",
-      "window": "overnight",
-      "cycle": 167,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-05-01T04:35:23.995352",
       "window": "overnight",
@@ -142,6 +132,16 @@
       "ts": "2026-05-01T04:57:11.052069",
       "window": "overnight",
       "cycle": 176,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-05-01T04:59:55.132572",
+      "window": "overnight",
+      "cycle": 177,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
@@ -292,8 +292,10 @@
     }
   ],
   "health": {
-    "status": "HEALTHY",
-    "issues": []
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "WARNING: Feed not updated in 120m"
+    ]
   },
   "kg_stats": {
     "entities": 1021,
