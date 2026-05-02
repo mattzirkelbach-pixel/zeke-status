@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-05-02 03:19:04 ET",
-  "timestamp_utc": "2026-05-02T07:19:04Z",
+  "timestamp_local": "2026-05-02 03:21:52 ET",
+  "timestamp_utc": "2026-05-02T07:21:52Z",
   "scheduler": {
     "running": true,
     "pid": 1777,
-    "uptime_minutes": 19357,
+    "uptime_minutes": 19359,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 41733,
+    "total_lines": 41734,
     "last_entries": [
-      "[2026-05-02T07:00:00] treasury-bonds",
       "[2026-05-02T07:00:00] treasury-bonds",
       "[2026-05-13T12:00:00] treasury-bonds",
       "[2026-05-02T07:10:00] treasury-bonds",
-      "[2026-05-02T07:13:00] treasury-bonds"
+      "[2026-05-02T07:13:00] treasury-bonds",
+      "[2026-05-02T07:17:00] treasury-bonds"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -29,11 +29,14 @@
   },
   "spark": {
     "online": true,
-    "models_loaded": [],
+    "models_loaded": [
+      "nemotron-3-nano:30b",
+      "nomic-embed-text:latest"
+    ],
     "model_stuck": false,
     "stuck_model": null,
-    "inference_active": false,
-    "detail": "healthy, loaded: none"
+    "inference_active": true,
+    "detail": "healthy, loaded: nemotron-3-nano:30b, nomic-embed-text:latest"
   },
   "gateway": {
     "running": true
@@ -46,16 +49,6 @@
     "feed_growth": 1
   },
   "cycles": [
-    {
-      "ts": "2026-05-02T02:52:41.213628",
-      "window": "overnight",
-      "cycle": 128,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-05-02T02:55:24.754018",
       "window": "overnight",
@@ -140,6 +133,16 @@
       "ts": "2026-05-02T03:18:38.517503",
       "window": "overnight",
       "cycle": 137,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-05-02T03:21:25.731512",
+      "window": "overnight",
+      "cycle": 138,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
