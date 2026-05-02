@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-05-02 02:19:57 ET",
-  "timestamp_utc": "2026-05-02T06:19:57Z",
+  "timestamp_local": "2026-05-02 02:22:47 ET",
+  "timestamp_utc": "2026-05-02T06:22:47Z",
   "scheduler": {
     "running": true,
     "pid": 1777,
-    "uptime_minutes": 19297,
+    "uptime_minutes": 19300,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 41718,
+    "total_lines": 41719,
     "last_entries": [
-      "[2026-05-02T06:02:00] treasury-bonds",
       "[2026-05-02T06:05:00] treasury-bonds",
       "[2026-05-02T06:10:00] treasury-bonds",
       "[2026-05-02T06:11:00] treasury-bonds",
-      "[2026-05-02T06:13:00] treasury-bonds"
+      "[2026-05-02T06:13:00] treasury-bonds",
+      "[2026-05-02T06:16:00] treasury-bonds"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -28,12 +28,14 @@
     "last_modified_minutes_ago": 1.7
   },
   "spark": {
-    "online": false,
-    "models_loaded": [],
+    "online": true,
+    "models_loaded": [
+      "nemotron-3-nano:30b"
+    ],
     "model_stuck": false,
     "stuck_model": null,
-    "inference_active": false,
-    "detail": "unreachable"
+    "inference_active": true,
+    "detail": "healthy, loaded: nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
@@ -46,16 +48,6 @@
     "feed_growth": 1
   },
   "cycles": [
-    {
-      "ts": "2026-05-02T01:54:20.376846",
-      "window": "overnight",
-      "cycle": 107,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-05-02T01:57:07.358455",
       "window": "overnight",
@@ -140,6 +132,16 @@
       "ts": "2026-05-02T02:19:28.534684",
       "window": "overnight",
       "cycle": 116,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-05-02T02:22:20.836414",
+      "window": "overnight",
+      "cycle": 117,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
@@ -290,10 +292,8 @@
     }
   ],
   "health": {
-    "status": "ISSUES_FOUND",
-    "issues": [
-      "CRITICAL: Spark offline"
-    ]
+    "status": "HEALTHY",
+    "issues": []
   },
   "kg_stats": {
     "entities": 1021,
