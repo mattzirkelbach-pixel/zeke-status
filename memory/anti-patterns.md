@@ -152,6 +152,12 @@ DISABLED: com.zeke.portfolio-push
 
 
 
+## RESEARCH-ENGINE-FALSE-DEGRADED-FROM-THROTTLE (learned 2026-05-02)
+**Pattern**: `nightly-assessment.research_engine_health()` flagged DEGRADED ("0 findings in last hour") and queued an autofix prompting a `pkill` + restart of a *healthy* engine. Root cause: the detector hardcoded a 1-hour window with `>0` threshold, but `MAX_HYPOTHESES_PER_HOUR=1` (intentional throttle from 2026-04-30 audit, pinned until research-to-edges-wiring spec ships). At rate=cap, any sliding 1-hour window often contains 0 findings depending on phase.
+**Rule**: When writing a watchdog over a *throttled* producer, the window must be ≥ 2× the throttle period, OR derive the threshold from the producer's configured rate. Never hardcode "1/hr" assumptions about systems whose rate is a tunable.
+**Also**: Before executing an autofix that calls `pkill -9` + restart, *first* verify the symptom against the canonical state (heartbeat, recent output files). Restarting is destructive to in-flight work; a false-positive autofix is worse than no autofix.
+**Fix shipped**: window extended to 3h in `nightly-assessment.py:362`.
+
 ## RESEARCH-SCOUT-IS-THE-AUTONOMY-ENGINE (built 2026-04-24)
 **What**: research_scout.py at ~/zeke-portfolio/research/ — novel hypothesis generator. Runs daily 23:00 UTC via com.zeke.research-scout LaunchAgent. This is the post-fiction-engine safe replacement for knowledge-evolver.py (which was killed 4/18).
 
