@@ -125,6 +125,13 @@ DISABLED: com.zeke.portfolio-push
 
 
 
+## SPARK-VRAM-CRON-STARVATION (recurring; 5/1, 5/4, 5/6, 5/7, 5/8 — 4 firings; partial fix landed 5/10)
+**Pattern**: 120B model (`nemotron-3-super`) loaded interactively claims full 94GB VRAM with a multi-hour keepalive. Cron-tier feed writers (`association-engine` 4h, `kg-extractor` 2h) request smaller models (`nemotron-3-nano:30b`, `qwen3:8b`) on the same Spark host → 503 "max pending requests" → silent skip. Feed mtime stalls until keepalive expires; QC fires `OPENCLAW_FEED_STALE` >6h later.
+**Detection**: `curl http://10.0.0.143:11434/api/ps` shows only the 120B resident with `size_vram > 80GB`. Compare to feed mtime; if both true, this is the cause — not a cron bug.
+**Fix (immediate)**: WAIT for 120B `expires_at`. Do NOT force-unload (may be Matt's active session) or restart Spark.
+**Fix (permanent, partial — landed 2026-05-10)**: `spark_models.get_model(task_type, cron_lane=True)` returns `None` when `is_vram_starved()` (any resident >80GB on `/api/ps`). Cron-tier callers MUST opt in with `cron_lane=True` to defer instead of retry-storming. Remaining work: pass that flag from openclaw cron jobs (association-engine, kg-extractor, capability-scanner, scoring sweeps — configs live in openclaw, not this repo). `zeke-qc.py` now ledgers firings in `state/openclaw_feed_stale_ledger.json` and hard-escalates to Matt via `alert_dispatcher` at recurrence #5 in 7d, suppressing the cowork loop. See `specs/openclaw-feed-stale-fix.md`.
+**Rule**: Before "fixing" a stale feed, check `/api/ps` first. If it's VRAM contention, it's not actionable — wait it out and log occurrence. Any NEW Spark caller invoked from cron MUST pass `cron_lane=True`.
+
 ## OPENCLAW-BESTEFFORT-GAP (discovered 3/23)
 **Pattern**: Openclaw cron jobs without `bestEffort: true` + explicit `to: <chat_id>` silently fail on delivery — the research task runs but the result never posts. This triggered `fix_feed_stale` 3x in one day (13:12, 14:21, 16:12 UTC) as the stale detector fired on legitimate gaps.
 **Detection**: `fix_feed_stale` firing more than once per day = likely a job missing these fields. Check with `openclaw cron list` and look for jobs without bestEffort.
@@ -346,3 +353,64 @@ health-check path.
 **Root cause**: No detector existed for runaway Claude desktop / CLI processes. Reconciler in `orchestrator/zeke_self_aware.py` is scoped to `state/expected.json` LaunchAgents, so a stuck GUI binary is out of scope by design.
 **Fix**: `scripts/zombie-claude-killer.py` runs every 30 min via `com.zeke.zombie-claude-killer`. Matches `Claude.app/Contents/MacOS/Claude` and `.local/bin/claude` (excludes `Claude Helper`). Kills if elapsed >2h AND (cpu >50% OR state=R). Allowlists processes whose parent has a real TTY (interactive Matt CLI). Logs to `state/incidents/zombie-kills.jsonl`, fires `osascript` notification, appends a run record to this file. Listed in `state/expected.json` (ephemeral, expected_interval=1800).
 **Rule**: If you add a long-running Claude binary path (e.g. a new CLI install location), update `GUI_PATH`/`CLI_PATH_FRAGMENT` in `zombie-claude-killer.py`. Do NOT widen matching to "Claude" in command — that catches helper subprocesses (gpu-process, renderer) that legitimately run hot. The narrow path-prefix match is the safety rail.
+
+---
+
+## 2026-05-03 — Don't Telegram metrics with no user action
+
+**Symptom**: Matt got "⚠️ Feed stagnant — 41789 entries, no growth in 120+ min" Telegram alerts at 1:02p, 3:04p, 5:06p. Not actionable. Asked to kill permanently.
+**Root cause**: `zeke-watchdog.py` fired Telegram on `feed_stagnant` every 120 min during active hours. Feed growth is bursty by design (queue-driven, batch writes), so a flat window during the day is the normal case, not pathological. The alert had no associated user action — Matt couldn't "fix" feed growth from his phone.
+**Fix**: `zeke-watchdog.py` line 627-629: `telegram(...)` replaced with `log(...)`. Detection still runs, `report["feed_stagnant"]` still flows into the repair pipeline below it (auto-repair unchanged), and `record_alert()` still tracks cooldown state. Just no Telegram noise.
+**Rule**: Telegram is reserved for messages where line 3 ("what to do") is non-empty AND line 2 ("what it means for positions") shows a real change. Feed-growth-rate fails both tests for Matt. If a metric is useful for the auto-repair pipeline but not for Matt's phone, log it — don't Telegram it. Real wipe/corruption is still covered by `zeke-feed-guardian.py` (separate path, untouched).
+
+---
+
+## 2026-05-06 — Don't let claude-code drift turn capabilities chronic
+
+**Symptom**: nightly-assessment `capabilities` FAILED 3 cycles in a row → chronic alert. Sole failure: `claude-code v2.1.119 is 12 versions behind latest v2.1.131`.
+**Root cause**: `check_capabilities()` flags drift > 10 patches as FAIL, but nothing in zeke ever runs `claude update`. Claude Code ships rapid patch releases, so drift accumulates monotonically until the threshold trips. The fix-task generator had no specific handler for `capabilities`, so the only auto-recovery path was the chronic-failure handler — which waits for 3 consecutive failures (≥4 hours) and queues a generic "investigate" task. That's slow and burns a Claude session for a one-line shell fix.
+**Fix**: `nightly-assessment.py` `generate_fix_tasks()` now emits `autofix_claude_update_<date>` whenever `results.capabilities.claude_code.status == "FAILED"` and `behind > 0`. Task body just runs `~/.local/bin/claude update`. First-FAIL recovery, no chronic wait.
+**Rule**: If a mechanically-fixable check is going to drift in one direction over time (versions, certs, secrets nearing expiry), wire the fix into the first-FAIL fix-task generator — don't lean on the chronic-failure pathway. Chronic is the escape hatch for *unknown* failures, not for known ones with a one-liner remedy.
+
+## ZOMBIE-CLAUDE-KILL run 2026-05-07 13:30 UTC
+- pid=1670 ppid=1 etime=131411s cpu=0.3% state=R match=gui reason=etime=131411s state=R
+Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## DO-NOT-REBUILD: roadmap_edge_track_record_in_briefing (retired 2026-05-10)
+Roadmap task that verifies a parser on a 2-key JSON file. Ran 7 consecutive
+days reporting "acceptance criteria already met" — zero new info per run, pure
+cowork-budget waste. Replaced with tests/test_edge_weights_parser.py which
+locks the contract (edges dict + updated_at + top-N formatting). If the
+edge-weights.json schema evolves (e.g. CIs added), update the test, do NOT
+re-add a roadmap task to "verify" it.
+
+## ALERT-BARE-SEVERITY (2026-05-10)
+Never pass `urgency="HIGH"|"MEDIUM"|"LOW"` to `alert_dispatcher.send_alert()`. The dispatcher logs `urgency or cooldown_key` as `alert_type` in alert-quality-log.jsonl; bare severity labels collide with production noise and become indistinguishable on review. Pass a semantic signal type (`options_unusual`, `polcat_stop_breach`, `gdx_break_high`). Dispatcher now rejects bare-severity urgencies in non-dry-run calls (returns False, logs REJECTED). Severity can be embedded in the message body. Burst incident: donor-adjacent-screen.py and political-catalyst-calendar.py — both fixed.
+
+## ZOMBIE-CLAUDE-KILL run 2026-05-18 15:31 UTC
+- pid=8805 ppid=1 etime=162922s cpu=0.8% state=R match=gui reason=etime=162922s state=R
+Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## ZOMBIE-CLAUDE-KILL run 2026-05-27 22:02 UTC
+- pid=78947 ppid=1 etime=375010s cpu=0.0% state=R match=gui reason=etime=375010s state=R
+Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## CC-BARE-MODE-SKIPS-HOOKS (2026-05-28)
+Never pass `--bare` to `claude -p` from harness spawners (cowork-executor.py,
+continuous-agent.py, any autonomous task runner). In Claude Code 2.1.85+ `--bare`
+is "minimal mode: skip hooks, LSP, plugins" — which disables the harness safety
+gates: require_register.py (PreToolUse register_artifact gate, CLAUDE.md #4),
+post_tool_use_py_compile.py (PostToolUse, #5), and pre-tool-use.sh (anti-pattern
+blocker). Running unsupervised tasks with --bare lets them write unregistered
+artifacts, leave broken .py, and run blocked commands the PreToolUse hook exists
+to stop. Discovered when the 2.1.150 -> 2.1.153 update made `--bare` newly
+detectable: cowork-executor.py would have auto-enabled it via _detect_cli_flags(),
+and continuous-agent.py was already using it unconditionally. research/capability-
+scanner.py was the propagation source — it recommended adding --bare "for faster
+scripted calls" with auto_fix=True; inverted to flag active --bare use as relevance-5.
+Speed/token savings are NOT worth disabling the harness on autonomous execution.
+SECOND INDEPENDENT BLOCKER (confirmed 2.1.153, 2026-05-28): `--bare` auth is
+strictly ANTHROPIC_API_KEY/apiKeyHelper — OAuth and keychain are NEVER read. Zeke
+runs entirely on the Claude Max *subscription* (OAuth /login, no API key set), so
+every `--bare` call would FAIL outright, not just run unsafely. There is no config
+under which --bare helps this system: it breaks auth AND disables the harness.

@@ -18,8 +18,19 @@ STATUS = Path.home() / "zeke-status"
 QUALITY_FILE = STATUS / "quality-metrics.json"
 SENT_INSIGHTS = STATUS / "sent-insights.json"
 
-TELEGRAM_TOKEN = "8320091698:AAEDPuqw9o-14aI04cYHP-ByxzsTz2LktvY"
-TELEGRAM_CHAT = "6984324216"
+def _load_telegram_creds():
+    env_file = Path.home() / '.zeke-telegram.env'
+    creds = {}
+    try:
+        for line in env_file.read_text().splitlines():
+            if '=' in line and not line.startswith('#'):
+                k, v = line.split('=', 1)
+                creds[k.strip()] = v.strip().strip('"')
+    except Exception:
+        pass
+    return creds.get('TELEGRAM_BOT_TOKEN', ''), creds.get('TELEGRAM_CHAT_ID', '')
+
+TELEGRAM_TOKEN, TELEGRAM_CHAT = _load_telegram_creds()
 
 # Insight scoring criteria
 DEPTH_SIGNALS = [
