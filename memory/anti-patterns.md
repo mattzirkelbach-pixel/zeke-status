@@ -414,3 +414,6 @@ strictly ANTHROPIC_API_KEY/apiKeyHelper — OAuth and keychain are NEVER read. Z
 runs entirely on the Claude Max *subscription* (OAuth /login, no API key set), so
 every `--bare` call would FAIL outright, not just run unsafely. There is no config
 under which --bare helps this system: it breaks auth AND disables the harness.
+
+## LOGS-IN-MEMORY-REPO (2026-06-09)
+Symptom: zeke-status pushes silently failed for ~6 weeks (143 commits stuck); memory git backup dead. Two stacked causes: (1) logs/reconciler.log — a LIVE LaunchAgent log — was git-tracked and grew past GitHub's 100MB blob limit, so every push was rejected by pre-receive; (2) a stale .git/index.lock from a crashed git process (May 3) blocked even local commits. Rule: NEVER track log files in zeke-status (or any git memory repo) — logs/ and *.log are gitignored as of 2026-06-09; LaunchAgent stdout/stderr paths should point OUTSIDE git repos (~/logs/). If memory-sync reports a GitHub error, treat it as an outage and root-cause it same-session — a failing push means the compounding layer has no off-machine backup. Pre-squash history preserved on branch backup-pre-squash-20260609.
