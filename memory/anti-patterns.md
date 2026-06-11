@@ -417,3 +417,18 @@ under which --bare helps this system: it breaks auth AND disables the harness.
 
 ## LOGS-IN-MEMORY-REPO (2026-06-09)
 Symptom: zeke-status pushes silently failed for ~6 weeks (143 commits stuck); memory git backup dead. Two stacked causes: (1) logs/reconciler.log — a LIVE LaunchAgent log — was git-tracked and grew past GitHub's 100MB blob limit, so every push was rejected by pre-receive; (2) a stale .git/index.lock from a crashed git process (May 3) blocked even local commits. Rule: NEVER track log files in zeke-status (or any git memory repo) — logs/ and *.log are gitignored as of 2026-06-09; LaunchAgent stdout/stderr paths should point OUTSIDE git repos (~/logs/). If memory-sync reports a GitHub error, treat it as an outage and root-cause it same-session — a failing push means the compounding layer has no off-machine backup. Pre-squash history preserved on branch backup-pre-squash-20260609.
+
+## TAILSCALE-CLI-FROM-LAUNCHD (2026-06-11)
+Symptom: mcp-watchdog logged "Fixing Tailscale" every 180s cycle for weeks. Root
+cause: on macOS the Tailscale CLI (/Applications/Tailscale.app/Contents/MacOS/Tailscale)
+CANNOT run from a launchd agent — it returns "The Tailscale GUI failed to start
+(Tailscale.CLIError error 3)" with rc=0 and empty-ish stdout. So `funnel status`
+parsing AND the `funnel --bg 8100` remediation were both silent no-ops: the check
+false-positived every cycle and the "fix" never did anything. The funnel was healthy
+the entire time. Compounding bug: bare `except: pass` + no effect-check (classic
+open-loop remediation) hid this for weeks. Rules: (1) NEVER call the Tailscale CLI
+from launchd/cron context — verify connectivity by curling the public endpoint
+end-to-end (https://zekes-mac-mini.tail5d6012.ts.net/mcp, expect HTTP 200); real
+funnel repairs need a user GUI session or reboot (boot-recovery handles it).
+(2) Every watchdog remediation must log WHY it fired (rc/stdout/stderr) and
+re-check effect after firing — a fix that can't observe its own failure is noise.
