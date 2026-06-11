@@ -115,6 +115,12 @@ DISABLED: com.zeke.portfolio-push
 **Fix**: Add `<key>KeepAlive</key><true/>` to ALL daemon plists. Also fix pgrep duplicate check to match on script name, not just process existence.
 **Rule**: Any LaunchAgent running a long-lived daemon MUST have KeepAlive=true. After ANY LaunchAgent reload, verify `launchctl list | grep <label>` shows PID (not just loaded).
 
+## DAEMON-HUNG-NOT-CRASHED (discovered 6/11)
+**Pattern**: KeepAlive only relaunches on **crash / non-zero exit** — it is blind to a process that is *alive but hung*. A long-lived daemon that blocks forever inside an HTTP call keeps its PID, so launchd never restarts it. `urllib.urlopen(timeout=N)` does NOT save you: the socket timeout is **per-read**, not a total deadline — a Spark/Ollama gateway that accepts the connection then trickles bytes (e.g. Super 120B contending with the Camel pipeline) blocks `r.read()` effectively forever.
+**Damage (6/11)**: research_engine.py went silent for 23.5h (last heartbeat 6/10 21:35 → next log 6/11 21:05), 0 findings written, KeepAlive present but never fired because the PID stayed alive. Looked DEGRADED ("running but 0 output") not DOWN.
+**Fix**: Self-watchdog thread (daemon) tracking a `time.monotonic()` progress marker bumped at the top of the main loop; if no progress for a hard ceiling (research_engine: 900s, > the 300s rate-cap sleep + ~420s worst-case propose) it calls `os._exit(1)` → non-zero exit → KeepAlive relaunches cleanly. Persistent queue/seen-cache survive the restart.
+**Rule**: Every long-lived daemon that makes blocking network calls needs a wall-clock self-watchdog that force-exits on no-progress. KeepAlive + per-read socket timeouts are NOT sufficient against an indefinite hang. To detect: a stalled daemon shows a frozen `last_heartbeat` while still holding a PID — alert on heartbeat staleness, not just process existence.
+
 
 
 ## NARRATE-INSTEAD-OF-FIX (learned 2026-03-08)
