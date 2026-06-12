@@ -438,3 +438,7 @@ end-to-end (https://zekes-mac-mini.tail5d6012.ts.net/mcp, expect HTTP 200); real
 funnel repairs need a user GUI session or reboot (boot-recovery handles it).
 (2) Every watchdog remediation must log WHY it fired (rc/stdout/stderr) and
 re-check effect after firing — a fix that can't observe its own failure is noise.
+
+## ZOMBIE-CLAUDE-KILL run 2026-06-12 13:04 UTC
+- pid=623 ppid=1 etime=57613s cpu=2.5% state=R match=gui reason=etime=57613s state=R
+Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
