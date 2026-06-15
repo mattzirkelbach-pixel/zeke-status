@@ -468,3 +468,23 @@ the ONLY ongoing DevTools-liveness check.
 ## SPARK-PERREAD-HANG (added 2026-06-15)
 `urllib.urlopen(timeout=)` and `requests(timeout=)` are PER-READ socket timeouts, NOT a total deadline. A wedged Spark gateway can trickle/stall mid-stream so each read stays under the timeout while the call never returns. This stalled research-engine ~23.5h on 2026-06-11 (live-but-stuck process, zero findings; launchd KeepAlive useless — process never exited). The culprit was the `/api/ps` GPU-coexistence probe.
 FIX (binding): every Spark HTTP call goes through `spark_models.call_with_deadline(fn, deadline=…)` which enforces a HARD wall-clock ceiling (raises `SparkDeadlineError`). Applied to `research_scout.ask_spark` (deadline=timeout+30), `research_engine.spark_busy_with_priority_consumer` (deadline=60), `spark_models.is_vram_starved` (deadline=10). DO NOT add a raw urlopen/requests Spark call without wrapping it.
+
+## RECONCILER-RESTARTS-BUSY-EPHEMERAL (2026-06-15)
+Class: a watchdog that infers "stuck" from heartbeat staleness will kill a healthy
+agent that is legitimately BUSY (blocked in a long subprocess) if the staleness
+threshold is shorter than the agent's max work duration. Instance: zeke_self_aware
+reconciler restarts ephemeral agents at 10*expected_interval = 600s; cowork-executor
+runs claude -p tasks up to 900s (TASK_TIMEOUT_CRITICAL) and only beats at task
+START. Every 10-15min HIGH task crossed 600s → reconciler restart → task killed +
+requeued + claude -p respawned (each respawn = a phone notification). This is the
+SAME failure mode as the 2026-04-26 ephemeral-restart storm (3,041 notifications),
+re-emerging via a different trigger (long task vs cycle jitter). Rules: (1) any
+liveness heartbeat must be emitted DURING long blocking work, not just at its
+boundaries — use a periodic beat thread around subprocess.run. (2) A restart
+threshold must exceed the agent's max legitimate work duration (600s threshold <
+900s task ceiling = guaranteed false kill). (3) When a "self-healing" restart
+fires on a process that has a live child doing real work, that's an open-loop
+storm — fix the liveness signal, don't raise the threshold blindly.
+Fix shipped: cowork-executor._run_claude beats cowork-executor every 60s until the
+subprocess returns. Also fixed same session: reconciler DRIFT log only on change
+(was 6.6M lines/828MB logging the full drift set every 30s cycle).
