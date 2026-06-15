@@ -442,3 +442,25 @@ re-check effect after firing — a fix that can't observe its own failure is noi
 ## ZOMBIE-CLAUDE-KILL run 2026-06-12 13:04 UTC
 - pid=623 ppid=1 etime=57613s cpu=2.5% state=R match=gui reason=etime=57613s state=R
 Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## DO-NOT-REBUILD: OpenClaw browser silent-hang self-heal (added 2026-06-15)
+
+The 2026-06-08 staleness incident (OpenClaw Chrome on CDP 18800 ran 9 days, hung
+silently — port still LISTEN, /json/version dead — and scraper LaunchAgents kept
+firing into the dead browser) is now covered. Do NOT build another browser
+watchdog. Existing, verified:
+
+- `~/zeke-portfolio/openclaw-browser-health.py` — robust CDP probe (200 + valid
+  webSocketDebuggerUrl, not just port-open) + self-heal that force-kills only the
+  process matching `remote-debugging-port=18800` and restarts via
+  `openclaw browser start`, re-probing up to 30s. CLI: `--probe` (exit 0/1, no
+  side effects, for cron self-heal), `--heal`, default `--watchdog`.
+- `com.zeke.openclaw-browser-health.plist` — RunAtLoad + StartInterval 300.
+- Companion to `com.zeke.openclaw-browser` (boot-only start). Do NOT merge/replace
+  either; the boot agent starts at login, the health agent keeps it alive.
+
+Why `openclaw browser start` alone is insufficient: it will NOT recover a
+hung-but-listening Chrome because the port is still bound, so `start` thinks the
+browser is up. zeke-watchdog.py only checks `pgrep -f openclaw` (process alive !=
+DevTools alive); boot-recovery.py only probes once 30s after boot. The new tool is
+the ONLY ongoing DevTools-liveness check.
