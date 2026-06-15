@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-06-14 22:38:21 ET",
-  "timestamp_utc": "2026-06-15T02:38:21Z",
+  "timestamp_local": "2026-06-14 22:40:59 ET",
+  "timestamp_utc": "2026-06-15T02:40:59Z",
   "scheduler": {
     "running": true,
     "pid": 1745,
-    "uptime_minutes": 4653,
+    "uptime_minutes": 4656,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 42603,
+    "total_lines": 42604,
     "last_entries": [
-      "[PARSE ERROR] {\\\"timestamp\\\":\\\"2026-06-15T02:24:00Z\\\",\\\"topic\\\":\\\"treasury-bonds\\\",\\\"finding\\\"",
       "[2026-06-15T02:27:37] treasury-bonds",
       "[2026-06-15T02:29:00] treasury-bonds",
       "[2026-06-15T02:34:00] treasury-bonds",
-      "[2026-06-15T02:35:00] treasury-bonds"
+      "[2026-06-15T02:35:00] treasury-bonds",
+      "[2026-06-15T02:37:00] treasury-bonds"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -30,13 +30,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nemotron-3-super:120b",
-      "nemotron-3-nano:30b"
+      "nemotron-3-nano:30b",
+      "nomic-embed-text:latest",
+      "nemotron-3-super:120b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-super:120b, nemotron-3-nano:30b"
+    "detail": "healthy, loaded: nemotron-3-nano:30b, nomic-embed-text:latest, nemotron-3-super:120b"
   },
   "gateway": {
     "running": true
@@ -49,16 +50,6 @@
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-06-14T22:14:15.350059",
-      "window": "overnight",
-      "cycle": 29,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-06-14T22:16:53.724427",
       "window": "overnight",
@@ -143,6 +134,16 @@
       "ts": "2026-06-14T22:37:58.919090",
       "window": "overnight",
       "cycle": 38,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-06-14T22:40:37.783938",
+      "window": "overnight",
+      "cycle": 39,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
