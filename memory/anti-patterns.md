@@ -464,3 +464,7 @@ hung-but-listening Chrome because the port is still bound, so `start` thinks the
 browser is up. zeke-watchdog.py only checks `pgrep -f openclaw` (process alive !=
 DevTools alive); boot-recovery.py only probes once 30s after boot. The new tool is
 the ONLY ongoing DevTools-liveness check.
+
+## SPARK-PERREAD-HANG (added 2026-06-15)
+`urllib.urlopen(timeout=)` and `requests(timeout=)` are PER-READ socket timeouts, NOT a total deadline. A wedged Spark gateway can trickle/stall mid-stream so each read stays under the timeout while the call never returns. This stalled research-engine ~23.5h on 2026-06-11 (live-but-stuck process, zero findings; launchd KeepAlive useless — process never exited). The culprit was the `/api/ps` GPU-coexistence probe.
+FIX (binding): every Spark HTTP call goes through `spark_models.call_with_deadline(fn, deadline=…)` which enforces a HARD wall-clock ceiling (raises `SparkDeadlineError`). Applied to `research_scout.ask_spark` (deadline=timeout+30), `research_engine.spark_busy_with_priority_consumer` (deadline=60), `spark_models.is_vram_starved` (deadline=10). DO NOT add a raw urlopen/requests Spark call without wrapping it.
