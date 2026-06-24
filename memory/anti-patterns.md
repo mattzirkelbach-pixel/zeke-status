@@ -492,3 +492,7 @@ subprocess returns. Also fixed same session: reconciler DRIFT log only on change
 ## ZOMBIE-CLAUDE-KILL run 2026-06-18 14:05 UTC
 - pid=82600 ppid=1 etime=273362s cpu=0.1% state=R match=gui reason=etime=273362s state=R
 Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## ZOMBIE-CLAUDE-KILL run 2026-06-24 07:35 UTC
+- pid=676 ppid=1 etime=240551s cpu=0.4% state=R match=gui reason=etime=240551s state=R
+Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
