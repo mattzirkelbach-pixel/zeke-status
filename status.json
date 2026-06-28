@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-28T09:34:32.106724+00:00",
+  "timestamp": "2026-06-28T09:40:52.104984+00:00",
   "feed_lines": 45498,
   "recent_feed": [
     "{\"timestamp\":\"2026-06-28T08:22:00Z\",\"topic\":\"treasury-bonds\",\"finding\":\"10yr Treasury yield at 4.3720 stays below 4.40% ceiling suggesting continued TLT long bias and delaying Fed tightening expectations\",\"source\":\"https://finance.yahoo.com/markets/bonds/\"}",
@@ -25,9 +25,9 @@
   "priorities_content": "# Research Priorities \u2014 Updated 2026-03-01\n\n## Tier 1 \u2014 Actively Monitor\n1. **Rapamycin clinical trials** \u2014 PEARL trial Phase 2 ongoing; watch for full\n   results. Human safety/efficacy data is the gap to fill. Source: pmc.ncbi.nlm.nih.gov\n2. **AI agent reliability** \u2014 Tool-calling accuracy is the limiting factor for\n   Zeke autonomy. Monitor Berkeley BFCL leaderboard for model improvements.\n   Current ceiling: ~88% multi-step. Gap: real-world reliability below benchmark.\n\n## Tier 2 \u2014 Periodic Check (Weekly)\n3. **Spaced repetition implementation** \u2014 Apply double-spacing intervals to Zeke\n   feed review. Research is settled; priority shifts to implementation.\n4. **Treasury yields** \u2014 10Y at 3.95%, Fed holding. Monitor for rate cut signals\n   that affect TLT position.\n\n## Tier 3 \u2014 Diminishing Returns (Reduce Feed Weight)\n5. **tool-calling general** \u2014 Saturated. Consolidate to monthly summary.\n6. **compound-synthesis** \u2014 Derivable locally; not worth dedicated feed slots.\n7. **AI agent benchmarks (general)** \u2014 High noise/signal ratio; filter to\n   specific named tools only (Claude Code, Lovable, Cursor).\n\n## Feed Health Notes\n- Dedup pass needed: tool-calling topic has 8+ near-identical entries this cycle\n- compound-synthesis entries should be generated locally, not ingested as feed\n- Quality scoring working well; 4-5 scores are surfacing genuinely useful content\n",
   "gpu_stats": {
     "status": "OK",
-    "gpu_util_pct": 0.0,
-    "temp_c": 40.0,
-    "power_w": 10.86,
+    "gpu_util_pct": 95.0,
+    "temp_c": 79.0,
+    "power_w": 86.37,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -73,7 +73,7 @@
     }
   },
   "gateway_process": {
-    "pid": "1731\n1805\n51587\n60999\n61260\n61262\n61263\n61264\n61265\n61266\n61267\n61269\n61270\n61272\n61274\n61275\n61276\n61278\n61282\n61299\n61304\n61324\n61586\n61593\n61603\n61605\n61607\n81869\n81870\n85769\n87798\n87807\n87809\n87810\n87811\n87813\n87814\n87820\n94534\n94536\n94817\n94823\n97120\n97123\n97126\n97127\n97185\n97196",
+    "pid": "1731\n1805\n51587\n60999\n61260\n61262\n61263\n61264\n61265\n61266\n61267\n61269\n61270\n61272\n61274\n61275\n61276\n61278\n61282\n61299\n61304\n61324\n61586\n61593\n61603\n61605\n61607\n81869\n81870\n85769\n87798\n87807\n87809\n87810\n87811\n87813\n87814\n87820\n94534\n94536\n94959\n95071\n95160\n95162\n95195\n97120\n97123\n97126\n97127\n97185\n97196",
     "memory_pct": "",
     "uptime": "",
     "status": "RUNNING"
@@ -82,16 +82,16 @@
     "status": "ONLINE",
     "loaded_models": [
       {
-        "name": "nomic-embed-text:latest",
-        "size_gb": 0.6
-      },
-      {
-        "name": "nemotron-3-super:120b",
-        "size_gb": 94.2
+        "name": "qwen3:8b",
+        "size_gb": 11.5
       },
       {
         "name": "nemotron-3-nano:30b",
         "size_gb": 28.0
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "size_gb": 0.6
       }
     ]
   },
