@@ -2,6 +2,17 @@
 # SINGLE SOURCE OF TRUTH. Updated every major session.
 # Last updated: 2026-05-31 (Confluence Engine + on-demand Analyst built — see section below; prior refresh 2026-05-08)
 
+## INCIDENT 2026-07-04: Morning briefing outage fixed (21 days, since 2026-06-08)
+com.zeke.morning-briefing LaunchAgent had fallen out of launchd (plist found renamed to
+.retired-20260601). A stale sandboxed Cowork task (~/Documents/Claude/Scheduled/morning-alpha-briefing,
+supposed to have been disabled back in March per the original migration spec) partially covered the
+gap once on 2026-06-12 but its sandbox can't shell out to alert_dispatcher, so no Telegram send
+happened; it then went silent too. Fix: restored the plist + `launchctl bootstrap gui/501`, disabled
+the stale Cowork task. Verified via --dry-run + one isolated test Telegram send. Real morning_briefing_daily
+cooldown untouched — next real send expected Monday 2026-07-06 06:30 ET. Watch launchctl list after
+any future reboot to confirm it stays loaded (a separate system-wide launchd issue is being tracked
+independently by Matt).
+
 ## Portfolio (positions.json @ 2026-05-08)
 
 ### E*TRADE brokerage ($266,437 — 3/25 snapshot)
