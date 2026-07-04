@@ -297,6 +297,23 @@ RULE: Must fetch settlement prices after 5:15 PM ET, not just regular session cl
 - Dated post-mortems and verbose historical fixes go to `anti-patterns-archive.md`.
 - Grep both, read neither end-to-end.
 
+## ORCHESTRATOR-BLACKOUT (2026-06-29, 4d 5h)
+
+**Pattern**: Mac Mini went to sleep ~21:45 UTC Jun 29. All daemons (orchestrator, supervisor, mcp-watchdog) suspended simultaneously. No external trip wire. No alert sent on wake. No alert sent when fix tasks entered chronic_failure. Blackout lasted 4d 5h undetected.
+
+**Three gaps that allowed this:**
+1. `chronic_failure` in learning-substrate returns "escalate" as a string but orchestrator never calls send_alert — fix queued as `add_chronic_failure_alert`.
+2. boot-recovery.py fires on every wake/boot but sends nothing — fix queued as `add_boot_resume_alert`.
+3. No persistent caffeinate process holding `PreventSystemSleep` — fixed: `com.zeke.caffeinate` LaunchAgent running `caffeinate -s` with KeepAlive=true added 2026-07-04.
+
+**Rules:**
+- `com.zeke.caffeinate` MUST remain loaded — it holds the only persistent sleep prevention assertion. `launchctl list | grep caffeinate` should show a live PID.
+- When `should_auto_queue` returns chronic_failure, that is a CRITICAL condition requiring human attention — not a silent skip.
+- boot-recovery.py firing = host was down. Always alert Matt.
+- Do not add new daemons that rely on the same host for their watchdog — they all go dark together.
+
+**Postmortem:** `state/postmortems/2026-06-29_orchestrator_blackout.md`
+
 ## 2026-04-28: Mass-disable without audit
 
 **Lesson:** When disabling looping LaunchAgents, audit each one BEFORE renaming to .disabled.
