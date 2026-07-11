@@ -521,3 +521,15 @@ Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
 ## ZOMBIE-CLAUDE-KILL run 2026-07-04 18:10 UTC
 - pid=88784 ppid=1 etime=17417s cpu=0.3% state=R match=gui reason=etime=17417s state=R
 Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## AUDITOR-FALSE-POSITIVE: camel-deepdive-latest.json age flooding (2026-07-11)
+tag: auditor-false-positive
+Root cause: system-auditor slug for state-age findings includes the exact age in hours
+(e.g. "308h old", "332h old"). Each daily audit run produces a unique orch_action_type,
+bypassing the existing dedup check. Result: 7 duplicate HIGH tasks queued 2026-07-04..10
+for the same underlying issue (file was genuinely stale; scanner refreshed it 2026-07-10).
+Fix shipped: system-auditor.py ~line 775 — normalize numerics in dedup_slug via
+re.sub(r"\d+", "N", slug) so all age-variant findings share one action_type.
+Queue purged: all 7 stale tasks removed from cowork-trigger.json (backup preserved).
+Threshold note: zeke-qc.py has 14400 min (240h) for camel-deepdive; system-auditor.py
+has 480h. Both are intentional: different tools, different tolerance windows.
