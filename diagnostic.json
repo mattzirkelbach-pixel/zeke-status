@@ -1,11 +1,11 @@
 {
-  "timestamp_local": "2026-07-17 05:59:39 ET",
-  "timestamp_utc": "2026-07-17T09:59:39Z",
+  "timestamp_local": "2026-07-17 06:00:40 ET",
+  "timestamp_utc": "2026-07-17T10:00:40Z",
   "scheduler": {
     "running": true,
     "pid": 1349,
-    "uptime_minutes": 19159,
-    "current_window": "queue/reason"
+    "uptime_minutes": 19160,
+    "current_window": "daytime"
   },
   "feed": {
     "total_lines": 48704,
@@ -30,13 +30,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nemotron-3-nano:30b",
-      "nemotron-3-super:120b"
+      "qwen3:8b",
+      "nomic-embed-text:latest",
+      "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b, nemotron-3-super:120b"
+    "detail": "healthy, loaded: qwen3:8b, nomic-embed-text:latest, nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
@@ -49,16 +50,6 @@
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-07-17T04:36:08.079927",
-      "window": "overnight",
-      "cycle": 180,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-07-17T04:38:40.066493",
       "window": "overnight",
@@ -143,6 +134,16 @@
       "ts": "2026-07-17T04:58:56.770749",
       "window": "overnight",
       "cycle": 189,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-07-17T06:00:21.905757",
+      "window": "daytime",
+      "cycle": 1,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
