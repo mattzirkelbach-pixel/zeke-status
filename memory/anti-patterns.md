@@ -533,3 +533,22 @@ re.sub(r"\d+", "N", slug) so all age-variant findings share one action_type.
 Queue purged: all 7 stale tasks removed from cowork-trigger.json (backup preserved).
 Threshold note: zeke-qc.py has 14400 min (240h) for camel-deepdive; system-auditor.py
 has 480h. Both are intentional: different tools, different tolerance windows.
+
+## STALE-CATEGORY-EXCLUSION: alert_quality_reflection missing STATUS category (2026-07-19)
+tag: alert-reflection-coverage-gap
+Root cause: nightly-assessment.py AQ_SURFACING_CATEGORIES excluded "STATUS" with a stale
+comment ("dashboard, not Telegram"). STATUS is actually a real Telegram-surfacing category
+(alert_dispatcher.py CATEGORY_COOLDOWN_MINUTES, 24h cooldown) — premarket_scan,
+options_velocity_state_change, correlation_regime, cot_monitor, and options_analytics
+all dispatch via category="STATUS". Excluding it meant these alert types got zero
+post-validation reflection (no useful=true tagging), so no actionable/noise ratio existed
+for them despite being genuinely sent to Matt.
+Fix shipped: nightly-assessment.py ~line 44 — added "STATUS" to AQ_SURFACING_CATEGORIES,
+only "SYSTEM" (log-only, never sent) remains excluded. No alert-type list was added
+anywhere — the reflector already gates on the `category` field already present on every
+alert-quality-log.jsonl row, so this fix is generic to any current/future STATUS alert,
+not just the 3 named in the audit.
+Verified: ran reflect_alert_quality() directly — retroactively tagged 24 real historical
+rows across premarket_scan/options_velocity_state_change/correlation_regime spanning
+2026-07-06..07-19 with useful=true. Also confirmed via synthetic test injection then
+cleaned up (removed test rows + their same-day reflection rows before leaving state).
