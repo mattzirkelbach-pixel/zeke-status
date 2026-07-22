@@ -552,3 +552,15 @@ Verified: ran reflect_alert_quality() directly — retroactively tagged 24 real 
 rows across premarket_scan/options_velocity_state_change/correlation_regime spanning
 2026-07-06..07-19 with useful=true. Also confirmed via synthetic test injection then
 cleaned up (removed test rows + their same-day reflection rows before leaving state).
+
+## MORNING-BRIEFING-LENGTH-OVERFLOW (2026-07-22)
+
+**Symptom:** morning_briefing.py fails with `telegram HTTP error: HTTP Error 400: Bad Request`.
+
+**Root cause:** Upstream per-section budget checks (SCENARIO @3800, POLITICAL @3700) are cumulative-length-at-insertion-time, not final-message-length. Tail sections (DEFERRED OVERNIGHT ALERTS, OTM WATCH, TOP ALPHA, ACTIONS) are appended AFTER those checks, so cumulative can pass 3800 at insertion and still exceed Telegram's 4096 hard cap at send. On 2026-07-22 the msg reached 4709 chars.
+
+**Fix (in place):** Final length guard at end of `build_message()` in `scripts/morning_briefing.py`. If total > 3900, drop sections in reverse-priority order: `DEFERRED OVERNIGHT ALERTS` → `OTM WATCH (suppressed)` → `POLITICAL ALPHA` → `TOP ALPHA` → `SCENARIO TRACKER`. Hard-truncate with ellipsis as last resort. Preserves CYCLE, ALPHA V3, CAMEL THESIS, OPTIONS RISK, ACTIVE SIGNALS, PORTFOLIO RISK, ACTIONS.
+
+**Rule:** Any pipeline that sends to Telegram must apply a final total-length guard immediately before send. Per-section budgets are not enough when downstream sections can grow independently. Telegram cap = 4096; safe target = 3900.
+
+**Related files:** `scripts/morning_briefing.py`, `alert_dispatcher.py` (dispatcher does NOT truncate — the caller must).
