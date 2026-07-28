@@ -564,3 +564,7 @@ cleaned up (removed test rows + their same-day reflection rows before leaving st
 **Rule:** Any pipeline that sends to Telegram must apply a final total-length guard immediately before send. Per-section budgets are not enough when downstream sections can grow independently. Telegram cap = 4096; safe target = 3900.
 
 **Related files:** `scripts/morning_briefing.py`, `alert_dispatcher.py` (dispatcher does NOT truncate — the caller must).
+
+## ZOMBIE-CLAUDE-KILL run 2026-07-28 13:10 UTC
+- pid=41423 ppid=1 etime=72906s cpu=0.4% state=R match=gui reason=etime=72906s state=R
+Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
