@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-07-29 01:44:07 ET",
-  "timestamp_utc": "2026-07-29T05:44:07Z",
+  "timestamp_local": "2026-07-29 01:46:48 ET",
+  "timestamp_utc": "2026-07-29T05:46:48Z",
   "scheduler": {
     "running": true,
     "pid": 1712,
-    "uptime_minutes": 15454,
+    "uptime_minutes": 15457,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 51147,
+    "total_lines": 51148,
     "last_entries": [
-      "[2026-07-29T05:30:00] treasury-bonds",
       "[2026-07-29T05:32:00] treasury-bonds",
       "[2026-07-29T05:35:00] treasury-bonds",
       "[2026-07-29T05:38:00] treasury-bonds",
-      "[2026-07-29T05:40:00] treasury-bonds"
+      "[2026-07-29T05:40:00] treasury-bonds",
+      "[PARSE ERROR] {\\\"timestamp\\\":\\\"2026-07-29T05:43:00Z\\\",\\\"topic\\\":\\\"treasury-bonds\\\",\\\"finding\\\""
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -30,13 +30,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
+      "nomic-embed-text:latest",
       "nemotron-3-nano:30b",
       "qwen3:8b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b, qwen3:8b"
+    "detail": "healthy, loaded: nomic-embed-text:latest, nemotron-3-nano:30b, qwen3:8b"
   },
   "gateway": {
     "running": true
@@ -49,16 +50,6 @@
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-07-29T01:19:59.933227",
-      "window": "overnight",
-      "cycle": 99,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-07-29T01:22:37.466555",
       "window": "overnight",
@@ -143,6 +134,16 @@
       "ts": "2026-07-29T01:43:44.430972",
       "window": "overnight",
       "cycle": 108,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-07-29T01:46:23.349336",
+      "window": "overnight",
+      "cycle": 109,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
