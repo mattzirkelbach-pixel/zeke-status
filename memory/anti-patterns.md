@@ -600,3 +600,36 @@ method.
 (explains *why* a low is/isn't confirmed). Evidence:
 `state/backtests/cycle-confirmation-minsep-sweep.json`,
 `decisions/cycle_confirmation_backtest.py`, spec `specs/cycle-confirmation-harness.md`.
+
+## BLIND-EXTEND-CORRUPTS-PRICE-DATA (2026-07-30) — DO-NOT-REBUILD-deep-data-appender
+**The bug:** `research/zeke-research-loop.py refresh_prices()` did
+
+    d["candles"].extend(new_candles)          # no dedup
+    d["last_date"] = new_candles[-1]["date"]
+
+Around weekends/holidays yfinance returns a bar dated at or before `last_date`,
+so `last_date` never advanced and the loop re-appended the SAME bar on every
+subsequent run. GLD held 2026-04-17 **nine times** in a row; 2026-04-24 ten times.
+
+**Blast radius:** 66 of 68 files in `data/deep/` corrupt — **6,711 phantom bars**,
+108-129 duplicates each, all concentrated in the most recent ~3 months (began
+~2026-04-17) — i.e. exactly the window every live decision reads. Only BTC/ETH
+were clean (different fetch path).
+
+Cycle theory counts BARS, so duplicates inflate every day count:
+  - morning briefing showed **"SPX day 142"** against a 36-44 window
+  - cycle detector showed **"GLD day 55, VERY_LATE"** — after repair, **day 24,
+    IN_WINDOW**. Gold was reported 31 days past its window while actually inside it.
+Every SMA and every backtest over recent data was computed on this.
+
+**The rule:** any incremental append to a time series MUST dedupe by timestamp on
+write (keep last occurrence, sort ascending) and MUST NOT trust a `last_date`
+cursor to advance. Never `.extend()` fetched bars blindly.
+
+**Fixed:** `scripts/repair_deep_data.py --audit / --repair` (idempotent, writes
+.bak, never interpolates) + dedupe-on-write in the loop, verified with a behavior
+test that replays 5 re-appends of the same bar.
+
+**Check first when a cycle day-count looks absurd:** run
+`/opt/homebrew/bin/python3 ~/zeke-portfolio/scripts/repair_deep_data.py --audit`
+before believing any bar-index day count.
