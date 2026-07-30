@@ -568,3 +568,35 @@ cleaned up (removed test rows + their same-day reflection rows before leaving st
 ## ZOMBIE-CLAUDE-KILL run 2026-07-28 13:10 UTC
 - pid=41423 ppid=1 etime=72906s cpu=0.4% state=R match=gui reason=etime=72906s state=R
 Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## SINGLE-SETTING-BACKTEST (2026-07-30) — DO-NOT-REBUILD-cycle-confirmation-score
+**The bug:** built a 6-signal Camel cycle confirmation scorer, backtested it, got a
+clean monotonic score→return result (1-2: −0.00%, 3-4: +3.60%, 5-6: +4.35%,
+out-of-sample n=194) and nearly shipped it as a validated edge.
+
+It was a curve-fit. The monotonicity existed at **exactly one** value of the
+`min_sep` cycle-chaining parameter — which I had chosen myself. Sweeping it
+0.4–1.2 × window_min: monotonic at **1 of 8** settings, with `score_5_6` mean
+sign-flipping across the sweep (+2.88, +0.08, −0.18, +4.35, −1.64, +1.11, −0.43,
++2.22) on n=8–18. Noise.
+
+**The rule:** never report an edge from a single parameter setting. Any result
+that depends on a value *I* picked must be swept across that value BEFORE it is
+reported, and what gets reported is **stability across the sweep**, not the best
+cell. A result that appears at 1/8 settings is a researcher degree of freedom,
+not a finding.
+
+**What survived the sweep and IS worth pursuing:** the Camel **timing window**
+— in-window entries were positive at **8 of 8** settings (+0.76% to +4.17%) with
+hit rate 66–86% vs a 58.1% buy-any-day baseline. The lift is in HIT RATE, not
+magnitude, so it suits a timing *filter* on entries already being taken.
+
+**Blocker before any of it can be armed:** our detected cycle lows land in his
+window only 6–41% of the time vs his claimed 70–80%. Until low placement
+reproduces his marks, "does the window work" measures our detector, not his
+method.
+
+**Do not rebuild the confirmation score as a sizing input.** It stays context-only
+(explains *why* a low is/isn't confirmed). Evidence:
+`state/backtests/cycle-confirmation-minsep-sweep.json`,
+`decisions/cycle_confirmation_backtest.py`, spec `specs/cycle-confirmation-harness.md`.
