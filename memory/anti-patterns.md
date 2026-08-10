@@ -633,3 +633,34 @@ test that replays 5 re-appends of the same bar.
 **Check first when a cycle day-count looks absurd:** run
 `/opt/homebrew/bin/python3 ~/zeke-portfolio/scripts/repair_deep_data.py --audit`
 before believing any bar-index day count.
+
+## BROWSER-HEALTH-RACE-KILLS-SCRAPER (2026-08-10)
+
+`com.zeke.camel-yt-posts` (`research/camel-yt-posts-scraper.py`) crashed with
+`TargetClosedError` on `ctx.new_page()`, exit 1, LaunchAgent flagged QC HIGH.
+
+**Cause:** two independent LaunchAgents racing on the same CDP browser (port
+18800). The scraper connects, then closes accumulated CDP "iframe" targets one
+HTTP call at a time (137 of them that run — normal is a handful). While it was
+mid-cleanup, `com.zeke.openclaw-browser-health` (polls every 5 min) probed
+`/json/version`, timed out because Chrome was momentarily unresponsive under
+the target-close storm, and force-killed + restarted Chrome per its own design
+(`openclaw-browser-health.py`, the 2026-06-08 silent-hang fix). The scraper's
+`browser`/`ctx` handles from before the restart were now dead, and
+`ctx.new_page()` sat OUTSIDE the script's only try/except, so the exception
+was uncaught → traceback → exit 1.
+
+**Fixed:** wrapped connect+new_page in a retry loop (2 attempts, `ensure_browser()`
++ 3s sleep between) in `scrape_posts()`. A restart mid-run now costs one retry
+instead of the whole cron cycle. Verified: manual run exit 0, next scheduled
+LaunchAgent fire also exit 0 (`launchctl list | grep camel-yt-posts` → `0`).
+
+**Not fixed (watch):** WHY 137 iframe targets accumulated before this run is
+still open — normal runs clean a handful. If iframe counts keep climbing,
+something else is opening YouTube iframes on the shared OpenClaw browser
+without closing them; investigate before touching the scraper again.
+
+**The rule:** any CDP-based scraper on the shared OpenClaw browser (18800) must
+assume `openclaw-browser-health` can force-restart Chrome underneath it at any
+moment — wrap `connect_over_cdp` → `new_page` in a retry, don't just wrap the
+`page.goto`/scrape logic.
