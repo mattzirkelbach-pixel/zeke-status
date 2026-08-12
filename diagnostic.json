@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-08-11 20:59:15 ET",
-  "timestamp_utc": "2026-08-12T00:59:15Z",
+  "timestamp_local": "2026-08-11 21:00:03 ET",
+  "timestamp_utc": "2026-08-12T01:00:03Z",
   "scheduler": {
     "running": true,
     "pid": 1712,
-    "uptime_minutes": 35329,
-    "current_window": "daytime"
+    "uptime_minutes": 35330,
+    "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 53931,
+    "total_lines": 53932,
     "last_entries": [
-      "[2026-08-11T22:23:00] treasury-bonds",
       "[2026-08-11T22:54:00] treasury-bonds",
       "[2026-08-11T23:25:00] treasury-bonds",
       "[2026-08-11T23:56:00] treasury-bonds",
-      "[2026-08-12T00:27:00] treasury-bonds"
+      "[2026-08-12T00:27:00] treasury-bonds",
+      "[2026-08-12T00:59:00] treasury-bonds"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -30,13 +30,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nemotron-3-nano:30b",
-      "nemotron-3-super:120b"
+      "qwen3:8b",
+      "nomic-embed-text:latest",
+      "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b, nemotron-3-super:120b"
+    "detail": "healthy, loaded: qwen3:8b, nomic-embed-text:latest, nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
@@ -49,16 +50,6 @@
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-08-11T15:48:37.132278",
-      "window": "daytime",
-      "cycle": 20,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-08-11T16:19:36.945961",
       "window": "daytime",
@@ -143,6 +134,16 @@
       "ts": "2026-08-11T20:28:08.380603",
       "window": "daytime",
       "cycle": 29,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-08-11T20:59:31.009047",
+      "window": "daytime",
+      "cycle": 30,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
