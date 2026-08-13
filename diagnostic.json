@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-08-12 22:59:28 ET",
-  "timestamp_utc": "2026-08-13T02:59:28Z",
+  "timestamp_local": "2026-08-12 23:04:02 ET",
+  "timestamp_utc": "2026-08-13T03:04:02Z",
   "scheduler": {
     "running": true,
     "pid": 1712,
-    "uptime_minutes": 36889,
+    "uptime_minutes": 36894,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 54171,
+    "total_lines": 54172,
     "last_entries": [
-      "[2026-08-13T02:44:00] treasury-bonds",
       "[2026-08-13T02:47:00] treasury-bonds",
       "[2026-08-13T02:50:00] treasury-bonds",
       "[2026-08-13T02:53:00] treasury-bonds",
-      "[2026-08-13T02:56:00] treasury-bonds"
+      "[2026-08-13T02:56:00] treasury-bonds",
+      "[2026-08-13T02:58:00] treasury-bonds"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -30,35 +30,24 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nemotron-3-nano:30b",
-      "nemotron-3-super:120b"
+      "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b, nemotron-3-super:120b"
+    "detail": "healthy, loaded: nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
   },
   "today": {
     "jobs_run": 100,
-    "success": 100,
+    "success": 99,
     "timeout": 0,
     "fail": 0,
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-08-12T22:33:23.536597",
-      "window": "overnight",
-      "cycle": 34,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-08-12T22:36:09.413925",
       "window": "overnight",
@@ -145,6 +134,16 @@
       "cycle": 43,
       "jobs": 1,
       "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-08-12T23:03:16.780346",
+      "window": "overnight",
+      "cycle": 44,
+      "jobs": 1,
+      "success": 0,
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
@@ -286,10 +285,12 @@
     },
     {
       "name": "treasury-bonds",
-      "status": "success",
+      "status": "unknown",
       "duration": 0,
       "grew": 0,
-      "issues": []
+      "issues": [
+        "spark_locked"
+      ]
     }
   ],
   "health": {
