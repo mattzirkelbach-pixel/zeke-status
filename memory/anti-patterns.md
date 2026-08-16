@@ -664,3 +664,43 @@ without closing them; investigate before touching the scraper again.
 assume `openclaw-browser-health` can force-restart Chrome underneath it at any
 moment — wrap `connect_over_cdp` → `new_page` in a retry, don't just wrap the
 `page.goto`/scrape logic.
+
+## DIGEST-DEFER-RETURNS-FALSE-BREAKS-CALLER-COOLDOWN (2026-08-16)
+
+`polcat_catalyst_imminent` (`research/political-catalyst-calendar.py`) showed
+0/10 dispatched over 30 days in `alert-quality-log.jsonl` despite the
+underlying signal being real (RUM/WYNN catalyst windows) and genuinely
+queuing into `state/deferred-alerts.jsonl` 10/10 times.
+
+**Cause 1 — cooldown never armed:** the urgency is in
+`alert_dispatcher.DIGEST_ONLY_URGENCIES`, so `send_alert()` *always* returns
+`False` on that path (digest-deferred, not "sent live") even on success. The
+caller only called `_mark_cd()` inside `if send_alert(...):`, so the 24h
+per-ticker cooldown never got set and the alert re-queued into the digest
+2x/day forever. **Any caller gating its own cooldown/side-effects on
+send_alert()'s return value will break for any urgency in
+DIGEST_ONLY_URGENCIES** — that return value means "not sent live", not
+"failed". Check for this pattern before adding a new digest-only urgency.
+
+**Cause 2 — digest crowding:** `morning_briefing.py`'s DEFERRED OVERNIGHT
+ALERTS section took a flat `top-6` slice over insertion order across ALL
+digest-only urgencies combined. The blank-urgency ACTION-defer bucket
+("robinhood-covers-intraday", `alert_dispatcher.py` line ~509) ran
+70-80/109 entries some days and filled all 6 slots before a low-volume real
+signal ever got a turn — 0/10 polcat entries were ever visible to Matt even
+though they were queued 10/10 times.
+
+**Fixed:** (1) `political-catalyst-calendar.py` marks cooldown unconditionally
+after calling `send_alert()` for `polcat_catalyst_imminent` instead of gating
+on its return value. (2) `morning_briefing.py`'s deferred-alerts section now
+round-robins by urgency (most-recent-first per bucket, 8-line cap) instead of
+a flat top-N, guaranteeing every distinct urgency a slot. Verified: synthetic
+cooldown test shows run 2/3 no longer refire same-day; synthetic crowding
+fixture (9 blank + 2 polcat + 12 blank + 1 other) shows old logic surfaces
+zero polcat entries, new logic surfaces both.
+
+**The rule:** never gate local state (cooldowns, sent-counters) on
+`send_alert()`'s boolean return for a digest-only urgency — that return is
+about live-Telegram delivery, not queue success. And any list-truncation in a
+shared digest section needs per-source fairness, not flat recency, or a
+low-volume real signal will starve behind a high-volume one silently.
