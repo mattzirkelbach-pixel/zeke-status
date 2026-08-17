@@ -704,3 +704,29 @@ zero polcat entries, new logic surfaces both.
 about live-Telegram delivery, not queue success. And any list-truncation in a
 shared digest section needs per-source fairness, not flat recency, or a
 low-volume real signal will starve behind a high-volume one silently.
+
+## MACHINE-FREEZE-MASQUERADES-AS-PIPELINE-STALE (2026-08-16)
+**Symptom:** QC HIGH `PIPELINE_STALE` on `state/camel-yt-posts.json` (37h old, max 8h),
+writer apparently dead. Looked like a single scraper/LaunchAgent bug.
+**Root cause:** the whole Mac Mini was frozen/unresponsive for ~35h (2026-08-15 08:20 UTC →
+2026-08-16 19:19 UTC), not just the Camel pipeline. Proof: `cowork-executor.log`, a 1-minute
+heartbeat with zero dependency on Camel/CDP/Playwright, stopped at the same instant
+(08:20:55) and resumed at the same instant (19:19:51) as every camel-* LaunchAgent. `last
+reboot` showed no clean reboot in that window and `pmset` system sleep timer = 0, so it
+wasn't idle sleep; diag reports for `com.apple.MobileSoftwareUpdate.UpdateBrainService`
+timestamped exactly at the resume moment point to a stuck/pending macOS update holding the
+box non-responsive until it force-restarted.
+**Detection tell:** if a QC/staleness finding on one pipeline coincides with an equally-stale
+gap in an unrelated, high-frequency, non-Camel log (e.g. `cowork-executor.log`, 1-min
+cadence), don't diagnose the named pipeline — diagnose the machine. Check `last reboot`,
+`pmset -g log | grep -i sleep`, and `ls -la /Library/Logs/DiagnosticReports/` for the
+window before touching any single script.
+**Fix:** no code fix — the scraper and its LaunchAgent (StartInterval 7200s, retry-wrapped
+CDP connect from BROWSER-HEALTH-RACE-KILLS-SCRAPER 2026-08-10) were already correct. Manual
+run once the machine was back: exit 0, mtime refreshed, next `zeke-qc.py` scan clean.
+**Rule:** don't restart/patch a single pipeline for staleness without first checking whether
+sibling, unrelated jobs went dark in the exact same window — that's the machine, not the job.
+**Open (not built, flagging only):** no watchdog external to this Mac Mini caught the 35h
+freeze directly; it was only inferred after the fact from an 8h staleness threshold tripping
+~37h late. A heartbeat that pages from outside the box would close this gap — Matt's call,
+INFRASTRUCTURE-WITHOUT-ALPHA applies until there's a repeat.
