@@ -730,3 +730,30 @@ sibling, unrelated jobs went dark in the exact same window — that's the machin
 freeze directly; it was only inferred after the fact from an 8h staleness threshold tripping
 ~37h late. A heartbeat that pages from outside the box would close this gap — Matt's call,
 INFRASTRUCTURE-WITHOUT-ALPHA applies until there's a repeat.
+
+## ONE-SIGNAL-TYPE-THREE-EVENTS (2026-08-16)
+**Symptom:** cycle_state XAUUSD carried `last_dcl_date: 2026-08-04` with
+`last_dcl_price: 3942.1` — a price gold never traded that day — arming a false
+TRANCHE_2 entry on a live metals book.
+**Root cause:** the CF TradingView alert template emits THREE distinct events
+under the SAME parsed signal type ("dcl"): `PENDING DCLevent : Future DCL Zone
+Reached` (approach warning), `New DCL event` (the actual low), and `Cancelled
+DCL event` (retraction). Only `raw_message` distinguishes them.
+`tv_signal_processor.py` treated all three as fresh lows. The 8/04 date came
+from a PENDING zone alert; the 3942.1 price arrived three days later from a
+1W-chart DCL alert (the weekly bar's OANDA-spot mark) applied to the daily
+record. Compounding bug: alerts fire from BOTH the 1D and 1W charts with the
+same signal type, and weekly-chart marks are historical annotations, not fresh
+daily events.
+**Fix (webhooks/tv_signal_processor.py, 2026-08-16):** guards run before any
+state mutation — (1) event_status() parses raw_message; pending/cancelled
+events quarantine (cancelled additionally marks dcl_confirmed=False, never
+resets dates); (2) DCL-family signals from a 1W chart quarantine; (3) prices
+range-validate against the RAW instrument's own data/<SYM>_history.json
+(raw, not canonical — XAGUSD spot ~65 vs SLV ETF ~58 would false-reject),
+3% same-day / 6% nearby-day tolerance for spot-vs-futures basis. Rejects
+append to state/tv_signals_rejected.jsonl for audit.
+**Rule:** when a webhook feed multiplexes event lifecycles through one signal
+type, parse the lifecycle stage BEFORE mutating state — and validate any
+webhook-supplied price against an independent series keyed to the SENDING
+chart's instrument, never the canonical/mapped one.
