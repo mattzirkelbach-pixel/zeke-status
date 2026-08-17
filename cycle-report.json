@@ -1,42 +1,47 @@
 {
-  "timestamp": "2026-08-17T11:10:39.425918+00:00",
-  "window": "daytime",
-  "cycle": 1,
-  "feed_before": 2,
-  "feed_after": 2,
-  "feed_growth": 0,
-  "jobs": {
-    "total": 1,
-    "success": 0,
-    "fail": 1,
-    "timeout": 0
-  },
-  "job_details": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration_s": 2,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "or: gateway closed (1006 abnormal closure (no close frame)): no close reason\nGateway target: ws://127.0.0.1:18789\nSource: local loopback\nConfig: /Users/zekezirk/.openclaw/openclaw.json\nBind: loopback\n"
-    }
-  ],
-  "failures": [
-    {
-      "uuid": "fd3685b9-d6c",
-      "name": "treasury-bonds",
-      "status": "fail",
-      "duration_s": 2,
-      "feed_grew": 0,
-      "entry_valid": false,
-      "issues": [],
-      "output_tail": "or: gateway closed (1006 abnormal closure (no close frame)): no close reason\nGateway target: ws://127.0.0.1:18789\nSource: local loopback\nConfig: /Users/zekezirk/.openclaw/openclaw.json\nBind: loopback\n"
-    }
-  ],
-  "needs_repair": true,
+  "timestamp": "2026-08-17T11:40:32.744403+00:00",
+  "feed_total": 54793,
+  "feed_previous": 2,
+  "feed_growth": 54791,
   "feed_stagnant": true,
-  "repair_dispatched": true,
-  "repair_result": "error"
+  "spark": {
+    "online": true,
+    "model_loaded": true,
+    "models": [
+      "nomic-embed-text:latest",
+      "nemotron-3-super:120b",
+      "nemotron-3-nano:30b"
+    ]
+  },
+  "scheduler": {
+    "running": true,
+    "pids": [
+      "1769"
+    ]
+  },
+  "gateway": {
+    "running": true,
+    "pids": [
+      "1751",
+      "2234",
+      "2603",
+      "2609",
+      "2610",
+      "2611",
+      "2614",
+      "2616",
+      "2618",
+      "2620",
+      "2623",
+      "14782"
+    ]
+  },
+  "jobs_today": 1,
+  "success_today": 1,
+  "fails_today": 0,
+  "timeouts_today": 0,
+  "needs_repair": true,
+  "repair_reasons": [
+    "feed_stagnant"
+  ]
 }
