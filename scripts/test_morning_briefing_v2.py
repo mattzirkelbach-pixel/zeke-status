@@ -124,9 +124,11 @@ class TestWordTrunc(unittest.TestCase):
         self.assertEqual(mb.word_trunc("short text", 50), "short text")
 
     def test_sentence_preference(self):
-        s = "First sentence here. Second sentence that runs long " + "x" * 100
+        # sentence boundary is used when it lands past 50% of the budget
+        s = ("First sentence is quite a bit longer here. Second sentence "
+             "that runs long " + "x" * 100)
         out = mb.word_trunc(s, 60)
-        self.assertEqual(out, "First sentence here.")
+        self.assertEqual(out, "First sentence is quite a bit longer here.")
 
 
 class TestOvernightDigest(unittest.TestCase):
