@@ -757,3 +757,9 @@ append to state/tv_signals_rejected.jsonl for audit.
 type, parse the lifecycle stage BEFORE mutating state — and validate any
 webhook-supplied price against an independent series keyed to the SENDING
 chart's instrument, never the canonical/mapped one.
+
+## YFINANCE-PREMARKET-NAN-BAR (2026-08-18)
+**Symptom**: 6:30 AM briefing sent with `GLD $nan (+nan%)` for every US equity/ETF; futures/crypto fine.
+**Root cause**: Pre-market, `yf.Ticker.history()` returns a today-dated bar with NaN Close for equities/ETFs (exchange not open). `data/fetch_prices.py` used `closes[-1]` raw → NaN last_close poisoned daily_change, all SMAs, and 52w high/low (`np.max` propagates NaN). RSI survived only because `np.where(NaN>0)` → 0. Tell-tale: NaN tickers had `last_date` = yesterday; clean tickers (futures/crypto, overnight sessions) = today.
+**Fix**: `hist = hist[hist["Close"].notna()]` immediately after every `history()` call, + `np.nanmax`/`np.nanmin` for 52w. Fixed in fetch_prices.py 2026-08-18.
+**Rule**: Any yfinance history read MUST drop NaN-close rows before computing anything. Timing note: the 6:30 LaunchAgent briefing consumed a prices file written pre-open — any pre-open fetch of US equities hits this without the notna guard.
