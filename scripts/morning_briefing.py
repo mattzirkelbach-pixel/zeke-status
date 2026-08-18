@@ -256,7 +256,12 @@ def build_camel_theses(cs: dict) -> list:
             text = f"{label} ({phase}): {rest}" if rest else f"{label}: {phase}"
         else:
             text = f"{label}: {read}"
-        lines.append("• " + esc(word_trunc(text, 220)))
+        text = word_trunc(text, 220)
+        # Upstream camel_read is sometimes stored pre-truncated mid-clause
+        # ("…global bear market and"); mark the cut instead of dangling.
+        if text and text[-1] not in ".!?…":
+            text = text.rstrip(",;: ") + "…"
+        lines.append("• " + esc(text))
     return lines
 
 # Signals older than this are history, not setups.
@@ -369,7 +374,7 @@ def build_setups(prices: dict, cs: dict, sigs: dict, exp: dict,
         if w1:
             wk_price = fmt_price(w1["price"]) if w1.get("price") else "n/a"
             lines.append(
-                f"{tick}: weekly {w1['signal'].upper()} marked {wk_price} "
+                f"{tick}: weekly cycle low marked {wk_price} "
                 f"({w1['age_days']}d ago) — weekly cycle young. Context for "
                 f"dip-buys, not a trigger.")
 
@@ -399,11 +404,12 @@ def summarize_top_fires(deferred: list, exp: dict) -> list:
     for tk, kinds in per_tick.items():
         scope = "weekly+daily" if len(kinds) > 1 else \
                 ("weekly" if "weekly_top_confluence" in kinds else "daily")
-        held = _held_str(exp, tk)
-        action = "EXIT-REVIEW today" if exp.get(tk) else \
-                 "no position — supports top thesis, WATCH"
+        if exp.get(tk):
+            tail = f"{_held_str(exp, tk)}. EXIT-REVIEW today."
+        else:
+            tail = "no position — supports top thesis. WATCH."
         lines.append(f"{tk}: overnight TOP-SIGNAL fire ({scope} confluence) — "
-                     f"{held}. {action}.")
+                     f"{tail}")
     return lines
 
 def build_position_risk(exp: dict) -> list:
