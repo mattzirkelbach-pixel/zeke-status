@@ -33,9 +33,10 @@ Last pruned: 2026-04-24
 
 
 
-## CONTEXT-BLOAT-FROM-TOOL-RESULTS (discovered 3/22)
+## CONTEXT-BLOAT-FROM-TOOL-RESULTS (discovered 3/22, recurred 8/25 as hard failure)
 **Pattern**: Calling tools that return massive payloads (get_camel_feed with full transcripts, get_session_context with 50+ anti-patterns) fills context window, leaving no room for actual work. Session degrades after ~60% context used.
-**Fix**: (1) Use last_n=3 not last_n=10 for feed calls. (2) Pipe large results to temp files, grep for what's needed. (3) Front-load diagnostic calls, minimize mid-session data pulls. (4) Plan the full session scope BEFORE making tool calls — don't explore interactively.
+**8/25 escalation**: `get_session_context` hit 933,316 chars and started hard-failing every Cowork session at start (exceeded the tool-result token cap outright, not just degrading context). Root cause: `SESSION_BRIEF.json`'s `user_facts`/`open_decisions` grow unbounded from `persistent-memory-curator.py` (234 facts × ~1KB narrative text, 48 decisions × ~3KB). Fixed with a `max_chars` cap (default 150000) in `mcp/server.py get_session_context` — clips SESSION_BRIEF lists to most-recent N, clips long text sections, and drops/hard-truncates as a last resort, always recording what was clipped + which file has the full version. Curator itself still unbounded — MCP clip is a safety net, not the root fix; if this recurs, prune at write time in the curator instead of only at read time.
+**Fix**: (1) Use last_n=3 not last_n=10 for feed calls. (2) Pipe large results to temp files, grep for what's needed. (3) Front-load diagnostic calls, minimize mid-session data pulls. (4) Plan the full session scope BEFORE making tool calls — don't explore interactively. (5) Any MCP tool returning a growing list/file must cap response size with a sane default (see mcp/CLAUDE.md rule #2).
 
 
 
