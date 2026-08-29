@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-29T22:12:59.666892+00:00",
+  "timestamp": "2026-08-29T22:18:05.311737+00:00",
   "feed_lines": 57322,
   "recent_feed": [
     "{\"timestamp\":\"2026-08-29T15:43:00Z\",\"topic\":\"treasury-bonds\",\"finding\":\"10-year Treasury yield rose to 4.72% on Aug 28 2026 indicating further upside risk; consider extending duration\",\"source\":\"https://finance.yahoo.com/markets/bonds/\"}",
@@ -26,8 +26,8 @@
   "gpu_stats": {
     "status": "OK",
     "gpu_util_pct": 0.0,
-    "temp_c": 44.0,
-    "power_w": 11.29,
+    "temp_c": 43.0,
+    "power_w": 11.15,
     "gpu_name": "NVIDIA GB10"
   },
   "gateway_config": {
@@ -82,6 +82,10 @@
     "status": "ONLINE",
     "loaded_models": [
       {
+        "name": "qwen3:8b",
+        "size_gb": 11.5
+      },
+      {
         "name": "nomic-embed-text:latest",
         "size_gb": 0.6
       },
@@ -100,8 +104,8 @@
     "error_rate": 0.0
   },
   "crontab_status": {
-    "total_entries": 12,
-    "active": 12,
+    "total_entries": 13,
+    "active": 13,
     "disabled_for_maint": 0,
     "has_queue": false,
     "has_overnight": true,
@@ -253,6 +257,6 @@
   "ops_status": "# Operational Status \u2014 2026-02-26\n\n## System Health: HEALTHY\n\n### Pipeline Summary (automated via Python scheduler)\n- Scheduler: Running, daytime+overnight windows\n- Feed: 1,029 entries, growing ~30-40/overnight cycle\n- Success rate: 89% (89/100 jobs today)\n- Cost: $0/day (all local Spark models)\n- Timeouts: 0 today\n\n### Active Research Jobs (Python scheduler)\n- treasury-bonds: \u2705 running\n- longevity: \u2705 running  \n- ai-agents: \u2705 running\n- self-improvement: \u2705 running\n- tool-calling: \u26a0\ufe0f intermittent failures\n- compound-synthesis: \u2705 running\n- quality-eval: \u274c failing (needs investigation)\n\n### Active OpenClaw Cron Jobs\n- tlt-alert-scanner: \u2705 enabled (market hours)\n- association-engine: \u2705 enabled (every 4h)\n- system-health-alert: \u2705 enabled (every 2h)\n- kg-extractor: \u2705 enabled (every 2h)\n- system-doctor: \u2705 enabled (every 2h)\n\n### Infrastructure\n| Component       | Status  | Notes                              |\n|-----------------|---------|-------------------------------------|\n| Gateway         | RUNNING | 23+ hours uptime                    |\n| Spark server    | ONLINE  | qwen3-32b-32k, nomic-embed, qwen3:8b |\n| MCP Server      | RUNNING | Port 8100, Tailscale funnel active  |\n| Dashboard       | LIVE    | GitHub Pages + local:3333           |\n| Watchdogs       | ACTIVE  | System (10min) + MCP (5min)         |\n\n### Automation Layers\n- L1 (Execution): \u2705 DEPLOYED \u2014 scheduler, guardian, quality gate\n- L2 (Oversight): \ud83d\udd28 IN PROGRESS (~60%) \u2014 dashboard live, watchdogs active, quality-eval broken\n- L3 (Intelligence): \ud83d\udccb PLANNED \u2014 cross-domain synthesis, prompt evolution\n",
   "zeke-queue_tail": [],
   "zeke-reason-error_tail": [],
-  "cron_job_count": 12,
+  "cron_job_count": 13,
   "strategic_context": "# Zeke Strategic Context\nLast distilled: 2026-03-19\n\n## System Architecture\n- **Core Compute**: DGX Spark GPU running Nemotron 3 Nano (30B MoE, 3B active). Throughput 76 tok/s vs qwen3-32b 9.6 tok/s (8x gain). Spark cleaned post-recovery: 187.5GB \u2192 50GB.\n- **Model Routing**: config/spark-models.json = single source of truth. spark_models.py get_model(task_type) dispatcher routes reasoning/fast/extraction/scoring/coding/synthesis/embedding to optimal model. All 7 cron scripts refactored to use router. Zero hardcoded model names.\n- **Memory System**: openclaw (v2026.3.11 post-recovery), session-journal.jsonl (mandatory on structural changes), anti-patterns.md (decision history). Memory index: 34/38 files, 113 chunks, fresh daily.\n- **Feedback Loop**: alpha-feedback.py parses source_type from source field. alpha-scanner.py reads accuracy weights, adjusts conviction dynamically. First run: ideas differentiated 5/6/7 vs flat 5/8.\n- **Data Quality**: Learning feed (7,130 entries). Auto-cleanup of malformed JSON. Gateway healthy (PID 88639, RPC probe OK). Ollama fallback for GPU metrics if SSH unavailable.\n- **Availability**: Recovered 2026-03-18 from 39-hour outage (3/15-3/17). Root: openclaw sandbox.mode=\"true\" on Mac Mini (no Docker). FIXED: sandbox.mode=\"off\", removed bad config keys (ownerDisplay, streaming).\n\n## Active Positions\n- **TLT Treasury Bonds**: Yield research active. Cycle analysis ongoing. \"No new developments\" signal emerging\u2014rotation needed soon.\n- **Precious Metals**: XAUUSD (Camel Finance primary), GLD, SLV. Cycle theory monitoring active.\n- **Bitcoin**: BTC cycle tracking (Camel Finance, SPX correlated).\n- **Portfolio Metadata**: Cost basis tracking enabled. Phase 1 (cycle ride) position state captured. Greeks/live P&L pending Phase 1 completion.\n\n## Trading Rules\n- **Camel Finance Cycle Theory**: XAUUSD, SPX, BTC. Timing windows, translation rules, confirmation methods per get_cycle_theory spec.\n- **Phase 1 (Cycle Ride)**: Tranche 2 + 3 entry signals (get_active_signals). SCALE_OUT + HARD_STOP exit triggers. Exit signal live evaluation. Holding state per get_trade_plan.\n- **Phase 2 (Post-Drawdown Reload)**: Trigger conditions from trade-plan spec. Conditions not yet active.\n- **Tax Optimization**: Section 1256 qualified instruments routed to 401k vs taxable. Estimated savings tracked.\n- **Price Data**: 10 tickers tracked (GLD, SLV, GDX, SILJ, TLT, VIX, DXY, SPX, BTC, XAUUSD). RSI, SMAs, 52w H/L computed. Last update via latest price fetch cycle.\n\n## Autonomous Schedule\n- **08:45 Daily**: Memory distillation daemon. Session journal (mandatory) + 5-8 daily files \u2192 claude-strategic-context updated.\n- **Cron Jobs (8 active)**: learning-9pm (fixed 2026-02-18), learning-2am, learning-6am, scheduler tasks, feedback loop, model monitor. All routed to Nemotron via spark_models.py. Cost = $0 (local GPU).\n- **model-release-monitor.py --evaluate-new**: Auto-pull \u2192 benchmark \u2192 conditional swap or remove. Runs on new model release.\n- **Camel YT"
 }
