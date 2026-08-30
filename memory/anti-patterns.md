@@ -816,3 +816,36 @@ Verified still clean against live state: `com.zeke.alpha-monitor` was observed w
 **Detection**: >=2 unrelated interval-agent logs/heartbeats stale beyond 2x their StartInterval simultaneously → suspect domain stall, not individual script failure. Confirm with the pended flag in `launchctl print gui/501/<label>`. Do NOT debug the individual scripts — they are fine.
 **Fix**: `launchctl kickstart gui/501/<label>` runs the job on demand (works every time). Neither kickstart nor bootout/bootstrap restores native interval self-firing — agents re-pend at their next due fire. Only a session/machine reboot fully clears it. Stopgap shipped: `scripts/launchd-stall-kickstart.py` from user crontab (*/5, marker ZEKE-STOPGAP-20260829) auto-kickstarts pended agents at their native cadence. Durable fix specced: specs/cowork-tasks/launchd-interval-stall-detector.md (detector inside zeke-scheduler.py daemon — it survives these stalls).
 **Rule**: Never place a watchdog in the same launchd domain + spawn mechanism as the things it watches. Interval-agent liveness must be checked from a long-lived daemon or cron. Never kickstart com.zeke.trade-alerts (disabled stale alert path).
+
+## VALIDATION-THAT-VALIDATED-SOMETHING-ELSE (2026-08-30)
+**Symptom:** `decisions/alpha_v3.py` carried an authoritative-looking comment —
+"SPX + Cobra-aligned: 68.3% @ 20d (up from 63.2% raw) — AMPLIFY" — cited as the
+justification for a live trading gate, and re-affirmed as given by two
+subsequent audits (8/17, 8/28).
+**Root cause:** the cited study (`research/cobra_camel_backtest.py` →
+`state/cobra_camel_backtest_results.json`, 2026-04-22) filtered on ONE
+condition, `nearest_pct <= 1.5`. It never tested the day window, never required
+`dcl_confirmed`, never required direction alignment. Four compounding defects:
+(1) the study's own `verdict` field says "Cobra-within-1.5pct filter adds NO
+edge over raw Camel calls" (aggregate -1.0pp/-1.2pp) — the 68.3% is an n=82
+per-instrument slice mined out of a negative result; (2) the bin mixes longs
+and shorts on an instrument whose edge was short-side (long 26.2% vs short
+66.0% @20d) while the gate it justifies is a LONG; (3) "up from 63.2%" takes
+the baseline from a different run on a different corpus — not like-for-like;
+(4) the hardcoded window `22 <= day <= 28` is GOLD's cycle window applied to
+SPX, whose declared window is 36-44 — and only 7% of reconstructed SPX cycles
+are even 22-28 bars long.
+**Detection tell:** a comment that cites a percentage as justification, where
+the gate in the code has MORE conditions than the study that produced the
+percentage. Any condition present in the code but absent from the test is
+unvalidated, no matter how authoritative the number looks.
+**Compounding failure:** `specs/cycle-confirmation-harness.md:43` flagged this
+exact defect on 2026-07-30 ("alpha_v3.py | SPX | 22 <= day <= 28 | Should be
+36-44") and it was never actioned; later work then baked 22-28 into a passing
+test fixture (`drafts/cobra_bug_proofs.py:25`), converting the bug into
+"expected behaviour".
+**Rule:** before trusting an in-code performance citation, open the artifact it
+names and diff the study's filter set against the code's condition set. Cite
+the study's own verdict field, not a slice of its output. And when a spec flags
+a defect, either action it or tombstone it — an un-actioned flag decays into
+consensus that the behaviour is intended.
