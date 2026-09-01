@@ -1018,3 +1018,26 @@ failure mode that let the original exposure run for 6 months. 12h cooldown.
 The check holds no secret (it succeeds by being rejected), so it is safe
 anywhere. If you ever see it "failing" after intentionally changing the auth
 scheme, fix the check — do not delete it.
+
+## ROLLING-WINDOW-CANNOT-SEE-A-QUOTA-RESET (2026-09-01)
+Matt's Max weekly quota reset on 2026-09-01. `claude-budget.py` computed the
+weekly figure as a **rolling** count of the last 7 days of session events, so
+it kept reporting 119% of the 4200 cap and `safe_to_spawn_claude()` returned
+False — cowork-executor logged **336 BUDGET-BLOCKED** refusals and every
+headless spawn was deferred against a limit that no longer existed. Symptom
+reads as "Zeke went quiet"; cause was local accounting, not Anthropic.
+**Root mismatch:** Anthropic's weekly limit resets on a FIXED weekly cadence.
+A rolling window is the wrong model — it can never observe the reset.
+**Fix:** `state/claude-budget-anchor.json` records one known reset instant;
+`weekly_window_start()` returns the latest `anchor + k*7d <= now`, so the
+window tracks Anthropic's cadence and self-advances forever. Guards: no anchor
+→ legacy rolling; anchor in the future → rolling. Set it once with
+`claude-budget.py --mark-weekly-reset [ISO]`. Verified: six window cases +
+live gate flipped False→True; weekly_pct 1.19→0.0.
+**Rule:** when a local counter mirrors a remote quota, model the remote's reset
+semantics (fixed vs rolling). If the two disagree, the local gate will
+eventually block real work while the real quota sits idle — the failure is
+silent because nothing errors, jobs just "defer until cap rolls" forever.
+**Recalibration note:** caps (950/5h, 4200/7d) were calibrated against Sonnet
+4 / Opus 4-era UI screenshots. Interactive Fable 5.1 use may weight events
+differently in Anthropic's counter; re-anchor against the UI after a week.
