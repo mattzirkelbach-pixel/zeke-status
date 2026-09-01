@@ -974,3 +974,28 @@ Cause: bash expands every word on a `local a=$1 b=$a` line BEFORE performing any
 assignment, so `$key` was unbound inside the curl array. Split the `local`
 declarations. Any interactive script now needs a `--selftest` path that actually
 executes its functions; a syntax check is not verification.
+
+## CLAUDE-AI-CONNECTOR-HAS-NO-EDIT-ONLY-REMOVE (2026-09-01)
+Corrects an assumption made earlier the same day. A custom connector on
+claude.ai (Settings → Customize → Connectors; note they MOVED from
+/settings/connectors to /customize/connectors) **cannot be edited**. Opening one
+shows the URL read-only, a `Disconnect` button, and a `⋮` menu whose only item is
+`Remove`. To change the URL or credentials you must **Remove and re-Add**.
+**The header field DOES exist** — "Request headers" with `authorization` in the
+dropdown, described as "stored securely and never shown again". It appears only
+in the **Add custom connector** dialog (second step, after the server check),
+which is why it looked absent when inspecting the existing connector. That
+mistaken read led to briefly shipping a path-embedded-token fallback
+(`/mcp/<token>`); it has been REMOVED because a token in a URL leaks into proxy
+and access logs. Do not reintroduce it.
+**Gotcha:** with a bearer-gated server the Add flow probes the plain URL, gets
+401, and pre-selects Authentication = "Always required" (OAuth). That is wrong
+for a static token — choose **None**, then add the `authorization` header with
+the full value including the scheme (`Bearer <token>`).
+**Verified end state:** connector URL `https://zekes-mac-mini.tail5d6012.ts.net/mcp`
+(no token), auth via header, 36 tools listed. Server checks: header 200 ·
+`/mcp/<token>` 401 · no-auth 401 · watchdog check() True.
+**Also:** "This connector has no tools available" on a healthy server means the
+client is being 401'd — an MCP client that cannot authenticate has no tool list
+to render. It is not evidence the server is broken; check the server directly
+before concluding anything was damaged.
