@@ -946,3 +946,7 @@ funnel traffic arrives from 127.0.0.1 and is indistinguishable from local by
 source IP. Auth is the only control at that boundary.
 **Rule 3:** any tool that can execute, write, or restart must be audited at the
 call site, or a future incident is unreconstructable.
+
+## ZOMBIE-CLAUDE-KILL run 2026-09-01 04:51 UTC
+- pid=48255 ppid=1 etime=9716s cpu=1.0% state=R match=gui reason=etime=9716s state=R
+Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
