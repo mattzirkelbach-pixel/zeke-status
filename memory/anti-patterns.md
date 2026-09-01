@@ -910,3 +910,39 @@ Old-format state files fall back to UNSPECIFIED — verified.
 that cause. An alert that names a remedy the code never diagnosed is a guess
 wearing the costume of an instruction — and it is worst precisely when Matt is
 away and acting on it blind.
+
+## MCP-BEARER-AUTH-LOADED-BUT-NEVER-ENFORCED (CRITICAL — found & fixed 2026-08-31)
+`mcp/server.py` had a `# BEARER TOKEN AUTH` section that read
+`~/.zeke-mcp-token` into `_MCP_TOKEN` at import — and then **never referenced it
+again**. No middleware, no auth provider, no gate. Meanwhile
+`tailscale serve status` showed **Funnel ON**, publishing
+`https://zekes-mac-mini.tail5d6012.ts.net` → `127.0.0.1:8100` to the public
+internet. Token file dated 2026-02-27, so the window was ~6 months.
+**Proven, not theorised (2026-08-31):** an unauthenticated POST to the public
+funnel URL returned `tools/list` with 36 tools, and `exec_command` with
+`id -un` returned `exit_code 0 / zekezirk`. Unauthenticated remote code
+execution as the owning user, on the box holding brokerage sessions,
+positions.json, Telegram and Claude tokens.
+**Second defect, same file:** the LaunchAgent passes `--host 127.0.0.1` but
+`FastMCP(...)` hardcoded `host="0.0.0.0"` and ignored the arg, so it was also
+exposed LAN-wide. Operator intent was in the plist and silently overridden.
+**Third defect:** `_audit_tool_call` instrumented only find_capability /
+remember / record_mistake. exec_command, write_file, edit_file and
+restart_service were NOT audited — so there is **no forensic record** of
+whether the exposure was used. Absence of evidence is not evidence of absence.
+**Fixed:** `BearerAuthASGI` middleware requires `Authorization: Bearer <token>`
+on every request (constant-time compare); `/healthz` stays open so a watchdog
+can distinguish "process up" from "bad credential" without holding the secret;
+missing token now **fails closed** (random token ⇒ deny-all) instead of serving
+openly; `uvicorn.run(..., host=args.host)` honors the plist; all four dangerous
+tools are now audited. `mcp-watchdog-v2.py` probes the authenticated path and
+treats 401 as "do not restart" so a credential fault cannot cause a restart
+storm. Verified: public unauth 401, local unauth 401, wrong token 401, valid
+token 200/36 tools, healthz 200, watchdog check() True, audit line written.
+**Rule 1:** never rely on the *presence* of an auth section. Prove enforcement
+by sending an unauthenticated request from outside and requiring a 401.
+**Rule 2:** a localhost bind is NOT a security control behind Tailscale Funnel —
+funnel traffic arrives from 127.0.0.1 and is indistinguishable from local by
+source IP. Auth is the only control at that boundary.
+**Rule 3:** any tool that can execute, write, or restart must be audited at the
+call site, or a future incident is unreconstructable.
