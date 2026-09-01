@@ -950,3 +950,27 @@ call site, or a future incident is unreconstructable.
 ## ZOMBIE-CLAUDE-KILL run 2026-09-01 04:51 UTC
 - pid=48255 ppid=1 etime=9716s cpu=1.0% state=R match=gui reason=etime=9716s state=R
 Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## IDENTITY-LINKED-API-KEY-READS-AS-INVALID (2026-09-01)
+A new Anthropic API key returned HTTP 400 and a validator rejected it as bad.
+It was **valid**: 2026 "identity-linked" keys authenticate fine, then fail the
+request with `invalid_request_error: anthropic-workspace-id is required when
+authenticating with an identity-linked API key`. A genuinely bad key returns
+**401 `authentication_error`** — that is the only reliable invalid-key signal.
+**Never treat non-200 as "bad key".** Classify: 200 = workspace-scoped key, OK
+as-is · 400 + `anthropic-workspace-id` = valid, needs the workspace header ·
+401 = actually invalid.
+Such keys do NOT appear in the console's per-workspace key list (they are
+account/user-scoped and target a workspace per-request), so absence from that
+list is not evidence of a problem.
+`~/.zeke-anthropic.env` now carries both `ANTHROPIC_API_KEY` and
+`ANTHROPIC_WORKSPACE_ID`. All three consumers send the header when it is set
+and are unchanged when it is not: `webhooks/tv-alert-computer-use.py`
+(`make_client`), `decisions/cf_vision_extract.py`, `research/camel-visual-extractor.py`.
+The workspace id is an identifier, not a secret.
+**Second lesson, process:** the fixer script shipped after only `bash -n`, which
+cannot catch a runtime unbound variable — it crashed twice in Matt's hands.
+Cause: bash expands every word on a `local a=$1 b=$a` line BEFORE performing any
+assignment, so `$key` was unbound inside the curl array. Split the `local`
+declarations. Any interactive script now needs a `--selftest` path that actually
+executes its functions; a syntax check is not verification.
