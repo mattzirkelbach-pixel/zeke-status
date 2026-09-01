@@ -849,3 +849,35 @@ names and diff the study's filter set against the code's condition set. Cite
 the study's own verdict field, not a slice of its output. And when a spec flags
 a defect, either action it or tombstone it — an un-actioned flag decays into
 consensus that the behaviour is intended.
+
+## COMPUTER-USE-CANNOT-REACH-HEADLESS-JOBS (2026-08-31)
+Matt enabled macOS Screen Recording + Accessibility for the Claude app and asked
+whether it upgrades the scheduled scrapers/crawlers. **It does not. Do not
+rewrite, wrap, or "upgrade" any scheduled job to use computer-use.**
+**Verified, not assumed (2026-08-31):**
+(1) `claude mcp list` from `~/zeke-portfolio` returns ONLY remote claude.ai HTTP
+MCP servers (FMP, Zeke MCP, PubMed, Calendar, Figma, ...). `computer-use` and
+`claude-in-chrome` are **not** there — they are injected by the Claude desktop
+app into an interactive session. Every `mcpServers` block in `~/.claude.json` is
+empty `[]`. A headless `claude -p` LaunchAgent cannot see these tools at all.
+(2) Even where present, `request_access` renders a dialog a human must approve,
+per session, and `list_granted_applications` returns `[]` at session start. No
+human at 03:00 = fails closed. There is no standing-grant escape.
+(3) Screen capture needs an unlocked GUI session — precisely what wedged for
+4.2 days in the Jun 29 freeze. Coupling data ingestion to GUI-session health
+would import that failure mode into the scrapers.
+**The existing stack is strictly better and must stay:** dedicated OpenClaw
+Chrome on CDP port 18800 (`openclaw-browser-health.py` self-heals it),
+`playwright.connect_over_cdp`, and `pycookiecheat` reading `cf_session` straight
+out of Chrome's cookie DB across two profiles (`research/cf-portal-crawler.py`).
+CDP is coordinate-free, does not steal focus, works with the screen locked, and
+is immune to window resizing. Pixel-driving would be a downgrade on every axis.
+**Where computer-use IS legitimately useful — interactive sessions only:**
+disambiguating an `AUTH DOWN` alert (dead cookie vs. crawler bug — a screenshot
+of Chrome answers it in one shot; confirmed 2026-08-31 that the portal showed
+logged-in while `/api/me` was the authority), and the Jun 29 freeze class where
+the box is up and the logs are silent.
+**Rule:** capability granted to the desktop app ≠ capability available to cron.
+Before designing anything around a new tool, run `claude mcp list` in the
+target working directory and confirm the tool exists on the path the *scheduled
+job* actually takes — not the path your interactive session takes.
