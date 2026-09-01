@@ -999,3 +999,22 @@ the full value including the scheme (`Bearer <token>`).
 client is being 401'd — an MCP client that cannot authenticate has no tool list
 to render. It is not evidence the server is broken; check the server directly
 before concluding anything was damaged.
+
+## MCP-PUBLIC-AUTH-REGRESSION-CHECK — DO NOT REMOVE (2026-09-01)
+`zeke-qc.check_mcp_public_auth()` sends a deliberately **unauthenticated**
+tools/list to the public funnel URL every QC run (07:00 and 17:00) and requires
+a **401**. It exists because the Feb–Aug 2026 exposure went ~6 months unnoticed:
+every monitor asked "is the MCP up?" and none ever asked "does it answer
+someone with no credentials?" Uptime checks cannot catch an auth regression —
+an open server looks *healthier* than a closed one.
+Branches (all tested): 401 → silent pass · 200 → CRITICAL **and pages Matt
+directly** · 000/unreachable → MEDIUM, no page (tunnel down is the watchdog's
+job, not a security finding) · anything else → MEDIUM, fails closed.
+**Why it pages instead of only filing a finding:** per the P1-8 note in
+`_escalate_feed_stale_to_matt`, SYSTEM is the dispatcher's log-only dead-letter
+and CRITICAL is the only category that fires through lockdown. A finding in
+`all_findings` lands in a report file and reaches nobody — which is the same
+failure mode that let the original exposure run for 6 months. 12h cooldown.
+The check holds no secret (it succeeds by being rejected), so it is safe
+anywhere. If you ever see it "failing" after intentionally changing the auth
+scheme, fix the check — do not delete it.
