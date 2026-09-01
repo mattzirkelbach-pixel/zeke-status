@@ -121,3 +121,32 @@ KEY FACTS: Cycles are UNIVERSAL (playbook `~/.openclaw/workspace/references/came
 6. **morning-briefing-state.json says last_sent: 2026-03-23** (5+ weeks stale) while dispatcher fires daily — file just stopped being written. Cosmetic; no impact on actual sends.
 7. **Sprawl: 122 dormant scripts** flagged for removal in 2026-05-08 sprawl audit. 24 duplicates.
 8. **Budget tracker calibration error fixed 2026-05-08:** prior version over-counted by ~2.5x (combined_pct = sonnet+opus, max_200 quota). Now unified `messages_per_5h=500` matching UI. Throttle gate was over-deferring during entire 2026-05-07 session.
+
+## Control planes — who can change what (added 2026-08-31)
+
+Two separate paths reach this Mac. Confusing them wasted a full session on 2026-08-31.
+
+**A. Cloud/remote Claude session (claude.ai/code) → Zeke MCP over Tailscale.**
+Tools: `exec_command`, `read_file`, `write_file`, `tail_log`, `restart_service`, etc.
+CAN: read/write any file, edit scripts + plists, `launchctl` load/unload/kickstart,
+restart services, rotate logs, run python/git. Everything shell-reachable.
+CANNOT: click anything. No screen, no GUI, no computer-use tools in that session.
+
+**B. Local Claude desktop app session on the Mac.**
+2026-08-31: Matt enabled computer control + screen recording for the desktop app.
+This grants GUI control to sessions running IN THAT APP — not to cloud sessions.
+Use this path for anything that only exists as app UI state.
+
+**GUI-only settings (path B required — a cloud session cannot reach these):**
+- Scheduled-task model picker (Edit scheduled task → model dropdown). Default resolves
+  to the app's default model, which was **Fable 5** — that is why every Cowork
+  scheduled task ran on Fable and all four died together when the Fable weekly cap
+  hit 100% on 2026-08-31.
+- Scheduled-task Permissions ("Manually approve" vs pre-approved tools).
+- Plan usage page (Settings → Usage). Weekly caps are **per model tier**: on
+  2026-08-31 Fable read 100% used while All-models read 58%. A tier can be dead
+  while the account has headroom — check the per-model bar, not just the total.
+
+**Practical rule:** if a fix is a file, a script, a plist or a service → cloud session
+handles it end to end. If the fix is a dropdown or a toggle → it needs the local app
+(path B) or Matt's hands. Say which one up front instead of promising a remote fix.
