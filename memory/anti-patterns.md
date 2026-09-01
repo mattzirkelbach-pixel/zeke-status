@@ -881,3 +881,32 @@ the box is up and the logs are silent.
 Before designing anything around a new tool, run `claude mcp list` in the
 target working directory and confirm the tool exists on the path the *scheduled
 job* actually takes — not the path your interactive session takes.
+
+## ALERT-PRESCRIBES-A-FIX-IT-NEVER-DIAGNOSED (2026-08-31)
+`cf-portal-crawler.get_session()` built a per-source `failures` list that
+correctly separated "cookie read failed" (permission) from "no cf_session"
+(logout) from "/api/me HTTP 401" (server-side revocation) — then **discarded it**
+and fired one hardcoded alert: *"Matt must open community.cftrading.co.uk and
+confirm he is logged in."*
+**Why that is expensive:** `pycookiecheat` needs macOS Full Disk Access +
+Keychain for `/opt/homebrew/bin/python3` to read Chrome's cookie DB. That TCC
+grant silently resets on OS/Chrome updates, and **TCC state is not readable from
+the CLI** (`TCC.db` → "authorization denied"). So a lapsed permission renders as
+"you're logged out" — Matt logs in (possibly remotely, where he cannot fix TCC
+at all), it still fails, and the real cause is invisible to every CLI tool.
+Diagnosis and remedy point in opposite directions.
+**Fixed 2026-08-31:** `get_session()` now returns `(session, me, failures)`;
+`classify_auth_failure()` maps them to PERMISSION / LOGGED_OUT /
+SERVER_INVALIDATED / UNKNOWN with a matching remediation. Permission takes
+precedence over logout when both appear — if you cannot read the store you
+cannot know whether the cookie is there. Cause + remediation + raw failures are
+written into `state/cf-portal/latest-crawl.json`, and `zeke-qc.py` propagates
+them instead of hardcoding "re-login" (action flips to `matt_fix_python_fda`).
+Old-format state files fall back to UNSPECIFIED — verified.
+**Audited, already correct, left alone:** `zeke-qc.py`'s TradingView path
+(logged_out → CRITICAL vs cdp_unavailable → MEDIUM) and
+`webhooks/tv-alert-guardian.py` (passes `kind`, per its spec criterion 7).
+**Rule:** if a code path computes *why* something failed, the alert must carry
+that cause. An alert that names a remedy the code never diagnosed is a guess
+wearing the costume of an instruction — and it is worst precisely when Matt is
+away and acting on it blind.
