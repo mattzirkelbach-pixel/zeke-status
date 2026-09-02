@@ -1060,3 +1060,12 @@ list is now always empty (kept for shape compat, no longer meaningful).
 **Rule:** a "no signal" branch in any hypothesis/scan generator must still
 write SOMETHING to the audit log — silent `return None` is indistinguishable
 from "never ran" to any downstream freshness/gate check reading that log.
+
+## X-TWEETTEXT-SELECTOR-DEAD (discovered 2026-09-02, dark since 06-10)
+**Pattern**: `multi-x-monitor.py` logged "Found 0 tweets" for every account for ~12 weeks and nobody noticed — the log line looked healthy and the LaunchAgent exited 0.
+**Root cause**: X removed `[data-testid="tweetText"]` from public (logged-out) profile renders in June. `article[data-testid="tweet"]` still renders 5-10 posts.
+**Fix**: article inner_text parse (header lines = name/@handle/age, body until an engagement-counter line). Canonical impl `_parse_x_article()` in research/sentiment_pivot_detector.py; fallback copy in multi-x-monitor.py.
+**Rule**: A scraper that returns 0 items N runs in a row is a FAILURE, not a quiet day. Any scraper log "Found 0" for >3 consecutive runs must surface in feed-quality-monitor. X search (`/search?f=live`) is login-gated — do not build on it.
+
+## SENTIMENT-PIVOT-DO-NOT-REBUILD (2026-09-02)
+"What just moved and why" = `research/sentiment_pivot_detector.py` -> `state/sentiment-pivot-latest.json` -> MCP `get_sentiment_pivot`. Thresholds/sources live ONLY in `config/sentiment-pivot.json`. Do not add a second intraday-move detector; extend the basket/config instead. Numbers come from Python; the Spark narrative is one digit-stripped sentence and is advisory.
