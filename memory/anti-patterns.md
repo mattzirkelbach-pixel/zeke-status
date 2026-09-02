@@ -1041,3 +1041,22 @@ silent because nothing errors, jobs just "defer until cap rolls" forever.
 **Recalibration note:** caps (950/5h, 4200/7d) were calibrated against Sonnet
 4 / Opus 4-era UI screenshots. Interactive Fable 5.1 use may weight events
 differently in Anthropic's counter; re-anchor against the UI after a week.
+
+## alpha_v3 silent no-signal = false "ticker not scanned" (2026-09-02)
+
+`decisions/alpha_v3.py`'s `compose_hypothesis()` returned bare `None` for any
+ticker with <3 aligned edges or a close long/short disagreement — NO record
+was ever written to `decisions.jsonl` for that scan. `brief_scorecard.py`'s
+`spx_absent_from_alpha` golden gate can't distinguish "ticker scanned, no
+signal" from "ticker never in the universe" without a decisions.jsonl entry,
+so it fired `grade_capped=true` (score 100, grade C, exit 1) even though SPX
+was correctly in `HELD_UNIVERSE` and scanned every day — it just hadn't had
+3 aligned edges since 2026-08-31.
+**Fix:** `compose_hypothesis()` now always returns a dict — a `chosen=no_trade`
+audit record (`_no_signal_hypothesis()`) when no actionable signal exists,
+same shape/write path as the existing low-conviction no_trade case. Every
+scanned ticker leaves a trail in `decisions.jsonl`; `run()`'s `no_signal`
+list is now always empty (kept for shape compat, no longer meaningful).
+**Rule:** a "no signal" branch in any hypothesis/scan generator must still
+write SOMETHING to the audit log — silent `return None` is indistinguishable
+from "never ran" to any downstream freshness/gate check reading that log.
