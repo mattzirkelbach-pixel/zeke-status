@@ -1,16 +1,17 @@
 {
-  "timestamp_local": "2026-09-04 21:45:47 ET",
-  "timestamp_utc": "2026-09-05T01:45:47Z",
+  "timestamp_local": "2026-09-04 21:48:13 ET",
+  "timestamp_utc": "2026-09-05T01:48:13Z",
   "scheduler": {
     "running": true,
     "pid": 33394,
-    "uptime_minutes": 8135,
+    "uptime_minutes": 8138,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 1,
+    "total_lines": 2,
     "last_entries": [
-      "[PARSE ERROR] {\"timestamp\":\"2026-09-05T01:40:00Z\",\"topic\":\"treasury-bonds\",\"finding\":\"10-Year "
+      "[PARSE ERROR] {\"timestamp\":\"2026-09-05T01:40:00Z\",\"topic\":\"treasury-bonds\",\"finding\":\"10-Year ",
+      "[2026-09-05T01:45:00] treasury-bonds"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -26,14 +27,13 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nemotron-3-nano:30b",
-      "qwen3:8b",
-      "nomic-embed-text:latest"
+      "nemotron-3-super:120b",
+      "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b, qwen3:8b, nomic-embed-text:latest"
+    "detail": "healthy, loaded: nemotron-3-super:120b, nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
@@ -46,16 +46,6 @@
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-09-04T21:21:50.211082",
-      "window": "overnight",
-      "cycle": 9,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-09-04T21:24:30.976366",
       "window": "overnight",
@@ -140,6 +130,16 @@
       "ts": "2026-09-04T21:45:37.449895",
       "window": "overnight",
       "cycle": 18,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-09-04T21:48:02.796766",
+      "window": "overnight",
+      "cycle": 19,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
