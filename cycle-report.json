@@ -1,37 +1,42 @@
 {
-  "timestamp": "2026-09-07T19:39:21.875755+00:00",
-  "feed_total": 59237,
-  "feed_previous": 59237,
+  "timestamp": "2026-09-07T19:39:29.010607+00:00",
+  "window": "daytime",
+  "cycle": 1,
+  "feed_before": 59237,
+  "feed_after": 59237,
   "feed_growth": 0,
-  "feed_stagnant": false,
-  "spark": {
-    "online": true,
-    "model_loaded": false,
-    "models": [
-      "nemotron-3-super:120b"
-    ]
+  "jobs": {
+    "total": 1,
+    "success": 0,
+    "fail": 1,
+    "timeout": 0
   },
-  "scheduler": {
-    "running": true,
-    "pids": [
-      "1204"
-    ]
-  },
-  "gateway": {
-    "running": true,
-    "pids": [
-      "1158",
-      "1163",
-      "1240",
-      "1401",
-      "1404",
-      "1454"
-    ]
-  },
-  "jobs_today": 1,
-  "success_today": 1,
-  "fails_today": 0,
-  "timeouts_today": 0,
-  "needs_repair": false,
-  "repair_reasons": []
+  "job_details": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration_s": 20,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "or: gateway closed (1006 abnormal closure (no close frame)): no close reason\nGateway target: ws://127.0.0.1:18789\nSource: local loopback\nConfig: /Users/zekezirk/.openclaw/openclaw.json\nBind: loopback\n"
+    }
+  ],
+  "failures": [
+    {
+      "uuid": "fd3685b9-d6c",
+      "name": "treasury-bonds",
+      "status": "fail",
+      "duration_s": 20,
+      "feed_grew": 0,
+      "entry_valid": false,
+      "issues": [],
+      "output_tail": "or: gateway closed (1006 abnormal closure (no close frame)): no close reason\nGateway target: ws://127.0.0.1:18789\nSource: local loopback\nConfig: /Users/zekezirk/.openclaw/openclaw.json\nBind: loopback\n"
+    }
+  ],
+  "needs_repair": true,
+  "feed_stagnant": true,
+  "repair_dispatched": true,
+  "repair_result": "error"
 }
