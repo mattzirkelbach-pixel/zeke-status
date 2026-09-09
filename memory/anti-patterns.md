@@ -1085,3 +1085,28 @@ from "never ran" to any downstream freshness/gate check reading that log.
 ## ZOMBIE-CLAUDE-KILL run 2026-09-08 11:38 UTC
 - pid=629 ppid=1 etime=57613s cpu=3.8% state=R match=gui reason=etime=57613s state=R
 Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## PIXELS-WHERE-STRUCTURED-EXISTS (found & fixed 2026-09-09)
+**Symptom:** two pipelines (tv-cycle-reader.py OCR every 2h; cf_vision_extract.py
+Haiku vision at 07:00) transcribed the CF indicator's "Cycle Low Windows" table
+off screenshots — ~600 lines of glyph/axis/modal/viewport heuristics, a daily
+API spend, Unconfirmed rows "unreadable", and a 4-day silent 7/7 while a promo
+modal covered the chart. Prompted by Matt asking whether the TradingView
+DESKTOP app connects better (it doesn't: same web app in Electron, no API).
+**Root cause:** the table is a Pine `table.new()`; TradingView keeps every cell's
+TEXT in the chart model — `window.TradingViewApi.activeChart().chartModel()
+.dataSources()[CF].graphics()._primitivesCollection.dwgtablecells` — reachable
+from the CDP session we already had. Nobody checked the page's JS objects before
+reaching for OCR. Same-day check: JS == OCR on every confirmed count, plus the
+Unconfirmed cells OCR never read.
+**Fix:** decisions/cf_table_reader.py (JS first, {} on shape change → pixel
+fallback, counts in the output files). Spec: specs/tv-js-table-extraction.md.
+Bonus catch: cf_vision_extract charted OANDA:XAUUSD (untuned, 51d) while the
+reader charted TVC:GOLD (tuned, 29d) — same instrument, two answers, feeding
+different consumers. Repointed; SLV (untuned) flagged for Matt.
+**Rule:** before OCR/vision/computer-use on a rendered page, dump the page's JS
+globals and the XHRs it makes (`Runtime.evaluate` + `Network.enable`) — if the
+site rendered it from structured data, that data is still in memory. Pixels are
+the fallback, never the first path. Survey of the rest of the system is in the
+spec §5 (camel-yt-posts ytInitialData, YouTube timedtext captions, pricealerts
+create) and queued in cowork-trigger.json.
