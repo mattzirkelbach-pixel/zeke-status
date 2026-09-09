@@ -150,3 +150,26 @@ Use this path for anything that only exists as app UI state.
 **Practical rule:** if a fix is a file, a script, a plist or a service → cloud session
 handles it end to end. If the fix is a dropdown or a toggle → it needs the local app
 (path B) or Matt's hands. Say which one up front instead of promising a remote fix.
+
+### Cowork scheduled tasks die silently when Claude.app quits (added 2026-09-09)
+2026-09-08 ~10:34Z the Claude desktop app stopped running. All four Cowork
+scheduled tasks (cowork-trigger-processor, weekly-system-review,
+video-transcript-analyzer, morning-alpha-briefing) run INSIDE that app and are
+marked "Only on this computer", so all four stopped firing for ~24h with:
+  - enabled=true on every task
+  - recordedSkips = {} (nothing recorded)
+  - no error anywhere, no alert
+The Mac itself was healthy the whole time (up 1d15h, caffeinate holding
+PreventSystemSleep) and the LOCAL LaunchAgent briefing sent normally at 10:30Z —
+so machine-level watchdogs and the dead-man check both stayed green. Only the
+missing morning-alpha-synthesis.md mtime revealed it.
+
+**Detection:** `ps aux | grep -c "[C]laude.app/Contents/MacOS/Claude"` — 0 means
+every Cowork scheduled task is dead regardless of what scheduled-tasks.json says.
+Also compare each task's lastRunAt against its cron; stale lastRunAt with
+enabled=true and no recordedSkips is the signature.
+**Fix:** `open -a Claude` (works over Zeke MCP exec; app relaunches into the GUI
+session). Verify the process survives ~60s, then confirm the next scheduled fire
+actually lands — relaunching the app is not proof the scheduler resumed.
+**Note:** a missed window is not retroactive. The 06:30 ET synthesis for that day
+is simply lost; only future fires recover.
