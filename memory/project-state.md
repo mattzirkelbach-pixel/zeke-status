@@ -171,5 +171,10 @@ enabled=true and no recordedSkips is the signature.
 **Fix:** `open -a Claude` (works over Zeke MCP exec; app relaunches into the GUI
 session). Verify the process survives ~60s, then confirm the next scheduled fire
 actually lands — relaunching the app is not proof the scheduler resumed.
-**Note:** a missed window is not retroactive. The 06:30 ET synthesis for that day
-is simply lost; only future fires recover.
+**Missed windows ARE caught up on relaunch** (corrected 2026-09-09, same day —
+the original note here claimed the opposite and was wrong). Within ~1 minute of
+`open -a Claude` at 11:09Z, all three due tasks fired at 11:10Z (trigger
+processor, video analyzer, morning-alpha-briefing) and the synthesis was written
+at 11:13Z, correctly dated 2026-09-09 with deltas against 9/8. Normal schedule
+then resumed (11:30, 12:01). So relaunching promptly recovers the day rather
+than conceding it — do not tell Matt a missed brief is lost without checking.
