@@ -1110,3 +1110,37 @@ site rendered it from structured data, that data is still in memory. Pixels are
 the fallback, never the first path. Survey of the rest of the system is in the
 spec §5 (camel-yt-posts ytInitialData, YouTube timedtext captions, pricealerts
 create) and queued in cowork-trigger.json.
+
+## MCP-WATCHDOG-PUBLIC-PROBE-LEFT-UNAUTHENTICATED-AFTER-AUTH-ROLLOUT (2026-09-10)
+**Symptom**: Matt reports the claude.ai Zeke connector "down again" (3rd time in a
+week) during the 08:30 data release. `mcp-watchdog.log` shows `PUBLIC MCP PATH DOWN
+— attempting funnel fix` every 180s, ~480/day, continuously since 2026-09-01 07:18 —
+the exact minute bearer auth was enforced on `mcp/server.py`.
+**Root cause**: the 2026-08-31 auth rollout updated `check()` (local probe) to send
+the token but left `funnel_ok()` (public funnel probe) unauthenticated. Every cycle
+it got 401, read it as "down", and ran `Tailscale funnel --bg 8100`. The funnel was
+healthy the whole time (auth watchdog: 1588 authenticated probes Sep 5–10, 0
+failures; only gap = the Sep 7 reboot). Net effect: 9 days of a blind public-path
+monitor — a real outage would have been indistinguishable from the noise — and the
+watchdog never alerted on public-path loss at all (it only logged).
+**Why the connector actually drops is still unproven**: uvicorn/FastMCP ran at
+WARNING with no access log, so there was no server-side record of what claude.ai
+received (status, latency, disconnect). The Mac Mini is on Wi-Fi (en1), the
+Tailscale Sparkle autoupdater has been sitting in a pending state since the Sep 7
+boot, and claude.ai-side connector faults are all still candidates.
+**Fix**: (1) `funnel_probe()` sends the bearer token; 401/403 WITH token = credential
+state (owned by `monitoring/mcp_auth_watchdog.py`), never a funnel repair; 000/5xx =
+real public-down → repair logs rc/stderr + re-probe, `/tmp/mcp-wd-public-down` streak,
+ONE CRITICAL via dispatcher after 2 cycles (key `mcp_public_path_down`, 6h cooldown),
+`RESTORED after N cycles` line on recovery so every drop leaves a duration.
+(2) `BearerAuthASGI` now appends one JSON line per request to
+`~/logs/mcp-access.jsonl` (ts, method, path, status, ms, x-forwarded-for, UA, error
+class on client disconnect; never token or body; /healthz excluded). Next
+"connector down" report: grep that file for the minute in question FIRST.
+**Also corrected**: the Tailscale CLI DOES work from the com.zeke.mcp-watchdog
+LaunchAgent when the Tailscale GUI app is running in the login session (verified
+rc=0, config re-applied, 40/40 concurrent funnel requests unaffected). The
+TAILSCALE-CLI-FROM-LAUNCHD note above described the no-GUI case.
+**Rule**: when you add auth to a server, grep every monitor that probes it —
+`rg -l 'ts.net|8100' --type py` — and update each probe the same commit. A probe
+that cannot authenticate is not a monitor; it is a scheduled false alarm.
