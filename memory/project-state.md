@@ -171,6 +171,23 @@ enabled=true and no recordedSkips is the signature.
 **Fix:** `open -a Claude` (works over Zeke MCP exec; app relaunches into the GUI
 session). Verify the process survives ~60s, then confirm the next scheduled fire
 actually lands — relaunching the app is not proof the scheduler resumed.
+**ROOT CAUSE FOUND 2026-09-11: scripts/zombie-claude-killer.py is killing it.**
+That LaunchAgent (com.zeke.zombie-claude-killer, every 1800s) SIGKILLs any
+process at /Applications/Claude.app/Contents/MacOS/Claude matching
+`etime > 2h AND state.startswith("R")` — a clause with NO CPU guard. `state=R`
+in a ps sample just means the app was doing something at that instant, so every
+healthy long-lived Claude.app qualifies. The TTY allowlist never protects the
+GUI app (its ppid is 1, tty "??"). state/incidents/zombie-kills.jsonl shows 10
+such kills since 2026-05-27, every one at 0.0-3.8% CPU — nowhere near the 50%
+runaway it was built for (2026-05-03, a GUI proc stuck 64h at 100% CPU).
+Confirmed kills behind the outages: 2026-09-08T11:38:56Z (pid 629) = the ~24h
+gap, and 2026-09-11T10:39:14Z (pid 59293, 1.0% CPU, up 10h) five minutes after
+that morning's brief completed.
+FIX (not yet applied, awaiting Matt): the `state=R` clause in should_kill() is
+redundant — the `cpu > 50` clause already catches the real runaway case. Either
+drop it or require a CPU floor alongside it. Do NOT rebuild the script; it
+carries a DO-NOT-REBUILD marker. py_compile after editing.
+
 **Missed windows ARE caught up on relaunch** (corrected 2026-09-09, same day —
 the original note here claimed the opposite and was wrong). Within ~1 minute of
 `open -a Claude` at 11:09Z, all three due tasks fired at 11:10Z (trigger
