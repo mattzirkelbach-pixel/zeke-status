@@ -1148,3 +1148,7 @@ that cannot authenticate is not a monitor; it is a scheduled false alarm.
 ## ZOMBIE-CLAUDE-KILL run 2026-09-11 10:39 UTC
 - pid=59293 ppid=1 etime=36270s cpu=1.0% state=R match=gui reason=etime=36270s state=R
 Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## ZOMBIE-CLAUDE-KILL run 2026-09-13 11:09 UTC
+- pid=26573 ppid=1 etime=143392s cpu=0.0% state=R match=gui reason=etime=143392s state=R
+Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
