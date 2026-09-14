@@ -1152,3 +1152,34 @@ Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
 ## ZOMBIE-CLAUDE-KILL run 2026-09-13 11:09 UTC
 - pid=26573 ppid=1 etime=143392s cpu=0.0% state=R match=gui reason=etime=143392s state=R
 Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## CYCLE-STATE-STALE-CAMEL-READS (2026-09-14)
+**Symptom:** `state/cycle_state.json` per-instrument `camel_read`/`camel_action`/
+`camel_updated` frozen for weeks (XAUUSD 08-25, SPX 08-28, BTC/TLT 08-31, SILJ
+08-17, XAGUSD 08-11, GDX 05-22) even though `state/camel-deepdive-latest.json`
+(a separate manual-synthesis artifact) was fresh (09-11). Two different pipelines
+— don't confuse them.
+**Root cause:** `video-analyzer-v3.py` (`com.zeke.video-analyzer`, StartInterval
+21600s) is the only writer of `cycle_state[inst].camel_read`. Its 03:39 UTC run
+on 09-14 hit `zeke_dispatch error: 400 Client Error: Bad Request` on every single
+chunk of every video (2 attempts × 10 chunks), so `analyze_with_quality_gate`
+returned nothing and zero instruments got updated. `raise_for_status()` in
+`~/zeke_dispatch.py::_call_anthropic` swallowed the response body, so the log
+gave no way to tell auth/workspace/content/rate-limit apart.
+**Diagnosis:** reproduced the exact failing call (same video id V55qMPLctPE,
+same chunk, same key/workspace) by hand minutes later — it returned 200. The
+key/workspace pair in `~/.zeke-anthropic.env` was untouched (mtime Sep 1) and
+works today, so this was a transient Anthropic-side 400 window, not a config
+rot. Confirmed by manually re-running `video-analyzer-v3.py`: it processed the
+newest video cleanly and refreshed BTC/SPX/XAUUSD/TLT `camel_updated` to
+2026-09-14. GDX/SILJ/XAGUSD stayed stale afterward too — that's expected
+content-dependent staleness (those tickers just weren't mentioned in the last 5
+videos), not a bug.
+**Fix (in place):** `_call_anthropic` now logs `r.status_code` + first 500 chars
+of `r.text` via `log.error` before `raise_for_status()`, so the next 400/401/429
+leaves an actual reason in `~/logs/*.log` instead of just "Bad Request for url".
+**Rule:** because `video-analyzer-v3.py` only marks a video `analyzed` on
+success, a transient API failure is self-healing on the next 6h fire — no
+special retry logic needed. If `camel_updated` is stale for >1 cycle (6h) on a
+weekday, check `~/logs/video-analyzer.log` for `zeke_dispatch error` FIRST
+before assuming a code regression.
