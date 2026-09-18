@@ -1187,3 +1187,7 @@ before assuming a code regression.
 ## ZOMBIE-CLAUDE-KILL run 2026-09-16 19:39 UTC
 - pid=38673 ppid=1 etime=90368s cpu=0.1% state=R match=gui reason=etime=90368s state=R
 Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
+
+## ZOMBIE-CLAUDE-KILL run 2026-09-18 04:39 UTC
+- pid=15060 ppid=1 etime=11219s cpu=0.1% state=R match=gui reason=etime=11219s state=R
+Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
