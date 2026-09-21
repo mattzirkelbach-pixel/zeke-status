@@ -195,3 +195,31 @@ processor, video analyzer, morning-alpha-briefing) and the synthesis was written
 at 11:13Z, correctly dated 2026-09-09 with deltas against 9/8. Normal schedule
 then resumed (11:30, 12:01). So relaunching promptly recovers the day rather
 than conceding it — do not tell Matt a missed brief is lost without checking.
+
+### Monday brief said "first run" for three weeks — fixed 2026-09-21
+`build_changes()` in scripts/morning_briefing.py gated the delta baseline on
+`(date.today() - bdate).days > 2`. The brief skips weekends (is_weekend()) but
+NOT market holidays, so every Monday's baseline was Friday's = 3 days ->
+"• no baseline (first run)" on 2026-09-07 (Labor Day, script still ran),
+09-14 and 09-21; 08-31 was the genuine first run. Every Tue-Fri rendered real
+deltas (12/12). Introduced in commit 3ff53ca (2026-09-05).
+FIX: threshold 2 -> 4 (3 = weekend; 4 = one day of slack for a failed Friday
+send, since the snapshot is only written after a successful send). Sentinel
+text and the "CHANGES SINCE YESTERDAY" header are byte-identical — both are
+matched by scripts/brief_scorecard.py gate_changes_block(). Backups:
+scripts/morning_briefing.py.bak-20260921-074954-firstrun and the tests file.
+Added 3 tests to TestChangesBlock (gap 3 and 4 must render deltas, gap 5 must
+say first run); suite 44 -> 47, all green; red/green verified. NOT committed —
+the working copy carries 5 other uncommitted hunks that are Matt's.
+WHY IT HID FOR 3 WEEKS: (1) the scorecard rubric accepts "no baseline (first
+run)" as a valid CHANGES block, so Monday briefs scored 100; (2) the daily
+cloud check-in verified the brief SENT and never read it. Verify content,
+not delivery: on a Tue-Fri, "first run" in state/morning-alpha.md is a
+regression; on a Monday after 09-28 it means this fix failed.
+FOLLOW-UPS (real, not done — need their own tests): (a) diffs[:6] cap fills
+with pure cycle-count aging on Mondays (GLD 1->2, SLV 10->2 ...) and DROPPED
+BTC's +8% weekend move in a simulated patched 09-21 brief — skip diffs where
+new.day - old.day == trading_days_between(), or raise the cap when gap > 1;
+(b) the snapshot carries no price, so a weekend price move is never a
+"change" — add per-ticker last_close + a "moved >2% since baseline" line if
+Monday is meant to answer "what changed over the weekend".
