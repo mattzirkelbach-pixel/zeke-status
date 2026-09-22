@@ -1204,3 +1204,34 @@ Killer: scripts/zombie-claude-killer.py (DO-NOT-REBUILD-zombie-claude-killer).
 **Root cause:** `alert_dispatcher.send_alert()`'s digest-only gate (~line 502) and ACTION-defer gate (~line 542) both called `_queue_deferred()` unconditionally, before the per-key cooldown check that lives further down the function (~line 585, `_on_cooldown`). Every deferred alert bypassed its own cooldown entirely — only the live-Telegram-send path ever checked it.
 **Fix:** new `_queue_deferred_with_cooldown()` helper applies the same `CATEGORY_COOLDOWN_MINUTES`-or-override window (`_resolve_cooldown_minutes()`) to the deferred path: on cooldown, drops the queue write and logs `reason="deferred_cooldown"` (a new bucket, correctly still counted in QC's `suppression_rate` — unlike `digest_deferred`/`action_deferred`, this really is a suppression); otherwise queues and arms the cooldown via `set_cooldown`-equivalent, exactly as a real send would. Both gate call sites now route through this helper. CRITICAL bypass and the morning-briefing exemption untouched. Verified: two `dry_run` `send_alert()` calls with the same `cooldown_key` → one `deferred-alerts.jsonl` row, second call returns `last_outcome="suppressed"`.
 **Rule:** any deferred/queued alternate-delivery path for an alert needs the SAME cooldown gate as the live-send path, or it inherits none of the dedup guarantees callers assume `cooldown_key` gives them — a queue is not exempt from the rate logic just because it isn't Telegram. See also [[DIGEST-DEFER-RETURNS-FALSE-BREAKS-CALLER-COOLDOWN]] and [[DEFERRED-IS-NOT-FAILED]].
+
+
+## TV-LABEL-RANGE-CHECK-WRONG-DATE (fixed 2026-09-22)
+**Symptom:** `state/tv_signals_rejected.jsonl` quarantined 'New DCL event' labels for
+XAUUSD ($4235.165), XAGUSD ($62.31), GDX ($91.19), SILJ ($28.01) as
+`price_outside_daily_range` between 2026-09-18 and 2026-09-21; `cycle_state.json`
+never set `dcl_confirmed=True` for any of them.
+**Root cause:** `webhooks/tv_signal_processor.py:price_in_daily_range()` validated
+the label's price against the daily range on `received_at` (the date the webhook
+arrived), but a confirmed CF cycle-low label carries the price of the marked LOW
+BAR, which the raw_message's own `time:NNNN` epoch-ms field can date several
+sessions earlier than receipt (XAUUSD/XAGUSD: label received 9/18, bar was 9/17).
+Validating against the wrong day's range false-quarantined a genuine low.
+**Fix:** added `label_bar_date(raw_message)` — parses `time:(\d{13})` and converts
+to a UTC date — and `price_in_daily_range()` now prefers that date over
+`received_at[:10]`, falling back only when the field is absent/unparseable.
+3%/6% tolerances unchanged.
+**Caveat surfaced by replay:** only XAUUSD actually passed after the fix
+(bar_date 9/17, price $4235.165 within GC=F 9/17 range). XAGUSD, GDX, and SILJ
+still failed range validation post-fix — for those three the label's own
+`time:` field already matched `received_at` (no date-shift bug), so the failure
+is a genuine data-quality gap in `data/{XAGUSD,GDX,SILJ}_history.json` (e.g.
+XAGUSD 9/17 row is a flat/thin OHLC placeholder: open=high=low=close=65.47,
+volume=157), not the range-check bug. Per task rule, none of the 4 were applied
+to `cycle_state.json` since not all 4 passed — do not force-apply partial passes.
+**Rule:** when a webhook label embeds the marked bar's own timestamp separately
+from the receipt timestamp, range-check against the bar's date, not the
+receipt date — but verify each failure individually before assuming a date fix
+resolves it; a still-failing record after the date fix may point at a second,
+independent bug (here: thin/placeholder history rows) rather than the one you
+just fixed.
