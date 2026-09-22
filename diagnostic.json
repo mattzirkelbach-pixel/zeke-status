@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-09-21 23:00:19 ET",
-  "timestamp_utc": "2026-09-22T03:00:19Z",
+  "timestamp_local": "2026-09-21 23:04:33 ET",
+  "timestamp_utc": "2026-09-22T03:04:33Z",
   "scheduler": {
     "running": true,
     "pid": 3757,
-    "uptime_minutes": 20595,
+    "uptime_minutes": 20600,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 62432,
+    "total_lines": 62433,
     "last_entries": [
-      "[2026-09-22T02:46:00] treasury-bonds",
       "[2026-09-22T02:48:00] treasury-bonds",
       "[2026-09-22T02:51:00] treasury-bonds",
       "[2026-09-22T02:54:00] treasury-bonds",
-      "[2026-09-22T02:57:00] treasury-bonds"
+      "[2026-09-22T02:57:00] treasury-bonds",
+      "[2026-09-22T02:59:00] treasury-bonds"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -43,22 +43,12 @@
   },
   "today": {
     "jobs_run": 100,
-    "success": 100,
+    "success": 99,
     "timeout": 0,
     "fail": 0,
     "feed_growth": 1
   },
   "cycles": [
-    {
-      "ts": "2026-09-21T22:35:27.448419",
-      "window": "overnight",
-      "cycle": 36,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-09-21T22:38:10.080954",
       "window": "overnight",
@@ -145,6 +135,16 @@
       "cycle": 45,
       "jobs": 1,
       "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-09-21T23:04:06.949196",
+      "window": "overnight",
+      "cycle": 46,
+      "jobs": 1,
+      "success": 0,
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
@@ -286,10 +286,12 @@
     },
     {
       "name": "treasury-bonds",
-      "status": "success",
+      "status": "unknown",
       "duration": 0,
       "grew": 0,
-      "issues": []
+      "issues": [
+        "spark_locked"
+      ]
     }
   ],
   "health": {
