@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-09-23 04:13:46 ET",
-  "timestamp_utc": "2026-09-23T08:13:46Z",
+  "timestamp_local": "2026-09-23 04:16:29 ET",
+  "timestamp_utc": "2026-09-23T08:16:29Z",
   "scheduler": {
     "running": true,
     "pid": 3757,
-    "uptime_minutes": 22349,
+    "uptime_minutes": 22351,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 62767,
+    "total_lines": 62769,
     "last_entries": [
-      "[2026-09-23T07:59:00] treasury-bonds",
-      "[2026-09-23T08:02:00] treasury-bonds",
       "[2026-09-23T08:05:00] treasury-bonds",
       "[2026-09-23T08:07:00] treasury-bonds",
-      "[2026-09-23T08:10:00] treasury-bonds"
+      "[2026-09-23T08:10:00] treasury-bonds",
+      "[2026-09-23T08:13:00] treasury-bonds",
+      "[2026-09-23T08:15:18] sentiment-pivot"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -30,13 +30,14 @@
   "spark": {
     "online": true,
     "models_loaded": [
+      "nomic-embed-text:latest",
       "nemotron-3-nano:30b",
       "qwen3:8b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b, qwen3:8b"
+    "detail": "healthy, loaded: nomic-embed-text:latest, nemotron-3-nano:30b, qwen3:8b"
   },
   "gateway": {
     "running": true
@@ -49,16 +50,6 @@
     "feed_growth": 1
   },
   "cycles": [
-    {
-      "ts": "2026-09-23T03:49:00.347457",
-      "window": "overnight",
-      "cycle": 151,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-09-23T03:51:41.995447",
       "window": "overnight",
@@ -143,6 +134,16 @@
       "ts": "2026-09-23T04:13:20.714534",
       "window": "overnight",
       "cycle": 160,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-09-23T04:16:03.110505",
+      "window": "overnight",
+      "cycle": 161,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
