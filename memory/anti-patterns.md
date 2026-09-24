@@ -1235,3 +1235,72 @@ receipt date — but verify each failure individually before assuming a date fix
 resolves it; a still-failing record after the date fix may point at a second,
 independent bug (here: thin/placeholder history rows) rather than the one you
 just fixed.
+
+## DCL-REPLAY-USED-PROCESSING-DATE-NOT-BAR-DATE (fixed 2026-09-24)
+**Symptom:** `state/cycle_state.json` XAUUSD.last_dcl_date was set to 2026-09-23 —
+the date a quarantined 'New DCL event' label (id f27ef4b98e6a) was REPLAYED
+through `webhooks/tv_signal_processor.py`, not 2026-09-17, the date its own
+`raw_message` `time:1789678800000` field says the low bar actually printed.
+`get_active_signals`'s cycle-day cross-check (`mcp/server.py`) showed
+`date_math=1` off the wrong anchor.
+**Root cause:** the DCL-accept block (`tv_signal_processor.py` ~line 244) wrote
+`entry["last_dcl_date"] = today_str` (today's processing date) unconditionally
+on accept — a separate bug from [[TV-LABEL-RANGE-CHECK-WRONG-DATE]] (fixed
+2026-09-22), which only fixed the RANGE-VALIDATION date, not the value actually
+STORED once a label passed. A label can be quarantined for days/weeks before a
+manual replay re-processes it (as happened here), so "today" at accept time can
+be arbitrarily later than the bar it marks.
+**Fix:** the accept block now computes `bar_date = label_bar_date(raw_message)
+or received_at[:10] or today_str` and stores that, exactly mirroring the
+range-check's own date preference. `XAUUSD.last_dcl_date` hand-corrected to
+2026-09-17 post-fix (backup: `state/cycle_state.json.bak-20260924-pre-dcl-date-fix`).
+**Caveat surfaced by re-replay:** GDX (91.19) and SILJ (28.01) labels quarantined
+under [[TV-LABEL-RANGE-CHECK-WRONG-DATE]] still fail `price_in_daily_range` after
+this fix too — for BOTH, the label price is an EXACT match to the prior trading
+day's low (GDX/SILJ 2026-09-16 low = 91.19/28.01 respectively) rather than the
+day `label_bar_date()` derives from `time:` (9/18, 9/21). XAUUSD/XAGUSD's `time:`
+field reliably marks the low bar itself; GDX/SILJ's apparently does not — open
+lead, not yet root-caused, do not force these three into cycle_state on a
+partial pass (established rule, [[TV-LABEL-RANGE-CHECK-WRONG-DATE]]).
+**Rule:** a webhook's accept-and-store path needs the SAME date preference as
+its own validation path — fixing range-check's date math without also fixing
+where the value gets STORED leaves the original bug half-fixed. Verify by
+re-deriving the date from the raw field, never from `date.today()`.
+
+## TV-READER-RESOLUTION-URL-IGNORED (fixed 2026-09-24)
+**Symptom:** `daily_day_tv` for ALL 8 tracked instruments (XAUUSD, XAGUSD, GDX,
+SILJ, TLT, SPX, BTC + the XAUUSD_W weekly pair) came back byte-identical across
+every 2-hourly `tv-cycle-reader.py` run from 2026-09-21 13:00Z through
+2026-09-23 21:00Z straight (15 consecutive runs, 3 trading days) — XAUUSD=12,
+XAGUSD=10, GDX=10, SILJ=10, TLT=18, SPX=1, BTC=12, never moving.
+**Root cause:** `decisions/cf_table_reader.py`'s `read_cf_cells()`/`ChartPage`
+opens each chart via `tv_url=...&interval=D`, but that query param is NOT
+authoritative — TradingView's logged-in account (openclaw Chrome profile)
+silently restored/synced a WEEKLY layout on every new tab regardless of the
+URL, so every "daily" panel was actually rendering (and the JS table reader was
+actually reading) the **1W** chart the whole time. Confirmed live 2026-09-24:
+`ch.resolution()` returned `"1W"` on a freshly opened `interval=D` tab, for
+BOTH TVC:GOLD and SP:SPX (SPX has no paired weekly chart in `INSTRUMENTS`, so
+this is account-level, not cross-contamination from the XAUUSD/XAUUSD_W pair).
+Weekly cycle-low counts barely move over a 3-day span — hence "frozen," not
+actually cached/stale data, just the wrong timeframe's real data reported
+under the daily key. `cf_chart_resolution` was being captured into
+`tv-cycle-fresh.json` this whole time (never merged into `cycle_state.json`
+itself — `update_cycle_state()` only copies a fixed allowlist of keys) but
+nobody had looked at it against the frozen-count symptom until now.
+**Fix:** `cf_table_reader.py`'s `CF_TABLE_JS` now takes a `desired_resolution`
+and, when `ch.resolution()` doesn't match, calls `ch.setResolution(desired)`
+(confirmed live: reliably flips 1W→1D) and signals the caller to retry after a
+short settle rather than trusting that read's cells. `read_cf_cells()` /
+`read_chart_table()` gained a `resolution=` param; `tv-cycle-reader.py`'s call
+site now passes `inst["timeframe"]` ("D"/"W") through. Verified live 2026-09-24:
+XAUUSD daily now reads 6 (was frozen 12, which was actually the correct WEEKLY
+count), all 8 instruments now report `cf_chart_resolution=1D` (XAUUSD_W
+correctly stays 1W), and values differ per-instrument again.
+**Rule:** never trust a chart URL's `interval=`/`symbol=` query param on a
+logged-in, session-syncing site to actually control what loads — read the
+API's own reported state (`ch.resolution()`) after navigation and force-correct
+via the same API (`ch.setResolution()`) before trusting any read off the page.
+A screenshot looking "different" day to day is NOT proof the underlying data
+source is correct — it only proves the page redrew; verify the specific field
+you're reading, not just that pixels changed.
