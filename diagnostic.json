@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-09-24 23:17:22 ET",
-  "timestamp_utc": "2026-09-25T03:17:22Z",
+  "timestamp_local": "2026-09-24 23:20:04 ET",
+  "timestamp_utc": "2026-09-25T03:20:04Z",
   "scheduler": {
     "running": true,
     "pid": 3757,
-    "uptime_minutes": 24932,
+    "uptime_minutes": 24935,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 63124,
+    "total_lines": 63125,
     "last_entries": [
-      "[2026-09-25T02:56:00] treasury-bonds",
       "[2026-09-25T03:08:21] treasury-bonds",
       "[PARSE ERROR] {\\\"timestamp\\\":\\\"2026-09-25T03:08:00Z\\\",\\\"topic\\\":\\\"treasury-bonds\\\",\\\"finding\\\"",
       "[2026-09-25T03:11:00] treasury-bonds",
-      "[2026-09-25T03:14:00] treasury-bonds"
+      "[2026-09-25T03:14:00] treasury-bonds",
+      "[2026-09-25T03:16:00] treasury-bonds"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -30,12 +30,13 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nemotron-3-super:120b"
+      "qwen3:8b",
+      "nemotron-3-nano:30b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-super:120b"
+    "detail": "healthy, loaded: qwen3:8b, nemotron-3-nano:30b"
   },
   "gateway": {
     "running": true
@@ -48,16 +49,6 @@
     "feed_growth": 1
   },
   "cycles": [
-    {
-      "ts": "2026-09-24T22:51:03.593744",
-      "window": "overnight",
-      "cycle": 42,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-09-24T22:53:44.474663",
       "window": "overnight",
@@ -147,16 +138,19 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-09-24T23:19:38.377725",
+      "window": "overnight",
+      "cycle": 52,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
     }
   ],
   "recent_jobs": [
-    {
-      "name": "treasury-bonds",
-      "status": "success",
-      "duration": 0,
-      "grew": 0,
-      "issues": []
-    },
     {
       "name": "treasury-bonds",
       "status": "success",
@@ -262,6 +256,13 @@
       "status": "success",
       "duration": 0,
       "grew": 1,
+      "issues": []
+    },
+    {
+      "name": "treasury-bonds",
+      "status": "success",
+      "duration": 0,
+      "grew": 0,
       "issues": []
     },
     {
