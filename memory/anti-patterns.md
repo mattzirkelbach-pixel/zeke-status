@@ -1304,3 +1304,31 @@ via the same API (`ch.setResolution()`) before trusting any read off the page.
 A screenshot looking "different" day to day is NOT proof the underlying data
 source is correct — it only proves the page redrew; verify the specific field
 you're reading, not just that pixels changed.
+
+## DO-NOT-DATE-A-CF-DCL-BY-ITS-LABEL-TIME (fixed 2026-09-26)
+**Symptom:** XAGUSD 62.31 (b2274470a0d9) and SILJ 28.01 (9c482bde7c7a) DCL labels
+quarantined `price_outside_daily_range` 3x each (9/18-9/24) despite two "fixes"
+([[TV-LABEL-RANGE-CHECK-WRONG-DATE]], [[DCL-REPLAY-USED-PROCESSING-DATE-NOT-BAR-DATE]]);
+the 9/24 task reported them replayed without checking state. SLV stayed on
+2026-07-29 (day 42), SILJ on 2026-02-10 (day 163). Accepted XAUUSD (9/17) and GDX
+(9/25) were stored on the wrong day as well.
+**Root cause:** a CF label's `time:` is the **confirmation bar**, and its price is the
+low of an **earlier** bar. All four 9/16 lows were exact or basis matches (SILJ
+28.01, GDX 91.19, GC=F 4273 vs spot 4235, SLV 56.28 = the week's low). GDX
+'Updated' 90.85 with time 9/25 = the 9/24 low. CF's own `days_since_dcl_unconfirmed`
+agreed (7 on 9/25 for gold, silver and SILJ; 1 for GDX). Contributing causes:
+(a) the range check compared against the confirm bar's range; (b) `label_bar_date`
+truncated to the UTC date, so TVC 17:00-ET session opens landed a day early;
+(c) SI=F history is a thin front-month contract (vol 13-365, flat o=h=l=c rows)
+whose lows don't rank correctly (spot-vs-futures source problem); (d)
+`INSTRUMENT_MAP` sent SILJ to GDX, so SILJ could never update SILJ.
+**Fix:** `resolve_dcl_low_date()` = argmin low over 8 sessions up to the confirm bar
+(XAGUSD ranks lows on SLV). The range check validates at that date and the accept
+path stores it. `label_bar_date` now uses ET-session dates. SILJ maps to SILJ. The
+premature guard allows a lower-or-earlier refinement within 10 days. Added
+`--replay id,id` so replays take the live path and print the resulting state.
+Tests are in `tests/test_tv_signal_processor.py`.
+**Rule:** DO NOT date a DCL by the label's timestamp. Cross-check any stored
+DCL date against CF `daily_day_tv`; a mismatch means the date is wrong. DO NOT
+report a replay as done until cycle_state shows the new values and
+tv_signals_rejected.jsonl has no new row for that id.
