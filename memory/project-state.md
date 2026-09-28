@@ -197,6 +197,14 @@ then resumed (11:30, 12:01). So relaunching promptly recovers the day rather
 than conceding it — do not tell Matt a missed brief is lost without checking.
 
 ### Monday brief said "first run" for three weeks — fixed 2026-09-21
+**CONFIRMED IN PRODUCTION Mon 2026-09-28** (first gap-3 morning since the fix):
+the CHANGES block rendered 6 real deltas (GLD 6->7, SLV 6->7 + level, GDX
+6->1, SILJ 6->7, SPX 6->7) instead of "first run". Suite still 47 OK. The 9/22-
+9/25 deltas were gap-1 and did not exercise the fix; this one did. Note the
+[:6] cap was hit by pure cycle-count aging again — five of six lines are
+"N->N+1" — and BTC's -2.06% weekend move did not make the block. That is the
+open follow-up (a), now observed in production rather than simulated.
+
 `build_changes()` in scripts/morning_briefing.py gated the delta baseline on
 `(date.today() - bdate).days > 2`. The brief skips weekends (is_weekend()) but
 NOT market holidays, so every Monday's baseline was Friday's = 3 days ->
