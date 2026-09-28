@@ -1332,3 +1332,8 @@ Tests are in `tests/test_tv_signal_processor.py`.
 DCL date against CF `daily_day_tv`; a mismatch means the date is wrong. DO NOT
 report a replay as done until cycle_state shows the new values and
 tv_signals_rejected.jsonl has no new row for that id.
+
+## WHISPER-BARE-FFMPEG-UNDER-LAUNCHD (2026-09-27)
+**Symptom:** camel-visual summary.json `transcript_segments: 0` on caption-less videos (4 of 6, 9/23-9/26) although the whisper fallback existed.
+**Root cause:** `/opt/homebrew/bin/whisper` calls bare `ffmpeg` via PATH; launchd PATH lacks /opt/homebrew/bin. Whisper logs "Skipping ... FileNotFoundError: 'ffmpeg'" and EXITS 0 with no output file. Caller discarded extractor stdout, so nothing surfaced.
+**Rule:** any subprocess that itself shells out to Homebrew tools must get `env["PATH"]` with /opt/homebrew/bin prepended; never trust whisper's exit code, check the output file. Before transcribing a Camel video, reuse `~/.openclaw/workspace/memory/camel-transcripts/<id>.json` / `transcripts/<id>.json` (camel-visual-extractor `local_transcript()`).
