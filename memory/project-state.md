@@ -231,3 +231,32 @@ new.day - old.day == trading_days_between(), or raise the cap when gap > 1;
 (b) the snapshot carries no price, so a weekend price move is never a
 "change" — add per-ticker last_close + a "moved >2% since baseline" line if
 Monday is meant to answer "what changed over the weekend".
+
+## Cowork scheduled tasks moved to cloud Routines (2026-09-28, found 2026-09-29)
+- 2026-09-28 21:21Z: Claude.app (2.9939.4, relaunched 15:00 local) migrated all four
+  local Cowork tasks to cloud Routines via `sweep` (`migratedToRemote` in
+  scheduled-tasks.json, all `enabled:false` locally). Those four cloud copies
+  (trig_011YbLVzMjp7L6asnJZRYT8A morning, trig_01XRzNSYG3nwtRgknHUmp4v3 processor,
+  trig_01XqUDowYhfoYpsqU7rh68tk video, trig_01TKpZpt4uedwDaNsb4CJ9Nq weekly) were
+  then DISABLED at 21:51-21:54Z and replaced by four new "(cloud, Zeke MCP)"
+  Routines created via http_api (creator Matt):
+    trig_017eKrFriZ6S1EV5YU8qp4rE  Morning alpha briefing   CRON_TZ=America/Indianapolis 30 6 * * 1-5
+    trig_019un1ZgtXAhE58K51cSqsZP  Cowork trigger processor CRON_TZ=America/Indianapolis 21 */6 * * *
+    trig_01DMavjPuDDXaWyxmBMveAyR  Video transcript analyzer CRON_TZ=America/Indianapolis 30 11 * * *
+    trig_01GvnRarZkttF7ZX6gLEubUF  Weekly system review     CRON_TZ=America/Indianapolis 0 20 * * 0
+- Prompts were rewritten with an "Execution environment (cloud routine since
+  2026-09-28)" header: sandbox has nothing local; the Mini is reached only via the
+  Zeke_MCP connector (exec_command / read_file / write_file). Morning brief still
+  writes ONLY state/morning-alpha-synthesis.md; local morning_briefing.py LaunchAgent
+  still owns Telegram.
+- First cloud run: 2026-09-29 10:32:52Z -> 10:34:22Z SUCCEEDED, synthesis mtime
+  06:34 local matches. Ran on claude-sonnet-5-5 (session cse_019wW8sjfX3Fx48itjJ5dv43,
+  cost $0.50, 97k ctx). The Routine's model field is EMPTY, so the Opus 5 choice
+  Matt set on the local task on 9/12 did NOT carry over. Trigger processor is
+  pinned to claude-sonnet-5-5 explicitly.
+- Consequences: zombie-claude-killer / Claude.app liveness no longer affects
+  scheduled work; local scheduled-tasks.json + local-agent-mode-sessions are
+  obsolete for health checks. Health = get_trigger last_run on the four IDs above.
+- Stale text in the new processor prompt: says local executor runs "every 60s"
+  and gates on heartbeat age < 5 min; executor is 300s since 8/31, so the cloud
+  sweep will sometimes judge the local worker stuck. Harmless unless tasks pending.
