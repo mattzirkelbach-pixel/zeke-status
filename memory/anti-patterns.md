@@ -1359,3 +1359,10 @@ tv_signals_rejected.jsonl has no new row for that id.
 **Fix**: single `_otm_tracked_qty()` helper scoped to account + strike, called by both functions; reset path now prints and stamps `reset_at`/`reset_reason` in the state file so the next silent loop is diagnosable. GLD_500.0C entry manually set to count 3 (sessions actually spent). Verify at the next 07:00 QC run: log should print `Suppressed 1 repeated stale-option alert(s)` and no new qc_ GLD task should appear in `state/cowork-trigger.json`.
 
 **Rule**: any dedupe/suppression pair (check vs record) must compute its identity key and change-detector through ONE shared function. Two hand-rolled loops that "obviously do the same thing" is how this drifted. When a QC ping repeats with the same prompt on consecutive runs, check the suppression ledger's counter before re-analysing the position.
+
+## PEER-HEARTBEAT-THRESHOLD-EQUALS-CADENCE (2026-10-01)
+
+**Symptom**: `restart_peer_launchagent` task for `com.zeke.scheduler` with "last heartbeat 30.1 min ago; threshold is 30 min". Daemon was healthy (PID live, 23d uptime, heartbeat refreshed 2 min after the flag).
+**Cause**: `orchestrator/peer-coordinator-supervisor.py` PEERS["scheduler"].max_age_min was 30, and the scheduler writes `~/zeke-status/cycle-report.json` once per cycle with `cycle_pause=1800`. Gaps are 30.0-30.2 min by design, so the supervisor's 15-min check lands on the boundary a few times a day (3 false STALE in 27h, all age 30.1). Same bug the orchestrator peer already hit (its limit was raised to 90 for the identical reason).
+**Rule**: a peer heartbeat threshold must be >= 1.5x the writer's cadence. Before kickstarting a "stale" peer, check `ps -o etime -p <pid>` and the heartbeat gap history (`git log --format=%ct -- cycle-report.json`): if every over-threshold gap is within seconds of the cadence, fix the threshold, not the daemon.
+**Fix shipped**: scheduler max_age_min 30 -> 45. Orchestrator daemon kickstarted to reload the module (it imports the supervisor at startup, so a file edit alone does nothing until restart).
