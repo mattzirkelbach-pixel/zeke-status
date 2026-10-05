@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-10-05 03:45:23 ET",
-  "timestamp_utc": "2026-10-05T07:45:23Z",
+  "timestamp_local": "2026-10-05 03:48:12 ET",
+  "timestamp_utc": "2026-10-05T07:48:12Z",
   "scheduler": {
     "running": true,
     "pid": 3757,
-    "uptime_minutes": 39600,
+    "uptime_minutes": 39603,
     "current_window": "overnight"
   },
   "feed": {
-    "total_lines": 65363,
+    "total_lines": 65364,
     "last_entries": [
-      "[2026-10-05T07:30:00] treasury-bonds",
       "[2026-10-05T07:33:00] treasury-bonds",
       "[2026-10-05T07:35:00] treasury-bonds",
       "[2026-10-05T07:39:00] treasury-bonds",
-      "[2026-10-05T07:44:28] sentiment-pivot"
+      "[2026-10-05T07:44:28] sentiment-pivot",
+      "[2026-10-05T07:44:00] treasury-bonds"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -30,12 +30,13 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "nemotron-3-nano:30b"
+      "nemotron-3-nano:30b",
+      "qwen3:8b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: nemotron-3-nano:30b"
+    "detail": "healthy, loaded: nemotron-3-nano:30b, qwen3:8b"
   },
   "gateway": {
     "running": true
@@ -48,16 +49,6 @@
     "feed_growth": 1
   },
   "cycles": [
-    {
-      "ts": "2026-10-05T03:18:53.842072",
-      "window": "overnight",
-      "cycle": 131,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-10-05T03:21:49.254959",
       "window": "overnight",
@@ -142,6 +133,16 @@
       "ts": "2026-10-05T03:44:45.552987",
       "window": "overnight",
       "cycle": 140,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-10-05T03:47:40.386776",
+      "window": "overnight",
+      "cycle": 141,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
