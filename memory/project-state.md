@@ -288,8 +288,10 @@ Monday is meant to answer "what changed over the weekend".
   shared strip/UPS trip), not a Mini wedge. Treat "both machines reboot together" as
   the power signature in future incidents. There is no auto-catch-up for calendar
   LaunchAgents after a power cycle (see 10/8 entry above).
-- Spark afternoon outage 10/8: last good Ollama contact 13:08 ET (super-prewarm), fail
-  at 14:38 ET, research engine "unreachable" from 18:11 ET and "Host is down" 19:18 ET;
+- Spark evening outage 10/8: last good Ollama contact 17:08 ET (super-prewarm), fail
+  at 18:38 ET, research engine "unreachable" from 18:11 ET and "Host is down" 19:18 ET.
+  CAUTION: ~/logs/super-prewarm.log stamps LOCAL time with a trailing "Z", so its
+  "17:08:48Z" is 17:08 ET; do not read it as UTC;
   no NetworkManager carrier events in the Spark journal for that window, so the Spark
   hung rather than losing link. Matt rebooted it 19:14 ET; link up 19:23 ET; from the
   Mini: ARP ok, ping 4 ms, ssh 22 + Ollama 11434 open, autossh tunnel restored, by
