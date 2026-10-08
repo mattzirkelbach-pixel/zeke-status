@@ -260,3 +260,23 @@ Monday is meant to answer "what changed over the weekend".
 - Stale text in the new processor prompt: says local executor runs "every 60s"
   and gates on heartbeat age < 5 min; executor is 300s since 8/31, so the cloud
   sweep will sometimes judge the local worker stuck. Harmless unless tasks pending.
+
+## Mac down 12h overnight 10/7-10/8; morning brief missed (2026-10-08)
+- Last zeke-status commit 2026-10-07 18:23 ET; reboot 2026-10-08 06:22 ET (`last reboot`),
+  no clean shutdown entry, no panic report. 4th hang-class incident (Jun 29, Aug 15-16,
+  Sep 21-22 issue #11, now). Cause not determined from logs.
+- Dead-man Routine WORKED: issue #13 opened 00:05Z (102 min), 3 comments to 03:05Z.
+  It did NOT auto-close after recovery: its prompt says "age<=60 -> output OK and STOP"
+  before the step that closes an open issue, so recovery-close never runs. Close by hand.
+- Brief impact: com.zeke.morning-briefing is StartCalendarInterval 06:30 with no catch-up;
+  user session came up ~06:36 (caffeinate/Claude assertions), so the 06:30 slot was
+  missed (launchctl runs=0, never exited). No Telegram brief, no morning-alpha.md,
+  brief-state-yesterday.json still 10/7. Cloud synthesis Routine fired 06:33 ET while
+  the Mini was still booting: 11s run, 494 output tokens, wrote nothing, status SUCCEEDED
+  (SUCCEEDED = session finished, not "did the job"). brief_scorecard sent CRITICAL
+  "NO BRIEF TO GRADE" 07:08 ET. Absence watchdog (09:00/09:35/10:05/11:05 ET) only alerts,
+  never re-runs the brief. Recovery = run scripts/morning_briefing.py by hand (no --force
+  needed when nothing sent today) then fire_trigger trig_017eKrFriZ6S1EV5YU8qp4rE.
+- Pipeline otherwise recovered post-boot: premarket brief 07:01 ET, price scan 07:08 ET,
+  dead-man/watchdog OK, cowork-executor running fscan_20261008_haiku55 (queued by the
+  frontier scan Matt resumed 07:12 ET; routine now on claude-fable-5-1, issue #14).
