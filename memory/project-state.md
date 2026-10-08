@@ -280,3 +280,32 @@ Monday is meant to answer "what changed over the weekend".
 - Pipeline otherwise recovered post-boot: premarket brief 07:01 ET, price scan 07:08 ET,
   dead-man/watchdog OK, cowork-executor running fscan_20261008_haiku55 (queued by the
   frontier scan Matt resumed 07:12 ET; routine now on claude-fable-5-1, issue #14).
+
+## ROOT CAUSE of the 10/7-10/8 outage: power event, not a hang (2026-10-08 evening)
+- The DGX Spark's `last -x` shows system boots at 2026-10-06 21:53, 2026-10-08 06:22 and
+  2026-10-08 19:14 ET. The Mini rebooted 2026-10-08 06:22 ET too: both boxes came back
+  in the same minute, so the 18:23 ET 10/7 -> 06:22 ET 10/8 gap was a power loss (or a
+  shared strip/UPS trip), not a Mini wedge. Treat "both machines reboot together" as
+  the power signature in future incidents. There is no auto-catch-up for calendar
+  LaunchAgents after a power cycle (see 10/8 entry above).
+- Spark afternoon outage 10/8: last good Ollama contact 13:08 ET (super-prewarm), fail
+  at 14:38 ET, research engine "unreachable" from 18:11 ET and "Host is down" 19:18 ET;
+  no NetworkManager carrier events in the Spark journal for that window, so the Spark
+  hung rather than losing link. Matt rebooted it 19:14 ET; link up 19:23 ET; from the
+  Mini: ARP ok, ping 4 ms, ssh 22 + Ollama 11434 open, autossh tunnel restored, by
+  19:26 ET. Ollama listens on *:11434 (not localhost-only). After the reboot only
+  nomic-embed-text was loaded; super-prewarm kicked by hand 19:3x ET.
+- Diagnosing the Spark from the Mini: the MCP exec shell has no /sbin,/usr/sbin in PATH
+  (use /sbin/ping, /sbin/ifconfig, /usr/sbin/arp -an). Mini is 10.0.0.125 on en1; Spark
+  is 10.0.0.143 MAC 4c:bb:47:2e:70:27, hostname spark-7027, ssh user zirkai (key auth
+  works). spark_url lives in config/spark-models.json and is also hardcoded in 7 .py
+  files (boot-recovery, kg-readback, model-release-monitor, spark-model-manager,
+  spark_models, system-auditor, zeke-unified-api); a DHCP reservation on the router
+  (10.0.0.1) for that MAC is the cheap protection. nvidia-smi on the GB10 reports
+  memory as [N/A] (unified memory) - do not gate on it.
+- Spark sshd logs "Invalid user zekezirk from 10.0.0.125" at 19:24/19:25 ET: some Mini
+  process sshes to the Spark without specifying user zirkai and fails silently. Not yet
+  located.
+- Workflow note: the first outage-sweep workflow (13:5xZ) died on the account's 5-hour
+  usage limit ("session limit, resets 15:20 UTC") after writing the synthesis; rerun at
+  23:2xZ. Subagent fan-outs share Matt's plan quota - check headroom before big sweeps.
