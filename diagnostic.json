@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-10-08 18:20:57 ET",
-  "timestamp_utc": "2026-10-08T22:20:57Z",
+  "timestamp_local": "2026-10-08 18:26:19 ET",
+  "timestamp_utc": "2026-10-08T22:26:19Z",
   "scheduler": {
     "running": true,
     "pid": 1765,
-    "uptime_minutes": 704,
+    "uptime_minutes": 709,
     "current_window": "daytime"
   },
   "feed": {
@@ -28,38 +28,24 @@
     "last_modified_minutes_ago": 1.7
   },
   "spark": {
-    "online": true,
-    "models_loaded": [
-      "nomic-embed-text:latest",
-      "qwen3:8b",
-      "nemotron-3-nano:30b"
-    ],
+    "online": false,
+    "models_loaded": [],
     "model_stuck": false,
     "stuck_model": null,
-    "inference_active": true,
-    "detail": "healthy, loaded: nomic-embed-text:latest, qwen3:8b, nemotron-3-nano:30b"
+    "inference_active": false,
+    "detail": "unreachable"
   },
   "gateway": {
     "running": true
   },
   "today": {
-    "jobs_run": 23,
-    "success": 22,
+    "jobs_run": 24,
+    "success": 23,
     "timeout": 0,
     "fail": 1,
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-10-08T13:17:27.655837",
-      "window": "daytime",
-      "cycle": 14,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-10-08T13:48:19.381832",
       "window": "daytime",
@@ -144,6 +130,16 @@
       "ts": "2026-10-08T17:54:36.119100",
       "window": "daytime",
       "cycle": 23,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-10-08T18:25:48.635417",
+      "window": "daytime",
+      "cycle": 24,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
@@ -294,8 +290,10 @@
     }
   ],
   "health": {
-    "status": "HEALTHY",
-    "issues": []
+    "status": "ISSUES_FOUND",
+    "issues": [
+      "CRITICAL: Spark offline"
+    ]
   },
   "kg_stats": {
     "entities": 1021,
