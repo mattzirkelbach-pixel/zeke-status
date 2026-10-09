@@ -311,3 +311,34 @@ Monday is meant to answer "what changed over the weekend".
 - Workflow note: the first outage-sweep workflow (13:5xZ) died on the account's 5-hour
   usage limit ("session limit, resets 15:20 UTC") after writing the synthesis; rerun at
   23:2xZ. Subagent fan-outs share Matt's plan quota - check headroom before big sweeps.
+
+## 10/8 outage sweep result (workflow, 15 agents, verified) and synthesis correction
+- Only slots lost to the power loss: btc-trailing-monitor 21:00 10/7 (superseded by 10/8
+  runs), nightly-reflection 02:30, claude-code-updater 03:00, embed-capability-index 03:30,
+  sprawl-audit 04:00, camel-posts-backup 04:10, system-auditor 05:00, conviction-backtest
+  Thu 05:00, fix-monitor 05:30, tombstone-sweep 05:45, briefing-prestage 05:45,
+  premarket-scan 06:00 (+ morning-briefing 06:30, recovered). Every other calendar and
+  interval job, all 17 daemons, openclaw gateway/tunnel/dashboard and ttyd ran or came
+  back normally; boot-recovery.py only checks Funnel + restarts CDP, no catch-up role.
+- Kicked by hand 20:12 ET 10/8 after two-agent verification (read-only probes, no
+  Telegram): system-auditor (exit 0, state/system-audit.json) and conviction-backtest
+  (exit 0, state/conviction-backtest.json; otherwise nightly-assessment would hit its 168h
+  FAILED threshold Mon). Left for their 10/9 slots: the rest. premarket-scan must NOT be
+  kicked late: its 720-min cooldown lapses and it sends a dated PRE-MARKET Telegram.
+- wiki-compiler's 18:39 ET run lost 7 feed entries (6 for bond-thesis.md) to the Spark
+  outage and advanced its cursor past them; openclaw gateway cron agents timed out
+  18:25 ET and retried at 20:00 ET. scheduler had one boot-race fail (treasury-bonds
+  06:36 ET). TV delivered new DCL labels 20:01Z 10/8: TLT $76.43 and GDX $84.36
+  (daily_day_tv reset to 1 for both).
+- Synthesis written 13:50Z had two wrong decision lines, found by the fact-checker and
+  fixed 23:5xZ (file now 10,116 chars, rechecked pass/pass): (1) SPX kill line was given as
+  the 10-SMA $7,731; the real alpha_v3 kill is a close under $7,177.63 (-8% from the
+  $7,801.77 entry; SESSION_BRIEF.json + morning-alpha.md). (2) "TLT $78 stop" is not an
+  armed rule anywhere (no TLT exit rule; the only $78 stop on file is silver's); it is
+  the bottom of Camel's 78-80 sweep zone carried as a floor since the 9/29 synthesis.
+  Lesson for the cloud synthesis prompt: cite kill/stop levels only from decisions.jsonl,
+  SESSION_BRIEF open_decisions or morning-alpha.md, never from prior syntheses.
+- Account 5-hour usage limit can kill subagent fan-outs mid-flight ("session limit,
+  resets 15:20 UTC" on 10/8); the producer had already written its file. Check headroom
+  before big workflows and treat ROUTINE_RUN_STATUS_SUCCEEDED as "session ended", not
+  "job done".
