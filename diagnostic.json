@@ -1,10 +1,10 @@
 {
-  "timestamp_local": "2026-10-11 04:17:10 ET",
-  "timestamp_utc": "2026-10-11T08:17:10Z",
+  "timestamp_local": "2026-10-11 04:19:52 ET",
+  "timestamp_utc": "2026-10-11T08:19:52Z",
   "scheduler": {
     "running": true,
     "pid": 1765,
-    "uptime_minutes": 4180,
+    "uptime_minutes": 4183,
     "current_window": "overnight"
   },
   "feed": {
@@ -44,22 +44,12 @@
   },
   "today": {
     "jobs_run": 100,
-    "success": 100,
+    "success": 99,
     "timeout": 0,
-    "fail": 0,
-    "feed_growth": 0
+    "fail": 1,
+    "feed_growth": 1
   },
   "cycles": [
-    {
-      "ts": "2026-10-11T03:52:27.862586",
-      "window": "overnight",
-      "cycle": 154,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-10-11T03:55:09.951756",
       "window": "overnight",
@@ -149,6 +139,16 @@
       "timeout": 0,
       "fail": 0,
       "feed_grew": 0
+    },
+    {
+      "ts": "2026-10-11T04:19:26.811313",
+      "window": "overnight",
+      "cycle": 164,
+      "jobs": 1,
+      "success": 0,
+      "timeout": 0,
+      "fail": 1,
+      "feed_grew": 1
     }
   ],
   "recent_jobs": [
@@ -287,10 +287,12 @@
     },
     {
       "name": "treasury-bonds",
-      "status": "success",
+      "status": "bad_output",
       "duration": 0,
-      "grew": 0,
-      "issues": []
+      "grew": 1,
+      "issues": [
+        "too short"
+      ]
     }
   ],
   "health": {
