@@ -1,20 +1,20 @@
 {
-  "timestamp_local": "2026-10-15 12:35:45 ET",
-  "timestamp_utc": "2026-10-15T16:35:45Z",
+  "timestamp_local": "2026-10-15 12:40:59 ET",
+  "timestamp_utc": "2026-10-15T16:40:59Z",
   "scheduler": {
     "running": true,
     "pid": 1765,
-    "uptime_minutes": 10439,
+    "uptime_minutes": 10444,
     "current_window": "daytime"
   },
   "feed": {
-    "total_lines": 67314,
+    "total_lines": 67315,
     "last_entries": [
-      "[2026-10-15T14:33:45] sentiment-pivot",
       "[2026-10-15T14:37:00] treasury-bonds",
       "[2026-10-15T15:08:00] treasury-bonds",
       "[2026-10-15T15:40:00] treasury-bonds",
-      "[PARSE ERROR] {\\\"timestamp\\\":\\\"2026-10-15T16:09:00Z\\\",\\\"topic\\\":\\\"treasury-bonds\\\",\\\"finding\\\""
+      "[PARSE ERROR] {\\\"timestamp\\\":\\\"2026-10-15T16:09:00Z\\\",\\\"topic\\\":\\\"treasury-bonds\\\",\\\"finding\\\"",
+      "[2026-10-15T16:38:36] sentiment-pivot"
     ],
     "topic_distribution": {
       "queue-research-general": 46,
@@ -30,14 +30,13 @@
   "spark": {
     "online": true,
     "models_loaded": [
-      "qwen3:8b",
-      "nomic-embed-text:latest",
-      "nemotron-3-nano:30b"
+      "nemotron-3-nano:30b",
+      "nemotron-3-super:120b"
     ],
     "model_stuck": false,
     "stuck_model": null,
     "inference_active": true,
-    "detail": "healthy, loaded: qwen3:8b, nomic-embed-text:latest, nemotron-3-nano:30b"
+    "detail": "healthy, loaded: nemotron-3-nano:30b, nemotron-3-super:120b"
   },
   "gateway": {
     "running": true
@@ -50,16 +49,6 @@
     "feed_growth": 0
   },
   "cycles": [
-    {
-      "ts": "2026-10-15T07:32:28.642404",
-      "window": "daytime",
-      "cycle": 4,
-      "jobs": 1,
-      "success": 1,
-      "timeout": 0,
-      "fail": 0,
-      "feed_grew": 0
-    },
     {
       "ts": "2026-10-15T08:03:29.889338",
       "window": "daytime",
@@ -144,6 +133,16 @@
       "ts": "2026-10-15T12:09:47.487740",
       "window": "daytime",
       "cycle": 13,
+      "jobs": 1,
+      "success": 1,
+      "timeout": 0,
+      "fail": 0,
+      "feed_grew": 0
+    },
+    {
+      "ts": "2026-10-15T12:40:31.886414",
+      "window": "daytime",
+      "cycle": 14,
       "jobs": 1,
       "success": 1,
       "timeout": 0,
